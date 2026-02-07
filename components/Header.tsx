@@ -1,10 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { COMPANY_INFO, IMAGES } from '@/lib/constants'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { useRouter } from 'next/navigation'
 import {
   DropdownMenu,
@@ -25,29 +26,16 @@ import {
   ChevronDown
 } from 'lucide-react'
 
-type Language = 'ES' | 'EN'
-
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMobileTools, setShowMobileTools] = useState(false)
   const [showMobileOperations, setShowMobileOperations] = useState(false)
   const [showMobileAcademy, setShowMobileAcademy] = useState(false)
-  const [currentLang, setCurrentLang] = useState<Language>('ES')
   const { user, userData, signOut } = useAuth()
+  const { language, setLanguage, t } = useLanguage()
   const router = useRouter()
 
-  useEffect(() => {
-    const savedLang = localStorage.getItem('language') as Language
-    if (savedLang) {
-      setCurrentLang(savedLang)
-    }
-  }, [])
-
-  const handleLanguageToggle = () => {
-    const newLang = currentLang === 'ES' ? 'EN' : 'ES'
-    setCurrentLang(newLang)
-    localStorage.setItem('language', newLang)
-  }
+  const handleLanguageToggle = () => setLanguage(language === 'ES' ? 'EN' : 'ES')
 
   const handleSignOut = async () => {
     try {
@@ -59,17 +47,17 @@ export default function Header() {
   }
 
   const toolsItems = [
-    { name: 'Ver Todas', href: '/herramientas', className: 'dropdown-item-all' },
-    { name: 'Arsenal Tecnológico', href: '/herramientas/arsenal', className: 'dropdown-item-arsenal' },
-    { name: 'Agentes IA', href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
-    { name: 'Prompt Designer', href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
-    { name: 'Agente de Noticias', href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
+    { name: t.nav.verTodas, href: '/herramientas', className: 'dropdown-item-all' },
+    { name: t.nav.arsenalTec, href: '/herramientas/arsenal', className: 'dropdown-item-arsenal' },
+    { name: t.nav.agentesIA, href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
+    { name: t.nav.promptDesigner, href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
+    { name: t.nav.agenteNoticias, href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
   ]
 
   const academyItems = [
-    { name: 'Vista General', href: '/capacitacion', className: 'dropdown-item-all' },
-    { name: 'Mentoría 1-a-1', href: '/capacitacion/mentoria-personalizada', className: 'dropdown-item-mentoria' },
-    { name: 'Capacitación Corporativa', href: '/capacitacion/equipos-empresariales', className: 'dropdown-item-corporate' }
+    { name: t.nav.vistaGeneral, href: '/capacitacion', className: 'dropdown-item-all' },
+    { name: t.nav.mentoria, href: '/capacitacion/mentoria-personalizada', className: 'dropdown-item-mentoria' },
+    { name: t.nav.capacitacionCorporativa, href: '/capacitacion/equipos-empresariales', className: 'dropdown-item-corporate' }
   ]
 
   const renderMenuItems = () => {
@@ -79,7 +67,7 @@ export default function Header() {
       items.push(
         <DropdownMenuItem key="dashboard" onClick={() => router.push('/dashboard')}>
           <LayoutDashboard className="mr-2 h-4 w-4" />
-          Dashboard
+          {t.nav.dashboard}
         </DropdownMenuItem>
       )
     }
@@ -88,13 +76,13 @@ export default function Header() {
       items.push(
         <DropdownMenuItem key="chatbot" onClick={() => router.push('/admin')}>
           <MessageSquare className="mr-2 h-4 w-4" />
-          Dashboard Chatbot
+          {t.nav.dashboardChatbot}
         </DropdownMenuItem>
       )
       items.push(
         <DropdownMenuItem key="consultant" onClick={() => router.push('/consultant')}>
           <UserCog className="mr-2 h-4 w-4" />
-          Dashboard Consultor
+          {t.nav.dashboardConsultor}
         </DropdownMenuItem>
       )
     }
@@ -103,7 +91,7 @@ export default function Header() {
       items.push(
         <DropdownMenuItem key="consultant-admin" onClick={() => router.push('/consultant')}>
           <UserCog className="mr-2 h-4 w-4" />
-          Dashboard Consultor
+          {t.nav.dashboardConsultor}
         </DropdownMenuItem>
       )
       items.push(<DropdownMenuSeparator key="separator" />)
@@ -114,7 +102,7 @@ export default function Header() {
           className="text-brand-cyan font-medium"
         >
           <Shield className="mr-2 h-4 w-4" />
-          Panel Administración
+          {t.nav.panelAdmin}
         </DropdownMenuItem>
       )
     }
@@ -133,7 +121,7 @@ export default function Header() {
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
           onClick={() => setIsMenuOpen(false)}
         >
-          Dashboard
+          {t.nav.dashboard}
         </Link>
       )
     }
@@ -146,7 +134,7 @@ export default function Header() {
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
           onClick={() => setIsMenuOpen(false)}
         >
-          Dashboard Chatbot
+          {t.nav.dashboardChatbot}
         </Link>
       )
       items.push(
@@ -156,7 +144,7 @@ export default function Header() {
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
           onClick={() => setIsMenuOpen(false)}
         >
-          Dashboard Consultor
+          {t.nav.dashboardConsultor}
         </Link>
       )
     }
@@ -169,7 +157,7 @@ export default function Header() {
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
           onClick={() => setIsMenuOpen(false)}
         >
-          Dashboard Consultor
+          {t.nav.dashboardConsultor}
         </Link>
       )
       items.push(
@@ -179,7 +167,7 @@ export default function Header() {
             className="block px-3 py-2 text-sm text-brand-cyan font-medium hover:bg-cyan-50 rounded"
             onClick={() => setIsMenuOpen(false)}
           >
-            Panel Administración
+            {t.nav.panelAdmin}
           </Link>
         </div>
       )
@@ -395,13 +383,13 @@ export default function Header() {
             <div className="hidden lg:flex items-center gap-2 xl:gap-4">
               <nav className="flex items-center gap-1 xl:gap-3">
                 <Link href="/#diagnostico" className="nav-link text-sm xl:text-base whitespace-nowrap">
-                  Diagnóstico 3D
+                  {t.nav.diagnostico}
                 </Link>
 
                 {/* Herramientas dropdown */}
                 <div className="nav-dropdown">
                   <Link href="/herramientas" className="nav-link text-sm xl:text-base flex items-center gap-1">
-                    Herramientas
+                    {t.nav.herramientas}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
@@ -416,12 +404,12 @@ export default function Header() {
                 {/* Finanzas dropdown */}
                 <div className="nav-dropdown">
                   <Link href="/servicios/finanzas" className="nav-link text-sm xl:text-base flex items-center gap-1">
-                    Finanzas
+                    {t.nav.finanzas}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
                     <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all">
-                      Consultoría Financiera
+                      {t.nav.consultoriaFinanciera}
                     </Link>
                     <Link href="https://nova.tuimpulsalab.com" target="_blank" rel="noopener noreferrer" className="dropdown-item dropdown-item-nova">
                       <span className="flex items-center justify-between">
@@ -437,27 +425,27 @@ export default function Header() {
                 {/* Operaciones dropdown */}
                 <div className="nav-dropdown">
                   <Link href="/servicios/operaciones" className="nav-link text-sm xl:text-base flex items-center gap-1">
-                    Operaciones
+                    {t.nav.operaciones}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
-                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">Vista General</Link>
-                    <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">Agente 4IA</Link>
-                    <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">Arsenal 5,670+</Link>
-                    <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">Plataformas</Link>
-                    <Link href="/servicios/operaciones/casos" className="dropdown-item dropdown-item-noticias">Casos de Uso</Link>
-                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">Planes y Precios</Link>
+                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
+                    <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
+                    <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
+                    <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
+                    <Link href="/servicios/operaciones/casos" className="dropdown-item dropdown-item-noticias">{t.nav.casosDeUso}</Link>
+                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
                   </div>
                 </div>
 
                 <Link href="/servicios/marketing" className="nav-link text-sm xl:text-base whitespace-nowrap">
-                  Marketing
+                  {t.nav.marketing}
                 </Link>
 
                 {/* Academy dropdown */}
                 <div className="nav-dropdown">
                   <Link href="/capacitacion" className="nav-link text-sm xl:text-base whitespace-nowrap flex items-center gap-1">
-                    Academy
+                    {t.nav.academy}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
@@ -470,10 +458,10 @@ export default function Header() {
                 </div>
 
                 <Link href="/#equipo" className="nav-link text-sm xl:text-base whitespace-nowrap">
-                  Nosotros
+                  {t.nav.nosotros}
                 </Link>
                 <Link href="/#contacto" className="nav-link text-sm xl:text-base whitespace-nowrap">
-                  Contacto
+                  {t.nav.contacto}
                 </Link>
               </nav>
 
@@ -482,9 +470,9 @@ export default function Header() {
                 <button
                   onClick={handleLanguageToggle}
                   className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-gray-700 hover:text-brand-navy transition-colors"
-                  title={currentLang === 'ES' ? 'Switch to English' : 'Cambiar a Español'}
+                  title={language === 'ES' ? 'Switch to English' : 'Cambiar a Español'}
                 >
-                  <span className="text-lg">{currentLang === 'ES' ? '🇬🇧' : '🇪🇸'}</span>
+                  <span className="text-lg">{language === 'ES' ? '🇬🇧' : '🇪🇸'}</span>
                 </button>
 
                 {user ? (
@@ -497,7 +485,7 @@ export default function Header() {
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
                       <DropdownMenuLabel>
-                        Mi Cuenta
+                        {t.nav.miCuenta}
                         {userData?.role && (
                           <span className="ml-2 text-xs font-normal text-gray-500">
                             ({userData.role === 'admin' ? 'Administrador' :
@@ -512,7 +500,7 @@ export default function Header() {
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={handleSignOut}>
                         <LogOut className="mr-2 h-4 w-4" />
-                        Cerrar Sesión
+                        {t.nav.cerrarSesion}
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
@@ -522,13 +510,13 @@ export default function Header() {
                       href="/login"
                       className="px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-brand-cyan transition-colors whitespace-nowrap"
                     >
-                      {currentLang === 'ES' ? 'Iniciar sesión' : 'Login'}
+                      {t.nav.iniciarSesion}
                     </Link>
                     <Link
                       href="/signup"
                       className="px-4 py-1.5 text-sm font-medium text-white bg-brand-navy rounded-lg hover:bg-brand-navy/90 transition-all whitespace-nowrap"
                     >
-                      {currentLang === 'ES' ? 'Crear cuenta' : 'Sign up'}
+                      {t.nav.crearCuenta}
                     </Link>
                   </div>
                 )}
@@ -540,9 +528,9 @@ export default function Header() {
               <button
                 onClick={handleLanguageToggle}
                 className="p-2 text-2xl"
-                title={currentLang === 'ES' ? 'EN' : 'ES'}
+                title={language === 'ES' ? 'EN' : 'ES'}
               >
-                {currentLang === 'ES' ? '🇬🇧' : '🇪🇸'}
+                {language === 'ES' ? '🇬🇧' : '🇪🇸'}
               </button>
 
               <button
@@ -586,7 +574,7 @@ export default function Header() {
                       }}
                       className="block w-full text-left px-3 py-2 text-sm text-red-600 hover:bg-red-50 rounded"
                     >
-                      Cerrar Sesión
+                      {t.nav.cerrarSesion}
                     </button>
                   </div>
                 ) : (
@@ -596,14 +584,14 @@ export default function Header() {
                       className="flex-1 px-4 py-3 text-sm font-medium text-brand-navy border border-brand-navy/20 rounded-lg text-center hover:bg-gray-50 transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {currentLang === 'ES' ? 'Iniciar sesión' : 'Login'}
+                      {t.nav.iniciarSesion}
                     </Link>
                     <Link
                       href="/signup"
                       className="flex-1 px-4 py-3 text-sm font-medium text-white bg-brand-navy rounded-lg text-center"
                       onClick={() => setIsMenuOpen(false)}
                     >
-                      {currentLang === 'ES' ? 'Crear cuenta' : 'Sign up'}
+                      {t.nav.crearCuenta}
                     </Link>
                   </div>
                 )}
@@ -614,7 +602,7 @@ export default function Header() {
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Diagnóstico 3D
+                {t.nav.diagnostico}
               </Link>
 
               {/* Herramientas móvil */}
@@ -623,7 +611,7 @@ export default function Header() {
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileTools(!showMobileTools)}
                 >
-                  <span>Herramientas</span>
+                  <span>{t.nav.herramientas}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileTools ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -653,7 +641,7 @@ export default function Header() {
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Finanzas
+                {t.nav.finanzas}
               </Link>
 
               {/* Operaciones móvil */}
@@ -662,29 +650,29 @@ export default function Header() {
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileOperations(!showMobileOperations)}
                 >
-                  <span>Operaciones</span>
+                  <span>{t.nav.operaciones}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileOperations ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showMobileOperations && (
                   <div className="pl-4 space-y-1 mt-2">
                     <Link href="/servicios/operaciones" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Vista General
+                      {t.nav.vistaGeneral}
                     </Link>
                     <Link href="/servicios/operaciones/agentes" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Agente 4IA
+                      {t.nav.agente4IA}
                     </Link>
                     <Link href="/servicios/operaciones/arsenal" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Arsenal 5,670+
+                      {t.nav.arsenal5670}
                     </Link>
                     <Link href="/servicios/operaciones/plataformas" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Plataformas
+                      {t.nav.plataformas}
                     </Link>
                     <Link href="/servicios/operaciones/casos" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Casos de Uso
+                      {t.nav.casosDeUso}
                     </Link>
                     <Link href="/servicios/operaciones/precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      Planes y Precios
+                      {t.nav.planesPrecios}
                     </Link>
                   </div>
                 )}
@@ -695,7 +683,7 @@ export default function Header() {
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Marketing
+                {t.nav.marketing}
               </Link>
 
               {/* Academy móvil */}
@@ -704,7 +692,7 @@ export default function Header() {
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileAcademy(!showMobileAcademy)}
                 >
-                  <span>Academy</span>
+                  <span>{t.nav.academy}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileAcademy ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -734,14 +722,14 @@ export default function Header() {
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Nosotros
+                {t.nav.nosotros}
               </Link>
               <Link
                 href="/#contacto"
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contacto
+                {t.nav.contacto}
               </Link>
             </nav>
           </div>
