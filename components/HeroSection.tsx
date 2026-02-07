@@ -80,7 +80,7 @@ const PromptIcon = ({ className }: { className?: string }) => (
 
 export default function HeroSection() {
   return (
-    <section className="bg-[#002D62] text-white pt-24 pb-20 min-h-screen flex items-center">
+    <section className="bg-brand-navy text-white pt-24 pb-20 min-h-screen flex items-center">
       <div className="container mx-auto px-4">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* COLUMNA IZQUIERDA */}
@@ -96,7 +96,7 @@ export default function HeroSection() {
             {/* Título principal - más grande */}
             <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6 leading-tight">
               El Crecimiento de tu Negocio, 
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400"> Impulsado por IA.</span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300"> Impulsado por IA.</span>
             </h1>
             
             {/* Subtítulo - ajustado */}
@@ -111,7 +111,7 @@ export default function HeroSection() {
               <Link 
                 href={LINKS.calendly}
                 target="_blank"
-                className="inline-flex items-center justify-center bg-white text-blue-900 px-8 py-4 rounded-lg 
+                className="inline-flex items-center justify-center bg-white text-brand-navy px-8 py-4 rounded-lg 
                          font-semibold text-lg transition-all duration-300 
                          hover:scale-105 hover:bg-gray-100 hover:shadow-xl group"
               >
@@ -165,10 +165,10 @@ export default function HeroSection() {
                       href="/herramientas"
                       className="group inline-flex items-center gap-2 hover:gap-3 transition-all duration-300"
                     >
-                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-[#002D62] group-hover:text-blue-700 transition-colors">
+                      <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-brand-navy group-hover:text-brand-cyan transition-colors">
                         Hub de Herramientas IA
                       </h3>
-                      <svg className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-blue-600 opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8 text-brand-cyan opacity-0 group-hover:opacity-100 transition-all duration-300 transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                       </svg>
                     </Link>
@@ -294,7 +294,7 @@ export default function HeroSection() {
                   <div className="mt-8 text-center">
                     <Link 
                       href="/herramientas"
-                      className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-blue-500 via-purple-600 to-blue-500 rounded-xl font-bold text-sm md:text-base lg:text-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/50 animate-gradient bg-[length:200%_auto] group"
+                      className="inline-flex items-center px-6 md:px-8 py-3 md:py-4 bg-gradient-to-r from-brand-navy via-brand-cyan to-brand-navy rounded-xl font-bold text-sm md:text-base lg:text-lg transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-brand-cyan/30 animate-gradient bg-[length:200%_auto] group"
                     >
                       <ToolsIcon className="w-4 h-4 md:w-5 md:h-5 mr-2 group-hover:rotate-12 transition-transform" />
                       Explorar Todas las Herramientas

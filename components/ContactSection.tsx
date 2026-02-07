@@ -249,9 +249,9 @@ export default function ContactSection() {
           <a href={LINKS.calendly}
              target="_blank"
              rel="noopener noreferrer"
-             className="inline-block bg-blue-600 text-white px-8 py-4 rounded-lg 
-                      font-semibold text-lg transition-all duration-300 
-                      hover:bg-blue-700 hover:scale-105 mb-12">
+             className="inline-block bg-brand-navy text-white px-8 py-4 rounded-lg
+                      font-semibold text-lg transition-all duration-300
+                      hover:bg-brand-navy/90 hover:scale-105 mb-12">
             Obtén tu Diagnóstico 3D Gratis
           </a>
 
@@ -271,9 +271,9 @@ export default function ContactSection() {
                   className={`w-full px-4 py-3 rounded-lg border transition-all
                     ${formErrors.name 
                       ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:ring-blue-200'} 
+                      : 'border-gray-300 focus:ring-brand-cyan/30'} 
                     bg-white text-gray-900 placeholder-gray-500
-                    focus:border-blue-500 focus:outline-none focus:ring-2
+                    focus:border-brand-cyan focus:outline-none focus:ring-2
                     disabled:opacity-50 disabled:cursor-not-allowed`} 
                 />
                 {formErrors.name && (
@@ -294,9 +294,9 @@ export default function ContactSection() {
                   className={`w-full px-4 py-3 rounded-lg border transition-all
                     ${formErrors.email 
                       ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:ring-blue-200'} 
+                      : 'border-gray-300 focus:ring-brand-cyan/30'} 
                     bg-white text-gray-900 placeholder-gray-500
-                    focus:border-blue-500 focus:outline-none focus:ring-2
+                    focus:border-brand-cyan focus:outline-none focus:ring-2
                     disabled:opacity-50 disabled:cursor-not-allowed`} 
                 />
                 {formErrors.email && (
@@ -317,9 +317,9 @@ export default function ContactSection() {
                   className={`w-full px-4 py-3 rounded-lg border transition-all
                     ${formErrors.phone 
                       ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:ring-blue-200'} 
+                      : 'border-gray-300 focus:ring-brand-cyan/30'} 
                     bg-white text-gray-900 placeholder-gray-500
-                    focus:border-blue-500 focus:outline-none focus:ring-2
+                    focus:border-brand-cyan focus:outline-none focus:ring-2
                     disabled:opacity-50 disabled:cursor-not-allowed`} 
                 />
                 {formErrors.phone && (
@@ -336,8 +336,8 @@ export default function ContactSection() {
                   disabled={formStatus === 'loading'}
                   className="w-full px-4 py-3 rounded-lg border border-gray-300 
                            bg-white text-gray-900
-                           focus:border-blue-500 focus:outline-none focus:ring-2 
-                           focus:ring-blue-200 transition-all
+                           focus:border-brand-cyan focus:outline-none focus:ring-2 
+                           focus:ring-brand-cyan/30 transition-all
                            disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   <option value="general">Consulta General</option>
@@ -361,9 +361,9 @@ export default function ContactSection() {
                   className={`w-full px-4 py-3 rounded-lg border transition-all
                     ${formErrors.message 
                       ? 'border-red-500 focus:ring-red-200' 
-                      : 'border-gray-300 focus:ring-blue-200'} 
+                      : 'border-gray-300 focus:ring-brand-cyan/30'} 
                     bg-white text-gray-900 placeholder-gray-500
-                    focus:border-blue-500 focus:outline-none focus:ring-2
+                    focus:border-brand-cyan focus:outline-none focus:ring-2
                     resize-none disabled:opacity-50 disabled:cursor-not-allowed`} 
                 />
                 {formErrors.message && (
@@ -385,8 +385,8 @@ export default function ContactSection() {
               <button 
                 type="submit"
                 disabled={formStatus === 'loading'} 
-                className="w-full bg-blue-600 text-white px-6 py-3 rounded-lg 
-                         font-semibold hover:bg-blue-700 transition-all duration-300
+                className="w-full bg-brand-navy text-white px-6 py-3 rounded-lg
+                         font-semibold hover:bg-brand-navy/90 transition-all duration-300
                          disabled:opacity-50 disabled:cursor-not-allowed
                          flex items-center justify-center gap-2">
                 {formStatus === 'loading' ? (
@@ -408,7 +408,7 @@ export default function ContactSection() {
             <div className="mt-6 text-gray-600">
               <p className="mb-2">O si lo prefieres, escríbenos a:</p>
               <a href={`mailto:${LINKS.email}`} 
-                 className="text-blue-600 hover:underline block">
+                 className="text-brand-cyan hover:underline block">
                 {LINKS.email}
               </a>
             </div>

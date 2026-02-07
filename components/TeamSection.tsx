@@ -65,7 +65,7 @@ export default function TeamSection() {
   ]
 
   return (
-    <section id="equipo" className="py-20 bg-[#002D62] text-white">
+    <section id="equipo" className="py-20 bg-brand-navy text-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-8">
@@ -86,7 +86,7 @@ export default function TeamSection() {
         <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto mb-16">
           <div className="bg-white/10 backdrop-blur-sm rounded-xl p-8 border border-white/20">
             <div className="flex items-center mb-4">
-              <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center mr-4">
+              <div className="w-12 h-12 bg-brand-cyan rounded-full flex items-center justify-center mr-4">
                 <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
@@ -143,7 +143,7 @@ export default function TeamSection() {
                     {member.role}
                   </div>
                   <h4 className="text-xl font-bold mb-1">{member.name}</h4>
-                  <p className="text-blue-200 text-sm mb-4">{member.title}</p>
+                  <p className="text-brand-cyan/70 text-sm mb-4">{member.title}</p>
                   <p className="text-gray-300 text-sm leading-relaxed mb-4 px-2 min-h-[120px]">
                     {member.description}
                   </p>
@@ -236,19 +236,19 @@ export default function TeamSection() {
           <h4 className="text-2xl font-bold text-center mb-8">El Poder de Nuestro Equipo</h4>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
-              <p className="text-3xl font-bold text-blue-300 mb-2">50+</p>
+              <p className="text-3xl font-bold text-brand-cyan mb-2">50+</p>
               <p className="text-sm text-gray-300">Años de Experiencia Combinada</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-blue-300 mb-2">200+</p>
+              <p className="text-3xl font-bold text-brand-cyan mb-2">200+</p>
               <p className="text-sm text-gray-300">Proyectos Completados</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-blue-300 mb-2">4</p>
+              <p className="text-3xl font-bold text-brand-cyan mb-2">4</p>
               <p className="text-sm text-gray-300">Expertos Especializados</p>
             </div>
             <div>
-              <p className="text-3xl font-bold text-blue-300 mb-2">1</p>
+              <p className="text-3xl font-bold text-brand-cyan mb-2">1</p>
               <p className="text-sm text-gray-300">IA de Última Generación</p>
             </div>
           </div>
