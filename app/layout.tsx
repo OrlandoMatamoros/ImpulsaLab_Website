@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { FirebaseAuthProvider } from '@/contexts/FirebaseAuthContext'
+import { LanguageProvider } from '@/contexts/LanguageContext'
 import { AuthTokenProvider } from '@/components/AuthTokenProvider'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -41,17 +42,18 @@ export default function RootLayout({
           `}
         </Script>
 
-        <FirebaseAuthProvider>
-          <AuthTokenProvider>
-            <Header />
-            <main className="min-h-screen pt-16">
-              {children}
-            </main>
-            <Footer />
-            {/* WidgetProvider - Incluye WhatsApp y Chatbot en TODAS las páginas */}
-            <WidgetProvider />
-          </AuthTokenProvider>
-        </FirebaseAuthProvider>
+        <LanguageProvider>
+          <FirebaseAuthProvider>
+            <AuthTokenProvider>
+              <Header />
+              <main className="min-h-screen pt-16">
+                {children}
+              </main>
+              <Footer />
+              <WidgetProvider />
+            </AuthTokenProvider>
+          </FirebaseAuthProvider>
+        </LanguageProvider>
         <CookieBanner />
       </body>
     </html>

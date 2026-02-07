@@ -16,8 +16,10 @@ import {
 } from 'react-icons/fa';
 import { useState } from 'react';
 import { COMPANY_INFO } from '@/lib/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
@@ -25,10 +27,9 @@ const Footer = () => {
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubscribing(true);
-    
-    // TODO: Implementar lógica de suscripción
+
     setTimeout(() => {
-      alert('¡Gracias por suscribirte! Pronto recibirás nuestros insights.');
+      alert(t.footer.graciasSubscripcion);
       setEmail('');
       setIsSubscribing(false);
     }, 1000);
@@ -41,10 +42,10 @@ const Footer = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h3 className="text-2xl md:text-3xl font-bold mb-4">
-              Únete a la Revolución Digital
+              {t.footer.newsletter}
             </h3>
             <p className="mb-6 text-lg">
-              Recibe insights, casos de éxito y estrategias de IA directamente en tu inbox
+              {t.footer.newsletterDesc}
             </p>
             <form onSubmit={handleSubscribe} className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
               <input
@@ -60,11 +61,11 @@ const Footer = () => {
                 disabled={isSubscribing}
                 className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {isSubscribing ? 'Suscribiendo...' : 'Suscribirse'}
+                {isSubscribing ? t.footer.suscribiendo : t.footer.suscribirse}
               </button>
             </form>
             <p className="mt-4 text-sm opacity-90">
-              No spam, solo contenido de valor. Puedes cancelar cuando quieras.
+              {t.footer.noSpam}
             </p>
           </div>
         </div>
@@ -153,50 +154,35 @@ const Footer = () => {
 
           {/* Solutions Column */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Soluciones</h4>
+            <h4 className="font-semibold text-lg mb-4">{t.footer.soluciones}</h4>
             <ul className="space-y-3 text-sm">
               <li>
-                <Link 
-                  href="/servicios/finanzas"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                >
-                  Dashboard Financiero
+                <Link href="/servicios/finanzas" className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  {t.footer.dashboardFinanciero}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/servicios/operaciones"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                >
-                  Automatización con IA
+                <Link href="/servicios/operaciones" className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  {t.footer.automatizacionIA}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/servicios/marketing"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                >
-                  Marketing Digital
+                <Link href="/servicios/marketing" className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  {t.footer.marketingDigital}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/herramientas/agentes"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                >
-                  Agentes de IA
+                <Link href="/herramientas/agentes" className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  {t.footer.agentesIA}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
               <li>
-                <Link 
-                  href="/herramientas/arsenal"
-                  className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
-                >
-                  Arsenal Tecnológico
+                <Link href="/herramientas/arsenal" className="text-gray-400 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  {t.footer.arsenalTec}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
@@ -205,142 +191,37 @@ const Footer = () => {
 
           {/* Resources Column */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Recursos</h4>
+            <h4 className="font-semibold text-lg mb-4">{t.footer.recursos}</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link 
-                  href="/blog"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Blog
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/casos-de-exito"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Casos de Éxito
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/herramientas"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Todas las Herramientas
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/herramientas/noticias"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Noticias IA
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/diagnostico"
-                  className="text-blue-400 font-semibold hover:text-blue-300 transition-colors inline-flex items-center gap-1"
-                >
-                  Diagnóstico 3D ⭐
-                </Link>
-              </li>
+              <li><Link href="/blog" className="text-gray-400 hover:text-white transition-colors">{t.footer.blog}</Link></li>
+              <li><Link href="/casos-de-exito" className="text-gray-400 hover:text-white transition-colors">{t.footer.casosExito}</Link></li>
+              <li><Link href="/herramientas" className="text-gray-400 hover:text-white transition-colors">{t.footer.todasHerramientas}</Link></li>
+              <li><Link href="/herramientas/noticias" className="text-gray-400 hover:text-white transition-colors">{t.footer.noticiasIA}</Link></li>
+              <li><Link href="/diagnostico" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors inline-flex items-center gap-1">{t.nav.diagnostico} ⭐</Link></li>
             </ul>
           </div>
 
           {/* Company Column */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Empresa</h4>
+            <h4 className="font-semibold text-lg mb-4">{t.footer.empresa}</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link 
-                  href="/nosotros"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Nosotros
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/#equipo"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Equipo
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/carreras"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Carreras
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/partners"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Partners
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/contacto"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Contacto
-                </Link>
-              </li>
+              <li><Link href="/nosotros" className="text-gray-400 hover:text-white transition-colors">{t.footer.nosotros}</Link></li>
+              <li><Link href="/#equipo" className="text-gray-400 hover:text-white transition-colors">{t.footer.equipo}</Link></li>
+              <li><Link href="/carreras" className="text-gray-400 hover:text-white transition-colors">{t.footer.carreras}</Link></li>
+              <li><Link href="/partners" className="text-gray-400 hover:text-white transition-colors">{t.footer.partners}</Link></li>
+              <li><Link href="/contacto" className="text-gray-400 hover:text-white transition-colors">{t.nav.contacto}</Link></li>
             </ul>
           </div>
 
           {/* Support Column */}
           <div>
-            <h4 className="font-semibold text-lg mb-4">Acceso</h4>
+            <h4 className="font-semibold text-lg mb-4">{t.footer.acceso}</h4>
             <ul className="space-y-3 text-sm">
-              <li>
-                <Link 
-                  href="/login"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Iniciar Sesión
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/signup"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Registrarse
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/admin"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Admin
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/ayuda"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  Centro de Ayuda
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/faq"
-                  className="text-gray-400 hover:text-white transition-colors"
-                >
-                  FAQ
-                </Link>
-              </li>
+              <li><Link href="/login" className="text-gray-400 hover:text-white transition-colors">{t.footer.iniciarSesion}</Link></li>
+              <li><Link href="/signup" className="text-gray-400 hover:text-white transition-colors">{t.footer.registrarse}</Link></li>
+              <li><Link href="/admin" className="text-gray-400 hover:text-white transition-colors">{t.footer.admin}</Link></li>
+              <li><Link href="/ayuda" className="text-gray-400 hover:text-white transition-colors">{t.footer.centroAyuda}</Link></li>
+              <li><Link href="/faq" className="text-gray-400 hover:text-white transition-colors">FAQ</Link></li>
             </ul>
           </div>
         </div>
@@ -351,7 +232,7 @@ const Footer = () => {
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="text-sm text-gray-400 text-center md:text-left">
-              © {currentYear} {COMPANY_INFO.name} LLC. Todos los derechos reservados.
+              © {currentYear} {COMPANY_INFO.name} LLC. {t.footer.derechos}.
             </div>
             
             {/* Legal Links */}
@@ -360,25 +241,25 @@ const Footer = () => {
                 href="/legal/privacidad" 
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Política de Privacidad
+                {t.footer.privacidad}
               </Link>
-              <Link 
-                href="/legal/terminos" 
+              <Link
+                href="/legal/terminos"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Términos de Servicio
+                {t.footer.terminos}
               </Link>
-              <Link 
-                href="/legal/cookies" 
+              <Link
+                href="/legal/cookies"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Política de Cookies
+                {t.footer.cookies}
               </Link>
-              <Link 
-                href="/legal/datos" 
+              <Link
+                href="/legal/datos"
                 className="text-gray-400 hover:text-white transition-colors"
               >
-                Protección de Datos
+                {t.footer.proteccionDatos}
               </Link>
             </div>
           </div>
