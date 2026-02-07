@@ -15,6 +15,35 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'ImpulsaLab - Transformación Digital Empresarial',
   description: 'Diagnóstico 3D, herramientas de IA, y servicios de consultoría en Finanzas, Operaciones y Marketing',
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '48x48' },
+    ],
+    apple: [
+      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
+  openGraph: {
+    title: 'ImpulsaLab - Transformación Digital Empresarial',
+    description: 'Transformamos negocios con inteligencia artificial, datos y automatización. Diagnóstico 3D, herramientas de IA y consultoría en Finanzas, Operaciones y Marketing.',
+    type: 'website',
+    locale: 'es_LA',
+    siteName: 'ImpulsaLab',
+    images: [
+      {
+        url: '/images/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'ImpulsaLab - Transformación Digital Empresarial',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'ImpulsaLab - Transformación Digital Empresarial',
+    description: 'Transformamos negocios con inteligencia artificial, datos y automatización.',
+    images: ['/images/og-image.jpg'],
+  },
   verification: {
     google: 'SiCheXqFkVDrLLuNSd9wx8zKZ3Pq8LYwTjz1uGeNitg',
   },
