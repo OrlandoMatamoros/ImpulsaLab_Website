@@ -6,24 +6,23 @@ import Image from 'next/image'
 import { COMPANY_INFO, IMAGES } from '@/lib/constants'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
 import { useRouter } from 'next/navigation'
-import { 
+import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
-  DropdownMenuTrigger 
+  DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import { Button } from '@/components/ui/button'
-import { 
-  User, 
-  Settings, 
-  LogOut, 
-  LayoutDashboard, 
-  Shield, 
+import {
+  User,
+  LogOut,
+  LayoutDashboard,
+  Shield,
   UserCog,
   MessageSquare,
-  Users
+  ChevronDown
 } from 'lucide-react'
 
 type Language = 'ES' | 'EN'
@@ -60,54 +59,22 @@ export default function Header() {
   }
 
   const toolsItems = [
-    { 
-      name: 'Ver Todas', 
-      href: '/herramientas',
-      className: 'dropdown-item-all'
-    },
-    { 
-      name: 'Arsenal Tecnológico', 
-      href: '/herramientas/arsenal',
-      className: 'dropdown-item-arsenal'
-    },
-    { 
-      name: 'Agentes IA', 
-      href: '/herramientas/agentes',
-      className: 'dropdown-item-agentes'
-    },
-    { 
-      name: 'Prompt Designer', 
-      href: '/herramientas/prompt-designer',
-      className: 'dropdown-item-prompt'
-    },
-    { 
-      name: 'Agente de Noticias', 
-      href: '/herramientas/noticias',
-      className: 'dropdown-item-noticias'
-    }
+    { name: 'Ver Todas', href: '/herramientas', className: 'dropdown-item-all' },
+    { name: 'Arsenal Tecnológico', href: '/herramientas/arsenal', className: 'dropdown-item-arsenal' },
+    { name: 'Agentes IA', href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
+    { name: 'Prompt Designer', href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
+    { name: 'Agente de Noticias', href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
   ]
 
   const academyItems = [
-    { 
-      name: 'Vista General', 
-      href: '/capacitacion',
-      className: 'dropdown-item-all'
-    },
-    { 
-      name: 'Mentoría 1-a-1', 
-      href: '/capacitacion/mentoria-personalizada',
-      className: 'dropdown-item-mentoria'
-    },
-    { 
-      name: 'Capacitación Corporativa', 
-      href: '/capacitacion/equipos-empresariales',
-      className: 'dropdown-item-corporate'
-    }
+    { name: 'Vista General', href: '/capacitacion', className: 'dropdown-item-all' },
+    { name: 'Mentoría 1-a-1', href: '/capacitacion/mentoria-personalizada', className: 'dropdown-item-mentoria' },
+    { name: 'Capacitación Corporativa', href: '/capacitacion/equipos-empresariales', className: 'dropdown-item-corporate' }
   ]
 
   const renderMenuItems = () => {
     const items = []
-    
+
     if (!userData?.role || userData?.role === 'free' || userData?.role === 'premium') {
       items.push(
         <DropdownMenuItem key="dashboard" onClick={() => router.push('/dashboard')}>
@@ -116,7 +83,7 @@ export default function Header() {
         </DropdownMenuItem>
       )
     }
-    
+
     if (userData?.role === 'consultant') {
       items.push(
         <DropdownMenuItem key="chatbot" onClick={() => router.push('/admin')}>
@@ -131,7 +98,7 @@ export default function Header() {
         </DropdownMenuItem>
       )
     }
-    
+
     if (userData?.role === 'admin') {
       items.push(
         <DropdownMenuItem key="consultant-admin" onClick={() => router.push('/consultant')}>
@@ -141,26 +108,26 @@ export default function Header() {
       )
       items.push(<DropdownMenuSeparator key="separator" />)
       items.push(
-        <DropdownMenuItem 
+        <DropdownMenuItem
           key="admin-panel"
           onClick={() => router.push('/admin')}
-          className="text-blue-600 font-medium"
+          className="text-brand-cyan font-medium"
         >
           <Shield className="mr-2 h-4 w-4" />
           Panel Administración
         </DropdownMenuItem>
       )
     }
-    
+
     return items
   }
 
   const renderMobileMenuItems = () => {
     const items = []
-    
+
     if (!userData?.role || userData?.role === 'free' || userData?.role === 'premium') {
       items.push(
-        <Link 
+        <Link
           key="dashboard-mobile"
           href="/dashboard"
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
@@ -170,10 +137,10 @@ export default function Header() {
         </Link>
       )
     }
-    
+
     if (userData?.role === 'consultant') {
       items.push(
-        <Link 
+        <Link
           key="chatbot-mobile"
           href="/admin"
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
@@ -183,7 +150,7 @@ export default function Header() {
         </Link>
       )
       items.push(
-        <Link 
+        <Link
           key="consultant-mobile"
           href="/consultant"
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
@@ -193,10 +160,10 @@ export default function Header() {
         </Link>
       )
     }
-    
+
     if (userData?.role === 'admin') {
       items.push(
-        <Link 
+        <Link
           key="consultant-admin-mobile"
           href="/consultant"
           className="block px-3 py-2 text-sm text-gray-700 hover:bg-gray-50 rounded"
@@ -207,9 +174,9 @@ export default function Header() {
       )
       items.push(
         <div key="separator-mobile" className="border-t pt-2 mt-2">
-          <Link 
+          <Link
             href="/admin"
-            className="block px-3 py-2 text-sm text-blue-600 font-medium hover:bg-blue-50 rounded"
+            className="block px-3 py-2 text-sm text-brand-cyan font-medium hover:bg-cyan-50 rounded"
             onClick={() => setIsMenuOpen(false)}
           >
             Panel Administración
@@ -217,50 +184,47 @@ export default function Header() {
         </div>
       )
     }
-    
+
     return items
   }
 
   return (
     <>
-      {/* CSS puro para el dropdown */}
       <style jsx global>{`
         /* Fix para dropdown de usuario en fondos oscuros */
         [data-radix-popper-content-wrapper] {
           z-index: 100 !important;
         }
-        
-        /* Mejorar contraste del dropdown de usuario */
+
         [role="menu"] {
           background: white !important;
           border: 1px solid rgba(0, 0, 0, 0.1) !important;
           box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
         }
-        
+
         [role="menuitem"] {
           color: #111827 !important;
         }
-        
+
         [role="menuitem"]:hover {
           background: #f3f4f6 !important;
           color: #111827 !important;
         }
-        
+
         [role="menuitem"] svg {
           color: #6b7280 !important;
         }
-        
+
         [role="menuitem"]:hover svg {
           color: #111827 !important;
         }
-        
+
         /* Dropdown Container */
-        .tools-dropdown-container {
+        .nav-dropdown {
           position: relative;
         }
 
-        /* Dropdown Menu */
-        .tools-dropdown-menu {
+        .nav-dropdown-menu {
           position: absolute;
           top: 100%;
           left: 50%;
@@ -277,20 +241,17 @@ export default function Header() {
           padding: 8px 0;
         }
 
-        /* Mostrar dropdown al hover */
-        .tools-dropdown-container:hover .tools-dropdown-menu {
+        .nav-dropdown:hover .nav-dropdown-menu {
           opacity: 1;
           visibility: visible;
           margin-top: 6px;
         }
 
-        /* Triángulo superior */
-        .tools-dropdown-menu::before {
+        .nav-dropdown-menu::before {
           content: '';
           position: absolute;
           top: -6px;
           left: 50%;
-          transform: translateX(-50%);
           width: 12px;
           height: 12px;
           background: white;
@@ -298,7 +259,6 @@ export default function Header() {
           box-shadow: -2px -2px 4px rgba(0, 0, 0, 0.05);
         }
 
-        /* Items del dropdown */
         .dropdown-item {
           display: block;
           padding: 10px 16px;
@@ -308,7 +268,6 @@ export default function Header() {
           transition: all 0.2s ease;
         }
 
-        /* Primer item (Ver Todas) */
         .dropdown-item-all {
           font-weight: 600;
           border-bottom: 1px solid #f3f4f6;
@@ -321,55 +280,44 @@ export default function Header() {
           color: #111827;
         }
 
-        /* Arsenal Tecnológico - Azul */
         .dropdown-item-arsenal:hover {
-          background: #dbeafe;
-          color: #1e40af;
+          background: #e0f7fa;
+          color: #006064;
         }
 
-        /* Agentes IA - Púrpura */
         .dropdown-item-agentes:hover {
           background: #f3e8ff;
           color: #7c3aed;
         }
 
-        /* Prompt Designer - Naranja */
         .dropdown-item-prompt:hover {
           background: #fed7aa;
           color: #ea580c;
         }
 
-        /* Agente de Noticias - Negro */
         .dropdown-item-noticias:hover {
           background: #1f2937;
           color: #ffffff;
         }
 
-        /* Nova Finance - Gradient púrpura/azul */
         .dropdown-item-nova {
           position: relative;
           overflow: hidden;
         }
 
         .dropdown-item-nova:hover {
-          background: linear-gradient(135deg, #f3e8ff 0%, #dbeafe 100%);
-          color: #7c3aed;
+          background: linear-gradient(135deg, #f3e8ff 0%, #e0f7fa 100%);
+          color: #006064;
         }
 
         .dropdown-item-nova::after {
-          content: '✨';
+          content: '';
           position: absolute;
           right: 16px;
           opacity: 0;
           transition: opacity 0.2s ease;
         }
 
-        .dropdown-item-nova:hover::after {
-          opacity: 1;
-          animation: pulse 1s infinite;
-        }
-
-        /* Impulsa Academy - Gradient verde/esmeralda */
         .dropdown-item-mentoria:hover {
           background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
           color: #065f46;
@@ -380,13 +328,8 @@ export default function Header() {
           color: #5b21b6;
         }
 
-        @keyframes pulse {
-          0%, 100% { transform: scale(1); }
-          50% { transform: scale(1.2); }
-        }
-
-        /* Link de Herramientas */
-        .tools-link {
+        /* Nav link styling */
+        .nav-link {
           position: relative;
           color: #374151;
           font-weight: 500;
@@ -395,29 +338,28 @@ export default function Header() {
           transition: color 0.2s ease;
         }
 
-        .tools-link:hover {
+        .nav-link:hover {
           color: #002D62;
         }
 
-        /* Línea inferior animada */
-        .tools-link::after {
+        .nav-link::after {
           content: '';
           position: absolute;
           bottom: 0;
           left: 0;
           right: 0;
           height: 2px;
-          background: #002D62;
+          background: #00BCD4;
           transform: scaleX(0);
           transition: transform 0.2s ease;
         }
 
-        .tools-dropdown-container:hover .tools-link::after {
+        .nav-dropdown:hover .nav-link::after,
+        .nav-link:hover::after {
           transform: scaleX(1);
         }
 
-        /* Ajuste para que el dropdown no se cierre al mover el mouse */
-        .tools-dropdown-container::after {
+        .nav-dropdown::after {
           content: '';
           position: absolute;
           top: 100%;
@@ -437,67 +379,54 @@ export default function Header() {
                 alt={COMPANY_INFO.name}
                 width={40}
                 height={40}
-                className="w-10 h-10 md:w-12 md:h-12 mr-2 md:mr-3"
+                className="w-10 h-10 md:w-11 md:h-11 mr-2"
               />
-              <span className="text-xl md:text-2xl font-bold bg-gradient-to-r from-[#002D62] to-blue-600 bg-clip-text text-transparent">
-                {COMPANY_INFO.name}
-              </span>
+              <div className="flex items-baseline">
+                <span className="text-xl md:text-2xl font-bold text-brand-navy tracking-tight">
+                  IMPULSA
+                </span>
+                <span className="text-xl md:text-2xl font-bold text-brand-cyan tracking-tight ml-1">
+                  LAB
+                </span>
+              </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-4">
-              <nav className="flex items-center space-x-4 xl:space-x-6">
-                <Link href="/#diagnostico" className="text-gray-700 hover:text-[#002D62] transition-colors font-medium text-sm xl:text-base whitespace-nowrap">
+            <div className="hidden lg:flex items-center gap-2 xl:gap-4">
+              <nav className="flex items-center gap-1 xl:gap-3">
+                <Link href="/#diagnostico" className="nav-link text-sm xl:text-base whitespace-nowrap">
                   Diagnóstico 3D
                 </Link>
-                
-                {/* Herramientas con dropdown */}
-                <div className="tools-dropdown-container">
-                  <Link 
-                    href="/herramientas"
-                    className="tools-link text-sm xl:text-base"
-                  >
+
+                {/* Herramientas dropdown */}
+                <div className="nav-dropdown">
+                  <Link href="/herramientas" className="nav-link text-sm xl:text-base flex items-center gap-1">
                     Herramientas
+                    <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
-                  
-                  <div className="tools-dropdown-menu">
+                  <div className="nav-dropdown-menu">
                     {toolsItems.map((item) => (
-                      <Link 
-                        key={item.href}
-                        href={item.href} 
-                        className={`dropdown-item ${item.className}`}
-                      >
+                      <Link key={item.href} href={item.href} className={`dropdown-item ${item.className}`}>
                         {item.name}
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                {/* Finanzas con dropdown */}
-                <div className="tools-dropdown-container">
-                  <Link 
-                    href="/servicios/finanzas"
-                    className="tools-link text-sm xl:text-base"
-                  >
+                {/* Finanzas dropdown */}
+                <div className="nav-dropdown">
+                  <Link href="/servicios/finanzas" className="nav-link text-sm xl:text-base flex items-center gap-1">
                     Finanzas
+                    <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
-  
-                  <div className="tools-dropdown-menu">
-                    <Link 
-                      href="/servicios/finanzas"
-                      className="dropdown-item dropdown-item-all"
-                    >
+                  <div className="nav-dropdown-menu">
+                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all">
                       Consultoría Financiera
                     </Link>
-                    <Link 
-                      href="https://nova.tuimpulsalab.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="dropdown-item dropdown-item-nova"
-                    >
+                    <Link href="https://nova.tuimpulsalab.com" target="_blank" rel="noopener noreferrer" className="dropdown-item dropdown-item-nova">
                       <span className="flex items-center justify-between">
                         <span>Nova Finance</span>
-                        <span className="text-xs bg-gradient-to-r from-purple-600 to-blue-600 text-white px-2 py-0.5 rounded-full font-bold">
+                        <span className="text-xs bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-2 py-0.5 rounded-full font-bold">
                           NUEVO
                         </span>
                       </span>
@@ -505,105 +434,65 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Operaciones con dropdown */}
-                <div className="tools-dropdown-container">
-                  <Link 
-                    href="/servicios/operaciones"
-                    className="tools-link text-sm xl:text-base"
-                  >
+                {/* Operaciones dropdown */}
+                <div className="nav-dropdown">
+                  <Link href="/servicios/operaciones" className="nav-link text-sm xl:text-base flex items-center gap-1">
                     Operaciones
+                    <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
-                  
-                  <div className="tools-dropdown-menu">
-                    <Link 
-                      href="/servicios/operaciones"
-                      className="dropdown-item dropdown-item-all"
-                    >
-                      Vista General
-                    </Link>
-                    <Link 
-                      href="/servicios/operaciones/agentes"
-                      className="dropdown-item dropdown-item-agentes"
-                    >
-                      Agente 4IA
-                    </Link>
-                    <Link 
-                      href="/servicios/operaciones/arsenal"
-                      className="dropdown-item dropdown-item-arsenal"
-                    >
-                      Arsenal 5,670+
-                    </Link>
-                    <Link 
-                      href="/servicios/operaciones/plataformas"
-                      className="dropdown-item dropdown-item-prompt"
-                    >
-                      Plataformas
-                    </Link>
-                    <Link 
-                      href="/servicios/operaciones/casos"
-                      className="dropdown-item dropdown-item-noticias"
-                    >
-                      Casos de Uso
-                    </Link>
-                    <Link 
-                      href="/servicios/operaciones/precios"
-                      className="dropdown-item dropdown-item-nova"
-                    >
-                      Planes y Precios
-                    </Link>
+                  <div className="nav-dropdown-menu">
+                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">Vista General</Link>
+                    <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">Agente 4IA</Link>
+                    <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">Arsenal 5,670+</Link>
+                    <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">Plataformas</Link>
+                    <Link href="/servicios/operaciones/casos" className="dropdown-item dropdown-item-noticias">Casos de Uso</Link>
+                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">Planes y Precios</Link>
                   </div>
                 </div>
 
-                <Link href="/servicios/marketing" className="text-gray-700 hover:text-[#002D62] transition-colors font-medium text-sm xl:text-base whitespace-nowrap">
+                <Link href="/servicios/marketing" className="nav-link text-sm xl:text-base whitespace-nowrap">
                   Marketing
                 </Link>
 
-                {/* 🎓 IMPULSA ACADEMY */}
-                <div className="tools-dropdown-container">
-                  <Link 
-                    href="/capacitacion"
-                    className="tools-link text-sm xl:text-base whitespace-nowrap"
-                  >
-                    Impulsa Academy
+                {/* Academy dropdown */}
+                <div className="nav-dropdown">
+                  <Link href="/capacitacion" className="nav-link text-sm xl:text-base whitespace-nowrap flex items-center gap-1">
+                    Academy
+                    <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
-                  
-                  <div className="tools-dropdown-menu">
+                  <div className="nav-dropdown-menu">
                     {academyItems.map((item) => (
-                      <Link 
-                        key={item.href}
-                        href={item.href} 
-                        className={`dropdown-item ${item.className}`}
-                      >
+                      <Link key={item.href} href={item.href} className={`dropdown-item ${item.className}`}>
                         {item.name}
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                <Link href="/#equipo" className="text-gray-700 hover:text-[#002D62] transition-colors font-medium text-sm xl:text-base whitespace-nowrap">
-                  Quiénes Somos
+                <Link href="/#equipo" className="nav-link text-sm xl:text-base whitespace-nowrap">
+                  Nosotros
                 </Link>
-                <Link href="/#contacto" className="text-gray-700 hover:text-[#002D62] transition-colors font-medium text-sm xl:text-base whitespace-nowrap">
+                <Link href="/#contacto" className="nav-link text-sm xl:text-base whitespace-nowrap">
                   Contacto
                 </Link>
               </nav>
 
-              {/* Auth section */}
-              <div className="flex items-center gap-3 ml-2">
-                <button 
+              {/* Auth section - separated with divider */}
+              <div className="flex items-center gap-2 ml-2 pl-3 border-l border-gray-200">
+                <button
                   onClick={handleLanguageToggle}
-                  className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-gray-700 hover:text-[#002D62] transition-colors"
+                  className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-gray-700 hover:text-brand-navy transition-colors"
                   title={currentLang === 'ES' ? 'Switch to English' : 'Cambiar a Español'}
                 >
                   <span className="text-lg">{currentLang === 'ES' ? '🇬🇧' : '🇪🇸'}</span>
                 </button>
-                
+
                 {user ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size="sm" className="flex items-center gap-2">
+                      <Button variant="outline" size="sm" className="flex items-center gap-2 border-brand-navy/20 hover:border-brand-cyan">
                         <User className="h-4 w-4" />
-                        <span className="hidden xl:inline">{userData?.name || user.email}</span>
+                        <span className="hidden xl:inline max-w-[120px] truncate">{userData?.name || user.email}</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
@@ -611,19 +500,16 @@ export default function Header() {
                         Mi Cuenta
                         {userData?.role && (
                           <span className="ml-2 text-xs font-normal text-gray-500">
-                            ({userData.role === 'admin' ? 'Administrador' : 
-                              userData.role === 'consultant' ? 'Consultor' : 
+                            ({userData.role === 'admin' ? 'Administrador' :
+                              userData.role === 'consultant' ? 'Consultor' :
                               userData.role === 'premium' ? 'Premium' :
                               userData.role === 'free' ? 'Free' : 'Usuario'})
                           </span>
                         )}
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
-                      
                       {renderMenuItems()}
-                      
                       <DropdownMenuSeparator />
-                      
                       <DropdownMenuItem onClick={handleSignOut}>
                         <LogOut className="mr-2 h-4 w-4" />
                         Cerrar Sesión
@@ -631,41 +517,41 @@ export default function Header() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <>
-                    <Link 
+                  <div className="flex items-center gap-2">
+                    <Link
                       href="/login"
-                      className="px-4 py-2 text-sm font-medium text-[#002D62] border-2 border-[#002D62] rounded-lg hover:bg-[#002D62] hover:text-white transition-all duration-300 whitespace-nowrap"
+                      className="px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-brand-cyan transition-colors whitespace-nowrap"
                     >
                       {currentLang === 'ES' ? 'Iniciar sesión' : 'Login'}
                     </Link>
-                    <Link 
+                    <Link
                       href="/signup"
-                      className="px-4 py-2 text-sm font-medium text-white bg-gradient-to-r from-[#002D62] to-blue-600 rounded-lg hover:shadow-lg transform hover:scale-105 transition-all duration-300 whitespace-nowrap"
+                      className="px-4 py-1.5 text-sm font-medium text-white bg-brand-navy rounded-lg hover:bg-brand-navy/90 transition-all whitespace-nowrap"
                     >
                       {currentLang === 'ES' ? 'Crear cuenta' : 'Sign up'}
                     </Link>
-                  </>
+                  </div>
                 )}
               </div>
             </div>
 
             {/* Mobile menu button */}
             <div className="flex lg:hidden items-center gap-2">
-              <button 
+              <button
                 onClick={handleLanguageToggle}
                 className="p-2 text-2xl"
                 title={currentLang === 'ES' ? 'EN' : 'ES'}
               >
                 {currentLang === 'ES' ? '🇬🇧' : '🇪🇸'}
               </button>
-              
-              <button 
-                className="p-2 text-gray-700 hover:text-[#002D62] transition-colors"
+
+              <button
+                className="p-2 text-gray-700 hover:text-brand-navy transition-colors"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
                 aria-label="Toggle menu"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} 
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
                         d={isMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
                 </svg>
               </button>
@@ -685,16 +571,14 @@ export default function Header() {
                       {userData?.name || user.email}
                       {userData?.role && (
                         <span className="ml-2 text-xs text-gray-500">
-                          ({userData.role === 'admin' ? 'Admin' : 
-                            userData.role === 'consultant' ? 'Consultor' : 
+                          ({userData.role === 'admin' ? 'Admin' :
+                            userData.role === 'consultant' ? 'Consultor' :
                             userData.role === 'premium' ? 'Premium' :
                             userData.role === 'free' ? 'Free' : 'Usuario'})
                         </span>
                       )}
                     </div>
-                    
                     {renderMobileMenuItems()}
-                    
                     <button
                       onClick={() => {
                         handleSignOut()
@@ -706,57 +590,50 @@ export default function Header() {
                     </button>
                   </div>
                 ) : (
-                  <>
-                    <Link 
+                  <div className="flex gap-3">
+                    <Link
                       href="/login"
-                      className="flex-1 px-4 py-3 text-sm font-medium text-[#002D62] border-2 border-[#002D62] rounded-lg text-center"
+                      className="flex-1 px-4 py-3 text-sm font-medium text-brand-navy border border-brand-navy/20 rounded-lg text-center hover:bg-gray-50 transition-colors"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {currentLang === 'ES' ? 'Iniciar sesión' : 'Login'}
                     </Link>
-                    <Link 
+                    <Link
                       href="/signup"
-                      className="flex-1 px-4 py-3 text-sm font-medium text-white bg-gradient-to-r from-[#002D62] to-blue-600 rounded-lg text-center"
+                      className="flex-1 px-4 py-3 text-sm font-medium text-white bg-brand-navy rounded-lg text-center"
                       onClick={() => setIsMenuOpen(false)}
                     >
                       {currentLang === 'ES' ? 'Crear cuenta' : 'Sign up'}
                     </Link>
-                  </>
+                  </div>
                 )}
               </div>
 
-              <Link 
-                href="/#diagnostico" 
-                className="block text-gray-700 font-medium hover:text-[#002D62] py-3"
+              <Link
+                href="/#diagnostico"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Diagnóstico 3D
               </Link>
-              
+
               {/* Herramientas móvil */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-[#002D62] py-3"
+                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileTools(!showMobileTools)}
                 >
                   <span>Herramientas</span>
-                  <svg 
-                    className={`w-5 h-5 transition-transform duration-300 ${showMobileTools ? 'rotate-180' : ''}`} 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileTools ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {showMobileTools && (
                   <div className="pl-4 space-y-1 mt-2">
                     {toolsItems.map((item, index) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm ${
+                        className={`block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm ${
                           index === 0 ? 'border-b border-gray-100 pb-3 mb-2 font-medium' : ''
                         }`}
                         onClick={() => {
@@ -771,9 +648,9 @@ export default function Header() {
                 )}
               </div>
 
-              <Link 
-                href="/servicios/finanzas" 
-                className="block text-gray-700 font-medium hover:text-[#002D62] py-3"
+              <Link
+                href="/servicios/finanzas"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Finanzas
@@ -782,118 +659,62 @@ export default function Header() {
               {/* Operaciones móvil */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-[#002D62] py-3"
+                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileOperations(!showMobileOperations)}
                 >
                   <span>Operaciones</span>
-                  <svg 
-                    className={`w-5 h-5 transition-transform duration-300 ${showMobileOperations ? 'rotate-180' : ''}`} 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileOperations ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {showMobileOperations && (
                   <div className="pl-4 space-y-1 mt-2">
-                    <Link
-                      href="/servicios/operaciones"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Vista General
                     </Link>
-                    <Link
-                      href="/servicios/operaciones/agentes"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones/agentes" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Agente 4IA
                     </Link>
-                    <Link
-                      href="/servicios/operaciones/arsenal"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones/arsenal" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Arsenal 5,670+
                     </Link>
-                    <Link
-                      href="/servicios/operaciones/plataformas"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones/plataformas" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Plataformas
                     </Link>
-                    <Link
-                      href="/servicios/operaciones/casos"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones/casos" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Casos de Uso
                     </Link>
-                    <Link
-                      href="/servicios/operaciones/precios"
-                      className="block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm"
-                      onClick={() => {
-                        setIsMenuOpen(false)
-                        setShowMobileOperations(false)
-                      }}
-                    >
+                    <Link href="/servicios/operaciones/precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       Planes y Precios
                     </Link>
                   </div>
                 )}
               </div>
 
-              <Link 
-                href="/servicios/marketing" 
-                className="block text-gray-700 font-medium hover:text-[#002D62] py-3"
+              <Link
+                href="/servicios/marketing"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Marketing
               </Link>
 
-              {/* 🎓 IMPULSA ACADEMY MÓVIL */}
+              {/* Academy móvil */}
               <div>
                 <button
-                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-[#002D62] py-3"
+                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileAcademy(!showMobileAcademy)}
                 >
-                  <span>Impulsa Academy</span>
-                  <svg 
-                    className={`w-5 h-5 transition-transform duration-300 ${showMobileAcademy ? 'rotate-180' : ''}`} 
-                    fill="none" 
-                    stroke="currentColor" 
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
+                  <span>Academy</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileAcademy ? 'rotate-180' : ''}`} />
                 </button>
-                
+
                 {showMobileAcademy && (
                   <div className="pl-4 space-y-1 mt-2">
                     {academyItems.map((item, index) => (
                       <Link
                         key={item.href}
                         href={item.href}
-                        className={`block text-gray-600 hover:text-[#002D62] py-2 pl-4 text-sm ${
+                        className={`block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm ${
                           index === 0 ? 'border-b border-gray-100 pb-3 mb-2 font-medium' : ''
                         }`}
                         onClick={() => {
@@ -908,16 +729,16 @@ export default function Header() {
                 )}
               </div>
 
-              <Link 
-                href="/#equipo" 
-                className="block text-gray-700 font-medium hover:text-[#002D62] py-3"
+              <Link
+                href="/#equipo"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Quiénes Somos
+                Nosotros
               </Link>
-              <Link 
-                href="/#contacto" 
-                className="block text-gray-700 font-medium hover:text-[#002D62] py-3"
+              <Link
+                href="/#contacto"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contacto

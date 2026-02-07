@@ -40,7 +40,7 @@ export default function RiskShieldSection() {
   return (
     <section id="risk-shield" className="relative animate-fadeIn">
       {/* Banner Superior - ALTO CONTRASTE */}
-      <div className="bg-gradient-to-r from-blue-700 to-purple-700 py-5 px-4 shadow-lg">
+      <div className="bg-gradient-to-r from-brand-navy to-brand-cyan py-5 px-4 shadow-lg">
         <p className="text-center font-bold text-white text-lg md:text-xl">
           ¿Otro consejo gratis? 
           <span className="block md:inline md:ml-2 text-yellow-300 drop-shadow-md">
@@ -71,7 +71,7 @@ export default function RiskShieldSection() {
                 <th className="p-6 text-center font-bold text-gray-300">
                   Asesoría "Gratis"
                 </th>
-                <th className="p-6 text-center font-bold bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+                <th className="p-6 text-center font-bold bg-gradient-to-r from-brand-navy to-brand-cyan text-white">
                   Impulsa Lab
                 </th>
               </tr>
@@ -80,14 +80,14 @@ export default function RiskShieldSection() {
               {comparisons.map((item, index) => (
                 <tr 
                   key={index} 
-                  className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-blue-50 transition-colors duration-200`}
+                  className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-cyan-50 transition-colors duration-200`}
                   style={{
                     animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
                   }}
                 >
                   <td className="p-6 font-bold text-gray-900 border-r-2 border-gray-200">{item.aspect}</td>
                   <td className="p-6 text-center text-gray-600 font-medium border-r-2 border-gray-200">{item.generic}</td>
-                  <td className="p-6 text-center bg-gradient-to-r from-blue-50 to-purple-50">
+                  <td className="p-6 text-center bg-gradient-to-r from-cyan-50 to-brand-cyan/5">
                     <span className="text-green-600 font-bold text-xl mr-2">✓</span>
                     <span className="text-gray-900 font-bold">{item.impulsaLab}</span>
                   </td>
@@ -121,7 +121,7 @@ export default function RiskShieldSection() {
                 <div className="flex items-start space-x-3 bg-green-50 p-3 rounded-lg">
                   <span className="text-green-600 font-bold text-xl mt-0.5">✓</span>
                   <div className="flex-1">
-                    <p className="text-sm font-bold text-blue-700 mb-1">Impulsa Lab</p>
+                    <p className="text-sm font-bold text-brand-navy mb-1">Impulsa Lab</p>
                     <p className="text-gray-900 font-bold">{item.impulsaLab}</p>
                   </div>
                 </div>
@@ -134,7 +134,7 @@ export default function RiskShieldSection() {
         <div className="mt-12 text-center">
           <a 
             href="https://wa.me/19295007815?text=Quiero%20agendar%20mi%20Diagnóstico%203D"
-            className="inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-3 bg-gradient-to-r from-brand-navy to-brand-cyan text-white font-bold px-8 py-4 rounded-full shadow-lg hover:shadow-xl transform transition-all duration-300 hover:scale-105"
           >
             <span className="text-lg">Agenda tu Diagnóstico 3D Gratis</span>
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">

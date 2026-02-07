@@ -22,11 +22,11 @@ export default function DiagnosticSection() {
           </p>
           <div className="grid md:grid-cols-3 gap-6 text-left mt-8">
             <div className="text-center">
-              <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-100 rounded-full mb-3">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-brand-cyan/10 rounded-full mb-3">
                 <span className="text-2xl">💨</span>
               </div>
               <p className="text-sm text-gray-600">
-                <span className="font-semibold text-blue-600">Finanzas</span> es el <strong>oxígeno</strong> del negocio. Sin flujo de caja positivo, no puede sobrevivir.
+                <span className="font-semibold text-brand-cyan">Finanzas</span> es el <strong>oxígeno</strong> del negocio. Sin flujo de caja positivo, no puede sobrevivir.
               </p>
             </div>
             <div className="text-center">
@@ -52,7 +52,7 @@ export default function DiagnosticSection() {
           {/* Botón para iniciar diagnóstico */}
           <div className="mt-8">
             <Link href="/diagnostico">
-              <button className="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-700 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+              <button className="bg-brand-navy text-white px-8 py-4 rounded-lg font-semibold text-lg hover:bg-brand-navy/90 transition-colors duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
                 🎯 Iniciar Diagnóstico 3D Gratuito
               </button>
             </Link>
@@ -63,19 +63,19 @@ export default function DiagnosticSection() {
           {/* Eje X: FINANZAS */}
           <Link href="/servicios/finanzas" className="block">
             <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center mb-6">
+                <svg className="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} 
                         d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">Eje X: FINANZAS</h3>
-              <h4 className="text-lg font-medium mb-3 text-blue-600">Control Total de tus Números</h4>
+              <h4 className="text-lg font-medium mb-3 text-brand-cyan">Control Total de tus Números</h4>
               <p className="text-gray-600">
                 Te entregamos un dashboard a medida para que visualices tu rentabilidad, 
                 controles tus costos y tomes decisiones inteligentes.
               </p>
-              <p className="text-blue-600 text-sm mt-4 font-medium">
+              <p className="text-brand-cyan text-sm mt-4 font-medium">
                 Conoce más →
               </p>
             </div>
