@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FaCheckCircle, FaCalendarAlt, FaEnvelope } from 'react-icons/fa'
 import { InlineWidget } from 'react-calendly'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 declare global {
   interface Window {
@@ -13,6 +14,7 @@ declare global {
 }
 
 export default function GraciasPage() {
+  const { t } = useLanguage()
   const [showCalendly, setShowCalendly] = useState(false)
 
   useEffect(() => {
@@ -36,25 +38,25 @@ export default function GraciasPage() {
 
         {/* Título principal */}
         <h1 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#002D62' }}>
-          ¡Solicitud Recibida!
+          {t.graciasPage.titulo}
         </h1>
 
         {/* Mensaje principal */}
         <p className="text-xl md:text-2xl text-gray-700 mb-4 leading-relaxed">
-          Tu camino hacia la inteligencia de negocio comienza ahora.
+          {t.graciasPage.mensaje}
         </p>
 
         {/* Mensaje de reporte enviado */}
         <div className="bg-green-50 border border-green-200 rounded-lg p-4 mb-6 flex items-center justify-center gap-3">
           <FaEnvelope className="text-green-600 text-2xl" />
           <p className="text-green-800 font-semibold">
-            ✓ Tu reporte ha sido enviado a tu correo
+            {t.graciasPage.reporteEnviado}
           </p>
         </div>
 
         {/* Mensaje secundario */}
         <p className="text-lg text-gray-600 mb-10">
-          Revisa tu bandeja de entrada para ver el análisis completo de tu <span className="font-semibold" style={{ color: '#002D62' }}>Diagnóstico 3D</span>
+          {t.graciasPage.revisaBandeja} <span className="font-semibold" style={{ color: '#002D62' }}>{t.graciasPage.diagnostico3d}</span>
         </p>
 
         {/* Decoración visual */}
@@ -63,20 +65,20 @@ export default function GraciasPage() {
         {/* Información adicional */}
         <div className="bg-blue-50 rounded-lg p-6 mb-8 border border-blue-100">
           <h2 className="text-lg font-semibold mb-3" style={{ color: '#002D62' }}>
-            ¿Qué sigue?
+            {t.graciasPage.queSigue}
           </h2>
           <ul className="text-left text-gray-700 space-y-2 max-w-md mx-auto">
             <li className="flex items-start">
-              <span className="text-green-600 mr-2">✓</span>
-              <span>Revisa tu reporte completo en tu email</span>
+              <span className="text-green-600 mr-2">&#10003;</span>
+              <span>{t.graciasPage.revisaReporte}</span>
             </li>
             <li className="flex items-start">
-              <span className="text-green-600 mr-2">✓</span>
-              <span>Agenda una consulta gratuita de 30 minutos</span>
+              <span className="text-green-600 mr-2">&#10003;</span>
+              <span>{t.graciasPage.agendaConsulta}</span>
             </li>
             <li className="flex items-start">
-              <span className="text-green-600 mr-2">✓</span>
-              <span>Recibe un plan de acción personalizado</span>
+              <span className="text-green-600 mr-2">&#10003;</span>
+              <span>{t.graciasPage.recibeplan}</span>
             </li>
           </ul>
         </div>
@@ -90,14 +92,14 @@ export default function GraciasPage() {
               style={{ backgroundColor: '#002D62' }}
             >
               <FaCalendarAlt className="text-xl" />
-              Agendar Consulta Gratuita (30 min)
+              {t.graciasPage.agendarConsulta}
             </button>
           ) : (
             <button
               onClick={() => setShowCalendly(false)}
               className="inline-block px-6 py-3 text-sm text-gray-700 border-2 border-gray-300 font-semibold rounded-lg hover:bg-gray-50 transition-all duration-200 mb-4"
             >
-              Cerrar Calendario
+              {t.graciasPage.cerrarCalendario}
             </button>
           )}
         </div>
@@ -121,7 +123,7 @@ export default function GraciasPage() {
             href="/diagnostico?showResults=true"
             className="inline-block px-8 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
           >
-            📊 Ver Resultados Completos
+            {t.graciasPage.verResultados}
           </Link>
 
           <Link
@@ -129,13 +131,13 @@ export default function GraciasPage() {
             className="inline-block px-8 py-4 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
             style={{ backgroundColor: '#002D62' }}
           >
-            Volver al Inicio
+            {t.graciasPage.volverInicio}
           </Link>
         </div>
 
         {/* Mensaje de soporte */}
         <p className="text-sm text-gray-500 mt-8">
-          ¿Tienes alguna pregunta? Contáctanos en{' '}
+          {t.graciasPage.pregunta}{' '}
           <a
             href="mailto:contacto@tuimpulsalab.com"
             className="underline hover:text-blue-600"

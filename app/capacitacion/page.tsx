@@ -123,14 +123,14 @@ export default function ImpulsaAcademyPage() {
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">
                       <Building2 className="w-4 h-4 text-blue-600" />
-                      <span className="font-semibold text-slate-900">Cobertura:</span>
-                      <span className="text-gray-600">Brooklyn, Queens, Manhattan, Bronx</span>
+                      <span className="font-semibold text-slate-900">{t.capacitacionPage.cobertura}</span>
+                      <span className="text-gray-600">{t.capacitacionPage.coberturaZonas}</span>
                     </div>
                   </div>
                   <div className="mt-4 pt-4 border-t border-gray-100">
                     <div className="flex items-center gap-2 text-sm text-gray-600">
                       <Video className="w-4 h-4" />
-                      <span><span className="font-semibold">Alternativa remota:</span> Disponible con 15% descuento (no recomendado para implementaciones prácticas)</span>
+                      <span><span className="font-semibold">{t.capacitacionPage.alternativaRemota}</span> {t.capacitacionPage.alternativaDesc}</span>
                     </div>
                   </div>
                 </div>
@@ -145,10 +145,10 @@ export default function ImpulsaAcademyPage() {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              Elige tu camino de aprendizaje
+              {t.capacitacionPage.eligeCamino}
             </h2>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Dos formatos diseñados para diferentes necesidades. Mismo nivel de excelencia.
+              {t.capacitacionPage.eligeDesc}
             </p>
           </div>
 
@@ -168,15 +168,15 @@ export default function ImpulsaAcademyPage() {
                 <div className="flex items-center justify-between mb-4">
                   <UserCheck className="w-12 h-12" />
                   <span className="bg-white/20 px-4 py-1 rounded-full text-sm font-semibold">
-                    Individual
+                    {t.capacitacionPage.individual}
                   </span>
                 </div>
-                <h3 className="text-3xl font-bold mb-2">Mentoría 1-a-1</h3>
+                <h3 className="text-3xl font-bold mb-2">{t.capacitacionPage.mentoria1a1}</h3>
                 <p className="text-emerald-50 mb-4">
-                  Atención personalizada para tu proyecto o negocio
+                  {t.capacitacionPage.mentoriaDesc}
                 </p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl text-emerald-200">Desde</span>
+                  <span className="text-2xl text-emerald-200">{t.capacitacionPage.desde}</span>
                   <span className="text-5xl font-bold">$200</span>
                 </div>
               </div>
@@ -190,18 +190,18 @@ export default function ImpulsaAcademyPage() {
                       <span className="font-bold text-slate-900">BASIC</span>
                       <span className="text-2xl font-bold text-emerald-600">$200</span>
                     </div>
-                    <div className="text-sm text-gray-600">2 horas • Fundamentos AI</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.basicHoras}</div>
                   </div>
-                  
+
                   <div className="bg-white rounded-xl p-4 border-2 border-emerald-300 relative">
                     <div className="absolute -top-2 -right-2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                      POPULAR
+                      {t.capacitacionPage.popular}
                     </div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-bold text-slate-900">STANDARD</span>
                       <span className="text-2xl font-bold text-emerald-600">$349</span>
                     </div>
-                    <div className="text-sm text-gray-600">4 horas • AI en Acción</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.standardHoras}</div>
                   </div>
                   
                   <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border-2 border-amber-200">
@@ -209,7 +209,7 @@ export default function ImpulsaAcademyPage() {
                       <span className="font-bold text-slate-900">PREMIUM</span>
                       <span className="text-2xl font-bold text-amber-600">$899</span>
                     </div>
-                    <div className="text-sm text-gray-600">6 horas • AI Estratégico</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.premiumHoras}</div>
                   </div>
                 </div>
 
@@ -217,24 +217,24 @@ export default function ImpulsaAcademyPage() {
                 <div className="space-y-3 mb-8">
                   <div className="flex items-start gap-3">
                     <Sparkles className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">GPTs personalizados configurados</span>
+                    <span className="text-gray-700">{t.capacitacionPage.gptsPersonalizados}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Brain className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Casos de uso estratégicos</span>
+                    <span className="text-gray-700">{t.capacitacionPage.casosEstrategicos}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Target className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Blueprint de automatización</span>
+                    <span className="text-gray-700">{t.capacitacionPage.blueprintAuto}</span>
                   </div>
                 </div>
 
                 {/* CTA */}
-                <Link 
+                <Link
                   href="/capacitacion/mentoria-personalizada"
                   className="block w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-center hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Ver detalles completos
+                  {t.capacitacionPage.verDetalles}
                 </Link>
               </div>
             </div>
@@ -254,19 +254,19 @@ export default function ImpulsaAcademyPage() {
                 <div className="flex items-center justify-between mb-4">
                   <Users className="w-12 h-12" />
                   <span className="bg-white/20 px-4 py-1 rounded-full text-sm font-semibold">
-                    Hasta 5 personas
+                    {t.capacitacionPage.hasta5}
                   </span>
                 </div>
-                <h3 className="text-3xl font-bold mb-2">Impulsa Teams</h3>
+                <h3 className="text-3xl font-bold mb-2">{t.capacitacionPage.impulsaTeams}</h3>
                 <p className="text-blue-50 mb-4">
-                  Potencia las habilidades de tu equipo completo
+                  {t.capacitacionPage.teamsDesc}
                 </p>
                 <div className="flex items-baseline gap-2">
-                  <span className="text-2xl text-blue-200">Desde</span>
+                  <span className="text-2xl text-blue-200">{t.capacitacionPage.desde}</span>
                   <span className="text-5xl font-bold">$400</span>
                 </div>
                 <div className="text-sm text-blue-100 mt-2">
-                  + $59 por persona adicional
+                  {t.capacitacionPage.porPersona}
                 </div>
               </div>
 
@@ -279,18 +279,18 @@ export default function ImpulsaAcademyPage() {
                       <span className="font-bold text-slate-900">WORKSHOP</span>
                       <span className="text-2xl font-bold text-blue-600">$400</span>
                     </div>
-                    <div className="text-sm text-gray-600">3 horas • AI para Equipos</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.workshopHoras}</div>
                   </div>
-                  
+
                   <div className="bg-white rounded-xl p-4 border-2 border-blue-300 relative">
                     <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                      POPULAR
+                      {t.capacitacionPage.popular}
                     </div>
                     <div className="flex items-center justify-between mb-2">
                       <span className="font-bold text-slate-900">STANDARD</span>
                       <span className="text-2xl font-bold text-blue-600">$749</span>
                     </div>
-                    <div className="text-sm text-gray-600">6 horas • Implementación AI</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.standardTeamHoras}</div>
                   </div>
                   
                   <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border-2 border-amber-200">
@@ -298,7 +298,7 @@ export default function ImpulsaAcademyPage() {
                       <span className="font-bold text-slate-900">PREMIUM</span>
                       <span className="text-2xl font-bold text-amber-600">$2,099</span>
                     </div>
-                    <div className="text-sm text-gray-600">12h (2 días) • Transformación AI</div>
+                    <div className="text-sm text-gray-600">{t.capacitacionPage.premiumTeamHoras}</div>
                   </div>
                 </div>
 
@@ -306,24 +306,24 @@ export default function ImpulsaAcademyPage() {
                 <div className="space-y-3 mb-8">
                   <div className="flex items-start gap-3">
                     <Rocket className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Setup colaborativo de plataformas</span>
+                    <span className="text-gray-700">{t.capacitacionPage.setupColaborativo}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Zap className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">3 casos de uso implementados</span>
+                    <span className="text-gray-700">{t.capacitacionPage.casosImplementados}</span>
                   </div>
                   <div className="flex items-start gap-3">
                     <Award className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">Certificados premium para todos</span>
+                    <span className="text-gray-700">{t.capacitacionPage.certificadosPremium}</span>
                   </div>
                 </div>
 
                 {/* CTA */}
-                <Link 
+                <Link
                   href="/capacitacion/equipos-empresariales"
                   className="block w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-center hover:shadow-xl transform hover:scale-105 transition-all duration-300"
                 >
-                  Ver detalles completos
+                  {t.capacitacionPage.verDetalles}
                 </Link>
               </div>
             </div>
@@ -337,10 +337,10 @@ export default function ImpulsaAcademyPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                ¿Por qué funciona?
+                {t.capacitacionPage.porQueFunciona}
               </h2>
               <p className="text-xl text-gray-600">
-                Enfoque práctico con resultados medibles desde el día 1
+                {t.capacitacionPage.porQueDesc}
               </p>
             </div>
 
