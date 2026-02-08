@@ -19,6 +19,7 @@ import {
   FaTimes
 } from 'react-icons/fa';
 import { LINKS } from '@/lib/constants';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 // ⚠️ WEBHOOK URL - MISMO QUE HOMEPAGE (CRÍTICO: NO CAMBIAR)
 const WEBHOOK_URL = 'https://orlandom88.app.n8n.cloud/webhook/fa05d73f-28a6-4827-8353-5b3a5780ad11';
@@ -27,6 +28,8 @@ const WEBHOOK_URL = 'https://orlandom88.app.n8n.cloud/webhook/fa05d73f-28a6-4827
 const rateLimitStorage = new Map<string, number>();
 
 export default function Contacto() {
+  const { t } = useLanguage();
+
   const [formData, setFormData] = useState({
     nombre: '',
     empresa: '',
@@ -91,7 +94,7 @@ export default function Contacto() {
         const remainingTime = Math.ceil((60000 - timeDiff) / 1000);
         setFormStatus({
           type: 'rate-limit',
-          message: `Por favor espera ${remainingTime} segundos antes de enviar otro mensaje.`
+          message: t.contactoPage.rateLimitMsg.replace('{seconds}', String(remainingTime))
         });
         return false;
       }
@@ -107,7 +110,7 @@ export default function Contacto() {
     if (!emailRegex.test(formData.email)) {
       setFormStatus({
         type: 'error',
-        message: 'Por favor ingresa un email válido.'
+        message: t.contactoPage.emailInvalido
       });
       return false;
     }
@@ -117,7 +120,7 @@ export default function Contacto() {
     if (phoneDigits.length < 8) {
       setFormStatus({
         type: 'error',
-        message: 'Por favor ingresa un número de teléfono válido (mínimo 8 dígitos).'
+        message: t.contactoPage.telefonoInvalido
       });
       return false;
     }
@@ -126,7 +129,7 @@ export default function Contacto() {
     if (!formData.nombre || !formData.servicio || !formData.mensaje) {
       setFormStatus({
         type: 'error',
-        message: 'Por favor completa todos los campos requeridos.'
+        message: t.contactoPage.camposRequeridos
       });
       return false;
     }
@@ -243,7 +246,7 @@ export default function Contacto() {
     } else {
       setFormStatus({
         type: 'error',
-        message: 'Hubo un problema al enviar tu mensaje. Por favor intenta de nuevo.'
+        message: t.contactoPage.errorGeneral
       });
     }
   };
@@ -254,14 +257,14 @@ export default function Contacto() {
   };
 
   const servicios = [
-    { value: '', label: 'Selecciona un servicio' },
-    { value: 'consulta-general', label: 'Consulta General' },
-    { value: 'diagnostico-3d', label: 'Diagnóstico 3D', icon: FaBullseye },
-    { value: 'marketing-digital', label: 'Marketing Digital' },
-    { value: 'desarrollo-web', label: 'Desarrollo Web' },
-    { value: 'consultoria', label: 'Consultoría', icon: FaChartLine },
-    { value: 'automatizacion-ia', label: 'Automatización con IA', icon: FaRobot },
-    { value: 'capacitacion', label: 'Capacitación' }
+    { value: '', label: t.contactoPage.seleccionaServicio },
+    { value: 'consulta-general', label: t.contactoPage.consultaGeneral },
+    { value: 'diagnostico-3d', label: t.contactoPage.diagnostico3d, icon: FaBullseye },
+    { value: 'marketing-digital', label: t.contactoPage.marketingDigital },
+    { value: 'desarrollo-web', label: t.contactoPage.desarrolloWeb },
+    { value: 'consultoria', label: t.contactoPage.consultoria, icon: FaChartLine },
+    { value: 'automatizacion-ia', label: t.contactoPage.automatizacionIA, icon: FaRobot },
+    { value: 'capacitacion', label: t.contactoPage.capacitacion }
   ];
 
   return (
@@ -271,10 +274,10 @@ export default function Contacto() {
         <div className="container mx-auto px-4 py-4">
           <nav className="text-sm">
             <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
-              Inicio
+              {t.common.inicio}
             </Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">Contacto</span>
+            <span className="text-gray-900 font-medium">{t.contactoPage.breadcrumb}</span>
           </nav>
         </div>
       </div>
@@ -283,11 +286,10 @@ export default function Contacto() {
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Conectemos para Transformar tu Negocio
+            {t.contactoPage.heroTitulo}
           </h1>
           <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Estamos aquí para escucharte y diseñar juntos la estrategia de transformación 
-            digital que llevará tu empresa al siguiente nivel con IA y datos
+            {t.contactoPage.heroSubtitulo}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -297,14 +299,14 @@ export default function Contacto() {
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105"
             >
               <FaCalendarAlt />
-              Agenda tu Diagnóstico 3D Gratis
+              {t.contactoPage.agendaDiagnostico}
             </a>
             <a
               href="tel:+19295001850"
               className="inline-flex items-center justify-center gap-2 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 transition-all duration-300"
             >
               <FaPhone />
-              Llámanos Ahora
+              {t.contactoPage.llamanos}
             </a>
           </div>
         </div>
@@ -318,7 +320,7 @@ export default function Contacto() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaPhone className="text-blue-600 text-xl" />
               </div>
-              <h3 className="font-semibold mb-2">Teléfono</h3>
+              <h3 className="font-semibold mb-2">{t.contactoPage.telefono}</h3>
               <a href="tel:+19295001850" className="text-blue-600 hover:underline">
                 +1 929 500 1850
               </a>
@@ -328,7 +330,7 @@ export default function Contacto() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaEnvelope className="text-blue-600 text-xl" />
               </div>
-              <h3 className="font-semibold mb-2">Email</h3>
+              <h3 className="font-semibold mb-2">{t.contactoPage.email}</h3>
               <a href={`mailto:${LINKS.email}`} className="text-blue-600 hover:underline">
                 contacto@tuimpulsalab.com
               </a>
@@ -338,8 +340,8 @@ export default function Contacto() {
               <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                 <FaClock className="text-blue-600 text-xl" />
               </div>
-              <h3 className="font-semibold mb-2">Horario</h3>
-              <p className="text-gray-600">Lun - Vie: 9:00 AM - 6:00 PM EST</p>
+              <h3 className="font-semibold mb-2">{t.contactoPage.horario}</h3>
+              <p className="text-gray-600">{t.contactoPage.horarioTexto}</p>
             </div>
           </div>
         </div>
@@ -352,9 +354,9 @@ export default function Contacto() {
             {/* Formulario de Contacto */}
             <div className="lg:col-span-2">
               <div className="bg-white rounded-xl shadow-lg p-8">
-                <h2 className="text-2xl font-bold mb-2">Cuéntanos sobre tu Proyecto</h2>
+                <h2 className="text-2xl font-bold mb-2">{t.contactoPage.cuentanos}</h2>
                 <p className="text-gray-600 mb-6">
-                  Completa el formulario y nos pondremos en contacto contigo en menos de 24 horas hábiles
+                  {t.contactoPage.cuentanosDesc}
                 </p>
                 
                 {/* Notificaciones */}
@@ -363,12 +365,12 @@ export default function Contacto() {
                     <div className="flex items-start gap-3">
                       <FaCheckCircle className="text-green-500 mt-1 flex-shrink-0" />
                       <div className="flex-1">
-                        <p className="text-green-800 font-semibold">¡Mensaje enviado con éxito!</p>
+                        <p className="text-green-800 font-semibold">{t.contactoPage.exitoMensaje}</p>
                         <p className="text-green-600 text-sm mt-1">
-                          Hemos recibido tu mensaje. Nuestro equipo se pondrá en contacto contigo pronto.
+                          {t.contactoPage.exitoDesc}
                         </p>
                         <p className="text-green-600 text-sm mt-2">
-                          📧 Revisa tu email para la confirmación
+                          {t.contactoPage.revisaEmail}
                         </p>
                         <div className="mt-3 h-1 bg-green-200 rounded-full overflow-hidden">
                           <div 
@@ -386,7 +388,7 @@ export default function Contacto() {
                     <div className="flex items-start gap-3">
                       <FaExclamationTriangle className="text-red-500 mt-1 flex-shrink-0" />
                       <div className="flex-1">
-                        <p className="text-red-800 font-semibold">Error al enviar</p>
+                        <p className="text-red-800 font-semibold">{t.contactoPage.errorEnviar}</p>
                         <p className="text-red-600 text-sm">{formStatus.message}</p>
                         {retryCount < 3 && (
                           <button
@@ -394,7 +396,7 @@ export default function Contacto() {
                             className="mt-2 text-red-600 hover:text-red-700 text-sm font-medium flex items-center gap-1"
                           >
                             <FaRedo className="text-xs" />
-                            Reintentar
+                            {t.contactoPage.reintentar}
                           </button>
                         )}
                       </div>
@@ -407,7 +409,7 @@ export default function Contacto() {
                     <div className="flex items-start gap-3">
                       <FaClock className="text-yellow-600 mt-1 flex-shrink-0" />
                       <div className="flex-1">
-                        <p className="text-yellow-800 font-semibold">Límite de envío</p>
+                        <p className="text-yellow-800 font-semibold">{t.contactoPage.limiteEnvio}</p>
                         <p className="text-yellow-600 text-sm">{formStatus.message}</p>
                       </div>
                     </div>
@@ -429,7 +431,7 @@ export default function Contacto() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="nombre" className="block text-sm font-medium text-gray-700 mb-2">
-                        Nombre Completo *
+                        {t.contactoPage.nombreCompleto}
                       </label>
                       <input
                         type="text"
@@ -446,7 +448,7 @@ export default function Contacto() {
                     
                     <div>
                       <label htmlFor="empresa" className="block text-sm font-medium text-gray-700 mb-2">
-                        Empresa
+                        {t.contactoPage.empresa}
                       </label>
                       <input
                         type="text"
@@ -464,7 +466,7 @@ export default function Contacto() {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
-                        Email *
+                        {t.contactoPage.emailLabel}
                       </label>
                       <input
                         type="email"
@@ -481,7 +483,7 @@ export default function Contacto() {
                     
                     <div>
                       <label htmlFor="telefono" className="block text-sm font-medium text-gray-700 mb-2">
-                        Teléfono *
+                        {t.contactoPage.telefonoLabel}
                       </label>
                       <input
                         type="tel"
@@ -499,7 +501,7 @@ export default function Contacto() {
 
                   <div>
                     <label htmlFor="servicio" className="block text-sm font-medium text-gray-700 mb-2">
-                      ¿En qué área necesitas ayuda? *
+                      {t.contactoPage.areaAyuda}
                     </label>
                     <select
                       id="servicio"
@@ -520,7 +522,7 @@ export default function Contacto() {
 
                   <div>
                     <label htmlFor="mensaje" className="block text-sm font-medium text-gray-700 mb-2">
-                      Cuéntanos más sobre tu proyecto *
+                      {t.contactoPage.cuentanosProyecto}
                     </label>
                     <textarea
                       id="mensaje"
@@ -531,7 +533,7 @@ export default function Contacto() {
                       disabled={formStatus.type === 'loading'}
                       rows={5}
                       className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none disabled:bg-gray-100 disabled:cursor-not-allowed"
-                      placeholder="Describe brevemente tu proyecto, desafíos actuales y objetivos..."
+                      placeholder={t.contactoPage.placeholderProyecto}
                     />
                   </div>
 
@@ -544,11 +546,11 @@ export default function Contacto() {
                       {formStatus.type === 'loading' ? (
                         <>
                           <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
-                          Enviando...
+                          {t.contactoPage.enviando}
                         </>
                       ) : (
                         <>
-                          Enviar Mensaje
+                          {t.contactoPage.enviarMensaje}
                           <FaArrowRight />
                         </>
                       )}
@@ -561,7 +563,7 @@ export default function Contacto() {
                       className="flex-1 border-2 border-blue-600 text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all duration-300 text-center flex items-center justify-center gap-2"
                     >
                       <FaCalendarAlt />
-                      Prefiero Agendar una Llamada
+                      {t.contactoPage.prefieroAgendar}
                     </a>
                   </div>
                 </form>
@@ -574,11 +576,10 @@ export default function Contacto() {
               <div className="bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-xl p-6">
                 <h3 className="text-xl font-bold mb-3 flex items-center gap-2">
                   <FaBullseye />
-                  Diagnóstico 3D Gratuito
+                  {t.contactoPage.diagnostico3dGratuito}
                 </h3>
                 <p className="mb-4">
-                  Descubre las oportunidades ocultas en tu negocio con nuestro análisis 
-                  tridimensional sin costo ni compromiso.
+                  {t.contactoPage.diagnostico3dDesc}
                 </p>
                 <a
                   href={LINKS.calendly}
@@ -586,19 +587,19 @@ export default function Contacto() {
                   rel="noopener noreferrer"
                   className="inline-block bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                 >
-                  Agenda Ahora
+                  {t.contactoPage.agendaAhora}
                 </a>
               </div>
 
               {/* Información de Oficina */}
               <div className="bg-white rounded-xl shadow-lg p-6">
-                <h3 className="text-lg font-bold mb-4">Información de Oficina</h3>
+                <h3 className="text-lg font-bold mb-4">{t.contactoPage.infoOficina}</h3>
                 
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Dirección</p>
+                      <p className="font-medium">{t.contactoPage.direccion}</p>
                       <p className="text-gray-600 text-sm">
                         118-35 Queens Blvd #400<br />
                         Forest Hills, NY 11375
@@ -609,7 +610,7 @@ export default function Contacto() {
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:underline text-sm mt-1 inline-block"
                       >
-                        Ver en Google Maps →
+                        {t.contactoPage.verGoogleMaps} &rarr;
                       </a>
                     </div>
                   </div>
@@ -617,10 +618,10 @@ export default function Contacto() {
                   <div className="flex items-start gap-3">
                     <FaClock className="text-blue-600 mt-1 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Horario de Atención</p>
+                      <p className="font-medium">{t.contactoPage.horarioAtencion}</p>
                       <p className="text-gray-600 text-sm">
-                        Lunes - Viernes: 9:00 AM - 6:00 PM EST<br />
-                        Sábado - Domingo: Cerrado
+                        {t.contactoPage.horarioSemana}<br />
+                        {t.contactoPage.horarioFinde}
                       </p>
                     </div>
                   </div>
@@ -628,7 +629,7 @@ export default function Contacto() {
                   <div className="flex items-start gap-3">
                     <FaLinkedin className="text-blue-600 mt-1 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">Síguenos</p>
+                      <p className="font-medium">{t.contactoPage.siguenos}</p>
                       <a
                         href={LINKS.linkedin}
                         target="_blank"
@@ -644,15 +645,15 @@ export default function Contacto() {
 
               {/* Preguntas Frecuentes */}
               <div className="bg-gray-100 rounded-xl p-6">
-                <h3 className="text-lg font-bold mb-3">¿Tienes Preguntas?</h3>
+                <h3 className="text-lg font-bold mb-3">{t.contactoPage.tienesPreguntas}</h3>
                 <p className="text-gray-600 mb-4">
-                  Consulta nuestras preguntas frecuentes o contáctanos directamente.
+                  {t.contactoPage.consultaFAQ}
                 </p>
                 <Link
                   href="/faq"
                   className="text-blue-600 hover:underline font-medium"
                 >
-                  Ver Preguntas Frecuentes →
+                  {t.contactoPage.verFAQ} &rarr;
                 </Link>
               </div>
             </div>
@@ -664,10 +665,10 @@ export default function Contacto() {
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            ¿Listo para Transformar tu Negocio?
+            {t.common.listoTransformar}
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
-            No esperes más. El futuro de tu empresa comienza con una conversación.
+            {t.contactoPage.noEsperes}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
@@ -677,14 +678,14 @@ export default function Contacto() {
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105"
             >
               <FaCalendarAlt />
-              Agenda tu Diagnóstico Gratuito
+              {t.common.agendaDiagnostico}
             </a>
             <a
               href={`mailto:${LINKS.email}`}
               className="inline-flex items-center justify-center gap-2 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 transition-all duration-300"
             >
               <FaEnvelope />
-              Escríbenos Ahora
+              {t.contactoPage.escribenos}
             </a>
           </div>
         </div>

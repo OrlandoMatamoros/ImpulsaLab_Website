@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 import { 
   GraduationCap, 
   Users, 
@@ -25,6 +26,7 @@ import {
 } from 'lucide-react'
 
 export default function ImpulsaAcademyPage() {
+  const { t } = useLanguage()
   const [selectedProgram, setSelectedProgram] = useState<'mentoria' | 'teams' | null>(null)
 
   return (
@@ -41,35 +43,34 @@ export default function ImpulsaAcademyPage() {
           <div className="max-w-5xl mx-auto text-center">
             {/* Main Title */}
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              La IA no reemplazará<br />a tus empleados
+              {t.capacitacionPage.heroTitulo1}<br />{t.capacitacionPage.heroTitulo2}
             </h1>
 
             <p className="text-3xl md:text-4xl font-bold text-emerald-400 mb-8">
-              Los hará 3x más productivos
+              {t.capacitacionPage.heroAccent}
             </p>
 
             <p className="text-xl md:text-2xl text-blue-100 mb-12 max-w-3xl mx-auto leading-relaxed">
-              Y eso se traduce directamente en <span className="font-bold text-white">más dinero</span> para tu negocio.
-              Capacitación práctica en IA con resultados inmediatos.
+              {t.capacitacionPage.heroDesc} <span className="font-bold text-white">{t.capacitacionPage.heroDescBold}</span> {t.capacitacionPage.heroDesc2}
             </p>
 
             {/* Stats */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12">
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
                 <div className="text-4xl font-bold text-emerald-400 mb-2">2-12h</div>
-                <div className="text-sm text-blue-100">Duración flexible</div>
+                <div className="text-sm text-blue-100">{t.capacitacionPage.statDuracion}</div>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
                 <div className="text-4xl font-bold text-emerald-400 mb-2">100%</div>
-                <div className="text-sm text-blue-100">Práctico</div>
+                <div className="text-sm text-blue-100">{t.capacitacionPage.statPractico}</div>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
                 <div className="text-4xl font-bold text-emerald-400 mb-2">NYC</div>
-                <div className="text-sm text-blue-100">Presencial</div>
+                <div className="text-sm text-blue-100">{t.capacitacionPage.statPresencial}</div>
               </div>
               <div className="bg-white/10 backdrop-blur rounded-2xl p-6 border border-white/20">
                 <div className="text-4xl font-bold text-emerald-400 mb-2">5+</div>
-                <div className="text-sm text-blue-100">Módulos</div>
+                <div className="text-sm text-blue-100">{t.capacitacionPage.statModulos}</div>
               </div>
             </div>
 
@@ -79,14 +80,14 @@ export default function ImpulsaAcademyPage() {
                 href="#programas"
                 className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-emerald-500/50 transform hover:scale-105 transition-all duration-300 flex items-center gap-2"
               >
-                Ver Programas
+                {t.capacitacionPage.verProgramas}
                 <ArrowRight className="w-5 h-5" />
               </a>
-              <Link 
+              <Link
                 href="/#contacto"
                 className="px-8 py-4 bg-white/10 backdrop-blur text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300"
               >
-                Consulta Gratuita
+                {t.capacitacionPage.consultaGratuita}
               </Link>
             </div>
           </div>
@@ -106,28 +107,18 @@ export default function ImpulsaAcademyPage() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-2xl font-bold text-slate-900 mb-3">
-                    📍 Capacitación en tu espacio de trabajo
+                    {`📍 ${t.capacitacionPage.enTuEspacio}`}
                   </h3>
                   <p className="text-gray-700 mb-4 leading-relaxed">
-                    Todas nuestras sesiones son <span className="font-bold text-blue-600">presenciales en tu locación</span> para:
+                    {t.capacitacionPage.presencialDesc} <span className="font-bold text-blue-600">{t.capacitacionPage.presencialBold}</span> {t.capacitacionPage.presencialPara}
                   </p>
                   <div className="grid md:grid-cols-2 gap-3 mb-4">
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">Trabajar directamente en tus sistemas</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">Involucrar al equipo sin desplazamientos</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">Resolver problemas reales en tiempo real</span>
-                    </div>
-                    <div className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                      <span className="text-gray-700">Maximizar el tiempo productivo</span>
-                    </div>
+                    {t.capacitacionPage.presencialItems.map((item, index) => (
+                      <div key={index} className="flex items-start gap-2">
+                        <CheckCircle2 className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+                        <span className="text-gray-700">{item}</span>
+                      </div>
+                    ))}
                   </div>
                   <div className="flex items-center gap-4 text-sm">
                     <div className="flex items-center gap-2">

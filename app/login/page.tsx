@@ -6,9 +6,11 @@ import Link from 'next/link';
 import { auth } from '@/lib/firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { Eye, EyeOff } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function LoginPage() {
   const router = useRouter();
+  const { t } = useLanguage();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -51,19 +53,19 @@ export default function LoginPage() {
       // Mensajes de error más amigables
       switch(error.code) {
         case 'auth/user-not-found':
-          setError('No account found with this email');
+          setError(t.loginPage.errorNoEncontrado);
           break;
         case 'auth/wrong-password':
-          setError('Incorrect password');
+          setError(t.loginPage.errorContrasena);
           break;
         case 'auth/invalid-email':
-          setError('Invalid email address');
+          setError(t.loginPage.errorEmailInvalido);
           break;
         case 'auth/too-many-requests':
-          setError('Too many failed attempts. Please try again later');
+          setError(t.loginPage.errorMuchosIntentos);
           break;
         default:
-          setError('Login failed. Please try again');
+          setError(t.loginPage.errorGeneral);
       }
     } finally {
       setLoading(false);
@@ -79,10 +81,10 @@ export default function LoginPage() {
             Impulsa Lab
           </h1>
           <h2 className="text-2xl font-semibold text-gray-700">
-            Welcome Back
+            {t.loginPage.bienvenido}
           </h2>
           <p className="mt-2 text-gray-600">
-            Sign in to your account
+            {t.loginPage.iniciarSesion}
           </p>
         </div>
 
@@ -99,7 +101,7 @@ export default function LoginPage() {
             {/* Email Field */}
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email Address
+                {t.loginPage.email}
               </label>
               <input
                 id="email"
@@ -115,7 +117,7 @@ export default function LoginPage() {
             {/* Password Field with Toggle */}
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">
-                Password
+                {t.loginPage.contrasena}
               </label>
               <div className="relative">
                 <input
@@ -151,13 +153,13 @@ export default function LoginPage() {
                 className="h-4 w-4 text-purple-600 focus:ring-purple-500 border-gray-300 rounded"
               />
               <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-700">
-                Remember me
+                {t.loginPage.recordarme}
               </label>
             </div>
 
             <div className="text-sm">
               <Link href="/forgot-password" className="font-medium text-purple-600 hover:text-purple-500">
-                Forgot password?
+                {t.loginPage.olvidasteContrasena}
               </Link>
             </div>
           </div>
@@ -174,24 +176,24 @@ export default function LoginPage() {
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                 </svg>
-                Signing in...
+                {t.loginPage.iniciando}
               </span>
             ) : (
-              'Sign In'
+              t.loginPage.iniciarSesionBtn
             )}
           </button>
 
           {/* Sign up link */}
           <div className="text-center text-sm">
-            <span className="text-gray-600">Don't have an account? </span>
+            <span className="text-gray-600">{t.loginPage.noTienesCuenta}{' '}</span>
             <Link href="/signup" className="font-medium text-purple-600 hover:text-purple-500">
-              Sign up
+              {t.loginPage.registrate}
             </Link>
           </div>
 
           {/* Demo Account Info - TEMPORAL */}
           <div className="mt-6 p-4 bg-blue-50 rounded-lg border border-blue-200">
-            <p className="text-xs text-blue-800 font-medium mb-2">Demo Account:</p>
+            <p className="text-xs text-blue-800 font-medium mb-2">{t.loginPage.cuentaDemo}</p>
             <p className="text-xs text-blue-700">Email: demo@tuimpulsalab.com</p>
             <p className="text-xs text-blue-700">Password: DemoImpulsa2025!</p>
           </div>
