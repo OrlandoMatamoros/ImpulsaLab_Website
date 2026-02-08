@@ -347,23 +347,23 @@ export default function ImpulsaAcademyPage() {
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
-                  title: 'Finanzas',
-                  subtitle: 'De 4 horas a 20 minutos',
-                  description: 'Automatiza reportes financieros. El resto del tiempo, toma decisiones estratégicas.',
+                  title: t.capacitacionPage.finanzasTitulo,
+                  subtitle: t.capacitacionPage.finanzasSubtitulo,
+                  description: t.capacitacionPage.finanzasDesc,
                   icon: TrendingUp,
                   color: 'emerald'
                 },
                 {
-                  title: 'Operaciones',
-                  subtitle: 'Automatiza lo repetitivo',
-                  description: 'Libera a tu equipo de tareas manuales. Enfócalos en lo que genera valor.',
+                  title: t.capacitacionPage.operacionesTitulo,
+                  subtitle: t.capacitacionPage.operacionesSubtitulo,
+                  description: t.capacitacionPage.operacionesDesc,
                   icon: Zap,
                   color: 'blue'
                 },
                 {
-                  title: 'Marketing',
-                  subtitle: '1 hora vs 1 semana',
-                  description: 'Crea contenido 5x más rápido sin sacrificar calidad ni autenticidad.',
+                  title: t.capacitacionPage.marketingTitulo,
+                  subtitle: t.capacitacionPage.marketingSubtitulo,
+                  description: t.capacitacionPage.marketingDesc,
                   icon: Sparkles,
                   color: 'purple'
                 }
@@ -388,10 +388,10 @@ export default function ImpulsaAcademyPage() {
           <div className="max-w-4xl mx-auto text-center">
             <GraduationCap className="w-20 h-20 text-emerald-400 mx-auto mb-6" />
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              ¿Listo para 3x la productividad de tu equipo?
+              {t.capacitacionPage.ctaTitulo}
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              Agenda una consulta gratuita de 15 minutos para identificar cuál programa se ajusta mejor a tus necesidades.
+              {t.capacitacionPage.ctaDesc}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link 
@@ -399,16 +399,16 @@ export default function ImpulsaAcademyPage() {
                 className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-emerald-500/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <Calendar className="w-5 h-5" />
-                Consulta Gratuita (15 min)
+                {t.capacitacionPage.consultaGratuita15}
               </Link>
-              <a 
+              <a
                 href="https://wa.me/19295007815"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-white/10 backdrop-blur text-white rounded-xl font-semibold text-lg border-2 border-white/30 hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <MessageSquare className="w-5 h-5" />
-                Hablar por WhatsApp
+                {t.capacitacionPage.hablarWhatsapp}
               </a>
             </div>
           </div>
