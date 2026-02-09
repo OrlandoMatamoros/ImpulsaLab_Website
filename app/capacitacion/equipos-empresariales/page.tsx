@@ -30,7 +30,7 @@ import {
 } from 'lucide-react'
 
 export default function EquiposEmpresarialesPage() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const ep = t.equiposPage
   const [selectedTier, setSelectedTier] = useState<'workshop' | 'standard' | 'premium'>('standard')
   const [additionalPeople, setAdditionalPeople] = useState(0)
@@ -283,7 +283,7 @@ export default function EquiposEmpresarialesPage() {
                   <div className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full shadow-lg">
                     <Plus className="w-5 h-5" />
                     <span className="font-semibold">
-                      +{additionalPeople} {ep.personaAdicional}{additionalPeople > 1 ? (t.language === 'ES' ? 'es' : 's') : ''} = +${additionalPeople * 59}
+                      +{additionalPeople} {ep.personaAdicional}{additionalPeople > 1 ? (language === 'ES' ? 'es' : 's') : ''} = +${additionalPeople * 59}
                     </span>
                   </div>
                 )}
