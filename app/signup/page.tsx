@@ -4,9 +4,11 @@ import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Eye, EyeOff, Check, X } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 function SignupForm() {
   const router = useRouter()
+  const { t } = useLanguage()
   const searchParams = useSearchParams()
   const isConsultant = searchParams.get('consultor') === 'true'
   
@@ -50,17 +52,17 @@ function SignupForm() {
     
     // Validaciones
     if (formData.password !== formData.confirmPassword) {
-      setError('Las contraseñas no coinciden')
+      setError(t.signupPage.errorContrasenas)
       return
     }
-    
+
     if (!Object.values(passwordChecks).every(check => check)) {
-      setError('La contraseña no cumple con los requisitos')
+      setError(t.signupPage.errorRequisitos)
       return
     }
-    
+
     if (isConsultant && !formData.consultantCode) {
-      setError('El código de consultor es requerido')
+      setError(t.signupPage.errorCodigoRequerido)
       return
     }
     
@@ -94,7 +96,7 @@ function SignupForm() {
       router.push(`/verification?${params.toString()}`)
       
     } catch (err) {
-      setError('Error al procesar el registro')
+      setError(t.signupPage.errorProcesar)
       setLoading(false)
     }
   }
@@ -104,10 +106,10 @@ function SignupForm() {
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold text-gray-900">
-            {isConsultant ? 'Registro de Consultor' : 'Crear Cuenta'}
+            {isConsultant ? t.signupPage.registroConsultor : t.signupPage.crearCuenta}
           </h2>
           <p className="text-gray-600 mt-2">
-            {isConsultant ? 'Acceso exclusivo para consultores' : 'Únete a Impulsa Lab'}
+            {isConsultant ? t.signupPage.accesoConsultores : t.signupPage.uneteImpulsa}
           </p>
         </div>
         
@@ -120,7 +122,7 @@ function SignupForm() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Nombre completo *
+              {t.signupPage.nombreCompleto}
             </label>
             <input
               type="text"
@@ -133,7 +135,7 @@ function SignupForm() {
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Email *
+              {t.signupPage.email}
             </label>
             <input
               type="email"
@@ -147,7 +149,7 @@ function SignupForm() {
           {isConsultant && (
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">
-                Código de Consultor *
+                {t.signupPage.codigoConsultor}
               </label>
               <input
                 type="text"
@@ -162,7 +164,7 @@ function SignupForm() {
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Contraseña *
+              {t.signupPage.contrasena}
             </label>
             <div className="relative">
               <input
@@ -185,23 +187,23 @@ function SignupForm() {
               <div className="mt-2 space-y-1">
                 <div className={`flex items-center text-xs ${passwordChecks.length ? 'text-green-600' : 'text-gray-400'}`}>
                   {passwordChecks.length ? <Check size={14} /> : <X size={14} />}
-                  <span className="ml-1">Mínimo 8 caracteres</span>
+                  <span className="ml-1">{t.signupPage.min8caracteres}</span>
                 </div>
                 <div className={`flex items-center text-xs ${passwordChecks.uppercase ? 'text-green-600' : 'text-gray-400'}`}>
                   {passwordChecks.uppercase ? <Check size={14} /> : <X size={14} />}
-                  <span className="ml-1">Una mayúscula</span>
+                  <span className="ml-1">{t.signupPage.unaMayuscula}</span>
                 </div>
                 <div className={`flex items-center text-xs ${passwordChecks.lowercase ? 'text-green-600' : 'text-gray-400'}`}>
                   {passwordChecks.lowercase ? <Check size={14} /> : <X size={14} />}
-                  <span className="ml-1">Una minúscula</span>
+                  <span className="ml-1">{t.signupPage.unaMinuscula}</span>
                 </div>
                 <div className={`flex items-center text-xs ${passwordChecks.number ? 'text-green-600' : 'text-gray-400'}`}>
                   {passwordChecks.number ? <Check size={14} /> : <X size={14} />}
-                  <span className="ml-1">Un número</span>
+                  <span className="ml-1">{t.signupPage.unNumero}</span>
                 </div>
                 <div className={`flex items-center text-xs ${passwordChecks.special ? 'text-green-600' : 'text-gray-400'}`}>
                   {passwordChecks.special ? <Check size={14} /> : <X size={14} />}
-                  <span className="ml-1">Un carácter especial (!@#$%^&*)</span>
+                  <span className="ml-1">{t.signupPage.unEspecial}</span>
                 </div>
               </div>
             )}
@@ -209,7 +211,7 @@ function SignupForm() {
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Confirmar Contraseña *
+              {t.signupPage.confirmarContrasena}
             </label>
             <div className="relative">
               <input
@@ -228,13 +230,13 @@ function SignupForm() {
               </button>
             </div>
             {formData.confirmPassword && formData.password !== formData.confirmPassword && (
-              <p className="text-red-500 text-xs mt-1">Las contraseñas no coinciden</p>
+              <p className="text-red-500 text-xs mt-1">{t.signupPage.contrasenasNoCoinciden}</p>
             )}
           </div>
           
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">
-              Teléfono WhatsApp
+              {t.signupPage.telefonoWhatsapp}
             </label>
             <input
               type="tel"
@@ -250,24 +252,24 @@ function SignupForm() {
             disabled={loading || !Object.values(passwordChecks).every(check => check) || formData.password !== formData.confirmPassword}
             className="w-full bg-purple-600 text-white py-3 rounded-lg font-semibold hover:bg-purple-700 disabled:opacity-50 transition-colors"
           >
-            {loading ? 'Procesando...' : 'Continuar con verificación'}
+            {loading ? t.signupPage.procesando : t.signupPage.continuarVerificacion}
           </button>
         </form>
         
         <div className="mt-6 text-center">
           {!isConsultant && (
             <p className="text-gray-600 mb-2">
-              ¿Eres consultor?{' '}
+              {t.signupPage.eresConsultor}{' '}
               <Link href="/signup?consultor=true" className="text-purple-600 hover:text-purple-700 font-medium">
-                Registrarse con código
+                {t.signupPage.registrarseConCodigo}
               </Link>
             </p>
           )}
           
           <p className="text-gray-600">
-            ¿Ya tienes cuenta?{' '}
+            {t.signupPage.yaTienesCuenta}{' '}
             <Link href="/login" className="text-purple-600 hover:text-purple-700 font-medium">
-              Iniciar sesión
+              {t.signupPage.iniciarSesion}
             </Link>
           </p>
         </div>

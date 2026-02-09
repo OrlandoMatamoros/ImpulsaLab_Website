@@ -3,10 +3,11 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useState } from 'react';
-import { 
- FaArrowRight, 
- FaClock, 
- FaUser, 
+import { useLanguage } from '@/contexts/LanguageContext';
+import {
+ FaArrowRight,
+ FaClock,
+ FaUser,
  FaTag,
  FaSearch,
  FaRobot,
@@ -31,94 +32,81 @@ interface BlogPost {
  featured?: boolean;
 }
 
-// Datos de ejemplo - Estos vendrían de tu CMS o base de datos
-const blogPosts: BlogPost[] = [
+// Static post metadata (non-translatable fields)
+const postMeta = [
  {
    id: '1',
    slug: 'ia-transformacion-pymes-2025',
-   title: 'Cómo la IA está Transformando las PYMES en 2025: Guía Práctica',
-   excerpt: 'Descubre las herramientas de inteligencia artificial más efectivas para pequeños negocios y cómo implementarlas sin necesidad de ser un experto en tecnología.',
-   category: 'Inteligencia Artificial',
    author: 'Orlando Matamoros',
    date: '2025-08-05',
-   readTime: '7 min',
    image: 'https://via.placeholder.com/800x600/4F46E5/ffffff?text=IA+para+PYMES',
    featured: true
  },
  {
    id: '2',
    slug: 'automatizacion-procesos-restaurantes',
-   title: 'Automatización para Restaurantes: 5 Procesos que Debes Digitalizar Ya',
-   excerpt: 'Aprende cómo los restaurantes en Brooklyn están ahorrando 20 horas semanales automatizando reservas, pedidos y gestión de inventario con herramientas accesibles.',
-   category: 'Automatización',
    author: 'Nova AI',
    date: '2025-08-03',
-   readTime: '5 min',
    image: 'https://via.placeholder.com/800x600/10B981/ffffff?text=Automatización'
  },
  {
    id: '3',
    slug: 'dashboard-financiero-excel-gratis',
-   title: 'Crea tu Dashboard Financiero en Excel: Template Gratuito Incluido',
-   excerpt: 'Te enseñamos paso a paso cómo construir un dashboard financiero profesional en Excel para tener el control total de las finanzas de tu negocio.',
-   category: 'Finanzas',
    author: 'Katty Garces',
    date: '2025-08-01',
-   readTime: '10 min',
    image: 'https://via.placeholder.com/800x600/F59E0B/ffffff?text=Dashboard+Financiero'
  },
  {
    id: '4',
    slug: 'marketing-digital-presupuesto-limitado',
-   title: 'Marketing Digital con $500: Estrategia Completa para Emprendedores',
-   excerpt: 'Una guía realista sobre cómo maximizar tu presupuesto de marketing digital y conseguir resultados medibles desde el primer mes.',
-   category: 'Marketing Digital',
    author: 'Diego Flores',
    date: '2025-07-28',
-   readTime: '8 min',
    image: 'https://via.placeholder.com/800x600/EC4899/ffffff?text=Marketing+Digital'
  },
  {
    id: '5',
    slug: 'caso-exito-bodega-queens',
-   title: 'De Bodega Tradicional a Negocio Digital: Caso de Éxito en Queens',
-   excerpt: 'Cómo una bodega familiar aumentó sus ventas 40% en 6 meses implementando un sistema de pedidos online y análisis de datos.',
-   category: 'Casos de Éxito',
    author: 'Alex Cruces',
    date: '2025-07-25',
-   readTime: '6 min',
    image: 'https://via.placeholder.com/800x600/8B5CF6/ffffff?text=Caso+de+Éxito'
  },
  {
    id: '6',
    slug: 'transformacion-digital-paso-a-paso',
-   title: 'Transformación Digital: Tu Hoja de Ruta en 90 Días',
-   excerpt: 'Un plan detallado y práctico para digitalizar tu negocio en tres meses, sin interrumpir tus operaciones diarias.',
-   category: 'Transformación Digital',
    author: 'Orlando Matamoros',
    date: '2025-07-20',
-   readTime: '12 min',
    image: 'https://via.placeholder.com/800x600/0EA5E9/ffffff?text=Transformación+Digital'
  }
 ];
 
-const categories = [
- { name: 'Todos', icon: FaRocket, count: 6 },
- { name: 'Inteligencia Artificial', icon: FaRobot, count: 1 },
- { name: 'Transformación Digital', icon: FaChartLine, count: 1 },
- { name: 'Casos de Éxito', icon: FaLightbulb, count: 1 },
- { name: 'Finanzas', icon: FaChartLine, count: 1 },
- { name: 'Marketing Digital', icon: FaBrain, count: 1 },
- { name: 'Automatización', icon: FaCogs, count: 1 }
-];
-
 export default function BlogPage() {
- const [selectedCategory, setSelectedCategory] = useState('Todos');
+ const { t } = useLanguage();
+ const [selectedCategory, setSelectedCategory] = useState(t.blogPage.catTodos);
  const [searchTerm, setSearchTerm] = useState('');
+
+ // Build translated blog posts by merging static metadata with translated content
+ const blogPosts: BlogPost[] = postMeta.map((meta, index) => ({
+   ...meta,
+   title: t.blogPage.posts[index]?.title ?? '',
+   excerpt: t.blogPage.posts[index]?.excerpt ?? '',
+   category: t.blogPage.posts[index]?.category ?? '',
+   readTime: t.blogPage.posts[index]?.readTime ?? '',
+ }));
+
+ // Build translated categories
+ const categories = [
+   { name: t.blogPage.catTodos, icon: FaRocket, count: 6 },
+   { name: t.blogPage.catIA, icon: FaRobot, count: 1 },
+   { name: t.blogPage.catTransformacion, icon: FaChartLine, count: 1 },
+   { name: t.blogPage.catCasos, icon: FaLightbulb, count: 1 },
+   { name: t.blogPage.catFinanzas, icon: FaChartLine, count: 1 },
+   { name: t.blogPage.catMarketing, icon: FaBrain, count: 1 },
+   { name: t.blogPage.catAutomatizacion, icon: FaCogs, count: 1 }
+ ];
 
  // Filtrar posts basado en categoría y búsqueda
  const filteredPosts = blogPosts.filter(post => {
-   const matchesCategory = selectedCategory === 'Todos' || post.category === selectedCategory;
+   const matchesCategory = selectedCategory === t.blogPage.catTodos || post.category === selectedCategory;
    const matchesSearch = post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
                          post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
    return matchesCategory && matchesSearch;
@@ -134,10 +122,10 @@ export default function BlogPage() {
        <div className="container mx-auto px-4 py-4">
          <nav className="text-sm">
            <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
-             Inicio
+             {t.blogPage.breadcrumbInicio}
            </Link>
            <span className="mx-2 text-gray-400">/</span>
-           <span className="text-gray-900 font-medium">Blog</span>
+           <span className="text-gray-900 font-medium">{t.blogPage.breadcrumbBlog}</span>
          </nav>
        </div>
      </div>
@@ -147,18 +135,18 @@ export default function BlogPage() {
        <div className="absolute inset-0 bg-black opacity-10"></div>
        <div className="container mx-auto px-4 text-center relative z-10">
          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 animate-fade-in">
-           Blog de Impulsa Lab
+           {t.blogPage.heroTitle}
          </h1>
          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto opacity-95">
-           Insights, estrategias y casos de éxito para transformar tu negocio con inteligencia artificial
+           {t.blogPage.heroSubtitle}
          </p>
-         
+
          {/* Barra de búsqueda */}
          <div className="max-w-2xl mx-auto">
            <div className="relative">
              <input
                type="text"
-               placeholder="Buscar artículos..."
+               placeholder={t.blogPage.buscarPlaceholder}
                value={searchTerm}
                onChange={(e) => setSearchTerm(e.target.value)}
                className="w-full px-6 py-4 pr-12 rounded-full text-gray-900 bg-white shadow-lg focus:outline-none focus:ring-4 focus:ring-white focus:ring-opacity-30"
@@ -170,10 +158,10 @@ export default function BlogPage() {
      </section>
 
      {/* Post Destacado */}
-     {featuredPost && !searchTerm && selectedCategory === 'Todos' && (
+     {featuredPost && !searchTerm && selectedCategory === t.blogPage.catTodos && (
        <section className="py-12 bg-white">
          <div className="container mx-auto px-4">
-           <h2 className="text-2xl font-bold mb-8 text-gray-900">Artículo Destacado</h2>
+           <h2 className="text-2xl font-bold mb-8 text-gray-900">{t.blogPage.articuloDestacado}</h2>
            <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl overflow-hidden shadow-xl">
              <div className="grid md:grid-cols-2 gap-0">
                <div className="relative h-64 md:h-full">
@@ -209,7 +197,7 @@ export default function BlogPage() {
                      href={`/blog/${featuredPost.slug}`}
                      className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                    >
-                     Leer más
+                     {t.blogPage.leerMas}
                      <FaArrowRight className="text-sm" />
                    </Link>
                  </div>
@@ -227,7 +215,7 @@ export default function BlogPage() {
            {/* Sidebar de Categorías */}
            <div className="lg:col-span-1">
              <div className="sticky top-4">
-               <h3 className="text-lg font-bold mb-6 text-gray-900">Categorías</h3>
+               <h3 className="text-lg font-bold mb-6 text-gray-900">{t.blogPage.categorias}</h3>
                <div className="space-y-2">
                  {categories.map((category) => {
                    const Icon = category.icon;
@@ -259,15 +247,15 @@ export default function BlogPage() {
 
                {/* Newsletter CTA */}
                <div className="mt-8 p-6 bg-gradient-to-br from-blue-600 to-purple-600 rounded-xl text-white">
-                 <h4 className="font-bold text-lg mb-2">Suscríbete al Newsletter</h4>
+                 <h4 className="font-bold text-lg mb-2">{t.blogPage.newsletterTitle}</h4>
                  <p className="text-sm mb-4 opacity-90">
-                   Recibe insights semanales sobre IA y transformación digital
+                   {t.blogPage.newsletterDesc}
                  </p>
                  <Link
                    href="/contacto"
                    className="block w-full text-center bg-white text-blue-600 py-2 px-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
                  >
-                   Suscribirme
+                   {t.blogPage.suscribirme}
                  </Link>
                </div>
              </div>
@@ -293,7 +281,7 @@ export default function BlogPage() {
                          {post.category}
                        </span>
                      </div>
-                     
+
                      <div className="p-6">
                        <h3 className="text-xl font-bold mb-3 text-gray-900 group-hover:text-blue-600 transition-colors line-clamp-2">
                          {post.title}
@@ -301,7 +289,7 @@ export default function BlogPage() {
                        <p className="text-gray-600 mb-4 line-clamp-3">
                          {post.excerpt}
                        </p>
-                       
+
                        <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
                          <span className="flex items-center gap-1">
                            <FaUser className="text-xs" />
@@ -312,12 +300,12 @@ export default function BlogPage() {
                            {post.readTime}
                          </span>
                        </div>
-                       
+
                        <Link
                          href={`/blog/${post.slug}`}
                          className="inline-flex items-center gap-2 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                        >
-                         Leer artículo
+                         {t.blogPage.leerArticulo}
                          <FaArrowRight className="text-sm group-hover:translate-x-1 transition-transform" />
                        </Link>
                      </div>
@@ -327,16 +315,16 @@ export default function BlogPage() {
              ) : (
                <div className="text-center py-12">
                  <p className="text-gray-500 text-lg">
-                   No se encontraron artículos que coincidan con tu búsqueda.
+                   {t.blogPage.noResultados}
                  </p>
                  <button
                    onClick={() => {
                      setSearchTerm('');
-                     setSelectedCategory('Todos');
+                     setSelectedCategory(t.blogPage.catTodos);
                    }}
                    className="mt-4 text-blue-600 font-semibold hover:text-blue-700 transition-colors"
                  >
-                   Ver todos los artículos
+                   {t.blogPage.verTodos}
                  </button>
                </div>
              )}
@@ -349,24 +337,24 @@ export default function BlogPage() {
      <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
        <div className="container mx-auto px-4 text-center">
          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-           ¿Listo para Transformar tu Negocio?
+           {t.blogPage.ctaTitle}
          </h2>
          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-95">
-           Aplica las estrategias de nuestro blog con el apoyo de expertos en IA y transformación digital
+           {t.blogPage.ctaSubtitle}
          </p>
          <div className="flex flex-col sm:flex-row gap-4 justify-center">
            <Link
              href="/diagnostico"
              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
            >
-             Solicitar Diagnóstico Gratuito
+             {t.blogPage.ctaDiagnostico}
              <FaArrowRight />
            </Link>
            <Link
              href="/contacto"
              className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"
            >
-             Hablar con un Experto
+             {t.blogPage.ctaExperto}
            </Link>
          </div>
        </div>

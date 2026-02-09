@@ -2,10 +2,11 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import { 
-  UserCheck, 
-  Clock, 
-  DollarSign, 
+import { useLanguage } from '@/contexts/LanguageContext'
+import {
+  UserCheck,
+  Clock,
+  DollarSign,
   CheckCircle2,
   ArrowRight,
   Sparkles,
@@ -27,174 +28,18 @@ import {
 } from 'lucide-react'
 
 export default function MentoriaPersonalizadaPage() {
+  const { t } = useLanguage()
+  const mp = t.mentoriaPage
   const [selectedTier, setSelectedTier] = useState<'basic' | 'standard' | 'premium'>('standard')
 
-  const tiers = {
-    basic: {
-      name: 'BASIC',
-      subtitle: 'AI Foundations',
-      price: 200,
-      duration: '2 horas',
-      color: 'emerald',
-      description: 'Introducción completa al mundo de la IA',
-      ideal: 'Emprendedores, gerentes y profesionales curiosos sobre IA',
-      modules: [
-        {
-          title: 'Fundamentos de IA Generativa',
-          time: '60 min',
-          topics: [
-            'Historia y evolución de la IA',
-            '¿Qué son los LLMs? (Large Language Models)',
-            'Conceptos: Tokens, contexto, temperatura',
-            'Redes neuronales explicadas (simple)',
-            'Fine-tuning vs Prompt Engineering',
-            'Limitaciones y capacidades reales'
-          ]
-        },
-        {
-          title: 'Plataformas y Herramientas',
-          time: '60 min',
-          topics: [
-            'ChatGPT: Versiones (3.5, 4, 4o, o1), GPTs, plugins',
-            'Claude: Modelos (Sonnet 4, Opus), Projects',
-            'Gemini: Integración Google, AI Studio',
-            'Comparación: ¿Cuándo usar cada una?',
-            'Herramientas complementarias (MidJourney, ElevenLabs)',
-            'Perplexity para research'
-          ]
-        }
-      ],
-      deliverables: [
-        'Guía de plataformas AI (PDF)',
-        'Comparativa detallada de modelos',
-        '20 prompts starter por industria',
-        'Glosario de términos AI'
-      ]
-    },
-    standard: {
-      name: 'STANDARD',
-      subtitle: 'AI en Acción',
-      price: 349,
-      duration: '4 horas',
-      color: 'blue',
-      description: 'De teoría a práctica. Herramientas listas para usar.',
-      ideal: 'Negocios que quieren implementar IA HOY',
-      modules: [
-        {
-          title: 'Todo lo de BASIC +',
-          time: '2h',
-          topics: ['Fundamentos completos', 'Plataformas y comparativa']
-        },
-        {
-          title: 'Prompt Engineering Avanzado',
-          time: '60 min',
-          topics: [
-            'Estructura de prompts efectivos',
-            'Chain-of-thought prompting',
-            'Few-shot learning práctico',
-            'Roles y contexto optimizado',
-            'Casos por área: Finanzas, Ops, Marketing'
-          ]
-        },
-        {
-          title: 'Setup Estratégico de IA',
-          time: '60 min',
-          topics: [
-            'GPTs personalizados (ChatGPT): configuración completa',
-            'Claude Projects setup con tus documentos',
-            'Gemini AI Studio: prompts guardados',
-            'Integraciones básicas'
-          ]
-        }
-      ],
-      deliverables: [
-        'Todo lo de BASIC',
-        '3 GPTs configurados (ChatGPT + Claude + Gemini)',
-        '50+ prompts específicos para tu industria',
-        'Blueprint de automatización simple (diagrama)',
-        '30 días de soporte por email'
-      ]
-    },
-    premium: {
-      name: 'PREMIUM',
-      subtitle: 'AI Estratégico',
-      price: 899,
-      duration: '6 horas',
-      color: 'amber',
-      description: 'Transformación completa. Blueprint + implementación.',
-      ideal: 'Líderes que quieren transformar su operación',
-      modules: [
-        {
-          title: 'Todo lo de STANDARD +',
-          time: '4h',
-          topics: ['Fundamentos + plataformas', 'Prompt engineering', 'Setup estratégico']
-        },
-        {
-          title: 'Caso de Uso Estratégico',
-          time: '90 min',
-          topics: [
-            'Análisis profundo de UN proceso clave',
-            'Diseño de solución con IA paso a paso',
-            'Inputs, outputs y herramientas necesarias',
-            'Integraciones requeridas',
-            'Timeline de implementación realista',
-            'Blueprint detallado (documento completo)'
-          ]
-        },
-        {
-          title: 'Demo + Roadmap de Adopción',
-          time: '90 min',
-          topics: [
-            'Demo en vivo de automatización (con mis APIs)',
-            'Replica en ambiente sandbox',
-            'Plan de adopción AI 90 días',
-            'Quick wins (semana 1-2)',
-            'Change management para el equipo'
-          ]
-        }
-      ],
-      deliverables: [
-        'Todo lo de STANDARD',
-        '1 automatización simple configurada (sin APIs complejas)',
-        'Roadmap personalizado 90 días',
-        '60 días de soporte prioritario',
-        'Sesión de seguimiento (1h) a los 30 días',
-        'Toolkit premium (templates, workflows, prompts avanzados)'
-      ]
-    }
+  const prices = {
+    basic: 200,
+    standard: 349,
+    premium: 899,
   }
 
-  const currentTier = tiers[selectedTier]
-
-  const testimonials = [
-    {
-      name: 'María González',
-      business: 'Café Andino, Brooklyn',
-      image: '👩‍💼',
-      tier: 'Standard',
-      text: 'En 4 horas configuramos ChatGPT para mi inventario. Ahora genero reportes en 5 minutos.',
-      result: '10h/semana ahorradas',
-      savings: '$800/mes en tiempo'
-    },
-    {
-      name: 'Carlos Ramírez',
-      business: 'Tech Solutions, Manhattan',
-      image: '👨‍💻',
-      tier: 'Premium',
-      text: 'El blueprint nos dio claridad total. Implementamos IA en 3 departamentos en 60 días.',
-      result: '3 áreas automatizadas',
-      savings: '40% más eficiente'
-    },
-    {
-      name: 'Ana Martínez',
-      business: 'Beauty Studio, Queens',
-      image: '👩‍🦱',
-      tier: 'Basic',
-      text: 'Necesitaba entender qué era posible con IA. Ahora uso Claude diariamente para marketing.',
-      result: 'Contenido 5x más rápido',
-      savings: '$600/mes en freelancers'
-    }
-  ]
+  const currentTierData = mp.tiers[selectedTier]
+  const currentPrice = prices[selectedTier]
 
   return (
     <div className="pt-24 pb-20">
@@ -209,27 +54,26 @@ export default function MentoriaPersonalizadaPage() {
         <div className="container mx-auto px-4 py-20 relative">
           <div className="max-w-4xl mx-auto">
             {/* Back Link */}
-            <Link 
+            <Link
               href="/capacitacion"
               className="inline-flex items-center gap-2 text-emerald-200 hover:text-white mb-8 transition-colors group"
             >
               <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
-              Volver a Impulsa Academy
+              {mp.volverAcademy}
             </Link>
 
             {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <UserCheck className="w-4 h-4" />
-              Mentoría Individual
+              {mp.badgeText}
             </div>
 
             <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              Mentoría 1-a-1
+              {mp.heroTitle}
             </h1>
 
             <p className="text-2xl text-emerald-100 mb-8 leading-relaxed">
-              Atención personalizada para transformar tu visión en realidad. 
-              De 2 a 6 horas intensivas con un experto dedicado exclusivamente a tu proyecto.
+              {mp.heroSubtitle}
             </p>
 
             {/* Stats Bar */}
@@ -237,21 +81,21 @@ export default function MentoriaPersonalizadaPage() {
               <div>
                 <div className="flex items-center gap-2 text-emerald-200 mb-2">
                   <Clock className="w-5 h-5" />
-                  <span className="text-sm font-medium">Duración</span>
+                  <span className="text-sm font-medium">{mp.duracionLabel}</span>
                 </div>
-                <div className="text-3xl font-bold">2-6h</div>
+                <div className="text-3xl font-bold">{mp.duracionValue}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-emerald-200 mb-2">
                   <MapPin className="w-5 h-5" />
-                  <span className="text-sm font-medium">Formato</span>
+                  <span className="text-sm font-medium">{mp.formatoLabel}</span>
                 </div>
-                <div className="text-2xl font-bold">Presencial</div>
+                <div className="text-2xl font-bold">{mp.formatoValue}</div>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-emerald-200 mb-2">
                   <DollarSign className="w-5 h-5" />
-                  <span className="text-sm font-medium">Desde</span>
+                  <span className="text-sm font-medium">{mp.desdeLabel}</span>
                 </div>
                 <div className="text-3xl font-bold">$200</div>
               </div>
@@ -259,21 +103,21 @@ export default function MentoriaPersonalizadaPage() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link 
+              <Link
                 href="/#contacto"
                 className="px-8 py-4 bg-white text-emerald-900 rounded-xl font-semibold text-lg shadow-2xl hover:shadow-white/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <Calendar className="w-5 h-5" />
-                Agendar mi Mentoría
+                {mp.agendarMentoria}
               </Link>
-              <a 
+              <a
                 href="https://wa.me/19295007815"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="px-8 py-4 bg-emerald-800/50 backdrop-blur text-white rounded-xl font-semibold text-lg border-2 border-white/20 hover:bg-emerald-800 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <MessageSquare className="w-5 h-5" />
-                Consultar por WhatsApp
+                {mp.consultarWhatsapp}
               </a>
             </div>
           </div>
@@ -286,10 +130,10 @@ export default function MentoriaPersonalizadaPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                Elige tu nivel
+                {mp.eligeNivel}
               </h2>
               <p className="text-xl text-gray-600">
-                3 opciones diseñadas para diferentes etapas
+                {mp.opcionesDesc}
               </p>
             </div>
 
@@ -301,7 +145,7 @@ export default function MentoriaPersonalizadaPage() {
                   onClick={() => setSelectedTier(tier)}
                   className={`flex-1 p-6 rounded-2xl border-4 transition-all duration-300 ${
                     selectedTier === tier
-                      ? tier === 'basic' 
+                      ? tier === 'basic'
                         ? 'border-emerald-500 bg-emerald-50 scale-105 shadow-xl'
                         : tier === 'standard'
                         ? 'border-blue-500 bg-blue-50 scale-105 shadow-xl'
@@ -311,16 +155,16 @@ export default function MentoriaPersonalizadaPage() {
                 >
                   <div className="text-center">
                     <div className="font-bold text-lg text-slate-900 mb-1">
-                      {tiers[tier].name}
+                      {mp.tiers[tier].name}
                     </div>
                     <div className="text-sm text-gray-600 mb-3">
-                      {tiers[tier].subtitle}
+                      {mp.tiers[tier].subtitle}
                     </div>
                     <div className="text-4xl font-bold text-slate-900 mb-1">
-                      ${tiers[tier].price}
+                      ${prices[tier]}
                     </div>
                     <div className="text-sm text-gray-600">
-                      {tiers[tier].duration}
+                      {mp.tiers[tier].duration}
                     </div>
                   </div>
                 </button>
@@ -340,15 +184,15 @@ export default function MentoriaPersonalizadaPage() {
               {/* Header */}
               <div className="text-center mb-12">
                 <h3 className="text-4xl font-bold text-slate-900 mb-4">
-                  {currentTier.name} - {currentTier.subtitle}
+                  {currentTierData.name} - {currentTierData.subtitle}
                 </h3>
                 <p className="text-xl text-gray-700 mb-6">
-                  {currentTier.description}
+                  {currentTierData.description}
                 </p>
                 <div className="inline-flex items-center gap-2 bg-white px-6 py-3 rounded-full shadow-lg">
                   <Target className="w-5 h-5 text-emerald-600" />
                   <span className="text-gray-700">
-                    <span className="font-semibold">Ideal para:</span> {currentTier.ideal}
+                    <span className="font-semibold">{mp.idealPara}</span> {currentTierData.ideal}
                   </span>
                 </div>
               </div>
@@ -357,10 +201,10 @@ export default function MentoriaPersonalizadaPage() {
               <div className="mb-12">
                 <h4 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                   <Brain className="w-7 h-7 text-emerald-600" />
-                  Contenido de la sesión
+                  {mp.contenidoSesion}
                 </h4>
                 <div className="space-y-6">
-                  {currentTier.modules.map((module, i) => (
+                  {currentTierData.modules.map((module, i) => (
                     <div key={i} className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
                       <div className="flex items-start justify-between mb-4">
                         <h5 className="text-xl font-bold text-slate-900">{module.title}</h5>
@@ -385,10 +229,10 @@ export default function MentoriaPersonalizadaPage() {
               <div className="mb-12">
                 <h4 className="text-2xl font-bold text-slate-900 mb-6 flex items-center gap-3">
                   <Award className="w-7 h-7 text-emerald-600" />
-                  Lo que recibes
+                  {mp.loQueRecibes}
                 </h4>
                 <div className="grid md:grid-cols-2 gap-4">
-                  {currentTier.deliverables.map((item, i) => (
+                  {currentTierData.deliverables.map((item, i) => (
                     <div key={i} className="bg-white rounded-xl p-4 shadow-lg border-2 border-gray-100 flex items-start gap-3">
                       <Sparkles className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
                       <span className="text-gray-700 font-medium">{item}</span>
@@ -400,15 +244,15 @@ export default function MentoriaPersonalizadaPage() {
               {/* Pricing Comparison */}
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-gray-100">
                 <div className="text-center">
-                  <div className="text-sm text-gray-600 mb-2">Valor de mercado en NYC</div>
+                  <div className="text-sm text-gray-600 mb-2">{mp.valorMercado}</div>
                   <div className="text-3xl font-bold text-gray-400 line-through mb-2">
-                    ${currentTier.price * 2}+
+                    ${currentPrice * 2}+
                   </div>
                   <div className="text-sm text-emerald-600 font-semibold mb-4">
-                    Ahorras más de ${currentTier.price}
+                    {mp.ahorras} ${currentPrice}
                   </div>
                   <div className="text-5xl font-bold text-slate-900 mb-6">
-                    ${currentTier.price}
+                    ${currentPrice}
                   </div>
                   <Link
                     href="/#contacto"
@@ -418,7 +262,7 @@ export default function MentoriaPersonalizadaPage() {
                       'from-amber-600 to-orange-600'
                     } text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300`}
                   >
-                    Agendar {currentTier.name}
+                    {mp.agendar} {currentTierData.name}
                   </Link>
                 </div>
               </div>
@@ -433,10 +277,10 @@ export default function MentoriaPersonalizadaPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                Comparación completa
+                {mp.comparacionCompleta}
               </h2>
               <p className="text-xl text-gray-600">
-                Encuentra el tier perfecto para tu momento
+                {mp.encuentraTier}
               </p>
             </div>
 
@@ -444,28 +288,14 @@ export default function MentoriaPersonalizadaPage() {
               <table className="w-full border-collapse">
                 <thead>
                   <tr className="bg-slate-900 text-white">
-                    <th className="p-4 text-left font-bold">Característica</th>
+                    <th className="p-4 text-left font-bold">{mp.caracteristica}</th>
                     <th className="p-4 text-center font-bold">BASIC<br/><span className="text-emerald-400">$200</span></th>
                     <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$349</span></th>
                     <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$899</span></th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
-                  {[
-                    { feature: 'Duración', basic: '2 horas', standard: '4 horas', premium: '6 horas' },
-                    { feature: 'Fundamentos IA', basic: '✓', standard: '✓', premium: '✓' },
-                    { feature: 'Plataformas (ChatGPT, Claude, Gemini)', basic: '✓', standard: '✓', premium: '✓' },
-                    { feature: 'Prompt Engineering', basic: '—', standard: '✓', premium: '✓' },
-                    { feature: 'GPTs configurados', basic: '—', standard: '3 GPTs', premium: '3 GPTs' },
-                    { feature: 'Caso de uso estratégico', basic: '—', standard: '—', premium: '✓' },
-                    { feature: 'Blueprint automatización', basic: '—', standard: 'Simple', premium: 'Detallado' },
-                    { feature: 'Demo en vivo', basic: '—', standard: '—', premium: '✓' },
-                    { feature: 'Automatización configurada', basic: '—', standard: '—', premium: '✓' },
-                    { feature: 'Roadmap 90 días', basic: '—', standard: '—', premium: '✓' },
-                    { feature: 'Soporte post-sesión', basic: '—', standard: '30 días', premium: '60 días' },
-                    { feature: 'Seguimiento', basic: '—', standard: '—', premium: '1 sesión' },
-                    { feature: 'Toolkit', basic: 'Básico', standard: 'Standard', premium: 'Premium' }
-                  ].map((row, i) => (
+                  {mp.comparisonRows.map((row, i) => (
                     <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                       <td className="p-4 font-semibold text-gray-900 border">{row.feature}</td>
                       <td className="p-4 text-center border">{row.basic}</td>
@@ -486,15 +316,15 @@ export default function MentoriaPersonalizadaPage() {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-                Casos de éxito reales
+                {mp.casosExito}
               </h2>
               <p className="text-xl text-gray-600">
-                Lo que lograron otros emprendedores en NYC
+                {mp.loQueLogaron}
               </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, i) => (
+              {mp.testimonials.map((testimonial, i) => (
                 <div key={i} className="bg-white rounded-2xl p-8 shadow-xl border-2 border-gray-100 hover:border-emerald-300 hover:shadow-2xl transition-all duration-300">
                   <div className="text-6xl mb-4">{testimonial.image}</div>
                   <div className="mb-4">
@@ -504,13 +334,13 @@ export default function MentoriaPersonalizadaPage() {
                       Tier: {testimonial.tier}
                     </div>
                   </div>
-                  <p className="text-gray-700 mb-4 italic leading-relaxed">"{testimonial.text}"</p>
+                  <p className="text-gray-700 mb-4 italic leading-relaxed">&ldquo;{testimonial.text}&rdquo;</p>
                   <div className="space-y-2">
                     <div className="inline-flex bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-bold">
                       {testimonial.result}
                     </div>
                     <div className="text-sm text-gray-600 font-semibold">
-                      💰 {testimonial.savings}
+                      {testimonial.savings}
                     </div>
                   </div>
                 </div>
@@ -526,34 +356,34 @@ export default function MentoriaPersonalizadaPage() {
           <div className="max-w-4xl mx-auto text-center">
             <Sparkles className="w-20 h-20 mx-auto mb-6 text-emerald-300" />
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Tu transformación con IA empieza aquí
+              {mp.transformacion}
             </h2>
             <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              Desde <span className="font-bold text-white text-3xl">$200</span> puedes aprender los fundamentos.
-              Desde <span className="font-bold text-white text-3xl">$349</span> implementas herramientas reales.
+              <span className="font-bold text-white text-3xl">$200</span> {mp.desdeFundamentos}
+              {' '}<span className="font-bold text-white text-3xl">$349</span> {mp.desdeImplementas}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link 
+              <Link
                 href="/#contacto"
                 className="px-10 py-5 bg-white text-emerald-900 rounded-xl font-bold text-lg shadow-2xl hover:shadow-white/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
               >
                 <Calendar className="w-6 h-6" />
-                Agendar Mentoría Ahora
+                {mp.agendarAhora}
               </Link>
-              <Link 
+              <Link
                 href="/capacitacion"
                 className="px-10 py-5 bg-emerald-800/50 backdrop-blur text-white rounded-xl font-bold text-lg border-2 border-white/30 hover:bg-emerald-800 transition-all duration-300"
               >
-                Ver Impulsa Teams
+                {mp.verTeams}
               </Link>
             </div>
-            
+
             <div className="mt-12 pt-8 border-t border-white/20">
               <p className="text-emerald-200 text-sm mb-4">
-                📍 Todas las sesiones son presenciales en tu locación (NYC)
+                {mp.presencial}
               </p>
               <p className="text-emerald-200 text-sm">
-                ¿Prefieres remoto? Disponible con 15% descuento
+                {mp.prefiereRemoto}
               </p>
             </div>
           </div>

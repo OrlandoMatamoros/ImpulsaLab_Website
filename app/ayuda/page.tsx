@@ -2,11 +2,12 @@
 
 import Link from 'next/link';
 import { useState } from 'react';
-import { 
-  FaArrowRight, 
-  FaSearch, 
-  FaBookOpen, 
-  FaVideo, 
+import { useLanguage } from '@/contexts/LanguageContext';
+import {
+  FaArrowRight,
+  FaSearch,
+  FaBookOpen,
+  FaVideo,
   FaQuestionCircle,
   FaRobot,
   FaChartLine,
@@ -23,161 +24,83 @@ import {
 
 
 export default function Ayuda() {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('todos');
 
-  // Categorías de ayuda
-  const categorias = [
+  // Category icon/color config (non-translatable)
+  const categoryConfig = [
+    { id: 'inicio', icono: <FaLightbulb />, color: 'bg-blue-100 text-blue-600' },
+    { id: 'ia', icono: <FaRobot />, color: 'bg-purple-100 text-purple-600' },
+    { id: 'finanzas', icono: <FaChartLine />, color: 'bg-green-100 text-green-600' },
+    { id: 'marketing', icono: <FaBullhorn />, color: 'bg-pink-100 text-pink-600' },
+  ];
+
+  // Merge translated category data with config
+  const categorias = categoryConfig.map((config, index) => ({
+    ...config,
+    nombre: t.ayudaPage.categorias[index]?.nombre ?? '',
+    descripcion: t.ayudaPage.categorias[index]?.descripcion ?? '',
+  }));
+
+  // Guide static metadata (non-translatable)
+  const guiaMeta = [
+    { categoria: 'inicio', tiempo: '10 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'inicio', tiempo: '5 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'ia', tiempo: '15 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'ia', tiempo: '20 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'finanzas', tiempo: '12 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'finanzas', tiempo: '8 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'marketing', tiempo: '25 min', tipo: 'guia', enlace: '#' },
+    { categoria: 'marketing', tiempo: '10 min', tipo: 'guia', enlace: '#' },
+  ];
+
+  // Merge translated guide data with metadata
+  const guias = guiaMeta.map((meta, index) => ({
+    ...meta,
+    titulo: t.ayudaPage.guias[index]?.titulo ?? '',
+    descripcion: t.ayudaPage.guias[index]?.descripcion ?? '',
+  }));
+
+  // Videos tutoriales - static metadata
+  const videoMeta = [
     {
-      id: 'inicio',
-      nombre: 'Primeros Pasos',
-      icono: <FaLightbulb />,
-      descripcion: 'Todo lo que necesitas para comenzar',
-      color: 'bg-blue-100 text-blue-600'
+      duracion: '15:30',
+      thumbnail: 'https://img.youtube.com/vi/JlRlIaEy2IM/maxresdefault.jpg',
+      url: 'https://www.youtube.com/watch?v=0Uu_VJeVVfo'
     },
     {
-      id: 'ia',
-      nombre: 'Herramientas de IA',
-      icono: <FaRobot />,
-      descripcion: 'Aprende a usar nuestros agentes inteligentes',
-      color: 'bg-purple-100 text-purple-600'
+      duracion: '12:45',
+      thumbnail: 'https://img.youtube.com/vi/UIZAiXYceBI/maxresdefault.jpg',
+      url: 'https://youtube.com/watch?v=UIZAiXYceBI'
     },
     {
-      id: 'finanzas',
-      nombre: 'Dashboards Financieros',
-      icono: <FaChartLine />,
-      descripcion: 'Gestiona tus finanzas con inteligencia',
-      color: 'bg-green-100 text-green-600'
-    },
-    {
-      id: 'marketing',
-      nombre: 'Marketing Digital',
-      icono: <FaBullhorn />,
-      descripcion: 'Potencia tu presencia online',
-      color: 'bg-pink-100 text-pink-600'
+      duracion: '8:20',
+      thumbnail: 'https://img.youtube.com/vi/ocaR_j6LZRs/maxresdefault.jpg',
+      url: 'https://www.youtube.com/watch?v=gv0WHhKelSE'
     }
   ];
 
-  // Guías rápidas
-  const guias = [
-    {
-      categoria: 'inicio',
-      titulo: 'Cómo realizar tu Diagnóstico 3D',
-      descripcion: 'Aprende paso a paso cómo completar tu diagnóstico inicial',
-      tiempo: '10 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'inicio',
-      titulo: 'Configuración inicial de tu cuenta',
-      descripcion: 'Todo lo que necesitas para configurar tu espacio de trabajo',
-      tiempo: '5 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'ia',
-      titulo: 'Activar tu primer agente de IA',
-      descripcion: 'Guía completa para poner en marcha tu asistente virtual',
-      tiempo: '15 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'ia',
-      titulo: 'Personalizar respuestas automatizadas',
-      descripcion: 'Configura las respuestas de tu agente según tu negocio',
-      tiempo: '20 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'finanzas',
-      titulo: 'Leer tu dashboard financiero',
-      descripcion: 'Entiende cada métrica y KPI de tu panel de control',
-      tiempo: '12 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'finanzas',
-      titulo: 'Cargar datos de ventas',
-      descripcion: 'Cómo importar y sincronizar tus datos de facturación',
-      tiempo: '8 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'marketing',
-      titulo: 'Crear tu primera campaña con IA',
-      descripcion: 'Usa la inteligencia artificial para diseñar campañas efectivas',
-      tiempo: '25 min',
-      tipo: 'guia',
-      enlace: '#'
-    },
-    {
-      categoria: 'marketing',
-      titulo: 'Generar contenido para redes sociales',
-      descripcion: 'Crea posts atractivos con nuestro generador de contenido',
-      tiempo: '10 min',
-      tipo: 'guia',
-      enlace: '#'
-    }
+  // Merge translated video data
+  const videos = videoMeta.map((meta, index) => ({
+    ...meta,
+    titulo: t.ayudaPage.videos[index]?.titulo ?? '',
+    descripcion: t.ayudaPage.videos[index]?.descripcion ?? '',
+  }));
+
+  // Recursos descargables - static metadata
+  const recursoMeta = [
+    { tipo: 'PDF', tamano: '2.3 MB', icono: <FaFileAlt /> },
+    { tipo: 'Excel', tamano: '1.5 MB', icono: <FaChartLine /> },
+    { tipo: 'PDF', tamano: '3.8 MB', icono: <FaBullhorn /> },
+    { tipo: 'PDF', tamano: '800 KB', icono: <FaRobot /> },
   ];
 
-  // Videos tutoriales
-  const videos = [
-  {
-  titulo: 'Introducción a ChatGPT 5 para Negocios',
-  duracion: '15:30',
-  descripcion: 'Aprende cómo usar ChatGPT para tu empresa',
-  thumbnail: 'https://img.youtube.com/vi/JlRlIaEy2IM/maxresdefault.jpg',
-  url: 'https://www.youtube.com/watch?v=0Uu_VJeVVfo'
-},
-  {
-    titulo: 'Google Gemini: IA para Emprendedores',
-    duracion: '12:45',
-    descripcion: 'Descubre el poder de Gemini para análisis de datos',
-    thumbnail: 'https://img.youtube.com/vi/UIZAiXYceBI/maxresdefault.jpg',
-    url: 'https://youtube.com/watch?v=UIZAiXYceBI'
-  },
-  {
-    titulo: 'Claude: Tu Asistente de IA Empresarial',
-    duracion: '8:20',
-    descripcion: 'Casos de uso de Claude para automatización',
-    thumbnail: 'https://img.youtube.com/vi/ocaR_j6LZRs/maxresdefault.jpg',
-    url: 'https://www.youtube.com/watch?v=gv0WHhKelSE'
-  }
-];
-
-  // Recursos descargables
-  const recursos = [
-    {
-      titulo: 'Guía de Mejores Prácticas de IA',
-      tipo: 'PDF',
-      tamano: '2.3 MB',
-      icono: <FaFileAlt />
-    },
-    {
-      titulo: 'Plantilla de Control Financiero',
-      tipo: 'Excel',
-      tamano: '1.5 MB',
-      icono: <FaChartLine />
-    },
-    {
-      titulo: 'Manual de Marketing Digital',
-      tipo: 'PDF',
-      tamano: '3.8 MB',
-      icono: <FaBullhorn />
-    },
-    {
-      titulo: 'Checklist de Automatización',
-      tipo: 'PDF',
-      tamano: '800 KB',
-      icono: <FaRobot />
-    }
-  ];
+  // Merge translated resource data
+  const recursos = recursoMeta.map((meta, index) => ({
+    ...meta,
+    titulo: t.ayudaPage.recursos[index]?.titulo ?? '',
+  }));
 
   // Filtrar guías basado en búsqueda y categoría
   const guiasFiltradas = guias.filter(guia => {
@@ -194,10 +117,10 @@ export default function Ayuda() {
         <div className="container mx-auto px-4 py-4">
           <nav className="text-sm">
             <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
-              Inicio
+              {t.ayudaPage.breadcrumbInicio}
             </Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">Centro de Ayuda</span>
+            <span className="text-gray-900 font-medium">{t.ayudaPage.breadcrumbAyuda}</span>
           </nav>
         </div>
       </div>
@@ -207,18 +130,17 @@ export default function Ayuda() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              ¿En qué podemos ayudarte?
+              {t.ayudaPage.heroTitle}
             </h1>
             <p className="text-xl mb-8 opacity-95">
-              Encuentra respuestas rápidas, guías detalladas y recursos para 
-              aprovechar al máximo nuestras soluciones de IA
+              {t.ayudaPage.heroSubtitle}
             </p>
-            
+
             {/* Barra de búsqueda */}
             <div className="relative max-w-2xl mx-auto">
               <input
                 type="text"
-                placeholder="Buscar en el centro de ayuda..."
+                placeholder={t.ayudaPage.buscarPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-6 py-4 pr-12 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-white/30"
@@ -233,17 +155,17 @@ export default function Ayuda() {
       <section className="py-16">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">
-            Explora por Categoría
+            {t.ayudaPage.explorarCategoria}
           </h2>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
             {categorias.map((categoria) => (
               <button
                 key={categoria.id}
                 onClick={() => setSelectedCategory(categoria.id)}
                 className={`p-6 rounded-xl border-2 transition-all hover:shadow-lg ${
-                  selectedCategory === categoria.id 
-                    ? 'border-blue-500 bg-blue-50' 
+                  selectedCategory === categoria.id
+                    ? 'border-blue-500 bg-blue-50'
                     : 'border-gray-200 bg-white hover:border-gray-300'
                 }`}
               >
@@ -263,7 +185,7 @@ export default function Ayuda() {
                 onClick={() => setSelectedCategory('todos')}
                 className="text-blue-600 hover:text-blue-700 font-medium"
               >
-                Ver todas las guías →
+                {t.ayudaPage.verTodasGuias}
               </button>
             </div>
           )}
@@ -274,12 +196,12 @@ export default function Ayuda() {
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl font-bold">Guías Rápidas</h2>
+            <h2 className="text-3xl font-bold">{t.ayudaPage.guiasRapidas}</h2>
             <span className="text-gray-500">
-              {guiasFiltradas.length} guías disponibles
+              {guiasFiltradas.length} {t.ayudaPage.guiasDisponibles}
             </span>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {guiasFiltradas.map((guia, index) => (
               <Link
@@ -299,7 +221,7 @@ export default function Ayuda() {
                 </h3>
                 <p className="text-gray-600 text-sm mb-4">{guia.descripcion}</p>
                 <span className="text-blue-600 text-sm font-medium group-hover:gap-2 flex items-center gap-1 transition-all">
-                  Leer guía <FaArrowRight className="text-xs" />
+                  {t.ayudaPage.leerGuia} <FaArrowRight className="text-xs" />
                 </span>
               </Link>
             ))}
@@ -311,12 +233,12 @@ export default function Ayuda() {
       <section className="py-16 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Videos Tutoriales</h2>
+            <h2 className="text-3xl font-bold mb-4">{t.ayudaPage.videosTutoriales}</h2>
             <p className="text-gray-600 text-lg">
-              Aprende de forma visual con nuestros tutoriales paso a paso
+              {t.ayudaPage.videosSubtitle}
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {videos.map((video, index) => (
               <a
@@ -327,8 +249,8 @@ export default function Ayuda() {
                 className="group bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
               >
                 <div className="relative aspect-video bg-gray-200">
-                  <img 
-                    src={video.thumbnail} 
+                  <img
+                    src={video.thumbnail}
                     alt={video.titulo}
                     className="w-full h-full object-cover"
                   />
@@ -348,7 +270,7 @@ export default function Ayuda() {
               </a>
             ))}
           </div>
-          
+
           <div className="text-center mt-8">
             <a
               href="https://youtube.com/@impulsa-lab"
@@ -356,7 +278,7 @@ export default function Ayuda() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium"
             >
-              Ver todos los videos en YouTube
+              {t.ayudaPage.verTodosVideos}
               <FaExternalLinkAlt className="text-sm" />
             </a>
           </div>
@@ -368,9 +290,9 @@ export default function Ayuda() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Recursos Descargables
+              {t.ayudaPage.recursosDescargables}
             </h2>
-            
+
             <div className="grid md:grid-cols-2 gap-6">
               {recursos.map((recurso, index) => (
                 <div
@@ -403,67 +325,67 @@ export default function Ayuda() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-12">
-              Documentación Técnica
+              {t.ayudaPage.documentacionTecnica}
             </h2>
-            
+
             <div className="bg-white rounded-lg shadow-sm p-8">
               <div className="grid md:grid-cols-2 gap-6">
-                <Link 
+                <Link
                   href="/docs/api"
                   className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
                 >
                   <FaCheckCircle className="text-green-500 text-xl" />
                   <div>
                     <h3 className="font-semibold group-hover:text-blue-600 transition-colors">
-                      Documentación API
+                      {t.ayudaPage.docApi}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Integra nuestros servicios con tu sistema
+                      {t.ayudaPage.docApiDesc}
                     </p>
                   </div>
                 </Link>
-                
-                <Link 
+
+                <Link
                   href="/docs/webhooks"
                   className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
                 >
                   <FaCheckCircle className="text-green-500 text-xl" />
                   <div>
                     <h3 className="font-semibold group-hover:text-blue-600 transition-colors">
-                      Webhooks y Eventos
+                      {t.ayudaPage.docWebhooks}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Recibe notificaciones en tiempo real
+                      {t.ayudaPage.docWebhooksDesc}
                     </p>
                   </div>
                 </Link>
-                
-                <Link 
+
+                <Link
                   href="/docs/integraciones"
                   className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
                 >
                   <FaCheckCircle className="text-green-500 text-xl" />
                   <div>
                     <h3 className="font-semibold group-hover:text-blue-600 transition-colors">
-                      Integraciones
+                      {t.ayudaPage.docIntegraciones}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Conecta con QuickBooks, Shopify y más
+                      {t.ayudaPage.docIntegracionesDesc}
                     </p>
                   </div>
                 </Link>
-                
-                <Link 
+
+                <Link
                   href="/docs/seguridad"
                   className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors group"
                 >
                   <FaCheckCircle className="text-green-500 text-xl" />
                   <div>
                     <h3 className="font-semibold group-hover:text-blue-600 transition-colors">
-                      Seguridad y Privacidad
+                      {t.ayudaPage.docSeguridad}
                     </h3>
                     <p className="text-sm text-gray-600">
-                      Conoce cómo protegemos tus datos
+                      {t.ayudaPage.docSeguridadDesc}
                     </p>
                   </div>
                 </Link>
@@ -479,50 +401,49 @@ export default function Ayuda() {
           <div className="max-w-3xl mx-auto text-center">
             <FaHeadset className="text-5xl text-blue-600 mx-auto mb-6" />
             <h2 className="text-3xl font-bold mb-4">
-              ¿No encuentras lo que buscas?
+              {t.ayudaPage.noEncuentras}
             </h2>
             <p className="text-gray-600 text-lg mb-8">
-              Nuestro equipo de soporte está listo para ayudarte con cualquier 
-              pregunta o problema que tengas
+              {t.ayudaPage.noEncuentrasDesc}
             </p>
-            
+
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="p-6 bg-gray-50 rounded-lg">
                 <FaQuestionCircle className="text-3xl text-purple-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">FAQ</h3>
+                <h3 className="font-semibold mb-2">{t.ayudaPage.faq}</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Respuestas a las preguntas más frecuentes
+                  {t.ayudaPage.faqDesc}
                 </p>
-                <Link 
+                <Link
                   href="/faq"
                   className="text-blue-600 hover:text-blue-700 font-medium text-sm"
                 >
-                  Ver FAQ →
+                  {t.ayudaPage.verFaq}
                 </Link>
               </div>
-              
+
               <div className="p-6 bg-gray-50 rounded-lg">
                 <FaRobot className="text-3xl text-green-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">Chat en Vivo</h3>
+                <h3 className="font-semibold mb-2">{t.ayudaPage.chatVivo}</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Habla con nuestro asistente de IA 24/7
+                  {t.ayudaPage.chatVivoDesc}
                 </p>
                 <button className="text-blue-600 hover:text-blue-700 font-medium text-sm">
-                  Iniciar Chat →
+                  {t.ayudaPage.iniciarChat}
                 </button>
               </div>
-              
+
               <div className="p-6 bg-gray-50 rounded-lg">
                 <FaHeadset className="text-3xl text-blue-600 mx-auto mb-4" />
-                <h3 className="font-semibold mb-2">Soporte Premium</h3>
+                <h3 className="font-semibold mb-2">{t.ayudaPage.soportePremium}</h3>
                 <p className="text-sm text-gray-600 mb-4">
-                  Atención personalizada para clientes
+                  {t.ayudaPage.soportePremiumDesc}
                 </p>
-                <Link 
+                <Link
                   href="/contacto"
                   className="text-blue-600 hover:text-blue-700 font-medium text-sm"
                 >
-                  Contactar →
+                  {t.ayudaPage.contactar}
                 </Link>
               </div>
             </div>
@@ -534,24 +455,24 @@ export default function Ayuda() {
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-4">
-            ¿Listo para transformar tu negocio con IA?
+            {t.ayudaPage.ctaTitle}
           </h2>
           <p className="text-xl mb-8 opacity-95">
-            Agenda una consultoría gratuita y descubre cómo podemos ayudarte
+            {t.ayudaPage.ctaSubtitle}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/diagnostico"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
             >
-              Iniciar Diagnóstico 3D
+              {t.ayudaPage.ctaDiagnostico}
               <FaArrowRight />
             </Link>
             <Link
               href="/contacto"
               className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white/10 transition-colors"
             >
-              Hablar con un Experto
+              {t.ayudaPage.ctaExperto}
             </Link>
           </div>
         </div>

@@ -8,8 +8,12 @@ import { ArrowRight, Target, Megaphone, PenTool, TrendingUp, CheckCircle2, Packa
 import ProtectedSection from '@/components/ProtectedSection'
 import ContentStrategistChat from '@/components/services/marketing/ContentStrategistChat'
 import AIToolsShowcase from '@/components/services/marketing/AIToolsShowcase'
+import { useLanguage } from '@/contexts/LanguageContext'
+
+const methodologyIcons = [Target, PenTool, Megaphone, TrendingUp]
 
 export default function MarketingPage() {
+ const { t } = useLanguage()
  const [selectedImage, setSelectedImage] = useState<string | null>(null)
  const [currentImageIndex, setCurrentImageIndex] = useState(0)
  const [activeVideoCategory, setActiveVideoCategory] = useState('todos')
@@ -76,11 +80,10 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4 relative z-10">
          <div className="max-w-4xl mx-auto text-center">
            <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-             Marketing e Identidad de Marca con IA
+             {t.marketingPage.heroTitle}
            </h1>
            <p className="text-xl mb-8 text-purple-100">
-             Construye una marca memorable y atrae clientes con estrategias 
-             de marketing potenciadas por Inteligencia Artificial
+             {t.marketingPage.heroSubtitle}
            </p>
            <Link
              href={LINKS.calendly}
@@ -88,7 +91,7 @@ export default function MarketingPage() {
              rel="noopener noreferrer"
              className="inline-flex items-center gap-2 bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"
            >
-             Obtén tu Diagnóstico 3D Gratis
+             {t.marketingPage.ctaDiagnostico}
              <ArrowRight className="w-5 h-5" />
            </Link>
          </div>
@@ -100,15 +103,15 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-7xl mx-auto">
            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-             Portafolio: Creatividad Potenciada por IA
+             {t.marketingPage.portfolioTitle}
            </h2>
            <p className="text-center text-gray-600 mb-12 text-lg">
-             Ejemplos reales de lo que podemos crear para tu marca
+             {t.marketingPage.portfolioSubtitle}
            </p>
-           
+
            <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-4 mb-8">
              {portfolioImages.slice(0, 8).map((image, index) => (
-               <div 
+               <div
                  key={index}
                  className="group relative overflow-hidden rounded-xl shadow-lg hover:shadow-2xl transition-all cursor-pointer"
                  onClick={() => {
@@ -133,9 +136,9 @@ export default function MarketingPage() {
                </div>
              ))}
            </div>
-           
+
            <p className="text-center text-sm text-gray-500">
-             Nuevas creaciones cada semana • {portfolioImages.length} diseños disponibles
+             {t.marketingPage.portfolioNewCreations} • {portfolioImages.length} {t.marketingPage.portfolioDesignsAvailable}
            </p>
          </div>
        </div>
@@ -143,11 +146,11 @@ export default function MarketingPage() {
 
      {/* Lightbox Mejorado */}
      {selectedImage && (
-       <div 
+       <div
          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
          onClick={() => setSelectedImage(null)}
        >
-         <button 
+         <button
            className="absolute top-4 right-4 text-white hover:text-gray-300 z-50"
            onClick={(e) => {
              e.stopPropagation()
@@ -156,7 +159,7 @@ export default function MarketingPage() {
          >
            <X className="w-8 h-8" />
          </button>
-         
+
          <button
            className="absolute left-4 text-white hover:text-gray-300 z-50"
            onClick={(e) => {
@@ -167,7 +170,7 @@ export default function MarketingPage() {
          >
            <ChevronLeft className="w-10 h-10" />
          </button>
-         
+
          <button
            className="absolute right-4 text-white hover:text-gray-300 z-50"
            onClick={(e) => {
@@ -178,7 +181,7 @@ export default function MarketingPage() {
          >
            <ChevronRight className="w-10 h-10" />
          </button>
-         
+
          <Image
            src={selectedImage}
            alt="Portfolio"
@@ -195,27 +198,17 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-3xl mx-auto">
            <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-             ¿Te Suena Familiar?
+             {t.marketingPage.painPointsTitle}
            </h2>
            <div className="space-y-6">
-             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
-               <p className="text-gray-700">
-                 <span className="font-semibold">"Tengo un buen producto, pero nadie me conoce"</span> 
-                 - No sabes cómo hacer que tu negocio destaque en un mercado saturado.
-               </p>
-             </div>
-             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
-               <p className="text-gray-700">
-                 <span className="font-semibold">"Publico en redes pero no veo resultados"</span> 
-                 - Inviertes tiempo en contenido que no genera engagement ni ventas.
-               </p>
-             </div>
-             <div className="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
-               <p className="text-gray-700">
-                 <span className="font-semibold">"Mi competencia parece más profesional"</span> 
-                 - Tu imagen no refleja la calidad de tu servicio.
-               </p>
-             </div>
+             {t.marketingPage.painPoints.map((point, index) => (
+               <div key={index} className="bg-white p-6 rounded-lg shadow-md border-l-4 border-purple-500 hover:shadow-xl transition-shadow">
+                 <p className="text-gray-700">
+                   <span className="font-semibold">{point.bold}</span>
+                   {' '}{point.rest}
+                 </p>
+               </div>
+             ))}
            </div>
          </div>
        </div>
@@ -226,12 +219,12 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-4xl mx-auto">
            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-             Transforma tu Marca con IA Generativa
+             {t.marketingPage.videoSectionTitle}
            </h2>
            <p className="text-center text-gray-600 mb-8 text-lg">
-             Descubre las últimas tendencias y capacidades de la IA en marketing
+             {t.marketingPage.videoSectionSubtitle}
            </p>
-           
+
            {/* Video de YouTube CENTRAL - ACTUALIZABLE */}
            <div className="relative rounded-xl overflow-hidden shadow-2xl max-w-3xl mx-auto">
              <div className="aspect-video">
@@ -244,9 +237,9 @@ export default function MarketingPage() {
                />
              </div>
            </div>
-           
+
            <p className="text-center text-sm text-gray-500 mt-4">
-             🔄 Contenido actualizado semanalmente con las últimas innovaciones en IA
+             {t.marketingPage.videoSectionNote}
            </p>
          </div>
        </div>
@@ -260,10 +253,10 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-7xl mx-auto">
            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-             Centro de Aprendizaje
+             {t.marketingPage.learningCenterTitle}
            </h2>
            <p className="text-center text-gray-600 mb-8 text-lg">
-             Masterclasses, tutoriales y casos de éxito
+             {t.marketingPage.learningCenterSubtitle}
            </p>
 
            <div className="flex justify-center gap-3 mb-12 flex-wrap">
@@ -277,13 +270,13 @@ export default function MarketingPage() {
                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                  }`}
                >
-                 {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                 {t.marketingPage.videoCategoryLabels[cat] || cat.charAt(0).toUpperCase() + cat.slice(1)}
                </button>
              ))}
            </div>
-           
+
            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-             {(activeVideoCategory === 'todos' 
+             {(activeVideoCategory === 'todos'
                ? [...allVideos.herramientas, ...allVideos.casos, ...allVideos.tutoriales]
                : allVideos[activeVideoCategory as keyof typeof allVideos] || []
              ).map((video) => (
@@ -314,10 +307,10 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-4xl mx-auto">
            <h2 className="text-4xl font-bold text-center mb-4 text-gray-900">
-             ¿Listo para tu Primera Estrategia de Contenidos?
+             {t.marketingPage.chatStrategistTitle}
            </h2>
            <p className="text-center text-gray-600 mb-12 text-lg">
-             Nuestro Estratega IA te ayudará a crear un plan personalizado en 60 segundos
+             {t.marketingPage.chatStrategistSubtitle}
            </p>
            <ContentStrategistChat />
          </div>
@@ -326,7 +319,7 @@ export default function MarketingPage() {
 
      {/* CONTENIDO PROTEGIDO - MANTENIDO TAL CUAL */}
      <ProtectedSection
-       message="Regístrate gratis para acceder a nuestra metodología completa de marketing con IA, planes detallados y casos de éxito"
+       message={t.marketingPage.protectedMessage}
        showPreview={true}
        previewBlur={false}
      >
@@ -335,115 +328,51 @@ export default function MarketingPage() {
          <div className="container mx-auto px-4">
            <div className="max-w-4xl mx-auto">
              <h2 className="text-3xl font-bold text-center mb-4 text-gray-900">
-               Nuestra Metodología de Marketing con IA
+               {t.marketingPage.methodologyTitle}
              </h2>
              <p className="text-center text-gray-600 mb-12">
-               Un proceso probado para construir tu presencia digital
+               {t.marketingPage.methodologySubtitle}
              </p>
-             
+
              <div className="grid md:grid-cols-2 gap-8">
-               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
-                 <div className="flex items-start gap-4">
-                   <div className="bg-purple-100 p-3 rounded-lg">
-                     <Target className="w-6 h-6 text-purple-600" />
-                   </div>
-                   <div>
-                     <h3 className="font-semibold text-lg mb-2">1. Análisis de Marca</h3>
-                     <p className="text-gray-600">
-                       Definimos tu propuesta única de valor y analizamos a tu competencia 
-                       con herramientas de IA para identificar oportunidades de mercado.
-                     </p>
-                     <div className="mt-3 space-y-1 text-sm text-gray-500">
-                       <div>• Análisis competitivo automatizado</div>
-                       <div>• Investigación de audiencia con IA</div>
-                       <div>• Definición de buyer personas</div>
+               {t.marketingPage.methodologySteps.map((step, index) => {
+                 const Icon = methodologyIcons[index]
+                 return (
+                   <div key={index} className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
+                     <div className="flex items-start gap-4">
+                       <div className="bg-purple-100 p-3 rounded-lg">
+                         <Icon className="w-6 h-6 text-purple-600" />
+                       </div>
+                       <div>
+                         <h3 className="font-semibold text-lg mb-2">{step.title}</h3>
+                         <p className="text-gray-600">
+                           {step.description}
+                         </p>
+                         <div className="mt-3 space-y-1 text-sm text-gray-500">
+                           {step.items.map((item, i) => (
+                             <div key={i}>• {item}</div>
+                           ))}
+                         </div>
+                       </div>
                      </div>
                    </div>
-                 </div>
-               </div>
-               
-               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
-                 <div className="flex items-start gap-4">
-                   <div className="bg-purple-100 p-3 rounded-lg">
-                     <PenTool className="w-6 h-6 text-purple-600" />
-                   </div>
-                   <div>
-                     <h3 className="font-semibold text-lg mb-2">2. Identidad Visual</h3>
-                     <p className="text-gray-600">
-                       Creamos tu logo, paleta de colores y guía de estilo con 
-                       asistencia de IA generativa para garantizar consistencia.
-                     </p>
-                     <div className="mt-3 space-y-1 text-sm text-gray-500">
-                       <div>• Logo y marca gráfica</div>
-                       <div>• Paleta de colores estratégica</div>
-                       <div>• Guía de estilo completa</div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               
-               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
-                 <div className="flex items-start gap-4">
-                   <div className="bg-purple-100 p-3 rounded-lg">
-                     <Megaphone className="w-6 h-6 text-purple-600" />
-                   </div>
-                   <div>
-                     <h3 className="font-semibold text-lg mb-2">3. Estrategia de Contenido</h3>
-                     <p className="text-gray-600">
-                       Desarrollamos un calendario editorial y creamos contenido 
-                       optimizado con copywriting de IA que convierte.
-                     </p>
-                     <div className="mt-3 space-y-1 text-sm text-gray-500">
-                       <div>• Calendario editorial mensual</div>
-                       <div>• Copywriting optimizado para conversión</div>
-                       <div>• Contenido multimedia automatizado</div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
-               
-               <div className="bg-white p-6 rounded-lg shadow-sm hover:shadow-lg transition-shadow">
-                 <div className="flex items-start gap-4">
-                   <div className="bg-purple-100 p-3 rounded-lg">
-                     <TrendingUp className="w-6 h-6 text-purple-600" />
-                   </div>
-                   <div>
-                     <h3 className="font-semibold text-lg mb-2">4. Implementación y Análisis</h3>
-                     <p className="text-gray-600">
-                       Lanzamos campañas y monitoreamos resultados con dashboards 
-                       en tiempo real para optimización continua.
-                     </p>
-                     <div className="mt-3 space-y-1 text-sm text-gray-500">
-                       <div>• Automatización de campañas</div>
-                       <div>• Dashboards de métricas en vivo</div>
-                       <div>• Optimización basada en datos</div>
-                     </div>
-                   </div>
-                 </div>
-               </div>
+                 )
+               })}
              </div>
 
              {/* Casos de Éxito Preview */}
              <div className="mt-16 bg-white rounded-xl p-8 shadow-lg">
                <h3 className="text-2xl font-bold text-center mb-8 text-gray-900">
-                 Resultados Reales de Nuestros Clientes
+                 {t.marketingPage.clientResultsTitle}
                </h3>
                <div className="grid md:grid-cols-3 gap-6">
-                 <div className="text-center p-6 bg-purple-50 rounded-lg">
-                   <div className="text-3xl font-bold text-purple-600 mb-2">+340%</div>
-                   <div className="text-gray-700">Aumento en engagement</div>
-                   <div className="text-sm text-gray-500 mt-2">Restaurante Gourmet</div>
-                 </div>
-                 <div className="text-center p-6 bg-purple-50 rounded-lg">
-                   <div className="text-3xl font-bold text-purple-600 mb-2">+180%</div>
-                   <div className="text-gray-700">Crecimiento en ventas</div>
-                   <div className="text-sm text-gray-500 mt-2">E-commerce Fashion</div>
-                 </div>
-                 <div className="text-center p-6 bg-purple-50 rounded-lg">
-                   <div className="text-3xl font-bold text-purple-600 mb-2">+250%</div>
-                   <div className="text-gray-700">Leads calificados</div>
-                   <div className="text-sm text-gray-500 mt-2">Consultoría B2B</div>
-                 </div>
+                 {t.marketingPage.clientResults.map((result, index) => (
+                   <div key={index} className="text-center p-6 bg-purple-50 rounded-lg">
+                     <div className="text-3xl font-bold text-purple-600 mb-2">{result.value}</div>
+                     <div className="text-gray-700">{result.label}</div>
+                     <div className="text-sm text-gray-500 mt-2">{result.client}</div>
+                   </div>
+                 ))}
                </div>
              </div>
            </div>
@@ -455,44 +384,30 @@ export default function MarketingPage() {
          <div className="container mx-auto px-4">
            <div className="max-w-4xl mx-auto">
              <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-               Planes de Marketing con IA
+               {t.marketingPage.plansTitle}
              </h2>
-             
+
              <div className="grid md:grid-cols-2 gap-8">
                {/* Plan Identidad */}
                <div className="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-purple-500 transition-all duration-300 hover:shadow-xl">
                  <div className="mb-4">
                    <Package className="w-12 h-12 text-purple-600" />
                  </div>
-                 <h3 className="text-2xl font-bold mb-4">Plan Identidad</h3>
+                 <h3 className="text-2xl font-bold mb-4">{t.marketingPage.planIdentidad.name}</h3>
                  <p className="text-gray-600 mb-6">
-                   Construye los cimientos de tu marca profesional con IA
+                   {t.marketingPage.planIdentidad.description}
                  </p>
                  <div className="text-3xl font-bold mb-6">
-                   Desde <span className="text-purple-600">$1,200</span>
-                   <div className="text-sm font-normal text-gray-500 mt-1">Pago único</div>
+                   {t.marketingPage.planIdentidad.priceFrom} <span className="text-purple-600">$1,200</span>
+                   <div className="text-sm font-normal text-gray-500 mt-1">{t.marketingPage.planIdentidad.priceNote}</div>
                  </div>
                  <ul className="space-y-3 mb-8">
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Logo profesional y guía de marca</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Kit completo de redes sociales</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">50 plantillas de contenido generadas con IA</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Estrategia de messaging y tono de voz</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Análisis competitivo con IA</span>
-                   </li>
+                   {t.marketingPage.planIdentidad.features.map((feature, index) => (
+                     <li key={index} className="flex items-start gap-2">
+                       <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
+                       <span className="text-gray-700">{feature}</span>
+                     </li>
+                   ))}
                  </ul>
                  <Link
                    href={LINKS.calendly}
@@ -500,51 +415,33 @@ export default function MarketingPage() {
                    rel="noopener noreferrer"
                    className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
                  >
-                   Empezar Ahora
+                   {t.marketingPage.planIdentidad.cta}
                  </Link>
                </div>
 
                {/* Plan Crecimiento */}
                <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-500 rounded-lg p-8 relative hover:shadow-2xl transition-all duration-300">
                  <div className="absolute -top-4 right-4 bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                   Más Popular
+                   {t.marketingPage.planCrecimiento.badge}
                  </div>
                  <div className="mb-4">
                    <Rocket className="w-12 h-12 text-purple-600" />
                  </div>
-                 <h3 className="text-2xl font-bold mb-4">Plan Crecimiento</h3>
+                 <h3 className="text-2xl font-bold mb-4">{t.marketingPage.planCrecimiento.name}</h3>
                  <p className="text-gray-600 mb-6">
-                   Marketing completo con IA para escalar tu negocio exponencialmente
+                   {t.marketingPage.planCrecimiento.description}
                  </p>
                  <div className="text-3xl font-bold mb-6">
-                   Desde <span className="text-purple-600">$2,500</span>
-                   <div className="text-sm font-normal text-gray-600 mt-1">+ $800/mes gestión</div>
+                   {t.marketingPage.planCrecimiento.priceFrom} <span className="text-purple-600">$2,500</span>
+                   <div className="text-sm font-normal text-gray-600 mt-1">{t.marketingPage.planCrecimiento.priceNote}</div>
                  </div>
                  <ul className="space-y-3 mb-8">
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Todo del Plan Identidad</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Gestión automatizada de redes con IA</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Campañas de email marketing inteligentes</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Analytics avanzados y reportes mensuales</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Chatbot de atención 24/7</span>
-                   </li>
-                   <li className="flex items-start gap-2">
-                     <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                     <span className="text-gray-700">Optimización continua con machine learning</span>
-                   </li>
+                   {t.marketingPage.planCrecimiento.features.map((feature, index) => (
+                     <li key={index} className="flex items-start gap-2">
+                       <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
+                       <span className="text-gray-700">{feature}</span>
+                     </li>
+                   ))}
                  </ul>
                  <Link
                    href={LINKS.calendly}
@@ -552,7 +449,7 @@ export default function MarketingPage() {
                    rel="noopener noreferrer"
                    className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
                  >
-                   Agenda tu Diagnóstico
+                   {t.marketingPage.planCrecimiento.cta}
                  </Link>
                </div>
              </div>
@@ -566,11 +463,10 @@ export default function MarketingPage() {
        <div className="container mx-auto px-4">
          <div className="max-w-3xl mx-auto text-center">
            <h2 className="text-4xl md:text-5xl font-bold mb-6">
-             ¿Listo para Brillar en el Mercado?
+             {t.marketingPage.ctaTitle}
            </h2>
            <p className="text-xl mb-8 text-purple-100">
-             Descubre cómo la IA puede transformar tu marketing y hacer crecer 
-             tu negocio de forma exponencial
+             {t.marketingPage.ctaSubtitle}
            </p>
            <Link
              href={LINKS.calendly}
@@ -578,7 +474,7 @@ export default function MarketingPage() {
              rel="noopener noreferrer"
              className="inline-flex items-center gap-2 bg-white text-purple-900 px-10 py-5 rounded-lg font-bold text-lg hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"
            >
-             Obtén tu Diagnóstico 3D Gratis
+             {t.marketingPage.ctaDiagnostico}
              <ArrowRight className="w-6 h-6" />
            </Link>
          </div>
