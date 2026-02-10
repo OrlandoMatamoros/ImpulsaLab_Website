@@ -20,6 +20,7 @@ import {
   BarChart3
 } from 'lucide-react'
 import ProtectedSection from '@/components/ProtectedSection'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Tipos de datos
 interface NewsItem {
@@ -38,34 +39,36 @@ interface NewsItem {
   isFeatured?: boolean
 }
 
-// Configuración de categorías
-const categories = [
-  { id: 'all', label: 'Todas las Noticias', icon: Sparkles },
-  { id: 'business-ai', label: 'IA para Negocios', icon: Building2 },
-  { id: 'product-launches', label: 'Lanzamientos', icon: FileText },
-  { id: 'success-stories', label: 'Casos de Éxito', icon: Trophy },
-  { id: 'market-trends', label: 'Tendencias de Mercado', icon: BarChart3 },
-  { id: 'research', label: 'Investigación', icon: BookOpen },
-  { id: 'regulations', label: 'Regulaciones', icon: Shield }
-]
-
-// Opciones de ordenamiento
-const sortOptions = [
-  { value: 'date', label: 'Más Recientes' },
-  { value: 'relevance', label: 'Más Relevantes' },
-  { value: 'trending', label: 'En Tendencia' }
-]
+// Icon config for categories (labels come from translations)
+const categoryIcons: Record<string, React.ComponentType<{ className?: string }>> = {
+  'all': Sparkles,
+  'business-ai': Building2,
+  'product-launches': FileText,
+  'success-stories': Trophy,
+  'market-trends': BarChart3,
+  'research': BookOpen,
+  'regulations': Shield,
+}
 
 export default function NoticiasPage() {
+  const { t } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('date')
   const [showNewsletter, setShowNewsletter] = useState(false)
   const [email, setEmail] = useState('')
-  
+
   // Estados para datos dinámicos - SIN MOCK DATA
   const [newsData, setNewsData] = useState<NewsItem[]>([])
   const [isLoading, setIsLoading] = useState(true)
+
+  // Categories and sort options from translations with icons from config
+  const categories = t.herramientasNoticiasPage.categories.map((cat: { id: string; label: string }) => ({
+    ...cat,
+    icon: categoryIcons[cat.id] || Sparkles,
+  }))
+
+  const sortOptions = t.herramientasNoticiasPage.sortOptions
 
   // Cargar noticias de Gmail
   useEffect(() => {
@@ -154,7 +157,7 @@ export default function NoticiasPage() {
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-purple-500 mx-auto mb-4"></div>
-          <p className="text-gray-400">Cargando noticias de IA...</p>
+          <p className="text-gray-400">{t.herramientasNoticiasPage.cargandoNoticias}</p>
         </div>
       </div>
     )
@@ -167,11 +170,11 @@ export default function NoticiasPage() {
         <section className="relative py-20 px-4">
           <div className="max-w-7xl mx-auto text-center">
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
-              Noticias IA
+              {t.herramientasNoticiasPage.titulo}
             </h1>
             <div className="mt-12 p-8 border border-white/10 rounded-xl">
-              <h2 className="text-2xl mb-4">No hay noticias disponibles en este momento</h2>
-              <p className="text-gray-400">Las noticias se actualizarán automáticamente cuando lleguen nuevos Google Alerts</p>
+              <h2 className="text-2xl mb-4">{t.herramientasNoticiasPage.tituloSinNoticias}</h2>
+              <p className="text-gray-400">{t.herramientasNoticiasPage.descripcionSinNoticias}</p>
             </div>
           </div>
         </section>
@@ -247,10 +250,10 @@ export default function NoticiasPage() {
         
         <div className="relative z-10 max-w-7xl mx-auto text-center animate-fadeInUp">
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
-            Noticias IA
+            {t.herramientasNoticiasPage.titulo}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-            Últimas noticias y tendencias en inteligencia artificial directamente desde tus Google Alerts
+            {t.herramientasNoticiasPage.subtitulo}
           </p>
 
           {/* Barra de búsqueda principal */}
@@ -259,7 +262,7 @@ export default function NoticiasPage() {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500 w-5 h-5" />
               <input
                 type="text"
-                placeholder="Buscar noticias, herramientas, tendencias..."
+                placeholder={t.herramientasNoticiasPage.buscarPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all shadow-lg"
@@ -268,7 +271,7 @@ export default function NoticiasPage() {
           </div>
           
           <div className="mt-4 text-sm text-gray-400">
-            {newsData.length} noticias disponibles • Actualizado automáticamente cada hora
+            {newsData.length} {t.herramientasNoticiasPage.noticiasDisponibles} • {t.herramientasNoticiasPage.actualizadoAutomaticamente}
           </div>
         </div>
       </section>
@@ -321,7 +324,7 @@ export default function NoticiasPage() {
 
       {/* Contenido Principal */}
       <ProtectedSection
-        message="Regístrate gratis para leer noticias completas y personalizar tu feed de IA"
+        message={t.herramientasNoticiasPage.protectedMessage}
         showPreview={true}
         previewBlur={false}
       >
@@ -340,7 +343,7 @@ export default function NoticiasPage() {
                   >
                     <div className="absolute top-4 left-4 z-10">
                       <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
-                        DESTACADO
+                        {t.herramientasNoticiasPage.destacado}
                       </span>
                     </div>
                     
@@ -391,7 +394,7 @@ export default function NoticiasPage() {
                         </div>
                         
                         <div className="flex items-center gap-1 text-purple-400">
-                          <span className="text-sm font-medium">Leer más</span>
+                          <span className="text-sm font-medium">{t.herramientasNoticiasPage.leerMas}</span>
                           <ChevronRight className="w-4 h-4" />
                         </div>
                       </div>
@@ -425,7 +428,7 @@ export default function NoticiasPage() {
                           <div className="absolute top-2 right-2">
                             <span className="px-2 py-1 bg-orange-500 text-white text-xs font-semibold rounded-full flex items-center gap-1">
                               <TrendingUp className="w-3 h-3" />
-                              Trending
+                              {t.herramientasNoticiasPage.trending}
                             </span>
                           </div>
                         )}
@@ -479,7 +482,7 @@ export default function NoticiasPage() {
               
               {filteredNews.length === 0 && (
                 <div className="text-center py-12">
-                  <p className="text-gray-400">No se encontraron noticias con los filtros actuales</p>
+                  <p className="text-gray-400">{t.herramientasNoticiasPage.noResultados}</p>
                 </div>
               )}
             </div>
@@ -492,18 +495,18 @@ export default function NoticiasPage() {
                   <div className="p-2 bg-purple-600 rounded-lg">
                     <Mail className="w-5 h-5" />
                   </div>
-                  <h3 className="text-xl font-bold">Newsletter IA</h3>
+                  <h3 className="text-xl font-bold">{t.herramientasNoticiasPage.newsletterTitulo}</h3>
                 </div>
-                
+
                 <p className="text-gray-300 mb-4">
-                  Recibe las noticias más importantes de IA directamente en tu correo.
+                  {t.herramientasNoticiasPage.newsletterDescripcion}
                 </p>
-                
+
                 <button
                   onClick={() => setShowNewsletter(true)}
                   className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
                 >
-                  Suscribirse Gratis
+                  {t.herramientasNoticiasPage.suscribirseGratis}
                 </button>
               </div>
 
@@ -512,7 +515,7 @@ export default function NoticiasPage() {
                 <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 animate-fadeInUp">
                   <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
                     <TrendingUp className="w-5 h-5 text-orange-500" />
-                    En Tendencia
+                    {t.herramientasNoticiasPage.enTendencia}
                   </h3>
                   
                   <div className="space-y-4">
@@ -545,7 +548,7 @@ export default function NoticiasPage() {
 
               {/* Tags populares dinámicos */}
               <div className="mt-8 bg-white/5 backdrop-blur-lg border border-white/10 rounded-xl p-6 animate-fadeInUp">
-                <h3 className="text-xl font-bold mb-4">Tags Populares</h3>
+                <h3 className="text-xl font-bold mb-4">{t.herramientasNoticiasPage.tagsPopulares}</h3>
                 <div className="flex flex-wrap gap-2">
                   {Array.from(new Set(newsData.flatMap(n => n.tags)))
                     .slice(0, 10)
@@ -576,7 +579,7 @@ export default function NoticiasPage() {
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-6">
-              <h3 className="text-2xl font-bold">Suscríbete al Newsletter</h3>
+              <h3 className="text-2xl font-bold">{t.herramientasNoticiasPage.suscribirseAlNewsletter}</h3>
               <button
                 onClick={() => setShowNewsletter(false)}
                 className="p-2 hover:bg-white/10 rounded-lg transition-colors"
@@ -586,7 +589,7 @@ export default function NoticiasPage() {
             </div>
 
             <p className="text-gray-300 mb-6">
-              Mantente al día con las últimas noticias y tendencias en inteligencia artificial.
+              {t.herramientasNoticiasPage.newsletterModalDesc}
             </p>
 
             <form onSubmit={handleNewsletterSubmit}>
@@ -603,12 +606,12 @@ export default function NoticiasPage() {
                 type="submit"
                 className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
               >
-                Suscribirse
+                {t.herramientasNoticiasPage.suscribirse}
               </button>
             </form>
 
             <p className="text-xs text-gray-500 mt-4 text-center">
-              No compartiremos tu email. Puedes cancelar cuando quieras.
+              {t.herramientasNoticiasPage.newsletterPrivacidad}
             </p>
           </div>
         </div>

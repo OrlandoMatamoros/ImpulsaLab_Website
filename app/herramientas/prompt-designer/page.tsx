@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react'
 import { Copy, Check, Save, History, Sparkles, Target, FileText, Palette, Shield, Package, ChevronRight, ChevronLeft, X, Trash2, Clock } from 'lucide-react'
 import ProtectedSection from '@/components/ProtectedSection'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 // Tipos para el formulario
 interface FormData {
