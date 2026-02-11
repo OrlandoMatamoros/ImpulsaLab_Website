@@ -11,6 +11,8 @@ import {
   Dimensions,
   Alert,
   BackHandler,
+  StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -54,10 +56,9 @@ const AnimatedProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
   });
 
   return (
-    <View className="h-2 bg-gray-200 rounded-full overflow-hidden">
+    <View style={styles.progressBarContainer}>
       <Animated.View
-        className="h-full bg-primary-500 rounded-full"
-        style={{ width: widthInterpolated }}
+        style={[styles.progressBarFill, { width: widthInterpolated }]}
       />
     </View>
   );
@@ -81,18 +82,25 @@ const DimensionBadge: React.FC<{ dimension: string; isActive: boolean }> = ({
     }
   };
 
+  const getDimensionColor = () => {
+    switch (dimension) {
+      case 'finance':
+        return '#10b981'; // green
+      case 'operations':
+        return '#8b5cf6'; // purple
+      case 'marketing':
+        return '#f59e0b'; // amber
+      default:
+        return '#3b82f6';
+    }
+  };
+
+  const color = getDimensionColor();
+
   return (
-    <View
-      className={`px-3 py-1 rounded-full flex-row items-center ${
-        isActive ? 'bg-primary-100' : 'bg-gray-100'
-      }`}
-    >
-      <Text className="mr-1">{getIcon()}</Text>
-      <Text
-        className={`text-sm font-medium ${
-          isActive ? 'text-primary-700' : 'text-gray-500'
-        }`}
-      >
+    <View style={[styles.dimensionBadge, { backgroundColor: isActive ? `${color}20` : '#f3f4f6' }]}>
+      <Text style={styles.dimensionIcon}>{getIcon()}</Text>
+      <Text style={[styles.dimensionText, { color: isActive ? color : '#6b7280' }]}>
         {getDimensionLabel(dimension as 'finance' | 'operations' | 'marketing')}
       </Text>
     </View>
@@ -105,7 +113,9 @@ const QuestionCard: React.FC<{
   selectedOptionId: string | null;
   onSelectOption: (optionId: string, points: number) => void;
   animatedValue: Animated.Value;
-}> = ({ question, selectedOptionId, onSelectOption, animatedValue }) => {
+  questionNumber: number;
+  totalQuestions: number;
+}> = ({ question, selectedOptionId, onSelectOption, animatedValue, questionNumber, totalQuestions }) => {
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [SCREEN_WIDTH, 0],
@@ -116,68 +126,94 @@ const QuestionCard: React.FC<{
     outputRange: [0, 0.5, 1],
   });
 
+  const getDimensionColor = () => {
+    switch (question.dimension) {
+      case 'finance':
+        return '#10b981';
+      case 'operations':
+        return '#8b5cf6';
+      case 'marketing':
+        return '#f59e0b';
+      default:
+        return '#3b82f6';
+    }
+  };
+
+  const dimensionColor = getDimensionColor();
+
   return (
     <Animated.View
-      className="flex-1 px-6"
-      style={{
-        transform: [{ translateX }],
-        opacity,
-      }}
+      style={[
+        styles.questionCard,
+        {
+          transform: [{ translateX }],
+          opacity,
+        },
+      ]}
     >
+      {/* Question Header with gradient effect */}
+      <View style={[styles.questionHeader, { backgroundColor: `${dimensionColor}10` }]}>
+        <View style={[styles.questionNumberBadge, { backgroundColor: dimensionColor }]}>
+          <Text style={styles.questionNumberText}>{questionNumber}</Text>
+        </View>
+        <Text style={styles.questionOf}>de {totalQuestions}</Text>
+      </View>
+
       {/* Question Text */}
-      <View className="bg-white rounded-2xl p-6 shadow-sm mb-6">
-        <Text className="text-gray-900 text-xl font-semibold leading-7">
-          {question.text}
-        </Text>
+      <View style={styles.questionTextContainer}>
+        <Text style={styles.questionText}>{question.text}</Text>
         {question.category === 'CRITICAL' && (
-          <View className="flex-row items-center mt-3">
-            <Ionicons name="alert-circle" size={16} color="#f59e0b" />
-            <Text className="text-amber-600 text-xs ml-1 font-medium">
-              Pregunta clave para tu diagnóstico
-            </Text>
+          <View style={styles.criticalBadge}>
+            <Ionicons name="star" size={14} color="#f59e0b" />
+            <Text style={styles.criticalText}>Pregunta clave</Text>
           </View>
         )}
       </View>
 
       {/* Options */}
-      <View className="space-y-3">
+      <View style={styles.optionsContainer}>
         {question.options.map((option, index) => {
           const isSelected = selectedOptionId === option.id;
+          const letters = ['A', 'B', 'C', 'D', 'E'];
 
           return (
             <TouchableOpacity
               key={option.id}
               onPress={() => onSelectOption(option.id, option.points)}
-              className={`p-4 rounded-xl border-2 flex-row items-center ${
-                isSelected
-                  ? 'border-primary-500 bg-primary-50'
-                  : 'border-gray-200 bg-white'
-              }`}
+              style={[
+                styles.optionButton,
+                isSelected && styles.optionButtonSelected,
+                isSelected && { borderColor: dimensionColor },
+              ]}
               activeOpacity={0.7}
             >
-              {/* Radio indicator */}
+              {/* Letter indicator */}
               <View
-                className={`w-6 h-6 rounded-full border-2 mr-3 items-center justify-center ${
-                  isSelected ? 'border-primary-500' : 'border-gray-300'
-                }`}
+                style={[
+                  styles.optionLetter,
+                  isSelected && { backgroundColor: dimensionColor },
+                ]}
               >
-                {isSelected && (
-                  <View className="w-3 h-3 rounded-full bg-primary-500" />
-                )}
+                <Text style={[styles.optionLetterText, isSelected && styles.optionLetterTextSelected]}>
+                  {letters[index]}
+                </Text>
               </View>
 
               {/* Option text */}
               <Text
-                className={`flex-1 ${
-                  isSelected ? 'text-primary-700 font-medium' : 'text-gray-700'
-                }`}
+                style={[
+                  styles.optionText,
+                  isSelected && { color: dimensionColor, fontWeight: '600' },
+                ]}
               >
                 {option.label}
               </Text>
 
               {/* Selection checkmark */}
               {isSelected && (
-                <Ionicons name="checkmark-circle" size={24} color="#3b82f6" />
+                <View style={[styles.checkmarkContainer, { backgroundColor: dimensionColor }]}>
+                  <Ionicons name="checkmark" size={16} color="white" />
+                </View>
               )}
             </TouchableOpacity>
           );
@@ -294,7 +330,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
       // Calculate results
       const result = calculateDiagnosticResult(leadData, answers);
 
-      // Save to Firebase
+      // Save to Firebase (non-blocking)
       try {
         await saveCompleteDiagnostic(leadData, result);
       } catch (firebaseError) {
@@ -335,25 +371,41 @@ export const DiagnosticWizardScreen: React.FC = () => {
 
   if (!currentQuestion) {
     return (
-      <View className="flex-1 justify-center items-center bg-gray-50">
-        <Text>Cargando preguntas...</Text>
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color="#3b82f6" />
+        <Text style={styles.loadingText}>Cargando preguntas...</Text>
       </View>
     );
   }
 
+  const getDimensionColor = () => {
+    switch (currentQuestion.dimension) {
+      case 'finance':
+        return '#10b981';
+      case 'operations':
+        return '#8b5cf6';
+      case 'marketing':
+        return '#f59e0b';
+      default:
+        return '#3b82f6';
+    }
+  };
+
+  const dimensionColor = getDimensionColor();
+
   return (
-    <View className="flex-1 bg-gray-50">
+    <View style={styles.container}>
       {/* Header */}
-      <View className="bg-white px-6 pt-14 pb-4 border-b border-gray-100">
+      <View style={styles.header}>
         {/* Top bar */}
-        <View className="flex-row justify-between items-center mb-4">
-          <TouchableOpacity onPress={handleExit} className="p-2 -ml-2">
+        <View style={styles.headerTopBar}>
+          <TouchableOpacity onPress={handleExit} style={styles.closeButton}>
             <Ionicons name="close" size={24} color="#6b7280" />
           </TouchableOpacity>
 
           <DimensionBadge dimension={currentQuestion.dimension} isActive />
 
-          <Text className="text-gray-500 font-medium">
+          <Text style={styles.questionCounter}>
             {currentIndex + 1} / {totalQuestions}
           </Text>
         </View>
@@ -362,32 +414,32 @@ export const DiagnosticWizardScreen: React.FC = () => {
         <AnimatedProgressBar progress={progress} />
 
         {/* Progress text */}
-        <Text className="text-center text-gray-400 text-xs mt-2">
-          {progress}% completado
-        </Text>
+        <Text style={styles.progressText}>{progress}% completado</Text>
       </View>
 
       {/* Question Card */}
-      <View className="flex-1 py-6">
+      <View style={styles.questionCardWrapper}>
         <QuestionCard
           question={currentQuestion}
           selectedOptionId={selectedOptionId}
           onSelectOption={handleSelectOption}
           animatedValue={cardAnimation}
+          questionNumber={currentIndex + 1}
+          totalQuestions={totalQuestions}
         />
       </View>
 
       {/* Navigation Buttons */}
-      <View className="px-6 pb-8 pt-4 bg-white border-t border-gray-100">
-        <View className="flex-row space-x-3">
+      <View style={styles.navigationContainer}>
+        <View style={styles.navigationButtons}>
           {/* Previous Button */}
           {currentIndex > 0 && (
             <TouchableOpacity
               onPress={handlePrevious}
-              className="flex-1 py-4 rounded-xl border border-gray-300 flex-row justify-center items-center"
+              style={styles.previousButton}
             >
               <Ionicons name="arrow-back" size={20} color="#6b7280" />
-              <Text className="text-gray-600 font-semibold ml-2">Anterior</Text>
+              <Text style={styles.previousButtonText}>Anterior</Text>
             </TouchableOpacity>
           )}
 
@@ -395,22 +447,25 @@ export const DiagnosticWizardScreen: React.FC = () => {
           <TouchableOpacity
             onPress={handleNext}
             disabled={isLoading}
-            className={`${currentIndex > 0 ? 'flex-1' : 'w-full'} py-4 rounded-xl flex-row justify-center items-center ${
-              selectedOptionId
-                ? 'bg-primary-600'
-                : 'bg-gray-300'
-            }`}
+            style={[
+              styles.nextButton,
+              currentIndex === 0 && styles.nextButtonFull,
+              selectedOptionId ? { backgroundColor: dimensionColor } : styles.nextButtonDisabled,
+            ]}
           >
             {isLoading ? (
-              <Text className="text-white font-semibold">Procesando...</Text>
+              <View style={styles.loadingButtonContent}>
+                <ActivityIndicator color="white" size="small" />
+                <Text style={styles.nextButtonText}>Procesando...</Text>
+              </View>
             ) : currentIndex === totalQuestions - 1 ? (
               <>
-                <Text className="text-white font-semibold mr-2">Ver Resultados</Text>
+                <Text style={styles.nextButtonText}>Ver Resultados</Text>
                 <Ionicons name="analytics" size={20} color="white" />
               </>
             ) : (
               <>
-                <Text className="text-white font-semibold mr-2">Siguiente</Text>
+                <Text style={styles.nextButtonText}>Siguiente</Text>
                 <Ionicons name="arrow-forward" size={20} color="white" />
               </>
             )}
@@ -420,5 +475,244 @@ export const DiagnosticWizardScreen: React.FC = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f9fafb',
+  },
+  loadingContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f9fafb',
+  },
+  loadingText: {
+    marginTop: 12,
+    color: '#6b7280',
+    fontSize: 16,
+  },
+  header: {
+    backgroundColor: 'white',
+    paddingHorizontal: 20,
+    paddingTop: 56,
+    paddingBottom: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f3f4f6',
+  },
+  headerTopBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  closeButton: {
+    padding: 8,
+    marginLeft: -8,
+  },
+  questionCounter: {
+    color: '#6b7280',
+    fontWeight: '600',
+    fontSize: 14,
+  },
+  progressBarContainer: {
+    height: 8,
+    backgroundColor: '#e5e7eb',
+    borderRadius: 4,
+    overflow: 'hidden',
+  },
+  progressBarFill: {
+    height: '100%',
+    backgroundColor: '#3b82f6',
+    borderRadius: 4,
+  },
+  progressText: {
+    textAlign: 'center',
+    color: '#9ca3af',
+    fontSize: 12,
+    marginTop: 8,
+  },
+  dimensionBadge: {
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dimensionIcon: {
+    marginRight: 4,
+    fontSize: 14,
+  },
+  dimensionText: {
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  questionCardWrapper: {
+    flex: 1,
+    paddingVertical: 20,
+  },
+  questionCard: {
+    flex: 1,
+    paddingHorizontal: 20,
+  },
+  questionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderRadius: 16,
+    marginBottom: 16,
+  },
+  questionNumberBadge: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  questionNumberText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  },
+  questionOf: {
+    marginLeft: 8,
+    color: '#6b7280',
+    fontSize: 14,
+  },
+  questionTextContainer: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 24,
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  questionText: {
+    color: '#111827',
+    fontSize: 18,
+    fontWeight: '600',
+    lineHeight: 26,
+  },
+  criticalBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 6,
+    backgroundColor: '#fef3c7',
+    borderRadius: 8,
+    alignSelf: 'flex-start',
+  },
+  criticalText: {
+    color: '#92400e',
+    fontSize: 12,
+    fontWeight: '500',
+    marginLeft: 4,
+  },
+  optionsContainer: {
+    gap: 12,
+  },
+  optionButton: {
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 2,
+    borderColor: '#e5e7eb',
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  optionButtonSelected: {
+    backgroundColor: '#f0f9ff',
+  },
+  optionLetter: {
+    width: 32,
+    height: 32,
+    borderRadius: 8,
+    backgroundColor: '#f3f4f6',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginRight: 12,
+  },
+  optionLetterText: {
+    color: '#6b7280',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  optionLetterTextSelected: {
+    color: 'white',
+  },
+  optionText: {
+    flex: 1,
+    color: '#374151',
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  checkmarkContainer: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 8,
+  },
+  navigationContainer: {
+    paddingHorizontal: 20,
+    paddingBottom: 32,
+    paddingTop: 16,
+    backgroundColor: 'white',
+    borderTopWidth: 1,
+    borderTopColor: '#f3f4f6',
+  },
+  navigationButtons: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  previousButton: {
+    flex: 1,
+    paddingVertical: 16,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
+  },
+  previousButtonText: {
+    color: '#6b7280',
+    fontWeight: '600',
+    marginLeft: 8,
+    fontSize: 16,
+  },
+  nextButton: {
+    flex: 1,
+    paddingVertical: 16,
+    borderRadius: 14,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  nextButtonFull: {
+    flex: 1,
+  },
+  nextButtonDisabled: {
+    backgroundColor: '#d1d5db',
+  },
+  nextButtonText: {
+    color: 'white',
+    fontWeight: '700',
+    fontSize: 16,
+    marginRight: 8,
+  },
+  loadingButtonContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+});
 
 export default DiagnosticWizardScreen;

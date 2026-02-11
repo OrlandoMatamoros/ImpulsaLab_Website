@@ -12,6 +12,8 @@ import {
   Share,
   Alert,
   Dimensions,
+  StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -79,7 +81,7 @@ const RadarChart: React.FC<{
   const startAngle = -Math.PI / 2;
 
   return (
-    <View style={{ alignItems: 'center', marginVertical: 20 }}>
+    <View style={styles.radarChartContainer}>
       <Svg width={size} height={size}>
         {/* Grid circles */}
         {gridLevels.map(level => (
@@ -179,22 +181,14 @@ const RadarChart: React.FC<{
       </Svg>
 
       {/* Legend */}
-      <View className="flex-row justify-center space-x-6 mt-4">
-        <View className="flex-row items-center">
-          <View className="w-4 h-4 rounded bg-blue-500 mr-2" />
-          <Text className="text-gray-600 text-sm">Tu puntaje</Text>
+      <View style={styles.legendContainer}>
+        <View style={styles.legendItem}>
+          <View style={[styles.legendColor, { backgroundColor: '#3b82f6' }]} />
+          <Text style={styles.legendText}>Tu puntaje</Text>
         </View>
-        <View className="flex-row items-center">
-          <View
-            className="w-4 h-4 rounded mr-2"
-            style={{
-              backgroundColor: 'rgba(249, 115, 22, 0.3)',
-              borderWidth: 1,
-              borderColor: '#f97316',
-              borderStyle: 'dashed',
-            }}
-          />
-          <Text className="text-gray-600 text-sm">Promedio industria</Text>
+        <View style={styles.legendItem}>
+          <View style={[styles.legendColor, styles.legendColorDashed]} />
+          <Text style={styles.legendText}>Promedio industria</Text>
         </View>
       </View>
     </View>
@@ -211,7 +205,7 @@ const ScoreCard: React.FC<{
   const percentileInfo = getPercentileInfo(percentile);
   const difference = userScore - industryAverage;
 
-  const getIcon = () => {
+  const getIcon = (): keyof typeof Ionicons.glyphMap => {
     switch (dimension) {
       case 'finance':
         return 'wallet-outline';
@@ -222,37 +216,43 @@ const ScoreCard: React.FC<{
     }
   };
 
+  const getDimensionColor = () => {
+    switch (dimension) {
+      case 'finance':
+        return '#10b981';
+      case 'operations':
+        return '#8b5cf6';
+      case 'marketing':
+        return '#f59e0b';
+    }
+  };
+
   return (
-    <View className="bg-white rounded-2xl p-4 mb-3 shadow-sm">
-      <View className="flex-row items-center justify-between">
-        <View className="flex-row items-center flex-1">
-          <View className="bg-gray-100 rounded-full p-2 mr-3">
-            <Ionicons name={getIcon()} size={20} color="#6b7280" />
+    <View style={styles.scoreCard}>
+      <View style={styles.scoreCardContent}>
+        <View style={styles.scoreCardLeft}>
+          <View style={[styles.scoreCardIcon, { backgroundColor: `${getDimensionColor()}15` }]}>
+            <Ionicons name={getIcon()} size={20} color={getDimensionColor()} />
           </View>
-          <View className="flex-1">
-            <Text className="text-gray-500 text-sm">{getDimensionLabel(dimension)}</Text>
-            <Text className="text-gray-900 text-2xl font-bold">{userScore}</Text>
+          <View style={styles.scoreCardInfo}>
+            <Text style={styles.scoreCardLabel}>{getDimensionLabel(dimension)}</Text>
+            <Text style={styles.scoreCardValue}>{userScore}</Text>
           </View>
         </View>
 
-        <View className="items-end">
-          <View
-            className="px-2 py-1 rounded-full"
-            style={{ backgroundColor: `${percentileInfo.color}20` }}
-          >
-            <Text style={{ color: percentileInfo.color }} className="text-xs font-medium">
+        <View style={styles.scoreCardRight}>
+          <View style={[styles.percentileBadge, { backgroundColor: `${percentileInfo.color}15` }]}>
+            <Text style={[styles.percentileText, { color: percentileInfo.color }]}>
               {percentileInfo.label}
             </Text>
           </View>
-          <View className="flex-row items-center mt-1">
+          <View style={styles.differenceContainer}>
             <Ionicons
               name={difference >= 0 ? 'arrow-up' : 'arrow-down'}
               size={14}
               color={difference >= 0 ? '#22c55e' : '#ef4444'}
             />
-            <Text
-              className={`text-sm ml-1 ${difference >= 0 ? 'text-green-500' : 'text-red-500'}`}
-            >
+            <Text style={[styles.differenceText, { color: difference >= 0 ? '#22c55e' : '#ef4444' }]}>
               {Math.abs(difference)} vs industria
             </Text>
           </View>
@@ -289,13 +289,14 @@ export const ResultsScreen: React.FC = () => {
 
   if (!result) {
     return (
-      <View className="flex-1 justify-center items-center bg-gray-50">
-        <Text className="text-gray-500">No hay resultados disponibles</Text>
+      <View style={styles.emptyContainer}>
+        <Ionicons name="analytics-outline" size={64} color="#d1d5db" />
+        <Text style={styles.emptyText}>No hay resultados disponibles</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('LeadGate')}
-          className="mt-4 bg-primary-600 px-6 py-3 rounded-xl"
+          style={styles.emptyButton}
         >
-          <Text className="text-white font-semibold">Iniciar diagnóstico</Text>
+          <Text style={styles.emptyButtonText}>Iniciar diagnóstico</Text>
         </TouchableOpacity>
       </View>
     );
@@ -425,7 +426,7 @@ export const ResultsScreen: React.FC = () => {
   };
 
   return (
-    <ScrollView className="flex-1 bg-gray-50" showsVerticalScrollIndicator={false}>
+    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       <Animated.View
         style={{
           opacity: fadeAnim,
@@ -433,48 +434,37 @@ export const ResultsScreen: React.FC = () => {
         }}
       >
         {/* Header */}
-        <View className="bg-primary-600 px-6 pt-16 pb-8 rounded-b-3xl">
-          <Text className="text-white/80 text-center">Diagnóstico completado</Text>
-          <Text className="text-white text-2xl font-bold text-center mt-1">
-            {leadData.companyName}
-          </Text>
+        <View style={styles.header}>
+          <Text style={styles.headerSubtitle}>Diagnóstico completado</Text>
+          <Text style={styles.headerTitle}>{leadData.companyName}</Text>
 
           {/* Overall Score */}
-          <View className="bg-white/20 rounded-2xl p-6 mt-6 items-center">
-            <Text className="text-white/80 text-sm mb-2">Puntaje General</Text>
-            <Text className="text-white text-6xl font-bold">{scores.overall}</Text>
-            <View className="flex-row items-center mt-3">
-              <View
-                className="w-3 h-3 rounded-full mr-2"
-                style={{ backgroundColor: maturityInfo.color }}
-              />
-              <Text className="text-white font-medium">{maturityInfo.label}</Text>
+          <View style={styles.overallScoreContainer}>
+            <Text style={styles.overallScoreLabel}>Puntaje General</Text>
+            <Text style={styles.overallScoreValue}>{scores.overall}</Text>
+            <View style={styles.maturityBadge}>
+              <View style={[styles.maturityDot, { backgroundColor: maturityInfo.color }]} />
+              <Text style={styles.maturityText}>{maturityInfo.label}</Text>
             </View>
-            <Text className="text-white/70 text-sm text-center mt-2">
-              {maturityInfo.description}
-            </Text>
+            <Text style={styles.maturityDescription}>{maturityInfo.description}</Text>
           </View>
         </View>
 
         {/* Radar Chart */}
-        <View className="px-6 mt-6">
-          <Text className="text-gray-900 text-lg font-bold mb-2">
-            Tu perfil vs. Industria
-          </Text>
-          <Text className="text-gray-500 text-sm mb-4">
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Tu perfil vs. Industria</Text>
+          <Text style={styles.sectionSubtitle}>
             Comparado con {getIndustryLabel(leadData.industry)}
           </Text>
 
-          <View className="bg-white rounded-2xl p-4 shadow-sm">
+          <View style={styles.chartCard}>
             <RadarChart scores={scores} industryScores={industryAverages} />
           </View>
         </View>
 
         {/* Dimension Scores */}
-        <View className="px-6 mt-6">
-          <Text className="text-gray-900 text-lg font-bold mb-4">
-            Detalle por dimensión
-          </Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Detalle por dimensión</Text>
 
           <ScoreCard
             dimension="finance"
@@ -497,50 +487,37 @@ export const ResultsScreen: React.FC = () => {
         </View>
 
         {/* Recommendations */}
-        <View className="px-6 mt-6">
-          <Text className="text-gray-900 text-lg font-bold mb-4">
-            Recomendaciones para ti
-          </Text>
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>Recomendaciones para ti</Text>
 
-          <View className="bg-amber-50 rounded-2xl p-4 border border-amber-200">
+          <View style={styles.recommendationsCard}>
             {companySizeConfig.recommendations.map((rec, index) => (
-              <View key={index} className="flex-row items-start mb-3 last:mb-0">
-                <View className="bg-amber-400 rounded-full w-6 h-6 items-center justify-center mr-3 mt-0.5">
-                  <Text className="text-white text-xs font-bold">{index + 1}</Text>
+              <View key={index} style={styles.recommendationItem}>
+                <View style={styles.recommendationNumber}>
+                  <Text style={styles.recommendationNumberText}>{index + 1}</Text>
                 </View>
-                <Text className="flex-1 text-gray-700">{rec}</Text>
+                <Text style={styles.recommendationText}>{rec}</Text>
               </View>
             ))}
           </View>
         </View>
 
         {/* Action Buttons */}
-        <View className="px-6 mt-8 mb-10">
-          <TouchableOpacity
-            onPress={generatePDF}
-            className="bg-primary-600 py-4 rounded-xl flex-row justify-center items-center mb-3"
-          >
+        <View style={styles.actionsSection}>
+          <TouchableOpacity onPress={generatePDF} style={styles.primaryButton}>
             <Ionicons name="document-text-outline" size={20} color="white" />
-            <Text className="text-white font-bold text-lg ml-2">
-              Descargar Plan PDF
-            </Text>
+            <Text style={styles.primaryButtonText}>Descargar Plan PDF</Text>
           </TouchableOpacity>
 
-          <View className="flex-row space-x-3">
-            <TouchableOpacity
-              onPress={shareResults}
-              className="flex-1 bg-white border border-gray-300 py-4 rounded-xl flex-row justify-center items-center"
-            >
+          <View style={styles.secondaryButtonsRow}>
+            <TouchableOpacity onPress={shareResults} style={styles.secondaryButton}>
               <Ionicons name="share-social-outline" size={20} color="#6b7280" />
-              <Text className="text-gray-700 font-semibold ml-2">Compartir</Text>
+              <Text style={styles.secondaryButtonText}>Compartir</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity
-              onPress={handleNewDiagnostic}
-              className="flex-1 bg-white border border-gray-300 py-4 rounded-xl flex-row justify-center items-center"
-            >
+            <TouchableOpacity onPress={handleNewDiagnostic} style={styles.secondaryButton}>
               <Ionicons name="refresh-outline" size={20} color="#6b7280" />
-              <Text className="text-gray-700 font-semibold ml-2">Nuevo</Text>
+              <Text style={styles.secondaryButtonText}>Nuevo</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -548,5 +525,282 @@ export const ResultsScreen: React.FC = () => {
     </ScrollView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f9fafb',
+  },
+  emptyContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f9fafb',
+    padding: 24,
+  },
+  emptyText: {
+    color: '#6b7280',
+    fontSize: 16,
+    marginTop: 16,
+  },
+  emptyButton: {
+    marginTop: 24,
+    backgroundColor: '#2563eb',
+    paddingHorizontal: 24,
+    paddingVertical: 14,
+    borderRadius: 12,
+  },
+  emptyButtonText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  header: {
+    backgroundColor: '#2563eb',
+    paddingHorizontal: 24,
+    paddingTop: 64,
+    paddingBottom: 32,
+    borderBottomLeftRadius: 32,
+    borderBottomRightRadius: 32,
+  },
+  headerSubtitle: {
+    color: 'rgba(255,255,255,0.8)',
+    textAlign: 'center',
+    fontSize: 14,
+  },
+  headerTitle: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginTop: 4,
+  },
+  overallScoreContainer: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 20,
+    padding: 24,
+    marginTop: 24,
+    alignItems: 'center',
+  },
+  overallScoreLabel: {
+    color: 'rgba(255,255,255,0.8)',
+    fontSize: 14,
+    marginBottom: 8,
+  },
+  overallScoreValue: {
+    color: 'white',
+    fontSize: 64,
+    fontWeight: 'bold',
+  },
+  maturityBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+  },
+  maturityDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    marginRight: 8,
+  },
+  maturityText: {
+    color: 'white',
+    fontWeight: '600',
+    fontSize: 16,
+  },
+  maturityDescription: {
+    color: 'rgba(255,255,255,0.7)',
+    fontSize: 13,
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  section: {
+    paddingHorizontal: 24,
+    marginTop: 24,
+  },
+  sectionTitle: {
+    color: '#111827',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  sectionSubtitle: {
+    color: '#6b7280',
+    fontSize: 14,
+    marginBottom: 16,
+  },
+  chartCard: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  radarChartContainer: {
+    alignItems: 'center',
+    marginVertical: 20,
+  },
+  legendContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 24,
+    marginTop: 16,
+  },
+  legendItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  legendColor: {
+    width: 16,
+    height: 16,
+    borderRadius: 4,
+    marginRight: 8,
+  },
+  legendColorDashed: {
+    backgroundColor: 'rgba(249, 115, 22, 0.3)',
+    borderWidth: 1,
+    borderColor: '#f97316',
+    borderStyle: 'dashed',
+  },
+  legendText: {
+    color: '#6b7280',
+    fontSize: 13,
+  },
+  scoreCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  scoreCardContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+  },
+  scoreCardLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    flex: 1,
+  },
+  scoreCardIcon: {
+    borderRadius: 12,
+    padding: 10,
+    marginRight: 12,
+  },
+  scoreCardInfo: {
+    flex: 1,
+  },
+  scoreCardLabel: {
+    color: '#6b7280',
+    fontSize: 13,
+  },
+  scoreCardValue: {
+    color: '#111827',
+    fontSize: 28,
+    fontWeight: 'bold',
+  },
+  scoreCardRight: {
+    alignItems: 'flex-end',
+  },
+  percentileBadge: {
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+  },
+  percentileText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  differenceContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 6,
+  },
+  differenceText: {
+    fontSize: 12,
+    marginLeft: 4,
+  },
+  recommendationsCard: {
+    backgroundColor: '#fffbeb',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#fcd34d',
+  },
+  recommendationItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginBottom: 12,
+  },
+  recommendationNumber: {
+    backgroundColor: '#f59e0b',
+    borderRadius: 12,
+    width: 24,
+    height: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginRight: 12,
+    marginTop: 2,
+  },
+  recommendationNumberText: {
+    color: 'white',
+    fontSize: 12,
+    fontWeight: 'bold',
+  },
+  recommendationText: {
+    flex: 1,
+    color: '#374151',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  actionsSection: {
+    paddingHorizontal: 24,
+    marginTop: 32,
+    marginBottom: 40,
+  },
+  primaryButton: {
+    backgroundColor: '#2563eb',
+    paddingVertical: 16,
+    borderRadius: 14,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  primaryButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  secondaryButtonsRow: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  secondaryButton: {
+    flex: 1,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    paddingVertical: 14,
+    borderRadius: 14,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  secondaryButtonText: {
+    color: '#374151',
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+});
 
 export default ResultsScreen;

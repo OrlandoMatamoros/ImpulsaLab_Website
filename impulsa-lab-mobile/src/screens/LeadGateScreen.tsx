@@ -1,8 +1,4 @@
-// ============================================
-// IMPULSA LAB - LEAD GATE SCREEN (Screen 1)
-// ============================================
-
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -13,6 +9,7 @@ import {
   Platform,
   Alert,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -27,7 +24,7 @@ import { RootStackParamList } from '../navigation/types';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LeadGate'>;
 
-// Custom Picker Component
+// Custom Picker Component - OUTSIDE main component
 const CustomPicker: React.FC<{
   label: string;
   options: { value: string; label: string }[];
@@ -39,13 +36,13 @@ const CustomPicker: React.FC<{
   const selectedOption = options.find(opt => opt.value === selectedValue);
 
   return (
-    <View className="mb-4">
-      <Text className="text-gray-700 font-medium mb-2">{label}</Text>
+    <View style={styles.inputContainer}>
+      <Text style={styles.label}>{label}</Text>
       <TouchableOpacity
         onPress={() => setIsOpen(!isOpen)}
-        className="bg-white border border-gray-300 rounded-xl p-4 flex-row justify-between items-center"
+        style={styles.pickerButton}
       >
-        <Text className={selectedValue ? 'text-gray-900' : 'text-gray-400'}>
+        <Text style={selectedValue ? styles.pickerText : styles.pickerPlaceholder}>
           {selectedOption?.label || placeholder}
         </Text>
         <Ionicons
@@ -56,8 +53,8 @@ const CustomPicker: React.FC<{
       </TouchableOpacity>
 
       {isOpen && (
-        <View className="bg-white border border-gray-300 rounded-xl mt-2 max-h-48 overflow-hidden">
-          <ScrollView nestedScrollEnabled>
+        <View style={styles.pickerDropdown}>
+          <ScrollView nestedScrollEnabled style={{ maxHeight: 200 }}>
             {options.map(option => (
               <TouchableOpacity
                 key={option.value}
@@ -65,16 +62,13 @@ const CustomPicker: React.FC<{
                   onValueChange(option.value);
                   setIsOpen(false);
                 }}
-                className={`p-4 border-b border-gray-100 ${
-                  option.value === selectedValue ? 'bg-primary-50' : ''
-                }`}
+                style={[
+                  styles.pickerOption,
+                  option.value === selectedValue && styles.pickerOptionSelected
+                ]}
               >
                 <Text
-                  className={
-                    option.value === selectedValue
-                      ? 'text-primary-600 font-medium'
-                      : 'text-gray-700'
-                  }
+                  style={option.value === selectedValue ? styles.pickerOptionTextSelected : styles.pickerOptionText}
                 >
                   {option.label}
                 </Text>
@@ -87,86 +81,102 @@ const CustomPicker: React.FC<{
   );
 };
 
+// Input Field Component - OUTSIDE main component to prevent re-renders
+const InputField: React.FC<{
+  label: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  placeholder: string;
+  keyboardType?: 'default' | 'email-address' | 'phone-pad' | 'numeric';
+  autoCapitalize?: 'none' | 'sentences' | 'words';
+  error?: string;
+  icon: keyof typeof Ionicons.glyphMap;
+}> = React.memo(({
+  label,
+  value,
+  onChangeText,
+  placeholder,
+  keyboardType = 'default',
+  autoCapitalize = 'sentences',
+  error,
+  icon,
+}) => (
+  <View style={styles.inputContainer}>
+    <Text style={styles.label}>{label}</Text>
+    <View style={[styles.inputWrapper, error && styles.inputError]}>
+      <Ionicons name={icon} size={20} color="#9ca3af" />
+      <TextInput
+        style={styles.input}
+        value={value}
+        onChangeText={onChangeText}
+        placeholder={placeholder}
+        placeholderTextColor="#9ca3af"
+        keyboardType={keyboardType}
+        autoCapitalize={autoCapitalize}
+        autoCorrect={false}
+      />
+    </View>
+    {error && <Text style={styles.errorText}>{error}</Text>}
+  </View>
+));
+
 export const LeadGateScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const setLeadData = useDiagnosticStore(state => state.setLeadData);
   const [isLoading, setIsLoading] = useState(false);
 
   // Form state
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    companyName: '',
-    industry: '' as Industry | '',
-    employeeCount: '',
-    zipCode: '',
-  });
-
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [industry, setIndustry] = useState<Industry | ''>('');
+  const [employeeCount, setEmployeeCount] = useState('');
+  const [zipCode, setZipCode] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   // Validation
-  const validateForm = (): boolean => {
+  const validateForm = useCallback((): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'El nombre es requerido';
-    }
-
-    if (!formData.email.trim()) {
+    if (!name.trim()) newErrors.name = 'El nombre es requerido';
+    if (!email.trim()) {
       newErrors.email = 'El email es requerido';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       newErrors.email = 'Email inválido';
     }
-
-    if (!formData.companyName.trim()) {
-      newErrors.companyName = 'El nombre de la empresa es requerido';
-    }
-
-    if (!formData.industry) {
-      newErrors.industry = 'Selecciona una industria';
-    }
-
-    if (!formData.employeeCount) {
-      newErrors.employeeCount = 'Selecciona el número de empleados';
-    }
-
-    if (!formData.zipCode.trim()) {
+    if (!companyName.trim()) newErrors.companyName = 'El nombre de la empresa es requerido';
+    if (!industry) newErrors.industry = 'Selecciona una industria';
+    if (!employeeCount) newErrors.employeeCount = 'Selecciona el número de empleados';
+    if (!zipCode.trim()) {
       newErrors.zipCode = 'El código postal es requerido';
-    } else if (!/^\d{5}$/.test(formData.zipCode)) {
+    } else if (!/^\d{5}$/.test(zipCode)) {
       newErrors.zipCode = 'Código postal inválido (5 dígitos)';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [name, email, companyName, industry, employeeCount, zipCode]);
 
   // Handle form submission
-  const handleSubmit = async () => {
-    if (!validateForm()) {
-      return;
-    }
+  const handleSubmit = useCallback(async () => {
+    if (!validateForm()) return;
 
     setIsLoading(true);
 
     try {
       const leadData: LeadData = {
-        name: formData.name.trim(),
-        email: formData.email.trim().toLowerCase(),
-        phone: formData.phone.trim() || undefined,
-        companyName: formData.companyName.trim(),
-        industry: formData.industry as Industry,
-        employeeCount: parseInt(formData.employeeCount, 10),
-        zipCode: formData.zipCode.trim(),
+        name: name.trim(),
+        email: email.trim().toLowerCase(),
+        phone: phone.trim() || undefined,
+        companyName: companyName.trim(),
+        industry: industry as Industry,
+        employeeCount: parseInt(employeeCount, 10),
+        zipCode: zipCode.trim(),
       };
 
-      // Save to store
       setLeadData(leadData);
-
-      // Save locally for persistence
       await saveLeadDataLocally(leadData);
-
-      // Navigate to diagnostic wizard
       navigation.navigate('DiagnosticWizard');
     } catch (error) {
       console.error('Error submitting lead:', error);
@@ -174,97 +184,46 @@ export const LeadGateScreen: React.FC = () => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // Input field component
-  const InputField: React.FC<{
-    label: string;
-    value: string;
-    onChangeText: (text: string) => void;
-    placeholder: string;
-    keyboardType?: 'default' | 'email-address' | 'phone-pad' | 'numeric';
-    autoCapitalize?: 'none' | 'sentences' | 'words';
-    error?: string;
-    icon: keyof typeof Ionicons.glyphMap;
-  }> = ({
-    label,
-    value,
-    onChangeText,
-    placeholder,
-    keyboardType = 'default',
-    autoCapitalize = 'sentences',
-    error,
-    icon,
-  }) => (
-    <View className="mb-4">
-      <Text className="text-gray-700 font-medium mb-2">{label}</Text>
-      <View className="flex-row items-center bg-white border border-gray-300 rounded-xl px-4">
-        <Ionicons name={icon} size={20} color="#9ca3af" />
-        <TextInput
-          className="flex-1 py-4 px-3 text-gray-900"
-          value={value}
-          onChangeText={onChangeText}
-          placeholder={placeholder}
-          placeholderTextColor="#9ca3af"
-          keyboardType={keyboardType}
-          autoCapitalize={autoCapitalize}
-        />
-      </View>
-      {error && <Text className="text-red-500 text-sm mt-1">{error}</Text>}
-    </View>
-  );
+  }, [name, email, phone, companyName, industry, employeeCount, zipCode, validateForm, setLeadData, navigation]);
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-gray-50"
+      style={styles.container}
     >
       <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ paddingBottom: 40 }}
+        style={styles.scrollView}
+        contentContainerStyle={styles.scrollContent}
         showsVerticalScrollIndicator={false}
+        keyboardShouldPersistTaps="handled"
       >
         {/* Header */}
-        <View className="bg-primary-600 px-6 pt-16 pb-10 rounded-b-3xl">
-          <View className="items-center mb-4">
-            <View className="bg-white/20 rounded-full p-4 mb-4">
+        <View style={styles.header}>
+          <View style={styles.headerContent}>
+            <View style={styles.iconContainer}>
               <Ionicons name="analytics" size={40} color="white" />
             </View>
-            <Text className="text-white text-2xl font-bold text-center">
-              Diagnóstico Empresarial 3D
-            </Text>
-            <Text className="text-white/80 text-center mt-2">
-              Evalúa tu negocio en 3 dimensiones clave
-            </Text>
+            <Text style={styles.title}>Diagnóstico Empresarial 3D</Text>
+            <Text style={styles.subtitle}>Evalúa tu negocio en 3 dimensiones clave</Text>
           </View>
 
           {/* Dimension badges */}
-          <View className="flex-row justify-center space-x-2 mt-4">
-            <View className="bg-white/20 px-3 py-1 rounded-full">
-              <Text className="text-white text-xs">💰 Finanzas</Text>
-            </View>
-            <View className="bg-white/20 px-3 py-1 rounded-full">
-              <Text className="text-white text-xs">⚙️ Operaciones</Text>
-            </View>
-            <View className="bg-white/20 px-3 py-1 rounded-full">
-              <Text className="text-white text-xs">📣 Marketing</Text>
-            </View>
+          <View style={styles.badges}>
+            <View style={styles.badge}><Text style={styles.badgeText}>💰 Finanzas</Text></View>
+            <View style={styles.badge}><Text style={styles.badgeText}>⚙️ Operaciones</Text></View>
+            <View style={styles.badge}><Text style={styles.badgeText}>📣 Marketing</Text></View>
           </View>
         </View>
 
         {/* Form */}
-        <View className="px-6 pt-8">
-          <Text className="text-gray-900 text-xl font-bold mb-2">
-            Comencemos con tu información
-          </Text>
-          <Text className="text-gray-500 mb-6">
-            Estos datos nos ayudarán a personalizar tu diagnóstico
-          </Text>
+        <View style={styles.form}>
+          <Text style={styles.formTitle}>Comencemos con tu información</Text>
+          <Text style={styles.formSubtitle}>Estos datos nos ayudarán a personalizar tu diagnóstico</Text>
 
           <InputField
             label="Nombre completo"
-            value={formData.name}
-            onChangeText={text => setFormData({ ...formData, name: text })}
+            value={name}
+            onChangeText={setName}
             placeholder="Juan Pérez"
             autoCapitalize="words"
             error={errors.name}
@@ -273,8 +232,8 @@ export const LeadGateScreen: React.FC = () => {
 
           <InputField
             label="Email"
-            value={formData.email}
-            onChangeText={text => setFormData({ ...formData, email: text })}
+            value={email}
+            onChangeText={setEmail}
             placeholder="juan@empresa.com"
             keyboardType="email-address"
             autoCapitalize="none"
@@ -284,8 +243,8 @@ export const LeadGateScreen: React.FC = () => {
 
           <InputField
             label="Teléfono (opcional)"
-            value={formData.phone}
-            onChangeText={text => setFormData({ ...formData, phone: text })}
+            value={phone}
+            onChangeText={setPhone}
             placeholder="+52 55 1234 5678"
             keyboardType="phone-pad"
             icon="call-outline"
@@ -293,8 +252,8 @@ export const LeadGateScreen: React.FC = () => {
 
           <InputField
             label="Nombre de la empresa"
-            value={formData.companyName}
-            onChangeText={text => setFormData({ ...formData, companyName: text })}
+            value={companyName}
+            onChangeText={setCompanyName}
             placeholder="Mi Empresa S.A."
             autoCapitalize="words"
             error={errors.companyName}
@@ -304,29 +263,25 @@ export const LeadGateScreen: React.FC = () => {
           <CustomPicker
             label="Industria"
             options={INDUSTRY_OPTIONS}
-            selectedValue={formData.industry}
-            onValueChange={value => setFormData({ ...formData, industry: value as Industry })}
+            selectedValue={industry}
+            onValueChange={(value) => setIndustry(value as Industry)}
             placeholder="Selecciona tu industria"
           />
-          {errors.industry && (
-            <Text className="text-red-500 text-sm -mt-3 mb-4">{errors.industry}</Text>
-          )}
+          {errors.industry && <Text style={[styles.errorText, { marginTop: -12, marginBottom: 16 }]}>{errors.industry}</Text>}
 
           <CustomPicker
             label="Número de empleados"
             options={EMPLOYEE_COUNT_OPTIONS}
-            selectedValue={formData.employeeCount}
-            onValueChange={value => setFormData({ ...formData, employeeCount: value })}
+            selectedValue={employeeCount}
+            onValueChange={setEmployeeCount}
             placeholder="Selecciona el rango"
           />
-          {errors.employeeCount && (
-            <Text className="text-red-500 text-sm -mt-3 mb-4">{errors.employeeCount}</Text>
-          )}
+          {errors.employeeCount && <Text style={[styles.errorText, { marginTop: -12, marginBottom: 16 }]}>{errors.employeeCount}</Text>}
 
           <InputField
             label="Código Postal"
-            value={formData.zipCode}
-            onChangeText={text => setFormData({ ...formData, zipCode: text })}
+            value={zipCode}
+            onChangeText={setZipCode}
             placeholder="12345"
             keyboardType="numeric"
             error={errors.zipCode}
@@ -337,24 +292,20 @@ export const LeadGateScreen: React.FC = () => {
           <TouchableOpacity
             onPress={handleSubmit}
             disabled={isLoading}
-            className={`mt-6 rounded-xl py-4 flex-row justify-center items-center ${
-              isLoading ? 'bg-primary-400' : 'bg-primary-600'
-            }`}
+            style={[styles.submitButton, isLoading && styles.submitButtonDisabled]}
           >
             {isLoading ? (
               <ActivityIndicator color="white" />
             ) : (
               <>
-                <Text className="text-white font-bold text-lg mr-2">
-                  Comenzar Diagnóstico
-                </Text>
+                <Text style={styles.submitButtonText}>Comenzar Diagnóstico</Text>
                 <Ionicons name="arrow-forward" size={20} color="white" />
               </>
             )}
           </TouchableOpacity>
 
           {/* Privacy note */}
-          <Text className="text-gray-400 text-xs text-center mt-4">
+          <Text style={styles.privacyNote}>
             🔒 Tus datos están seguros y no serán compartidos con terceros
           </Text>
         </View>
@@ -362,5 +313,175 @@ export const LeadGateScreen: React.FC = () => {
     </KeyboardAvoidingView>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#f9fafb',
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    paddingBottom: 40,
+  },
+  header: {
+    backgroundColor: '#2563eb',
+    paddingHorizontal: 24,
+    paddingTop: 64,
+    paddingBottom: 40,
+    borderBottomLeftRadius: 24,
+    borderBottomRightRadius: 24,
+  },
+  headerContent: {
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  iconContainer: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: 50,
+    padding: 16,
+    marginBottom: 16,
+  },
+  title: {
+    color: 'white',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  subtitle: {
+    color: 'rgba(255,255,255,0.8)',
+    textAlign: 'center',
+    marginTop: 8,
+  },
+  badges: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+    marginTop: 16,
+  },
+  badge: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 20,
+  },
+  badgeText: {
+    color: 'white',
+    fontSize: 12,
+  },
+  form: {
+    paddingHorizontal: 24,
+    paddingTop: 32,
+  },
+  formTitle: {
+    color: '#111827',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  formSubtitle: {
+    color: '#6b7280',
+    marginBottom: 24,
+  },
+  inputContainer: {
+    marginBottom: 16,
+  },
+  label: {
+    color: '#374151',
+    fontWeight: '500',
+    marginBottom: 8,
+  },
+  inputWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 12,
+    paddingHorizontal: 16,
+  },
+  inputError: {
+    borderColor: '#ef4444',
+  },
+  input: {
+    flex: 1,
+    paddingVertical: 16,
+    paddingHorizontal: 12,
+    color: '#111827',
+    fontSize: 16,
+  },
+  errorText: {
+    color: '#ef4444',
+    fontSize: 12,
+    marginTop: 4,
+  },
+  pickerButton: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 12,
+    padding: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  pickerText: {
+    color: '#111827',
+    fontSize: 16,
+  },
+  pickerPlaceholder: {
+    color: '#9ca3af',
+    fontSize: 16,
+  },
+  pickerDropdown: {
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d1d5db',
+    borderRadius: 12,
+    marginTop: 8,
+  },
+  pickerOption: {
+    padding: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f3f4f6',
+  },
+  pickerOptionSelected: {
+    backgroundColor: '#eff6ff',
+  },
+  pickerOptionText: {
+    color: '#374151',
+    fontSize: 16,
+  },
+  pickerOptionTextSelected: {
+    color: '#2563eb',
+    fontWeight: '500',
+    fontSize: 16,
+  },
+  submitButton: {
+    marginTop: 24,
+    backgroundColor: '#2563eb',
+    borderRadius: 12,
+    paddingVertical: 16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  submitButtonDisabled: {
+    backgroundColor: '#93c5fd',
+  },
+  submitButtonText: {
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18,
+    marginRight: 8,
+  },
+  privacyNote: {
+    color: '#9ca3af',
+    fontSize: 12,
+    textAlign: 'center',
+    marginTop: 16,
+  },
+});
 
 export default LeadGateScreen;
