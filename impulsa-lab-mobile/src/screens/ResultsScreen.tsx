@@ -13,7 +13,6 @@ import {
   Alert,
   Dimensions,
   StyleSheet,
-  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -23,14 +22,9 @@ import * as Print from 'expo-print';
 import * as Sharing from 'expo-sharing';
 
 import { useDiagnosticStore } from '../store/diagnosticStore';
-import {
-  getMaturityLevelInfo,
-  getDimensionLabel,
-  getPercentileInfo,
-} from '../utils/scoring-engine';
-import { getIndustryLabel } from '../constants/industry-benchmarks';
 import { getCompanySizeByEmployees } from '../constants/company-size';
 import { RootStackParamList } from '../navigation/types';
+import { useLanguage } from '../i18n';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -40,7 +34,9 @@ type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'Results'>;
 const RadarChart: React.FC<{
   scores: { finance: number; operations: number; marketing: number };
   industryScores: { finance: number; operations: number; marketing: number };
-}> = ({ scores, industryScores }) => {
+  dimensionLabels: string[];
+  legendLabels: { yourScore: string; industryAverage: string };
+}> = ({ scores, industryScores, dimensionLabels, legendLabels }) => {
   const size = SCREEN_WIDTH - 80;
   const center = size / 2;
   const maxRadius = size / 2 - 40;
@@ -57,14 +53,14 @@ const RadarChart: React.FC<{
   }, [animatedValue]);
 
   // Convert scores to polygon points
-  const getPolygonPoints = (scoreObj: typeof scores, scale = 1) => {
+  const getPolygonPoints = (scoreObj: typeof scores) => {
     const dimensions = ['finance', 'operations', 'marketing'] as const;
     const angleStep = (Math.PI * 2) / 3;
     const startAngle = -Math.PI / 2; // Start from top
 
     return dimensions
       .map((dim, i) => {
-        const score = scoreObj[dim] * scale;
+        const score = scoreObj[dim];
         const radius = (score / 100) * maxRadius;
         const angle = startAngle + i * angleStep;
         const x = center + radius * Math.cos(angle);
@@ -76,7 +72,6 @@ const RadarChart: React.FC<{
 
   // Grid lines
   const gridLevels = [20, 40, 60, 80, 100];
-  const dimensions = ['Finanzas', 'Operaciones', 'Marketing'];
   const angleStep = (Math.PI * 2) / 3;
   const startAngle = -Math.PI / 2;
 
@@ -97,7 +92,7 @@ const RadarChart: React.FC<{
         ))}
 
         {/* Axis lines */}
-        {dimensions.map((_, i) => {
+        {dimensionLabels.map((_, i) => {
           const angle = startAngle + i * angleStep;
           const x2 = center + maxRadius * Math.cos(angle);
           const y2 = center + maxRadius * Math.sin(angle);
@@ -146,7 +141,7 @@ const RadarChart: React.FC<{
         })}
 
         {/* Labels */}
-        {dimensions.map((label, i) => {
+        {dimensionLabels.map((label, i) => {
           const angle = startAngle + i * angleStep;
           const labelRadius = maxRadius + 25;
           const x = center + labelRadius * Math.cos(angle);
@@ -184,11 +179,11 @@ const RadarChart: React.FC<{
       <View style={styles.legendContainer}>
         <View style={styles.legendItem}>
           <View style={[styles.legendColor, { backgroundColor: '#3b82f6' }]} />
-          <Text style={styles.legendText}>Tu puntaje</Text>
+          <Text style={styles.legendText}>{legendLabels.yourScore}</Text>
         </View>
         <View style={styles.legendItem}>
           <View style={[styles.legendColor, styles.legendColorDashed]} />
-          <Text style={styles.legendText}>Promedio industria</Text>
+          <Text style={styles.legendText}>{legendLabels.industryAverage}</Text>
         </View>
       </View>
     </View>
@@ -201,8 +196,10 @@ const ScoreCard: React.FC<{
   userScore: number;
   industryAverage: number;
   percentile: string;
-}> = ({ dimension, userScore, industryAverage, percentile }) => {
-  const percentileInfo = getPercentileInfo(percentile);
+  dimensionLabel: string;
+  percentileLabel: string;
+  vsIndustryText: string;
+}> = ({ dimension, userScore, industryAverage, dimensionLabel, percentileLabel, vsIndustryText }) => {
   const difference = userScore - industryAverage;
 
   const getIcon = (): keyof typeof Ionicons.glyphMap => {
@@ -227,6 +224,13 @@ const ScoreCard: React.FC<{
     }
   };
 
+  const getPercentileColor = () => {
+    if (percentileLabel.includes('Excelente') || percentileLabel.includes('Excellent')) return '#22c55e';
+    if (percentileLabel.includes('Bueno') || percentileLabel.includes('Good')) return '#3b82f6';
+    if (percentileLabel.includes('Promedio') || percentileLabel.includes('Average')) return '#f59e0b';
+    return '#ef4444';
+  };
+
   return (
     <View style={styles.scoreCard}>
       <View style={styles.scoreCardContent}>
@@ -235,15 +239,15 @@ const ScoreCard: React.FC<{
             <Ionicons name={getIcon()} size={20} color={getDimensionColor()} />
           </View>
           <View style={styles.scoreCardInfo}>
-            <Text style={styles.scoreCardLabel}>{getDimensionLabel(dimension)}</Text>
+            <Text style={styles.scoreCardLabel}>{dimensionLabel}</Text>
             <Text style={styles.scoreCardValue}>{userScore}</Text>
           </View>
         </View>
 
         <View style={styles.scoreCardRight}>
-          <View style={[styles.percentileBadge, { backgroundColor: `${percentileInfo.color}15` }]}>
-            <Text style={[styles.percentileText, { color: percentileInfo.color }]}>
-              {percentileInfo.label}
+          <View style={[styles.percentileBadge, { backgroundColor: `${getPercentileColor()}15` }]}>
+            <Text style={[styles.percentileText, { color: getPercentileColor() }]}>
+              {percentileLabel}
             </Text>
           </View>
           <View style={styles.differenceContainer}>
@@ -253,7 +257,7 @@ const ScoreCard: React.FC<{
               color={difference >= 0 ? '#22c55e' : '#ef4444'}
             />
             <Text style={[styles.differenceText, { color: difference >= 0 ? '#22c55e' : '#ef4444' }]}>
-              {Math.abs(difference)} vs industria
+              {Math.abs(difference)} {vsIndustryText}
             </Text>
           </View>
         </View>
@@ -267,6 +271,7 @@ export const ResultsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const result = useDiagnosticStore(state => state.result);
   const resetDiagnostic = useDiagnosticStore(state => state.resetDiagnostic);
+  const { t, language } = useLanguage();
 
   // Animation
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -287,23 +292,52 @@ export const ResultsScreen: React.FC = () => {
     ]).start();
   }, [fadeAnim, slideAnim]);
 
+  // Helper functions
+  const getIndustryLabel = (industry: string) => {
+    return t.industries[industry as keyof typeof t.industries] || industry;
+  };
+
+  const getDimensionLabel = (dimension: string) => {
+    return t.dimensions[dimension as keyof typeof t.dimensions] || dimension;
+  };
+
+  const getPercentileLabel = (percentile: string) => {
+    const key = percentile.toLowerCase().replace(' ', '_') as keyof typeof t.percentile;
+    return t.percentile[key] || percentile;
+  };
+
+  const getMaturityInfo = (level: string) => {
+    const levelKey = level.toLowerCase() as keyof typeof t.maturity;
+    const maturityData = t.maturity[levelKey];
+    const colors: Record<string, string> = {
+      expansion: '#22c55e',
+      growth: '#3b82f6',
+      survival: '#f59e0b',
+    };
+    return {
+      label: maturityData?.label || level,
+      description: maturityData?.description || '',
+      color: colors[level.toLowerCase()] || '#6b7280',
+    };
+  };
+
   if (!result) {
     return (
       <View style={styles.emptyContainer}>
         <Ionicons name="analytics-outline" size={64} color="#d1d5db" />
-        <Text style={styles.emptyText}>No hay resultados disponibles</Text>
+        <Text style={styles.emptyText}>{t.results.noResults}</Text>
         <TouchableOpacity
           onPress={() => navigation.navigate('LeadGate')}
           style={styles.emptyButton}
         >
-          <Text style={styles.emptyButtonText}>Iniciar diagnóstico</Text>
+          <Text style={styles.emptyButtonText}>{t.results.startDiagnostic}</Text>
         </TouchableOpacity>
       </View>
     );
   }
 
   const { scores, maturityLevel, industryComparison, leadData } = result;
-  const maturityInfo = getMaturityLevelInfo(maturityLevel);
+  const maturityInfo = getMaturityInfo(maturityLevel);
   const companySizeConfig = getCompanySizeByEmployees(leadData.employeeCount);
 
   // Industry average scores for radar
@@ -312,6 +346,13 @@ export const ResultsScreen: React.FC = () => {
     operations: industryComparison.operations.industryAverage,
     marketing: industryComparison.marketing.industryAverage,
   };
+
+  // Dimension labels for radar chart
+  const dimensionLabels = [
+    t.dimensions.finance,
+    t.dimensions.operations,
+    t.dimensions.marketing,
+  ];
 
   // Generate PDF
   const generatePDF = async () => {
@@ -335,45 +376,45 @@ export const ResultsScreen: React.FC = () => {
         </head>
         <body>
           <div class="header">
-            <h1 class="title">Diagnóstico Empresarial 3D</h1>
+            <h1 class="title">${t.leadGate.title}</h1>
             <p>Impulsa Lab</p>
           </div>
 
-          <h2>Empresa: ${leadData.companyName}</h2>
-          <p>Industria: ${getIndustryLabel(leadData.industry)}</p>
-          <p>Tamaño: ${companySizeConfig.label}</p>
+          <h2>${leadData.companyName}</h2>
+          <p>${t.leadGate.fields.industry}: ${getIndustryLabel(leadData.industry)}</p>
+          <p>${companySizeConfig.label}</p>
 
           <div class="score-box">
-            <p style="text-align: center;">Puntaje General</p>
+            <p style="text-align: center;">${t.results.overallScore}</p>
             <div class="overall-score">${scores.overall}</div>
             <p style="text-align: center; color: ${maturityInfo.color};">
-              Nivel: ${maturityInfo.label}
+              ${maturityInfo.label}
             </p>
           </div>
 
-          <h3>Puntajes por Dimensión</h3>
+          <h3>${t.results.dimensionDetail}</h3>
           <div class="dimension">
-            <span>💰 Finanzas</span>
+            <span>💰 ${t.dimensions.finance}</span>
             <strong>${scores.finance}</strong>
           </div>
           <div class="dimension">
-            <span>⚙️ Operaciones</span>
+            <span>⚙️ ${t.dimensions.operations}</span>
             <strong>${scores.operations}</strong>
           </div>
           <div class="dimension">
-            <span>📣 Marketing</span>
+            <span>📣 ${t.dimensions.marketing}</span>
             <strong>${scores.marketing}</strong>
           </div>
 
           <div class="recommendations">
-            <h3>Recomendaciones para ${companySizeConfig.label}</h3>
+            <h3>${t.results.recommendations}</h3>
             ${companySizeConfig.recommendations.map(rec => `
               <div class="recommendation-item">✓ ${rec}</div>
             `).join('')}
           </div>
 
           <p style="margin-top: 40px; text-align: center; color: #9ca3af; font-size: 12px;">
-            Generado el ${new Date().toLocaleDateString('es-MX')}
+            ${new Date().toLocaleDateString(language === 'es' ? 'es-MX' : 'en-US')}
           </p>
         </body>
         </html>
@@ -384,24 +425,26 @@ export const ResultsScreen: React.FC = () => {
       if (await Sharing.isAvailableAsync()) {
         await Sharing.shareAsync(uri, {
           mimeType: 'application/pdf',
-          dialogTitle: 'Diagnóstico Impulsa Lab',
+          dialogTitle: `${t.leadGate.title} - Impulsa Lab`,
           UTI: 'com.adobe.pdf',
         });
       } else {
-        Alert.alert('PDF Generado', 'El archivo se ha guardado correctamente.');
+        Alert.alert(t.results.pdfGenerated, t.results.pdfSaved);
       }
     } catch (error) {
       console.error('Error generating PDF:', error);
-      Alert.alert('Error', 'No se pudo generar el PDF.');
+      Alert.alert(t.common.error, t.results.pdfError);
     }
   };
 
   // Share results
   const shareResults = async () => {
     try {
-      await Share.share({
-        message: `🎯 Mi Diagnóstico Empresarial 3D - Impulsa Lab\n\n📊 Puntaje General: ${scores.overall}/100\n💰 Finanzas: ${scores.finance}\n⚙️ Operaciones: ${scores.operations}\n📣 Marketing: ${scores.marketing}\n\n🏆 Nivel: ${maturityInfo.label}\n\n¡Descubre el tuyo en Impulsa Lab!`,
-      });
+      const message = language === 'es'
+        ? `🎯 Mi Diagnóstico Empresarial 3D - Impulsa Lab\n\n📊 Puntaje General: ${scores.overall}/100\n💰 Finanzas: ${scores.finance}\n⚙️ Operaciones: ${scores.operations}\n📣 Marketing: ${scores.marketing}\n\n🏆 Nivel: ${maturityInfo.label}\n\n¡Descubre el tuyo en Impulsa Lab!`
+        : `🎯 My 3D Business Diagnostic - Impulsa Lab\n\n📊 Overall Score: ${scores.overall}/100\n💰 Finance: ${scores.finance}\n⚙️ Operations: ${scores.operations}\n📣 Marketing: ${scores.marketing}\n\n🏆 Level: ${maturityInfo.label}\n\nDiscover yours at Impulsa Lab!`;
+
+      await Share.share({ message });
     } catch (error) {
       console.error('Error sharing:', error);
     }
@@ -410,12 +453,12 @@ export const ResultsScreen: React.FC = () => {
   // Start new diagnostic
   const handleNewDiagnostic = () => {
     Alert.alert(
-      'Nuevo diagnóstico',
-      '¿Deseas iniciar un nuevo diagnóstico? Se borrarán los resultados actuales.',
+      t.results.newDiagnosticTitle,
+      t.results.newDiagnosticMessage,
       [
-        { text: 'Cancelar', style: 'cancel' },
+        { text: t.common.cancel, style: 'cancel' },
         {
-          text: 'Iniciar nuevo',
+          text: t.results.startNew,
           onPress: () => {
             resetDiagnostic();
             navigation.replace('LeadGate');
@@ -435,12 +478,12 @@ export const ResultsScreen: React.FC = () => {
       >
         {/* Header */}
         <View style={styles.header}>
-          <Text style={styles.headerSubtitle}>Diagnóstico completado</Text>
+          <Text style={styles.headerSubtitle}>{t.results.completed}</Text>
           <Text style={styles.headerTitle}>{leadData.companyName}</Text>
 
           {/* Overall Score */}
           <View style={styles.overallScoreContainer}>
-            <Text style={styles.overallScoreLabel}>Puntaje General</Text>
+            <Text style={styles.overallScoreLabel}>{t.results.overallScore}</Text>
             <Text style={styles.overallScoreValue}>{scores.overall}</Text>
             <View style={styles.maturityBadge}>
               <View style={[styles.maturityDot, { backgroundColor: maturityInfo.color }]} />
@@ -452,43 +495,60 @@ export const ResultsScreen: React.FC = () => {
 
         {/* Radar Chart */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Tu perfil vs. Industria</Text>
+          <Text style={styles.sectionTitle}>{t.results.profileVsIndustry}</Text>
           <Text style={styles.sectionSubtitle}>
-            Comparado con {getIndustryLabel(leadData.industry)}
+            {t.results.comparedWith} {getIndustryLabel(leadData.industry)}
           </Text>
 
           <View style={styles.chartCard}>
-            <RadarChart scores={scores} industryScores={industryAverages} />
+            <RadarChart
+              scores={scores}
+              industryScores={industryAverages}
+              dimensionLabels={dimensionLabels}
+              legendLabels={{
+                yourScore: t.results.legend.yourScore,
+                industryAverage: t.results.legend.industryAverage,
+              }}
+            />
           </View>
         </View>
 
         {/* Dimension Scores */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Detalle por dimensión</Text>
+          <Text style={styles.sectionTitle}>{t.results.dimensionDetail}</Text>
 
           <ScoreCard
             dimension="finance"
             userScore={scores.finance}
             industryAverage={industryComparison.finance.industryAverage}
             percentile={industryComparison.finance.percentile}
+            dimensionLabel={getDimensionLabel('finance')}
+            percentileLabel={getPercentileLabel(industryComparison.finance.percentile)}
+            vsIndustryText={t.results.vsIndustry}
           />
           <ScoreCard
             dimension="operations"
             userScore={scores.operations}
             industryAverage={industryComparison.operations.industryAverage}
             percentile={industryComparison.operations.percentile}
+            dimensionLabel={getDimensionLabel('operations')}
+            percentileLabel={getPercentileLabel(industryComparison.operations.percentile)}
+            vsIndustryText={t.results.vsIndustry}
           />
           <ScoreCard
             dimension="marketing"
             userScore={scores.marketing}
             industryAverage={industryComparison.marketing.industryAverage}
             percentile={industryComparison.marketing.percentile}
+            dimensionLabel={getDimensionLabel('marketing')}
+            percentileLabel={getPercentileLabel(industryComparison.marketing.percentile)}
+            vsIndustryText={t.results.vsIndustry}
           />
         </View>
 
         {/* Recommendations */}
         <View style={styles.section}>
-          <Text style={styles.sectionTitle}>Recomendaciones para ti</Text>
+          <Text style={styles.sectionTitle}>{t.results.recommendations}</Text>
 
           <View style={styles.recommendationsCard}>
             {companySizeConfig.recommendations.map((rec, index) => (
@@ -506,18 +566,18 @@ export const ResultsScreen: React.FC = () => {
         <View style={styles.actionsSection}>
           <TouchableOpacity onPress={generatePDF} style={styles.primaryButton}>
             <Ionicons name="document-text-outline" size={20} color="white" />
-            <Text style={styles.primaryButtonText}>Descargar Plan PDF</Text>
+            <Text style={styles.primaryButtonText}>{t.results.downloadPDF}</Text>
           </TouchableOpacity>
 
           <View style={styles.secondaryButtonsRow}>
             <TouchableOpacity onPress={shareResults} style={styles.secondaryButton}>
               <Ionicons name="share-social-outline" size={20} color="#6b7280" />
-              <Text style={styles.secondaryButtonText}>Compartir</Text>
+              <Text style={styles.secondaryButtonText}>{t.results.share}</Text>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={handleNewDiagnostic} style={styles.secondaryButton}>
               <Ionicons name="refresh-outline" size={20} color="#6b7280" />
-              <Text style={styles.secondaryButtonText}>Nuevo</Text>
+              <Text style={styles.secondaryButtonText}>{t.results.new}</Text>
             </TouchableOpacity>
           </View>
         </View>

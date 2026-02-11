@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -21,6 +21,8 @@ import { EMPLOYEE_COUNT_OPTIONS } from '../constants/company-size';
 import { LeadData, Industry } from '../types';
 import { saveLeadDataLocally } from '../services/storage';
 import { RootStackParamList } from '../navigation/types';
+import { useLanguage } from '../i18n';
+import { LanguageSelector } from '../components';
 
 type NavigationProp = NativeStackNavigationProp<RootStackParamList, 'LeadGate'>;
 
@@ -124,6 +126,7 @@ export const LeadGateScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const setLeadData = useDiagnosticStore(state => state.setLeadData);
   const [isLoading, setIsLoading] = useState(false);
+  const { t, language } = useLanguage();
 
   // Form state
   const [name, setName] = useState('');
@@ -135,28 +138,44 @@ export const LeadGateScreen: React.FC = () => {
   const [zipCode, setZipCode] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
 
+  // Translated industry options
+  const translatedIndustryOptions = useMemo(() => {
+    return INDUSTRY_OPTIONS.map(opt => ({
+      value: opt.value,
+      label: t.industries[opt.value as keyof typeof t.industries] || opt.label,
+    }));
+  }, [t, language]);
+
+  // Translated employee options
+  const translatedEmployeeOptions = useMemo(() => {
+    return EMPLOYEE_COUNT_OPTIONS.map(opt => ({
+      value: opt.value,
+      label: t.employees[opt.value as keyof typeof t.employees] || opt.label,
+    }));
+  }, [t, language]);
+
   // Validation
   const validateForm = useCallback((): boolean => {
     const newErrors: Record<string, string> = {};
 
-    if (!name.trim()) newErrors.name = 'El nombre es requerido';
+    if (!name.trim()) newErrors.name = t.leadGate.errors.nameRequired;
     if (!email.trim()) {
-      newErrors.email = 'El email es requerido';
+      newErrors.email = t.leadGate.errors.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Email inválido';
+      newErrors.email = t.leadGate.errors.emailInvalid;
     }
-    if (!companyName.trim()) newErrors.companyName = 'El nombre de la empresa es requerido';
-    if (!industry) newErrors.industry = 'Selecciona una industria';
-    if (!employeeCount) newErrors.employeeCount = 'Selecciona el número de empleados';
+    if (!companyName.trim()) newErrors.companyName = t.leadGate.errors.companyRequired;
+    if (!industry) newErrors.industry = t.leadGate.errors.industryRequired;
+    if (!employeeCount) newErrors.employeeCount = t.leadGate.errors.employeesRequired;
     if (!zipCode.trim()) {
-      newErrors.zipCode = 'El código postal es requerido';
+      newErrors.zipCode = t.leadGate.errors.zipCodeRequired;
     } else if (!/^\d{5}$/.test(zipCode)) {
-      newErrors.zipCode = 'Código postal inválido (5 dígitos)';
+      newErrors.zipCode = t.leadGate.errors.zipCodeInvalid;
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [name, email, companyName, industry, employeeCount, zipCode]);
+  }, [name, email, companyName, industry, employeeCount, zipCode, t]);
 
   // Handle form submission
   const handleSubmit = useCallback(async () => {
@@ -180,11 +199,11 @@ export const LeadGateScreen: React.FC = () => {
       navigation.navigate('DiagnosticWizard');
     } catch (error) {
       console.error('Error submitting lead:', error);
-      Alert.alert('Error', 'Hubo un problema al guardar tus datos. Por favor intenta de nuevo.');
+      Alert.alert(t.common.error, t.leadGate.saveError);
     } finally {
       setIsLoading(false);
     }
-  }, [name, email, phone, companyName, industry, employeeCount, zipCode, validateForm, setLeadData, navigation]);
+  }, [name, email, phone, companyName, industry, employeeCount, zipCode, validateForm, setLeadData, navigation, t]);
 
   return (
     <KeyboardAvoidingView
@@ -199,42 +218,53 @@ export const LeadGateScreen: React.FC = () => {
       >
         {/* Header */}
         <View style={styles.header}>
+          {/* Language Selector */}
+          <View style={styles.languageSelectorContainer}>
+            <LanguageSelector compact />
+          </View>
+
           <View style={styles.headerContent}>
             <View style={styles.iconContainer}>
               <Ionicons name="analytics" size={40} color="white" />
             </View>
-            <Text style={styles.title}>Diagnóstico Empresarial 3D</Text>
-            <Text style={styles.subtitle}>Evalúa tu negocio en 3 dimensiones clave</Text>
+            <Text style={styles.title}>{t.leadGate.title}</Text>
+            <Text style={styles.subtitle}>{t.leadGate.subtitle}</Text>
           </View>
 
           {/* Dimension badges */}
           <View style={styles.badges}>
-            <View style={styles.badge}><Text style={styles.badgeText}>💰 Finanzas</Text></View>
-            <View style={styles.badge}><Text style={styles.badgeText}>⚙️ Operaciones</Text></View>
-            <View style={styles.badge}><Text style={styles.badgeText}>📣 Marketing</Text></View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>💰 {t.leadGate.badges.finance}</Text>
+            </View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>⚙️ {t.leadGate.badges.operations}</Text>
+            </View>
+            <View style={styles.badge}>
+              <Text style={styles.badgeText}>📣 {t.leadGate.badges.marketing}</Text>
+            </View>
           </View>
         </View>
 
         {/* Form */}
         <View style={styles.form}>
-          <Text style={styles.formTitle}>Comencemos con tu información</Text>
-          <Text style={styles.formSubtitle}>Estos datos nos ayudarán a personalizar tu diagnóstico</Text>
+          <Text style={styles.formTitle}>{t.leadGate.formTitle}</Text>
+          <Text style={styles.formSubtitle}>{t.leadGate.formSubtitle}</Text>
 
           <InputField
-            label="Nombre completo"
+            label={t.leadGate.fields.name}
             value={name}
             onChangeText={setName}
-            placeholder="Juan Pérez"
+            placeholder={t.leadGate.fields.namePlaceholder}
             autoCapitalize="words"
             error={errors.name}
             icon="person-outline"
           />
 
           <InputField
-            label="Email"
+            label={t.leadGate.fields.email}
             value={email}
             onChangeText={setEmail}
-            placeholder="juan@empresa.com"
+            placeholder={t.leadGate.fields.emailPlaceholder}
             keyboardType="email-address"
             autoCapitalize="none"
             error={errors.email}
@@ -242,47 +272,47 @@ export const LeadGateScreen: React.FC = () => {
           />
 
           <InputField
-            label="Teléfono (opcional)"
+            label={t.leadGate.fields.phone}
             value={phone}
             onChangeText={setPhone}
-            placeholder="+52 55 1234 5678"
+            placeholder={t.leadGate.fields.phonePlaceholder}
             keyboardType="phone-pad"
             icon="call-outline"
           />
 
           <InputField
-            label="Nombre de la empresa"
+            label={t.leadGate.fields.company}
             value={companyName}
             onChangeText={setCompanyName}
-            placeholder="Mi Empresa S.A."
+            placeholder={t.leadGate.fields.companyPlaceholder}
             autoCapitalize="words"
             error={errors.companyName}
             icon="business-outline"
           />
 
           <CustomPicker
-            label="Industria"
-            options={INDUSTRY_OPTIONS}
+            label={t.leadGate.fields.industry}
+            options={translatedIndustryOptions}
             selectedValue={industry}
             onValueChange={(value) => setIndustry(value as Industry)}
-            placeholder="Selecciona tu industria"
+            placeholder={t.leadGate.fields.industryPlaceholder}
           />
           {errors.industry && <Text style={[styles.errorText, { marginTop: -12, marginBottom: 16 }]}>{errors.industry}</Text>}
 
           <CustomPicker
-            label="Número de empleados"
-            options={EMPLOYEE_COUNT_OPTIONS}
+            label={t.leadGate.fields.employees}
+            options={translatedEmployeeOptions}
             selectedValue={employeeCount}
             onValueChange={setEmployeeCount}
-            placeholder="Selecciona el rango"
+            placeholder={t.leadGate.fields.employeesPlaceholder}
           />
           {errors.employeeCount && <Text style={[styles.errorText, { marginTop: -12, marginBottom: 16 }]}>{errors.employeeCount}</Text>}
 
           <InputField
-            label="Código Postal"
+            label={t.leadGate.fields.zipCode}
             value={zipCode}
             onChangeText={setZipCode}
-            placeholder="12345"
+            placeholder={t.leadGate.fields.zipCodePlaceholder}
             keyboardType="numeric"
             error={errors.zipCode}
             icon="location-outline"
@@ -298,7 +328,7 @@ export const LeadGateScreen: React.FC = () => {
               <ActivityIndicator color="white" />
             ) : (
               <>
-                <Text style={styles.submitButtonText}>Comenzar Diagnóstico</Text>
+                <Text style={styles.submitButtonText}>{t.leadGate.submitButton}</Text>
                 <Ionicons name="arrow-forward" size={20} color="white" />
               </>
             )}
@@ -306,7 +336,7 @@ export const LeadGateScreen: React.FC = () => {
 
           {/* Privacy note */}
           <Text style={styles.privacyNote}>
-            🔒 Tus datos están seguros y no serán compartidos con terceros
+            🔒 {t.leadGate.privacyNote}
           </Text>
         </View>
       </ScrollView>
@@ -328,14 +358,21 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#2563eb',
     paddingHorizontal: 24,
-    paddingTop: 64,
+    paddingTop: 48,
     paddingBottom: 40,
     borderBottomLeftRadius: 24,
     borderBottomRightRadius: 24,
   },
+  languageSelectorContainer: {
+    position: 'absolute',
+    top: 48,
+    right: 16,
+    zIndex: 10,
+  },
   headerContent: {
     alignItems: 'center',
     marginBottom: 16,
+    marginTop: 16,
   },
   iconContainer: {
     backgroundColor: 'rgba(255,255,255,0.2)',

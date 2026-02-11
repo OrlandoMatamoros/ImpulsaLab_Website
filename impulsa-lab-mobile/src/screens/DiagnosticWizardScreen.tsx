@@ -13,6 +13,7 @@ import {
   BackHandler,
   StyleSheet,
   ActivityIndicator,
+  ScrollView,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -23,7 +24,6 @@ import { ALL_QUESTIONS } from '../constants/questions';
 import { Question, Answer } from '../types';
 import {
   calculateDiagnosticResult,
-  getDimensionLabel,
   calculateProgress,
 } from '../utils/scoring-engine';
 import {
@@ -32,6 +32,7 @@ import {
 } from '../services/storage';
 import { saveCompleteDiagnostic } from '../services/firebase';
 import { RootStackParamList } from '../navigation/types';
+import { useLanguage } from '../i18n';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -65,9 +66,10 @@ const AnimatedProgressBar: React.FC<{ progress: number }> = ({ progress }) => {
 };
 
 // Dimension Badge Component
-const DimensionBadge: React.FC<{ dimension: string; isActive: boolean }> = ({
+const DimensionBadge: React.FC<{ dimension: string; isActive: boolean; label: string }> = ({
   dimension,
   isActive,
+  label,
 }) => {
   const getIcon = () => {
     switch (dimension) {
@@ -101,7 +103,7 @@ const DimensionBadge: React.FC<{ dimension: string; isActive: boolean }> = ({
     <View style={[styles.dimensionBadge, { backgroundColor: isActive ? `${color}20` : '#f3f4f6' }]}>
       <Text style={styles.dimensionIcon}>{getIcon()}</Text>
       <Text style={[styles.dimensionText, { color: isActive ? color : '#6b7280' }]}>
-        {getDimensionLabel(dimension as 'finance' | 'operations' | 'marketing')}
+        {label}
       </Text>
     </View>
   );
@@ -115,7 +117,9 @@ const QuestionCard: React.FC<{
   animatedValue: Animated.Value;
   questionNumber: number;
   totalQuestions: number;
-}> = ({ question, selectedOptionId, onSelectOption, animatedValue, questionNumber, totalQuestions }) => {
+  ofText: string;
+  keyQuestionText: string;
+}> = ({ question, selectedOptionId, onSelectOption, animatedValue, questionNumber, totalQuestions, ofText, keyQuestionText }) => {
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [SCREEN_WIDTH, 0],
@@ -151,74 +155,79 @@ const QuestionCard: React.FC<{
         },
       ]}
     >
-      {/* Question Header with gradient effect */}
-      <View style={[styles.questionHeader, { backgroundColor: `${dimensionColor}10` }]}>
-        <View style={[styles.questionNumberBadge, { backgroundColor: dimensionColor }]}>
-          <Text style={styles.questionNumberText}>{questionNumber}</Text>
-        </View>
-        <Text style={styles.questionOf}>de {totalQuestions}</Text>
-      </View>
-
-      {/* Question Text */}
-      <View style={styles.questionTextContainer}>
-        <Text style={styles.questionText}>{question.text}</Text>
-        {question.category === 'CRITICAL' && (
-          <View style={styles.criticalBadge}>
-            <Ionicons name="star" size={14} color="#f59e0b" />
-            <Text style={styles.criticalText}>Pregunta clave</Text>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.questionScrollContent}
+      >
+        {/* Question Header with gradient effect */}
+        <View style={[styles.questionHeader, { backgroundColor: `${dimensionColor}10` }]}>
+          <View style={[styles.questionNumberBadge, { backgroundColor: dimensionColor }]}>
+            <Text style={styles.questionNumberText}>{questionNumber}</Text>
           </View>
-        )}
-      </View>
+          <Text style={styles.questionOf}>{ofText} {totalQuestions}</Text>
+        </View>
 
-      {/* Options */}
-      <View style={styles.optionsContainer}>
-        {question.options.map((option, index) => {
-          const isSelected = selectedOptionId === option.id;
-          const letters = ['A', 'B', 'C', 'D', 'E'];
+        {/* Question Text */}
+        <View style={styles.questionTextContainer}>
+          <Text style={styles.questionText}>{question.text}</Text>
+          {question.category === 'CRITICAL' && (
+            <View style={styles.criticalBadge}>
+              <Ionicons name="star" size={14} color="#f59e0b" />
+              <Text style={styles.criticalText}>{keyQuestionText}</Text>
+            </View>
+          )}
+        </View>
 
-          return (
-            <TouchableOpacity
-              key={option.id}
-              onPress={() => onSelectOption(option.id, option.points)}
-              style={[
-                styles.optionButton,
-                isSelected && styles.optionButtonSelected,
-                isSelected && { borderColor: dimensionColor },
-              ]}
-              activeOpacity={0.7}
-            >
-              {/* Letter indicator */}
-              <View
+        {/* Options */}
+        <View style={styles.optionsContainer}>
+          {question.options.map((option, index) => {
+            const isSelected = selectedOptionId === option.id;
+            const letters = ['A', 'B', 'C', 'D', 'E'];
+
+            return (
+              <TouchableOpacity
+                key={option.id}
+                onPress={() => onSelectOption(option.id, option.points)}
                 style={[
-                  styles.optionLetter,
-                  isSelected && { backgroundColor: dimensionColor },
+                  styles.optionButton,
+                  isSelected && styles.optionButtonSelected,
+                  isSelected && { borderColor: dimensionColor },
                 ]}
+                activeOpacity={0.7}
               >
-                <Text style={[styles.optionLetterText, isSelected && styles.optionLetterTextSelected]}>
-                  {letters[index]}
-                </Text>
-              </View>
-
-              {/* Option text */}
-              <Text
-                style={[
-                  styles.optionText,
-                  isSelected && { color: dimensionColor, fontWeight: '600' },
-                ]}
-              >
-                {option.label}
-              </Text>
-
-              {/* Selection checkmark */}
-              {isSelected && (
-                <View style={[styles.checkmarkContainer, { backgroundColor: dimensionColor }]}>
-                  <Ionicons name="checkmark" size={16} color="white" />
+                {/* Letter indicator */}
+                <View
+                  style={[
+                    styles.optionLetter,
+                    isSelected && { backgroundColor: dimensionColor },
+                  ]}
+                >
+                  <Text style={[styles.optionLetterText, isSelected && styles.optionLetterTextSelected]}>
+                    {letters[index]}
+                  </Text>
                 </View>
-              )}
-            </TouchableOpacity>
-          );
-        })}
-      </View>
+
+                {/* Option text */}
+                <Text
+                  style={[
+                    styles.optionText,
+                    isSelected && { color: dimensionColor, fontWeight: '600' },
+                  ]}
+                >
+                  {option.label}
+                </Text>
+
+                {/* Selection checkmark */}
+                {isSelected && (
+                  <View style={[styles.checkmarkContainer, { backgroundColor: dimensionColor }]}>
+                    <Ionicons name="checkmark" size={16} color="white" />
+                  </View>
+                )}
+              </TouchableOpacity>
+            );
+          })}
+        </View>
+      </ScrollView>
     </Animated.View>
   );
 };
@@ -226,6 +235,7 @@ const QuestionCard: React.FC<{
 // Main Component
 export const DiagnosticWizardScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
+  const { t } = useLanguage();
 
   // Store state
   const leadData = useDiagnosticStore(state => state.leadData);
@@ -248,6 +258,11 @@ export const DiagnosticWizardScreen: React.FC = () => {
   // Get selected option for current question
   const currentAnswer = answers.find(a => a.questionId === currentQuestion?.id);
   const selectedOptionId = currentAnswer?.optionId || null;
+
+  // Get dimension label
+  const getDimensionLabel = (dimension: string) => {
+    return t.dimensions[dimension as keyof typeof t.dimensions] || dimension;
+  };
 
   // Handle back button
   useEffect(() => {
@@ -297,7 +312,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
   // Handle next question
   const handleNext = async () => {
     if (!selectedOptionId) {
-      Alert.alert('Selección requerida', 'Por favor selecciona una opción para continuar.');
+      Alert.alert(t.wizard.selectionRequired, t.wizard.selectOptionMessage);
       return;
     }
 
@@ -320,7 +335,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
   // Complete diagnostic and calculate results
   const completeDiagnostic = async () => {
     if (!leadData) {
-      Alert.alert('Error', 'No se encontraron los datos del lead.');
+      Alert.alert(t.common.error, t.wizard.errorNoLead);
       return;
     }
 
@@ -347,7 +362,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
       navigation.replace('Results');
     } catch (error) {
       console.error('Error completing diagnostic:', error);
-      Alert.alert('Error', 'Hubo un problema al procesar tu diagnóstico. Por favor intenta de nuevo.');
+      Alert.alert(t.common.error, t.wizard.processingError);
     } finally {
       setIsLoading(false);
     }
@@ -356,12 +371,12 @@ export const DiagnosticWizardScreen: React.FC = () => {
   // Exit confirmation
   const handleExit = () => {
     Alert.alert(
-      'Salir del diagnóstico',
-      'Tu progreso se guardará automáticamente. ¿Deseas salir?',
+      t.wizard.exitTitle,
+      t.wizard.exitMessage,
       [
-        { text: 'Cancelar', style: 'cancel' },
+        { text: t.common.cancel, style: 'cancel' },
         {
-          text: 'Salir',
+          text: t.wizard.exit,
           style: 'destructive',
           onPress: () => navigation.goBack(),
         },
@@ -373,7 +388,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#3b82f6" />
-        <Text style={styles.loadingText}>Cargando preguntas...</Text>
+        <Text style={styles.loadingText}>{t.wizard.loadingQuestions}</Text>
       </View>
     );
   }
@@ -403,7 +418,11 @@ export const DiagnosticWizardScreen: React.FC = () => {
             <Ionicons name="close" size={24} color="#6b7280" />
           </TouchableOpacity>
 
-          <DimensionBadge dimension={currentQuestion.dimension} isActive />
+          <DimensionBadge
+            dimension={currentQuestion.dimension}
+            isActive
+            label={getDimensionLabel(currentQuestion.dimension)}
+          />
 
           <Text style={styles.questionCounter}>
             {currentIndex + 1} / {totalQuestions}
@@ -414,7 +433,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
         <AnimatedProgressBar progress={progress} />
 
         {/* Progress text */}
-        <Text style={styles.progressText}>{progress}% completado</Text>
+        <Text style={styles.progressText}>{progress}% {t.wizard.completed}</Text>
       </View>
 
       {/* Question Card */}
@@ -426,6 +445,8 @@ export const DiagnosticWizardScreen: React.FC = () => {
           animatedValue={cardAnimation}
           questionNumber={currentIndex + 1}
           totalQuestions={totalQuestions}
+          ofText={t.wizard.of}
+          keyQuestionText={t.wizard.keyQuestion}
         />
       </View>
 
@@ -439,7 +460,7 @@ export const DiagnosticWizardScreen: React.FC = () => {
               style={styles.previousButton}
             >
               <Ionicons name="arrow-back" size={20} color="#6b7280" />
-              <Text style={styles.previousButtonText}>Anterior</Text>
+              <Text style={styles.previousButtonText}>{t.common.previous}</Text>
             </TouchableOpacity>
           )}
 
@@ -456,16 +477,16 @@ export const DiagnosticWizardScreen: React.FC = () => {
             {isLoading ? (
               <View style={styles.loadingButtonContent}>
                 <ActivityIndicator color="white" size="small" />
-                <Text style={styles.nextButtonText}>Procesando...</Text>
+                <Text style={styles.nextButtonText}>{t.wizard.processing}</Text>
               </View>
             ) : currentIndex === totalQuestions - 1 ? (
               <>
-                <Text style={styles.nextButtonText}>Ver Resultados</Text>
+                <Text style={styles.nextButtonText}>{t.wizard.viewResults}</Text>
                 <Ionicons name="analytics" size={20} color="white" />
               </>
             ) : (
               <>
-                <Text style={styles.nextButtonText}>Siguiente</Text>
+                <Text style={styles.nextButtonText}>{t.common.next}</Text>
                 <Ionicons name="arrow-forward" size={20} color="white" />
               </>
             )}
@@ -554,6 +575,9 @@ const styles = StyleSheet.create({
   questionCard: {
     flex: 1,
     paddingHorizontal: 20,
+  },
+  questionScrollContent: {
+    paddingBottom: 20,
   },
   questionHeader: {
     flexDirection: 'row',
