@@ -3,7 +3,7 @@
 // ============================================
 
 import React, { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
@@ -16,11 +16,25 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // Loading Screen
 const LoadingScreen: React.FC = () => (
-  <View className="flex-1 justify-center items-center bg-primary-600">
+  <View style={loadingStyles.container}>
     <ActivityIndicator size="large" color="white" />
-    <Text className="text-white mt-4 text-lg">Cargando...</Text>
+    <Text style={loadingStyles.text}>Cargando...</Text>
   </View>
 );
+
+const loadingStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#1e3a5f',
+  },
+  text: {
+    color: 'white',
+    marginTop: 16,
+    fontSize: 18,
+  },
+});
 
 export const AppNavigator: React.FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -35,6 +49,8 @@ export const AppNavigator: React.FC = () => {
 
   // Hydrate store from AsyncStorage
   useEffect(() => {
+    let timeoutId: NodeJS.Timeout;
+
     const hydrateStore = async () => {
       try {
         const progress = await loadDiagnosticProgress();
@@ -67,7 +83,18 @@ export const AppNavigator: React.FC = () => {
       }
     };
 
+    // Fallback: if loading takes more than 3 seconds, show app anyway
+    timeoutId = setTimeout(() => {
+      if (isLoading) {
+        console.warn('Hydration timeout - showing app');
+        setHydrated(true);
+        setIsLoading(false);
+      }
+    }, 3000);
+
     hydrateStore();
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   if (isLoading) {
