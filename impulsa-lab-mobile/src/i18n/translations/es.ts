@@ -160,6 +160,171 @@ export const es = {
     spanish: 'Español',
     english: 'English',
   },
+
+  // Questions
+  questions: {
+    'FIN-PRE-1': {
+      text: '¿Qué tan seguro te sientes manejando las finanzas de tu negocio?',
+      options: {
+        a: 'Sin control - No tengo visibilidad clara',
+        b: 'Supervisión básica - Reviso ocasionalmente',
+        c: 'Monitoreo constante - Tengo todo bajo control',
+      },
+    },
+    'OPS-PRE-1': {
+      text: '¿Qué porcentaje de tu semana involucra trabajo manual repetitivo?',
+      options: {
+        a: 'Más del 60% - La mayoría es repetitivo',
+        b: '30-60% - Una buena parte',
+        c: 'Menos del 30% - Muy poco',
+      },
+    },
+    'MKT-PRE-1': {
+      text: '¿Qué tan efectiva es tu visibilidad digital para atraer clientes?',
+      options: {
+        a: 'Mínima - Casi no tenemos presencia',
+        b: 'Desestructurada - Publicamos sin estrategia',
+        c: 'Estratégica - Tenemos un plan definido',
+      },
+    },
+    'fin-b-1': {
+      text: '¿Con qué frecuencia revisas los números financieros de tu negocio?',
+      options: {
+        a: 'Anualmente o nunca',
+        b: 'Trimestralmente',
+        c: 'Mensualmente',
+        d: 'Semanalmente',
+        e: 'Diariamente con reportes automatizados',
+      },
+    },
+    'fin-b-2': {
+      text: '¿Conoces el margen de ganancia de tus productos o servicios?',
+      options: {
+        a: 'No lo sé',
+        b: 'Tengo una idea general',
+        c: 'Conozco los principales productos',
+        d: 'Tengo el catálogo completo documentado',
+      },
+    },
+    'fin-b-3': {
+      text: '¿Cómo manejas las cuentas personales vs. las del negocio?',
+      options: {
+        a: 'Están mezcladas',
+        b: 'Parcialmente separadas',
+        c: 'Completamente separadas con cuentas distintas',
+      },
+    },
+    'fin-b-4': {
+      text: '¿Cuántos meses de gastos operativos tienes en reserva?',
+      options: {
+        a: 'Menos de 1 mes',
+        b: '1-3 meses',
+        c: '3-6 meses',
+        d: '6-12 meses',
+        e: 'Más de 12 meses',
+      },
+    },
+    'fin-b-5': {
+      text: '¿Qué herramientas usas para administrar tus finanzas?',
+      options: {
+        a: 'Papel y cuaderno',
+        b: 'Hojas de cálculo básicas (Excel/Sheets)',
+        c: 'Software de contabilidad (QuickBooks, Wave)',
+        d: 'ERP integrado con reportes automáticos',
+      },
+    },
+    'ops-b-1': {
+      text: '¿Cuántas horas a la semana dedicas a tareas repetitivas?',
+      options: {
+        a: 'Más de 20 horas',
+        b: '10-20 horas',
+        c: '5-10 horas',
+        d: '2-5 horas',
+        e: '0-2 horas (casi todo automatizado)',
+      },
+    },
+    'ops-b-2': {
+      text: '¿Cómo manejas las citas y reservaciones de clientes?',
+      options: {
+        a: 'Manualmente por teléfono/WhatsApp',
+        b: 'Calendario básico (Google Calendar)',
+        c: 'Sistema de reservas online',
+        d: 'Sistema automatizado con recordatorios',
+      },
+    },
+    'ops-b-3': {
+      text: '¿Qué nivel de documentación tienen tus procesos?',
+      options: {
+        a: 'Ninguna - Todo está en mi cabeza',
+        b: 'Notas básicas escritas',
+        c: 'Manuales escritos formales',
+        d: 'Documentación digital con videos',
+      },
+    },
+    'ops-b-4': {
+      text: '¿Cómo controlas tu inventario o recursos?',
+      options: {
+        a: 'De memoria',
+        b: 'Lista manual o Excel básico',
+        c: 'Sistema de inventario digital',
+        d: 'Sistema automatizado con alertas',
+      },
+    },
+    'ops-b-5': {
+      text: '¿Cuánto tiempo te toma generar un reporte de resultados?',
+      options: {
+        a: 'Un día completo o más',
+        b: 'Varias horas',
+        c: 'Menos de una hora',
+        d: 'Instantáneo (dashboards en tiempo real)',
+      },
+    },
+    'mkt-b-1': {
+      text: '¿Qué tan fácil es encontrar tu negocio en Google?',
+      options: {
+        a: 'No tenemos sitio web',
+        b: 'Tenemos web pero no aparece en búsquedas',
+        c: 'Aparecemos en algunas búsquedas',
+        d: 'Estamos en los primeros resultados',
+      },
+    },
+    'mkt-b-2': {
+      text: '¿Con qué frecuencia publicas en redes sociales?',
+      options: {
+        a: 'Nunca o casi nunca',
+        b: 'Ocasionalmente (cuando nos acordamos)',
+        c: 'Semanalmente con calendario',
+        d: 'Diariamente con estrategia definida',
+      },
+    },
+    'mkt-b-3': {
+      text: '¿Qué tan bien definido tienes tu cliente ideal?',
+      options: {
+        a: 'No lo tengo claro',
+        b: 'Tengo una idea general',
+        c: 'Perfil documentado básico',
+        d: 'Buyer personas basados en datos',
+      },
+    },
+    'mkt-b-4': {
+      text: '¿Cómo consigues nuevos clientes actualmente?',
+      options: {
+        a: 'Solo por referidos',
+        b: 'Referidos + algo de redes sociales',
+        c: 'Múltiples canales (redes, Google, email)',
+        d: 'Estrategia omnicanal integrada',
+      },
+    },
+    'mkt-b-5': {
+      text: '¿Mides el retorno de inversión de tu marketing?',
+      options: {
+        a: 'No mido nada',
+        b: 'Tengo métricas básicas (seguidores, likes)',
+        c: 'Mido conversiones y ventas',
+        d: 'Atribución avanzada con ROI por canal',
+      },
+    },
+  },
 };
 
 export type TranslationKeys = typeof es;

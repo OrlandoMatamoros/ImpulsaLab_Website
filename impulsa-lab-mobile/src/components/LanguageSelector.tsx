@@ -19,9 +19,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ style, compa
   const { language, setLanguage, t } = useLanguage();
   const [modalVisible, setModalVisible] = useState(false);
 
-  const languages: { code: Language; label: string; flag: string }[] = [
-    { code: 'es', label: t.language.spanish, flag: '🇲🇽' },
-    { code: 'en', label: t.language.english, flag: '🇺🇸' },
+  const languages: { code: Language; label: string; shortLabel: string }[] = [
+    { code: 'es', label: t.language.spanish, shortLabel: 'ES' },
+    { code: 'en', label: t.language.english, shortLabel: 'EN' },
   ];
 
   const currentLanguage = languages.find(l => l.code === language);
@@ -37,8 +37,9 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ style, compa
         onPress={() => setModalVisible(true)}
         style={[styles.compactButton, style]}
       >
-        <Text style={styles.compactFlag}>{currentLanguage?.flag}</Text>
-        <Ionicons name="chevron-down" size={14} color="#6b7280" />
+        <Ionicons name="globe-outline" size={16} color="#6b7280" />
+        <Text style={styles.compactText}>{currentLanguage?.shortLabel}</Text>
+        <Ionicons name="chevron-down" size={12} color="#6b7280" />
 
         <Modal
           animationType="fade"
@@ -61,7 +62,7 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ style, compa
                     language === lang.code && styles.languageOptionSelected,
                   ]}
                 >
-                  <Text style={styles.languageFlag}>{lang.flag}</Text>
+                  <Text style={styles.languageCode}>{lang.shortLabel}</Text>
                   <Text
                     style={[
                       styles.languageLabel,
@@ -95,7 +96,14 @@ export const LanguageSelector: React.FC<LanguageSelectorProps> = ({ style, compa
               language === lang.code && styles.languageButtonSelected,
             ]}
           >
-            <Text style={styles.buttonFlag}>{lang.flag}</Text>
+            <Text
+              style={[
+                styles.buttonCode,
+                language === lang.code && styles.buttonCodeSelected,
+              ]}
+            >
+              {lang.shortLabel}
+            </Text>
             <Text
               style={[
                 styles.buttonLabel,
@@ -141,9 +149,14 @@ const styles = StyleSheet.create({
     borderColor: '#2563eb',
     backgroundColor: '#eff6ff',
   },
-  buttonFlag: {
-    fontSize: 20,
+  buttonCode: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: '#9ca3af',
     marginRight: 8,
+  },
+  buttonCodeSelected: {
+    color: '#2563eb',
   },
   buttonLabel: {
     fontSize: 14,
@@ -161,11 +174,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 8,
-    backgroundColor: 'rgba(255,255,255,0.2)',
+    backgroundColor: 'rgba(255,255,255,0.9)',
+    gap: 4,
   },
-  compactFlag: {
-    fontSize: 18,
-    marginRight: 4,
+  compactText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#1e3a5f',
   },
   // Modal styles
   modalOverlay: {
@@ -199,9 +214,12 @@ const styles = StyleSheet.create({
   languageOptionSelected: {
     backgroundColor: '#eff6ff',
   },
-  languageFlag: {
-    fontSize: 24,
+  languageCode: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#1e3a5f',
     marginRight: 12,
+    width: 30,
   },
   languageLabel: {
     flex: 1,

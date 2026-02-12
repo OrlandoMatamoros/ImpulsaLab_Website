@@ -18,17 +18,31 @@ import { LeadData, DiagnosticResult } from '../types';
 // Firebase configuration
 // TODO: Replace with your actual Firebase config
 const firebaseConfig = {
-  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY || 'YOUR_API_KEY',
-  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN || 'YOUR_AUTH_DOMAIN',
-  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID || 'YOUR_PROJECT_ID',
-  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET || 'YOUR_STORAGE_BUCKET',
-  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || 'YOUR_SENDER_ID',
-  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID || 'YOUR_APP_ID',
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY || '',
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN || '',
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID || '',
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET || '',
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || '',
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID || '',
 };
 
-// Initialize Firebase (prevent re-initialization)
-const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
-const db = getFirestore(app);
+// Check if Firebase is properly configured
+const isFirebaseConfigured = (): boolean => {
+  return !!(
+    firebaseConfig.apiKey &&
+    firebaseConfig.projectId &&
+    firebaseConfig.apiKey !== 'YOUR_API_KEY'
+  );
+};
+
+// Initialize Firebase only if configured (prevent re-initialization)
+let app: ReturnType<typeof initializeApp> | null = null;
+let db: ReturnType<typeof getFirestore> | null = null;
+
+if (isFirebaseConfigured()) {
+  app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
+  db = getFirestore(app);
+}
 
 // Collection references
 const LEADS_COLLECTION = 'leads';
@@ -38,6 +52,11 @@ const DIAGNOSTICS_COLLECTION = 'diagnostics';
  * Save lead data to Firestore
  */
 export const saveLead = async (leadData: LeadData): Promise<string> => {
+  if (!db || !isFirebaseConfigured()) {
+    console.log('Firebase not configured, skipping lead save');
+    return 'local_' + Date.now();
+  }
+
   try {
     const docRef = await addDoc(collection(db, LEADS_COLLECTION), {
       ...leadData,
@@ -59,6 +78,11 @@ export const saveDiagnostic = async (
   result: DiagnosticResult,
   leadId?: string
 ): Promise<string> => {
+  if (!db || !isFirebaseConfigured()) {
+    console.log('Firebase not configured, skipping diagnostic save');
+    return result.id;
+  }
+
   try {
     const diagnosticData = {
       ...result,
@@ -81,6 +105,11 @@ export const saveDiagnostic = async (
  * Get diagnostic by ID
  */
 export const getDiagnostic = async (diagnosticId: string): Promise<DiagnosticResult | null> => {
+  if (!db || !isFirebaseConfigured()) {
+    console.log('Firebase not configured, cannot get diagnostic');
+    return null;
+  }
+
   try {
     const docRef = doc(db, DIAGNOSTICS_COLLECTION, diagnosticId);
     const docSnap = await getDoc(docRef);
@@ -106,6 +135,11 @@ export const saveCompleteDiagnostic = async (
   leadData: LeadData,
   result: DiagnosticResult
 ): Promise<{ leadId: string; diagnosticId: string }> => {
+  if (!isFirebaseConfigured()) {
+    console.log('Firebase not configured, skipping cloud save');
+    return { leadId: 'local_' + Date.now(), diagnosticId: result.id };
+  }
+
   try {
     // Save lead first
     const leadId = await saveLead(leadData);
@@ -120,4 +154,4 @@ export const saveCompleteDiagnostic = async (
   }
 };
 
-export { db };
+export { db, isFirebaseConfigured };

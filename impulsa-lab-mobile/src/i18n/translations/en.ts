@@ -162,4 +162,169 @@ export const en: TranslationKeys = {
     spanish: 'Español',
     english: 'English',
   },
+
+  // Questions
+  questions: {
+    'FIN-PRE-1': {
+      text: 'How confident do you feel managing your business finances?',
+      options: {
+        a: 'No control - I have no clear visibility',
+        b: 'Basic oversight - I check occasionally',
+        c: 'Constant monitoring - I have everything under control',
+      },
+    },
+    'OPS-PRE-1': {
+      text: 'What percentage of your week involves repetitive manual work?',
+      options: {
+        a: 'More than 60% - Most is repetitive',
+        b: '30-60% - A good portion',
+        c: 'Less than 30% - Very little',
+      },
+    },
+    'MKT-PRE-1': {
+      text: 'How effective is your digital visibility for attracting customers?',
+      options: {
+        a: 'Minimal - We barely have any presence',
+        b: 'Unstructured - We post without strategy',
+        c: 'Strategic - We have a defined plan',
+      },
+    },
+    'fin-b-1': {
+      text: 'How often do you review your business financial numbers?',
+      options: {
+        a: 'Annually or never',
+        b: 'Quarterly',
+        c: 'Monthly',
+        d: 'Weekly',
+        e: 'Daily with automated reports',
+      },
+    },
+    'fin-b-2': {
+      text: 'Do you know the profit margin of your products or services?',
+      options: {
+        a: "I don't know",
+        b: 'I have a general idea',
+        c: 'I know the main products',
+        d: 'I have the complete catalog documented',
+      },
+    },
+    'fin-b-3': {
+      text: 'How do you handle personal accounts vs. business accounts?',
+      options: {
+        a: 'They are mixed',
+        b: 'Partially separated',
+        c: 'Completely separated with different accounts',
+      },
+    },
+    'fin-b-4': {
+      text: 'How many months of operating expenses do you have in reserve?',
+      options: {
+        a: 'Less than 1 month',
+        b: '1-3 months',
+        c: '3-6 months',
+        d: '6-12 months',
+        e: 'More than 12 months',
+      },
+    },
+    'fin-b-5': {
+      text: 'What tools do you use to manage your finances?',
+      options: {
+        a: 'Paper and notebook',
+        b: 'Basic spreadsheets (Excel/Sheets)',
+        c: 'Accounting software (QuickBooks, Wave)',
+        d: 'Integrated ERP with automatic reports',
+      },
+    },
+    'ops-b-1': {
+      text: 'How many hours per week do you spend on repetitive tasks?',
+      options: {
+        a: 'More than 20 hours',
+        b: '10-20 hours',
+        c: '5-10 hours',
+        d: '2-5 hours',
+        e: '0-2 hours (almost everything automated)',
+      },
+    },
+    'ops-b-2': {
+      text: 'How do you manage client appointments and reservations?',
+      options: {
+        a: 'Manually by phone/WhatsApp',
+        b: 'Basic calendar (Google Calendar)',
+        c: 'Online booking system',
+        d: 'Automated system with reminders',
+      },
+    },
+    'ops-b-3': {
+      text: 'What level of documentation do your processes have?',
+      options: {
+        a: "None - It's all in my head",
+        b: 'Basic written notes',
+        c: 'Formal written manuals',
+        d: 'Digital documentation with videos',
+      },
+    },
+    'ops-b-4': {
+      text: 'How do you control your inventory or resources?',
+      options: {
+        a: 'From memory',
+        b: 'Manual list or basic Excel',
+        c: 'Digital inventory system',
+        d: 'Automated system with alerts',
+      },
+    },
+    'ops-b-5': {
+      text: 'How long does it take you to generate a results report?',
+      options: {
+        a: 'A full day or more',
+        b: 'Several hours',
+        c: 'Less than an hour',
+        d: 'Instant (real-time dashboards)',
+      },
+    },
+    'mkt-b-1': {
+      text: 'How easy is it to find your business on Google?',
+      options: {
+        a: "We don't have a website",
+        b: "We have a website but it doesn't appear in searches",
+        c: 'We appear in some searches',
+        d: 'We are in the top results',
+      },
+    },
+    'mkt-b-2': {
+      text: 'How often do you post on social media?',
+      options: {
+        a: 'Never or almost never',
+        b: 'Occasionally (when we remember)',
+        c: 'Weekly with a calendar',
+        d: 'Daily with defined strategy',
+      },
+    },
+    'mkt-b-3': {
+      text: 'How well defined is your ideal customer?',
+      options: {
+        a: "I don't have it clear",
+        b: 'I have a general idea',
+        c: 'Basic documented profile',
+        d: 'Data-based buyer personas',
+      },
+    },
+    'mkt-b-4': {
+      text: 'How do you currently get new customers?',
+      options: {
+        a: 'Only through referrals',
+        b: 'Referrals + some social media',
+        c: 'Multiple channels (social, Google, email)',
+        d: 'Integrated omnichannel strategy',
+      },
+    },
+    'mkt-b-5': {
+      text: 'Do you measure the return on investment of your marketing?',
+      options: {
+        a: "I don't measure anything",
+        b: 'I have basic metrics (followers, likes)',
+        c: 'I measure conversions and sales',
+        d: 'Advanced attribution with ROI by channel',
+      },
+    },
+  },
 };

@@ -119,7 +119,9 @@ const QuestionCard: React.FC<{
   totalQuestions: number;
   ofText: string;
   keyQuestionText: string;
-}> = ({ question, selectedOptionId, onSelectOption, animatedValue, questionNumber, totalQuestions, ofText, keyQuestionText }) => {
+  translatedText: string;
+  translatedOptions: { [key: string]: string };
+}> = ({ question, selectedOptionId, onSelectOption, animatedValue, questionNumber, totalQuestions, ofText, keyQuestionText, translatedText, translatedOptions }) => {
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
     outputRange: [SCREEN_WIDTH, 0],
@@ -169,7 +171,7 @@ const QuestionCard: React.FC<{
 
         {/* Question Text */}
         <View style={styles.questionTextContainer}>
-          <Text style={styles.questionText}>{question.text}</Text>
+          <Text style={styles.questionText}>{translatedText}</Text>
           {question.category === 'CRITICAL' && (
             <View style={styles.criticalBadge}>
               <Ionicons name="star" size={14} color="#f59e0b" />
@@ -182,7 +184,9 @@ const QuestionCard: React.FC<{
         <View style={styles.optionsContainer}>
           {question.options.map((option, index) => {
             const isSelected = selectedOptionId === option.id;
-            const letters = ['A', 'B', 'C', 'D', 'E'];
+            const letters = ['a', 'b', 'c', 'd', 'e'];
+            const letterKey = letters[index];
+            const translatedLabel = translatedOptions[letterKey] || option.label;
 
             return (
               <TouchableOpacity
@@ -203,7 +207,7 @@ const QuestionCard: React.FC<{
                   ]}
                 >
                   <Text style={[styles.optionLetterText, isSelected && styles.optionLetterTextSelected]}>
-                    {letters[index]}
+                    {letterKey.toUpperCase()}
                   </Text>
                 </View>
 
@@ -214,7 +218,7 @@ const QuestionCard: React.FC<{
                     isSelected && { color: dimensionColor, fontWeight: '600' },
                   ]}
                 >
-                  {option.label}
+                  {translatedLabel}
                 </Text>
 
                 {/* Selection checkmark */}
@@ -262,6 +266,21 @@ export const DiagnosticWizardScreen: React.FC = () => {
   // Get dimension label
   const getDimensionLabel = (dimension: string) => {
     return t.dimensions[dimension as keyof typeof t.dimensions] || dimension;
+  };
+
+  // Get translated question text and options
+  const getTranslatedQuestion = (questionId: string) => {
+    const questionTranslations = t.questions as Record<string, { text: string; options: Record<string, string> }>;
+    const translated = questionTranslations[questionId];
+    if (translated) {
+      return translated;
+    }
+    // Fallback to original question
+    const originalQuestion = ALL_QUESTIONS.find(q => q.id === questionId);
+    return {
+      text: originalQuestion?.text || '',
+      options: {} as Record<string, string>,
+    };
   };
 
   // Handle back button
@@ -447,6 +466,8 @@ export const DiagnosticWizardScreen: React.FC = () => {
           totalQuestions={totalQuestions}
           ofText={t.wizard.of}
           keyQuestionText={t.wizard.keyQuestion}
+          translatedText={getTranslatedQuestion(currentQuestion.id).text}
+          translatedOptions={getTranslatedQuestion(currentQuestion.id).options}
         />
       </View>
 
