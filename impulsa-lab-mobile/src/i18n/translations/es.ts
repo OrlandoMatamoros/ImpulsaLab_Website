@@ -99,6 +99,24 @@ export const es = {
       industryAverage: 'Promedio industria',
     },
     vsIndustry: 'vs industria',
+    // AI Roadmap
+    aiRoadmap: {
+      loadingAI: 'Generando recomendaciones personalizadas...',
+      primaryRecommendation: 'Recomendación Principal',
+      why: '¿Por qué es importante?',
+      expectedImpact: 'Impacto Esperado',
+      actionPlan: 'Plan de Acción',
+      tools: 'Herramientas Recomendadas',
+      quickWin: 'Acción Inmediata',
+      timeline: 'Tiempo Estimado',
+      roadmap90Days: 'Tu Hoja de Ruta - 90 Días',
+      focus: 'Enfoque',
+      keyActions: 'Acciones Clave',
+      expectedOutcome: 'Resultado Esperado',
+      successMetrics: 'Métricas de Éxito',
+      warningTitle: 'Atención',
+      byDimension: 'Por Dimensión',
+    },
   },
 
   // Dimensions

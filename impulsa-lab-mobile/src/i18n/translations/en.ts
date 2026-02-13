@@ -101,6 +101,24 @@ export const en: TranslationKeys = {
       industryAverage: 'Industry average',
     },
     vsIndustry: 'vs industry',
+    // AI Roadmap
+    aiRoadmap: {
+      loadingAI: 'Generating personalized recommendations...',
+      primaryRecommendation: 'Primary Recommendation',
+      why: 'Why is it important?',
+      expectedImpact: 'Expected Impact',
+      actionPlan: 'Action Plan',
+      tools: 'Recommended Tools',
+      quickWin: 'Quick Win',
+      timeline: 'Estimated Timeline',
+      roadmap90Days: 'Your Roadmap - 90 Days',
+      focus: 'Focus',
+      keyActions: 'Key Actions',
+      expectedOutcome: 'Expected Outcome',
+      successMetrics: 'Success Metrics',
+      warningTitle: 'Attention',
+      byDimension: 'By Dimension',
+    },
   },
 
   // Dimensions

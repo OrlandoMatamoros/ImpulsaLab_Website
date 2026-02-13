@@ -2,7 +2,7 @@
 // IMPULSA LAB - RESULTS DASHBOARD SCREEN (Screen 3)
 // ============================================
 
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -13,6 +13,7 @@ import {
   Alert,
   Dimensions,
   StyleSheet,
+  ActivityIndicator,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -26,6 +27,11 @@ import { getCompanySizeByEmployees } from '../constants/company-size';
 import { RootStackParamList } from '../navigation/types';
 import { useLanguage } from '../i18n';
 import { LanguageSelector } from '../components';
+import {
+  generateAIRecommendations,
+  getFallbackRecommendations,
+  AIRecommendations,
+} from '../services/gemini';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -271,12 +277,53 @@ const ScoreCard: React.FC<{
 export const ResultsScreen: React.FC = () => {
   const navigation = useNavigation<NavigationProp>();
   const result = useDiagnosticStore(state => state.result);
+  const answers = useDiagnosticStore(state => state.answers);
   const resetDiagnostic = useDiagnosticStore(state => state.resetDiagnostic);
   const { t, language } = useLanguage();
+
+  // AI Recommendations state
+  const [aiRecommendations, setAiRecommendations] = useState<AIRecommendations | null>(null);
+  const [isLoadingAI, setIsLoadingAI] = useState(true);
 
   // Animation
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const slideAnim = useRef(new Animated.Value(50)).current;
+
+  // Fetch AI recommendations on mount
+  useEffect(() => {
+    const fetchAIRecommendations = async () => {
+      if (!result) return;
+
+      setIsLoadingAI(true);
+      try {
+        const aiRecs = await generateAIRecommendations(
+          result.scores,
+          result.leadData,
+          answers,
+          language
+        );
+
+        if (aiRecs) {
+          setAiRecommendations(aiRecs);
+        } else {
+          // Use fallback if AI fails
+          const fallback = getFallbackRecommendations(result.scores, language);
+          setAiRecommendations(fallback);
+        }
+      } catch (error) {
+        console.error('Error fetching AI recommendations:', error);
+        // Use fallback on error
+        if (result) {
+          const fallback = getFallbackRecommendations(result.scores, language);
+          setAiRecommendations(fallback);
+        }
+      } finally {
+        setIsLoadingAI(false);
+      }
+    };
+
+    fetchAIRecommendations();
+  }, [result, answers, language]);
 
   useEffect(() => {
     Animated.parallel([
@@ -358,6 +405,58 @@ export const ResultsScreen: React.FC = () => {
   // Generate PDF
   const generatePDF = async () => {
     try {
+      // Build AI recommendations HTML if available
+      const aiRecsHtml = aiRecommendations ? `
+        <div class="primary-rec">
+          <h3 style="color: #f59e0b;">★ ${t.results.aiRoadmap.primaryRecommendation}</h3>
+          <h4>${aiRecommendations.primaryRecommendation.title}</h4>
+          <p><strong>${t.results.aiRoadmap.why}</strong><br/>${aiRecommendations.primaryRecommendation.why}</p>
+          <p><strong>${t.results.aiRoadmap.expectedImpact}:</strong> ${aiRecommendations.primaryRecommendation.impact}</p>
+          <p><strong>${t.results.aiRoadmap.actionPlan}:</strong></p>
+          <ul>
+            ${aiRecommendations.primaryRecommendation.actions.map(a => `<li>${a}</li>`).join('')}
+          </ul>
+          <p><strong>${t.results.aiRoadmap.quickWin}:</strong> ${aiRecommendations.primaryRecommendation.quickWin}</p>
+        </div>
+
+        <h3 style="margin-top: 30px;">${t.results.aiRoadmap.roadmap90Days}</h3>
+        ${aiRecommendations.roadmap90Days.map((phase, idx) => `
+          <div class="phase" style="background: ${idx === 0 ? '#dbeafe' : idx === 1 ? '#fef3c7' : '#dcfce7'}; padding: 15px; margin: 10px 0; border-radius: 8px;">
+            <strong>${phase.phase}: ${phase.focus}</strong>
+            <ul>
+              ${phase.keyActions.map(a => `<li>${a}</li>`).join('')}
+            </ul>
+            <p><em>${t.results.aiRoadmap.expectedOutcome}: ${phase.expectedOutcome}</em></p>
+          </div>
+        `).join('')}
+
+        <h3 style="margin-top: 30px;">${t.results.aiRoadmap.byDimension}</h3>
+        <div style="border-left: 4px solid #10b981; padding-left: 15px; margin: 10px 0;">
+          <strong>${t.dimensions.finance}:</strong> ${aiRecommendations.secondaryRecommendations.finance.title}<br/>
+          <span>${aiRecommendations.secondaryRecommendations.finance.action}</span>
+        </div>
+        <div style="border-left: 4px solid #8b5cf6; padding-left: 15px; margin: 10px 0;">
+          <strong>${t.dimensions.operations}:</strong> ${aiRecommendations.secondaryRecommendations.operations.title}<br/>
+          <span>${aiRecommendations.secondaryRecommendations.operations.action}</span>
+        </div>
+        <div style="border-left: 4px solid #f59e0b; padding-left: 15px; margin: 10px 0;">
+          <strong>${t.dimensions.marketing}:</strong> ${aiRecommendations.secondaryRecommendations.marketing.title}<br/>
+          <span>${aiRecommendations.secondaryRecommendations.marketing.action}</span>
+        </div>
+
+        <h3 style="margin-top: 30px;">${t.results.aiRoadmap.successMetrics}</h3>
+        <ul>
+          ${aiRecommendations.successMetrics.map(m => `<li>✓ ${m}</li>`).join('')}
+        </ul>
+      ` : `
+        <div class="recommendations">
+          <h3>${t.results.recommendations}</h3>
+          ${companySizeConfig.recommendations.map(rec => `
+            <div class="recommendation-item">✓ ${rec}</div>
+          `).join('')}
+        </div>
+      `;
+
       const html = `
         <!DOCTYPE html>
         <html>
@@ -373,6 +472,10 @@ export const ResultsScreen: React.FC = () => {
             .maturity { padding: 15px; border-radius: 10px; margin: 20px 0; }
             .recommendations { margin-top: 30px; }
             .recommendation-item { padding: 10px; margin: 5px 0; background: #fef3c7; border-radius: 5px; }
+            .primary-rec { background: #fffbeb; border: 2px solid #f59e0b; border-radius: 12px; padding: 20px; margin: 20px 0; }
+            .phase { page-break-inside: avoid; }
+            ul { margin: 10px 0; padding-left: 20px; }
+            li { margin: 5px 0; }
           </style>
         </head>
         <body>
@@ -395,24 +498,19 @@ export const ResultsScreen: React.FC = () => {
 
           <h3>${t.results.dimensionDetail}</h3>
           <div class="dimension">
-            <span>💰 ${t.dimensions.finance}</span>
+            <span>${t.dimensions.finance}</span>
             <strong>${scores.finance}</strong>
           </div>
           <div class="dimension">
-            <span>⚙️ ${t.dimensions.operations}</span>
+            <span>${t.dimensions.operations}</span>
             <strong>${scores.operations}</strong>
           </div>
           <div class="dimension">
-            <span>📣 ${t.dimensions.marketing}</span>
+            <span>${t.dimensions.marketing}</span>
             <strong>${scores.marketing}</strong>
           </div>
 
-          <div class="recommendations">
-            <h3>${t.results.recommendations}</h3>
-            ${companySizeConfig.recommendations.map(rec => `
-              <div class="recommendation-item">✓ ${rec}</div>
-            `).join('')}
-          </div>
+          ${aiRecsHtml}
 
           <p style="margin-top: 40px; text-align: center; color: #9ca3af; font-size: 12px;">
             ${new Date().toLocaleDateString(language === 'es' ? 'es-MX' : 'en-US')}
@@ -551,20 +649,196 @@ export const ResultsScreen: React.FC = () => {
           />
         </View>
 
-        {/* Recommendations */}
+        {/* AI Recommendations */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>{t.results.recommendations}</Text>
 
-          <View style={styles.recommendationsCard}>
-            {companySizeConfig.recommendations.map((rec, index) => (
-              <View key={index} style={styles.recommendationItem}>
-                <View style={styles.recommendationNumber}>
-                  <Text style={styles.recommendationNumberText}>{index + 1}</Text>
+          {isLoadingAI ? (
+            <View style={styles.loadingCard}>
+              <ActivityIndicator size="large" color="#2563eb" />
+              <Text style={styles.loadingText}>{t.results.aiRoadmap.loadingAI}</Text>
+            </View>
+          ) : aiRecommendations ? (
+            <>
+              {/* Warning Message if present */}
+              {aiRecommendations.warningMessage && (
+                <View style={styles.warningCard}>
+                  <View style={styles.warningHeader}>
+                    <Ionicons name="warning-outline" size={24} color="#dc2626" />
+                    <Text style={styles.warningTitle}>{t.results.aiRoadmap.warningTitle}</Text>
+                  </View>
+                  <Text style={styles.warningText}>{aiRecommendations.warningMessage}</Text>
                 </View>
-                <Text style={styles.recommendationText}>{rec}</Text>
+              )}
+
+              {/* Primary Recommendation */}
+              <View style={styles.primaryRecommendationCard}>
+                <View style={styles.primaryHeader}>
+                  <Ionicons name="star" size={24} color="#f59e0b" />
+                  <Text style={styles.primaryTitle}>{t.results.aiRoadmap.primaryRecommendation}</Text>
+                </View>
+                <Text style={styles.primaryRecommendationTitle}>
+                  {aiRecommendations.primaryRecommendation.title}
+                </Text>
+
+                <View style={styles.primarySection}>
+                  <Text style={styles.primarySectionLabel}>{t.results.aiRoadmap.why}</Text>
+                  <Text style={styles.primarySectionText}>
+                    {aiRecommendations.primaryRecommendation.why}
+                  </Text>
+                </View>
+
+                <View style={styles.primarySection}>
+                  <Text style={styles.primarySectionLabel}>{t.results.aiRoadmap.expectedImpact}</Text>
+                  <Text style={styles.primarySectionText}>
+                    {aiRecommendations.primaryRecommendation.impact}
+                  </Text>
+                </View>
+
+                <View style={styles.primarySection}>
+                  <Text style={styles.primarySectionLabel}>{t.results.aiRoadmap.actionPlan}</Text>
+                  {aiRecommendations.primaryRecommendation.actions.map((action, idx) => (
+                    <View key={idx} style={styles.actionItem}>
+                      <View style={styles.actionBullet} />
+                      <Text style={styles.actionText}>{action}</Text>
+                    </View>
+                  ))}
+                </View>
+
+                <View style={styles.primarySection}>
+                  <Text style={styles.primarySectionLabel}>{t.results.aiRoadmap.tools}</Text>
+                  <View style={styles.toolsContainer}>
+                    {aiRecommendations.primaryRecommendation.tools.map((tool, idx) => (
+                      <View key={idx} style={styles.toolChip}>
+                        <Text style={styles.toolChipText}>{tool}</Text>
+                      </View>
+                    ))}
+                  </View>
+                </View>
+
+                <View style={styles.quickWinBox}>
+                  <View style={styles.quickWinHeader}>
+                    <Ionicons name="flash" size={18} color="#22c55e" />
+                    <Text style={styles.quickWinLabel}>{t.results.aiRoadmap.quickWin}</Text>
+                  </View>
+                  <Text style={styles.quickWinText}>
+                    {aiRecommendations.primaryRecommendation.quickWin}
+                  </Text>
+                </View>
+
+                <View style={styles.timelineBox}>
+                  <Ionicons name="time-outline" size={16} color="#6b7280" />
+                  <Text style={styles.timelineText}>
+                    {t.results.aiRoadmap.timeline}: {aiRecommendations.primaryRecommendation.timeline}
+                  </Text>
+                </View>
               </View>
-            ))}
-          </View>
+
+              {/* 90 Day Roadmap */}
+              <View style={styles.roadmapSection}>
+                <Text style={styles.roadmapTitle}>{t.results.aiRoadmap.roadmap90Days}</Text>
+                {aiRecommendations.roadmap90Days.map((phase, idx) => (
+                  <View key={idx} style={styles.phaseCard}>
+                    <View style={[styles.phaseHeader, { backgroundColor: idx === 0 ? '#dbeafe' : idx === 1 ? '#fef3c7' : '#dcfce7' }]}>
+                      <Text style={styles.phaseLabel}>{phase.phase}</Text>
+                    </View>
+                    <View style={styles.phaseContent}>
+                      <Text style={styles.phaseFocus}>{phase.focus}</Text>
+                      <Text style={styles.phaseSubtitle}>{t.results.aiRoadmap.keyActions}:</Text>
+                      {phase.keyActions.map((action, actionIdx) => (
+                        <View key={actionIdx} style={styles.phaseActionItem}>
+                          <Text style={styles.phaseActionBullet}>•</Text>
+                          <Text style={styles.phaseActionText}>{action}</Text>
+                        </View>
+                      ))}
+                      <View style={styles.phaseOutcome}>
+                        <Text style={styles.phaseOutcomeLabel}>{t.results.aiRoadmap.expectedOutcome}:</Text>
+                        <Text style={styles.phaseOutcomeText}>{phase.expectedOutcome}</Text>
+                      </View>
+                    </View>
+                  </View>
+                ))}
+              </View>
+
+              {/* Secondary Recommendations by Dimension */}
+              <View style={styles.secondarySection}>
+                <Text style={styles.secondaryTitle}>{t.results.aiRoadmap.byDimension}</Text>
+
+                {/* Finance */}
+                <View style={[styles.dimensionCard, { borderLeftColor: '#10b981' }]}>
+                  <View style={styles.dimensionHeader}>
+                    <Ionicons name="wallet-outline" size={20} color="#10b981" />
+                    <Text style={styles.dimensionLabel}>{t.dimensions.finance}</Text>
+                  </View>
+                  <Text style={styles.dimensionTitle}>
+                    {aiRecommendations.secondaryRecommendations.finance.title}
+                  </Text>
+                  <Text style={styles.dimensionAction}>
+                    {aiRecommendations.secondaryRecommendations.finance.action}
+                  </Text>
+                  <Text style={styles.dimensionImpact}>
+                    {aiRecommendations.secondaryRecommendations.finance.impact}
+                  </Text>
+                </View>
+
+                {/* Operations */}
+                <View style={[styles.dimensionCard, { borderLeftColor: '#8b5cf6' }]}>
+                  <View style={styles.dimensionHeader}>
+                    <Ionicons name="cog-outline" size={20} color="#8b5cf6" />
+                    <Text style={styles.dimensionLabel}>{t.dimensions.operations}</Text>
+                  </View>
+                  <Text style={styles.dimensionTitle}>
+                    {aiRecommendations.secondaryRecommendations.operations.title}
+                  </Text>
+                  <Text style={styles.dimensionAction}>
+                    {aiRecommendations.secondaryRecommendations.operations.action}
+                  </Text>
+                  <Text style={styles.dimensionImpact}>
+                    {aiRecommendations.secondaryRecommendations.operations.impact}
+                  </Text>
+                </View>
+
+                {/* Marketing */}
+                <View style={[styles.dimensionCard, { borderLeftColor: '#f59e0b' }]}>
+                  <View style={styles.dimensionHeader}>
+                    <Ionicons name="megaphone-outline" size={20} color="#f59e0b" />
+                    <Text style={styles.dimensionLabel}>{t.dimensions.marketing}</Text>
+                  </View>
+                  <Text style={styles.dimensionTitle}>
+                    {aiRecommendations.secondaryRecommendations.marketing.title}
+                  </Text>
+                  <Text style={styles.dimensionAction}>
+                    {aiRecommendations.secondaryRecommendations.marketing.action}
+                  </Text>
+                  <Text style={styles.dimensionImpact}>
+                    {aiRecommendations.secondaryRecommendations.marketing.impact}
+                  </Text>
+                </View>
+              </View>
+
+              {/* Success Metrics */}
+              <View style={styles.metricsCard}>
+                <Text style={styles.metricsTitle}>{t.results.aiRoadmap.successMetrics}</Text>
+                {aiRecommendations.successMetrics.map((metric, idx) => (
+                  <View key={idx} style={styles.metricItem}>
+                    <Ionicons name="checkmark-circle" size={18} color="#22c55e" />
+                    <Text style={styles.metricText}>{metric}</Text>
+                  </View>
+                ))}
+              </View>
+            </>
+          ) : (
+            <View style={styles.recommendationsCard}>
+              {companySizeConfig.recommendations.map((rec, index) => (
+                <View key={index} style={styles.recommendationItem}>
+                  <View style={styles.recommendationNumber}>
+                    <Text style={styles.recommendationNumberText}>{index + 1}</Text>
+                  </View>
+                  <Text style={styles.recommendationText}>{rec}</Text>
+                </View>
+              ))}
+            </View>
+          )}
         </View>
 
         {/* Action Buttons */}
@@ -837,6 +1111,315 @@ const styles = StyleSheet.create({
     color: '#374151',
     fontSize: 14,
     lineHeight: 20,
+  },
+  // AI Recommendations Styles
+  loadingCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    padding: 32,
+    alignItems: 'center',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.05,
+    shadowRadius: 8,
+    elevation: 2,
+  },
+  loadingText: {
+    marginTop: 12,
+    color: '#6b7280',
+    fontSize: 14,
+  },
+  warningCard: {
+    backgroundColor: '#fef2f2',
+    borderRadius: 16,
+    padding: 16,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: '#fecaca',
+  },
+  warningHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  warningTitle: {
+    color: '#dc2626',
+    fontWeight: 'bold',
+    fontSize: 16,
+    marginLeft: 8,
+  },
+  warningText: {
+    color: '#7f1d1d',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  primaryRecommendationCard: {
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 20,
+    marginBottom: 16,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.08,
+    shadowRadius: 12,
+    elevation: 3,
+  },
+  primaryHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  primaryTitle: {
+    color: '#f59e0b',
+    fontWeight: 'bold',
+    fontSize: 14,
+    marginLeft: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  primaryRecommendationTitle: {
+    color: '#111827',
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
+  },
+  primarySection: {
+    marginBottom: 16,
+  },
+  primarySectionLabel: {
+    color: '#6b7280',
+    fontSize: 12,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 6,
+  },
+  primarySectionText: {
+    color: '#374151',
+    fontSize: 15,
+    lineHeight: 22,
+  },
+  actionItem: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginTop: 6,
+  },
+  actionBullet: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: '#3b82f6',
+    marginTop: 7,
+    marginRight: 10,
+  },
+  actionText: {
+    flex: 1,
+    color: '#374151',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  toolsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+    marginTop: 4,
+  },
+  toolChip: {
+    backgroundColor: '#eff6ff',
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 20,
+  },
+  toolChipText: {
+    color: '#1d4ed8',
+    fontSize: 13,
+    fontWeight: '500',
+  },
+  quickWinBox: {
+    backgroundColor: '#f0fdf4',
+    borderRadius: 12,
+    padding: 14,
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: '#bbf7d0',
+  },
+  quickWinHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 6,
+  },
+  quickWinLabel: {
+    color: '#15803d',
+    fontWeight: '600',
+    fontSize: 13,
+    marginLeft: 6,
+  },
+  quickWinText: {
+    color: '#166534',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  timelineBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#f3f4f6',
+  },
+  timelineText: {
+    color: '#6b7280',
+    fontSize: 13,
+    marginLeft: 6,
+  },
+  roadmapSection: {
+    marginBottom: 16,
+  },
+  roadmapTitle: {
+    color: '#111827',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  phaseCard: {
+    backgroundColor: 'white',
+    borderRadius: 16,
+    overflow: 'hidden',
+    marginBottom: 12,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  phaseHeader: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  phaseLabel: {
+    color: '#1f2937',
+    fontWeight: 'bold',
+    fontSize: 14,
+  },
+  phaseContent: {
+    padding: 16,
+  },
+  phaseFocus: {
+    color: '#111827',
+    fontSize: 16,
+    fontWeight: '600',
+    marginBottom: 12,
+  },
+  phaseSubtitle: {
+    color: '#6b7280',
+    fontSize: 12,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    marginBottom: 6,
+  },
+  phaseActionItem: {
+    flexDirection: 'row',
+    marginBottom: 4,
+  },
+  phaseActionBullet: {
+    color: '#9ca3af',
+    marginRight: 8,
+  },
+  phaseActionText: {
+    flex: 1,
+    color: '#374151',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  phaseOutcome: {
+    marginTop: 12,
+    paddingTop: 12,
+    borderTopWidth: 1,
+    borderTopColor: '#f3f4f6',
+  },
+  phaseOutcomeLabel: {
+    color: '#6b7280',
+    fontSize: 12,
+    fontWeight: '500',
+    marginBottom: 4,
+  },
+  phaseOutcomeText: {
+    color: '#059669',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  secondarySection: {
+    marginBottom: 16,
+  },
+  secondaryTitle: {
+    color: '#111827',
+    fontSize: 16,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  dimensionCard: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 10,
+    borderLeftWidth: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 1,
+  },
+  dimensionHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  dimensionLabel: {
+    color: '#6b7280',
+    fontSize: 12,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    marginLeft: 8,
+  },
+  dimensionTitle: {
+    color: '#111827',
+    fontSize: 15,
+    fontWeight: '600',
+    marginBottom: 6,
+  },
+  dimensionAction: {
+    color: '#374151',
+    fontSize: 14,
+    marginBottom: 6,
+  },
+  dimensionImpact: {
+    color: '#059669',
+    fontSize: 13,
+    fontStyle: 'italic',
+  },
+  metricsCard: {
+    backgroundColor: '#fefce8',
+    borderRadius: 16,
+    padding: 16,
+    borderWidth: 1,
+    borderColor: '#fef08a',
+  },
+  metricsTitle: {
+    color: '#854d0e',
+    fontSize: 14,
+    fontWeight: 'bold',
+    marginBottom: 12,
+  },
+  metricItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 8,
+  },
+  metricText: {
+    color: '#713f12',
+    fontSize: 14,
+    marginLeft: 8,
+    flex: 1,
   },
   actionsSection: {
     paddingHorizontal: 24,
