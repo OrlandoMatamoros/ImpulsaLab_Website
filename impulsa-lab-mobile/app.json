@@ -1,0 +1,25 @@
+{
+  "expo": {
+    "name": "Impulsa Lab Diagnóstico",
+    "slug": "impulsa-lab-diagnostico",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "impulsalab",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#1e40af"
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.impulsalab.diagnostico"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#1e40af"
+      },
+      "package": "com.impulsalab.diagnostico"
+    }
+  }
+}
