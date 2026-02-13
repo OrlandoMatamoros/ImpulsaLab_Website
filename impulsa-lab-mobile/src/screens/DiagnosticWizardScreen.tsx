@@ -33,6 +33,7 @@ import {
 import { saveCompleteDiagnostic } from '../services/firebase';
 import { RootStackParamList } from '../navigation/types';
 import { useLanguage } from '../i18n';
+import { LanguageSelector } from '../components';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -443,9 +444,12 @@ export const DiagnosticWizardScreen: React.FC = () => {
             label={getDimensionLabel(currentQuestion.dimension)}
           />
 
-          <Text style={styles.questionCounter}>
-            {currentIndex + 1} / {totalQuestions}
-          </Text>
+          <View style={styles.headerRight}>
+            <LanguageSelector compact />
+            <Text style={styles.questionCounter}>
+              {currentIndex + 1} / {totalQuestions}
+            </Text>
+          </View>
         </View>
 
         {/* Progress bar */}
@@ -551,6 +555,11 @@ const styles = StyleSheet.create({
   closeButton: {
     padding: 8,
     marginLeft: -8,
+  },
+  headerRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
   },
   questionCounter: {
     color: '#6b7280',

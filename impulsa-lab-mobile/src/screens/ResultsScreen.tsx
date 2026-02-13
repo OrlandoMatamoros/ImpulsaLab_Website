@@ -25,6 +25,7 @@ import { useDiagnosticStore } from '../store/diagnosticStore';
 import { getCompanySizeByEmployees } from '../constants/company-size';
 import { RootStackParamList } from '../navigation/types';
 import { useLanguage } from '../i18n';
+import { LanguageSelector } from '../components';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -478,6 +479,10 @@ export const ResultsScreen: React.FC = () => {
       >
         {/* Header */}
         <View style={styles.header}>
+          <View style={styles.headerTop}>
+            <View style={styles.headerPlaceholder} />
+            <LanguageSelector compact style={styles.languageSelectorHeader} />
+          </View>
           <Text style={styles.headerSubtitle}>{t.results.completed}</Text>
           <Text style={styles.headerTitle}>{leadData.companyName}</Text>
 
@@ -618,10 +623,22 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#2563eb',
     paddingHorizontal: 24,
-    paddingTop: 64,
+    paddingTop: 48,
     paddingBottom: 32,
     borderBottomLeftRadius: 32,
     borderBottomRightRadius: 32,
+  },
+  headerTop: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 16,
+  },
+  headerPlaceholder: {
+    width: 60,
+  },
+  languageSelectorHeader: {
+    backgroundColor: 'rgba(255,255,255,0.2)',
   },
   headerSubtitle: {
     color: 'rgba(255,255,255,0.8)',
