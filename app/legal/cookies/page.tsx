@@ -19,7 +19,7 @@ export default function CookiesPolicy() {
         <h1 className="text-4xl font-bold mb-4">{t.cookiesPage.titulo}</h1>
 
         <p className="text-gray-600 mb-8">
-          {t.cookiesPage.ultimaActualizacion} {new Date().toLocaleDateString(language === 'es' ? 'es-ES' : 'en-US', {
+          {t.cookiesPage.ultimaActualizacion} {new Date().toLocaleDateString(language === 'ES' ? 'es-ES' : 'en-US', {
             year: 'numeric',
             month: 'long',
             day: 'numeric'
