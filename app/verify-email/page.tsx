@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { auth } from '@/lib/firebase'
 import { onAuthStateChanged, sendEmailVerification } from 'firebase/auth'
 import { Mail, CheckCircle, AlertCircle, RefreshCw } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function VerifyEmailPage() {
   const [user, setUser] = useState<any>(null)
@@ -13,6 +14,8 @@ export default function VerifyEmailPage() {
   const [emailSent, setEmailSent] = useState(false)
   const [isVerified, setIsVerified] = useState(false)
   const router = useRouter()
+  const { t } = useLanguage()
+  const tp = t.verifyEmailPage
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -59,7 +62,7 @@ export default function VerifyEmailPage() {
       setTimeout(() => setEmailSent(false), 5000)
     } catch (error) {
       console.error('Error enviando email:', error)
-      alert('Error al enviar el email. Por favor intenta más tarde.')
+      alert(tp.errorEnviarEmail)
     } finally {
       setSending(false)
     }
@@ -74,7 +77,7 @@ export default function VerifyEmailPage() {
           router.push('/diagnostico')
         }, 1000)
       } else {
-        alert('Tu email aún no ha sido verificado. Por favor revisa tu bandeja de entrada.')
+        alert(tp.emailNoVerificado)
       }
     }
   }
@@ -95,13 +98,13 @@ export default function VerifyEmailPage() {
             <CheckCircle className="h-10 w-10 text-green-600" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            ¡Email Verificado!
+            {tp.emailVerificado}
           </h1>
           <p className="text-gray-600 mb-6">
-            Tu cuenta ha sido verificada exitosamente. Redirigiendo...
+            {tp.cuentaVerificada}
           </p>
           <div className="animate-pulse text-blue-600">
-            Entrando a tu cuenta...
+            {tp.entrandoCuenta}
           </div>
         </div>
       </div>
@@ -117,11 +120,11 @@ export default function VerifyEmailPage() {
           </div>
           
           <h1 className="text-2xl font-bold text-gray-900 mb-4">
-            Verifica tu Email
+            {tp.verificaTuEmail}
           </h1>
           
           <p className="text-gray-600 mb-2">
-            Hemos enviado un email de verificación a:
+            {tp.hemosEnviadoEmail}
           </p>
           
           <p className="font-semibold text-gray-900 mb-6">
@@ -133,10 +136,10 @@ export default function VerifyEmailPage() {
               <AlertCircle className="h-5 w-5 text-amber-600 mt-0.5 mr-2 flex-shrink-0" />
               <div className="text-left">
                 <p className="text-sm text-amber-800">
-                  Por favor revisa tu bandeja de entrada y haz click en el enlace de verificación.
+                  {tp.revisaBandeja}
                 </p>
                 <p className="text-xs text-amber-600 mt-1">
-                  Si no ves el email, revisa tu carpeta de spam.
+                  {tp.revisaSpam}
                 </p>
               </div>
             </div>
@@ -145,7 +148,7 @@ export default function VerifyEmailPage() {
           {emailSent && (
             <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
               <p className="text-sm text-green-800">
-                ✅ Email reenviado exitosamente
+                {tp.emailReenviado}
               </p>
             </div>
           )}
@@ -156,7 +159,7 @@ export default function VerifyEmailPage() {
               className="w-full flex items-center justify-center px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               <RefreshCw className="h-5 w-5 mr-2" />
-              Ya verifiqué mi email
+              {tp.yaVerifique}
             </button>
             
             <button
@@ -167,12 +170,12 @@ export default function VerifyEmailPage() {
               {sending ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-gray-700 mr-2"></div>
-                  Enviando...
+                  {tp.enviando}
                 </>
               ) : (
                 <>
                   <Mail className="h-5 w-5 mr-2" />
-                  Reenviar email
+                  {tp.reenviarEmail}
                 </>
               )}
             </button>
@@ -184,7 +187,7 @@ export default function VerifyEmailPage() {
               }}
               className="w-full text-sm text-gray-500 hover:text-gray-700"
             >
-              Usar otro email
+              {tp.usarOtroEmail}
             </button>
           </div>
         </div>

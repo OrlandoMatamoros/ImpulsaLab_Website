@@ -7,6 +7,7 @@ import { onAuthStateChanged } from 'firebase/auth'
 import { doc, getDoc, updateDoc } from 'firebase/firestore'
 import { ArrowLeft, Save, User, Mail, Phone, Shield } from 'lucide-react'
 import Link from 'next/link'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function ConfiguracionPage() {
   const [user, setUser] = useState<any>(null)
@@ -19,6 +20,8 @@ export default function ConfiguracionPage() {
     phone: ''
   })
   const router = useRouter()
+  const { t } = useLanguage()
+  const tp = t.dashboardConfigPage
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
@@ -55,10 +58,10 @@ export default function ConfiguracionPage() {
         updatedAt: new Date()
       })
       
-      alert('Perfil actualizado exitosamente')
+      alert(tp.perfilActualizado)
     } catch (error) {
       console.error('Error actualizando perfil:', error)
-      alert('Error al actualizar el perfil')
+      alert(tp.errorActualizar)
     } finally {
       setSaving(false)
     }
@@ -82,7 +85,7 @@ export default function ConfiguracionPage() {
                 <ArrowLeft className="h-6 w-6 text-gray-600 hover:text-gray-900" />
               </Link>
               <h1 className="text-2xl font-bold text-gray-900">
-                Configuración de Cuenta
+                {tp.configuracionCuenta}
               </h1>
             </div>
           </div>
@@ -95,7 +98,7 @@ export default function ConfiguracionPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <User className="inline h-4 w-4 mr-1" />
-                Nombre Completo
+                {tp.nombreCompleto}
               </label>
               <input
                 type="text"
@@ -108,7 +111,7 @@ export default function ConfiguracionPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Mail className="inline h-4 w-4 mr-1" />
-                Email
+                {tp.emailLabel}
               </label>
               <input
                 type="email"
@@ -116,13 +119,13 @@ export default function ConfiguracionPage() {
                 disabled
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg bg-gray-100 cursor-not-allowed"
               />
-              <p className="text-xs text-gray-500 mt-1">El email no puede ser modificado</p>
+              <p className="text-xs text-gray-500 mt-1">{tp.emailNoModificable}</p>
             </div>
 
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Phone className="inline h-4 w-4 mr-1" />
-                Teléfono
+                {tp.telefonoLabel}
               </label>
               <input
                 type="tel"
@@ -135,7 +138,7 @@ export default function ConfiguracionPage() {
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 <Shield className="inline h-4 w-4 mr-1" />
-                Rol
+                {tp.rolLabel}
               </label>
               <input
                 type="text"
@@ -152,11 +155,11 @@ export default function ConfiguracionPage() {
                 className="flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 disabled:bg-gray-400"
               >
                 {saving ? (
-                  <>Guardando...</>
+                  <>{tp.guardando}</>
                 ) : (
                   <>
                     <Save className="h-5 w-5 mr-2" />
-                    Guardar Cambios
+                    {tp.guardarCambios}
                   </>
                 )}
               </button>

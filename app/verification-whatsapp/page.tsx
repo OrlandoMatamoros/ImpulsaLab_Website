@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { auth } from '@/lib/firebase';
 import { signInWithCustomToken } from 'firebase/auth';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function PhoneVerification() {
   const router = useRouter();
@@ -15,6 +16,8 @@ export default function PhoneVerification() {
   const [success, setSuccess] = useState('');
   const [userData, setUserData] = useState<any>(null);
   const [debugCode, setDebugCode] = useState('');
+  const { t } = useLanguage();
+  const tp = t.verificationWhatsappPage;
 
   useEffect(() => {
     const savedData = sessionStorage.getItem('verifiedEmailData');
@@ -41,15 +44,15 @@ export default function PhoneVerification() {
       
       if (data.success) {
         setStep('code');
-        setSuccess(`Code sent via ${data.channel === 'whatsapp' ? 'WhatsApp' : 'SMS'}. Check your messages.`);
+        setSuccess(tp.codeSentVia + (data.channel === 'whatsapp' ? 'WhatsApp' : 'SMS') + '. ' + tp.checkMessages);
         if (data.debugCode) {
           setDebugCode(data.debugCode);
         }
       } else {
-        setError(data.error || 'Error sending code');
+        setError(data.error || tp.errorSendingCode);
       }
     } catch (err) {
-      setError('Connection error. Please try again.');
+      setError(tp.connectionError);
     } finally {
       setLoading(false);
     }
@@ -61,7 +64,7 @@ export default function PhoneVerification() {
     
     try {
       if (code.length !== 6) {
-        setError('Please enter a 6-digit code');
+        setError(tp.enter6DigitCode);
         setLoading(false);
         return;
       }
@@ -80,7 +83,7 @@ export default function PhoneVerification() {
       const data = await response.json();
       
       if (data.success && data.customToken) {
-        setSuccess('✅ Account created successfully! Redirecting...');
+        setSuccess(tp.accountCreated);
         
         await signInWithCustomToken(auth, data.customToken);
         sessionStorage.clear();
@@ -95,12 +98,12 @@ export default function PhoneVerification() {
           }
         }, 1500);
       } else {
-        setError(data.error || 'Error creating account');
+        setError(data.error || tp.errorCreatingAccount);
       }
       
     } catch (err) {
       console.error('Error:', err);
-      setError('Error creating account. Please try again.');
+      setError(tp.errorCreatingAccountRetry);
     } finally {
       setLoading(false);
     }
@@ -111,24 +114,24 @@ export default function PhoneVerification() {
       <div className="max-w-md w-full space-y-6 bg-white p-8 rounded-xl shadow-lg">
         <div className="text-center">
           <h2 className="text-3xl font-bold text-gray-900">
-            Phone Verification
+            {tp.phoneVerification}
           </h2>
           <p className="mt-2 text-gray-600">
-            Final step: Verify your phone number
+            {tp.finalStep}
           </p>
         </div>
 
         {userData && (
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
             <p className="text-sm text-green-800">
-              ✅ Email verified: <strong>{userData.email}</strong>
+              {tp.emailVerified} <strong>{userData.email}</strong>
             </p>
           </div>
         )}
 
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
           <p className="text-sm text-blue-800">
-            📱 We'll send you a verification code via WhatsApp or SMS
+            {tp.sendCodeMessage}
           </p>
         </div>
 
@@ -148,7 +151,7 @@ export default function PhoneVerification() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Phone Number
+                {tp.phoneNumber}
               </label>
               <input
                 type="tel"
@@ -158,7 +161,7 @@ export default function PhoneVerification() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
               />
               <p className="mt-1 text-xs text-gray-500">
-                Include country code (e.g., +1 for USA)
+                {tp.includeCountryCode}
               </p>
             </div>
             <button
@@ -166,7 +169,7 @@ export default function PhoneVerification() {
               disabled={loading || !phone || phone.length < 10}
               className="w-full bg-purple-600 text-white py-3 rounded-lg font-medium hover:bg-purple-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? 'Sending...' : 'Send Verification Code'}
+              {loading ? tp.sending : tp.sendVerificationCode}
             </button>
           </div>
         )}
@@ -175,7 +178,7 @@ export default function PhoneVerification() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Enter Verification Code
+                {tp.enterVerificationCode}
               </label>
               <input
                 type="text"
@@ -186,7 +189,7 @@ export default function PhoneVerification() {
                 className="w-full px-4 py-4 text-center text-2xl font-mono tracking-widest border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
               />
               <p className="mt-2 text-xs text-gray-500 text-center">
-                Enter the 6-digit code sent to {phone}
+                {tp.enterCodeSentTo} {phone}
               </p>
             </div>
             
@@ -195,7 +198,7 @@ export default function PhoneVerification() {
               disabled={loading || code.length !== 6}
               className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? 'Creating account...' : 'Verify & Create Account'}
+              {loading ? tp.creatingAccount : tp.verifyAndCreate}
             </button>
             
             <button
@@ -207,7 +210,7 @@ export default function PhoneVerification() {
               }}
               className="w-full text-gray-600 py-2 text-sm hover:text-gray-800 transition-colors"
             >
-              ← Use a different number
+              {tp.useDifferentNumber}
             </button>
           </div>
         )}
