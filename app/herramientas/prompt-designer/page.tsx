@@ -27,7 +27,6 @@ interface PromptTemplate {
 
 interface TemplateCategory {
   name: string
-  icon: string
   templates: PromptTemplate[]
 }
 
@@ -37,86 +36,15 @@ interface HistoryItem extends FormData {
   timestamp: string
 }
 
-// Templates predefinidos por industria/caso de uso
-const promptTemplates: Record<string, TemplateCategory> = {
-  marketing: {
-    name: "Marketing Digital",
-    icon: "📱",
-    templates: [
-      {
-        id: "social-media",
-        name: "Contenido para Redes Sociales",
-        objective: "generar contenido viral y engagement para redes sociales",
-        context: "Marca: [NOMBRE]\nIndustria: [SECTOR]\nAudiencia objetivo: [EDAD, INTERESES, UBICACIÓN]\nVoz de marca: [CARACTERÍSTICAS]\nPlataformas: [FACEBOOK/INSTAGRAM/LINKEDIN/X]",
-        tone: "casual pero profesional, inclusivo, con emojis estratégicos",
-        constraints: "Límite de caracteres por plataforma, incluir hashtags relevantes, evitar controversias, cumplir con políticas de cada red social",
-        output: "5 publicaciones con variaciones, hashtags optimizados, sugerencias de horarios de publicación"
-      },
-      {
-        id: "email-campaign",
-        name: "Campaña de Email Marketing",
-        objective: "diseñar secuencia de emails de conversión",
-        context: "Producto/Servicio: [DESCRIPCIÓN]\nPunto de dolor del cliente: [PROBLEMA]\nPropuesta de valor: [SOLUCIÓN]\nFase del funnel: [AWARENESS/CONSIDERATION/DECISION]",
-        tone: "persuasivo sin ser agresivo, personalizado, orientado a beneficios",
-        constraints: "Subject line máximo 50 caracteres, preview text optimizado, móvil-first, incluir CTA claro, cumplir con CAN-SPAM",
-        output: "Secuencia de 3-5 emails, líneas de asunto A/B test, métricas a trackear"
-      }
-    ]
-  },
-  desarrollo: {
-    name: "Desarrollo de Software",
-    icon: "💻",
-    templates: [
-      {
-        id: "code-review",
-        name: "Revisión y Optimización de Código",
-        objective: "analizar, refactorizar y optimizar código existente",
-        context: "Lenguaje: [JAVASCRIPT/PYTHON/JAVA/etc]\nFramework: [REACT/DJANGO/SPRING/etc]\nTipo de aplicación: [WEB/MÓVIL/API]\nProblema actual: [PERFORMANCE/MANTENIBILIDAD/SEGURIDAD]",
-        tone: "técnico pero didáctico, constructivo, orientado a mejores prácticas",
-        constraints: "Mantener funcionalidad actual, seguir principios SOLID, optimizar para legibilidad y performance, incluir tests unitarios",
-        output: "Código refactorizado, explicación de cambios, métricas de mejora, sugerencias adicionales"
-      },
-      {
-        id: "api-design",
-        name: "Diseño de API REST",
-        objective: "diseñar API RESTful completa y documentada",
-        context: "Dominio: [E-COMMERCE/FINTECH/SAAS/etc]\nEntidades principales: [USUARIOS, PRODUCTOS, etc]\nAutenticación: [JWT/OAUTH/API-KEY]\nClientes esperados: [WEB/MÓVIL/TERCEROS]",
-        tone: "técnico preciso, siguiendo estándares de la industria",
-        constraints: "RESTful principles, versionado semántico, manejo de errores consistente, paginación, rate limiting",
-        output: "Endpoints documentados, schemas JSON, códigos de respuesta, ejemplos de uso, consideraciones de seguridad"
-      }
-    ]
-  },
-  educacion: {
-    name: "Educación y Formación",
-    icon: "🎓",
-    templates: [
-      {
-        id: "lesson-plan",
-        name: "Plan de Lección Interactivo",
-        objective: "desarrollar plan de clase completo con metodología activa",
-        context: "Materia: [ASIGNATURA]\nTema específico: [CONTENIDO]\nNivel educativo: [PRIMARIA/SECUNDARIA/UNIVERSITARIO]\nTamaño del grupo: [NÚMERO]\nRecursos disponibles: [TECNOLOGÍA/MATERIALES]",
-        tone: "educativo inspirador, claro, adaptado a la edad",
-        constraints: "Duración: [MINUTOS], incluir diversidad de estilos de aprendizaje, evaluación formativa, uso de tecnología",
-        output: "Objetivos SMART, secuencia didáctica minuto a minuto, materiales necesarios, rúbricas de evaluación, actividades diferenciadas"
-      }
-    ]
-  },
-  negocios: {
-    name: "Estrategia de Negocios",
-    icon: "📈",
-    templates: [
-      {
-        id: "business-plan",
-        name: "Plan de Negocios Ejecutivo",
-        objective: "crear plan de negocios integral para presentar a inversionistas",
-        context: "Empresa: [NOMBRE Y ETAPA]\nSector: [INDUSTRIA]\nModelo de negocio: [B2B/B2C/MARKETPLACE]\nMercado objetivo: [TAM/SAM/SOM]\nDiferenciador: [PROPUESTA ÚNICA]",
-        tone: "ejecutivo persuasivo, respaldado por datos, visionario pero realista",
-        constraints: "Máximo 15-20 páginas, incluir proyecciones a 3-5 años, análisis de competencia, métricas clave",
-        output: "Executive summary, análisis de mercado, estrategia go-to-market, proyecciones financieras, equipo, necesidades de inversión"
-      }
-    ]
-  }
+// Step icons (non-translatable config)
+const stepIcons = [Target, FileText, Palette, Shield, Package]
+
+// Template icons (non-translatable config)
+const templateIconMap: Record<string, string> = {
+  marketing: '📱',
+  desarrollo: '💻',
+  educacion: '🎓',
+  negocios: '📈',
 }
 
 // Componente para el historial de prompts
@@ -124,19 +52,21 @@ const PromptHistory = ({
   history,
   onSelect,
   onDelete,
-  onClose
+  onClose,
+  labels,
 }: {
   history: HistoryItem[],
   onSelect: (item: HistoryItem) => void,
   onDelete: (index: number) => void,
-  onClose: () => void
+  onClose: () => void,
+  labels: { title: string; empty: string },
 }) => {
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[80vh] overflow-hidden">
         <div className="p-6 border-b border-gray-100">
           <div className="flex items-center justify-between">
-            <h3 className="text-2xl font-bold text-gray-900">Historial de Prompts</h3>
+            <h3 className="text-2xl font-bold text-gray-900">{labels.title}</h3>
             <button
               onClick={onClose}
               className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -145,12 +75,12 @@ const PromptHistory = ({
             </button>
           </div>
         </div>
-        
+
         <div className="p-6 overflow-y-auto max-h-[60vh]">
           {history.length === 0 ? (
             <div className="text-center py-12">
               <Clock className="w-12 h-12 text-gray-300 mx-auto mb-4" />
-              <p className="text-gray-500">No hay prompts guardados aún</p>
+              <p className="text-gray-500">{labels.empty}</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -192,6 +122,9 @@ const PromptHistory = ({
 }
 
 export default function PromptDesigner() {
+  const { t } = useLanguage()
+  const tp = t.herramientasPromptPage
+
   const [currentStep, setCurrentStep] = useState(0)
   const [showHistory, setShowHistory] = useState(false)
   const [copied, setCopied] = useState(false)
@@ -199,7 +132,7 @@ export default function PromptDesigner() {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
   const [selectedTemplate, setSelectedTemplate] = useState<PromptTemplate | null>(null)
   const [promptHistory, setPromptHistory] = useState<HistoryItem[]>([])
-  
+
   // Estado del formulario
   const [formData, setFormData] = useState({
     objective: '',
@@ -217,72 +150,79 @@ export default function PromptDesigner() {
     }
   }, [])
 
-  const steps = [
-    { id: 'objective', title: 'Objetivo', icon: Target },
-    { id: 'context', title: 'Contexto', icon: FileText },
-    { id: 'tone', title: 'Tono y Estilo', icon: Palette },
-    { id: 'constraints', title: 'Restricciones', icon: Shield },
-    { id: 'output', title: 'Output', icon: Package }
-  ]
+  // Build steps from translations + icons config
+  const steps = tp.steps.map((step: { id: string; title: string }, i: number) => ({
+    ...step,
+    icon: stepIcons[i],
+  }))
+
+  // Build template categories from translations + icon config
+  const templateCategories = Object.entries(tp.templateCategories as Record<string, TemplateCategory>).map(
+    ([key, cat]) => ({
+      key,
+      icon: templateIconMap[key] || '📁',
+      name: cat.name,
+      templates: cat.templates,
+    })
+  )
 
   // Generar el prompt basado en los datos del formulario con formato estructurado
   const generatePrompt = () => {
+    const labels = tp.promptLabels
     const parts = []
-    
-    // Estructura principal con delimitadores
+
     parts.push(`<PROMPT>`)
-    
+
     if (formData.objective) {
-      parts.push(`\n<OBJETIVO>
+      parts.push(`\n<${labels.objetivo}>
 [${formData.objective}]
-</OBJETIVO>`)
+</${labels.objetivo}>`)
     }
-    
+
     if (formData.context) {
-      parts.push(`\n\n<CONTEXTO>
+      parts.push(`\n\n<${labels.contexto}>
 {
   ${formData.context.split('\n').join('\n  ')}
 }
-</CONTEXTO>`)
+</${labels.contexto}>`)
     }
-    
+
     if (formData.tone) {
-      parts.push(`\n\n<PARAMETROS>
-- Tono: (${formData.tone})
-- Formato: [Estructurado y profesional]
-- Audiencia: [Definida en contexto]
-</PARAMETROS>`)
+      parts.push(`\n\n<${labels.parametros}>
+- ${labels.tono}: (${formData.tone})
+- ${labels.formato}: [${labels.formatoValue}]
+- ${labels.audiencia}: [${labels.audienciaValue}]
+</${labels.parametros}>`)
     }
-    
+
     if (formData.constraints) {
-      parts.push(`\n\n<RESTRICCIONES>
-${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
-</RESTRICCIONES>`)
+      parts.push(`\n\n<${labels.restricciones}>
+${formData.constraints.split(',').map((c: string) => `- ${c.trim()}`).join('\n')}
+</${labels.restricciones}>`)
     }
-    
+
     if (formData.output) {
-      parts.push(`\n\n<OUTPUT_ESPERADO>
+      parts.push(`\n\n<${labels.outputEsperado}>
 {
-  "formato": "${formData.output}",
-  "estructura": "Clara y organizada",
-  "entregables": [
-    ${formData.output.split(',').map(item => `"${item.trim()}"`).join(',\n    ')}
+  "${labels.formatoLabel}": "${formData.output}",
+  "${labels.estructura}": "${labels.estructuraValue}",
+  "${labels.entregables}": [
+    ${formData.output.split(',').map((item: string) => `"${item.trim()}"`).join(',\n    ')}
   ]
 }
-</OUTPUT_ESPERADO>`)
+</${labels.outputEsperado}>`)
     }
-    
-    // Instrucciones finales
-    parts.push(`\n\n<INSTRUCCIONES_FINALES>
-1. Analiza cuidadosamente cada sección delimitada
-2. Mantén coherencia con los parámetros establecidos
-3. Genera contenido original y relevante
-4. Verifica que cumples todas las restricciones
-5. Entrega el resultado en el formato especificado
-</INSTRUCCIONES_FINALES>`)
-    
+
+    parts.push(`\n\n<${labels.instruccionesFinales}>
+${labels.instruccion1}
+${labels.instruccion2}
+${labels.instruccion3}
+${labels.instruccion4}
+${labels.instruccion5}
+</${labels.instruccionesFinales}>`)
+
     parts.push(`\n</PROMPT>`)
-    
+
     return parts.join('')
   }
 
@@ -300,11 +240,11 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
       prompt,
       timestamp: new Date().toISOString()
     }
-    
-    const updatedHistory = [newItem, ...promptHistory].slice(0, 20) // Mantener máximo 20 items
+
+    const updatedHistory = [newItem, ...promptHistory].slice(0, 20)
     setPromptHistory(updatedHistory)
     localStorage.setItem('promptHistory', JSON.stringify(updatedHistory))
-    
+
     setSaved(true)
     setTimeout(() => setSaved(false), 2000)
   }
@@ -343,8 +283,17 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
     return formData[stepId as keyof FormData] && formData[stepId as keyof FormData].trim() !== ''
   }
 
-  const completedSteps = steps.filter(step => isStepComplete(step.id)).length
+  const completedSteps = steps.filter((step: { id: string }) => isStepComplete(step.id)).length
   const progress = (completedSteps / steps.length) * 100
+
+  // Form step configs for labels/placeholders/tips
+  const formSteps = [
+    { label: tp.queQuieresLograr, placeholder: tp.objectivePlaceholder, tip: tp.objectiveTip, field: 'objective', bgColor: 'bg-blue-50', textColor: 'text-blue-700' },
+    { label: tp.contextoLabel, placeholder: tp.contextoPlaceholder, tip: tp.contextoTip, field: 'context', bgColor: 'bg-purple-50', textColor: 'text-purple-700' },
+    { label: tp.tonoLabel, placeholder: tp.tonoPlaceholder, tip: tp.tonoTip, field: 'tone', bgColor: 'bg-green-50', textColor: 'text-green-700' },
+    { label: tp.restriccionesLabel, placeholder: tp.restriccionesPlaceholder, tip: tp.restriccionesTip, field: 'constraints', bgColor: 'bg-orange-50', textColor: 'text-orange-700' },
+    { label: tp.outputLabel, placeholder: tp.outputPlaceholder, tip: tp.outputTip, field: 'output', bgColor: 'bg-pink-50', textColor: 'text-pink-700' },
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
@@ -355,19 +304,19 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
             <Sparkles className="w-8 h-8 text-white" />
           </div>
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Prompt Designer
+            {tp.titulo}
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Crea prompts profesionales paso a paso con nuestra herramienta interactiva
+            {tp.subtitulo}
           </p>
           <div className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-blue-100 text-blue-700 rounded-full">
-            <span className="font-medium">Próximamente: Plantillas premium y colaboración</span>
+            <span className="font-medium">{tp.proximamente}</span>
           </div>
         </div>
 
         {/* CONTENIDO PROTEGIDO - Toda la herramienta interactiva */}
         <ProtectedSection
-          message="Regístrate gratis para usar nuestro Diseñador de Prompts con plantillas profesionales, historial y exportación"
+          message={tp.protectedMessage}
           showPreview={true}
           previewBlur={false}
         >
@@ -378,33 +327,35 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
               className="flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-md hover:shadow-lg transition-all"
             >
               <History className="w-5 h-5 text-gray-600" />
-              <span className="text-gray-700">Historial</span>
+              <span className="text-gray-700">{tp.historial}</span>
             </button>
           </div>
 
           {/* Templates Section */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Templates por Industria</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">{tp.templatesPorIndustria}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-              {Object.entries(promptTemplates).map(([key, category]) => (
+              {templateCategories.map((cat) => (
                 <button
-                  key={key}
-                  onClick={() => setSelectedCategory(selectedCategory === key ? null : key)}
+                  key={cat.key}
+                  onClick={() => setSelectedCategory(selectedCategory === cat.key ? null : cat.key)}
                   className={`p-4 rounded-xl border-2 transition-all ${
-                    selectedCategory === key
+                    selectedCategory === cat.key
                       ? 'border-blue-500 bg-blue-50'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
-                  <div className="text-3xl mb-2">{category.icon}</div>
-                  <div className="font-semibold text-gray-900">{category.name}</div>
+                  <div className="text-3xl mb-2">{cat.icon}</div>
+                  <div className="font-semibold text-gray-900">{cat.name}</div>
                 </button>
               ))}
             </div>
-            
+
             {selectedCategory && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fadeIn">
-                {promptTemplates[selectedCategory].templates.map((template) => (
+                {templateCategories
+                  .find((cat) => cat.key === selectedCategory)
+                  ?.templates.map((template) => (
                   <button
                     key={template.id}
                     onClick={() => handleTemplateSelect(template)}
@@ -425,7 +376,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
               {/* Progress Bar */}
               <div className="mb-8">
                 <div className="flex justify-between items-center mb-2">
-                  <span className="text-sm font-medium text-gray-600">Progreso</span>
+                  <span className="text-sm font-medium text-gray-600">{tp.progreso}</span>
                   <span className="text-sm font-medium text-gray-900">{Math.round(progress)}%</span>
                 </div>
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
@@ -438,11 +389,11 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
 
               {/* Steps Navigation */}
               <div className="flex items-center justify-between mb-8">
-                {steps.map((step, index) => {
+                {steps.map((step: { id: string; title: string; icon: React.ComponentType<{ className?: string }> }, index: number) => {
                   const Icon = step.icon
                   const isActive = currentStep === index
                   const isComplete = isStepComplete(step.id)
-                  
+
                   return (
                     <button
                       key={step.id}
@@ -476,110 +427,27 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
 
               {/* Form Fields */}
               <div className="space-y-6">
-                {currentStep === 0 && (
-                  <div className="animate-fadeIn">
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
-                      ¿Qué quieres lograr?
-                    </label>
-                    <textarea
-                      value={formData.objective}
-                      onChange={(e) => setFormData({ ...formData, objective: e.target.value })}
-                      placeholder="Ejemplo: crear contenido para redes sociales, escribir código, generar ideas de negocio..."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      rows={4}
-                    />
-                    <div className="mt-3 p-4 bg-blue-50 rounded-lg">
-                      <p className="text-sm text-blue-700">
-                        <strong>💡 Tip:</strong> Sé específico sobre tu objetivo. En lugar de "escribir contenido", 
-                        prueba "crear 5 posts de LinkedIn sobre inteligencia artificial para CEOs".
-                      </p>
+                {formSteps.map((stepConfig, index) => (
+                  currentStep === index && (
+                    <div key={stepConfig.field} className="animate-fadeIn">
+                      <label className="block text-lg font-semibold text-gray-900 mb-3">
+                        {stepConfig.label}
+                      </label>
+                      <textarea
+                        value={formData[stepConfig.field as keyof FormData]}
+                        onChange={(e) => setFormData({ ...formData, [stepConfig.field]: e.target.value })}
+                        placeholder={stepConfig.placeholder}
+                        className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                        rows={4}
+                      />
+                      <div className={`mt-3 p-4 ${stepConfig.bgColor} rounded-lg`}>
+                        <p className={`text-sm ${stepConfig.textColor}`}>
+                          <strong>💡 {tp.tip}</strong> {stepConfig.tip}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                )}
-
-                {currentStep === 1 && (
-                  <div className="animate-fadeIn">
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
-                      Contexto y detalles específicos
-                    </label>
-                    <textarea
-                      value={formData.context}
-                      onChange={(e) => setFormData({ ...formData, context: e.target.value })}
-                      placeholder="Proporciona información relevante sobre tu proyecto, empresa, audiencia, etc."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      rows={4}
-                    />
-                    <div className="mt-3 p-4 bg-purple-50 rounded-lg">
-                      <p className="text-sm text-purple-700">
-                        <strong>💡 Tip:</strong> Incluye datos como tu industria, público objetivo, 
-                        valores de marca o cualquier información que ayude a personalizar el resultado.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {currentStep === 2 && (
-                  <div className="animate-fadeIn">
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
-                      Tono y estilo deseado
-                    </label>
-                    <textarea
-                      value={formData.tone}
-                      onChange={(e) => setFormData({ ...formData, tone: e.target.value })}
-                      placeholder="Ejemplo: profesional pero cercano, humorístico, técnico, inspirador..."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      rows={4}
-                    />
-                    <div className="mt-3 p-4 bg-green-50 rounded-lg">
-                      <p className="text-sm text-green-700">
-                        <strong>💡 Tip:</strong> El tono correcto marca la diferencia. 
-                        Piensa en cómo hablarías con tu audiencia ideal.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {currentStep === 3 && (
-                  <div className="animate-fadeIn">
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
-                      Restricciones o requisitos especiales
-                    </label>
-                    <textarea
-                      value={formData.constraints}
-                      onChange={(e) => setFormData({ ...formData, constraints: e.target.value })}
-                      placeholder="Ejemplo: máximo 500 palabras, evitar jerga técnica, incluir llamadas a la acción..."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      rows={4}
-                    />
-                    <div className="mt-3 p-4 bg-orange-50 rounded-lg">
-                      <p className="text-sm text-orange-700">
-                        <strong>💡 Tip:</strong> Las restricciones claras evitan resultados no deseados. 
-                        Incluye límites de longitud, formatos específicos o elementos a evitar.
-                      </p>
-                    </div>
-                  </div>
-                )}
-
-                {currentStep === 4 && (
-                  <div className="animate-fadeIn">
-                    <label className="block text-lg font-semibold text-gray-900 mb-3">
-                      ¿Qué resultado esperas?
-                    </label>
-                    <textarea
-                      value={formData.output}
-                      onChange={(e) => setFormData({ ...formData, output: e.target.value })}
-                      placeholder="Ejemplo: lista con 10 ideas, código completo con comentarios, plan detallado paso a paso..."
-                      className="w-full p-4 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      rows={4}
-                    />
-                    <div className="mt-3 p-4 bg-pink-50 rounded-lg">
-                      <p className="text-sm text-pink-700">
-                        <strong>💡 Tip:</strong> Describe exactamente qué formato y estructura 
-                        necesitas para el resultado final.
-                      </p>
-                    </div>
-                  </div>
-                )}
+                  )
+                ))}
               </div>
 
               {/* Navigation Buttons */}
@@ -594,9 +462,9 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                   }`}
                 >
                   <ChevronLeft className="w-5 h-5" />
-                  Anterior
+                  {tp.anterior}
                 </button>
-                
+
                 <button
                   onClick={() => setCurrentStep(Math.min(steps.length - 1, currentStep + 1))}
                   disabled={currentStep === steps.length - 1}
@@ -606,7 +474,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                       : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg'
                   }`}
                 >
-                  Siguiente
+                  {tp.siguiente}
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
@@ -615,12 +483,12 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
             {/* Preview Panel */}
             <div className="bg-white rounded-2xl shadow-xl p-8">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-gray-900">Vista Previa</h2>
+                <h2 className="text-2xl font-bold text-gray-900">{tp.vistaPrevia}</h2>
                 <div className="flex gap-2">
                   <button
                     onClick={handleSave}
                     className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                    title="Guardar en historial"
+                    title={tp.guardarEnHistorial}
                   >
                     {saved ? (
                       <Check className="w-5 h-5 text-green-500" />
@@ -631,7 +499,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                   <button
                     onClick={handleCopy}
                     className="p-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-                    title="Copiar prompt"
+                    title={tp.copiarPromptTitle}
                   >
                     {copied ? (
                       <Check className="w-5 h-5 text-green-500" />
@@ -646,9 +514,8 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                 {generatePrompt() ? (
                   <div className="space-y-1">
                     {generatePrompt().split('\n').map((line, index) => {
-                      // Resaltado de sintaxis para diferentes elementos
                       let className = "text-gray-800"
-                      
+
                       if (line.includes('<') && line.includes('>')) {
                         className = "text-blue-600 font-semibold"
                       } else if (line.startsWith('[') || line.includes('[')) {
@@ -662,7 +529,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                       } else if (line.includes('"')) {
                         className = "text-teal-600"
                       }
-                      
+
                       return (
                         <div key={index} className={className}>
                           {line || '\u00A0'}
@@ -674,7 +541,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                   <div className="flex flex-col items-center justify-center h-full text-gray-400">
                     <Sparkles className="w-12 h-12 mb-4" />
                     <p className="text-center font-sans">
-                      Tu prompt aparecerá aquí mientras lo construyes
+                      {tp.promptAparecera}
                     </p>
                   </div>
                 )}
@@ -692,9 +559,9 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                   }`}
                 >
                   <Copy className="w-5 h-5" />
-                  {copied ? '¡Copiado!' : 'Copiar Prompt'}
+                  {copied ? tp.copiado : tp.copiarPrompt}
                 </button>
-                
+
                 <button
                   onClick={() => {
                     setFormData({
@@ -709,7 +576,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
                   }}
                   className="w-full py-3 px-6 bg-gray-200 text-gray-700 rounded-lg font-medium hover:bg-gray-300 transition-all"
                 >
-                  Limpiar Todo
+                  {tp.limpiarTodo}
                 </button>
               </div>
             </div>
@@ -722,6 +589,7 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
               onSelect={handleHistorySelect}
               onDelete={handleDeleteHistory}
               onClose={() => setShowHistory(false)}
+              labels={{ title: tp.historialDePrompts, empty: tp.noHayPrompts }}
             />
           )}
         </ProtectedSection>
@@ -738,11 +606,11 @@ ${formData.constraints.split(',').map(c => `- ${c.trim()}`).join('\n')}
             transform: translateY(0);
           }
         }
-        
+
         .animate-fadeIn {
           animation: fadeIn 0.3s ease-out;
         }
-        
+
         .line-clamp-2 {
           display: -webkit-box;
           -webkit-line-clamp: 2;
