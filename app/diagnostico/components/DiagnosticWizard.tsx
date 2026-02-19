@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button, Card, CardContent, CardHeader, CardTitle, Progress } from '@/components/ui/index';
 import { useDiagnosticStore } from '@/store/diagnosticStore';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { InitialLeadCapture } from './InitialLeadCapture';
 import { PreAssessment } from './PreAssessment';
 import { AdaptiveQuestions } from './AdaptiveQuestions';
@@ -24,6 +25,8 @@ interface DiagnosticWizardProps {
 }
 
 export default function DiagnosticWizard({ consultantId, isInternalMode = false }: DiagnosticWizardProps) {
+  const { t } = useLanguage();
+  const tp = t.diagnosticWizard;
   const searchParams = useSearchParams();
   const showResults = searchParams.get('showResults') === 'true';
 
@@ -65,13 +68,13 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
   });
 
   const steps = [
-    { id: 0, name: 'Registro', icon: '📝' },
-    { id: 1, name: 'Evaluación Inicial', icon: '🎯' },
-    { id: 2, name: 'Finanzas', icon: '💰' },
-    { id: 3, name: 'Operaciones', icon: '⚙️' },
-    { id: 4, name: 'Marketing', icon: '📈' },
-    { id: 5, name: 'Procesando', icon: '⚡' },
-    { id: 6, name: 'Resultados', icon: '📊' },
+    { id: 0, name: tp.steps.registro, icon: '📝' },
+    { id: 1, name: tp.steps.evaluacionInicial, icon: '🎯' },
+    { id: 2, name: tp.steps.finanzas, icon: '💰' },
+    { id: 3, name: tp.steps.operaciones, icon: '⚙️' },
+    { id: 4, name: tp.steps.marketing, icon: '📈' },
+    { id: 5, name: tp.steps.procesando, icon: '⚡' },
+    { id: 6, name: tp.steps.resultados, icon: '📊' },
   ];
 
   // Función para guardar progreso en localStorage
@@ -298,7 +301,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
           return (
             <div className="text-center py-20">
               <p className="text-red-600 font-semibold">
-                Error: No se encontraron datos del lead. Por favor, reinicia el diagnóstico.
+                {tp.errorNoLead}
               </p>
             </div>
           );
@@ -356,10 +359,10 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-6">
             <div>
               <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900">
-                Diagnóstico 3D Empresarial
+                {tp.title}
               </h1>
               <p className="text-sm sm:text-base text-gray-600 mt-1">
-                Evalúa las tres dimensiones clave de tu negocio
+                {tp.subtitle}
               </p>
             </div>
             
@@ -372,7 +375,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
                 className="flex items-center gap-2"
               >
                 <Home className="w-4 h-4" />
-                <span className="hidden sm:inline">Inicio</span>
+                <span className="hidden sm:inline">{tp.inicio}</span>
               </Button>
               <Button
                 variant="outline"
@@ -381,7 +384,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
                 className="flex items-center gap-2 text-orange-600 hover:text-orange-700"
               >
                 <RotateCcw className="w-4 h-4" />
-                <span className="hidden sm:inline">Reiniciar</span>
+                <span className="hidden sm:inline">{tp.reiniciar}</span>
               </Button>
             </div>
           </div>
@@ -390,10 +393,10 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
           <div className="bg-white rounded-lg shadow-sm p-4">
             <div className="flex items-center justify-between mb-4">
               <span className="text-sm text-gray-600">
-                Paso {currentStep + 1} de {steps.length}
+                {tp.pasoNDeTotal} {currentStep + 1} {tp.de} {steps.length}
               </span>
               <span className="text-sm font-semibold text-blue-600">
-                {Math.round(((currentStep + 1) / steps.length) * 100)}% Completado
+                {Math.round(((currentStep + 1) / steps.length) * 100)}% {tp.completado}
               </span>
             </div>
             
@@ -459,7 +462,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
             className="flex items-center gap-2"
           >
             <ChevronLeft className="w-4 h-4" />
-            <span className="hidden sm:inline">Anterior</span>
+            <span className="hidden sm:inline">{tp.anterior}</span>
           </Button>
 
           <div className="flex gap-2">
@@ -470,7 +473,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
                 variant="outline"
                 className="hidden sm:flex items-center gap-2"
               >
-                Ir a Resultados
+                {tp.irAResultados}
               </Button>
             )}
 
@@ -479,14 +482,14 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
                 onClick={handleNext}
                 className="flex items-center gap-2"
               >
-                <span className="hidden sm:inline">Siguiente</span>
+                <span className="hidden sm:inline">{tp.siguiente}</span>
                 <ChevronRight className="w-4 h-4" />
               </Button>
             )}
 
             {currentStep === 5 && (
               <div className="text-sm text-gray-500 italic">
-                Procesamiento automático en curso...
+                {tp.procesamientoEnCurso}
               </div>
             )}
           </div>
@@ -495,7 +498,7 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
         {/* Indicador de progreso guardado */}
         {completedSteps.size > 0 && (
           <div className="mt-4 text-center text-sm text-gray-500">
-            Tu progreso se guarda automáticamente
+            {tp.progresoGuardado}
           </div>
         )}
       </div>
@@ -504,19 +507,18 @@ export default function DiagnosticWizard({ consultantId, isInternalMode = false 
       <AlertDialog open={showResetDialog} onOpenChange={setShowResetDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>¿Reiniciar el diagnóstico?</AlertDialogTitle>
+            <AlertDialogTitle>{tp.resetDialogTitle}</AlertDialogTitle>
             <AlertDialogDescription>
-              Esta acción borrará todo tu progreso actual y comenzarás desde el principio. 
-              No se podrá recuperar la información ingresada.
+              {tp.resetDialogDescription}
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction 
+            <AlertDialogCancel>{tp.cancelar}</AlertDialogCancel>
+            <AlertDialogAction
               onClick={handleReset}
               className="bg-red-600 hover:bg-red-700"
             >
-              Sí, reiniciar todo
+              {tp.siReiniciar}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>
