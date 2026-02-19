@@ -11,6 +11,7 @@ import { Download, Users, UserCheck, Calendar, Search, Mail, Phone, Shield } fro
 import { format } from 'date-fns'
 import { es } from 'date-fns/locale'
 import AdminAuthWrapper from '../components/AdminAuthWrapper'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface UserData {
   id: string
@@ -26,6 +27,8 @@ export default function AdminUsuariosPage() {
   const [loading, setLoading] = useState(true)
   const [searchTerm, setSearchTerm] = useState('')
   const { user, userData } = useAuth()
+  const { t } = useLanguage()
+  const tp = t.adminUsuariosPage
 
   useEffect(() => {
     fetchUsers()
@@ -66,12 +69,12 @@ export default function AdminUsuariosPage() {
     const csvContent = users.map(user => {
       const createdDate = user.createdAt?.toDate?.() 
         ? format(user.createdAt.toDate(), 'dd/MM/yyyy HH:mm', { locale: es })
-        : 'Sin fecha'
+        : tp.sinFecha
       
-      return `"${user.name || 'Sin nombre'}","${user.email}","${user.phone || '-'}","${user.role === 'consultant' ? 'Consultor' : 'Público'}","${createdDate}"`
+      return `"${user.name || tp.sinNombre}","${user.email}","${user.phone || '-'}","${user.role === 'consultant' ? tp.consultor : tp.publicoLabel}","${createdDate}"`
     }).join('\n')
 
-    const header = '"Nombre","Email","Teléfono","Tipo","Fecha de Registro"\n'
+    const header = `"${tp.csvNombre}","${tp.csvEmail}","${tp.csvTelefono}","${tp.csvTipo}","${tp.csvFechaRegistro}"\n`
     const blob = new Blob([header + csvContent], { type: 'text/csv;charset=utf-8;' })
     const url = window.URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -81,44 +84,44 @@ export default function AdminUsuariosPage() {
   }
 
   return (
-    <AdminAuthWrapper title="Gestión de Usuarios">
+    <AdminAuthWrapper title={tp.gestionUsuarios}>
       {/* Estadísticas */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Usuarios</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.totalUsuarios}</CardTitle>
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{users.length}</div>
             <p className="text-xs text-muted-foreground">
-              Usuarios registrados en total
+              {tp.usuariosRegistrados}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Consultores</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.consultores}</CardTitle>
             <Shield className="h-4 w-4 text-blue-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{consultantCount}</div>
             <p className="text-xs text-muted-foreground">
-              Con código especial
+              {tp.conCodigoEspecial}
             </p>
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Usuarios Públicos</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.usuariosPublicos}</CardTitle>
             <UserCheck className="h-4 w-4 text-green-600" />
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{publicCount}</div>
             <p className="text-xs text-muted-foreground">
-              Acceso estándar
+              {tp.accesoEstandar}
             </p>
           </CardContent>
         </Card>
@@ -130,7 +133,7 @@ export default function AdminUsuariosPage() {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
           <Input
             type="text"
-            placeholder="Buscar por nombre, email o teléfono..."
+            placeholder={tp.buscarPlaceholder}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10"
@@ -138,42 +141,42 @@ export default function AdminUsuariosPage() {
         </div>
         <Button onClick={exportToCSV} className="flex items-center gap-2">
           <Download className="h-4 w-4" />
-          Exportar CSV
+          {tp.exportarCSV}
         </Button>
       </div>
 
       {/* Lista de usuarios */}
       <Card>
         <CardHeader>
-          <CardTitle>Lista de Usuarios ({filteredUsers.length})</CardTitle>
+          <CardTitle>{tp.listaUsuarios} ({filteredUsers.length})</CardTitle>
         </CardHeader>
         <CardContent>
           {loading ? (
             <div className="text-center py-8">
               <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
-              <p className="mt-2 text-gray-600">Cargando usuarios...</p>
+              <p className="mt-2 text-gray-600">{tp.cargandoUsuarios}</p>
             </div>
           ) : filteredUsers.length === 0 ? (
             <div className="text-center py-8 text-gray-500">
-              {searchTerm ? 'No se encontraron usuarios con ese criterio' : 'No hay usuarios registrados'}
+              {searchTerm ? tp.noSeEncontraronUsuarios : tp.noHayUsuarios}
             </div>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-2">Nombre</th>
-                    <th className="text-left p-2">Email</th>
-                    <th className="text-left p-2">Teléfono</th>
-                    <th className="text-left p-2">Tipo</th>
-                    <th className="text-left p-2">Registro</th>
+                    <th className="text-left p-2">{tp.nombre}</th>
+                    <th className="text-left p-2">{tp.email}</th>
+                    <th className="text-left p-2">{tp.telefono}</th>
+                    <th className="text-left p-2">{tp.tipo}</th>
+                    <th className="text-left p-2">{tp.registro}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredUsers.map((user) => (
                     <tr key={user.id} className="border-b hover:bg-gray-50">
                       <td className="p-2">
-                        <div className="font-medium">{user.name || 'Sin nombre'}</div>
+                        <div className="font-medium">{user.name || tp.sinNombre}</div>
                       </td>
                       <td className="p-2">
                         <div className="flex items-center gap-2">
@@ -193,7 +196,7 @@ export default function AdminUsuariosPage() {
                            ? 'bg-blue-100 text-blue-800' 
                           : 'bg-gray-100 text-gray-800'
                           }`}>
-                          {user.role === 'consultant' ? 'Consultor' : 'Público'}
+                          {user.role === 'consultant' ? tp.consultor : tp.publicoLabel}
                         </span>
                       </td>
                       <td className="p-2">

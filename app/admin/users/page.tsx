@@ -64,6 +64,7 @@ import {
 import { format } from 'date-fns';
 import { es } from 'date-fns/locale';
 import toast from 'react-hot-toast';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface User {
   id: string;
@@ -95,6 +96,8 @@ export default function UsersPage() {
   const itemsPerPage = 10;
   
   const router = useRouter();
+  const { t } = useLanguage();
+  const tp = t.adminUsersPage;
 
   useEffect(() => {
     // Verificar autenticación y rol admin
@@ -157,7 +160,7 @@ export default function UsersPage() {
       setFilteredUsers(usersData);
     } catch (error) {
       console.error('Error loading users:', error);
-      toast.error('Error al cargar usuarios');
+      toast.error(tp.errorCargarUsuarios);
     } finally {
       setLoading(false);
     }
@@ -173,12 +176,12 @@ export default function UsersPage() {
         updatedAt: Timestamp.now()
       });
       
-      toast.success(`Rol actualizado a ${newRole}`);
+      toast.success(tp.rolActualizado + ' ' + newRole);
       setEditDialogOpen(false);
       await loadUsers();
     } catch (error) {
       console.error('Error updating role:', error);
-      toast.error('Error al actualizar el rol');
+      toast.error(tp.errorActualizarRol);
     }
   };
 
@@ -192,11 +195,11 @@ export default function UsersPage() {
         updatedAt: Timestamp.now()
       });
       
-      toast.success(`Usuario ${newStatus === 'active' ? 'activado' : 'suspendido'}`);
+      toast.success(tp.usuario + ' ' + (newStatus === 'active' ? tp.activado : tp.suspendido));
       await loadUsers();
     } catch (error) {
       console.error('Error toggling status:', error);
-      toast.error('Error al cambiar el estado');
+      toast.error(tp.errorCambiarEstado);
     }
   };
 
@@ -211,12 +214,12 @@ export default function UsersPage() {
         deletedAt: Timestamp.now()
       });
       
-      toast.success('Usuario eliminado (soft delete)');
+      toast.success(tp.usuarioEliminado);
       setDeleteDialogOpen(false);
       await loadUsers();
     } catch (error) {
       console.error('Error deleting user:', error);
-      toast.error('Error al eliminar usuario');
+      toast.error(tp.errorEliminarUsuario);
     }
   };
 
@@ -246,7 +249,7 @@ export default function UsersPage() {
       <div className="flex items-center justify-center min-h-screen">
         <div className="text-center">
           <Shield className="h-12 w-12 text-red-500 mx-auto mb-4" />
-          <p className="text-lg">Acceso denegado. Solo administradores.</p>
+          <p className="text-lg">{tp.accesoDenegado}</p>
         </div>
       </div>
     );
@@ -257,14 +260,14 @@ export default function UsersPage() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Gestión de Usuarios</h1>
+          <h1 className="text-3xl font-bold tracking-tight">{tp.gestionUsuarios}</h1>
           <p className="text-muted-foreground">
-            Administra todos los usuarios de la plataforma
+            {tp.administraUsuarios}
           </p>
         </div>
         <Button onClick={loadUsers} variant="outline">
           <RefreshCw className={`mr-2 h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
-          Actualizar
+          {tp.actualizar}
         </Button>
       </div>
 
@@ -272,7 +275,7 @@ export default function UsersPage() {
       <div className="grid gap-4 md:grid-cols-4">
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Total Usuarios</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.totalUsuarios}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{users.length}</div>
@@ -280,7 +283,7 @@ export default function UsersPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Usuarios Admin</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.usuariosAdmin}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-red-600">
@@ -290,7 +293,7 @@ export default function UsersPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Consultores</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.consultores}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-green-600">
@@ -300,7 +303,7 @@ export default function UsersPage() {
         </Card>
         <Card>
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-medium">Usuarios Públicos</CardTitle>
+            <CardTitle className="text-sm font-medium">{tp.usuariosPublicos}</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold text-gray-600">
@@ -313,14 +316,14 @@ export default function UsersPage() {
       {/* Filtros */}
       <Card>
         <CardHeader>
-          <CardTitle>Filtros</CardTitle>
+          <CardTitle>{tp.filtros}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="flex gap-4">
             <div className="flex-1 relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
-                placeholder="Buscar por email, nombre o teléfono..."
+                placeholder={tp.buscarPlaceholder}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="pl-10"
@@ -328,13 +331,13 @@ export default function UsersPage() {
             </div>
             <Select value={roleFilter} onValueChange={setRoleFilter}>
               <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Filtrar por rol" />
+                <SelectValue placeholder={tp.filtrarPorRol} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">Todos los roles</SelectItem>
+                <SelectItem value="all">{tp.todosLosRoles}</SelectItem>
                 <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="consultant">Consultor</SelectItem>
-                <SelectItem value="public">Público</SelectItem>
+                <SelectItem value="consultant">{tp.consultor}</SelectItem>
+                <SelectItem value="public">{tp.publico}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -347,13 +350,13 @@ export default function UsersPage() {
           <Table>
             <TableHeader>
               <TableRow>
-                <TableHead>Email</TableHead>
-                <TableHead>Nombre</TableHead>
-                <TableHead>Rol</TableHead>
-                <TableHead>Teléfono</TableHead>
-                <TableHead>Fecha de registro</TableHead>
-                <TableHead>Estado</TableHead>
-                <TableHead className="text-right">Acciones</TableHead>
+                <TableHead>{tp.email}</TableHead>
+                <TableHead>{tp.nombre}</TableHead>
+                <TableHead>{tp.rol}</TableHead>
+                <TableHead>{tp.telefono}</TableHead>
+                <TableHead>{tp.fechaRegistro}</TableHead>
+                <TableHead>{tp.estadoLabel}</TableHead>
+                <TableHead className="text-right">{tp.accionesLabel}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -368,7 +371,7 @@ export default function UsersPage() {
               ) : currentUsers.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={7} className="text-center py-8">
-                    No se encontraron usuarios
+                    {tp.noSeEncontraronUsuarios}
                   </TableCell>
                 </TableRow>
               ) : (
@@ -385,23 +388,23 @@ export default function UsersPage() {
                     <TableCell>{formatDate(user.createdAt)}</TableCell>
                     <TableCell>
                       {user.status === 'suspended' ? (
-                        <Badge variant="outline">Suspendido</Badge>
+                        <Badge variant="outline">{tp.suspendidoBadge}</Badge>
                       ) : user.status === 'deleted' ? (
-                        <Badge variant="outline">Eliminado</Badge>
+                        <Badge variant="outline">{tp.eliminadoBadge}</Badge>
                       ) : (
-                        <Badge variant="secondary">Activo</Badge>
+                        <Badge variant="secondary">{tp.activoBadge}</Badge>
                       )}
                     </TableCell>
                     <TableCell className="text-right">
                       <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                           <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Abrir menú</span>
+                            <span className="sr-only">{tp.abrirMenu}</span>
                             <MoreHorizontal className="h-4 w-4" />
                           </Button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent align="end">
-                          <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+                          <DropdownMenuLabel>{tp.accionesLabel}</DropdownMenuLabel>
                           <DropdownMenuItem
                             onClick={() => {
                               setSelectedUser(user);
@@ -410,7 +413,7 @@ export default function UsersPage() {
                             }}
                           >
                             <Edit className="mr-2 h-4 w-4" />
-                            Cambiar rol
+                            {tp.cambiarRol}
                           </DropdownMenuItem>
                           <DropdownMenuItem
                             onClick={() => handleToggleStatus(user)}
@@ -418,12 +421,12 @@ export default function UsersPage() {
                             {user.status === 'suspended' ? (
                               <>
                                 <UserCheck className="mr-2 h-4 w-4" />
-                                Activar
+                                {tp.activar}
                               </>
                             ) : (
                               <>
                                 <UserX className="mr-2 h-4 w-4" />
-                                Suspender
+                                {tp.suspender}
                               </>
                             )}
                           </DropdownMenuItem>
@@ -436,7 +439,7 @@ export default function UsersPage() {
                             }}
                           >
                             <Trash2 className="mr-2 h-4 w-4" />
-                            Eliminar
+                            {tp.eliminar}
                           </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
@@ -453,7 +456,7 @@ export default function UsersPage() {
       {totalPages > 1 && (
         <div className="flex items-center justify-between">
           <p className="text-sm text-muted-foreground">
-            Mostrando {startIndex + 1} a {Math.min(endIndex, filteredUsers.length)} de {filteredUsers.length} usuarios
+            {tp.mostrando} {startIndex + 1} {tp.a} {Math.min(endIndex, filteredUsers.length)} {tp.de} {filteredUsers.length} {tp.usuariosLabel}
           </p>
           <div className="flex items-center space-x-2">
             <Button
@@ -463,7 +466,7 @@ export default function UsersPage() {
               disabled={currentPage === 1}
             >
               <ChevronLeft className="h-4 w-4" />
-              Anterior
+              {tp.anterior}
             </Button>
             <div className="flex items-center gap-1">
               {Array.from({ length: Math.min(5, totalPages) }, (_, i) => {
@@ -497,7 +500,7 @@ export default function UsersPage() {
               onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
               disabled={currentPage === totalPages}
             >
-              Siguiente
+              {tp.siguiente}
               <ChevronRight className="h-4 w-4" />
             </Button>
           </div>
@@ -508,29 +511,29 @@ export default function UsersPage() {
       <Dialog open={editDialogOpen} onOpenChange={setEditDialogOpen}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Cambiar rol de usuario</DialogTitle>
+            <DialogTitle>{tp.cambiarRolUsuario}</DialogTitle>
             <DialogDescription>
-              Cambiando rol para: {selectedUser?.email}
+              {tp.cambiandoRolPara} {selectedUser?.email}
             </DialogDescription>
           </DialogHeader>
           <div className="py-4">
             <Select value={newRole} onValueChange={setNewRole}>
               <SelectTrigger>
-                <SelectValue placeholder="Seleccionar rol" />
+                <SelectValue placeholder={tp.seleccionarRol} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="admin">Admin</SelectItem>
-                <SelectItem value="consultant">Consultor</SelectItem>
-                <SelectItem value="public">Público</SelectItem>
+                <SelectItem value="consultant">{tp.consultor}</SelectItem>
+                <SelectItem value="public">{tp.publico}</SelectItem>
               </SelectContent>
             </Select>
           </div>
           <DialogFooter>
                     <Button variant="outline" onClick={() => setEditDialogOpen(false)}>
-                      Cancelar
+                      {tp.cancelar}
                     </Button>
                               <Button onClick={handleChangeRole}>
-                                Guardar cambios
+                                {tp.guardarCambios}
                               </Button>
                             </DialogFooter>
                                       </DialogContent>

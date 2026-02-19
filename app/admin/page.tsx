@@ -6,6 +6,7 @@ import { db } from '@/lib/firebase'
 import { collection, query, orderBy, getDocs, limit, where, Timestamp } from 'firebase/firestore'
 import { Calendar, MessageCircle, Clock, Users, Download, Filter, ChevronDown, ChevronRight } from 'lucide-react'
 import AdminAuthWrapper from './components/AdminAuthWrapper'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface ChatSession {
   id: string
@@ -33,6 +34,8 @@ interface Stats {
 }
 
 export default function AdminDashboard() {
+  const { t } = useLanguage()
+  const tp = t.adminDashboardPage
   const [sessions, setSessions] = useState<ChatSession[]>([])
   const [loading, setLoading] = useState(true)
   const [stats, setStats] = useState<Stats>({
@@ -135,16 +138,16 @@ export default function AdminDashboard() {
     const csvContent = sessions.map(session => {
       const date = session.startedAt?.toDate 
         ? session.startedAt.toDate().toLocaleString('es-ES') 
-        : 'Sin fecha'
+        : tp.sinFecha
       const messages = session.messages?.map(m => 
         `${m.isUser ? 'Usuario' : 'Nova'}: ${m.text}`
       ).join(' | ') || ''
-      const source = session.userInfo?.referrer || 'Directo'
+      const source = session.userInfo?.referrer || tp.directo
       
-      return `"${date}","${messages}","${source}","${session.status || 'activo'}"`
+      return `"${date}","${messages}","${source}","${session.status || tp.activo}"`
     }).join('\n')
 
-    const header = '"Fecha","Mensajes","Fuente","Estado"\n'
+    const header = `"${tp.csvFecha}","${tp.csvMensajes}","${tp.csvFuente}","${tp.csvEstado}"\n`
     const blob = new Blob([header + csvContent], { type: 'text/csv' })
     const url = window.URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -155,13 +158,13 @@ export default function AdminDashboard() {
 
   // Dashboard principal con wrapper de autenticación
   return (
-    <AdminAuthWrapper title="Dashboard de Interacciones - Chatbot">
+    <AdminAuthWrapper title={tp.wrapperTitle}>
       {/* Header */}
       <div className="bg-white shadow-sm border-b border-gray-200 -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8">
         <div className="py-4">
           <div className="flex justify-between items-center">
             <h2 className="text-xl font-semibold text-gray-900">
-              Conversaciones del Chatbot
+              {tp.conversaciones}
             </h2>
             <button
               onClick={exportToCSV}
@@ -169,7 +172,7 @@ export default function AdminDashboard() {
                        rounded-lg hover:bg-green-700 transition-colors"
             >
               <Download className="w-4 h-4" />
-              Exportar CSV
+              {tp.exportarCSV}
             </button>
           </div>
         </div>
@@ -181,7 +184,7 @@ export default function AdminDashboard() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Total de Chats</p>
+                <p className="text-sm text-gray-600">{tp.totalChats}</p>
                 <p className="text-2xl font-bold text-gray-900">{stats.totalChats}</p>
               </div>
               <MessageCircle className="w-8 h-8 text-blue-600" />
@@ -191,7 +194,7 @@ export default function AdminDashboard() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Chats Hoy</p>
+                <p className="text-sm text-gray-600">{tp.chatsHoy}</p>
                 <p className="text-2xl font-bold text-gray-900">{stats.todayChats}</p>
               </div>
               <Calendar className="w-8 h-8 text-green-600" />
@@ -201,7 +204,7 @@ export default function AdminDashboard() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Últimos 7 días</p>
+                <p className="text-sm text-gray-600">{tp.ultimos7Dias}</p>
                 <p className="text-2xl font-bold text-gray-900">{stats.weekChats}</p>
               </div>
               <Clock className="w-8 h-8 text-purple-600" />
@@ -211,7 +214,7 @@ export default function AdminDashboard() {
           <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-100">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600">Promedio Mensajes</p>
+                <p className="text-sm text-gray-600">{tp.promedioMensajes}</p>
                 <p className="text-2xl font-bold text-gray-900">{stats.averageMessages}</p>
               </div>
               <Users className="w-8 h-8 text-orange-600" />
@@ -231,7 +234,7 @@ export default function AdminDashboard() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Todos
+              {tp.todos}
             </button>
             <button
               onClick={() => setFilterDate('today')}
@@ -241,7 +244,7 @@ export default function AdminDashboard() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              Hoy
+              {tp.hoy}
             </button>
             <button
               onClick={() => setFilterDate('week')}
@@ -251,7 +254,7 @@ export default function AdminDashboard() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              7 días
+              {tp.dias7}
             </button>
             <button
               onClick={() => setFilterDate('month')}
@@ -261,7 +264,7 @@ export default function AdminDashboard() {
                   : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
               }`}
             >
-              30 días
+              {tp.dias30}
             </button>
           </div>
         </div>
@@ -269,14 +272,14 @@ export default function AdminDashboard() {
         {/* Insights Avanzados */}
         <div className="bg-white rounded-lg shadow-sm border border-gray-100 p-6 mb-8">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">
-            Insights de Conversaciones
+            {tp.insightsConversaciones}
           </h3>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Preguntas más frecuentes */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">
-                Consultas Más Frecuentes
+                {tp.consultasFrecuentes}
               </h4>
               <div className="space-y-2">
                 {(() => {
@@ -313,7 +316,7 @@ export default function AdminDashboard() {
             {/* Horarios pico */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">
-                Horarios de Mayor Actividad
+                {tp.horariosActividad}
               </h4>
               <div className="space-y-2">
                 {Object.entries(
@@ -341,23 +344,23 @@ export default function AdminDashboard() {
             {/* Tasa de conversión */}
             <div>
               <h4 className="text-sm font-medium text-gray-700 mb-2">
-                Métricas de Conversión
+                {tp.metricasConversion}
               </h4>
               <div className="space-y-2">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Movidos a WhatsApp</span>
+                  <span className="text-sm text-gray-600">{tp.movidosWhatsapp}</span>
                   <span className="text-sm font-semibold text-green-600">
                     {sessions.filter(s => s.status === 'moved_to_whatsapp').length}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Completados</span>
+                  <span className="text-sm text-gray-600">{tp.completados}</span>
                   <span className="text-sm font-semibold text-blue-600">
                     {sessions.filter(s => s.status === 'closed').length}
                   </span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-sm text-gray-600">Abandonados</span>
+                  <span className="text-sm text-gray-600">{tp.abandonados}</span>
                   <span className="text-sm font-semibold text-gray-600">
                     {sessions.filter(s => s.status === 'active').length}
                   </span>
@@ -373,11 +376,11 @@ export default function AdminDashboard() {
             <div className="p-8 text-center">
               <div className="inline-block animate-spin rounded-full h-8 w-8 
                             border-b-2 border-blue-600"></div>
-              <p className="mt-2 text-gray-600">Cargando conversaciones...</p>
+              <p className="mt-2 text-gray-600">{tp.cargandoConversaciones}</p>
             </div>
           ) : sessions.length === 0 ? (
             <div className="p-8 text-center text-gray-500">
-              No hay conversaciones en este período
+              {tp.noConversaciones}
             </div>
           ) : (
             <div className="divide-y divide-gray-100">
@@ -413,19 +416,19 @@ export default function AdminDashboard() {
                                   ? 'bg-green-100 text-green-700' 
                                   : 'bg-yellow-100 text-yellow-700'
                               }`}>
-                                {session.isBusinessOpen ? 'En horario' : 'Fuera de horario'}
+                                {session.isBusinessOpen ? tp.enHorario : tp.fueraHorario}
                               </span>
                             </div>
                             <p className="text-sm text-gray-600 mt-1">
                               {userMessages.length > 0 
                                 ? userMessages[0].text.substring(0, 100) + '...'
-                                : 'Sin mensajes del usuario'
+                                : tp.sinMensajes
                               }
                             </p>
                             <div className="flex items-center gap-4 mt-2 text-xs text-gray-500">
-                              <span>{session.messages?.length || 0} mensajes</span>
+                              <span>{session.messages?.length || 0} {tp.mensajes}</span>
                               {session.userInfo?.referrer && (
-                                <span>Desde: {new URL(session.userInfo.referrer).hostname}</span>
+                                <span>{tp.desde} {new URL(session.userInfo.referrer).hostname}</span>
                               )}
                             </div>
                           </div>
@@ -455,10 +458,10 @@ export default function AdminDashboard() {
                         
                         {/* Información adicional */}
                         <div className="mt-4 pt-4 border-t border-gray-200 text-xs text-gray-600">
-                          <p><strong>Navegador:</strong> {session.userInfo?.userAgent.substring(0, 50)}...</p>
-                          <p><strong>Página:</strong> {session.userInfo?.url}</p>
+                          <p><strong>{tp.navegador}</strong> {session.userInfo?.userAgent.substring(0, 50)}...</p>
+                          <p><strong>{tp.pagina}</strong> {session.userInfo?.url}</p>
                           {session.userInfo?.referrer && (
-                            <p><strong>Referido desde:</strong> {session.userInfo.referrer}</p>
+                            <p><strong>{tp.referidoDesde}</strong> {session.userInfo.referrer}</p>
                           )}
                         </div>
                       </div>

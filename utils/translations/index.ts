@@ -10,6 +10,7 @@ import { capacitacionSubES, capacitacionSubEN } from './capacitacion-sub'
 import { herramientasES, herramientasEN } from './herramientas'
 import { carrerasCasosES, carrerasCasosEN } from './carreras-casos'
 import { legalPartnersES, legalPartnersEN } from './legal-partners'
+import { internalES, internalEN } from './internal'
 
 export const translations = {
   ES: {
@@ -25,6 +26,7 @@ export const translations = {
     ...herramientasES,
     ...carrerasCasosES,
     ...legalPartnersES,
+    ...internalES,
   },
   EN: {
     ...homeEN,
@@ -39,6 +41,7 @@ export const translations = {
     ...herramientasEN,
     ...carrerasCasosEN,
     ...legalPartnersEN,
+    ...internalEN,
   },
 }
 
