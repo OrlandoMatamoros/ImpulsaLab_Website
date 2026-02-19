@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { Button, Card, CardContent } from '@/components/ui/index';
 import { Loader2, CheckCircle, Mail } from 'lucide-react';
-import { useLanguage } from '@/utils/language-context';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface InitialLeadCaptureProps {
   onComplete: (leadData: {

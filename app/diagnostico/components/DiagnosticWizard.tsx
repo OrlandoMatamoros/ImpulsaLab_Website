@@ -4,7 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button, Card, CardContent, CardHeader, CardTitle, Progress } from '@/components/ui/index';
 import { useDiagnosticStore } from '@/store/diagnosticStore';
-import { useLanguage } from '@/utils/language-context';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { InitialLeadCapture } from './InitialLeadCapture';
 import { PreAssessment } from './PreAssessment';
 import { AdaptiveQuestions } from './AdaptiveQuestions';
