@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button, Card, CardContent } from '@/components/ui/index';
 import { Loader2, CheckCircle, Mail } from 'lucide-react';
+import { useLanguage } from '@/utils/language-context';
 
 interface InitialLeadCaptureProps {
   onComplete: (leadData: {
@@ -16,6 +17,8 @@ interface InitialLeadCaptureProps {
 }
 
 export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
+  const { t } = useLanguage();
+  const tp = t.initialLeadCapture;
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -31,32 +34,32 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
     const newErrors: any = {};
 
     if (!formData.nombre.trim()) {
-      newErrors.nombre = 'El nombre es requerido';
+      newErrors.nombre = tp.errorNombreRequerido;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'El email es requerido';
+      newErrors.email = tp.errorEmailRequerido;
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(formData.email)) {
-        newErrors.email = 'Email inválido';
+        newErrors.email = tp.errorEmailInvalido;
       }
     }
 
     if (!formData.negocio.trim()) {
-      newErrors.negocio = 'El nombre del negocio es requerido';
+      newErrors.negocio = tp.errorNegocioRequerido;
     }
 
     if (!formData.industria) {
-      newErrors.industria = 'Selecciona tu industria';
+      newErrors.industria = tp.errorIndustriaRequerida;
     }
 
     if (!formData.empleados || formData.empleados === '0') {
-      newErrors.empleados = 'Ingresa el número de empleados';
+      newErrors.empleados = tp.errorEmpleadosRequerido;
     } else {
       const empleadosNum = parseInt(formData.empleados);
       if (isNaN(empleadosNum) || empleadosNum < 1) {
-        newErrors.empleados = 'Debe ser un número mayor a 0';
+        newErrors.empleados = tp.errorEmpleadosInvalido;
       }
     }
 
@@ -136,14 +139,14 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
               <Mail className="w-8 h-8 text-white" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-3">
-              🎯 Diagnóstico 3D Empresarial
+              🎯 {tp.title}
             </h2>
             <p className="text-lg text-gray-700 leading-relaxed">
-              Registra tus datos para comenzar tu evaluación personalizada
+              {tp.subtitle}
             </p>
             <div className="mt-4 inline-block bg-white rounded-lg px-4 py-2 border border-blue-300">
               <p className="text-sm text-gray-600">
-                ✓ Recibirás acceso inmediato • ✓ Resultados por email
+                {tp.accessNote}
               </p>
             </div>
           </div>
@@ -153,7 +156,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Nombre */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Tu Nombre Completo *
+                {tp.labelNombre}
               </label>
               <input
                 type="text"
@@ -165,7 +168,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                   transition-all duration-200 ${
                   errors.nombre ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="Ej: Juan Pérez"
+                placeholder={tp.placeholderNombre}
                 disabled={isSubmitting}
               />
               {errors.nombre && (
@@ -176,7 +179,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Email */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Email *
+                {tp.labelEmail}
               </label>
               <input
                 type="email"
@@ -188,21 +191,21 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                   transition-all duration-200 ${
                   errors.email ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="tu@email.com"
+                placeholder={tp.placeholderEmail}
                 disabled={isSubmitting}
               />
               {errors.email && (
                 <p className="text-red-500 text-sm mt-1">{errors.email}</p>
               )}
               <p className="text-xs text-gray-500">
-                Te enviaremos los resultados a este correo
+                {tp.emailNote}
               </p>
             </div>
 
             {/* Nombre del Negocio */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Nombre de tu Negocio *
+                {tp.labelNegocio}
               </label>
               <input
                 type="text"
@@ -214,7 +217,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                   transition-all duration-200 ${
                   errors.negocio ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="Ej: Restaurante Antology"
+                placeholder={tp.placeholderNegocio}
                 disabled={isSubmitting}
               />
               {errors.negocio && (
@@ -225,7 +228,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Industria */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Industria *
+                {tp.labelIndustria}
               </label>
               <select
                 name="industria"
@@ -238,17 +241,17 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                 }`}
                 disabled={isSubmitting}
               >
-                <option value="">Selecciona tu industria</option>
-                <option value="Tecnología">Tecnología</option>
-                <option value="Retail">Retail / Comercio</option>
-                <option value="Servicios">Servicios Profesionales</option>
-                <option value="Manufactura">Manufactura</option>
-                <option value="Salud">Salud y Bienestar</option>
-                <option value="Educación">Educación</option>
-                <option value="Alimentos">Alimentos y Restaurantes</option>
-                <option value="Construcción">Construcción</option>
-                <option value="Turismo">Turismo y Hospitalidad</option>
-                <option value="Otro">Otro</option>
+                <option value="">{tp.selectIndustria}</option>
+                <option value="Tecnología">{tp.industrias.tecnologia}</option>
+                <option value="Retail">{tp.industrias.retail}</option>
+                <option value="Servicios">{tp.industrias.servicios}</option>
+                <option value="Manufactura">{tp.industrias.manufactura}</option>
+                <option value="Salud">{tp.industrias.salud}</option>
+                <option value="Educación">{tp.industrias.educacion}</option>
+                <option value="Alimentos">{tp.industrias.alimentos}</option>
+                <option value="Construcción">{tp.industrias.construccion}</option>
+                <option value="Turismo">{tp.industrias.turismo}</option>
+                <option value="Otro">{tp.industrias.otro}</option>
               </select>
               {errors.industria && (
                 <p className="text-red-500 text-sm mt-1">{errors.industria}</p>
@@ -258,7 +261,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Número de Empleados */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Número de Empleados *
+                {tp.labelEmpleados}
               </label>
               <input
                 type="number"
@@ -270,7 +273,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                   transition-all duration-200 ${
                   errors.empleados ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="Ej: 10"
+                placeholder={tp.placeholderEmpleados}
                 min="1"
                 disabled={isSubmitting}
               />
@@ -278,14 +281,14 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                 <p className="text-red-500 text-sm mt-1">{errors.empleados}</p>
               )}
               <p className="text-xs text-gray-500">
-                Esto nos ayuda a personalizar el diagnóstico para tu empresa
+                {tp.empleadosNote}
               </p>
             </div>
 
             {/* Teléfono (Opcional) */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                Teléfono <span className="text-gray-400 font-normal">(Opcional)</span>
+                {tp.labelTelefono} <span className="text-gray-400 font-normal">{tp.telefonoOpcional}</span>
               </label>
               <input
                 type="tel"
@@ -295,7 +298,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                 className="w-full px-4 py-3 text-base border-2 border-gray-300 rounded-lg
                   focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-gray-900
                   hover:border-gray-400 transition-all duration-200"
-                placeholder="+1 234 567 8900"
+                placeholder={tp.placeholderTelefono}
                 disabled={isSubmitting}
               />
             </div>
@@ -313,12 +316,12 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
                 {isSubmitting ? (
                   <span className="flex items-center justify-center gap-3">
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Registrando acceso...
+                    {tp.btnSubmitting}
                   </span>
                 ) : (
                   <span className="flex items-center justify-center gap-3">
                     <CheckCircle className="w-5 h-5" />
-                    Comenzar Diagnóstico Oficial
+                    {tp.btnSubmit}
                   </span>
                 )}
               </Button>
@@ -327,7 +330,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Privacy Note */}
             <div className="text-center pt-2">
               <p className="text-xs text-gray-500">
-                🔒 Tus datos están protegidos. No compartimos tu información.
+                🔒 {tp.privacyNote}
               </p>
             </div>
           </form>
@@ -338,18 +341,18 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
       <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
         <div className="bg-white rounded-lg p-4 text-center border border-gray-200">
           <div className="text-2xl mb-2">⚡</div>
-          <p className="text-sm font-semibold text-gray-700">Evaluación Rápida</p>
-          <p className="text-xs text-gray-500">Solo 5-7 minutos</p>
+          <p className="text-sm font-semibold text-gray-700">{tp.beneficio1Titulo}</p>
+          <p className="text-xs text-gray-500">{tp.beneficio1Desc}</p>
         </div>
         <div className="bg-white rounded-lg p-4 text-center border border-gray-200">
           <div className="text-2xl mb-2">📊</div>
-          <p className="text-sm font-semibold text-gray-700">Resultados Detallados</p>
-          <p className="text-xs text-gray-500">Por email al instante</p>
+          <p className="text-sm font-semibold text-gray-700">{tp.beneficio2Titulo}</p>
+          <p className="text-xs text-gray-500">{tp.beneficio2Desc}</p>
         </div>
         <div className="bg-white rounded-lg p-4 text-center border border-gray-200">
           <div className="text-2xl mb-2">🎁</div>
-          <p className="text-sm font-semibold text-gray-700">Consulta Gratuita</p>
-          <p className="text-xs text-gray-500">30 min con experto</p>
+          <p className="text-sm font-semibold text-gray-700">{tp.beneficio3Titulo}</p>
+          <p className="text-xs text-gray-500">{tp.beneficio3Desc}</p>
         </div>
       </div>
     </div>
