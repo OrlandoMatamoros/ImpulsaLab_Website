@@ -150,6 +150,46 @@ export const diagnosticoUiES = {
       },
     },
   },
+
+  // === AutoProcessing ===
+  autoProcessing: {
+    steps: {
+      calculating: {
+        title: 'Calculando Inteligencia de Negocio',
+        description: 'Analizando tus respuestas en las 3 dimensiones...',
+      },
+      sendingReport: {
+        title: 'Generando tu Reporte Personalizado',
+        description: 'Preparando resultados detallados...',
+      },
+      sendingAdmin: {
+        title: 'Enviando Resultados',
+        descriptionPrefix: 'Enviando reporte a',
+      },
+      savingCrm: {
+        title: 'Guardando Información',
+        description: 'Almacenando tus resultados de forma segura...',
+      },
+      complete: {
+        title: '¡Todo Listo!',
+        description: 'Redirigiendo a tus resultados...',
+      },
+    },
+    progreso: 'Progreso',
+    vistaPrevia: 'Vista Previa de Resultados',
+    finanzas: 'Finanzas',
+    operaciones: 'Operaciones',
+    marketing: 'Marketing',
+    promedioGeneral: 'Promedio General',
+    indicadores: {
+      analisis: 'Análisis completado',
+      reporte: 'Reporte generado',
+      email: 'Email enviado',
+      datos: 'Datos guardados',
+      listo: '¡Listo para ver resultados!',
+    },
+    infoNote: 'Este proceso toma solo unos segundos...',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -301,5 +341,45 @@ export const diagnosticoUiEN = {
         description: 'Assessment of your marketing strategies and market presence',
       },
     },
+  },
+
+  // === AutoProcessing ===
+  autoProcessing: {
+    steps: {
+      calculating: {
+        title: 'Calculating Business Intelligence',
+        description: 'Analyzing your answers across the 3 dimensions...',
+      },
+      sendingReport: {
+        title: 'Generating Your Personalized Report',
+        description: 'Preparing detailed results...',
+      },
+      sendingAdmin: {
+        title: 'Sending Results',
+        descriptionPrefix: 'Sending report to',
+      },
+      savingCrm: {
+        title: 'Saving Information',
+        description: 'Storing your results securely...',
+      },
+      complete: {
+        title: 'All Done!',
+        description: 'Redirecting to your results...',
+      },
+    },
+    progreso: 'Progress',
+    vistaPrevia: 'Results Preview',
+    finanzas: 'Finance',
+    operaciones: 'Operations',
+    marketing: 'Marketing',
+    promedioGeneral: 'Overall Average',
+    indicadores: {
+      analisis: 'Analysis completed',
+      reporte: 'Report generated',
+      email: 'Email sent',
+      datos: 'Data saved',
+      listo: 'Ready to see results!',
+    },
+    infoNote: 'This process takes only a few seconds...',
   },
 }
