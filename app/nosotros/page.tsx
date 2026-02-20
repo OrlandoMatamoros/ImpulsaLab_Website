@@ -278,25 +278,6 @@ export default function NosotrosPage() {
         </div>
       </section>
 
-      {/* CTA para ver el equipo */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <h2 className="text-3xl font-bold mb-4">{t.nosotrosPage.conoceEquipo}</h2>
-            <p className="text-lg text-gray-600 mb-8">
-              {t.nosotrosPage.conoceEquipoDesc}
-            </p>
-            <Link
-              href="/#equipo"
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition-all"
-            >
-              {t.nosotrosPage.conocerAlEquipo}
-              <FaArrowRight />
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Final */}
       <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
