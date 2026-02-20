@@ -80,7 +80,7 @@ export function PreAssessment({ onComplete }: PreAssessmentProps) {
 
         {/* Options - Touch Friendly */}
         <div className="space-y-3 sm:space-y-4">
-          {currentQ.options.map((option) => (
+          {currentQ.options.map((option: { label: string; value: number }) => (
             <button
               key={option.value}
               onClick={() => handleAnswer(option.value)}
