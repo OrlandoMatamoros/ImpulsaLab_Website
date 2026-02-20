@@ -80,6 +80,42 @@ export const diagnosticoUiES = {
     beneficio3Titulo: 'Consulta Gratuita',
     beneficio3Desc: '30 min con experto',
   },
+
+  // === PreAssessment ===
+  preAssessment: {
+    pregunta: 'Pregunta',
+    de: 'de',
+    anterior: '← Anterior',
+    questions: [
+      {
+        title: 'Finanzas',
+        question: '¿Qué tan en control te sientes de las finanzas de tu negocio?',
+        options: [
+          'Sin control - No sé mis números',
+          'Control básico - Reviso ocasionalmente',
+          'Buen control - Monitoreo constante',
+        ],
+      },
+      {
+        title: 'Operaciones',
+        question: '¿Cuánto tiempo dedicas a tareas repetitivas y manuales?',
+        options: [
+          'Demasiado - Más del 60% del tiempo',
+          'Moderado - Entre 30-60% del tiempo',
+          'Poco - Menos del 30% del tiempo',
+        ],
+      },
+      {
+        title: 'Marketing',
+        question: '¿Qué tan efectiva es tu presencia digital y atracción de clientes?',
+        options: [
+          'Muy básica - Casi no tengo presencia',
+          'Moderada - Algo de presencia pero sin estrategia',
+          'Fuerte - Estrategia clara y resultados medibles',
+        ],
+      },
+    ],
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -161,5 +197,41 @@ export const diagnosticoUiEN = {
     beneficio2Desc: 'By email instantly',
     beneficio3Titulo: 'Free Consultation',
     beneficio3Desc: '30 min with an expert',
+  },
+
+  // === PreAssessment ===
+  preAssessment: {
+    pregunta: 'Question',
+    de: 'of',
+    anterior: '← Previous',
+    questions: [
+      {
+        title: 'Finance',
+        question: 'How in control do you feel of your business finances?',
+        options: [
+          'No control - I don\'t know my numbers',
+          'Basic control - I review occasionally',
+          'Good control - Constant monitoring',
+        ],
+      },
+      {
+        title: 'Operations',
+        question: 'How much time do you spend on repetitive and manual tasks?',
+        options: [
+          'Too much - More than 60% of my time',
+          'Moderate - Between 30-60% of my time',
+          'Little - Less than 30% of my time',
+        ],
+      },
+      {
+        title: 'Marketing',
+        question: 'How effective is your digital presence and customer attraction?',
+        options: [
+          'Very basic - Almost no presence',
+          'Moderate - Some presence but no strategy',
+          'Strong - Clear strategy and measurable results',
+        ],
+      },
+    ],
   },
 }

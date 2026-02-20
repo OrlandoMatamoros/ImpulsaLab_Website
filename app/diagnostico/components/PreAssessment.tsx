@@ -2,12 +2,15 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/index';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface PreAssessmentProps {
   onComplete: (scores: { finance: number; operations: number; marketing: number }) => void;
 }
 
 export function PreAssessment({ onComplete }: PreAssessmentProps) {
+  const { t } = useLanguage();
+  const tp = t.preAssessment;
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState({
     finance: 0,
@@ -15,38 +18,19 @@ export function PreAssessment({ onComplete }: PreAssessmentProps) {
     marketing: 0
   });
 
-  const questions = [
-    {
-      id: 'finance',
-      title: '💰 Finanzas',
-      question: '¿Qué tan en control te sientes de las finanzas de tu negocio?',
-      options: [
-        { label: 'Sin control - No sé mis números', value: 20 },
-        { label: 'Control básico - Reviso ocasionalmente', value: 50 },
-        { label: 'Buen control - Monitoreo constante', value: 80 }
-      ]
-    },
-    {
-      id: 'operations',
-      title: '⚙️ Operaciones',
-      question: '¿Cuánto tiempo dedicas a tareas repetitivas y manuales?',
-      options: [
-        { label: 'Demasiado - Más del 60% del tiempo', value: 20 },
-        { label: 'Moderado - Entre 30-60% del tiempo', value: 50 },
-        { label: 'Poco - Menos del 30% del tiempo', value: 80 }
-      ]
-    },
-    {
-      id: 'marketing',
-      title: '📈 Marketing',
-      question: '¿Qué tan efectiva es tu presencia digital y atracción de clientes?',
-      options: [
-        { label: 'Muy básica - Casi no tengo presencia', value: 20 },
-        { label: 'Moderada - Algo de presencia pero sin estrategia', value: 50 },
-        { label: 'Fuerte - Estrategia clara y resultados medibles', value: 80 }
-      ]
-    }
-  ];
+  const icons = ['💰', '⚙️', '📈'];
+  const ids = ['finance', 'operations', 'marketing'] as const;
+  const values = [20, 50, 80];
+
+  const questions = tp.questions.map((q: any, i: number) => ({
+    id: ids[i],
+    title: `${icons[i]} ${q.title}`,
+    question: q.question,
+    options: q.options.map((label: string, j: number) => ({
+      label,
+      value: values[j],
+    })),
+  }));
 
   const handleAnswer = (value: number) => {
     const question = questions[currentQuestion];
@@ -74,7 +58,7 @@ export function PreAssessment({ onComplete }: PreAssessmentProps) {
       {/* Progress Bar - Mobile Optimized */}
       <div className="mb-6 sm:mb-8">
         <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-2">
-          <span>Pregunta {currentQuestion + 1} de {questions.length}</span>
+          <span>{tp.pregunta} {currentQuestion + 1} {tp.de} {questions.length}</span>
           <span>{Math.round(((currentQuestion + 1) / questions.length) * 100)}%</span>
         </div>
         <div className="w-full bg-gray-200 rounded-full h-2 sm:h-3">
@@ -132,7 +116,7 @@ export function PreAssessment({ onComplete }: PreAssessmentProps) {
               onClick={() => setCurrentQuestion(prev => prev - 1)}
               className="text-sm sm:text-base px-4 sm:px-6 py-2 sm:py-3"
             >
-              ← Anterior
+              {tp.anterior}
             </Button>
             <span className="text-xs sm:text-sm text-gray-500">
               {currentQuestion + 1}/{questions.length}
