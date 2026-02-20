@@ -116,6 +116,40 @@ export const diagnosticoUiES = {
       },
     ],
   },
+
+  // === AdaptiveQuestions ===
+  adaptiveQuestions: {
+    cargando: 'Cargando preguntas...',
+    pregunta: 'Pregunta',
+    de: 'de',
+    completado: 'completado',
+    anterior: 'Anterior',
+    siguiente: 'Siguiente',
+    completar: 'Completar',
+    seleccionaOpcion: 'Selecciona una opción para continuar',
+    puntuacionActual: 'Puntuación actual',
+    sliderDesacuerdo: 'Totalmente en desacuerdo',
+    sliderAcuerdo: 'Totalmente de acuerdo',
+    categoryLabels: {
+      critical: 'Crítico',
+      important: 'Importante',
+      relevant: 'Relevante',
+    },
+    axisInfo: {
+      finance: {
+        title: 'Finanzas',
+        description: 'Evaluación de la gestión financiera y salud económica de tu empresa',
+      },
+      operations: {
+        title: 'Operaciones',
+        description: 'Análisis de la eficiencia operativa y procesos de tu negocio',
+      },
+      marketing: {
+        title: 'Marketing',
+        description: 'Evaluación de tus estrategias de marketing y presencia en el mercado',
+      },
+    },
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -233,5 +267,39 @@ export const diagnosticoUiEN = {
         ],
       },
     ],
+  },
+
+  // === AdaptiveQuestions ===
+  adaptiveQuestions: {
+    cargando: 'Loading questions...',
+    pregunta: 'Question',
+    de: 'of',
+    completado: 'completed',
+    anterior: 'Previous',
+    siguiente: 'Next',
+    completar: 'Complete',
+    seleccionaOpcion: 'Select an option to continue',
+    puntuacionActual: 'Current score',
+    sliderDesacuerdo: 'Strongly disagree',
+    sliderAcuerdo: 'Strongly agree',
+    categoryLabels: {
+      critical: 'Critical',
+      important: 'Important',
+      relevant: 'Relevant',
+    },
+    axisInfo: {
+      finance: {
+        title: 'Finance',
+        description: 'Assessment of financial management and economic health of your company',
+      },
+      operations: {
+        title: 'Operations',
+        description: 'Analysis of operational efficiency and processes in your business',
+      },
+      marketing: {
+        title: 'Marketing',
+        description: 'Assessment of your marketing strategies and market presence',
+      },
+    },
   },
 }
