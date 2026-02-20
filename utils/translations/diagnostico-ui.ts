@@ -190,6 +190,50 @@ export const diagnosticoUiES = {
     },
     infoNote: 'Este proceso toma solo unos segundos...',
   },
+
+  // === RadarChart3D ===
+  radarChart3D: {
+    defaultCompany: 'Tu Empresa',
+    labels: ['FINANZAS', 'OPERACIONES', 'MARKETING'],
+    labelsMobile: ['FIN', 'OPS', 'MKT'],
+    expansion: 'Expansión',
+    supervivencia: 'Supervivencia',
+  },
+
+  // === ClientInfoStep ===
+  clientInfoStep: {
+    labelEmpresa: 'Nombre de la Empresa *',
+    placeholderEmpresa: 'Ej: Antology Restaurante',
+    labelContacto: 'Nombre del Contacto *',
+    placeholderContacto: 'Ej: Juan Pérez',
+    labelIndustria: 'Industria *',
+    selectIndustria: 'Selecciona una industria',
+    industrias: [
+      'Tecnología',
+      'Retail',
+      'Servicios',
+      'Manufactura',
+      'Salud',
+      'Educación',
+      'Alimentos',
+      'Otro',
+    ],
+    labelEmpleados: 'Número de Empleados *',
+    placeholderEmpleados: 'Ej: 10',
+    labelIngresos: 'Ingresos Anuales (USD)',
+    placeholderIngresos: 'Ej: 500000',
+    labelEmail: 'Email de Contacto *',
+    placeholderEmail: 'contacto@empresa.com',
+    labelTelefono: 'Teléfono',
+    placeholderTelefono: '+1 234 567 8900',
+    btnSubmit: 'Continuar al Diagnóstico',
+    errorEmpresa: 'El nombre de la empresa es requerido',
+    errorContacto: 'El nombre de contacto es requerido',
+    errorIndustria: 'Selecciona una industria',
+    errorEmail: 'El email es requerido',
+    errorEmailInvalido: 'Email inválido',
+    errorEmpleados: 'Ingresa el número de empleados',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -381,5 +425,49 @@ export const diagnosticoUiEN = {
       listo: 'Ready to see results!',
     },
     infoNote: 'This process takes only a few seconds...',
+  },
+
+  // === RadarChart3D ===
+  radarChart3D: {
+    defaultCompany: 'Your Company',
+    labels: ['FINANCE', 'OPERATIONS', 'MARKETING'],
+    labelsMobile: ['FIN', 'OPS', 'MKT'],
+    expansion: 'Expansion',
+    supervivencia: 'Survival',
+  },
+
+  // === ClientInfoStep ===
+  clientInfoStep: {
+    labelEmpresa: 'Company Name *',
+    placeholderEmpresa: 'E.g.: Antology Restaurant',
+    labelContacto: 'Contact Name *',
+    placeholderContacto: 'E.g.: John Smith',
+    labelIndustria: 'Industry *',
+    selectIndustria: 'Select an industry',
+    industrias: [
+      'Technology',
+      'Retail',
+      'Services',
+      'Manufacturing',
+      'Health',
+      'Education',
+      'Food',
+      'Other',
+    ],
+    labelEmpleados: 'Number of Employees *',
+    placeholderEmpleados: 'E.g.: 10',
+    labelIngresos: 'Annual Revenue (USD)',
+    placeholderIngresos: 'E.g.: 500000',
+    labelEmail: 'Contact Email *',
+    placeholderEmail: 'contact@company.com',
+    labelTelefono: 'Phone',
+    placeholderTelefono: '+1 234 567 8900',
+    btnSubmit: 'Continue to Diagnostic',
+    errorEmpresa: 'Company name is required',
+    errorContacto: 'Contact name is required',
+    errorIndustria: 'Select an industry',
+    errorEmail: 'Email is required',
+    errorEmailInvalido: 'Invalid email',
+    errorEmpleados: 'Enter the number of employees',
   },
 }
