@@ -80,6 +80,116 @@ export const diagnosticoUiES = {
     beneficio3Titulo: 'Consulta Gratuita',
     beneficio3Desc: '30 min con experto',
   },
+
+  // === PreAssessment ===
+  preAssessment: {
+    pregunta: 'Pregunta',
+    de: 'de',
+    anterior: '← Anterior',
+    questions: [
+      {
+        title: 'Finanzas',
+        question: '¿Qué tan en control te sientes de las finanzas de tu negocio?',
+        options: [
+          'Sin control - No sé mis números',
+          'Control básico - Reviso ocasionalmente',
+          'Buen control - Monitoreo constante',
+        ],
+      },
+      {
+        title: 'Operaciones',
+        question: '¿Cuánto tiempo dedicas a tareas repetitivas y manuales?',
+        options: [
+          'Demasiado - Más del 60% del tiempo',
+          'Moderado - Entre 30-60% del tiempo',
+          'Poco - Menos del 30% del tiempo',
+        ],
+      },
+      {
+        title: 'Marketing',
+        question: '¿Qué tan efectiva es tu presencia digital y atracción de clientes?',
+        options: [
+          'Muy básica - Casi no tengo presencia',
+          'Moderada - Algo de presencia pero sin estrategia',
+          'Fuerte - Estrategia clara y resultados medibles',
+        ],
+      },
+    ],
+  },
+
+  // === AdaptiveQuestions ===
+  adaptiveQuestions: {
+    cargando: 'Cargando preguntas...',
+    pregunta: 'Pregunta',
+    de: 'de',
+    completado: 'completado',
+    anterior: 'Anterior',
+    siguiente: 'Siguiente',
+    completar: 'Completar',
+    seleccionaOpcion: 'Selecciona una opción para continuar',
+    puntuacionActual: 'Puntuación actual',
+    sliderDesacuerdo: 'Totalmente en desacuerdo',
+    sliderAcuerdo: 'Totalmente de acuerdo',
+    categoryLabels: {
+      critical: 'Crítico',
+      important: 'Importante',
+      relevant: 'Relevante',
+    },
+    axisInfo: {
+      finance: {
+        title: 'Finanzas',
+        description: 'Evaluación de la gestión financiera y salud económica de tu empresa',
+      },
+      operations: {
+        title: 'Operaciones',
+        description: 'Análisis de la eficiencia operativa y procesos de tu negocio',
+      },
+      marketing: {
+        title: 'Marketing',
+        description: 'Evaluación de tus estrategias de marketing y presencia en el mercado',
+      },
+    },
+  },
+
+  // === AutoProcessing ===
+  autoProcessing: {
+    steps: {
+      calculating: {
+        title: 'Calculando Inteligencia de Negocio',
+        description: 'Analizando tus respuestas en las 3 dimensiones...',
+      },
+      sendingReport: {
+        title: 'Generando tu Reporte Personalizado',
+        description: 'Preparando resultados detallados...',
+      },
+      sendingAdmin: {
+        title: 'Enviando Resultados',
+        descriptionPrefix: 'Enviando reporte a',
+      },
+      savingCrm: {
+        title: 'Guardando Información',
+        description: 'Almacenando tus resultados de forma segura...',
+      },
+      complete: {
+        title: '¡Todo Listo!',
+        description: 'Redirigiendo a tus resultados...',
+      },
+    },
+    progreso: 'Progreso',
+    vistaPrevia: 'Vista Previa de Resultados',
+    finanzas: 'Finanzas',
+    operaciones: 'Operaciones',
+    marketing: 'Marketing',
+    promedioGeneral: 'Promedio General',
+    indicadores: {
+      analisis: 'Análisis completado',
+      reporte: 'Reporte generado',
+      email: 'Email enviado',
+      datos: 'Datos guardados',
+      listo: '¡Listo para ver resultados!',
+    },
+    infoNote: 'Este proceso toma solo unos segundos...',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -161,5 +271,115 @@ export const diagnosticoUiEN = {
     beneficio2Desc: 'By email instantly',
     beneficio3Titulo: 'Free Consultation',
     beneficio3Desc: '30 min with an expert',
+  },
+
+  // === PreAssessment ===
+  preAssessment: {
+    pregunta: 'Question',
+    de: 'of',
+    anterior: '← Previous',
+    questions: [
+      {
+        title: 'Finance',
+        question: 'How in control do you feel of your business finances?',
+        options: [
+          'No control - I don\'t know my numbers',
+          'Basic control - I review occasionally',
+          'Good control - Constant monitoring',
+        ],
+      },
+      {
+        title: 'Operations',
+        question: 'How much time do you spend on repetitive and manual tasks?',
+        options: [
+          'Too much - More than 60% of my time',
+          'Moderate - Between 30-60% of my time',
+          'Little - Less than 30% of my time',
+        ],
+      },
+      {
+        title: 'Marketing',
+        question: 'How effective is your digital presence and customer attraction?',
+        options: [
+          'Very basic - Almost no presence',
+          'Moderate - Some presence but no strategy',
+          'Strong - Clear strategy and measurable results',
+        ],
+      },
+    ],
+  },
+
+  // === AdaptiveQuestions ===
+  adaptiveQuestions: {
+    cargando: 'Loading questions...',
+    pregunta: 'Question',
+    de: 'of',
+    completado: 'completed',
+    anterior: 'Previous',
+    siguiente: 'Next',
+    completar: 'Complete',
+    seleccionaOpcion: 'Select an option to continue',
+    puntuacionActual: 'Current score',
+    sliderDesacuerdo: 'Strongly disagree',
+    sliderAcuerdo: 'Strongly agree',
+    categoryLabels: {
+      critical: 'Critical',
+      important: 'Important',
+      relevant: 'Relevant',
+    },
+    axisInfo: {
+      finance: {
+        title: 'Finance',
+        description: 'Assessment of financial management and economic health of your company',
+      },
+      operations: {
+        title: 'Operations',
+        description: 'Analysis of operational efficiency and processes in your business',
+      },
+      marketing: {
+        title: 'Marketing',
+        description: 'Assessment of your marketing strategies and market presence',
+      },
+    },
+  },
+
+  // === AutoProcessing ===
+  autoProcessing: {
+    steps: {
+      calculating: {
+        title: 'Calculating Business Intelligence',
+        description: 'Analyzing your answers across the 3 dimensions...',
+      },
+      sendingReport: {
+        title: 'Generating Your Personalized Report',
+        description: 'Preparing detailed results...',
+      },
+      sendingAdmin: {
+        title: 'Sending Results',
+        descriptionPrefix: 'Sending report to',
+      },
+      savingCrm: {
+        title: 'Saving Information',
+        description: 'Storing your results securely...',
+      },
+      complete: {
+        title: 'All Done!',
+        description: 'Redirecting to your results...',
+      },
+    },
+    progreso: 'Progress',
+    vistaPrevia: 'Results Preview',
+    finanzas: 'Finance',
+    operaciones: 'Operations',
+    marketing: 'Marketing',
+    promedioGeneral: 'Overall Average',
+    indicadores: {
+      analisis: 'Analysis completed',
+      reporte: 'Report generated',
+      email: 'Email sent',
+      datos: 'Data saved',
+      listo: 'Ready to see results!',
+    },
+    infoNote: 'This process takes only a few seconds...',
   },
 }

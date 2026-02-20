@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/index';
 import { Progress } from '@/components/ui/index';
 import { selectAdaptiveQuestions } from '../lib/questions-data';
 import { ChevronLeft, ChevronRight, Info, CheckCircle2 } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AdaptiveQuestionsProps {
   axis: 'finance' | 'operations' | 'marketing';
@@ -13,6 +14,8 @@ interface AdaptiveQuestionsProps {
 }
 
 export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: AdaptiveQuestionsProps) {
+  const { t } = useLanguage();
+  const tp = t.adaptiveQuestions;
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [answers, setAnswers] = useState<{ [key: string]: number }>({});
   const [questions, setQuestions] = useState<any[]>([]);
@@ -118,7 +121,7 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Cargando preguntas...</p>
+          <p className="text-gray-600">{tp.cargando}</p>
         </div>
       </div>
     );
@@ -128,26 +131,12 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
   const hasAnswer = currentQuestion.type === 'multiple-choice' ? selectedOption !== null : true;
 
-  // Títulos y descripciones mejoradas por eje
-  const axisInfo = {
-    finance: {
-      icon: '💰',
-      title: 'Finanzas',
-      description: 'Evaluación de la gestión financiera y salud económica de tu empresa'
-    },
-    operations: {
-      icon: '⚙️',
-      title: 'Operaciones',
-      description: 'Análisis de la eficiencia operativa y procesos de tu negocio'
-    },
-    marketing: {
-      icon: '📈',
-      title: 'Marketing',
-      description: 'Evaluación de tus estrategias de marketing y presencia en el mercado'
-    }
+  const axisIcons = { finance: '💰', operations: '⚙️', marketing: '📈' };
+  const currentAxisInfo = {
+    icon: axisIcons[axis],
+    title: tp.axisInfo[axis].title,
+    description: tp.axisInfo[axis].description,
   };
-
-  const currentAxisInfo = axisInfo[axis];
 
   return (
     <div className="max-w-3xl mx-auto p-4 sm:p-6">
@@ -165,8 +154,8 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
       {/* Progress */}
       <div className="mb-6">
         <div className="flex justify-between text-xs sm:text-sm text-gray-600 mb-2">
-          <span>Pregunta {currentQuestionIndex + 1} de {questions.length}</span>
-          <span>{Math.round(progress)}% completado</span>
+          <span>{tp.pregunta} {currentQuestionIndex + 1} {tp.de} {questions.length}</span>
+          <span>{Math.round(progress)}% {tp.completado}</span>
         </div>
         <Progress value={progress} className="h-2 sm:h-3" />
       </div>
@@ -180,9 +169,9 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
               ${currentQuestion.category === 'critical' ? 'bg-red-100 text-red-800' : 
                 currentQuestion.category === 'important' ? 'bg-yellow-100 text-yellow-800' : 
                 'bg-blue-100 text-blue-800'}`}>
-              {currentQuestion.category === 'critical' ? '🔴 Crítico' : 
-               currentQuestion.category === 'important' ? '🟡 Importante' : 
-               '🔵 Relevante'}
+              {currentQuestion.category === 'critical' ? `🔴 ${tp.categoryLabels.critical}` :
+               currentQuestion.category === 'important' ? `🟡 ${tp.categoryLabels.important}` :
+               `🔵 ${tp.categoryLabels.relevant}`}
             </span>
           </div>
         )}
@@ -248,8 +237,8 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
           <div className="space-y-6">
             <div className="px-2">
               <div className="flex justify-between text-sm text-gray-600 mb-2">
-                <span>Totalmente en desacuerdo</span>
-                <span>Totalmente de acuerdo</span>
+                <span>{tp.sliderDesacuerdo}</span>
+                <span>{tp.sliderAcuerdo}</span>
               </div>
               
               <input
@@ -279,7 +268,7 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
               <p className="text-3xl font-bold text-blue-600">
                 {answers[currentQuestion?.id] || 50}
               </p>
-              <p className="text-sm text-gray-600 mt-1">Puntuación actual</p>
+              <p className="text-sm text-gray-600 mt-1">{tp.puntuacionActual}</p>
             </div>
           </div>
         )}
@@ -294,7 +283,7 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
           className="flex items-center gap-2"
         >
           <ChevronLeft className="w-4 h-4" />
-          <span className="hidden sm:inline">Anterior</span>
+          <span className="hidden sm:inline">{tp.anterior}</span>
         </Button>
 
         <span className="text-sm text-gray-500">
@@ -307,7 +296,7 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
           className="flex items-center gap-2"
         >
           <span className="hidden sm:inline">
-            {currentQuestionIndex === questions.length - 1 ? 'Completar' : 'Siguiente'}
+            {currentQuestionIndex === questions.length - 1 ? tp.completar : tp.siguiente}
           </span>
           <ChevronRight className="w-4 h-4" />
         </Button>
@@ -316,7 +305,7 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
       {/* Helper text */}
       {currentQuestion?.type === 'multiple-choice' && !selectedOption && (
         <p className="text-center text-sm text-gray-500 mt-4">
-          Selecciona una opción para continuar
+          {tp.seleccionaOpcion}
         </p>
       )}
     </div>

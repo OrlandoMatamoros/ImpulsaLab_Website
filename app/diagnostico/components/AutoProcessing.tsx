@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Card, CardContent } from '@/components/ui/index';
 import { Loader2, CheckCircle, Mail, Database, TrendingUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface AutoProcessingProps {
   leadData: {
@@ -23,6 +24,8 @@ interface AutoProcessingProps {
 }
 
 export function AutoProcessing({ leadData, scores, responses }: AutoProcessingProps) {
+  const { t } = useLanguage();
+  const tp = t.autoProcessing;
   const router = useRouter();
   const [processingStep, setProcessingStep] = useState<
     'calculating' | 'sending_report' | 'sending_admin' | 'saving_crm' | 'complete'
@@ -111,29 +114,29 @@ export function AutoProcessing({ leadData, scores, responses }: AutoProcessingPr
   const stepInfo = {
     calculating: {
       icon: <TrendingUp className="w-12 h-12" />,
-      title: 'Calculando Inteligencia de Negocio',
-      description: 'Analizando tus respuestas en las 3 dimensiones...'
+      title: tp.steps.calculating.title,
+      description: tp.steps.calculating.description,
     },
     sending_report: {
       icon: <Mail className="w-12 h-12" />,
-      title: 'Generando tu Reporte Personalizado',
-      description: 'Preparando resultados detallados...'
+      title: tp.steps.sendingReport.title,
+      description: tp.steps.sendingReport.description,
     },
     sending_admin: {
       icon: <CheckCircle className="w-12 h-12" />,
-      title: 'Enviando Resultados',
-      description: `Enviando reporte a ${leadData.email}...`
+      title: tp.steps.sendingAdmin.title,
+      description: `${tp.steps.sendingAdmin.descriptionPrefix} ${leadData.email}...`,
     },
     saving_crm: {
       icon: <Database className="w-12 h-12" />,
-      title: 'Guardando Información',
-      description: 'Almacenando tus resultados de forma segura...'
+      title: tp.steps.savingCrm.title,
+      description: tp.steps.savingCrm.description,
     },
     complete: {
       icon: <CheckCircle className="w-12 h-12" />,
-      title: '¡Todo Listo!',
-      description: 'Redirigiendo a tus resultados...'
-    }
+      title: tp.steps.complete.title,
+      description: tp.steps.complete.description,
+    },
   };
 
   const currentStep = stepInfo[processingStep];
@@ -166,7 +169,7 @@ export function AutoProcessing({ leadData, scores, responses }: AutoProcessingPr
           {/* Progress Bar */}
           <div className="mb-8">
             <div className="flex justify-between text-sm text-gray-600 mb-2">
-              <span>Progreso</span>
+              <span>{tp.progreso}</span>
               <span className="font-semibold">{progress}%</span>
             </div>
             <div className="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
@@ -180,30 +183,30 @@ export function AutoProcessing({ leadData, scores, responses }: AutoProcessingPr
           {/* Scores Preview */}
           <div className="bg-white rounded-lg p-6 border border-blue-200">
             <h3 className="text-lg font-semibold text-gray-800 mb-4 text-center">
-              Vista Previa de Resultados
+              {tp.vistaPrevia}
             </h3>
             <div className="grid grid-cols-3 gap-4">
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">
                   {Math.round(scores.finance)}
                 </div>
-                <div className="text-xs text-gray-600 mt-1">💰 Finanzas</div>
+                <div className="text-xs text-gray-600 mt-1">💰 {tp.finanzas}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">
                   {Math.round(scores.operations)}
                 </div>
-                <div className="text-xs text-gray-600 mt-1">⚙️ Operaciones</div>
+                <div className="text-xs text-gray-600 mt-1">⚙️ {tp.operaciones}</div>
               </div>
               <div className="text-center">
                 <div className="text-3xl font-bold text-blue-600">
                   {Math.round(scores.marketing)}
                 </div>
-                <div className="text-xs text-gray-600 mt-1">📈 Marketing</div>
+                <div className="text-xs text-gray-600 mt-1">📈 {tp.marketing}</div>
               </div>
             </div>
             <div className="mt-4 pt-4 border-t border-gray-200 text-center">
-              <div className="text-sm text-gray-600">Promedio General</div>
+              <div className="text-sm text-gray-600">{tp.promedioGeneral}</div>
               <div className="text-4xl font-bold text-indigo-600 mt-1">
                 {Math.round((scores.finance + scores.operations + scores.marketing) / 3)}
               </div>
@@ -213,27 +216,27 @@ export function AutoProcessing({ leadData, scores, responses }: AutoProcessingPr
           {/* Status Steps */}
           <div className="mt-8 space-y-3">
             <StepIndicator
-              label="Análisis completado"
+              label={tp.indicadores.analisis}
               completed={progress >= 20}
               active={processingStep === 'calculating'}
             />
             <StepIndicator
-              label="Reporte generado"
+              label={tp.indicadores.reporte}
               completed={progress >= 40}
               active={processingStep === 'sending_report'}
             />
             <StepIndicator
-              label="Email enviado"
+              label={tp.indicadores.email}
               completed={progress >= 80}
               active={processingStep === 'sending_admin'}
             />
             <StepIndicator
-              label="Datos guardados"
+              label={tp.indicadores.datos}
               completed={progress >= 95}
               active={processingStep === 'saving_crm'}
             />
             <StepIndicator
-              label="¡Listo para ver resultados!"
+              label={tp.indicadores.listo}
               completed={progress === 100}
               active={processingStep === 'complete'}
             />
@@ -252,7 +255,7 @@ export function AutoProcessing({ leadData, scores, responses }: AutoProcessingPr
       {/* Info Note */}
       <div className="mt-6 text-center">
         <p className="text-sm text-gray-500">
-          ⏱️ Este proceso toma solo unos segundos...
+          ⏱️ {tp.infoNote}
         </p>
       </div>
     </div>
