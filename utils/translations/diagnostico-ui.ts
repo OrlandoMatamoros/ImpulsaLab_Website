@@ -343,6 +343,130 @@ export const diagnosticoUiES = {
       ],
     },
   },
+
+  // === ResultsDashboard ===
+  resultsDashboard: {
+    // Header
+    headerTitle: 'Diagnóstico 3D Completado',
+    defaultCompany: 'Tu Empresa',
+    globalScore: 'Puntuación Global',
+    // Business stages
+    stages: {
+      expansion: { stage: 'Expansión', description: 'Tu negocio está listo para escalar' },
+      growth: { stage: 'Crecimiento', description: 'Tienes una base sólida para crecer' },
+      survival: { stage: 'Supervivencia', description: 'Es momento de fortalecer los fundamentos' },
+    },
+    // Axis labels
+    axisLabels: { finance: 'Finanzas', operations: 'Operaciones', marketing: 'Marketing' },
+    // Tabs
+    tabOverview: 'Vista General',
+    tabDetails: 'Análisis Detallado',
+    tabRecommendations: 'Plan de Acción IA',
+    // Company profile
+    companyProfileTitle: 'Perfil de Empresa',
+    companyProfileSubtitle: 'Contexto para tu diagnóstico',
+    clasificacion: 'Clasificación:',
+    empleados: 'Empleados:',
+    industria: 'Industria:',
+    priorityTitle: 'Acciones Prioritarias',
+    prioritySubtitle: 'Para tu tamaño e industria',
+    strengthsTitle: 'Tus Fortalezas en',
+    improvementTitle: 'Oportunidades de Mejora',
+    // Radar chart
+    radarTitle: 'Mapa 3D de tu Negocio',
+    radarName: 'Tu Negocio',
+    // Bar chart
+    vsIndustry: 'vs Industria',
+    avgPrefix: 'Promedio',
+    // Insights
+    criticalArea: 'Área Crítica',
+    weakestMsg: 'Tu eje más débil es',
+    withPoints: 'con',
+    points: 'puntos',
+    belowAvg: 'puntos por debajo del promedio de',
+    improvementPotential: 'Potencial de Mejora',
+    improvementMsg: 'de potencial de mejora promedio.',
+    improvementHave: 'Tienes un',
+    improvementAdvice: 'Con las estrategias correctas, puedes superar el promedio de la industria.',
+    strengthCard: 'Tu Fortaleza',
+    strengthMsg: 'Destacas en',
+    aboveAvg: 'puntos sobre el promedio.',
+    solidBase: 'Aprovecha esta base sólida para crecer.',
+    // Details tab
+    detailsTitle: 'Análisis Detallado por Eje - Industria:',
+    benchmark: 'Benchmark',
+    aboveLabel: '✓ Por encima',
+    belowLabel: '✗ Por debajo',
+    comparisonWith: 'Comparación con',
+    diagnostico: 'Diagnóstico:',
+    roiPotencial: 'ROI Potencial:',
+    inMonths: 'en 12 meses',
+    implTime: 'Tiempo de Implementación:',
+    days: 'días',
+    toSeeResults: 'para ver resultados',
+    savingPotential: 'Ahorro Potencial:',
+    hrsWeek: 'hrs/semana',
+    inManualTasks: 'en tareas manuales',
+    capacityIncrease: 'Incremento Capacidad:',
+    noMoreHiring: 'sin contratar más personal',
+    leadsIncrease: 'Incremento en Leads:',
+    inSixMonths: 'en 6 meses',
+    cacReduction: 'Reducción CAC:',
+    withAutomation: 'con automatización',
+    industryContext: 'Contexto de la Industria:',
+    bestPractices: 'Mejores Prácticas en',
+    trends: 'Tendencias en',
+    // Finance diagnostics
+    financeDiag: {
+      excellent: (company: string, benchmark: number, industry: string) => `Excelente gestión financiera. ${company} demuestra un control excepcional, superando ampliamente el promedio de ${benchmark} puntos en ${industry}. Este nivel de madurez financiera te posiciona en el top 10% de tu industria.`,
+      good: (score: number, benchmark: number) => `Control financiero sólido. Con ${score} puntos, ${score >= benchmark ? 'superas' : 'estás cerca de'} el promedio de la industria. Hay oportunidades específicas para optimizar márgenes y flujo de caja que podrían elevar tu puntuación 15-20 puntos adicionales.`,
+      medium: (score: number, industry: string, benchmark: number) => `Control financiero en desarrollo. Tu puntuación de ${score} indica que hay sistemas básicos implementados, pero falta visibilidad en tiempo real. Las empresas de ${industry} con mejores prácticas promedian ${benchmark} puntos.`,
+      low: (score: number, benchmark: number) => `Gestión financiera reactiva. Con ${score} puntos, estás ${benchmark - score} puntos por debajo del estándar de la industria. Esto representa la mayor oportunidad de mejora inmediata para tu negocio.`,
+    },
+    // Operations diagnostics
+    opsDiag: {
+      excellent: (score: number, benchmark: number, industry: string) => `Operaciones de clase mundial. Con ${score} puntos, superas el benchmark de ${benchmark} en ${industry}. Tus procesos automatizados y documentados son un activo competitivo que te permite escalar eficientemente.`,
+      good: (score: number, benchmark: number) => `Operaciones eficientes. Tu puntuación de ${score} ${score >= benchmark ? 'supera' : 'se acerca a'} la media de la industria. Existe potencial para automatizar 2-3 procesos clave adicionales que liberarían 10-15 horas semanales.`,
+      medium: (score: number, benchmark: number, industry: string) => `Operaciones funcionales con oportunidades. Con ${score} puntos, hay margen significativo para alcanzar el estándar de ${benchmark} en ${industry}. La automatización selectiva puede duplicar tu capacidad sin aumentar costos.`,
+      low: (score: number, benchmark: number) => `Operaciones principalmente manuales. Tu puntuación de ${score} está ${benchmark - score} puntos debajo del promedio. Se estima que el 60-70% del tiempo de tu equipo se dedica a tareas repetitivas automatizables.`,
+    },
+    // Marketing diagnostics
+    mktDiag: {
+      excellent: (score: number, benchmark: number, industry: string) => `Marketing de alto rendimiento. Con ${score} puntos, superas significativamente el promedio de ${benchmark} en ${industry}. Tu marca genera demanda consistente y tiene un CAC optimizado con LTV/CAC > 3:1.`,
+      good: (score: number, benchmark: number) => `Estrategia de marketing efectiva. Tu puntuación de ${score} ${score >= benchmark ? 'está por encima del' : 'se acerca al'} promedio de la industria. Con optimizaciones específicas en canales digitales, podrías reducir CAC en 20-30%.`,
+      medium: (score: number, benchmark: number, industry: string) => `Marketing en fase de construcción. Con ${score} puntos, tienes base pero falta consistencia. El promedio en ${industry} es ${benchmark}, indicando oportunidad de crecimiento significativo en generación de demanda.`,
+      low: (score: number, benchmark: number) => `Marketing reactivo y limitado. Tu puntuación de ${score} está ${benchmark - score} puntos bajo el estándar. Los competidores están capturando tu mercado potencial mediante estrategias digitales efectivas.`,
+    },
+    // Industry context texts
+    financeContext: {
+      Tecnología: 'En el sector tecnológico, el control financiero riguroso es crítico debido a los ciclos de inversión y la necesidad de demostrar métricas SaaS como MRR, CAC y LTV a inversores.',
+      Retail: 'En retail, la gestión de inventario y márgenes ajustados requiere visibilidad financiera diaria. Los líderes del sector operan con dashboards en tiempo real.',
+      Servicios: 'En servicios profesionales, el tracking de rentabilidad por proyecto y cliente es fundamental. Las firmas exitosas mantienen márgenes del 20-30% mediante control estricto.',
+      Alimentos: 'En la industria alimentaria, el control de costos variables y la gestión de mermas puede significar la diferencia entre pérdida y ganancia. Los márgenes típicos oscilan entre 3-8%.',
+      default: 'el control financiero efectivo es la base para la toma de decisiones estratégicas y el crecimiento sostenible.',
+    },
+    opsContext: {
+      Tecnología: 'Las empresas tech líderes automatizan deployment, testing y soporte nivel 1. Utilizan metodologías ágiles y DevOps para reducir time-to-market en 40-60%.',
+      Retail: 'Los retailers exitosos integran inventario, POS y e-commerce en tiempo real. La automatización de reabastecimiento y pricing dinámico son estándares de la industria.',
+      Servicios: 'Las firmas de servicios eficientes automatizan propuestas, onboarding y facturación. Los líderes mantienen utilización del 75-85% mediante gestión inteligente de recursos.',
+      Alimentos: 'En alimentos, la trazabilidad automatizada, control de temperatura y gestión FIFO son críticos. Los líderes reducen mermas al 2-3% mediante sistemas predictivos.',
+      default: 'la eficiencia operativa marca la diferencia entre líderes y seguidores del mercado.',
+    },
+    mktContext: {
+      Tecnología: 'En tech, el content marketing y product-led growth dominan. Las empresas exitosas generan 60% de leads mediante contenido educativo y mantienen tasas de conversión del 2-4%.',
+      Retail: 'El retail moderno requiere omnicanalidad. Los líderes integran experiencias online/offline, utilizan personalización AI y mantienen engagement rates del 15-20% en email.',
+      Servicios: 'En servicios, el thought leadership y referencias son clave. Las firmas exitosas generan 40% de nuevos clientes vía referencias y mantienen presencia activa en LinkedIn.',
+      Alimentos: 'En alimentos, la presencia local y redes sociales son críticas. Los exitosos mantienen ratings 4.5+ en Google y generan 30% de ventas vía marketing digital local.',
+      default: 'el marketing digital efectivo es indispensable para el crecimiento sostenible.',
+    },
+    // Recommendations loading
+    aiLoading: 'Generando recomendaciones personalizadas con IA...',
+    // CTA
+    ctaTitle: '¿Listo para transformar tu negocio?',
+    ctaDescPremium: 'Descarga tu diagnóstico completo y agenda tu sesión de estrategia para implementar las mejoras.',
+    ctaDescPublic: 'Agenda una consultoría gratuita de 30 minutos y te mostraremos exactamente cómo implementar estas mejoras en tu negocio.',
+    ctaButton: 'Agendar Consultoría Gratuita',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -687,5 +811,129 @@ export const diagnosticoUiEN = {
         },
       ],
     },
+  },
+
+  // === ResultsDashboard ===
+  resultsDashboard: {
+    // Header
+    headerTitle: '3D Diagnostic Completed',
+    defaultCompany: 'Your Company',
+    globalScore: 'Global Score',
+    // Business stages
+    stages: {
+      expansion: { stage: 'Expansion', description: 'Your business is ready to scale' },
+      growth: { stage: 'Growth', description: 'You have a solid foundation to grow' },
+      survival: { stage: 'Survival', description: 'Time to strengthen the fundamentals' },
+    },
+    // Axis labels
+    axisLabels: { finance: 'Finance', operations: 'Operations', marketing: 'Marketing' },
+    // Tabs
+    tabOverview: 'Overview',
+    tabDetails: 'Detailed Analysis',
+    tabRecommendations: 'AI Action Plan',
+    // Company profile
+    companyProfileTitle: 'Company Profile',
+    companyProfileSubtitle: 'Context for your diagnostic',
+    clasificacion: 'Classification:',
+    empleados: 'Employees:',
+    industria: 'Industry:',
+    priorityTitle: 'Priority Actions',
+    prioritySubtitle: 'For your size and industry',
+    strengthsTitle: 'Your Strengths in',
+    improvementTitle: 'Improvement Opportunities',
+    // Radar chart
+    radarTitle: '3D Business Map',
+    radarName: 'Your Business',
+    // Bar chart
+    vsIndustry: 'vs Industry',
+    avgPrefix: 'Average',
+    // Insights
+    criticalArea: 'Critical Area',
+    weakestMsg: 'Your weakest axis is',
+    withPoints: 'with',
+    points: 'points',
+    belowAvg: 'points below the average of',
+    improvementPotential: 'Improvement Potential',
+    improvementMsg: 'average improvement potential.',
+    improvementHave: 'You have a',
+    improvementAdvice: 'With the right strategies, you can surpass the industry average.',
+    strengthCard: 'Your Strength',
+    strengthMsg: 'You stand out in',
+    aboveAvg: 'points above the average.',
+    solidBase: 'Leverage this solid base to grow.',
+    // Details tab
+    detailsTitle: 'Detailed Analysis by Axis - Industry:',
+    benchmark: 'Benchmark',
+    aboveLabel: '✓ Above',
+    belowLabel: '✗ Below',
+    comparisonWith: 'Comparison with',
+    diagnostico: 'Diagnostic:',
+    roiPotencial: 'ROI Potential:',
+    inMonths: 'in 12 months',
+    implTime: 'Implementation Time:',
+    days: 'days',
+    toSeeResults: 'to see results',
+    savingPotential: 'Saving Potential:',
+    hrsWeek: 'hrs/week',
+    inManualTasks: 'in manual tasks',
+    capacityIncrease: 'Capacity Increase:',
+    noMoreHiring: 'without hiring more staff',
+    leadsIncrease: 'Leads Increase:',
+    inSixMonths: 'in 6 months',
+    cacReduction: 'CAC Reduction:',
+    withAutomation: 'with automation',
+    industryContext: 'Industry Context:',
+    bestPractices: 'Best Practices in',
+    trends: 'Trends in',
+    // Finance diagnostics
+    financeDiag: {
+      excellent: (company: string, benchmark: number, industry: string) => `Excellent financial management. ${company} demonstrates exceptional control, far surpassing the average of ${benchmark} points in ${industry}. This level of financial maturity places you in the top 10% of your industry.`,
+      good: (score: number, benchmark: number) => `Solid financial control. With ${score} points, you ${score >= benchmark ? 'surpass' : 'are close to'} the industry average. There are specific opportunities to optimize margins and cash flow that could raise your score by 15-20 additional points.`,
+      medium: (score: number, industry: string, benchmark: number) => `Financial control in development. Your score of ${score} indicates basic systems are in place, but real-time visibility is lacking. Companies in ${industry} with best practices average ${benchmark} points.`,
+      low: (score: number, benchmark: number) => `Reactive financial management. With ${score} points, you are ${benchmark - score} points below the industry standard. This represents the greatest opportunity for immediate improvement in your business.`,
+    },
+    // Operations diagnostics
+    opsDiag: {
+      excellent: (score: number, benchmark: number, industry: string) => `World-class operations. With ${score} points, you surpass the benchmark of ${benchmark} in ${industry}. Your automated and documented processes are a competitive asset that allows you to scale efficiently.`,
+      good: (score: number, benchmark: number) => `Efficient operations. Your score of ${score} ${score >= benchmark ? 'surpasses' : 'approaches'} the industry average. There is potential to automate 2-3 additional key processes that would free up 10-15 hours per week.`,
+      medium: (score: number, benchmark: number, industry: string) => `Functional operations with opportunities. With ${score} points, there is significant room to reach the standard of ${benchmark} in ${industry}. Selective automation can double your capacity without increasing costs.`,
+      low: (score: number, benchmark: number) => `Primarily manual operations. Your score of ${score} is ${benchmark - score} points below the average. It is estimated that 60-70% of your team's time is spent on automatable repetitive tasks.`,
+    },
+    // Marketing diagnostics
+    mktDiag: {
+      excellent: (score: number, benchmark: number, industry: string) => `High-performance marketing. With ${score} points, you significantly surpass the average of ${benchmark} in ${industry}. Your brand generates consistent demand and has an optimized CAC with LTV/CAC > 3:1.`,
+      good: (score: number, benchmark: number) => `Effective marketing strategy. Your score of ${score} ${score >= benchmark ? 'is above' : 'approaches'} the industry average. With specific digital channel optimizations, you could reduce CAC by 20-30%.`,
+      medium: (score: number, benchmark: number, industry: string) => `Marketing in building phase. With ${score} points, you have a base but lack consistency. The average in ${industry} is ${benchmark}, indicating significant growth opportunity in demand generation.`,
+      low: (score: number, benchmark: number) => `Reactive and limited marketing. Your score of ${score} is ${benchmark - score} points below the standard. Competitors are capturing your potential market through effective digital strategies.`,
+    },
+    // Industry context texts
+    financeContext: {
+      Tecnología: 'In the tech sector, rigorous financial control is critical due to investment cycles and the need to demonstrate SaaS metrics like MRR, CAC, and LTV to investors.',
+      Retail: 'In retail, inventory management and tight margins require daily financial visibility. Industry leaders operate with real-time dashboards.',
+      Servicios: 'In professional services, profitability tracking by project and client is fundamental. Successful firms maintain 20-30% margins through strict control.',
+      Alimentos: 'In the food industry, variable cost control and waste management can mean the difference between loss and profit. Typical margins range between 3-8%.',
+      default: 'effective financial control is the foundation for strategic decision-making and sustainable growth.',
+    },
+    opsContext: {
+      Tecnología: 'Leading tech companies automate deployment, testing, and level-1 support. They use agile and DevOps methodologies to reduce time-to-market by 40-60%.',
+      Retail: 'Successful retailers integrate inventory, POS, and e-commerce in real time. Automated restocking and dynamic pricing are industry standards.',
+      Servicios: 'Efficient service firms automate proposals, onboarding, and billing. Leaders maintain 75-85% utilization through intelligent resource management.',
+      Alimentos: 'In food, automated traceability, temperature control, and FIFO management are critical. Leaders reduce waste to 2-3% through predictive systems.',
+      default: 'operational efficiency marks the difference between market leaders and followers.',
+    },
+    mktContext: {
+      Tecnología: 'In tech, content marketing and product-led growth dominate. Successful companies generate 60% of leads through educational content and maintain 2-4% conversion rates.',
+      Retail: 'Modern retail requires omnichannel presence. Leaders integrate online/offline experiences, use AI personalization, and maintain 15-20% email engagement rates.',
+      Servicios: 'In services, thought leadership and referrals are key. Successful firms generate 40% of new clients via referrals and maintain active LinkedIn presence.',
+      Alimentos: 'In food, local presence and social media are critical. Successful businesses maintain 4.5+ Google ratings and generate 30% of sales via local digital marketing.',
+      default: 'effective digital marketing is indispensable for sustainable growth.',
+    },
+    // Recommendations loading
+    aiLoading: 'Generating personalized AI recommendations...',
+    // CTA
+    ctaTitle: 'Ready to transform your business?',
+    ctaDescPremium: 'Download your complete diagnostic and schedule your strategy session to implement improvements.',
+    ctaDescPublic: 'Schedule a free 30-minute consultation and we will show you exactly how to implement these improvements in your business.',
+    ctaButton: 'Schedule Free Consultation',
   },
 }

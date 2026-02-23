@@ -27,6 +27,7 @@ import {
   getPriorityActions,
   getSizeBenchmarkMessage
 } from '@/lib/company-size';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ResultsDashboardProps {
   scores: {
@@ -47,6 +48,8 @@ export function ResultsDashboard({
   onScheduleConsultation,
   isInternalMode = false
 }: ResultsDashboardProps) {
+  const { t } = useLanguage();
+  const tp = t.resultsDashboard;
   const [showDetails, setShowDetails] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [recommendations, setRecommendations] = useState<any>(null);
@@ -104,52 +107,25 @@ export function ResultsDashboard({
 
   // Determinar el estado general
   const getBusinessStage = (avg: number) => {
-    if (avg >= 70) return { stage: 'Expansión', color: 'text-green-600', bg: 'bg-green-50 border-green-200', description: 'Tu negocio está listo para escalar' };
-    if (avg >= 40) return { stage: 'Crecimiento', color: 'text-blue-600', bg: 'bg-blue-50 border-blue-200', description: 'Tienes una base sólida para crecer' };
-    return { stage: 'Supervivencia', color: 'text-orange-600', bg: 'bg-orange-50 border-orange-200', description: 'Es momento de fortalecer los fundamentos' };
+    if (avg >= 70) return { stage: tp.stages.expansion.stage, color: 'text-green-600', bg: 'bg-green-50 border-green-200', description: tp.stages.expansion.description };
+    if (avg >= 40) return { stage: tp.stages.growth.stage, color: 'text-blue-600', bg: 'bg-blue-50 border-blue-200', description: tp.stages.growth.description };
+    return { stage: tp.stages.survival.stage, color: 'text-orange-600', bg: 'bg-orange-50 border-orange-200', description: tp.stages.survival.description };
   };
 
   const businessStage = getBusinessStage(averageScore);
 
   // Datos para el gráfico de radar
   const radarData = [
-    {
-      axis: 'Finanzas',
-      value: finalScores.finance,
-      fullMark: 100,
-    },
-    {
-      axis: 'Operaciones',
-      value: finalScores.operations,
-      fullMark: 100,
-    },
-    {
-      axis: 'Marketing',
-      value: finalScores.marketing,
-      fullMark: 100,
-    },
+    { axis: tp.axisLabels.finance, value: finalScores.finance, fullMark: 100 },
+    { axis: tp.axisLabels.operations, value: finalScores.operations, fullMark: 100 },
+    { axis: tp.axisLabels.marketing, value: finalScores.marketing, fullMark: 100 },
   ];
 
   // Datos para el gráfico de barras con benchmarks reales
   const barData = [
-    {
-      name: 'Finanzas',
-      score: finalScores.finance,
-      benchmark: benchmarks.finance,
-      color: '#3B82F6'
-    },
-    {
-      name: 'Operaciones',
-      score: finalScores.operations,
-      benchmark: benchmarks.operations,
-      color: '#10B981'
-    },
-    {
-      name: 'Marketing',
-      score: finalScores.marketing,
-      benchmark: benchmarks.marketing,
-      color: '#8B5CF6'
-    }
+    { name: tp.axisLabels.finance, score: finalScores.finance, benchmark: benchmarks.finance, color: '#3B82F6' },
+    { name: tp.axisLabels.operations, score: finalScores.operations, benchmark: benchmarks.operations, color: '#10B981' },
+    { name: tp.axisLabels.marketing, score: finalScores.marketing, benchmark: benchmarks.marketing, color: '#8B5CF6' }
   ];
 
   // Identificar fortalezas y debilidades
@@ -212,10 +188,10 @@ export function ResultsDashboard({
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
             <div className="w-full md:w-auto">
               <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white drop-shadow-lg">
-                Diagnóstico 3D Completado
+                {tp.headerTitle}
               </h2>
               <p className="text-white/90 text-sm md:text-base mt-1">
-                {clientInfo?.companyName || clientInfo?.name || 'Tu Empresa'} • {new Date().toLocaleDateString('es-ES')}
+                {clientInfo?.companyName || clientInfo?.name || tp.defaultCompany} • {new Date().toLocaleDateString()}
               </p>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/20 backdrop-blur-sm text-white text-xs md:text-sm font-semibold border border-white/30 mt-2">
                 <Award className="w-4 h-4" />
@@ -226,7 +202,7 @@ export function ResultsDashboard({
               <div className="text-5xl md:text-6xl font-bold text-white drop-shadow-lg">
                 {averageScore}
               </div>
-              <div className="text-xs md:text-sm text-white/80 uppercase tracking-wider">Puntuación Global</div>
+              <div className="text-xs md:text-sm text-white/80 uppercase tracking-wider">{tp.globalScore}</div>
             </div>
           </div>
         </div>
@@ -244,21 +220,21 @@ export function ResultsDashboard({
                     <Building2 className="w-6 h-6 text-blue-600" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg text-gray-800">Perfil de Empresa</h3>
-                    <p className="text-sm text-gray-600">Contexto para tu diagnóstico</p>
+                    <h3 className="font-bold text-lg text-gray-800">{tp.companyProfileTitle}</h3>
+                    <p className="text-sm text-gray-600">{tp.companyProfileSubtitle}</p>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4 space-y-2">
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Clasificación:</span>
+                    <span className="text-gray-600">{tp.clasificacion}</span>
                     <span className="font-bold text-blue-600">{companyProfile.icon} {companyProfile.label}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Empleados:</span>
+                    <span className="text-gray-600">{tp.empleados}</span>
                     <span className="font-semibold text-gray-800">{employeeCount} ({companyProfile.employeeRange})</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span className="text-gray-600">Industria:</span>
+                    <span className="text-gray-600">{tp.industria}</span>
                     <span className="font-semibold text-gray-800">{industryName}</span>
                   </div>
                 </div>
@@ -274,8 +250,8 @@ export function ResultsDashboard({
                     <Target className="w-6 h-6 text-purple-600" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-lg text-gray-800">Acciones Prioritarias</h3>
-                    <p className="text-sm text-gray-600">Para tu tamaño e industria</p>
+                    <h3 className="font-bold text-lg text-gray-800">{tp.priorityTitle}</h3>
+                    <p className="text-sm text-gray-600">{tp.prioritySubtitle}</p>
                   </div>
                 </div>
                 <div className="bg-white rounded-lg p-4 space-y-3">
@@ -310,7 +286,7 @@ export function ResultsDashboard({
                   <div className="bg-green-50 rounded-lg p-4">
                     <h4 className="font-semibold text-green-800 mb-2 flex items-center gap-2">
                       <CheckCircle className="w-5 h-5" />
-                      Tus Fortalezas en {industryName}
+                      {tp.strengthsTitle} {industryName}
                     </h4>
                     <div className="space-y-1">
                       {strengthAreas.map((area, idx) => (
@@ -323,7 +299,7 @@ export function ResultsDashboard({
                   <div className="bg-orange-50 rounded-lg p-4">
                     <h4 className="font-semibold text-orange-800 mb-2 flex items-center gap-2">
                       <AlertTriangle className="w-5 h-5" />
-                      Oportunidades de Mejora
+                      {tp.improvementTitle}
                     </h4>
                     <div className="space-y-1">
                       {improvementAreas.map((area, idx) => (
@@ -348,27 +324,27 @@ export function ResultsDashboard({
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >
-          Vista General
+          {tp.tabOverview}
         </button>
         <button
           onClick={() => setActiveTab('details')}
           className={`px-3 py-2 font-medium transition-colors whitespace-nowrap text-sm md:text-base ${
-            activeTab === 'details' 
-              ? 'border-b-2 border-blue-600 text-blue-600' 
+            activeTab === 'details'
+              ? 'border-b-2 border-blue-600 text-blue-600'
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >
-          Análisis Detallado
+          {tp.tabDetails}
         </button>
         <button
           onClick={() => setActiveTab('recommendations')}
           className={`px-3 py-2 font-medium transition-colors whitespace-nowrap text-sm md:text-base ${
-            activeTab === 'recommendations' 
-              ? 'border-b-2 border-blue-600 text-blue-600' 
+            activeTab === 'recommendations'
+              ? 'border-b-2 border-blue-600 text-blue-600'
               : 'text-gray-600 hover:text-gray-900'
           }`}
         >
-          Plan de Acción IA
+          {tp.tabRecommendations}
         </button>
       </div>
 
@@ -380,7 +356,7 @@ export function ResultsDashboard({
             {/* Gráfico de Radar */}
             <Card className="overflow-hidden border-gray-200">
               <CardHeader className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white">
-                <CardTitle className="text-white text-lg md:text-xl">Mapa 3D de tu Negocio</CardTitle>
+                <CardTitle className="text-white text-lg md:text-xl">{tp.radarTitle}</CardTitle>
               </CardHeader>
               <CardContent className="bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 p-2 md:p-4">
                 <div ref={radarChartRef} className="h-64 md:h-80">
@@ -408,8 +384,8 @@ export function ResultsDashboard({
                         tick={{ fill: '#475569', fontSize: 10 }}
                         tickCount={6}
                       />
-                      <Radar 
-                        name="Tu Negocio" 
+                      <Radar
+                        name={tp.radarName} 
                         dataKey="value" 
                         stroke="#7c3aed" 
                         fill="url(#radarGradient)" 
@@ -421,15 +397,15 @@ export function ResultsDashboard({
                 <div className="grid grid-cols-3 gap-2 md:gap-4 text-center p-2 md:p-4 bg-white/70 rounded-lg">
                   <div>
                     <div className="text-xl md:text-3xl font-bold text-blue-600">{finalScores.finance}</div>
-                    <div className="text-xs md:text-sm text-gray-700 font-medium">Finanzas</div>
+                    <div className="text-xs md:text-sm text-gray-700 font-medium">{tp.axisLabels.finance}</div>
                   </div>
                   <div>
                     <div className="text-xl md:text-3xl font-bold text-green-600">{finalScores.operations}</div>
-                    <div className="text-xs md:text-sm text-gray-700 font-medium">Operaciones</div>
+                    <div className="text-xs md:text-sm text-gray-700 font-medium">{tp.axisLabels.operations}</div>
                   </div>
                   <div>
                     <div className="text-xl md:text-3xl font-bold text-purple-600">{finalScores.marketing}</div>
-                    <div className="text-xs md:text-sm text-gray-700 font-medium">Marketing</div>
+                    <div className="text-xs md:text-sm text-gray-700 font-medium">{tp.axisLabels.marketing}</div>
                   </div>
                 </div>
               </CardContent>
@@ -439,7 +415,7 @@ export function ResultsDashboard({
             <Card className="border-gray-200">
               <CardHeader className="bg-gray-50">
                 <CardTitle className="text-lg md:text-xl text-gray-800">
-                  {clientInfo?.companyName || 'Tu Empresa'} vs Industria {industryName}
+                  {clientInfo?.companyName || tp.defaultCompany} {tp.vsIndustry} {industryName}
                 </CardTitle>
               </CardHeader>
               <CardContent className="bg-white">
@@ -462,12 +438,12 @@ export function ResultsDashboard({
                           borderRadius: '8px'
                         }}
                       />
-                      <Bar dataKey="score" name={clientInfo?.companyName || 'Tu Negocio'}>
+                      <Bar dataKey="score" name={clientInfo?.companyName || tp.radarName}>
                         {barData.map((entry, index) => (
                           <Cell key={`cell-${index}`} fill={entry.color} />
                         ))}
                       </Bar>
-                      <Bar dataKey="benchmark" name={`Promedio ${industryName}`} fill="#E5E7EB" />
+                      <Bar dataKey="benchmark" name={`${tp.avgPrefix} ${industryName}`} fill="#E5E7EB" />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -483,16 +459,15 @@ export function ResultsDashboard({
                   <div className="p-2 bg-orange-100 rounded-lg">
                     <AlertTriangle className="w-6 h-6 md:w-8 md:h-8 text-orange-600" />
                   </div>
-                  <h3 className="font-semibold text-base md:text-lg text-gray-800">Área Crítica</h3>
+                  <h3 className="font-semibold text-base md:text-lg text-gray-800">{tp.criticalArea}</h3>
                 </div>
                 <p className="text-gray-700 text-sm md:text-base">
-                  Tu eje más débil es <span className="font-bold text-orange-700">
-                    {weakestAxis.key === 'finance' ? 'Finanzas' : 
-                     weakestAxis.key === 'operations' ? 'Operaciones' : 'Marketing'}
-                  </span> con {weakestAxis.value} puntos.
+                  {tp.weakestMsg} <span className="font-bold text-orange-700">
+                    {tp.axisLabels[weakestAxis.key as keyof typeof tp.axisLabels]}
+                  </span> {tp.withPoints} {weakestAxis.value} {tp.points}.
                 </p>
                 <p className="text-xs md:text-sm text-gray-600 mt-2">
-                  {benchmarks[weakestAxis.key as keyof typeof benchmarks] - weakestAxis.value} puntos por debajo del promedio de {industryName}.
+                  {benchmarks[weakestAxis.key as keyof typeof benchmarks] - weakestAxis.value} {tp.belowAvg} {industryName}.
                 </p>
               </CardContent>
             </Card>
@@ -503,14 +478,13 @@ export function ResultsDashboard({
                   <div className="p-2 bg-blue-100 rounded-lg">
                     <Target className="w-6 h-6 md:w-8 md:h-8 text-blue-600" />
                   </div>
-                  <h3 className="font-semibold text-base md:text-lg text-gray-800">Potencial de Mejora</h3>
+                  <h3 className="font-semibold text-base md:text-lg text-gray-800">{tp.improvementPotential}</h3>
                 </div>
                 <p className="text-gray-700 text-sm md:text-base">
-                  Tienes un <span className="font-bold text-blue-700">{Math.round(totalImprovementPotential/3)}%</span> de 
-                  potencial de mejora promedio.
+                  {tp.improvementHave} <span className="font-bold text-blue-700">{Math.round(totalImprovementPotential/3)}%</span> {tp.improvementMsg}
                 </p>
                 <p className="text-xs md:text-sm text-gray-600 mt-2">
-                  Con las estrategias correctas, puedes superar el promedio de la industria.
+                  {tp.improvementAdvice}
                 </p>
               </CardContent>
             </Card>
@@ -521,18 +495,17 @@ export function ResultsDashboard({
                   <div className="p-2 bg-green-100 rounded-lg">
                     <TrendingUp className="w-6 h-6 md:w-8 md:h-8 text-green-600" />
                   </div>
-                  <h3 className="font-semibold text-base md:text-lg text-gray-800">Tu Fortaleza</h3>
+                  <h3 className="font-semibold text-base md:text-lg text-gray-800">{tp.strengthCard}</h3>
                 </div>
                 <p className="text-gray-700 text-sm md:text-base">
-                  Destacas en <span className="font-bold text-green-700">
-                    {strongestAxis.key === 'finance' ? 'Finanzas' : 
-                     strongestAxis.key === 'operations' ? 'Operaciones' : 'Marketing'}
-                  </span> con {strongestAxis.value} puntos.
+                  {tp.strengthMsg} <span className="font-bold text-green-700">
+                    {tp.axisLabels[strongestAxis.key as keyof typeof tp.axisLabels]}
+                  </span> {tp.withPoints} {strongestAxis.value} {tp.points}.
                 </p>
                 <p className="text-xs md:text-sm text-gray-600 mt-2">
-                  {strongestAxis.value > benchmarks[strongestAxis.key as keyof typeof benchmarks] ? 
-                    `${strongestAxis.value - benchmarks[strongestAxis.key as keyof typeof benchmarks]} puntos sobre el promedio.` :
-                    'Aprovecha esta base sólida para crecer.'}
+                  {strongestAxis.value > benchmarks[strongestAxis.key as keyof typeof benchmarks] ?
+                    `${strongestAxis.value - benchmarks[strongestAxis.key as keyof typeof benchmarks]} ${tp.aboveAvg}` :
+                    tp.solidBase}
                 </p>
               </CardContent>
             </Card>
@@ -546,7 +519,7 @@ export function ResultsDashboard({
           <Card className="border-gray-200">
             <CardHeader className="bg-gray-50">
               <CardTitle className="text-xl md:text-2xl text-gray-800">
-                Análisis Detallado por Eje - Industria: {industryName}
+                {tp.detailsTitle} {industryName}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-8 pt-6">
@@ -556,12 +529,12 @@ export function ResultsDashboard({
                   <div>
                     <h3 className="text-lg md:text-xl font-semibold mb-2 flex items-center gap-2 text-gray-800">
                       <DollarSign className="w-5 h-5 md:w-6 md:h-6 text-blue-600" />
-                      Finanzas - {finalScores.finance} puntos
+                      {tp.axisLabels.finance} - {finalScores.finance} {tp.points}
                     </h3>
                     <div className="flex items-center gap-4 text-sm md:text-base">
-                      <span className="text-gray-600">Benchmark {industryName}: {benchmarks.finance}</span>
+                      <span className="text-gray-600">{tp.benchmark} {industryName}: {benchmarks.finance}</span>
                       <span className={finalScores.finance >= benchmarks.finance ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
-                        {finalScores.finance >= benchmarks.finance ? "✓ Por encima" : "✗ Por debajo"}
+                        {finalScores.finance >= benchmarks.finance ? tp.aboveLabel : tp.belowLabel}
                         ({finalScores.finance >= benchmarks.finance ? '+' : ''}{finalScores.finance - benchmarks.finance})
                       </span>
                     </div>
@@ -573,7 +546,7 @@ export function ResultsDashboard({
                   <div className="bg-gradient-to-r from-blue-100 to-indigo-100 p-4 rounded-lg border-2 border-blue-300">
                     <h4 className="font-semibold text-blue-900 mb-2 flex items-center gap-2">
                       <TrendingUp className="w-5 h-5" />
-                      Comparación con {industryName}
+                      {tp.comparisonWith} {industryName}
                     </h4>
                     <p className="text-blue-800 text-sm md:text-base font-medium">
                       {industryComparisons.finance}
@@ -581,49 +554,40 @@ export function ResultsDashboard({
                   </div>
 
                   <div className="bg-blue-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Diagnóstico:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.diagnostico}</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {finalScores.finance >= 80 ? 
-                        `Excelente gestión financiera. ${clientInfo?.companyName || 'Tu empresa'} demuestra un control excepcional, superando ampliamente el promedio de ${benchmarks.finance} puntos en ${industryName}. Este nivel de madurez financiera te posiciona en el top 10% de tu industria.` :
+                      {finalScores.finance >= 80 ?
+                        tp.financeDiag.excellent(clientInfo?.companyName || tp.defaultCompany, benchmarks.finance, industryName) :
                         finalScores.finance >= 60 ?
-                        `Control financiero sólido. Con ${finalScores.finance} puntos, ${finalScores.finance >= benchmarks.finance ? 'superas' : 'estás cerca de'} el promedio de la industria. Hay oportunidades específicas para optimizar márgenes y flujo de caja que podrían elevar tu puntuación 15-20 puntos adicionales.` :
+                        tp.financeDiag.good(finalScores.finance, benchmarks.finance) :
                         finalScores.finance >= 40 ?
-                        `Control financiero en desarrollo. Tu puntuación de ${finalScores.finance} indica que hay sistemas básicos implementados, pero falta visibilidad en tiempo real. Las empresas de ${industryName} con mejores prácticas promedian ${benchmarks.finance} puntos.` :
-                        `Gestión financiera reactiva. Con ${finalScores.finance} puntos, estás ${benchmarks.finance - finalScores.finance} puntos por debajo del estándar de la industria. Esto representa la mayor oportunidad de mejora inmediata para tu negocio.`
+                        tp.financeDiag.medium(finalScores.finance, industryName, benchmarks.finance) :
+                        tp.financeDiag.low(finalScores.finance, benchmarks.finance)
                       }
                     </p>
                   </div>
                   
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Contexto de la Industria:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.industryContext}</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {industryName === 'Tecnología' ? 
-                        'En el sector tecnológico, el control financiero riguroso es crítico debido a los ciclos de inversión y la necesidad de demostrar métricas SaaS como MRR, CAC y LTV a inversores.' :
-                        industryName === 'Retail' ?
-                        'En retail, la gestión de inventario y márgenes ajustados requiere visibilidad financiera diaria. Los líderes del sector operan con dashboards en tiempo real.' :
-                        industryName === 'Servicios' ?
-                        'En servicios profesionales, el tracking de rentabilidad por proyecto y cliente es fundamental. Las firmas exitosas mantienen márgenes del 20-30% mediante control estricto.' :
-                        industryName === 'Alimentos' ?
-                        'En la industria alimentaria, el control de costos variables y la gestión de mermas puede significar la diferencia entre pérdida y ganancia. Los márgenes típicos oscilan entre 3-8%.' :
-                        `En ${industryName}, el control financiero efectivo es la base para la toma de decisiones estratégicas y el crecimiento sostenible.`
-                      }
+                      {(tp.financeContext as any)[industryName] || `En ${industryName}, ${tp.financeContext.default}`}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-blue-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-blue-800">ROI Potencial:</p>
+                      <p className="text-sm font-semibold text-blue-800">{tp.roiPotencial}</p>
                       <p className="text-lg md:text-xl font-bold text-blue-900">
                         {finalScores.finance < 60 ? '250-400%' : '150-200%'}
                       </p>
-                      <p className="text-xs text-blue-700">en 12 meses</p>
+                      <p className="text-xs text-blue-700">{tp.inMonths}</p>
                     </div>
                     <div className="bg-blue-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-blue-800">Tiempo de Implementación:</p>
+                      <p className="text-sm font-semibold text-blue-800">{tp.implTime}</p>
                       <p className="text-lg md:text-xl font-bold text-blue-900">
-                        {finalScores.finance < 60 ? '30-45' : '15-30'} días
+                        {finalScores.finance < 60 ? '30-45' : '15-30'} {tp.days}
                       </p>
-                      <p className="text-xs text-blue-700">para ver resultados</p>
+                      <p className="text-xs text-blue-700">{tp.toSeeResults}</p>
                     </div>
                   </div>
                 </div>
@@ -635,12 +599,12 @@ export function ResultsDashboard({
                   <div>
                     <h3 className="text-lg md:text-xl font-semibold mb-2 flex items-center gap-2 text-gray-800">
                       <Clock className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
-                      Operaciones - {finalScores.operations} puntos
+                      {tp.axisLabels.operations} - {finalScores.operations} {tp.points}
                     </h3>
                     <div className="flex items-center gap-4 text-sm md:text-base">
-                      <span className="text-gray-600">Benchmark {industryName}: {benchmarks.operations}</span>
+                      <span className="text-gray-600">{tp.benchmark} {industryName}: {benchmarks.operations}</span>
                       <span className={finalScores.operations >= benchmarks.operations ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
-                        {finalScores.operations >= benchmarks.operations ? "✓ Por encima" : "✗ Por debajo"}
+                        {finalScores.operations >= benchmarks.operations ? tp.aboveLabel : tp.belowLabel}
                         ({finalScores.operations >= benchmarks.operations ? '+' : ''}{finalScores.operations - benchmarks.operations})
                       </span>
                     </div>
@@ -652,7 +616,7 @@ export function ResultsDashboard({
                   <div className="bg-gradient-to-r from-green-100 to-emerald-100 p-4 rounded-lg border-2 border-green-300">
                     <h4 className="font-semibold text-green-900 mb-2 flex items-center gap-2">
                       <TrendingUp className="w-5 h-5" />
-                      Comparación con {industryName}
+                      {tp.comparisonWith} {industryName}
                     </h4>
                     <p className="text-green-800 text-sm md:text-base font-medium">
                       {industryComparisons.operations}
@@ -660,49 +624,40 @@ export function ResultsDashboard({
                   </div>
 
                   <div className="bg-green-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Diagnóstico:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.diagnostico}</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {finalScores.operations >= 80 ? 
-                        `Operaciones de clase mundial. Con ${finalScores.operations} puntos, superas el benchmark de ${benchmarks.operations} en ${industryName}. Tus procesos automatizados y documentados son un activo competitivo que te permite escalar eficientemente.` :
+                      {finalScores.operations >= 80 ?
+                        tp.opsDiag.excellent(finalScores.operations, benchmarks.operations, industryName) :
                         finalScores.operations >= 60 ?
-                        `Operaciones eficientes. Tu puntuación de ${finalScores.operations} ${finalScores.operations >= benchmarks.operations ? 'supera' : 'se acerca a'} la media de la industria. Existe potencial para automatizar 2-3 procesos clave adicionales que liberarían 10-15 horas semanales.` :
+                        tp.opsDiag.good(finalScores.operations, benchmarks.operations) :
                         finalScores.operations >= 40 ?
-                        `Operaciones funcionales con oportunidades. Con ${finalScores.operations} puntos, hay margen significativo para alcanzar el estándar de ${benchmarks.operations} en ${industryName}. La automatización selectiva puede duplicar tu capacidad sin aumentar costos.` :
-                        `Operaciones principalmente manuales. Tu puntuación de ${finalScores.operations} está ${benchmarks.operations - finalScores.operations} puntos debajo del promedio. Se estima que el 60-70% del tiempo de tu equipo se dedica a tareas repetitivas automatizables.`
+                        tp.opsDiag.medium(finalScores.operations, benchmarks.operations, industryName) :
+                        tp.opsDiag.low(finalScores.operations, benchmarks.operations)
                       }
                     </p>
                   </div>
-                  
+
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Mejores Prácticas en {industryName}:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.bestPractices} {industryName}:</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {industryName === 'Tecnología' ? 
-                        'Las empresas tech líderes automatizan deployment, testing y soporte nivel 1. Utilizan metodologías ágiles y DevOps para reducir time-to-market en 40-60%.' :
-                        industryName === 'Retail' ?
-                        'Los retailers exitosos integran inventario, POS y e-commerce en tiempo real. La automatización de reabastecimiento y pricing dinámico son estándares de la industria.' :
-                        industryName === 'Servicios' ?
-                        'Las firmas de servicios eficientes automatizan propuestas, onboarding y facturación. Los líderes mantienen utilización del 75-85% mediante gestión inteligente de recursos.' :
-                        industryName === 'Alimentos' ?
-                        'En alimentos, la trazabilidad automatizada, control de temperatura y gestión FIFO son críticos. Los líderes reducen mermas al 2-3% mediante sistemas predictivos.' :
-                        `En ${industryName}, la eficiencia operativa marca la diferencia entre líderes y seguidores del mercado.`
-                      }
+                      {(tp.opsContext as any)[industryName] || `En ${industryName}, ${tp.opsContext.default}`}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-green-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-green-800">Ahorro Potencial:</p>
+                      <p className="text-sm font-semibold text-green-800">{tp.savingPotential}</p>
                       <p className="text-lg md:text-xl font-bold text-green-900">
-                        {finalScores.operations < 60 ? '20-30' : '10-15'} hrs/semana
+                        {finalScores.operations < 60 ? '20-30' : '10-15'} {tp.hrsWeek}
                       </p>
-                      <p className="text-xs text-green-700">en tareas manuales</p>
+                      <p className="text-xs text-green-700">{tp.inManualTasks}</p>
                     </div>
                     <div className="bg-green-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-green-800">Incremento Capacidad:</p>
+                      <p className="text-sm font-semibold text-green-800">{tp.capacityIncrease}</p>
                       <p className="text-lg md:text-xl font-bold text-green-900">
                         {finalScores.operations < 60 ? '2-3X' : '1.5-2X'}
                       </p>
-                      <p className="text-xs text-green-700">sin contratar más personal</p>
+                      <p className="text-xs text-green-700">{tp.noMoreHiring}</p>
                     </div>
                   </div>
                 </div>
@@ -714,12 +669,12 @@ export function ResultsDashboard({
                   <div>
                     <h3 className="text-lg md:text-xl font-semibold mb-2 flex items-center gap-2 text-gray-800">
                       <Target className="w-5 h-5 md:w-6 md:h-6 text-purple-600" />
-                      Marketing - {finalScores.marketing} puntos
+                      {tp.axisLabels.marketing} - {finalScores.marketing} {tp.points}
                     </h3>
                     <div className="flex items-center gap-4 text-sm md:text-base">
-                      <span className="text-gray-600">Benchmark {industryName}: {benchmarks.marketing}</span>
+                      <span className="text-gray-600">{tp.benchmark} {industryName}: {benchmarks.marketing}</span>
                       <span className={finalScores.marketing >= benchmarks.marketing ? "text-green-600 font-semibold" : "text-red-600 font-semibold"}>
-                        {finalScores.marketing >= benchmarks.marketing ? "✓ Por encima" : "✗ Por debajo"}
+                        {finalScores.marketing >= benchmarks.marketing ? tp.aboveLabel : tp.belowLabel}
                         ({finalScores.marketing >= benchmarks.marketing ? '+' : ''}{finalScores.marketing - benchmarks.marketing})
                       </span>
                     </div>
@@ -731,7 +686,7 @@ export function ResultsDashboard({
                   <div className="bg-gradient-to-r from-purple-100 to-pink-100 p-4 rounded-lg border-2 border-purple-300">
                     <h4 className="font-semibold text-purple-900 mb-2 flex items-center gap-2">
                       <TrendingUp className="w-5 h-5" />
-                      Comparación con {industryName}
+                      {tp.comparisonWith} {industryName}
                     </h4>
                     <p className="text-purple-800 text-sm md:text-base font-medium">
                       {industryComparisons.marketing}
@@ -739,49 +694,40 @@ export function ResultsDashboard({
                   </div>
 
                   <div className="bg-purple-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Diagnóstico:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.diagnostico}</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {finalScores.marketing >= 80 ? 
-                        `Marketing de alto rendimiento. Con ${finalScores.marketing} puntos, superas significativamente el promedio de ${benchmarks.marketing} en ${industryName}. Tu marca genera demanda consistente y tiene un CAC optimizado con LTV/CAC > 3:1.` :
+                      {finalScores.marketing >= 80 ?
+                        tp.mktDiag.excellent(finalScores.marketing, benchmarks.marketing, industryName) :
                         finalScores.marketing >= 60 ?
-                        `Estrategia de marketing efectiva. Tu puntuación de ${finalScores.marketing} ${finalScores.marketing >= benchmarks.marketing ? 'está por encima del' : 'se acerca al'} promedio de la industria. Con optimizaciones específicas en canales digitales, podrías reducir CAC en 20-30%.` :
+                        tp.mktDiag.good(finalScores.marketing, benchmarks.marketing) :
                         finalScores.marketing >= 40 ?
-                        `Marketing en fase de construcción. Con ${finalScores.marketing} puntos, tienes base pero falta consistencia. El promedio en ${industryName} es ${benchmarks.marketing}, indicando oportunidad de crecimiento significativo en generación de demanda.` :
-                        `Marketing reactivo y limitado. Tu puntuación de ${finalScores.marketing} está ${benchmarks.marketing - finalScores.marketing} puntos bajo el estándar. Los competidores están capturando tu mercado potencial mediante estrategias digitales efectivas.`
+                        tp.mktDiag.medium(finalScores.marketing, benchmarks.marketing, industryName) :
+                        tp.mktDiag.low(finalScores.marketing, benchmarks.marketing)
                       }
                     </p>
                   </div>
-                  
+
                   <div className="bg-gray-50 p-4 rounded-lg">
-                    <h4 className="font-semibold text-gray-800 mb-2">Tendencias en {industryName}:</h4>
+                    <h4 className="font-semibold text-gray-800 mb-2">{tp.trends} {industryName}:</h4>
                     <p className="text-gray-700 text-sm md:text-base">
-                      {industryName === 'Tecnología' ? 
-                        'En tech, el content marketing y product-led growth dominan. Las empresas exitosas generan 60% de leads mediante contenido educativo y mantienen tasas de conversión del 2-4%.' :
-                        industryName === 'Retail' ?
-                        'El retail moderno requiere omnicanalidad. Los líderes integran experiencias online/offline, utilizan personalización AI y mantienen engagement rates del 15-20% en email.' :
-                        industryName === 'Servicios' ?
-                        'En servicios, el thought leadership y referencias son clave. Las firmas exitosas generan 40% de nuevos clientes vía referencias y mantienen presencia activa en LinkedIn.' :
-                        industryName === 'Alimentos' ?
-                        'En alimentos, la presencia local y redes sociales son críticas. Los exitosos mantienen ratings 4.5+ en Google y generan 30% de ventas vía marketing digital local.' :
-                        `En ${industryName}, el marketing digital efectivo es indispensable para el crecimiento sostenible.`
-                      }
+                      {(tp.mktContext as any)[industryName] || `En ${industryName}, ${tp.mktContext.default}`}
                     </p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="bg-purple-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-purple-800">Incremento en Leads:</p>
+                      <p className="text-sm font-semibold text-purple-800">{tp.leadsIncrease}</p>
                       <p className="text-lg md:text-xl font-bold text-purple-900">
                         {finalScores.marketing < 60 ? '3-5X' : '2-3X'}
                       </p>
-                      <p className="text-xs text-purple-700">en 6 meses</p>
+                      <p className="text-xs text-purple-700">{tp.inSixMonths}</p>
                     </div>
                     <div className="bg-purple-100 p-3 rounded-lg">
-                      <p className="text-sm font-semibold text-purple-800">Reducción CAC:</p>
+                      <p className="text-sm font-semibold text-purple-800">{tp.cacReduction}</p>
                       <p className="text-lg md:text-xl font-bold text-purple-900">
                         {finalScores.marketing < 60 ? '40-60%' : '20-30%'}
                       </p>
-                      <p className="text-xs text-purple-700">con automatización</p>
+                      <p className="text-xs text-purple-700">{tp.withAutomation}</p>
                     </div>
                   </div>
                 </div>
@@ -799,7 +745,7 @@ export function ResultsDashboard({
               <CardContent className="py-12">
                 <div className="text-center">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-                  <p className="text-gray-600">Generando recomendaciones personalizadas con IA...</p>
+                  <p className="text-gray-600">{tp.aiLoading}</p>
                 </div>
               </CardContent>
             </Card>
@@ -819,12 +765,11 @@ export function ResultsDashboard({
         <CardContent className="relative z-10 py-6 md:py-8">
           <div className="text-center space-y-4">
             <h3 className="text-xl md:text-2xl font-bold text-white">
-              ¿Listo para transformar tu negocio?
+              {tp.ctaTitle}
             </h3>
             <p className="text-blue-100 max-w-2xl mx-auto text-sm md:text-base px-4">
-              {userData?.role === 'client' || userData?.role === 'consultant' || userData?.role === 'admin' ? 
-                "Descarga tu diagnóstico completo y agenda tu sesión de estrategia para implementar las mejoras." :
-                "Agenda una consultoría gratuita de 30 minutos y te mostraremos exactamente cómo implementar estas mejoras en tu negocio."
+              {userData?.role === 'client' || userData?.role === 'consultant' || userData?.role === 'admin' ?
+                tp.ctaDescPremium : tp.ctaDescPublic
               }
             </p>
             <div className="flex flex-col md:flex-row gap-3 md:gap-4 justify-center pt-2 md:pt-4 px-4">
@@ -835,7 +780,7 @@ export function ResultsDashboard({
                          font-semibold text-base md:text-lg transition-all duration-300 
                          hover:scale-105 hover:bg-gray-100 hover:shadow-xl group w-full md:w-auto"
               >
-                Agendar Consultoría Gratuita
+                {tp.ctaButton}
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
