@@ -277,6 +277,72 @@ export const diagnosticoUiES = {
     noProporcionado: 'No proporcionado',
     noEspecificada: 'No especificada',
   },
+
+  // === ProfessionalRecommendations ===
+  professionalRecommendations: {
+    // Loading
+    loadingTitle: 'Analizando tu situación con IA...',
+    loadingSubtitle: 'Generando recomendaciones personalizadas',
+    // Errors
+    errorGenerar: 'Error al generar recomendaciones',
+    errorNote: 'Nota: Usando recomendaciones estándar.',
+    // Labels
+    badgeAI: 'Generado con IA',
+    badgeStandard: 'Recomendaciones Estándar',
+    // Card titles
+    mainTitle: 'Plan de Acción Principal',
+    quickWinTitle: '¡Acción Inmediata!',
+    whyTitle: '¿Por qué es crítico actuar ahora?',
+    impactTitle: 'Impacto esperado',
+    actionPlanTitle: 'Plan de acción paso a paso',
+    timelineTitle: 'Tiempo de implementación',
+    toolsTitle: 'Herramientas recomendadas',
+    warningTitle: 'Atención',
+    roadmapTitle: 'Tu Roadmap Personalizado de 90 Días',
+    expectedOutcome: 'Resultado esperado:',
+    metricsTitle: 'Métricas Clave para Medir tu Éxito',
+    // Secondary axis labels
+    axisLabels: {
+      finance: 'Finanzas',
+      operations: 'Operaciones',
+      marketing: 'Marketing',
+    },
+    // Default recommendations
+    defaults: {
+      titlePrefix: 'Mejora Urgente en',
+      why: 'Este es tu punto más débil y está limitando el crecimiento de tu negocio.',
+      impact: 'Mejora esperada del 30-50% en los próximos 90 días',
+      actions: [
+        'Implementar sistema de control básico',
+        'Automatizar procesos clave',
+        'Establecer métricas de seguimiento',
+        'Crear plan de mejora continua',
+      ],
+      timeline: '4-6 semanas',
+      tools: ['Herramientas digitales', 'Automatización', 'IA'],
+      quickWin: 'Comienza hoy mismo con una auditoría rápida de tu situación actual',
+      roadmap: [
+        {
+          phase: 'Días 1-30',
+          focus: 'Establecer fundamentos',
+          keyActions: ['Auditoría inicial', 'Quick wins'],
+          expectedOutcome: 'Sistema básico funcionando',
+        },
+        {
+          phase: 'Días 31-60',
+          focus: 'Optimización y automatización',
+          keyActions: ['Automatizar procesos', 'Entrenar equipo'],
+          expectedOutcome: 'Eficiencia mejorada 30%',
+        },
+        {
+          phase: 'Días 61-90',
+          focus: 'Escalamiento',
+          keyActions: ['Expandir sistema', 'Medir resultados'],
+          expectedOutcome: 'Sistema completo operativo',
+        },
+      ],
+    },
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -555,5 +621,71 @@ export const diagnosticoUiEN = {
     // API data defaults
     noProporcionado: 'Not provided',
     noEspecificada: 'Not specified',
+  },
+
+  // === ProfessionalRecommendations ===
+  professionalRecommendations: {
+    // Loading
+    loadingTitle: 'Analyzing your situation with AI...',
+    loadingSubtitle: 'Generating personalized recommendations',
+    // Errors
+    errorGenerar: 'Error generating recommendations',
+    errorNote: 'Note: Using standard recommendations.',
+    // Labels
+    badgeAI: 'AI Generated',
+    badgeStandard: 'Standard Recommendations',
+    // Card titles
+    mainTitle: 'Main Action Plan',
+    quickWinTitle: 'Immediate Action!',
+    whyTitle: 'Why is it critical to act now?',
+    impactTitle: 'Expected impact',
+    actionPlanTitle: 'Step-by-step action plan',
+    timelineTitle: 'Implementation timeline',
+    toolsTitle: 'Recommended tools',
+    warningTitle: 'Warning',
+    roadmapTitle: 'Your Personalized 90-Day Roadmap',
+    expectedOutcome: 'Expected outcome:',
+    metricsTitle: 'Key Metrics to Measure Your Success',
+    // Secondary axis labels
+    axisLabels: {
+      finance: 'Finance',
+      operations: 'Operations',
+      marketing: 'Marketing',
+    },
+    // Default recommendations
+    defaults: {
+      titlePrefix: 'Urgent Improvement in',
+      why: 'This is your weakest point and it is limiting your business growth.',
+      impact: 'Expected improvement of 30-50% in the next 90 days',
+      actions: [
+        'Implement basic control system',
+        'Automate key processes',
+        'Establish tracking metrics',
+        'Create continuous improvement plan',
+      ],
+      timeline: '4-6 weeks',
+      tools: ['Digital tools', 'Automation', 'AI'],
+      quickWin: 'Start today with a quick audit of your current situation',
+      roadmap: [
+        {
+          phase: 'Days 1-30',
+          focus: 'Establish foundations',
+          keyActions: ['Initial audit', 'Quick wins'],
+          expectedOutcome: 'Basic system running',
+        },
+        {
+          phase: 'Days 31-60',
+          focus: 'Optimization and automation',
+          keyActions: ['Automate processes', 'Train team'],
+          expectedOutcome: 'Efficiency improved 30%',
+        },
+        {
+          phase: 'Days 61-90',
+          focus: 'Scaling',
+          keyActions: ['Expand system', 'Measure results'],
+          expectedOutcome: 'Complete system operational',
+        },
+      ],
+    },
   },
 }

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/index';
 import { TrendingUp, Clock, Target, AlertCircle, CheckCircle, ArrowRight, Loader2, Zap, ChevronDown, ChevronUp } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface RecommendationProps {
   scores: {
@@ -15,6 +16,8 @@ interface RecommendationProps {
 }
 
 export function ProfessionalRecommendations({ scores, clientInfo, responses = [] }: RecommendationProps) {
+  const { t } = useLanguage();
+  const tp = t.professionalRecommendations;
   const [loading, setLoading] = useState(true);
   const [recommendations, setRecommendations] = useState<any>(null);
   const [error, setError] = useState<string | null>(null);
@@ -60,7 +63,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
       if (data.success) {
         setRecommendations(data.recommendations);
       } else {
-        setError('Error al generar recomendaciones');
+        setError(tp.errorGenerar);
         console.error('Error en la respuesta:', data.error);
         setDefaultRecommendations();
       }
@@ -81,41 +84,18 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
       { key: 'finance', value: scores.finance }
     );
 
+    const axisLabel = tp.axisLabels[weakestAxis.key as keyof typeof tp.axisLabels];
     setRecommendations({
       primaryRecommendation: {
-        title: `Mejora Urgente en ${weakestAxis.key === 'finance' ? 'Finanzas' : weakestAxis.key === 'operations' ? 'Operaciones' : 'Marketing'}`,
-        why: 'Este es tu punto más débil y está limitando el crecimiento de tu negocio.',
-        impact: 'Mejora esperada del 30-50% en los próximos 90 días',
-        actions: [
-          'Implementar sistema de control básico',
-          'Automatizar procesos clave',
-          'Establecer métricas de seguimiento',
-          'Crear plan de mejora continua'
-        ],
-        timeline: '4-6 semanas',
-        tools: ['Herramientas digitales', 'Automatización', 'IA'],
-        quickWin: 'Comienza hoy mismo con una auditoría rápida de tu situación actual'
+        title: `${tp.defaults.titlePrefix} ${axisLabel}`,
+        why: tp.defaults.why,
+        impact: tp.defaults.impact,
+        actions: tp.defaults.actions,
+        timeline: tp.defaults.timeline,
+        tools: tp.defaults.tools,
+        quickWin: tp.defaults.quickWin,
       },
-      roadmap90Days: [
-        {
-          phase: 'Días 1-30',
-          focus: 'Establecer fundamentos',
-          keyActions: ['Auditoría inicial', 'Quick wins'],
-          expectedOutcome: 'Sistema básico funcionando'
-        },
-        {
-          phase: 'Días 31-60',
-          focus: 'Optimización y automatización',
-          keyActions: ['Automatizar procesos', 'Entrenar equipo'],
-          expectedOutcome: 'Eficiencia mejorada 30%'
-        },
-        {
-          phase: 'Días 61-90',
-          focus: 'Escalamiento',
-          keyActions: ['Expandir sistema', 'Medir resultados'],
-          expectedOutcome: 'Sistema completo operativo'
-        }
-      ]
+      roadmap90Days: tp.defaults.roadmap,
     });
   };
 
@@ -132,8 +112,8 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
         <CardContent className="py-8 sm:py-12">
           <div className="flex flex-col items-center justify-center space-y-4">
             <Loader2 className="w-8 h-8 sm:w-10 sm:h-10 animate-spin text-blue-600" />
-            <p className="text-base sm:text-lg font-medium text-center">Analizando tu situación con IA...</p>
-            <p className="text-xs sm:text-sm text-gray-600">Generando recomendaciones personalizadas</p>
+            <p className="text-base sm:text-lg font-medium text-center">{tp.loadingTitle}</p>
+            <p className="text-xs sm:text-sm text-gray-600">{tp.loadingSubtitle}</p>
           </div>
         </CardContent>
       </Card>
@@ -154,10 +134,10 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
           <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <CardTitle className="text-xl sm:text-2xl flex items-center gap-2">
               <Target className="w-5 h-5 sm:w-6 sm:h-6 text-blue-600" />
-              <span className="text-responsive-lg">Plan de Acción Principal</span>
+              <span className="text-responsive-lg">{tp.mainTitle}</span>
             </CardTitle>
             <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full whitespace-nowrap">
-              {error ? 'Recomendaciones Estándar' : 'Generado con IA'}
+              {error ? tp.badgeStandard : tp.badgeAI}
             </span>
           </div>
           <h3 className="text-lg sm:text-xl font-semibold mt-2">{primaryRecommendation.title}</h3>
@@ -169,7 +149,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
             <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 sm:p-4 flex gap-2 sm:gap-3">
               <Zap className="w-4 h-4 sm:w-5 sm:h-5 text-yellow-600 mt-0.5 flex-shrink-0" />
               <div className="min-w-0">
-                <h4 className="font-semibold text-yellow-900 text-sm sm:text-base mb-1">¡Acción Inmediata!</h4>
+                <h4 className="font-semibold text-yellow-900 text-sm sm:text-base mb-1">{tp.quickWinTitle}</h4>
                 <p className="text-yellow-800 text-xs sm:text-sm break-words">{primaryRecommendation.quickWin}</p>
               </div>
             </div>
@@ -184,7 +164,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
             >
               <div className="flex gap-3 sm:gap-4 items-start">
                 <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-orange-500 mt-1 flex-shrink-0" />
-                <h4 className="font-semibold text-base sm:text-lg text-left">¿Por qué es crítico actuar ahora?</h4>
+                <h4 className="font-semibold text-base sm:text-lg text-left">{tp.whyTitle}</h4>
               </div>
               <div className="sm:hidden">
                 {expandedSections.why ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -203,7 +183,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
             >
               <div className="flex gap-3 sm:gap-4 items-start">
                 <TrendingUp className="w-4 h-4 sm:w-5 sm:h-5 text-green-500 mt-1 flex-shrink-0" />
-                <h4 className="font-semibold text-base sm:text-lg text-left">Impacto esperado</h4>
+                <h4 className="font-semibold text-base sm:text-lg text-left">{tp.impactTitle}</h4>
               </div>
               <div className="sm:hidden">
                 {expandedSections.impact ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
@@ -218,7 +198,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
           <div className="flex gap-3 sm:gap-4">
             <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-blue-500 mt-1 flex-shrink-0" />
             <div className="flex-1">
-              <h4 className="font-semibold text-base sm:text-lg mb-3">Plan de acción paso a paso</h4>
+              <h4 className="font-semibold text-base sm:text-lg mb-3">{tp.actionPlanTitle}</h4>
               <ol className="space-y-2">
                 {primaryRecommendation.actions.map((action: string, index: number) => (
                   <li key={index} className="flex items-start gap-2">
@@ -238,12 +218,12 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
             <div className="flex gap-3 sm:gap-4">
               <Clock className="w-4 h-4 sm:w-5 sm:h-5 text-purple-500 mt-1 flex-shrink-0" />
               <div>
-                <h4 className="font-semibold text-sm sm:text-base mb-1">Tiempo de implementación</h4>
+                <h4 className="font-semibold text-sm sm:text-base mb-1">{tp.timelineTitle}</h4>
                 <p className="text-gray-700 text-sm">{primaryRecommendation.timeline}</p>
               </div>
             </div>
             <div>
-              <h4 className="font-semibold text-sm sm:text-base mb-2">Herramientas recomendadas</h4>
+              <h4 className="font-semibold text-sm sm:text-base mb-2">{tp.toolsTitle}</h4>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {primaryRecommendation.tools.map((tool: string, index: number) => (
                   <span key={index} className="bg-gray-100 px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">
@@ -263,7 +243,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
             <div className="flex gap-2 sm:gap-3">
               <AlertCircle className="w-4 h-4 sm:w-5 sm:h-5 text-red-600 flex-shrink-0" />
               <div className="min-w-0">
-                <h4 className="font-semibold text-red-900 text-sm sm:text-base mb-1">⚠️ Atención</h4>
+                <h4 className="font-semibold text-red-900 text-sm sm:text-base mb-1">⚠️ {tp.warningTitle}</h4>
                 <p className="text-red-800 text-xs sm:text-sm break-words">{warningMessage}</p>
               </div>
             </div>
@@ -274,7 +254,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
       {/* Roadmap de 90 días - Responsive */}
       <Card className="overflow-hidden">
         <CardHeader className="p-4 sm:p-6">
-          <CardTitle className="text-lg sm:text-xl">Tu Roadmap Personalizado de 90 Días</CardTitle>
+          <CardTitle className="text-lg sm:text-xl">{tp.roadmapTitle}</CardTitle>
         </CardHeader>
         <CardContent className="p-4 sm:p-6">
           <div className="space-y-4 sm:space-y-6">
@@ -296,7 +276,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
                     ))}
                   </ul>
                   <p className="text-xs sm:text-sm font-medium text-green-700 mt-2">
-                    Resultado esperado: {phase.expectedOutcome}
+                    {tp.expectedOutcome} {phase.expectedOutcome}
                   </p>
                 </div>
                 <div className="hidden sm:block">
@@ -316,7 +296,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
       {successMetrics && successMetrics.length > 0 && (
         <Card className="bg-gradient-to-r from-green-50 to-blue-50">
           <CardHeader className="p-4 sm:p-6">
-            <CardTitle className="text-base sm:text-lg">📊 Métricas Clave para Medir tu Éxito</CardTitle>
+            <CardTitle className="text-base sm:text-lg">📊 {tp.metricsTitle}</CardTitle>
           </CardHeader>
           <CardContent className="p-4 sm:p-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -341,9 +321,8 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
                 'bg-purple-50'
               } py-3 sm:py-4 px-4`}>
                 <CardTitle className="text-sm sm:text-base">
-                  {axis === 'finance' ? '💰 Finanzas' :
-                   axis === 'operations' ? '⚙️ Operaciones' :
-                   '📈 Marketing'}
+                  {axis === 'finance' ? '💰' : axis === 'operations' ? '⚙️' : '📈'}{' '}
+                  {tp.axisLabels[axis as keyof typeof tp.axisLabels]}
                 </CardTitle>
               </CardHeader>
               <CardContent className="pt-3 sm:pt-4 px-4">
@@ -359,7 +338,7 @@ export function ProfessionalRecommendations({ scores, clientInfo, responses = []
       {/* Debug info - eliminar en producción */}
       {error && (
         <div className="text-xs text-gray-500 text-center mt-4">
-          Nota: Usando recomendaciones estándar. {error}
+          {tp.errorNote} {error}
         </div>
       )}
     </div>
