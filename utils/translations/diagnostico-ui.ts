@@ -190,6 +190,93 @@ export const diagnosticoUiES = {
     },
     infoNote: 'Este proceso toma solo unos segundos...',
   },
+
+  // === RadarChart3D ===
+  radarChart3D: {
+    defaultCompany: 'Tu Empresa',
+    labels: ['FINANZAS', 'OPERACIONES', 'MARKETING'],
+    labelsMobile: ['FIN', 'OPS', 'MKT'],
+    expansion: 'Expansión',
+    supervivencia: 'Supervivencia',
+  },
+
+  // === ClientInfoStep ===
+  clientInfoStep: {
+    labelEmpresa: 'Nombre de la Empresa *',
+    placeholderEmpresa: 'Ej: Antology Restaurante',
+    labelContacto: 'Nombre del Contacto *',
+    placeholderContacto: 'Ej: Juan Pérez',
+    labelIndustria: 'Industria *',
+    selectIndustria: 'Selecciona una industria',
+    industrias: [
+      'Tecnología',
+      'Retail',
+      'Servicios',
+      'Manufactura',
+      'Salud',
+      'Educación',
+      'Alimentos',
+      'Otro',
+    ],
+    labelEmpleados: 'Número de Empleados *',
+    placeholderEmpleados: 'Ej: 10',
+    labelIngresos: 'Ingresos Anuales (USD)',
+    placeholderIngresos: 'Ej: 500000',
+    labelEmail: 'Email de Contacto *',
+    placeholderEmail: 'contacto@empresa.com',
+    labelTelefono: 'Teléfono',
+    placeholderTelefono: '+1 234 567 8900',
+    btnSubmit: 'Continuar al Diagnóstico',
+    errorEmpresa: 'El nombre de la empresa es requerido',
+    errorContacto: 'El nombre de contacto es requerido',
+    errorIndustria: 'Selecciona una industria',
+    errorEmail: 'El email es requerido',
+    errorEmailInvalido: 'Email inválido',
+    errorEmpleados: 'Ingresa el número de empleados',
+  },
+
+  // === LeadConfirmation ===
+  leadConfirmation: {
+    // Success state
+    successTitle: '¡Reporte Enviado Exitosamente!',
+    successMsg: 'Hemos enviado tu diagnóstico completo a',
+    checkInbox: 'Revisa tu bandeja de entrada',
+    checkSpam: '(También verifica tu carpeta de SPAM)',
+    redirecting: 'Redirigiendo a tu página de resultados...',
+    redirectDesc: 'Allí podrás agendar tu consulta gratuita y ver el análisis completo',
+    // Validation
+    errorNombre: 'El nombre es requerido',
+    errorEmail: 'El email es requerido',
+    errorEmailInvalido: 'Email inválido',
+    errorSubmit: 'Error al enviar el reporte. Intenta nuevamente.',
+    errorConexion: 'Error de conexión. Verifica tu internet e intenta nuevamente.',
+    // Main form
+    completedTitle: '¡Diagnóstico Completado!',
+    completedDesc: 'Confirma tus datos para enviarte el reporte completo y desbloquear tu resultado.',
+    formTitle: 'Confirma tus Datos de Contacto',
+    labelNombre: 'Nombre Completo *',
+    placeholderNombre: 'Tu nombre completo',
+    labelEmail: 'Email *',
+    placeholderEmail: 'tu@email.com',
+    // Info section
+    infoTitle: 'Recibirás:',
+    infoItems: [
+      'Reporte completo con tu diagnóstico',
+      'Análisis detallado de las 3 dimensiones',
+      'Recomendaciones personalizadas',
+      'Acceso a agendar consultoría gratuita',
+    ],
+    // Button
+    btnSubmitting: 'Enviando...',
+    btnSubmit: 'Enviar Resultados y Continuar',
+    // Privacy
+    privacyText: 'Al continuar, aceptas recibir el reporte y comunicaciones de ImpulsaLab.',
+    privacyLink: 'Consulta nuestra',
+    privacyLinkText: 'Política de Privacidad',
+    // API data defaults
+    noProporcionado: 'No proporcionado',
+    noEspecificada: 'No especificada',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -381,5 +468,92 @@ export const diagnosticoUiEN = {
       listo: 'Ready to see results!',
     },
     infoNote: 'This process takes only a few seconds...',
+  },
+
+  // === RadarChart3D ===
+  radarChart3D: {
+    defaultCompany: 'Your Company',
+    labels: ['FINANCE', 'OPERATIONS', 'MARKETING'],
+    labelsMobile: ['FIN', 'OPS', 'MKT'],
+    expansion: 'Expansion',
+    supervivencia: 'Survival',
+  },
+
+  // === ClientInfoStep ===
+  clientInfoStep: {
+    labelEmpresa: 'Company Name *',
+    placeholderEmpresa: 'E.g.: Antology Restaurant',
+    labelContacto: 'Contact Name *',
+    placeholderContacto: 'E.g.: John Smith',
+    labelIndustria: 'Industry *',
+    selectIndustria: 'Select an industry',
+    industrias: [
+      'Technology',
+      'Retail',
+      'Services',
+      'Manufacturing',
+      'Health',
+      'Education',
+      'Food',
+      'Other',
+    ],
+    labelEmpleados: 'Number of Employees *',
+    placeholderEmpleados: 'E.g.: 10',
+    labelIngresos: 'Annual Revenue (USD)',
+    placeholderIngresos: 'E.g.: 500000',
+    labelEmail: 'Contact Email *',
+    placeholderEmail: 'contact@company.com',
+    labelTelefono: 'Phone',
+    placeholderTelefono: '+1 234 567 8900',
+    btnSubmit: 'Continue to Diagnostic',
+    errorEmpresa: 'Company name is required',
+    errorContacto: 'Contact name is required',
+    errorIndustria: 'Select an industry',
+    errorEmail: 'Email is required',
+    errorEmailInvalido: 'Invalid email',
+    errorEmpleados: 'Enter the number of employees',
+  },
+
+  // === LeadConfirmation ===
+  leadConfirmation: {
+    // Success state
+    successTitle: 'Report Sent Successfully!',
+    successMsg: 'We have sent your complete diagnostic to',
+    checkInbox: 'Check your inbox',
+    checkSpam: '(Also check your SPAM folder)',
+    redirecting: 'Redirecting to your results page...',
+    redirectDesc: 'There you can schedule your free consultation and see the full analysis',
+    // Validation
+    errorNombre: 'Name is required',
+    errorEmail: 'Email is required',
+    errorEmailInvalido: 'Invalid email',
+    errorSubmit: 'Error sending the report. Please try again.',
+    errorConexion: 'Connection error. Check your internet and try again.',
+    // Main form
+    completedTitle: 'Diagnostic Completed!',
+    completedDesc: 'Confirm your details to receive the full report and unlock your results.',
+    formTitle: 'Confirm Your Contact Details',
+    labelNombre: 'Full Name *',
+    placeholderNombre: 'Your full name',
+    labelEmail: 'Email *',
+    placeholderEmail: 'you@email.com',
+    // Info section
+    infoTitle: 'You will receive:',
+    infoItems: [
+      'Complete report with your diagnostic',
+      'Detailed analysis of the 3 dimensions',
+      'Personalized recommendations',
+      'Access to schedule a free consultation',
+    ],
+    // Button
+    btnSubmitting: 'Sending...',
+    btnSubmit: 'Send Results and Continue',
+    // Privacy
+    privacyText: 'By continuing, you agree to receive the report and communications from ImpulsaLab.',
+    privacyLink: 'See our',
+    privacyLinkText: 'Privacy Policy',
+    // API data defaults
+    noProporcionado: 'Not provided',
+    noEspecificada: 'Not specified',
   },
 }

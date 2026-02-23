@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/index';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface ClientInfoStepProps {
   clientInfo: any;
@@ -10,6 +11,8 @@ interface ClientInfoStepProps {
 }
 
 export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepProps) {
+  const { t } = useLanguage();
+  const tp = t.clientInfoStep;
   const [formData, setFormData] = useState({
     companyName: clientInfo?.companyName || '',
     contactName: clientInfo?.contactName || '',
@@ -22,32 +25,23 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
 
   const [errors, setErrors] = useState<any>({});
 
-  const industries = [
-    'Tecnología',
-    'Retail',
-    'Servicios',
-    'Manufactura',
-    'Salud',
-    'Educación',
-    'Alimentos',
-    'Otro'
-  ];
+  const industries = tp.industrias;
 
   const validateForm = () => {
     const newErrors: any = {};
     
-    if (!formData.companyName) newErrors.companyName = 'El nombre de la empresa es requerido';
-    if (!formData.contactName) newErrors.contactName = 'El nombre de contacto es requerido';
-    if (!formData.industry) newErrors.industry = 'Selecciona una industria';
-    if (!formData.email) newErrors.email = 'El email es requerido';
+    if (!formData.companyName) newErrors.companyName = tp.errorEmpresa;
+    if (!formData.contactName) newErrors.contactName = tp.errorContacto;
+    if (!formData.industry) newErrors.industry = tp.errorIndustria;
+    if (!formData.email) newErrors.email = tp.errorEmail;
     if (!formData.employeeCount || formData.employeeCount === '0') {
-      newErrors.employeeCount = 'Ingresa el número de empleados';
+      newErrors.employeeCount = tp.errorEmpleados;
     }
-    
+
     // Validar email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = 'Email inválido';
+      newErrors.email = tp.errorEmailInvalido;
     }
     
     setErrors(newErrors);
@@ -81,7 +75,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
       {/* Nombre de la Empresa */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
-          Nombre de la Empresa *
+          {tp.labelEmpresa}
         </label>
         <input
           type="text"
@@ -93,7 +87,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
             transition-all duration-200 ${
             errors.companyName ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
           }`}
-          placeholder="Ej: Antology Restaurante"
+          placeholder={tp.placeholderEmpresa}
           autoComplete="organization"
         />
         {errors.companyName && (
@@ -104,7 +98,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
       {/* Nombre del Contacto */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
-          Nombre del Contacto *
+          {tp.labelContacto}
         </label>
         <input
           type="text"
@@ -116,7 +110,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
             transition-all duration-200 ${
             errors.contactName ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
           }`}
-          placeholder="Ej: Juan Pérez"
+          placeholder={tp.placeholderContacto}
           autoComplete="name"
         />
         {errors.contactName && (
@@ -127,7 +121,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
       {/* Industria */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
-          Industria *
+          {tp.labelIndustria}
         </label>
         <select
           name="industry"
@@ -139,8 +133,8 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
             errors.industry ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
           }`}
         >
-          <option value="">Selecciona una industria</option>
-          {industries.map(ind => (
+          <option value="">{tp.selectIndustria}</option>
+          {industries.map((ind: string) => (
             <option key={ind} value={ind}>{ind}</option>
           ))}
         </select>
@@ -154,7 +148,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
         {/* Número de Empleados */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700">
-            Número de Empleados *
+            {tp.labelEmpleados}
           </label>
           <input
             type="number"
@@ -166,7 +160,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
               transition-all duration-200 ${
               errors.employeeCount ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
             }`}
-            placeholder="Ej: 10"
+            placeholder={tp.placeholderEmpleados}
             min="1"
             inputMode="numeric"
           />
@@ -178,7 +172,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
         {/* Ingresos Anuales */}
         <div className="space-y-2">
           <label className="block text-sm font-medium text-gray-700">
-            Ingresos Anuales (USD)
+            {tp.labelIngresos}
           </label>
           <input
             type="number"
@@ -190,7 +184,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
               transition-all duration-200 ${
               errors.annualRevenue ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
             }`}
-            placeholder="Ej: 500000"
+            placeholder={tp.placeholderIngresos}
             min="0"
             inputMode="numeric"
           />
@@ -200,7 +194,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
       {/* Email */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
-          Email de Contacto *
+          {tp.labelEmail}
         </label>
         <input
           type="email"
@@ -212,7 +206,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
             transition-all duration-200 ${
             errors.email ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
           }`}
-          placeholder="contacto@empresa.com"
+          placeholder={tp.placeholderEmail}
           autoComplete="email"
           inputMode="email"
         />
@@ -224,7 +218,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
       {/* Teléfono */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
-          Teléfono
+          {tp.labelTelefono}
         </label>
         <input
           type="tel"
@@ -236,7 +230,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
             transition-all duration-200 ${
             errors.phone ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
           }`}
-          placeholder="+1 234 567 8900"
+          placeholder={tp.placeholderTelefono}
           autoComplete="tel"
           inputMode="tel"
         />
@@ -249,7 +243,7 @@ export function ClientInfoStep({ clientInfo, onUpdate, onNext }: ClientInfoStepP
           size="lg"
           className="w-full sm:w-auto min-h-[48px] text-base font-medium"
         >
-          Continuar al Diagnóstico
+          {tp.btnSubmit}
         </Button>
       </div>
     </form>
