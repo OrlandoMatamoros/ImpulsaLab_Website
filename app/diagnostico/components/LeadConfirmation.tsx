@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { CheckCircle, Mail, User, AlertCircle } from 'lucide-react'
 import { useRouter } from 'next/navigation'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface LeadConfirmationProps {
   clientInfo: any
@@ -26,6 +27,8 @@ export function LeadConfirmation({
   onSubmitSuccess
 }: LeadConfirmationProps) {
   const router = useRouter()
+  const { t } = useLanguage()
+  const tp = t.leadConfirmation
   const [formData, setFormData] = useState({
     nombre: clientInfo?.contactName || '',
     email: clientInfo?.email || '',
@@ -38,15 +41,15 @@ export function LeadConfirmation({
     const newErrors: any = {}
 
     if (!formData.nombre.trim()) {
-      newErrors.nombre = 'El nombre es requerido'
+      newErrors.nombre = tp.errorNombre
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'El email es requerido'
+      newErrors.email = tp.errorEmail
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
       if (!emailRegex.test(formData.email)) {
-        newErrors.email = 'Email inválido'
+        newErrors.email = tp.errorEmailInvalido
       }
     }
 
@@ -75,9 +78,9 @@ export function LeadConfirmation({
             fecha: new Date().toISOString().split('T')[0],
             nombre: formData.nombre,
             email: formData.email,
-            telefono: clientInfo?.phone || 'No proporcionado',
-            empresa: clientInfo?.companyName || 'No proporcionado',
-            industria: clientInfo?.industry || 'No especificada',
+            telefono: clientInfo?.phone || tp.noProporcionado,
+            empresa: clientInfo?.companyName || tp.noProporcionado,
+            industria: clientInfo?.industry || tp.noEspecificada,
             empleados: clientInfo?.employeeCount || 0,
             facturacion_anual: clientInfo?.annualRevenue || null,
             score_finanzas: Math.round(scores.finance),
@@ -108,12 +111,12 @@ export function LeadConfirmation({
         }, 1500)
       } else {
         const errorData = await response.json()
-        setErrors({ submit: errorData.message || 'Error al enviar el reporte. Intenta nuevamente.' })
+        setErrors({ submit: errorData.message || tp.errorSubmit })
         setIsSubmitting(false)
       }
     } catch (error) {
       console.error('Error al enviar:', error)
-      setErrors({ submit: 'Error de conexión. Verifica tu internet e intenta nuevamente.' })
+      setErrors({ submit: tp.errorConexion })
       setIsSubmitting(false)
     }
   }
@@ -138,14 +141,14 @@ export function LeadConfirmation({
               </div>
               <div>
                 <h2 className="text-3xl font-bold text-gray-900 mb-3">
-                  ✅ ¡Reporte Enviado Exitosamente!
+                  ✅ {tp.successTitle}
                 </h2>
                 <p className="text-lg text-gray-700 mb-4 leading-relaxed">
-                  Hemos enviado tu diagnóstico completo a <strong>{formData.email}</strong>
+                  {tp.successMsg} <strong>{formData.email}</strong>
                 </p>
                 <div className="bg-white border border-green-200 rounded-lg p-4 mb-6 inline-block">
-                  <p className="text-sm text-gray-600 mb-2">📧 Revisa tu bandeja de entrada</p>
-                  <p className="text-xs text-gray-500">(También verifica tu carpeta de SPAM)</p>
+                  <p className="text-sm text-gray-600 mb-2">📧 {tp.checkInbox}</p>
+                  <p className="text-xs text-gray-500">{tp.checkSpam}</p>
                 </div>
               </div>
             </div>
@@ -153,10 +156,10 @@ export function LeadConfirmation({
             <div className="mt-6 space-y-3">
               <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 inline-block">
                 <p className="text-gray-700 font-semibold mb-2">
-                  🚀 Redirigiendo a tu página de resultados...
+                  🚀 {tp.redirecting}
                 </p>
                 <p className="text-sm text-gray-600">
-                  Allí podrás agendar tu consulta gratuita y ver el análisis completo
+                  {tp.redirectDesc}
                 </p>
               </div>
             </div>
@@ -177,10 +180,10 @@ export function LeadConfirmation({
             </div>
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-2">
-                ¡Diagnóstico Completado!
+                {tp.completedTitle}
               </h2>
               <p className="text-gray-700 leading-relaxed">
-                Confirma tus datos para enviarte el reporte completo y desbloquear tu resultado.
+                {tp.completedDesc}
               </p>
             </div>
           </div>
@@ -192,7 +195,7 @@ export function LeadConfirmation({
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Mail className="w-5 h-5 text-blue-600" />
-            Confirma tus Datos de Contacto
+            {tp.formTitle}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -201,7 +204,7 @@ export function LeadConfirmation({
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">
                 <User className="w-4 h-4 inline mr-2" />
-                Nombre Completo *
+                {tp.labelNombre}
               </label>
               <input
                 type="text"
@@ -213,7 +216,7 @@ export function LeadConfirmation({
                   transition-all duration-200 ${
                   errors.nombre ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="Tu nombre completo"
+                placeholder={tp.placeholderNombre}
                 disabled={isSubmitting}
               />
               {errors.nombre && (
@@ -228,7 +231,7 @@ export function LeadConfirmation({
             <div className="space-y-2">
               <label className="block text-sm font-medium text-gray-700">
                 <Mail className="w-4 h-4 inline mr-2" />
-                Email *
+                {tp.labelEmail}
               </label>
               <input
                 type="email"
@@ -240,7 +243,7 @@ export function LeadConfirmation({
                   transition-all duration-200 ${
                   errors.email ? 'border-red-500' : 'border-gray-300 hover:border-gray-400'
                 }`}
-                placeholder="tu@email.com"
+                placeholder={tp.placeholderEmail}
                 disabled={isSubmitting}
               />
               {errors.email && (
@@ -264,13 +267,12 @@ export function LeadConfirmation({
             {/* Información adicional */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
               <p className="text-sm text-gray-700">
-                <strong>📧 Recibirás:</strong>
+                <strong>📧 {tp.infoTitle}</strong>
               </p>
               <ul className="text-sm text-gray-600 mt-2 space-y-1 ml-4">
-                <li>✓ Reporte completo con tu diagnóstico</li>
-                <li>✓ Análisis detallado de las 3 dimensiones</li>
-                <li>✓ Recomendaciones personalizadas</li>
-                <li>✓ Acceso a agendar consultoría gratuita</li>
+                {tp.infoItems.map((item: string, i: number) => (
+                  <li key={i}>✓ {item}</li>
+                ))}
               </ul>
             </div>
 
@@ -284,11 +286,11 @@ export function LeadConfirmation({
               {isSubmitting ? (
                 <>
                   <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-2"></div>
-                  Enviando...
+                  {tp.btnSubmitting}
                 </>
               ) : (
                 <>
-                  Enviar Resultados y Continuar
+                  {tp.btnSubmit}
                 </>
               )}
             </Button>
@@ -298,9 +300,9 @@ export function LeadConfirmation({
 
       {/* Nota de privacidad */}
       <p className="text-xs text-gray-500 text-center">
-        Al continuar, aceptas recibir el reporte y comunicaciones de ImpulsaLab.
+        {tp.privacyText}
         <br />
-        Consulta nuestra <a href="/legal/datos" className="underline text-blue-600">Política de Privacidad</a>
+        {tp.privacyLink} <a href="/legal/datos" className="underline text-blue-600">{tp.privacyLinkText}</a>
       </p>
     </div>
   )
