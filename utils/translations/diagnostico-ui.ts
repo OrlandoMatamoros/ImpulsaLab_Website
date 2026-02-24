@@ -344,6 +344,31 @@ export const diagnosticoUiES = {
     },
   },
 
+  // === QuestionsData ===
+  questionsData: {
+    finance: [
+      { text: '¿Con qué frecuencia revisas los números de tu negocio?', helpText: 'Incluye revisión de ventas, gastos y utilidades', options: ['Diariamente con dashboard automatizado', 'Semanalmente con reportes', 'Mensualmente', 'Trimestralmente', 'Anualmente o menos'] },
+      { text: '¿Conoces el margen de ganancia de cada producto/servicio que ofreces?', options: ['No lo conozco', 'Tengo una idea aproximada', 'Lo sé para mis productos principales', 'Lo tengo calculado para todo mi catálogo'] },
+      { text: '¿Tienes separadas las finanzas personales de las del negocio?', options: ['No, están mezcladas', 'Parcialmente separadas', 'Sí, completamente separadas'] },
+      { text: '¿Cuántos meses podrías operar si mañana se detuvieran todas tus ventas?', helpText: 'Cash runway o colchón financiero', options: ['Menos de 1 mes', '1-2 meses', '3-6 meses', '6-12 meses', 'Más de 1 año'] },
+      { text: '¿Qué herramientas utilizas para gestionar tus finanzas?', options: ['Papel o notas', 'Excel básico', 'Excel con fórmulas avanzadas', 'Software especializado', 'Sistema ERP integrado'] },
+    ],
+    operations: [
+      { text: '¿Cuántas horas a la semana dedicas a tareas repetitivas?', helpText: 'Tareas que haces una y otra vez de la misma manera', options: ['0-2 horas', '3-5 horas', '6-10 horas', '11-20 horas', 'Más de 20 horas'] },
+      { text: '¿Cómo gestionas las citas con clientes?', options: ['Por teléfono/WhatsApp manual', 'Por email ida y vuelta', 'Calendario compartido', 'Sistema de reservas online', 'Totalmente automatizado'] },
+      { text: '¿Tienes documentados los procesos clave de tu negocio?', options: ['No, todo está en mi cabeza', 'Algunos procesos básicos', 'La mayoría documentados', 'Todos con procedimientos detallados', 'Sistema digital con videos'] },
+      { text: '¿Cómo manejas el inventario de tu negocio?', options: ['Control mental', 'Registros en papel', 'Excel actualizado manualmente', 'Software especializado', 'Sistema automatizado con alertas'] },
+      { text: '¿Cuánto tiempo te toma generar un reporte de desempeño?', options: ['Es instantáneo', 'Menos de 30 minutos', 'Unas 2 horas', 'Medio día', 'Un día completo o más'] },
+    ],
+    marketing: [
+      { text: '¿Los clientes te encuentran fácilmente en Google?', options: ['No tengo sitio web', 'No estoy seguro', 'A veces aparezco', 'Usualmente en primera página', 'Siempre en los primeros resultados'] },
+      { text: '¿Con qué frecuencia publicas en redes sociales?', options: ['Nunca o casi nunca', 'Cuando me acuerdo', '1-2 veces por semana', 'Diariamente', 'Varias veces al día con estrategia'] },
+      { text: '¿Conoces quién es tu cliente ideal?', options: ['No lo tengo claro', 'Idea general', 'Perfil básico definido', 'Buyer persona detallado', 'Múltiples personas basadas en datos'] },
+      { text: '¿Cómo captas nuevos clientes?', options: ['Solo por recomendaciones', 'Algo de publicidad básica', 'Varios canales sin integrar', 'Estrategia multicanal integrada', 'Omnicanal con automatización'] },
+      { text: '¿Mides el retorno de tu inversión en marketing?', options: ['No mido ROI', 'Tengo una idea aproximada', 'Medición básica', 'Métricas detalladas', 'Analytics avanzado con atribución'] },
+    ],
+  },
+
   // === ResultsDashboard ===
   resultsDashboard: {
     // Header
@@ -811,6 +836,31 @@ export const diagnosticoUiEN = {
         },
       ],
     },
+  },
+
+  // === QuestionsData ===
+  questionsData: {
+    finance: [
+      { text: 'How often do you review your business numbers?', helpText: 'Includes review of sales, expenses, and profits', options: ['Daily with automated dashboard', 'Weekly with reports', 'Monthly', 'Quarterly', 'Yearly or less'] },
+      { text: 'Do you know the profit margin for each product/service you offer?', options: ['I don\'t know it', 'I have a rough idea', 'I know it for my main products', 'I have it calculated for my entire catalog'] },
+      { text: 'Are your personal finances separated from your business finances?', options: ['No, they are mixed', 'Partially separated', 'Yes, completely separated'] },
+      { text: 'How many months could you operate if all your sales stopped tomorrow?', helpText: 'Cash runway or financial cushion', options: ['Less than 1 month', '1-2 months', '3-6 months', '6-12 months', 'More than 1 year'] },
+      { text: 'What tools do you use to manage your finances?', options: ['Paper or notes', 'Basic Excel', 'Excel with advanced formulas', 'Specialized software', 'Integrated ERP system'] },
+    ],
+    operations: [
+      { text: 'How many hours per week do you spend on repetitive tasks?', helpText: 'Tasks you do over and over in the same way', options: ['0-2 hours', '3-5 hours', '6-10 hours', '11-20 hours', 'More than 20 hours'] },
+      { text: 'How do you manage client appointments?', options: ['By phone/WhatsApp manually', 'By email back and forth', 'Shared calendar', 'Online booking system', 'Fully automated'] },
+      { text: 'Do you have your key business processes documented?', options: ['No, it\'s all in my head', 'Some basic processes', 'Most are documented', 'All with detailed procedures', 'Digital system with videos'] },
+      { text: 'How do you manage your business inventory?', options: ['Mental tracking', 'Paper records', 'Manually updated Excel', 'Specialized software', 'Automated system with alerts'] },
+      { text: 'How long does it take you to generate a performance report?', options: ['It\'s instant', 'Less than 30 minutes', 'About 2 hours', 'Half a day', 'A full day or more'] },
+    ],
+    marketing: [
+      { text: 'Can customers easily find you on Google?', options: ['I don\'t have a website', 'I\'m not sure', 'Sometimes I appear', 'Usually on the first page', 'Always in the top results'] },
+      { text: 'How often do you post on social media?', options: ['Never or almost never', 'When I remember', '1-2 times a week', 'Daily', 'Multiple times a day with strategy'] },
+      { text: 'Do you know who your ideal customer is?', options: ['I don\'t have it clear', 'General idea', 'Basic profile defined', 'Detailed buyer persona', 'Multiple data-driven personas'] },
+      { text: 'How do you acquire new customers?', options: ['Only by referrals', 'Some basic advertising', 'Multiple unintegrated channels', 'Integrated multichannel strategy', 'Omnichannel with automation'] },
+      { text: 'Do you measure the return on your marketing investment?', options: ['I don\'t measure ROI', 'I have a rough idea', 'Basic measurement', 'Detailed metrics', 'Advanced analytics with attribution'] },
+    ],
   },
 
   // === ResultsDashboard ===

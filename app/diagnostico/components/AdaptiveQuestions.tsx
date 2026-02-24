@@ -33,9 +33,10 @@ export function AdaptiveQuestions({ axis, onComplete, initialScore = 50 }: Adapt
     }
     
     // Cargar preguntas basadas en el eje y el score inicial
-    const loadedQuestions = selectAdaptiveQuestions(axis, initialScore, 5);
+    const axisTranslations = t.questionsData?.[axis];
+    const loadedQuestions = selectAdaptiveQuestions(axis, initialScore, 5, axisTranslations);
     setQuestions(loadedQuestions);
-  }, [axis, initialScore, previousAxis]);
+  }, [axis, initialScore, previousAxis, t]);
 
   const handleAnswer = () => {
     const currentQuestion = questions[currentQuestionIndex];
