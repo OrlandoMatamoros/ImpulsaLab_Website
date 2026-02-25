@@ -557,6 +557,8 @@ export const diagnosticoUiES = {
     page: 'Página',
   },
 }
+
+export const diagnosticoUiEN = {
   // === DiagnosticWizard ===
   diagnosticWizard: {
     title: '3D Business Diagnostic',
