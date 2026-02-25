@@ -513,9 +513,50 @@ export const diagnosticoUiES = {
     ctaDescPublic: 'Agenda una consultoría gratuita de 30 minutos y te mostraremos exactamente cómo implementar estas mejoras en tu negocio.',
     ctaButton: 'Agendar Consultoría Gratuita',
   },
-}
 
-export const diagnosticoUiEN = {
+  // === PDF CoverPage ===
+  pdfCoverPage: {
+    title: 'DIAGNÓSTICO 3D',
+    subtitle: 'BUSINESS INTELLIGENCE',
+    defaultCompany: 'Tu Empresa',
+    notSpecified: 'No especificada',
+    industryLabel: 'Industria:',
+    contactLabel: 'Contacto:',
+    globalScore: 'PUNTUACIÓN GLOBAL',
+    stageExpansion: 'EXPANSIÓN',
+    stageGrowth: 'CRECIMIENTO',
+    stageSurvival: 'SUPERVIVENCIA',
+    generatedOn: (date: string) => `Generado el ${date}`,
+    dateLocale: 'es-ES',
+  },
+
+  // === PDF ExecutiveSummary ===
+  pdfExecutiveSummary: {
+    headerTitle: 'RESUMEN EJECUTIVO',
+    businessStatus: 'Estado del Negocio',
+    defaultCompany: 'Tu Empresa',
+    companyLabel: 'Empresa:',
+    stageLabel: 'Etapa:',
+    globalScoreLabel: 'Score Global:',
+    industryLabel: 'Industria:',
+    stageExpansion: 'Expansión',
+    stageGrowth: 'Crecimiento',
+    stageSurvival: 'Supervivencia',
+    triDimensionalAnalysis: 'Análisis Tridimensional',
+    scoresByDimension: 'Puntuaciones por Dimensión',
+    finance: 'Finanzas',
+    operations: 'Operaciones',
+    marketing: 'Marketing',
+    industryComparison: 'Comparación con Industria',
+    keyInsights: 'Insights Clave',
+    biggestOpportunity: 'Mayor oportunidad:',
+    biggestStrength: 'Mayor fortaleza:',
+    improvementPotential: 'Potencial de mejora:',
+    pts: 'pts',
+    vsIndustry: 'vs industria',
+    page: 'Página',
+  },
+}
   // === DiagnosticWizard ===
   diagnosticWizard: {
     title: '3D Business Diagnostic',
@@ -1027,5 +1068,48 @@ export const diagnosticoUiEN = {
     ctaDescPremium: 'Download your complete diagnostic and schedule your strategy session to implement improvements.',
     ctaDescPublic: 'Schedule a free 30-minute consultation and we will show you exactly how to implement these improvements in your business.',
     ctaButton: 'Schedule Free Consultation',
+  },
+
+  // === PDF CoverPage ===
+  pdfCoverPage: {
+    title: '3D DIAGNOSTIC',
+    subtitle: 'BUSINESS INTELLIGENCE',
+    defaultCompany: 'Your Company',
+    notSpecified: 'Not specified',
+    industryLabel: 'Industry:',
+    contactLabel: 'Contact:',
+    globalScore: 'GLOBAL SCORE',
+    stageExpansion: 'EXPANSION',
+    stageGrowth: 'GROWTH',
+    stageSurvival: 'SURVIVAL',
+    generatedOn: (date: string) => `Generated on ${date}`,
+    dateLocale: 'en-US',
+  },
+
+  // === PDF ExecutiveSummary ===
+  pdfExecutiveSummary: {
+    headerTitle: 'EXECUTIVE SUMMARY',
+    businessStatus: 'Business Status',
+    defaultCompany: 'Your Company',
+    companyLabel: 'Company:',
+    stageLabel: 'Stage:',
+    globalScoreLabel: 'Global Score:',
+    industryLabel: 'Industry:',
+    stageExpansion: 'Expansion',
+    stageGrowth: 'Growth',
+    stageSurvival: 'Survival',
+    triDimensionalAnalysis: 'Tri-Dimensional Analysis',
+    scoresByDimension: 'Scores by Dimension',
+    finance: 'Finance',
+    operations: 'Operations',
+    marketing: 'Marketing',
+    industryComparison: 'Industry Comparison',
+    keyInsights: 'Key Insights',
+    biggestOpportunity: 'Biggest opportunity:',
+    biggestStrength: 'Biggest strength:',
+    improvementPotential: 'Improvement potential:',
+    pts: 'pts',
+    vsIndustry: 'vs industry',
+    page: 'Page',
   },
 }
