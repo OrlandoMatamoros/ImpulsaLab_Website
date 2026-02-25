@@ -369,6 +369,27 @@ export const diagnosticoUiES = {
     ],
   },
 
+  // === ScoringEngine ===
+  scoringEngine: {
+    maturityStages: {
+      survival: 'Supervivencia',
+      growth: 'Crecimiento',
+      expansion: 'Expansión',
+    },
+  },
+
+  // === AIAnalyzer ===
+  aiAnalyzer: {
+    executiveSummary: (companyName: string) => `Análisis completo para ${companyName}`,
+    financeInsight: 'Insight financiero 1',
+    operationsInsight: 'Insight operacional 1',
+    marketingInsight: 'Insight de marketing 1',
+    scenario: 'Optimista',
+    timeframe: '6 meses',
+    nextSteps: ['Siguiente paso 1', 'Siguiente paso 2'],
+    realTimeInsight: 'Análisis en tiempo real de la respuesta',
+  },
+
   // === ResultsDashboard ===
   resultsDashboard: {
     // Header
@@ -861,6 +882,27 @@ export const diagnosticoUiEN = {
       { text: 'How do you acquire new customers?', options: ['Only by referrals', 'Some basic advertising', 'Multiple unintegrated channels', 'Integrated multichannel strategy', 'Omnichannel with automation'] },
       { text: 'Do you measure the return on your marketing investment?', options: ['I don\'t measure ROI', 'I have a rough idea', 'Basic measurement', 'Detailed metrics', 'Advanced analytics with attribution'] },
     ],
+  },
+
+  // === ScoringEngine ===
+  scoringEngine: {
+    maturityStages: {
+      survival: 'Survival',
+      growth: 'Growth',
+      expansion: 'Expansion',
+    },
+  },
+
+  // === AIAnalyzer ===
+  aiAnalyzer: {
+    executiveSummary: (companyName: string) => `Full analysis for ${companyName}`,
+    financeInsight: 'Financial insight 1',
+    operationsInsight: 'Operational insight 1',
+    marketingInsight: 'Marketing insight 1',
+    scenario: 'Optimistic',
+    timeframe: '6 months',
+    nextSteps: ['Next step 1', 'Next step 2'],
+    realTimeInsight: 'Real-time response analysis',
   },
 
   // === ResultsDashboard ===

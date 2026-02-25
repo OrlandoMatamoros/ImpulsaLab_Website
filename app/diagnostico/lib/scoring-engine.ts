@@ -6,6 +6,8 @@ export interface AxisScores {
   marketing: number;
 }
 
+export type MaturityStage = 'survival' | 'growth' | 'expansion';
+
 export interface DetailedScore {
   axis: string;
   score: number;
@@ -16,7 +18,7 @@ export interface DetailedScore {
   }[];
   strengths: string[];
   weaknesses: string[];
-  maturityStage: 'Supervivencia' | 'Crecimiento' | 'Expansión';
+  maturityStage: MaturityStage;
 }
 
 export class ScoringEngine {
@@ -34,10 +36,10 @@ export class ScoringEngine {
     return Math.round(weightedSum / totalWeight);
   }
 
-  getMaturityStage(score: number): 'Supervivencia' | 'Crecimiento' | 'Expansión' {
-    if (score < 40) return 'Supervivencia';
-    if (score < 70) return 'Crecimiento';
-    return 'Expansión';
+  getMaturityStage(score: number): MaturityStage {
+    if (score < 40) return 'survival';
+    if (score < 70) return 'growth';
+    return 'expansion';
   }
 
   calculateOverallScore(

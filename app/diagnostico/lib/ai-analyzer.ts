@@ -22,6 +22,17 @@ export interface AIAnalysisResult {
   next_steps: string[];
 }
 
+export interface AIAnalyzerTranslations {
+  executiveSummary: (companyName: string) => string;
+  financeInsight: string;
+  operationsInsight: string;
+  marketingInsight: string;
+  scenario: string;
+  timeframe: string;
+  nextSteps: string[];
+  realTimeInsight: string;
+}
+
 export class AIAnalyzer {
   private openai: OpenAI;
 
@@ -33,15 +44,16 @@ export class AIAnalyzer {
     companyData: any,
     scores: AxisScores,
     detailedScores: DetailedScore[],
-    responses: any[]
+    responses: any[],
+    translations?: AIAnalyzerTranslations
   ): Promise<AIAnalysisResult> {
-    // Por ahora retornamos un análisis de ejemplo
+    const t = translations;
     return {
-      executive_summary: `Análisis completo para ${companyData.name}`,
+      executive_summary: t?.executiveSummary(companyData.name) ?? `Full analysis for ${companyData.name}`,
       key_insights: {
-        finance: ['Insight financiero 1'],
-        operations: ['Insight operacional 1'],
-        marketing: ['Insight de marketing 1']
+        finance: [t?.financeInsight ?? 'Financial insight 1'],
+        operations: [t?.operationsInsight ?? 'Operational insight 1'],
+        marketing: [t?.marketingInsight ?? 'Marketing insight 1']
       },
       critical_gaps: [],
       recommendations: {
@@ -50,21 +62,22 @@ export class AIAnalyzer {
         long_term: []
       },
       growth_potential: {
-        scenario: 'Optimista',
+        scenario: t?.scenario ?? 'Optimistic',
         projected_improvement: 30,
-        timeframe: '6 meses'
+        timeframe: t?.timeframe ?? '6 months'
       },
-      next_steps: ['Siguiente paso 1', 'Siguiente paso 2']
+      next_steps: t?.nextSteps ?? ['Next step 1', 'Next step 2']
     };
   }
 
   async analyzeResponseInRealTime(
     question: any,
     response: any,
-    previousResponses: any[]
+    previousResponses: any[],
+    translations?: { realTimeInsight: string }
   ): Promise<any> {
     return {
-      insight: 'Análisis en tiempo real de la respuesta',
+      insight: translations?.realTimeInsight ?? 'Real-time response analysis',
       followUpQuestion: null,
       suggestedProbe: null
     };
