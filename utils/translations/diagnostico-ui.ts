@@ -556,6 +556,223 @@ export const diagnosticoUiES = {
     vsIndustry: 'vs industria',
     page: 'Página',
   },
+
+  // === PDF DetailedAnalysis ===
+  pdfDetailedAnalysis: {
+    headerTitle: 'ANÁLISIS DETALLADO POR EJE',
+    finance: 'FINANZAS',
+    operations: 'OPERACIONES',
+    marketing: 'MARKETING',
+    scoreLabel: 'Score:',
+    benchmarkLabel: 'Benchmark',
+    pts: 'pts',
+    roiExpected: 'ROI Esperado:',
+    timeLabel: 'Tiempo:',
+    days: 'días',
+    priorityHigh: 'Prioridad: ALTA',
+    page: 'Página',
+    financeAnalysisAbove: (score: number, industry: string, benchmark: number) =>
+      `Control financiero básico que requiere fortalecimiento. El score de ${score} indica sistemas fundamentales pero con brechas en visibilidad. La industria ${industry} promedia ${benchmark} puntos, representando una oportunidad de mejora significativa.`,
+    financeAnalysisBelow: (score: number, benchmark: number) =>
+      `Gestión financiera reactiva. Con ${score} puntos, estás ${benchmark - score} puntos por debajo del estándar de la industria. Esto representa la mayor oportunidad de mejora inmediata.`,
+    opsAnalysisAbove: (score: number, benchmark: number) =>
+      `Operaciones funcionales pero manuales. El score de ${score} revela dependencia de procesos manuales que limitan escalabilidad. Con el benchmark en ${benchmark}, existe oportunidad de duplicar capacidad mediante automatización.`,
+    opsAnalysisBelow: (score: number, benchmark: number) =>
+      `Operaciones principalmente manuales. Tu puntuación de ${score} está ${benchmark - score} puntos debajo del promedio. Se estima que el 60-70% del tiempo se dedica a tareas automatizables.`,
+    mktAnalysisAbove: (score: number, benchmark: number) =>
+      `Marketing básico con potencial sin explotar. Con ${score} puntos vs ${benchmark} del benchmark, existe brecha en posicionamiento digital. La competencia está capturando market share mediante estrategias omnicanal.`,
+    mktAnalysisBelow: (score: number, benchmark: number) =>
+      `Marketing reactivo y limitado. Tu puntuación de ${score} está ${benchmark - score} puntos bajo el estándar. Los competidores están capturando tu mercado potencial mediante estrategias digitales efectivas.`,
+  },
+
+  // === PDF ROIMetrics ===
+  pdfROIMetrics: {
+    headerTitle: 'MÉTRICAS DE ÉXITO Y RETORNO DE INVERSIÓN',
+    headerTitleCont: 'MÉTRICAS DE ÉXITO Y ROI (Cont.)',
+    pageOf: (current: number, total: number) => `Página ${current} de ${total}`,
+    axisLabels: { finance: 'Finanzas', operations: 'Operaciones', marketing: 'Marketing' },
+    kpiSectionTitle: 'INDICADORES CLAVE DE ÉXITO (KPIs)',
+    tableHeaders: { metric: 'Métrica', current: 'Actual', target: 'Objetivo', timeline: 'Plazo', impact: 'Impacto' },
+    kpis: [
+      { metric: 'Eficiencia Operativa', current: '100%', target: '145%', timeline: '60 días', impact: 'ALTO' },
+      { metric: 'Tiempo en Tareas Manuales', current: '100%', target: '60%', timeline: '30 días', impact: 'MEDIO' },
+      { metric: 'Visibilidad de Datos', current: 'Reactiva', target: 'Proactiva', timeline: '45 días', impact: 'ALTO' },
+      { metric: 'Capacidad de Procesamiento', current: '1X', target: '2.5X', timeline: '90 días', impact: 'ALTO' },
+      { metric: 'Tiempo de Respuesta', current: '100%', target: '30%', timeline: '60 días', impact: 'MEDIO' },
+    ],
+    roiSectionTitle: 'RETORNO DE INVERSIÓN PROYECTADO',
+    roiCards: [
+      { title: 'ROI Año 1', value: '250-350%', detail: 'Recuperación total + ganancias' },
+      { title: 'Payback', value: '3-4 meses', detail: 'Tiempo de recuperación' },
+      { title: 'Ahorro Anual', value: '$50-150K', detail: 'En eficiencias y automatización' },
+    ],
+    roiBreakdownTitle: 'DESGLOSE DEL RETORNO DE INVERSIÓN',
+    roiBreakdown: [
+      'Ahorro en horas laborales: 20-30 hrs/semana × $30/hr = $24,000-36,000/año',
+      'Incremento en capacidad sin contratar: Equivalente a 2-3 empleados = $100,000-150,000/año',
+      'Reducción de errores y reprocesos: 70-80% menos errores = $20,000-30,000/año',
+      'Mejora en conversión de ventas: 20-30% más conversión = $50,000-100,000/año',
+    ],
+    benefitsTitle: 'BENEFICIOS INTANGIBLES',
+    benefits: [
+      'Mayor agilidad para responder a cambios del mercado',
+      'Mejora en la moral y productividad del equipo',
+      'Posicionamiento como líder innovador en tu industria',
+      'Capacidad de tomar decisiones basadas en datos reales',
+      'Reducción del estrés operativo y burnout del equipo',
+      'Preparación para oportunidades de inversión o expansión',
+    ],
+    guaranteeTitle: 'GARANTÍA DE RESULTADOS IMPULSA LAB',
+    guaranteeLine1: 'Si no alcanzas al menos 50% del ROI proyectado en 6 meses,',
+    guaranteeLine2: 'te proporcionamos consultoría adicional sin costo hasta lograrlo.',
+    page: 'Página',
+    days: 'días',
+  },
+
+  // === PDF ActionPlan ===
+  pdfActionPlan: {
+    headerTitle: 'PLAN DE ACCIÓN PERSONALIZADO',
+    headerTitleCont: 'PLAN DE ACCIÓN PERSONALIZADO (Cont.)',
+    axisLabels: { finance: 'Finanzas', operations: 'Operaciones', marketing: 'Marketing' },
+    criticalAction: 'ACCIÓN CRÍTICA PRIORITARIA',
+    strengthen: 'Fortalecer',
+    whyActNow: '¿Por qué actuar AHORA?',
+    defaultWhy: (score: number, axis: string) =>
+      `Tu puntuación de ${score} en ${axis} es crítica. Actuar ahora puede generar un ROI del 200-300% en los próximos 12 meses.`,
+    implementationPlan: 'Plan de Implementación - 5 Pasos Clave:',
+    defaultActions: [
+      'Auditoría inicial del estado actual',
+      'Implementación de quick wins',
+      'Automatización de procesos clave',
+      'Establecimiento de KPIs',
+      'Optimización continua',
+    ],
+    quickWinTitle: 'QUICK WIN - Acción para HOY:',
+    defaultQuickWin: 'Implementa un dashboard básico de seguimiento con las 3 métricas más críticas.',
+    successMetrics: 'Métricas de Éxito:',
+    strengthenImmediately: 'Inmediatamente',
+    page: 'Página',
+  },
+
+  // === PDF Roadmap ===
+  pdfRoadmap: {
+    headerTitle: 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS',
+    headerTitleCont: 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS (Cont.)',
+    timelineLabels: [
+      { label: 'Inicio', day: '0' },
+      { label: 'Fase 1', day: '30' },
+      { label: 'Fase 2', day: '60' },
+      { label: 'Fase 3', day: '90' },
+    ],
+    dayPrefix: 'Día',
+    keyActions: 'Acciones clave:',
+    expectedResult: 'Resultado esperado:',
+    defaultPhases: [
+      {
+        title: 'FASE 1: FUNDAMENTOS (Días 1-30)',
+        objective: 'Establecer las bases sólidas',
+        actions: [
+          'Auditoría completa de sistemas y procesos actuales',
+          'Implementación de quick wins identificados',
+          'Configuración de herramientas básicas de monitoreo',
+          'Capacitación inicial del equipo',
+        ],
+        result: 'Sistema básico operativo con 40% más visibilidad',
+      },
+      {
+        title: 'FASE 2: OPTIMIZACIÓN (Días 31-60)',
+        objective: 'Automatizar y optimizar procesos clave',
+        actions: [
+          'Automatización de 3-5 procesos críticos',
+          'Implementación de dashboards avanzados',
+          'Optimización de flujos de trabajo',
+          'Establecimiento de métricas automatizadas',
+        ],
+        result: 'Eficiencia operativa mejorada 35-45%',
+      },
+      {
+        title: 'FASE 3: ESCALAMIENTO (Días 61-90)',
+        objective: 'Escalar el sistema y preparar crecimiento',
+        actions: [
+          'Expansión del sistema a todas las áreas',
+          'Implementación de analytics predictivos',
+          'Optimización continua basada en datos',
+          'Preparación para scaling 2-3X',
+        ],
+        result: 'Sistema completo con capacidad de escalar',
+      },
+    ],
+    objectiveLabel: 'Objetivo:',
+    actionsLabel: 'Acciones:',
+    resultLabel: 'Resultado:',
+    continuation: '(Continuación)',
+    successIndicatorsTitle: 'INDICADORES DE ÉXITO DEL ROADMAP',
+    successIndicators: [
+      '✓ Reducción 40-60% en tareas manuales',
+      '✓ Incremento 2-3X en capacidad',
+      '✓ ROI positivo desde mes 3',
+    ],
+    page: 'Página',
+    pageOf: (current: number, total: number) => `Página ${current} de ${total}`,
+  },
+
+  // === PDF Conclusions ===
+  pdfConclusions: {
+    headerTitle: 'CONCLUSIONES Y PRÓXIMOS PASOS',
+    headerTitleCont: 'CONCLUSIONES Y PRÓXIMOS PASOS (Cont.)',
+    defaultCompany: 'Tu Empresa',
+    defaultIndustry: 'tu industria',
+    stageExpansion: 'Expansión',
+    stageGrowth: 'Crecimiento',
+    stageSurvival: 'Supervivencia',
+    axisLabels: { finance: 'Finanzas', operations: 'Operaciones', marketing: 'Marketing' },
+    currentSituationTitle: 'RESUMEN DE TU SITUACIÓN ACTUAL',
+    summaryText: (company: string, score: number, stage: string, strongAxis: string, strongScore: number, weakAxis: string, weakScore: number) =>
+      `${company} ha completado el Diagnóstico 3D Impulsa obteniendo una puntuación global de ${score}/100, ubicándose en la etapa de "${stage}". El análisis revela fortalezas notables en ${strongAxis} (${strongScore} puntos) y oportunidades significativas de mejora en ${weakAxis} (${weakScore} puntos).`,
+    growthPotentialTitle: 'TU POTENCIAL DE CRECIMIENTO',
+    potentialText: (potential: number, company: string) =>
+      `El análisis revela un potencial de mejora del ${potential}% promedio. Con las estrategias correctas y el acompañamiento experto, ${company} puede lograr:`,
+    achievements: [
+      '• Incremento del 35-50% en eficiencia operativa',
+      '• Reducción del 40-60% en costos operativos',
+      '• Aumento del 200-300% en capacidad sin contratar',
+      '• ROI del 250-350% en el primer año',
+    ],
+    strategicRecTitle: 'RECOMENDACIÓN ESTRATÉGICA',
+    recommendationText: (weakAxis: string) =>
+      `Basado en el diagnóstico integral, la recomendación prioritaria es iniciar inmediatamente con la transformación de ${weakAxis}. Esta intervención estratégica abordará el cuello de botella principal que limita tu crecimiento y generará el mayor impacto en el menor tiempo posible.`,
+    nextStepTitle: 'TU PRÓXIMO PASO',
+    nextStepLine1: 'Agenda tu sesión estratégica GRATUITA de 30 minutos',
+    nextStepLine2: 'para diseñar tu plan de implementación personalizado',
+    sessionBenefitsTitle: 'En tu sesión estratégica gratuita recibirás:',
+    sessionBenefits: [
+      '• Análisis detallado de tus resultados con un experto',
+      '• Plan de acción personalizado para tu situación',
+      '• Identificación de 3-5 quick wins inmediatos',
+      '• Estimación de ROI y timeline específico',
+      '• Acceso a herramientas y recursos exclusivos',
+    ],
+    footerTagline: 'Business Intelligence & Digital Transformation',
+    footerConfidential: 'Este diagnóstico es confidencial y propiedad de tu organización',
+    validUntil: (date: string) => `Validez: hasta ${date}`,
+    directContact: 'Contacto Directo:',
+    generatedBy: (email: string) => `Generado por: ${email}`,
+    authorizedUser: 'Usuario autorizado',
+    dateLocale: 'es-ES',
+    page: 'Página',
+    pageOf: (current: number, total: number) => `Página ${current} de ${total}`,
+  },
+
+  // === PDFGenerator ===
+  pdfGenerator: {
+    generatingPdf: 'Generando PDF...',
+    downloadFull: 'Descargar PDF Completo',
+    pdfAvailable: 'PDF Disponible (Agenda Consultoría)',
+    errorGenerating: 'Hubo un error al generar el PDF. Por favor intenta de nuevo.',
+    defaultCompany: 'Empresa',
+    scheduleConsultation: 'Agenda tu consultoría gratuita para obtener el PDF completo',
+    loginForMore: 'Inicia sesión para acceder a más funciones',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -1113,5 +1330,222 @@ export const diagnosticoUiEN = {
     pts: 'pts',
     vsIndustry: 'vs industry',
     page: 'Page',
+  },
+
+  // === PDF DetailedAnalysis ===
+  pdfDetailedAnalysis: {
+    headerTitle: 'DETAILED ANALYSIS BY AXIS',
+    finance: 'FINANCE',
+    operations: 'OPERATIONS',
+    marketing: 'MARKETING',
+    scoreLabel: 'Score:',
+    benchmarkLabel: 'Benchmark',
+    pts: 'pts',
+    roiExpected: 'Expected ROI:',
+    timeLabel: 'Time:',
+    days: 'days',
+    priorityHigh: 'Priority: HIGH',
+    page: 'Page',
+    financeAnalysisAbove: (score: number, industry: string, benchmark: number) =>
+      `Basic financial control that requires strengthening. A score of ${score} indicates fundamental systems with visibility gaps. The ${industry} industry averages ${benchmark} points, representing a significant improvement opportunity.`,
+    financeAnalysisBelow: (score: number, benchmark: number) =>
+      `Reactive financial management. With ${score} points, you are ${benchmark - score} points below the industry standard. This represents the greatest opportunity for immediate improvement.`,
+    opsAnalysisAbove: (score: number, benchmark: number) =>
+      `Functional but manual operations. A score of ${score} reveals dependence on manual processes limiting scalability. With the benchmark at ${benchmark}, there is an opportunity to double capacity through automation.`,
+    opsAnalysisBelow: (score: number, benchmark: number) =>
+      `Primarily manual operations. Your score of ${score} is ${benchmark - score} points below the average. An estimated 60-70% of time is spent on automatable tasks.`,
+    mktAnalysisAbove: (score: number, benchmark: number) =>
+      `Basic marketing with untapped potential. With ${score} points vs ${benchmark} benchmark, there is a gap in digital positioning. Competition is capturing market share through omnichannel strategies.`,
+    mktAnalysisBelow: (score: number, benchmark: number) =>
+      `Reactive and limited marketing. Your score of ${score} is ${benchmark - score} points below the standard. Competitors are capturing your potential market through effective digital strategies.`,
+  },
+
+  // === PDF ROIMetrics ===
+  pdfROIMetrics: {
+    headerTitle: 'SUCCESS METRICS AND RETURN ON INVESTMENT',
+    headerTitleCont: 'SUCCESS METRICS AND ROI (Cont.)',
+    pageOf: (current: number, total: number) => `Page ${current} of ${total}`,
+    axisLabels: { finance: 'Finance', operations: 'Operations', marketing: 'Marketing' },
+    kpiSectionTitle: 'KEY SUCCESS INDICATORS (KPIs)',
+    tableHeaders: { metric: 'Metric', current: 'Current', target: 'Target', timeline: 'Timeline', impact: 'Impact' },
+    kpis: [
+      { metric: 'Operational Efficiency', current: '100%', target: '145%', timeline: '60 days', impact: 'HIGH' },
+      { metric: 'Time on Manual Tasks', current: '100%', target: '60%', timeline: '30 days', impact: 'MEDIUM' },
+      { metric: 'Data Visibility', current: 'Reactive', target: 'Proactive', timeline: '45 days', impact: 'HIGH' },
+      { metric: 'Processing Capacity', current: '1X', target: '2.5X', timeline: '90 days', impact: 'HIGH' },
+      { metric: 'Response Time', current: '100%', target: '30%', timeline: '60 days', impact: 'MEDIUM' },
+    ],
+    roiSectionTitle: 'PROJECTED RETURN ON INVESTMENT',
+    roiCards: [
+      { title: 'Year 1 ROI', value: '250-350%', detail: 'Full recovery + profits' },
+      { title: 'Payback', value: '3-4 months', detail: 'Recovery time' },
+      { title: 'Annual Savings', value: '$50-150K', detail: 'In efficiencies and automation' },
+    ],
+    roiBreakdownTitle: 'RETURN ON INVESTMENT BREAKDOWN',
+    roiBreakdown: [
+      'Labor hour savings: 20-30 hrs/week × $30/hr = $24,000-36,000/year',
+      'Capacity increase without hiring: Equivalent to 2-3 employees = $100,000-150,000/year',
+      'Error and rework reduction: 70-80% fewer errors = $20,000-30,000/year',
+      'Sales conversion improvement: 20-30% more conversion = $50,000-100,000/year',
+    ],
+    benefitsTitle: 'INTANGIBLE BENEFITS',
+    benefits: [
+      'Greater agility to respond to market changes',
+      'Improved team morale and productivity',
+      'Positioning as an innovative leader in your industry',
+      'Ability to make decisions based on real data',
+      'Reduced operational stress and team burnout',
+      'Preparation for investment or expansion opportunities',
+    ],
+    guaranteeTitle: 'IMPULSA LAB RESULTS GUARANTEE',
+    guaranteeLine1: 'If you don\'t achieve at least 50% of the projected ROI in 6 months,',
+    guaranteeLine2: 'we provide additional consulting at no cost until you do.',
+    page: 'Page',
+    days: 'days',
+  },
+
+  // === PDF ActionPlan ===
+  pdfActionPlan: {
+    headerTitle: 'PERSONALIZED ACTION PLAN',
+    headerTitleCont: 'PERSONALIZED ACTION PLAN (Cont.)',
+    axisLabels: { finance: 'Finance', operations: 'Operations', marketing: 'Marketing' },
+    criticalAction: 'CRITICAL PRIORITY ACTION',
+    strengthen: 'Strengthen',
+    whyActNow: 'Why act NOW?',
+    defaultWhy: (score: number, axis: string) =>
+      `Your score of ${score} in ${axis} is critical. Acting now can generate a 200-300% ROI in the next 12 months.`,
+    implementationPlan: 'Implementation Plan - 5 Key Steps:',
+    defaultActions: [
+      'Initial audit of current state',
+      'Quick wins implementation',
+      'Key process automation',
+      'KPI establishment',
+      'Continuous optimization',
+    ],
+    quickWinTitle: 'QUICK WIN - Action for TODAY:',
+    defaultQuickWin: 'Implement a basic tracking dashboard with the 3 most critical metrics.',
+    successMetrics: 'Success Metrics:',
+    strengthenImmediately: 'Immediately',
+    page: 'Page',
+  },
+
+  // === PDF Roadmap ===
+  pdfRoadmap: {
+    headerTitle: 'TRANSFORMATION ROADMAP - 90 DAYS',
+    headerTitleCont: 'TRANSFORMATION ROADMAP - 90 DAYS (Cont.)',
+    timelineLabels: [
+      { label: 'Start', day: '0' },
+      { label: 'Phase 1', day: '30' },
+      { label: 'Phase 2', day: '60' },
+      { label: 'Phase 3', day: '90' },
+    ],
+    dayPrefix: 'Day',
+    keyActions: 'Key actions:',
+    expectedResult: 'Expected result:',
+    defaultPhases: [
+      {
+        title: 'PHASE 1: FOUNDATIONS (Days 1-30)',
+        objective: 'Establish solid foundations',
+        actions: [
+          'Complete audit of current systems and processes',
+          'Implementation of identified quick wins',
+          'Configuration of basic monitoring tools',
+          'Initial team training',
+        ],
+        result: 'Basic system operational with 40% more visibility',
+      },
+      {
+        title: 'PHASE 2: OPTIMIZATION (Days 31-60)',
+        objective: 'Automate and optimize key processes',
+        actions: [
+          'Automation of 3-5 critical processes',
+          'Implementation of advanced dashboards',
+          'Workflow optimization',
+          'Establishment of automated metrics',
+        ],
+        result: 'Operational efficiency improved 35-45%',
+      },
+      {
+        title: 'PHASE 3: SCALING (Days 61-90)',
+        objective: 'Scale the system and prepare for growth',
+        actions: [
+          'Expansion of the system to all areas',
+          'Implementation of predictive analytics',
+          'Continuous data-driven optimization',
+          'Preparation for 2-3X scaling',
+        ],
+        result: 'Complete system with scaling capability',
+      },
+    ],
+    objectiveLabel: 'Objective:',
+    actionsLabel: 'Actions:',
+    resultLabel: 'Result:',
+    continuation: '(Continued)',
+    successIndicatorsTitle: 'ROADMAP SUCCESS INDICATORS',
+    successIndicators: [
+      '✓ 40-60% reduction in manual tasks',
+      '✓ 2-3X capacity increase',
+      '✓ Positive ROI from month 3',
+    ],
+    page: 'Page',
+    pageOf: (current: number, total: number) => `Page ${current} of ${total}`,
+  },
+
+  // === PDF Conclusions ===
+  pdfConclusions: {
+    headerTitle: 'CONCLUSIONS AND NEXT STEPS',
+    headerTitleCont: 'CONCLUSIONS AND NEXT STEPS (Cont.)',
+    defaultCompany: 'Your Company',
+    defaultIndustry: 'your industry',
+    stageExpansion: 'Expansion',
+    stageGrowth: 'Growth',
+    stageSurvival: 'Survival',
+    axisLabels: { finance: 'Finance', operations: 'Operations', marketing: 'Marketing' },
+    currentSituationTitle: 'YOUR CURRENT SITUATION SUMMARY',
+    summaryText: (company: string, score: number, stage: string, strongAxis: string, strongScore: number, weakAxis: string, weakScore: number) =>
+      `${company} has completed the Impulsa 3D Diagnostic achieving a global score of ${score}/100, placing it in the "${stage}" stage. The analysis reveals notable strengths in ${strongAxis} (${strongScore} points) and significant improvement opportunities in ${weakAxis} (${weakScore} points).`,
+    growthPotentialTitle: 'YOUR GROWTH POTENTIAL',
+    potentialText: (potential: number, company: string) =>
+      `The analysis reveals an average improvement potential of ${potential}%. With the right strategies and expert guidance, ${company} can achieve:`,
+    achievements: [
+      '• 35-50% increase in operational efficiency',
+      '• 40-60% reduction in operating costs',
+      '• 200-300% increase in capacity without hiring',
+      '• 250-350% ROI in the first year',
+    ],
+    strategicRecTitle: 'STRATEGIC RECOMMENDATION',
+    recommendationText: (weakAxis: string) =>
+      `Based on the comprehensive diagnostic, the priority recommendation is to immediately begin the transformation of ${weakAxis}. This strategic intervention will address the main bottleneck limiting your growth and generate the greatest impact in the shortest time possible.`,
+    nextStepTitle: 'YOUR NEXT STEP',
+    nextStepLine1: 'Schedule your FREE 30-minute strategy session',
+    nextStepLine2: 'to design your personalized implementation plan',
+    sessionBenefitsTitle: 'In your free strategy session you will receive:',
+    sessionBenefits: [
+      '• Detailed analysis of your results with an expert',
+      '• Personalized action plan for your situation',
+      '• Identification of 3-5 immediate quick wins',
+      '• Specific ROI and timeline estimation',
+      '• Access to exclusive tools and resources',
+    ],
+    footerTagline: 'Business Intelligence & Digital Transformation',
+    footerConfidential: 'This diagnostic is confidential and property of your organization',
+    validUntil: (date: string) => `Valid until: ${date}`,
+    directContact: 'Direct Contact:',
+    generatedBy: (email: string) => `Generated by: ${email}`,
+    authorizedUser: 'Authorized user',
+    dateLocale: 'en-US',
+    page: 'Page',
+    pageOf: (current: number, total: number) => `Page ${current} of ${total}`,
+  },
+
+  // === PDFGenerator ===
+  pdfGenerator: {
+    generatingPdf: 'Generating PDF...',
+    downloadFull: 'Download Full PDF',
+    pdfAvailable: 'PDF Available (Schedule Consultation)',
+    errorGenerating: 'There was an error generating the PDF. Please try again.',
+    defaultCompany: 'Company',
+    scheduleConsultation: 'Schedule your free consultation to get the full PDF',
+    loginForMore: 'Log in to access more features',
   },
 }
