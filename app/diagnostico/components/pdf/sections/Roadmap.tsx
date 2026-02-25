@@ -189,7 +189,7 @@ export async function generateRoadmap(
 
     defaultPhases.forEach((phase: any, index: number) => {
       // Use color from translation data or fall back to defaults
-      const phaseColor = phase.color ?? (
+      const phaseColor: [number, number, number] = phase.color ?? (
         index === 0 ? styles.colors.secondary :
         index === 1 ? styles.colors.purple :
         styles.colors.success
