@@ -773,6 +773,18 @@ export const diagnosticoUiES = {
     scheduleConsultation: 'Agenda tu consultoría gratuita para obtener el PDF completo',
     loginForMore: 'Inicia sesión para acceder a más funciones',
   },
+
+  // === PDFStyles (utility functions) ===
+  pdfStyles: {
+    expansion: 'Expansión',
+    growth: 'Crecimiento',
+    survival: 'Supervivencia',
+    expansionMsg: 'Tu negocio está listo para escalar',
+    growthMsg: 'Tienes una base sólida para crecer',
+    survivalMsg: 'Es momento de fortalecer los fundamentos',
+    dateLocale: 'es-ES',
+    currencyLocale: 'es-US',
+  },
 }
 
 export const diagnosticoUiEN = {
@@ -1547,5 +1559,17 @@ export const diagnosticoUiEN = {
     defaultCompany: 'Company',
     scheduleConsultation: 'Schedule your free consultation to get the full PDF',
     loginForMore: 'Log in to access more features',
+  },
+
+  // === PDFStyles (utility functions) ===
+  pdfStyles: {
+    expansion: 'Expansion',
+    growth: 'Growth',
+    survival: 'Survival',
+    expansionMsg: 'Your business is ready to scale',
+    growthMsg: 'You have a solid foundation for growth',
+    survivalMsg: 'It\'s time to strengthen the fundamentals',
+    dateLocale: 'en-US',
+    currencyLocale: 'en-US',
   },
 }

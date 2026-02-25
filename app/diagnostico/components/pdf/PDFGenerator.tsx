@@ -16,8 +16,7 @@ import {
   generateROIMetrics,
   generateConclusions
 } from './sections';
-import renderChartToImage from './utils/chartHelpers';
-import { PDFStyles } from './/utils/pdfStyles';
+import { PDFStyles } from './utils/pdfStyles';
 
 interface PDFGeneratorProps {
   scores: {
