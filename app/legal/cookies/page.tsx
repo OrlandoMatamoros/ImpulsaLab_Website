@@ -1,186 +1,152 @@
+'use client';
+
 // app/legal/cookies/page.tsx
 import Link from 'next/link';
-
-export const metadata = {
-  title: 'Política de Cookies | Impulsa Lab',
-  description: 'Información sobre cómo usamos las cookies en Impulsa Lab.',
-};
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function CookiesPolicy() {
+  const { t, language } = useLanguage();
+
   return (
     <>
       <nav className="mb-8">
         <Link href="/" className="text-blue-600 hover:underline">
-          ← Volver al inicio
+          {t.cookiesPage.volverInicio}
         </Link>
       </nav>
 
       <article className="prose prose-lg max-w-none">
-        <h1 className="text-4xl font-bold mb-4">Política de Cookies</h1>
-        
+        <h1 className="text-4xl font-bold mb-4">{t.cookiesPage.titulo}</h1>
+
         <p className="text-gray-600 mb-8">
-          Última actualización: {new Date().toLocaleDateString('es-ES', { 
-            year: 'numeric', 
-            month: 'long', 
-            day: 'numeric' 
+          {t.cookiesPage.ultimaActualizacion} {new Date().toLocaleDateString(language === 'ES' ? 'es-ES' : 'en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
           })}
         </p>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">¿Qué son las Cookies?</h2>
-          <p>
-            Las cookies son pequeños archivos de texto que se almacenan en tu dispositivo 
-            cuando visitas un sitio web. Se utilizan ampliamente para hacer que los sitios 
-            web funcionen de manera más eficiente y proporcionar información a los 
-            propietarios del sitio.
-          </p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.quesonTitulo}</h2>
+          <p>{t.cookiesPage.quesonTexto}</p>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Cómo Usamos las Cookies</h2>
-          <p>Utilizamos cookies para:</p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.comoUsamosTitulo}</h2>
+          <p>{t.cookiesPage.comoUsamosTexto}</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Recordar tus preferencias y configuraciones</li>
-            <li>Mantener tu sesión activa</li>
-            <li>Analizar cómo utilizas nuestro sitio web</li>
-            <li>Personalizar tu experiencia</li>
-            <li>Mejorar el rendimiento del sitio</li>
+            {t.cookiesPage.comoUsamosItems.map((item: string, i: number) => (
+              <li key={i}>{item}</li>
+            ))}
           </ul>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Tipos de Cookies que Utilizamos</h2>
-          
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.tiposTitulo}</h2>
+
           <div className="bg-blue-50 p-4 rounded-lg mb-4">
-            <h3 className="text-xl font-semibold mb-2">🔒 Cookies Esenciales</h3>
-            <p>
-              Estas cookies son necesarias para que el sitio web funcione correctamente. 
-              Sin ellas, servicios como la navegación por páginas o el acceso a áreas 
-              seguras no serían posibles.
-            </p>
+            <h3 className="text-xl font-semibold mb-2">{t.cookiesPage.esencialesTitulo}</h3>
+            <p>{t.cookiesPage.esencialesTexto}</p>
             <ul className="list-disc pl-6 mt-2 text-sm">
-              <li>Autenticación de usuario</li>
-              <li>Preferencias de cookies</li>
-              <li>Seguridad del sitio</li>
+              {t.cookiesPage.esencialesItems.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </div>
 
           <div className="bg-green-50 p-4 rounded-lg mb-4">
-            <h3 className="text-xl font-semibold mb-2">📊 Cookies de Análisis</h3>
-            <p>
-              Nos ayudan a entender cómo los visitantes interactúan con nuestro sitio web 
-              recopilando información de forma anónima.
-            </p>
+            <h3 className="text-xl font-semibold mb-2">{t.cookiesPage.analisisTitulo}</h3>
+            <p>{t.cookiesPage.analisisTexto}</p>
             <ul className="list-disc pl-6 mt-2 text-sm">
-              <li>Google Analytics</li>
-              <li>Hotjar (mapas de calor)</li>
-              <li>Métricas de rendimiento</li>
+              {t.cookiesPage.analisisItems.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </div>
 
           <div className="bg-purple-50 p-4 rounded-lg mb-4">
-            <h3 className="text-xl font-semibold mb-2">🎯 Cookies de Marketing</h3>
-            <p>
-              Se utilizan para rastrear visitantes en diferentes sitios web con el fin 
-              de mostrar anuncios relevantes y atractivos.
-            </p>
+            <h3 className="text-xl font-semibold mb-2">{t.cookiesPage.marketingTitulo}</h3>
+            <p>{t.cookiesPage.marketingTexto}</p>
             <ul className="list-disc pl-6 mt-2 text-sm">
-              <li>Google Ads</li>
-              <li>Facebook Pixel</li>
-              <li>LinkedIn Insight Tag</li>
+              {t.cookiesPage.marketingItems.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </div>
 
           <div className="bg-yellow-50 p-4 rounded-lg">
-            <h3 className="text-xl font-semibold mb-2">⚙️ Cookies de Funcionalidad</h3>
-            <p>
-              Permiten que el sitio recuerde las elecciones que haces para proporcionarte 
-              características mejoradas y más personalizadas.
-            </p>
+            <h3 className="text-xl font-semibold mb-2">{t.cookiesPage.funcionalidadTitulo}</h3>
+            <p>{t.cookiesPage.funcionalidadTexto}</p>
             <ul className="list-disc pl-6 mt-2 text-sm">
-              <li>Preferencias de idioma</li>
-              <li>Configuración de región</li>
-              <li>Personalización de la interfaz</li>
+              {t.cookiesPage.funcionalidadItems.map((item: string, i: number) => (
+                <li key={i}>{item}</li>
+              ))}
             </ul>
           </div>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Gestión de Cookies</h2>
-          <p>
-            Puedes controlar y/o eliminar las cookies según desees. Tienes varias opciones:
-          </p>
-          
-          <h3 className="text-xl font-semibold mb-2 mt-4">Configuración del Navegador</h3>
-          <p>
-            La mayoría de los navegadores web te permiten controlar las cookies a través 
-            de sus configuraciones:
-          </p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.gestionTitulo}</h2>
+          <p>{t.cookiesPage.gestionTexto}</p>
+
+          <h3 className="text-xl font-semibold mb-2 mt-4">{t.cookiesPage.navegadorTitulo}</h3>
+          <p>{t.cookiesPage.navegadorTexto}</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>
-              <strong>Chrome:</strong> Configuración → Privacidad y seguridad → Cookies
+              <strong>Chrome:</strong> {t.cookiesPage.navegadorChrome}
             </li>
             <li>
-              <strong>Firefox:</strong> Opciones → Privacidad y seguridad → Cookies
+              <strong>Firefox:</strong> {t.cookiesPage.navegadorFirefox}
             </li>
             <li>
-              <strong>Safari:</strong> Preferencias → Privacidad
+              <strong>Safari:</strong> {t.cookiesPage.navegadorSafari}
             </li>
             <li>
-              <strong>Edge:</strong> Configuración → Privacidad, búsqueda y servicios
+              <strong>Edge:</strong> {t.cookiesPage.navegadorEdge}
             </li>
           </ul>
 
-          <h3 className="text-xl font-semibold mb-2 mt-4">Opt-Out de Servicios Específicos</h3>
+          <h3 className="text-xl font-semibold mb-2 mt-4">{t.cookiesPage.optOutTitulo}</h3>
           <ul className="list-disc pl-6 space-y-2">
             <li>
-              Google Analytics: 
+              {t.cookiesPage.optOutGA}
               <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
-                Descargar complemento de opt-out
+                {t.cookiesPage.optOutGALink}
               </a>
             </li>
             <li>
-              Google Ads: 
+              {t.cookiesPage.optOutAds}
               <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
-                Configuración de anuncios
+                {t.cookiesPage.optOutAdsLink}
               </a>
             </li>
             <li>
-              Facebook: 
+              {t.cookiesPage.optOutFB}
               <a href="https://www.facebook.com/ads/preferences" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline ml-1">
-                Preferencias de anuncios
+                {t.cookiesPage.optOutFBLink}
               </a>
             </li>
           </ul>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Consecuencias de Deshabilitar Cookies</h2>
-          <p>
-            Si decides deshabilitar las cookies, ten en cuenta que:
-          </p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.consecuenciasTitulo}</h2>
+          <p>{t.cookiesPage.consecuenciasTexto}</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li>Algunas funciones del sitio pueden no funcionar correctamente</li>
-            <li>Tu experiencia de usuario puede verse afectada</li>
-            <li>Es posible que tengas que iniciar sesión repetidamente</li>
-            <li>Tus preferencias no se guardarán entre visitas</li>
+            {t.cookiesPage.consecuenciasItems.map((item: string, i: number) => (
+              <li key={i}>{item}</li>
+            ))}
           </ul>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Actualizaciones de esta Política</h2>
-          <p>
-            Podemos actualizar nuestra Política de Cookies ocasionalmente. Te notificaremos 
-            cualquier cambio publicando la nueva política en esta página y actualizando la 
-            fecha de "Última actualización".
-          </p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.actualizacionesTitulo}</h2>
+          <p>{t.cookiesPage.actualizacionesTexto}</p>
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Más Información</h2>
-          <p>
-            Para obtener más información general sobre las cookies, visita:
-          </p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.masInfoTitulo}</h2>
+          <p>{t.cookiesPage.masInfoTexto}</p>
           <ul className="list-disc pl-6 space-y-2">
             <li>
               <a href="https://www.aboutcookies.org" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">
@@ -196,12 +162,12 @@ export default function CookiesPolicy() {
         </section>
 
         <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Contacto</h2>
-          <p>Si tienes preguntas sobre nuestra Política de Cookies:</p>
+          <h2 className="text-2xl font-semibold mb-4">{t.cookiesPage.contactoTitulo}</h2>
+          <p>{t.cookiesPage.contactoTexto}</p>
           <div className="bg-gray-100 p-4 rounded-lg mt-4">
-            <p><strong>Impulsa Lab LLC</strong></p>
-            <p>Email: <a href="mailto:cookies@tuimpulsalab.com" className="text-blue-600 hover:underline">cookies@tuimpulsalab.com</a></p>
-            <p>Teléfono: +1 929 500 1850</p>
+            <p><strong>{t.cookiesPage.contactoEmpresa}</strong></p>
+            <p>{t.cookiesPage.contactoEmailLabel} <a href={`mailto:${t.cookiesPage.contactoEmail}`} className="text-blue-600 hover:underline">{t.cookiesPage.contactoEmail}</a></p>
+            <p>{t.cookiesPage.contactoTelefonoLabel} {t.cookiesPage.contactoTelefono}</p>
           </div>
         </section>
       </article>

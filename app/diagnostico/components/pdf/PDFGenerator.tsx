@@ -1,13 +1,13 @@
 // app/diagnostico/components/pdf/PDFGenerator.tsx
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Button } from '@/components/ui/button';
 import { FileText, Lock, Download, Loader2 } from 'lucide-react';
 import { useAuth } from '@/contexts/FirebaseAuthContext';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { UserRole } from '@/types/user';
-import Link from 'next/link';
-import { 
+import {
   generateCoverPage,
   generateExecutiveSummary,
   generateDetailedAnalysis,
@@ -16,8 +16,7 @@ import {
   generateROIMetrics,
   generateConclusions
 } from './sections';
-import renderChartToImage from './utils/chartHelpers';
-import { PDFStyles } from './/utils/pdfStyles';
+import { PDFStyles } from './utils/pdfStyles';
 
 interface PDFGeneratorProps {
   scores: {
@@ -34,17 +33,19 @@ interface PDFGeneratorProps {
   };
 }
 
-export function PDFGenerator({ 
-  scores, 
-  responses, 
-  clientInfo, 
+export function PDFGenerator({
+  scores,
+  responses,
+  clientInfo,
   aiAnalysis,
-  chartRefs 
+  chartRefs
 }: PDFGeneratorProps) {
   const [generating, setGenerating] = useState(false);
   const [progress, setProgress] = useState(0);
   const { userData } = useAuth();
-  
+  const { t } = useLanguage();
+  const tp = t.pdfGenerator;
+
   // Verificar si el usuario puede descargar el PDF
   const canDownloadPDF = userData && [
     UserRole.CLIENT,
@@ -64,23 +65,21 @@ export function PDFGenerator({
 
     try {
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
       const styles = PDFStyles;
 
       // Progreso: 10%
       setProgress(10);
 
       // 1. PORTADA
-      await generateCoverPage(pdf, clientInfo, scores, styles);
-      
+      await generateCoverPage(pdf, clientInfo, scores, styles, t.pdfCoverPage);
+
       // Progreso: 20%
       setProgress(20);
       pdf.addPage();
 
       // 2. RESUMEN EJECUTIVO con gráficos
       let chartImages: any = {};
-      
+
       // Capturar gráficos si existen
       if (chartRefs?.radar?.current) {
         const radarCanvas = await html2canvas(chartRefs.radar.current, {
@@ -89,7 +88,7 @@ export function PDFGenerator({
         });
         chartImages.radar = radarCanvas.toDataURL('image/png');
       }
-      
+
       if (chartRefs?.bar?.current) {
         const barCanvas = await html2canvas(chartRefs.bar.current, {
           backgroundColor: '#ffffff',
@@ -101,48 +100,48 @@ export function PDFGenerator({
       // Progreso: 40%
       setProgress(40);
 
-      await generateExecutiveSummary(pdf, scores, clientInfo, chartImages, styles);
-      
+      await generateExecutiveSummary(pdf, scores, clientInfo, chartImages, styles, t.pdfExecutiveSummary);
+
       // Progreso: 50%
       setProgress(50);
       pdf.addPage();
 
       // 3. ANÁLISIS DETALLADO
-      await generateDetailedAnalysis(pdf, scores, responses, clientInfo, styles);
-      
+      await generateDetailedAnalysis(pdf, scores, responses, clientInfo, styles, t.pdfDetailedAnalysis);
+
       // Progreso: 60%
       setProgress(60);
       pdf.addPage();
 
       // 4. PLAN DE ACCIÓN CON IA
-      await generateActionPlan(pdf, scores, aiAnalysis, clientInfo, styles);
-      
+      await generateActionPlan(pdf, scores, aiAnalysis, clientInfo, styles, t.pdfActionPlan);
+
       // Progreso: 70%
       setProgress(70);
       pdf.addPage();
 
       // 5. ROADMAP 90 DÍAS
-      await generateRoadmap(pdf, aiAnalysis?.roadmap90Days || [], styles);
-      
+      await generateRoadmap(pdf, aiAnalysis?.roadmap90Days || [], styles, t.pdfRoadmap);
+
       // Progreso: 80%
       setProgress(80);
       pdf.addPage();
 
       // 6. MÉTRICAS Y ROI
-      await generateROIMetrics(pdf, scores, clientInfo, styles);
-      
+      await generateROIMetrics(pdf, scores, clientInfo, styles, t.pdfROIMetrics);
+
       // Progreso: 90%
       setProgress(90);
       pdf.addPage();
 
       // 7. CONCLUSIONES Y PRÓXIMOS PASOS
-      await generateConclusions(pdf, scores, clientInfo, userData, styles);
-      
+      await generateConclusions(pdf, scores, clientInfo, userData, styles, t.pdfConclusions);
+
       // Progreso: 100%
       setProgress(100);
 
       // Generar nombre del archivo
-      const companyName = (clientInfo?.companyName || 'Empresa')
+      const companyName = (clientInfo?.companyName || (tp?.defaultCompany ?? 'Empresa'))
         .replace(/[^a-zA-Z0-9]/g, '-')
         .substring(0, 30);
       const date = new Date().toISOString().split('T')[0];
@@ -154,7 +153,7 @@ export function PDFGenerator({
       // Guardar metadata en localStorage
       const pdfMetadata = {
         fileName,
-        companyName: clientInfo?.companyName || 'Empresa',
+        companyName: clientInfo?.companyName || (tp?.defaultCompany ?? 'Empresa'),
         scores,
         generatedAt: new Date().toISOString(),
         generatedBy: userData?.email
@@ -166,8 +165,8 @@ export function PDFGenerator({
       localStorage.setItem('pdf-history', JSON.stringify(history));
 
     } catch (error) {
-      console.error('Error generando PDF:', error);
-      alert('Hubo un error al generar el PDF. Por favor intenta de nuevo.');
+      console.error('Error generating PDF:', error);
+      alert(tp?.errorGenerating ?? 'Hubo un error al generar el PDF. Por favor intenta de nuevo.');
     } finally {
       setGenerating(false);
       setProgress(0);
@@ -182,8 +181,8 @@ export function PDFGenerator({
         onClick={handleGeneratePDF}
         disabled={generating}
         className={`
-          ${canDownloadPDF 
-            ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700' 
+          ${canDownloadPDF
+            ? 'bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700'
             : 'bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600'
           }
           text-white font-semibold transition-all duration-300 transform hover:scale-105
@@ -193,20 +192,20 @@ export function PDFGenerator({
         {generating ? (
           <>
             <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-            Generando PDF... {progress}%
+            {tp?.generatingPdf ?? 'Generando PDF...'} {progress}%
           </>
         ) : (
           <>
             {canDownloadPDF ? (
               <>
                 <Download className="w-5 h-5 mr-2" />
-                Descargar PDF Completo
+                {tp?.downloadFull ?? 'Descargar PDF Completo'}
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4 mr-2" />
                 <FileText className="w-5 h-5 mr-2" />
-                PDF Disponible (Agenda Consultoría)
+                {tp?.pdfAvailable ?? 'PDF Disponible (Agenda Consultoría)'}
               </>
             )}
           </>
@@ -217,7 +216,7 @@ export function PDFGenerator({
       {generating && (
         <div className="absolute -bottom-8 left-0 right-0">
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div 
+            <div
               className="bg-gradient-to-r from-blue-600 to-purple-600 h-2 rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
@@ -228,9 +227,9 @@ export function PDFGenerator({
       {/* Mensaje para usuarios sin acceso */}
       {!canDownloadPDF && !generating && (
         <p className="text-xs text-gray-500 mt-2 text-center">
-          {userData ? 
-            'Agenda tu consultoría gratuita para obtener el PDF completo' : 
-            'Inicia sesión para acceder a más funciones'
+          {userData ?
+            (tp?.scheduleConsultation ?? 'Agenda tu consultoría gratuita para obtener el PDF completo') :
+            (tp?.loginForMore ?? 'Inicia sesión para acceder a más funciones')
           }
         </p>
       )}

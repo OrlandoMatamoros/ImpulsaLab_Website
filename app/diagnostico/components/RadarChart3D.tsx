@@ -12,6 +12,7 @@ import {
   ChartOptions
 } from 'chart.js';
 import { Radar } from 'react-chartjs-2';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 ChartJS.register(
   RadialLinearScale,
@@ -65,8 +66,11 @@ interface RadarChart3DProps {
   companyName?: string;
 }
 
-export function RadarChart3D({ scores, companyName = 'Tu Empresa' }: RadarChart3DProps) {
+export function RadarChart3D({ scores, companyName }: RadarChart3DProps) {
+  const { t } = useLanguage();
+  const tp = t.radarChart3D;
   const { width } = useWindowSize();
+  const displayName = companyName || tp.defaultCompany;
   
   // Determinar el tamaño del chart según el dispositivo
   const getChartSize = () => {
@@ -185,12 +189,12 @@ export function RadarChart3D({ scores, companyName = 'Tu Empresa' }: RadarChart3
   };
 
   const data = {
-    labels: chartSize === 'mobile' 
-      ? ['FIN', 'OPS', 'MKT'] // Labels cortos en móvil
-      : ['FINANZAS', 'OPERACIONES', 'MARKETING'],
+    labels: chartSize === 'mobile'
+      ? tp.labelsMobile
+      : tp.labels,
     datasets: [
       {
-        label: companyName,
+        label: displayName,
         data: [scores.finance, scores.operations, scores.marketing],
         backgroundColor: 'rgba(255, 255, 255, 0.25)',
         borderColor: '#ffffff',
@@ -205,7 +209,7 @@ export function RadarChart3D({ scores, companyName = 'Tu Empresa' }: RadarChart3
       },
       // Zona de Expansión (70+)
       {
-        label: 'Expansión',
+        label: tp.expansion,
         data: [70, 70, 70],
         backgroundColor: 'rgba(255, 255, 255, 0.05)',
         borderColor: 'rgba(255, 255, 255, 0.3)',
@@ -215,7 +219,7 @@ export function RadarChart3D({ scores, companyName = 'Tu Empresa' }: RadarChart3
       },
       // Zona de Supervivencia (40)
       {
-        label: 'Supervivencia',
+        label: tp.supervivencia,
         data: [40, 40, 40],
         backgroundColor: 'rgba(255, 255, 255, 0.03)',
         borderColor: 'rgba(255, 255, 255, 0.2)',

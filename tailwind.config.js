@@ -6,7 +6,14 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        brand: {
+          navy: '#002D62',
+          cyan: '#00BCD4',
+        },
+      },
+    },
   },
   plugins: [],
 }

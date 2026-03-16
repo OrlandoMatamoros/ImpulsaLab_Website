@@ -5,8 +5,10 @@ import { Search, Grid, List, Filter, ExternalLink, ChevronLeft, X } from 'lucide
 import Link from 'next/link';
 import { tools } from '@/lib/tools-data';
 import ProtectedSection from '@/components/ProtectedSection';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ArsenalPage() {
+  const { t } = useLanguage();
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('todas');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
@@ -51,16 +53,16 @@ export default function ArsenalPage() {
             className="inline-flex items-center gap-2 text-gray-600 hover:text-gray-900 mb-4 text-sm sm:text-base"
           >
             <ChevronLeft className="w-4 h-4" />
-            Volver
+            {t.herramientasArsenalPage.volver}
           </Link>
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-900 mb-2 sm:mb-4">
-            Arsenal Tecnológico
+            {t.herramientasArsenalPage.titulo}
           </h1>
           <p className="text-base sm:text-xl text-gray-600">
-            Más de {tools.length} herramientas de IA para potenciar tu negocio
+            {t.herramientasArsenalPage.masDePrefix}{tools.length} {t.herramientasArsenalPage.subtitulo}
           </p>
           <div className="mt-4 inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full">
-            <span className="font-medium">Acceso premium: Filtros avanzados y recomendaciones personalizadas</span>
+            <span className="font-medium">{t.herramientasArsenalPage.accesoPremium}</span>
           </div>
         </div>
       </div>
@@ -72,7 +74,7 @@ export default function ArsenalPage() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
             <input
               type="text"
-              placeholder="Buscar herramientas..."
+              placeholder={t.herramientasArsenalPage.buscarPlaceholder}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base sm:text-lg"
@@ -83,7 +85,7 @@ export default function ArsenalPage() {
 
       {/* CONTENIDO PROTEGIDO - Herramientas y filtros */}
       <ProtectedSection
-        message="Regístrate gratis para explorar nuestro Arsenal completo con más de 100 herramientas de IA, filtros avanzados y recomendaciones personalizadas"
+        message={t.herramientasArsenalPage.protectedMessage}
         showPreview={true}
         previewBlur={false}
       >
@@ -106,12 +108,12 @@ export default function ArsenalPage() {
 
             <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
               <div className="sm:bg-white sm:rounded-2xl sm:shadow-xl sm:p-6 space-y-4">
-                <h3 className="font-semibold text-lg mb-4 sm:hidden">Filtros y Vista</h3>
+                <h3 className="font-semibold text-lg mb-4 sm:hidden">{t.herramientasArsenalPage.filtrosYVista}</h3>
                 
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Categoría
+                      {t.herramientasArsenalPage.categoria}
                     </label>
                     <select
                       value={selectedCategory}
@@ -120,7 +122,7 @@ export default function ArsenalPage() {
                     >
                       {categories.map(cat => (
                         <option key={cat} value={cat}>
-                          {cat.charAt(0).toUpperCase() + cat.slice(1)}
+                          {cat === 'todas' ? t.herramientasArsenalPage.todas.charAt(0).toUpperCase() + t.herramientasArsenalPage.todas.slice(1) : cat.charAt(0).toUpperCase() + cat.slice(1)}
                         </option>
                       ))}
                     </select>
@@ -128,21 +130,21 @@ export default function ArsenalPage() {
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Ordenar por
+                      {t.herramientasArsenalPage.ordenarPor}
                     </label>
                     <select
                       value={sortBy}
                       onChange={(e) => setSortBy(e.target.value)}
                       className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
                     >
-                      <option value="name">Nombre</option>
-                      <option value="category">Categoría</option>
+                      <option value="name">{t.herramientasArsenalPage.nombre}</option>
+                      <option value="category">{t.herramientasArsenalPage.categoriaLabel}</option>
                     </select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Vista
+                      {t.herramientasArsenalPage.vista}
                     </label>
                     <div className="flex gap-2">
                       <button
@@ -171,7 +173,7 @@ export default function ArsenalPage() {
 
                 <div className="flex items-center justify-between pt-4 border-t sm:border-0 sm:pt-0">
                   <p className="text-sm text-gray-600">
-                    {filteredTools.length} herramientas
+                    {filteredTools.length} {t.herramientasArsenalPage.herramientas}
                   </p>
                   <button
                     onClick={() => {
@@ -181,7 +183,7 @@ export default function ArsenalPage() {
                     }}
                     className="text-sm text-blue-500 hover:text-blue-700"
                   >
-                    Limpiar filtros
+                    {t.herramientasArsenalPage.limpiarFiltros}
                   </button>
                 </div>
               </div>
@@ -236,7 +238,7 @@ export default function ArsenalPage() {
                       </div>
 
                       <div className="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-1.5 sm:py-2 rounded-lg group-hover:from-blue-700 group-hover:to-purple-700 transition-all font-medium text-sm sm:text-base">
-                        Acceder
+                        {t.herramientasArsenalPage.acceder}
                       </div>
                     </div>
                   </a>
@@ -249,13 +251,13 @@ export default function ArsenalPage() {
                 <thead className="bg-gray-50">
                   <tr>
                     <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Herramienta
+                      {t.herramientasArsenalPage.herramienta}
                     </th>
                     <th className="px-4 sm:px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider hidden sm:table-cell">
-                      Categoría
+                      {t.herramientasArsenalPage.categoriaLabel}
                     </th>
                     <th className="px-4 sm:px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Acción
+                      {t.herramientasArsenalPage.accion}
                     </th>
                   </tr>
                 </thead>

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function TestWhatsApp() {
   const [phone, setPhone] = useState('');
@@ -8,6 +9,8 @@ export default function TestWhatsApp() {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const { t } = useLanguage();
+  const tp = t.testWhatsappPage;
 
   const sendCode = async () => {
     setLoading(true);
@@ -23,13 +26,13 @@ export default function TestWhatsApp() {
       const data = await response.json();
       
       if (data.success) {
-        setMessage('✅ Código enviado por WhatsApp Business');
+        setMessage(tp.codigoEnviado);
         setStep(2);
       } else {
-        setMessage(`❌ Error: ${data.error || 'No se pudo enviar el código'}`);
+        setMessage(tp.errorEnvio + (data.error || tp.noSePudoEnviar));
       }
     } catch (error) {
-      setMessage('❌ Error de conexión con el servidor');
+      setMessage(tp.errorConexion);
     } finally {
       setLoading(false);
     }
@@ -53,13 +56,13 @@ export default function TestWhatsApp() {
       const data = await response.json();
       
       if (data.success) {
-        setMessage('✅ ¡Teléfono verificado exitosamente!');
+        setMessage(tp.telefonoVerificado);
         setStep(3);
       } else {
-        setMessage(`❌ ${data.error || 'Código inválido'}`);
+        setMessage(tp.errorVerificacion + (data.error || tp.codigoInvalido));
       }
     } catch (error) {
-      setMessage('❌ Error al verificar el código');
+      setMessage(tp.errorAlVerificar);
     } finally {
       setLoading(false);
     }
@@ -69,15 +72,15 @@ export default function TestWhatsApp() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-4">
       <div className="max-w-md w-full space-y-6 bg-white p-8 rounded-xl shadow-lg">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-900">Test WhatsApp Business</h1>
-          <p className="mt-2 text-gray-600">Verificación Profesional</p>
+          <h1 className="text-3xl font-bold text-gray-900">{tp.titulo}</h1>
+          <p className="mt-2 text-gray-600">{tp.subtitulo}</p>
         </div>
 
         {/* Mensaje de WhatsApp Business */}
         <div className="bg-green-50 border border-green-200 rounded-lg p-4">
           <p className="text-sm text-green-800 text-center">
-            <span className="font-semibold">✅ WhatsApp Business Activo</span><br/>
-            Verificación directa desde Impulsa LAB LLC
+            <span className="font-semibold">{tp.whatsappActivo}</span><br/>
+            {tp.verificacionDirecta}
           </p>
         </div>
 
@@ -97,7 +100,7 @@ export default function TestWhatsApp() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Número de WhatsApp
+                {tp.numeroWhatsapp}
               </label>
               <input
                 type="tel"
@@ -107,7 +110,7 @@ export default function TestWhatsApp() {
                 className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               />
               <p className="mt-1 text-xs text-gray-500">
-                Incluye código de país (ej: +52 México, +57 Colombia, +1 USA)
+                {tp.incluyeCodigo}
               </p>
             </div>
             <button 
@@ -115,7 +118,7 @@ export default function TestWhatsApp() {
               disabled={loading || !phone || phone.length < 10}
               className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? '⏳ Enviando...' : '📱 Enviar Código'}
+              {loading ? tp.enviandoCodigo : tp.enviarCodigo}
             </button>
           </div>
         )}
@@ -125,7 +128,7 @@ export default function TestWhatsApp() {
           <div className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Código de verificación
+                {tp.codigoVerificacion}
               </label>
               <input
                 type="text"
@@ -141,13 +144,13 @@ export default function TestWhatsApp() {
               disabled={loading || code.length !== 6}
               className="w-full bg-green-600 text-white py-3 rounded-lg font-medium hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
-              {loading ? '⏳ Verificando...' : '✓ Verificar Código'}
+              {loading ? tp.verificando : tp.verificarCodigo}
             </button>
             <button 
               onClick={() => {setStep(1); setCode(''); setMessage('');}}
               className="w-full text-gray-600 py-2 text-sm hover:text-gray-800"
             >
-              ← Cambiar número
+              {tp.cambiarNumero}
             </button>
           </div>
         )}
@@ -161,16 +164,16 @@ export default function TestWhatsApp() {
               </svg>
             </div>
             <h3 className="text-xl font-semibold text-gray-900">
-              ¡Verificación exitosa!
+              {tp.verificacionExitosa}
             </h3>
             <p className="text-gray-600">
-              El número <strong>{phone}</strong> ha sido verificado correctamente.
+              {tp.elNumero} <strong>{phone}</strong> {tp.haVerificado}
             </p>
             <button 
               onClick={() => {setStep(1); setPhone(''); setCode(''); setMessage('');}}
               className="text-blue-600 hover:text-blue-700 font-medium"
             >
-              Probar con otro número →
+              {tp.probarOtroNumero}
             </button>
           </div>
         )}
@@ -178,8 +181,8 @@ export default function TestWhatsApp() {
         {/* Footer */}
         <div className="pt-4 border-t border-gray-200">
           <p className="text-xs text-center text-gray-500">
-            Powered by Twilio WhatsApp Business API<br/>
-            Impulsa LAB LLC © 2025
+            {tp.poweredBy}<br/>
+            {tp.copyright}
           </p>
         </div>
       </div>

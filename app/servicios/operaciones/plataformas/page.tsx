@@ -3,43 +3,11 @@
 import Link from 'next/link'
 import { ArrowLeft, Layers, Play } from 'lucide-react'
 import { LINKS } from '@/lib/constants'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PlataformasPage() {
-  const plataformas = [
-    {
-      nombre: "Make (Integromat)",
-      descripcion: "Plataforma visual no-code para crear automatizaciones complejas",
-      videoId: "g6u28CpxXoQ",
-      caracteristicas: ["Visual builder", "1000+ integraciones", "Lógica avanzada"],
-      precio: "Desde $9/mes",
-      mejor_para: "Empresas medianas"
-    },
-    {
-      nombre: "n8n",
-      descripcion: "Automatización de flujos de trabajo open-source y auto-hospedable",
-      videoId: "1MwSoB0gnM4",
-      caracteristicas: ["Open source", "Self-hosted", "Código personalizable"],
-      precio: "Gratis (self-hosted)",
-      mejor_para: "Equipos técnicos"
-    },
-    {
-      nombre: "Zapier",
-      descripcion: "La plataforma de automatización más popular y fácil de usar",
-      videoId: "vmsu3L4y4ro",
-      caracteristicas: ["5000+ apps", "Sin código", "Templates listos"],
-      precio: "Desde $29/mes",
-      mejor_para: "Pequeñas empresas"
-    },
-    {
-      nombre: "DAPTA",
-      descripcion: "Plataforma de automatización con IA integrada",
-      videoId: "7UCDHyXfoOA",
-      isShort: true,
-      caracteristicas: ["IA nativa", "Machine learning", "Analytics avanzado"],
-      precio: "Personalizado",
-      mejor_para: "Empresas enterprise"
-    }
-  ];
+  const { t } = useLanguage()
+  const tp = t.operacionesPlataformasPage
 
   return (
     <>
@@ -48,14 +16,14 @@ export default function PlataformasPage() {
         <div className="container mx-auto px-4">
           <div className="flex items-center gap-2 text-sm">
             <Link href="/servicios" className="text-gray-500 hover:text-gray-700">
-              Servicios
+              {tp.breadcrumbServicios}
             </Link>
             <span className="text-gray-400">/</span>
             <Link href="/servicios/operaciones" className="text-gray-500 hover:text-gray-700">
-              Operaciones
+              {tp.breadcrumbOperaciones}
             </Link>
             <span className="text-gray-400">/</span>
-            <span className="text-orange-600 font-semibold">Plataformas</span>
+            <span className="text-orange-600 font-semibold">{tp.breadcrumbPlataformas}</span>
           </div>
         </div>
       </div>
@@ -66,13 +34,13 @@ export default function PlataformasPage() {
           <div className="max-w-4xl mx-auto text-center">
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur rounded-full mb-6">
               <Layers className="w-5 h-5" />
-              <span>Partners certificados</span>
+              <span>{tp.heroBadge}</span>
             </div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Plataformas de Automatización
+              {tp.heroTitle}
             </h1>
             <p className="text-xl text-gray-200">
-              Implementamos y gestionamos las mejores herramientas del mercado
+              {tp.heroSubtitle}
             </p>
           </div>
         </div>
@@ -83,14 +51,14 @@ export default function PlataformasPage() {
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
             <div className="grid md:grid-cols-2 gap-8">
-              {plataformas.map((plataforma, index) => (
+              {tp.plataformas.map((plataforma, index) => (
                 <div key={index} className="bg-gray-50 rounded-xl p-8 hover:shadow-xl transition">
                   <h3 className="text-2xl font-bold mb-3">{plataforma.nombre}</h3>
                   <p className="text-gray-600 mb-6">{plataforma.descripcion}</p>
-                  
+
                   {/* Video */}
                   <div className="relative bg-gray-900 rounded-lg overflow-hidden mb-6 aspect-video">
-                    <iframe 
+                    <iframe
                       className="absolute top-0 left-0 w-full h-full"
                       src={`https://www.youtube.com/embed/${plataforma.videoId}`}
                       title={`${plataforma.nombre} Demo`}
@@ -99,8 +67,8 @@ export default function PlataformasPage() {
                       allowFullScreen
                     />
                   </div>
-                  
-                  {/* Características */}
+
+                  {/* Caracteristicas */}
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2">
                       {plataforma.caracteristicas.map((car, idx) => (
@@ -110,15 +78,15 @@ export default function PlataformasPage() {
                       ))}
                     </div>
                   </div>
-                  
+
                   {/* Info adicional */}
                   <div className="flex justify-between items-center pt-4 border-t">
                     <div>
-                      <p className="text-sm text-gray-500">Mejor para:</p>
+                      <p className="text-sm text-gray-500">{tp.labelMejorPara}</p>
                       <p className="font-semibold">{plataforma.mejor_para}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-gray-500">Precio:</p>
+                      <p className="text-sm text-gray-500">{tp.labelPrecio}</p>
                       <p className="font-semibold text-green-600">{plataforma.precio}</p>
                     </div>
                   </div>
@@ -128,33 +96,32 @@ export default function PlataformasPage() {
 
             {/* CTA */}
             <div className="mt-16 bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-12 text-center">
-              <h3 className="text-2xl font-bold mb-4">¿No sabes cuál elegir?</h3>
+              <h3 className="text-2xl font-bold mb-4">{tp.ctaTitle}</h3>
               <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
-                Te ayudamos a seleccionar e implementar la plataforma perfecta para tu negocio. 
-                Incluye configuración inicial y capacitación.
+                {tp.ctaDesc}
               </p>
               <Link href="https://calendly.com/orlando-tuimpulsalab/30min"
                     target="_blank"
                     className="inline-block bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition">
-                Agendar Diagnóstico 3D Gratis
+                {tp.ctaButton}
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Navegación */}
+      {/* Navegacion */}
       <div className="bg-gray-100 py-8">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
-            <Link href="/servicios/operaciones" 
+            <Link href="/servicios/operaciones"
                   className="flex items-center gap-2 text-gray-600 hover:text-orange-600 transition">
               <ArrowLeft className="w-5 h-5" />
-              Volver a Operaciones
+              {tp.navBack}
             </Link>
             <Link href="/servicios/operaciones/casos"
                   className="text-orange-600 hover:text-orange-700 font-semibold">
-              Ver Casos de Uso →
+              {tp.navNext} →
             </Link>
           </div>
         </div>

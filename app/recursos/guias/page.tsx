@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { FaArrowLeft, FaRocket, FaBell } from 'react-icons/fa';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function EnDesarrollo() {
+  const { t } = useLanguage();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50 flex items-center justify-center px-4">
       <div className="max-w-2xl w-full text-center">
@@ -18,31 +23,30 @@ export default function EnDesarrollo() {
 
           {/* Mensaje principal */}
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            ¡Estamos Trabajando en Algo Increíble!
+            {t.enDesarrolloPage.titulo}
           </h1>
-          
+
           <p className="text-xl text-gray-600 mb-8">
-            Esta página está en desarrollo. Pronto te sorprenderemos con contenido 
-            valioso que transformará tu forma de hacer negocios.
+            {t.enDesarrolloPage.subtitulo}
           </p>
 
           {/* Características próximas */}
           <div className="bg-gradient-to-r from-blue-100 to-purple-100 rounded-xl p-6 mb-8">
             <h2 className="text-lg font-semibold text-gray-800 mb-3">
-              Mientras tanto, puedes:
+              {t.enDesarrolloPage.mientrasTanto}
             </h2>
             <div className="space-y-2 text-left max-w-md mx-auto">
               <p className="flex items-center gap-2">
                 <span className="text-green-500">✓</span>
-                <span>Explorar nuestras herramientas de IA</span>
+                <span>{t.enDesarrolloPage.explorarHerramientas}</span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-green-500">✓</span>
-                <span>Leer casos de éxito de otros clientes</span>
+                <span>{t.enDesarrolloPage.leerCasos}</span>
               </p>
               <p className="flex items-center gap-2">
                 <span className="text-green-500">✓</span>
-                <span>Agendar una consultoría gratuita</span>
+                <span>{t.enDesarrolloPage.agendarConsultoria}</span>
               </p>
             </div>
           </div>
@@ -54,13 +58,13 @@ export default function EnDesarrollo() {
               className="inline-flex items-center justify-center gap-2 bg-gray-200 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
             >
               <FaArrowLeft />
-              Volver al Inicio
+              {t.enDesarrolloPage.volverInicio}
             </Link>
             <Link
               href="/contacto"
               className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105"
             >
-              Contáctanos
+              {t.enDesarrolloPage.contactanos}
               <FaRocket />
             </Link>
           </div>
@@ -68,7 +72,7 @@ export default function EnDesarrollo() {
           {/* Newsletter */}
           <div className="mt-12 pt-8 border-t border-gray-200">
             <p className="text-sm text-gray-600 mb-4">
-              ¿Quieres ser el primero en conocer las novedades?
+              {t.enDesarrolloPage.primerEnConocer}
             </p>
             <form className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
@@ -80,7 +84,7 @@ export default function EnDesarrollo() {
                 type="submit"
                 className="px-6 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors"
               >
-                Notifícame
+                {t.enDesarrolloPage.notificame}
               </button>
             </form>
           </div>
@@ -88,7 +92,7 @@ export default function EnDesarrollo() {
 
         {/* Decoración adicional */}
         <p className="mt-8 text-gray-500 text-sm">
-          Impulsa Lab - Transformando negocios con IA 🚀
+          {t.enDesarrolloPage.tagline}
         </p>
       </div>
     </div>
