@@ -13,8 +13,15 @@ import CookieBanner from '@/components/CookieBanner'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ImpulsaLab - Transformación Digital Empresarial',
-  description: 'Diagnóstico 3D, herramientas de IA, y servicios de consultoría en Finanzas, Operaciones y Marketing',
+  metadataBase: new URL('https://www.tuimpulsalab.com'),
+  title: {
+    default: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
+    template: '%s | Impulsa Lab',
+  },
+  description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
+  alternates: {
+    canonical: './',
+  },
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: '48x48' },
@@ -24,28 +31,39 @@ export const metadata: Metadata = {
     ],
   },
   openGraph: {
-    title: 'ImpulsaLab - Transformación Digital Empresarial',
-    description: 'Transformamos negocios con inteligencia artificial, datos y automatización. Diagnóstico 3D, herramientas de IA y consultoría en Finanzas, Operaciones y Marketing.',
     type: 'website',
-    locale: 'es_LA',
-    siteName: 'ImpulsaLab',
+    locale: 'es_ES',
+    siteName: 'Impulsa Lab',
+    title: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
+    description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'ImpulsaLab - Transformación Digital Empresarial',
+        alt: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'ImpulsaLab - Transformación Digital Empresarial',
-    description: 'Transformamos negocios con inteligencia artificial, datos y automatización.',
+    title: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
+    description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
     images: ['/images/og-image.jpg'],
   },
   verification: {
     google: 'SiCheXqFkVDrLLuNSd9wx8zKZ3Pq8LYwTjz1uGeNitg',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
   },
 }
 
