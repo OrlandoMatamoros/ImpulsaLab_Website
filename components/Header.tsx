@@ -433,7 +433,6 @@ export default function Header() {
                     <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
                     <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
                     <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
-                    <Link href="/servicios/operaciones/casos" className="dropdown-item dropdown-item-noticias">{t.nav.casosDeUso}</Link>
                     <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
                   </div>
                 </div>
@@ -667,9 +666,6 @@ export default function Header() {
                     </Link>
                     <Link href="/servicios/operaciones/plataformas" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       {t.nav.plataformas}
-                    </Link>
-                    <Link href="/servicios/operaciones/casos" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.casosDeUso}
                     </Link>
                     <Link href="/servicios/operaciones/precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       {t.nav.planesPrecios}

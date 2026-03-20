@@ -2,41 +2,41 @@
 export const serviciosMarketingES = {
   marketingPage: {
     // Hero Section
-    heroTitle: 'Marketing e Identidad de Marca con IA',
-    heroSubtitle: 'Construye una marca memorable y atrae clientes con estrategias de marketing potenciadas por Inteligencia Artificial',
-    ctaDiagnostico: 'Obtén tu Diagnóstico 3D Gratis',
+    heroTitle: 'Landing Express para Negocios Locales',
+    heroSubtitle: 'Tu negocio en internet con una máquina de ventas directa. Una página profesional que tus clientes encuentran en Google y te contactan por WhatsApp.',
+    ctaDiagnostico: 'Quiero Mi Landing Express',
 
     // Portfolio Section
-    portfolioTitle: 'Portafolio: Creatividad Potenciada por IA',
-    portfolioSubtitle: 'Ejemplos reales de lo que podemos crear para tu marca',
-    portfolioNewCreations: 'Nuevas creaciones cada semana',
+    portfolioTitle: 'Portafolio: Landings que Generan Ventas',
+    portfolioSubtitle: 'Ejemplos reales de páginas que hemos creado para negocios locales',
+    portfolioNewCreations: 'Nuevos proyectos cada semana',
     portfolioDesignsAvailable: 'diseños disponibles',
 
     // Pain Points Section
     painPointsTitle: '¿Te Suena Familiar?',
     painPoints: [
       {
-        bold: '"Tengo un buen producto, pero nadie me conoce"',
-        rest: '- No sabes cómo hacer que tu negocio destaque en un mercado saturado.',
+        bold: '"Mis clientes me buscan en Google y no me encuentran"',
+        rest: '- Sin una página web, estás perdiendo clientes que buscan tu servicio todos los días.',
       },
       {
-        bold: '"Publico en redes pero no veo resultados"',
-        rest: '- Inviertes tiempo en contenido que no genera engagement ni ventas.',
+        bold: '"Tengo redes sociales pero la gente no me contacta"',
+        rest: '- Las redes sociales no son suficientes. Necesitas un lugar donde la gente vea tu menú, tus horarios y te escriba directo.',
       },
       {
-        bold: '"Mi competencia parece más profesional"',
-        rest: '- Tu imagen no refleja la calidad de tu servicio.',
+        bold: '"Quiero una página pero me cotizaron miles de dólares"',
+        rest: '- No necesitas un sitio gigante. Necesitas una landing enfocada en que te contacten y te compren.',
       },
     ],
 
     // Video Section Central
-    videoSectionTitle: 'Transforma tu Marca con IA Generativa',
-    videoSectionSubtitle: 'Descubre las últimas tendencias y capacidades de la IA en marketing',
-    videoSectionNote: 'Contenido actualizado semanalmente con las últimas innovaciones en IA',
+    videoSectionTitle: 'Así Funciona una Landing Express',
+    videoSectionSubtitle: 'Mira cómo una página sencilla puede traerte clientes nuevos cada semana',
+    videoSectionNote: 'Contenido actualizado con ejemplos reales de negocios locales',
 
     // Learning Center / Video Hub
     learningCenterTitle: 'Centro de Aprendizaje',
-    learningCenterSubtitle: 'Masterclasses, tutoriales y casos de éxito',
+    learningCenterSubtitle: 'Tips, tutoriales y casos de éxito de negocios locales',
     videoCategoryLabels: {
       todos: 'Todos',
       herramientas: 'Herramientas',
@@ -45,139 +45,138 @@ export const serviciosMarketingES = {
     } as Record<string, string>,
 
     // Chat Strategist Section
-    chatStrategistTitle: '¿Listo para tu Primera Estrategia de Contenidos?',
-    chatStrategistSubtitle: 'Nuestro Estratega IA te ayudará a crear un plan personalizado en 60 segundos',
+    chatStrategistTitle: '¿Quieres Saber si una Landing Express es para Ti?',
+    chatStrategistSubtitle: 'Cuéntanos sobre tu negocio y te decimos exactamente cómo te podemos ayudar',
 
     // Protected Section
-    protectedMessage: 'Regístrate gratis para acceder a nuestra metodología completa de marketing con IA, planes detallados y casos de éxito',
+    protectedMessage: 'Regístrate gratis para ver nuestra metodología completa, planes detallados y ejemplos de landings para negocios como el tuyo',
 
     // Methodology Section
-    methodologyTitle: 'Nuestra Metodología de Marketing con IA',
-    methodologySubtitle: 'Un proceso probado para construir tu presencia digital',
+    methodologyTitle: 'Cómo Creamos Tu Landing en 7 Días',
+    methodologySubtitle: 'Un proceso simple y directo para tener tu página lista rápido',
     methodologySteps: [
       {
-        title: '1. Análisis de Marca',
-        description: 'Definimos tu propuesta única de valor y analizamos a tu competencia con herramientas de IA para identificar oportunidades de mercado.',
+        title: '1. Conversación Inicial',
+        description: 'Hablamos contigo para entender tu negocio: qué vendes, quiénes son tus clientes y qué te hace diferente. Nos mandas fotos de tu local, productos o equipo.',
         items: [
-          'Análisis competitivo automatizado',
-          'Investigación de audiencia con IA',
-          'Definición de buyer personas',
+          'Llamada de 30 minutos por WhatsApp o Zoom',
+          'Recopilación de fotos y datos de tu negocio',
+          'Definición de las 5 secciones de tu landing',
         ],
       },
       {
-        title: '2. Identidad Visual',
-        description: 'Creamos tu logo, paleta de colores y guía de estilo con asistencia de IA generativa para garantizar consistencia.',
+        title: '2. Diseño y Textos',
+        description: 'Creamos el diseño de tu página y escribimos los textos pensados para que tus clientes te contacten. Tú apruebas todo antes de seguir.',
         items: [
-          'Logo y marca gráfica',
-          'Paleta de colores estratégica',
-          'Guía de estilo completa',
+          'Diseño profesional adaptado a tu negocio',
+          'Textos claros que invitan a la acción',
+          'Botón de WhatsApp siempre visible',
         ],
       },
       {
-        title: '3. Estrategia de Contenido',
-        description: 'Desarrollamos un calendario editorial y creamos contenido optimizado con copywriting de IA que convierte.',
+        title: '3. Construcción y Pruebas',
+        description: 'Armamos tu landing con las 5 secciones: foto principal con botón de WhatsApp, menú o catálogo, testimonios, mapa con horarios, y formulario de contacto.',
         items: [
-          'Calendario editorial mensual',
-          'Copywriting optimizado para conversión',
-          'Contenido multimedia automatizado',
+          'Página rápida y optimizada para celulares',
+          'Integración con Google Maps',
+          'SEO local básico para que te encuentren',
         ],
       },
       {
-        title: '4. Implementación y Análisis',
-        description: 'Lanzamos campañas y monitoreamos resultados con dashboards en tiempo real para optimización continua.',
+        title: '4. Lanzamiento y Soporte',
+        description: 'Publicamos tu página y te enseñamos a compartirla. Incluye hosting y mantenimiento mensual para que no te preocupes por nada técnico.',
         items: [
-          'Automatización de campañas',
-          'Dashboards de métricas en vivo',
-          'Optimización basada en datos',
+          'Dominio y hosting incluidos en tu plan mensual',
+          'Soporte por WhatsApp para cambios menores',
+          'Te enseñamos a compartir tu link en redes',
         ],
       },
     ],
 
-    // Client Results
-    clientResultsTitle: 'Resultados Reales de Nuestros Clientes',
+    // Client Results - honest service highlights instead of inflated metrics
+    clientResultsTitle: 'Lo Que Incluye Tu Landing Express',
     clientResults: [
-      { value: '+340%', label: 'Aumento en engagement', client: 'Restaurante Gourmet' },
-      { value: '+180%', label: 'Crecimiento en ventas', client: 'E-commerce Fashion' },
-      { value: '+250%', label: 'Leads calificados', client: 'Consultoría B2B' },
+      { value: '5', label: 'Secciones profesionales diseñadas para vender', client: 'Hero, Menú, Testimonios, Mapa, Contacto' },
+      { value: '7 días', label: 'Tu página lista y publicada en internet', client: 'Proceso rápido de principio a fin' },
+      { value: '24/7', label: 'Tu negocio visible para clientes nuevos', client: 'Funciona mientras tú duermes' },
     ],
 
     // Plans Section
-    plansTitle: 'Planes de Marketing con IA',
+    plansTitle: 'Paquetes para Tu Negocio',
     planIdentidad: {
-      name: 'Plan Identidad',
-      description: 'Construye los cimientos de tu marca profesional con IA',
-      priceFrom: 'Desde',
-      priceNote: 'Pago único',
+      name: 'Landing Express',
+      description: 'Tu negocio en internet con una página profesional que vende por ti',
+      priceFrom: '$350',
+      priceNote: 'Setup único + $15/mes hosting',
       features: [
-        'Logo profesional y guía de marca',
-        'Kit completo de redes sociales',
-        '50 plantillas de contenido generadas con IA',
-        'Estrategia de messaging y tono de voz',
-        'Análisis competitivo con IA',
+        'Landing page de 5 secciones profesionales',
+        'Botón de WhatsApp integrado en toda la página',
+        'Diseño responsive (se ve perfecto en celular)',
+        'SEO local básico (para que Google te encuentre)',
+        'Integración con Google Maps y horarios',
       ],
-      cta: 'Empezar Ahora',
+      cta: 'Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.',
     },
     planCrecimiento: {
-      name: 'Plan Crecimiento',
-      badge: 'Más Popular',
-      description: 'Marketing completo con IA para escalar tu negocio exponencialmente',
-      priceFrom: 'Desde',
-      priceNote: '+ $800/mes gestión',
+      name: 'Identidad de Marca',
+      badge: 'Complemento Ideal',
+      description: 'Dale a tu negocio una imagen profesional que transmita confianza',
+      priceFrom: 'Desde $450',
+      priceNote: 'Pago único',
       features: [
-        'Todo del Plan Identidad',
-        'Gestión automatizada de redes con IA',
-        'Campañas de email marketing inteligentes',
-        'Analytics avanzados y reportes mensuales',
-        'Chatbot de atención 24/7',
-        'Optimización continua con machine learning',
+        'Logo profesional personalizado',
+        'Paleta de colores para tu marca',
+        'Tipografía y estilo visual definido',
+        'Guía de uso para redes sociales',
+        '10 plantillas editables en Canva',
       ],
-      cta: 'Agenda tu Diagnóstico',
+      cta: 'Hola Impulsa Lab, me interesa el paquete de Identidad de Marca para mi negocio.',
     },
 
     // CTA Final
-    ctaTitle: '¿Listo para Brillar en el Mercado?',
-    ctaSubtitle: 'Descubre cómo la IA puede transformar tu marketing y hacer crecer tu negocio de forma exponencial',
+    ctaTitle: '¿Listo para que tus Clientes te Encuentren en Google?',
+    ctaSubtitle: 'Desde $350 tienes tu negocio en internet con una página que vende. También ofrecemos optimización de SEO local y Google Ads (cotización aparte).',
   },
 }
 
 export const serviciosMarketingEN = {
   marketingPage: {
     // Hero Section
-    heroTitle: 'AI-Powered Marketing & Brand Identity',
-    heroSubtitle: 'Build a memorable brand and attract clients with marketing strategies powered by Artificial Intelligence',
-    ctaDiagnostico: 'Get Your Free 3D Diagnostic',
+    heroTitle: 'Landing Express for Local Businesses',
+    heroSubtitle: 'Get your business online with a direct sales machine. A professional page your customers find on Google and contact you via WhatsApp.',
+    ctaDiagnostico: 'I Want My Landing Express',
 
     // Portfolio Section
-    portfolioTitle: 'Portfolio: AI-Powered Creativity',
-    portfolioSubtitle: 'Real examples of what we can create for your brand',
-    portfolioNewCreations: 'New creations every week',
+    portfolioTitle: 'Portfolio: Landings That Drive Sales',
+    portfolioSubtitle: 'Real examples of pages we have built for local businesses',
+    portfolioNewCreations: 'New projects every week',
     portfolioDesignsAvailable: 'designs available',
 
     // Pain Points Section
     painPointsTitle: 'Sound Familiar?',
     painPoints: [
       {
-        bold: '"I have a great product, but nobody knows about it"',
-        rest: '- You don\'t know how to make your business stand out in a saturated market.',
+        bold: '"My customers search for me on Google and can\'t find me"',
+        rest: '- Without a website, you are losing customers who search for your service every day.',
       },
       {
-        bold: '"I post on social media but see no results"',
-        rest: '- You invest time in content that generates neither engagement nor sales.',
+        bold: '"I have social media but people don\'t contact me"',
+        rest: '- Social media is not enough. You need a place where people can see your menu, your hours, and message you directly.',
       },
       {
-        bold: '"My competition looks more professional"',
-        rest: '- Your image doesn\'t reflect the quality of your service.',
+        bold: '"I want a website but they quoted me thousands of dollars"',
+        rest: '- You don\'t need a huge site. You need a focused landing page that gets people to contact you and buy.',
       },
     ],
 
     // Video Section Central
-    videoSectionTitle: 'Transform Your Brand with Generative AI',
-    videoSectionSubtitle: 'Discover the latest trends and capabilities of AI in marketing',
-    videoSectionNote: 'Content updated weekly with the latest AI innovations',
+    videoSectionTitle: 'How a Landing Express Works',
+    videoSectionSubtitle: 'See how a simple page can bring you new customers every week',
+    videoSectionNote: 'Content updated with real examples from local businesses',
 
     // Learning Center / Video Hub
     learningCenterTitle: 'Learning Center',
-    learningCenterSubtitle: 'Masterclasses, tutorials, and success stories',
+    learningCenterSubtitle: 'Tips, tutorials, and success stories from local businesses',
     videoCategoryLabels: {
       todos: 'All',
       herramientas: 'Tools',
@@ -186,97 +185,96 @@ export const serviciosMarketingEN = {
     } as Record<string, string>,
 
     // Chat Strategist Section
-    chatStrategistTitle: 'Ready for Your First Content Strategy?',
-    chatStrategistSubtitle: 'Our AI Strategist will help you create a personalized plan in 60 seconds',
+    chatStrategistTitle: 'Want to Know if a Landing Express is Right for You?',
+    chatStrategistSubtitle: 'Tell us about your business and we will tell you exactly how we can help',
 
     // Protected Section
-    protectedMessage: 'Sign up for free to access our complete AI marketing methodology, detailed plans, and success stories',
+    protectedMessage: 'Sign up for free to see our full methodology, detailed plans, and landing page examples for businesses like yours',
 
     // Methodology Section
-    methodologyTitle: 'Our AI Marketing Methodology',
-    methodologySubtitle: 'A proven process to build your digital presence',
+    methodologyTitle: 'How We Build Your Landing in 7 Days',
+    methodologySubtitle: 'A simple, straightforward process to get your page ready fast',
     methodologySteps: [
       {
-        title: '1. Brand Analysis',
-        description: 'We define your unique value proposition and analyze your competition with AI tools to identify market opportunities.',
+        title: '1. Initial Conversation',
+        description: 'We talk with you to understand your business: what you sell, who your customers are, and what makes you different. You send us photos of your place, products, or team.',
         items: [
-          'Automated competitive analysis',
-          'AI-powered audience research',
-          'Buyer persona definition',
+          '30-minute call via WhatsApp or Zoom',
+          'Collection of photos and business details',
+          'Definition of your 5 landing page sections',
         ],
       },
       {
-        title: '2. Visual Identity',
-        description: 'We create your logo, color palette, and style guide with generative AI assistance to ensure consistency.',
+        title: '2. Design & Copy',
+        description: 'We design your page and write copy that gets your customers to contact you. You approve everything before we move forward.',
         items: [
-          'Logo and brand graphics',
-          'Strategic color palette',
-          'Complete style guide',
+          'Professional design tailored to your business',
+          'Clear copy that drives action',
+          'WhatsApp button always visible',
         ],
       },
       {
-        title: '3. Content Strategy',
-        description: 'We develop an editorial calendar and create optimized content with AI copywriting that converts.',
+        title: '3. Build & Test',
+        description: 'We build your landing with 5 sections: hero photo with WhatsApp button, product/service menu, testimonials, map with hours, and contact form.',
         items: [
-          'Monthly editorial calendar',
-          'Conversion-optimized copywriting',
-          'Automated multimedia content',
+          'Fast page optimized for mobile phones',
+          'Google Maps integration',
+          'Basic local SEO so customers find you',
         ],
       },
       {
-        title: '4. Implementation & Analytics',
-        description: 'We launch campaigns and monitor results with real-time dashboards for continuous optimization.',
+        title: '4. Launch & Support',
+        description: 'We publish your page and show you how to share it. Includes monthly hosting and maintenance so you don\'t worry about anything technical.',
         items: [
-          'Campaign automation',
-          'Live metrics dashboards',
-          'Data-driven optimization',
+          'Domain and hosting included in your monthly plan',
+          'WhatsApp support for minor updates',
+          'We teach you how to share your link on social media',
         ],
       },
     ],
 
-    // Client Results
-    clientResultsTitle: 'Real Results from Our Clients',
+    // Client Results - honest service highlights instead of inflated metrics
+    clientResultsTitle: 'What Your Landing Express Includes',
     clientResults: [
-      { value: '+340%', label: 'Increase in engagement', client: 'Gourmet Restaurant' },
-      { value: '+180%', label: 'Growth in sales', client: 'E-commerce Fashion' },
-      { value: '+250%', label: 'Qualified leads', client: 'B2B Consulting' },
+      { value: '5', label: 'Professional sections designed to sell', client: 'Hero, Menu, Testimonials, Map, Contact' },
+      { value: '7 days', label: 'Your page live and published online', client: 'Fast process from start to finish' },
+      { value: '24/7', label: 'Your business visible to new customers', client: 'Works while you sleep' },
     ],
 
     // Plans Section
-    plansTitle: 'AI Marketing Plans',
+    plansTitle: 'Packages for Your Business',
     planIdentidad: {
-      name: 'Identity Plan',
-      description: 'Build the foundation of your professional brand with AI',
-      priceFrom: 'From',
-      priceNote: 'One-time payment',
+      name: 'Landing Express',
+      description: 'Get your business online with a professional page that sells for you',
+      priceFrom: '$350',
+      priceNote: 'One-time setup + $15/mo hosting',
       features: [
-        'Professional logo and brand guide',
-        'Complete social media kit',
-        '50 AI-generated content templates',
-        'Messaging strategy and tone of voice',
-        'AI competitive analysis',
+        '5-section professional landing page',
+        'WhatsApp button integrated across the page',
+        'Responsive design (looks perfect on mobile)',
+        'Basic local SEO (so Google can find you)',
+        'Google Maps integration with business hours',
       ],
-      cta: 'Get Started Now',
+      cta: 'Hi Impulsa Lab, I\'m interested in the Landing Express package for my business.',
     },
     planCrecimiento: {
-      name: 'Growth Plan',
-      badge: 'Most Popular',
-      description: 'Complete AI marketing to scale your business exponentially',
-      priceFrom: 'From',
-      priceNote: '+ $800/mo management',
+      name: 'Brand Identity',
+      badge: 'Perfect Add-On',
+      description: 'Give your business a professional image that builds trust',
+      priceFrom: 'From $450',
+      priceNote: 'One-time payment',
       features: [
-        'Everything in the Identity Plan',
-        'AI-automated social media management',
-        'Intelligent email marketing campaigns',
-        'Advanced analytics and monthly reports',
-        '24/7 customer service chatbot',
-        'Continuous optimization with machine learning',
+        'Custom professional logo',
+        'Brand color palette',
+        'Typography and visual style defined',
+        'Social media usage guide',
+        '10 editable Canva templates',
       ],
-      cta: 'Schedule Your Diagnostic',
+      cta: 'Hi Impulsa Lab, I\'m interested in the Brand Identity package for my business.',
     },
 
     // CTA Final
-    ctaTitle: 'Ready to Shine in the Market?',
-    ctaSubtitle: 'Discover how AI can transform your marketing and grow your business exponentially',
+    ctaTitle: 'Ready for Your Customers to Find You on Google?',
+    ctaSubtitle: 'Starting at $350, get your business online with a page that sells. We also offer local SEO optimization and Google Ads (quoted separately).',
   },
 }

@@ -1,8 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Layers, Play } from 'lucide-react'
-import { LINKS } from '@/lib/constants'
+import { ArrowLeft, Layers, Star, CheckCircle2 } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PlataformasPage() {
@@ -46,18 +45,68 @@ export default function PlataformasPage() {
         </div>
       </section>
 
-      {/* Plataformas Grid */}
+      {/* Featured: Claude Code */}
+      <section className="py-16 bg-gradient-to-b from-orange-50 to-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto">
+            <div className="text-center mb-10">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full mb-4">
+                <Star className="w-5 h-5 fill-orange-500 text-orange-500" />
+                <span className="font-semibold">{tp.featuredTitle}</span>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-2xl shadow-xl border border-orange-200 overflow-hidden">
+              <div className="grid md:grid-cols-2 gap-0">
+                {/* Left: Info */}
+                <div className="p-8 md:p-10 flex flex-col justify-center">
+                  <h2 className="text-3xl font-bold mb-4 text-gray-900">
+                    {tp.featuredName}
+                  </h2>
+                  <p className="text-gray-600 mb-6 text-lg leading-relaxed">
+                    {tp.featuredDesc}
+                  </p>
+                  <ul className="space-y-3">
+                    {tp.featuredFeatures.map((feature, idx) => (
+                      <li key={idx} className="flex items-start gap-3">
+                        <CheckCircle2 className="w-5 h-5 text-orange-500 mt-0.5 flex-shrink-0" />
+                        <span className="text-gray-700">{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Right: Video */}
+                <div className="bg-gray-900 flex items-center">
+                  <div className="w-full aspect-video">
+                    <iframe
+                      className="w-full h-full"
+                      src={`https://www.youtube.com/embed/${tp.plataformas[0].videoId}`}
+                      title={`${tp.featuredName} Demo`}
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Plataformas Grid (remaining platforms) */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-7xl mx-auto">
-            <div className="grid md:grid-cols-2 gap-8">
-              {tp.plataformas.map((plataforma, index) => (
-                <div key={index} className="bg-gray-50 rounded-xl p-8 hover:shadow-xl transition">
-                  <h3 className="text-2xl font-bold mb-3">{plataforma.nombre}</h3>
-                  <p className="text-gray-600 mb-6">{plataforma.descripcion}</p>
+            <div className="grid md:grid-cols-3 gap-8">
+              {tp.plataformas.slice(1).map((plataforma, index) => (
+                <div key={index} className="bg-gray-50 rounded-xl p-6 hover:shadow-xl transition group">
+                  <h3 className="text-xl font-bold mb-2">{plataforma.nombre}</h3>
+                  <p className="text-gray-600 mb-5 text-sm">{plataforma.descripcion}</p>
 
                   {/* Video */}
-                  <div className="relative bg-gray-900 rounded-lg overflow-hidden mb-6 aspect-video">
+                  <div className="relative bg-gray-900 rounded-lg overflow-hidden mb-5 aspect-video">
                     <iframe
                       className="absolute top-0 left-0 w-full h-full"
                       src={`https://www.youtube.com/embed/${plataforma.videoId}`}
@@ -72,7 +121,7 @@ export default function PlataformasPage() {
                   <div className="mb-4">
                     <div className="flex flex-wrap gap-2">
                       {plataforma.caracteristicas.map((car, idx) => (
-                        <span key={idx} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-sm">
+                        <span key={idx} className="px-3 py-1 bg-orange-100 text-orange-700 rounded-full text-xs">
                           {car}
                         </span>
                       ))}
@@ -82,12 +131,12 @@ export default function PlataformasPage() {
                   {/* Info adicional */}
                   <div className="flex justify-between items-center pt-4 border-t">
                     <div>
-                      <p className="text-sm text-gray-500">{tp.labelMejorPara}</p>
-                      <p className="font-semibold">{plataforma.mejor_para}</p>
+                      <p className="text-xs text-gray-500">{tp.labelMejorPara}</p>
+                      <p className="font-semibold text-sm">{plataforma.mejor_para}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-gray-500">{tp.labelPrecio}</p>
-                      <p className="font-semibold text-green-600">{plataforma.precio}</p>
+                      <p className="text-xs text-gray-500">{tp.labelPrecio}</p>
+                      <p className="font-semibold text-sm text-green-600">{plataforma.precio}</p>
                     </div>
                   </div>
                 </div>
@@ -100,9 +149,11 @@ export default function PlataformasPage() {
               <p className="text-gray-600 mb-8 max-w-2xl mx-auto">
                 {tp.ctaDesc}
               </p>
-              <Link href="https://calendly.com/orlando-tuimpulsalab/30min"
-                    target="_blank"
-                    className="inline-block bg-orange-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-orange-700 transition">
+              <Link
+                href={`https://wa.me/13479043169?text=${encodeURIComponent(tp.ctaWhatsappMessage)}`}
+                target="_blank"
+                className="inline-block bg-green-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-green-700 transition"
+              >
                 {tp.ctaButton}
               </Link>
             </div>
@@ -119,7 +170,7 @@ export default function PlataformasPage() {
               <ArrowLeft className="w-5 h-5" />
               {tp.navBack}
             </Link>
-            <Link href="/servicios/operaciones/casos"
+            <Link href="/servicios/operaciones/precios"
                   className="text-orange-600 hover:text-orange-700 font-semibold">
               {tp.navNext} →
             </Link>

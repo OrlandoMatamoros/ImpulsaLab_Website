@@ -276,12 +276,6 @@ const Footer = () => {
             <span className="flex items-center gap-2">
               <span className="text-green-500">●</span> GDPR Compliant
             </span>
-            <span className="flex items-center gap-2">
-              <span className="text-green-500">●</span> SOC2 Type II
-            </span>
-            <span className="flex items-center gap-2">
-              <span className="text-green-500">●</span> ISO 27001
-            </span>
           </div>
         </div>
       </div>

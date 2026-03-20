@@ -2,30 +2,30 @@
 export const serviciosFinanzasES = {
   finanzasPage: {
     // Hero
-    heroTitle: 'Deja de Adivinar con tus Finanzas. Toma el Control con Datos.',
-    heroSubtitle: 'Transformamos tus ventas, gastos y costos desordenados en un dashboard interactivo que te da claridad total para tomar decisiones rentables.',
+    heroTitle: 'CFO en tu Excel con IA',
+    heroSubtitle: 'Conectamos Claude Code a tu Excel o Google Sheets para que tengas análisis financiero profesional sin contratar un contador de tiempo completo. Perfecto para pizzerías, salones, panaderías y negocios locales.',
 
     // Problems
     problemsTitle: '¿Te Suena Familiar?',
     problems: [
-      '¿Sientes que vendes mucho pero no sabes a dónde se va el dinero?',
-      '¿Te cuesta saber qué producto o servicio es realmente rentable?',
-      '¿Las decisiones sobre precios o compras se basan más en la intuición que en datos reales?',
-      '¿Pierdes tiempo haciendo cálculos manuales que no te dan la imagen completa?',
+      '¿Apuntas todo en un cuaderno o en un Excel que nadie entiende?',
+      '¿No sabes cuánto te cuesta realmente cada producto que vendes?',
+      '¿Llegas a fin de mes y no sabes a dónde se fue la plata?',
+      '¿Tomas decisiones de precio o de compras "al ojo"?',
     ],
 
     // Solution
-    solutionTitle: 'Nuestra Solución: Un Centro de Mando para tu Negocio',
+    solutionTitle: 'Tu Solución: Un CFO dentro de tu Excel',
     videoDemoTitle: 'Dashboard Demo - Impulsa Lab',
     features: [
-      { title: 'KPIs Personalizados', description: 'Métricas específicas para tu industria y modelo de negocio' },
-      { title: 'Análisis de Rentabilidad', description: 'Conoce el margen real de cada producto o servicio' },
-      { title: 'Control de Costos en Tiempo Real', description: 'Identifica gastos innecesarios y oportunidades de ahorro' },
-      { title: 'Proyecciones y Análisis de Escenarios', description: 'Simula decisiones antes de tomarlas' },
+      { title: 'Dashboards Automáticos', description: 'Claude Code analiza tus datos y crea gráficos claros directo en tu Excel o Google Sheets' },
+      { title: 'Análisis de Rentabilidad', description: 'Sabe exactamente cuánto ganas por cada producto o servicio que vendes' },
+      { title: 'Control de Gastos', description: 'Ve a dónde se va cada dólar de tu negocio, sin fórmulas complicadas' },
+      { title: 'Respuestas en Español', description: 'Pregúntale a tu dashboard lo que quieras en español y obtén respuestas claras' },
     ],
 
     // Protected section
-    protectedMessage: 'Regístrate gratis para explorar todos los ejemplos de dashboards, acceder a planes personalizados y agendar tu diagnóstico financiero',
+    protectedMessage: 'Regístrate gratis para explorar todos los ejemplos de dashboards y agendar tu diagnóstico financiero',
 
     // Dashboards section
     dashboardSectionTitle: 'Ve Tu Negocio en Acción',
@@ -175,98 +175,97 @@ export const serviciosFinanzasES = {
     transformationTitle: 'La Transformación es Real',
     beforeTitle: 'Antes',
     beforeItems: [
-      'Excel con fórmulas rotas y datos desactualizados',
-      'Horas perdidas consolidando información',
-      'Decisiones basadas en corazonadas',
-      'Sorpresas desagradables a fin de mes',
+      'Un Excel con números que nadie entiende',
+      'Horas sumando ventas a mano o en calculadora',
+      'Decisiones de precio basadas en lo que cobra el vecino',
+      'Sorpresas a fin de mes: "¿por qué no me alcanza?"',
     ],
     afterTitle: 'Después',
     afterItems: [
-      'Dashboard actualizado automáticamente en tiempo real',
-      'Toda tu información en un solo lugar',
-      'Decisiones respaldadas por datos precisos',
-      'Control total y anticipación a problemas',
+      'Un dashboard claro que se actualiza solo con Claude Code',
+      'Toda la información de tu negocio en un solo lugar',
+      'Sabes exactamente cuánto ganas por cada producto',
+      'Control total de tu dinero, sin sorpresas',
     ],
 
     // CTA in dashboard section
-    ctaWhatsapp: 'Quiero Ver Mis Números Claramente',
+    ctaWhatsapp: 'Quiero un CFO en mi Excel',
     ctaResponseTime: 'Respuesta en menos de 2 horas en horario laboral',
-    whatsappMessage: 'Hola! Vi los dashboards de Impulsa Lab y quiero ver mis números claramente. ¿Podrían ayudarme a tener control de mis finanzas?',
+    whatsappMessage: 'Hola Impulsa Lab, me interesa el paquete de CFO en tu Excel con IA para mi negocio.',
 
     // Methodology
-    methodologyTitle: 'Nuestra Metodología en 4 Pasos',
+    methodologyTitle: 'Así de Simple: 3 Pasos',
     steps: [
-      { number: '1', title: 'Diagnóstico y Recolección', description: 'Entendemos tu negocio y recolectamos tus datos.' },
-      { number: '2', title: 'Ingeniería de Datos', description: 'Limpiamos, estructuramos y modelamos tus datos.' },
-      { number: '3', title: 'Diseño y Entrega', description: 'Construimos tu dashboard 100% a medida.' },
-      { number: '4', title: 'Capacitación y Soporte', description: 'Te enseñamos a usarlo y te acompañamos.' },
+      { number: '1', title: 'Diagnóstico', description: 'Miramos tu Excel o Google Sheets actual y entendemos tu negocio en una llamada de 30 minutos.' },
+      { number: '2', title: 'Instalación + Dashboard', description: 'Conectamos Claude Code a tus hojas de cálculo y creamos tu primer dashboard personalizado.' },
+      { number: '3', title: 'Capacitación', description: 'Te enseñamos a usarlo para que puedas sacarle provecho desde el día uno.' },
     ],
 
     // Plans
-    plansTitle: 'Planes Diseñados para tu Etapa de Crecimiento',
+    plansTitle: 'Precio Claro, Sin Sorpresas',
     planPilot: {
-      title: 'Implementación "Piloto Automático"',
-      idealFor: 'Ideal para: Negocios que necesitan claridad y control inmediato.',
-      price: 'Desde $1,500',
+      title: 'CFO en tu Excel con IA',
+      idealFor: 'Ideal para: Negocios locales que quieren ver sus números claros sin gastar una fortuna.',
+      price: '$250',
       pricePeriod: 'Pago único',
-      deliverablesTitle: 'Entregables:',
+      deliverablesTitle: 'Incluye:',
       deliverables: [
-        'Dashboard personalizado en Excel/Google Sheets',
-        'Automatización de cálculos y reportes',
-        'Capacitación inicial incluida',
+        'Instalación de Claude Code en tu Excel o Google Sheets',
+        'Creación de tu primer dashboard personalizado',
+        'Capacitación para que lo uses sin ayuda',
       ],
-      cta: 'Agendar Diagnóstico',
+      cta: 'Agendar Diagnóstico Gratis',
     },
     planRocket: {
-      title: 'Consultoría Estratégica "Cohete"',
-      badge: 'Más Popular',
-      idealFor: 'Ideal para: Negocios que buscan optimizar y escalar con inteligencia de datos.',
-      price: 'Desde $2,500',
-      pricePeriod: '+ Suscripción mensual',
-      deliverablesTitle: 'Entregables:',
+      title: 'Soporte Mensual',
+      badge: 'Si usas infraestructura Impulsa',
+      idealFor: 'Ideal para: Negocios que prefieren no manejar su propia API key de Claude Code.',
+      price: '$15/mes',
+      pricePeriod: 'Suscripción mensual',
+      deliverablesTitle: 'Incluye:',
       deliverables: [
-        'Todo lo del plan Piloto Automático',
-        'Análisis avanzado y modelado predictivo',
-        'Reuniones mensuales de estrategia',
-        'Soporte prioritario continuo',
+        'Uso de tokens de Claude Code con infraestructura de Impulsa Lab',
+        'Soporte técnico continuo por WhatsApp',
+        'Actualizaciones y mejoras a tu dashboard',
+        'No necesitas configurar nada técnico',
       ],
-      cta: 'Agendar Diagnóstico',
+      cta: 'Agendar Diagnóstico Gratis',
     },
 
     // Final CTA
-    finalCtaTitle: '¿Listo para Tomar Decisiones Basadas en Datos?',
-    finalCtaSubtitle: 'Agenda tu diagnóstico gratuito y descubre cómo un dashboard personalizado puede transformar la forma en que manejas tu negocio.',
-    finalCtaButton: 'Obtén tu Diagnóstico 3D Gratis',
+    finalCtaTitle: '¿Listo para Ver tus Números Claros?',
+    finalCtaSubtitle: 'Agenda tu diagnóstico gratuito de 30 minutos. Te mostramos cómo Claude Code puede convertir tu Excel en un centro de control financiero.',
+    finalCtaButton: 'Agendar Mi Diagnóstico Gratis',
   },
 }
 
 export const serviciosFinanzasEN = {
   finanzasPage: {
     // Hero
-    heroTitle: 'Stop Guessing with Your Finances. Take Control with Data.',
-    heroSubtitle: 'We transform your messy sales, expenses and costs into an interactive dashboard that gives you total clarity to make profitable decisions.',
+    heroTitle: 'CFO in Your Spreadsheet, Powered by AI',
+    heroSubtitle: 'We connect Claude Code to your Excel or Google Sheets so you get professional financial analysis without hiring a full-time accountant. Perfect for pizzerias, salons, bakeries, and local businesses.',
 
     // Problems
     problemsTitle: 'Sound Familiar?',
     problems: [
-      'Do you feel like you sell a lot but don\'t know where the money goes?',
-      'Is it hard to know which product or service is truly profitable?',
-      'Are pricing or purchasing decisions based more on gut feeling than real data?',
-      'Do you waste time doing manual calculations that don\'t give you the full picture?',
+      'Do you track everything in a notebook or a messy spreadsheet nobody understands?',
+      'Do you have no idea how much each product you sell actually costs you?',
+      'Do you get to the end of the month and wonder where all the money went?',
+      'Do you make pricing or purchasing decisions based on gut feeling?',
     ],
 
     // Solution
-    solutionTitle: 'Our Solution: A Command Center for Your Business',
+    solutionTitle: 'Your Solution: A CFO Inside Your Spreadsheet',
     videoDemoTitle: 'Dashboard Demo - Impulsa Lab',
     features: [
-      { title: 'Custom KPIs', description: 'Metrics tailored to your industry and business model' },
-      { title: 'Profitability Analysis', description: 'Know the real margin of every product or service' },
-      { title: 'Real-Time Cost Control', description: 'Identify unnecessary expenses and savings opportunities' },
-      { title: 'Projections & Scenario Analysis', description: 'Simulate decisions before making them' },
+      { title: 'Automatic Dashboards', description: 'Claude Code analyzes your data and creates clear charts right in your Excel or Google Sheets' },
+      { title: 'Profitability Analysis', description: 'Know exactly how much you earn on every product or service you sell' },
+      { title: 'Expense Control', description: 'See where every dollar of your business goes, no complicated formulas needed' },
+      { title: 'Answers in Your Language', description: 'Ask your dashboard anything in plain English or Spanish and get clear answers' },
     ],
 
     // Protected section
-    protectedMessage: 'Sign up for free to explore all dashboard examples, access personalized plans, and schedule your financial diagnostic',
+    protectedMessage: 'Sign up for free to explore all dashboard examples and schedule your financial diagnostic',
 
     // Dashboards section
     dashboardSectionTitle: 'See Your Business in Action',
@@ -416,67 +415,66 @@ export const serviciosFinanzasEN = {
     transformationTitle: 'The Transformation is Real',
     beforeTitle: 'Before',
     beforeItems: [
-      'Spreadsheets with broken formulas and outdated data',
-      'Hours wasted consolidating information',
-      'Decisions based on gut feelings',
-      'Unpleasant surprises at month-end',
+      'A spreadsheet full of numbers nobody understands',
+      'Hours adding up sales by hand or on a calculator',
+      'Pricing decisions based on what the competition charges',
+      'End-of-month surprises: "why is there no money left?"',
     ],
     afterTitle: 'After',
     afterItems: [
-      'Dashboard automatically updated in real time',
-      'All your information in one place',
-      'Decisions backed by accurate data',
-      'Total control and problem anticipation',
+      'A clear dashboard that updates automatically with Claude Code',
+      'All your business information in one place',
+      'You know exactly how much you earn on every product',
+      'Total control of your money, no surprises',
     ],
 
     // CTA in dashboard section
-    ctaWhatsapp: 'I Want to See My Numbers Clearly',
+    ctaWhatsapp: 'I Want a CFO in My Spreadsheet',
     ctaResponseTime: 'Response within 2 hours during business hours',
-    whatsappMessage: 'Hi! I saw the dashboards from Impulsa Lab and I want to see my numbers clearly. Could you help me take control of my finances?',
+    whatsappMessage: 'Hola Impulsa Lab, me interesa el paquete de CFO en tu Excel con IA para mi negocio.',
 
     // Methodology
-    methodologyTitle: 'Our 4-Step Methodology',
+    methodologyTitle: 'Simple as 1-2-3',
     steps: [
-      { number: '1', title: 'Diagnostic & Collection', description: 'We understand your business and collect your data.' },
-      { number: '2', title: 'Data Engineering', description: 'We clean, structure, and model your data.' },
-      { number: '3', title: 'Design & Delivery', description: 'We build your 100% custom dashboard.' },
-      { number: '4', title: 'Training & Support', description: 'We teach you how to use it and support you along the way.' },
+      { number: '1', title: 'Diagnostic', description: 'We look at your current Excel or Google Sheets and understand your business in a 30-minute call.' },
+      { number: '2', title: 'Installation + Dashboard', description: 'We connect Claude Code to your spreadsheets and create your first custom dashboard.' },
+      { number: '3', title: 'Training', description: 'We teach you how to use it so you can get value from day one.' },
     ],
 
     // Plans
-    plansTitle: 'Plans Designed for Your Growth Stage',
+    plansTitle: 'Clear Pricing, No Surprises',
     planPilot: {
-      title: '"Autopilot" Implementation',
-      idealFor: 'Ideal for: Businesses that need clarity and immediate control.',
-      price: 'From $1,500',
+      title: 'CFO in Your Spreadsheet with AI',
+      idealFor: 'Ideal for: Local businesses that want to see their numbers clearly without spending a fortune.',
+      price: '$250',
       pricePeriod: 'One-time payment',
-      deliverablesTitle: 'Deliverables:',
+      deliverablesTitle: 'Includes:',
       deliverables: [
-        'Custom dashboard in Excel/Google Sheets',
-        'Automated calculations and reports',
-        'Initial training included',
+        'Claude Code installation in your Excel or Google Sheets',
+        'Creation of your first custom dashboard',
+        'Training so you can use it on your own',
       ],
-      cta: 'Schedule Diagnostic',
+      cta: 'Schedule Free Diagnostic',
     },
     planRocket: {
-      title: '"Rocket" Strategic Consulting',
-      badge: 'Most Popular',
-      idealFor: 'Ideal for: Businesses looking to optimize and scale with data intelligence.',
-      price: 'From $2,500',
-      pricePeriod: '+ Monthly subscription',
-      deliverablesTitle: 'Deliverables:',
+      title: 'Monthly Support',
+      badge: 'If using Impulsa infrastructure',
+      idealFor: 'Ideal for: Businesses that prefer not to manage their own Claude Code API key.',
+      price: '$15/mo',
+      pricePeriod: 'Monthly subscription',
+      deliverablesTitle: 'Includes:',
       deliverables: [
-        'Everything in the Autopilot plan',
-        'Advanced analysis and predictive modeling',
-        'Monthly strategy meetings',
-        'Ongoing priority support',
+        'Claude Code token usage with Impulsa Lab infrastructure',
+        'Ongoing technical support via WhatsApp',
+        'Updates and improvements to your dashboard',
+        'No technical setup needed on your end',
       ],
-      cta: 'Schedule Diagnostic',
+      cta: 'Schedule Free Diagnostic',
     },
 
     // Final CTA
-    finalCtaTitle: 'Ready to Make Data-Driven Decisions?',
-    finalCtaSubtitle: 'Schedule your free diagnostic and discover how a custom dashboard can transform the way you manage your business.',
-    finalCtaButton: 'Get Your Free 3D Diagnostic',
+    finalCtaTitle: 'Ready to See Your Numbers Clearly?',
+    finalCtaSubtitle: 'Schedule your free 30-minute diagnostic. We\'ll show you how Claude Code can turn your spreadsheet into a financial command center.',
+    finalCtaButton: 'Schedule My Free Diagnostic',
   },
 }

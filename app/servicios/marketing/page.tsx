@@ -86,7 +86,7 @@ export default function MarketingPage() {
              {t.marketingPage.heroSubtitle}
            </p>
            <Link
-             href={LINKS.calendly}
+             href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
              target="_blank"
              rel="noopener noreferrer"
              className="inline-flex items-center gap-2 bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"
@@ -410,7 +410,7 @@ export default function MarketingPage() {
                    ))}
                  </ul>
                  <Link
-                   href={LINKS.calendly}
+                   href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
                    target="_blank"
                    rel="noopener noreferrer"
                    className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
@@ -444,7 +444,7 @@ export default function MarketingPage() {
                    ))}
                  </ul>
                  <Link
-                   href={LINKS.calendly}
+                   href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
                    target="_blank"
                    rel="noopener noreferrer"
                    className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
@@ -469,7 +469,7 @@ export default function MarketingPage() {
              {t.marketingPage.ctaSubtitle}
            </p>
            <Link
-             href={LINKS.calendly}
+             href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
              target="_blank"
              rel="noopener noreferrer"
              className="inline-flex items-center gap-2 bg-white text-purple-900 px-10 py-5 rounded-lg font-bold text-lg hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"

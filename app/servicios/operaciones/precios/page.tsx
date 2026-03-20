@@ -1,12 +1,14 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowLeft, Check, DollarSign, Info } from 'lucide-react'
+import { ArrowLeft, Check, DollarSign, Info, AlertCircle } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function PreciosPage() {
   const { t } = useLanguage()
   const tp = t.operacionesPreciosPage
+
+  const whatsappUrl = `https://wa.me/13479043169?text=${encodeURIComponent(tp.ctaWhatsappMessage)}`
 
   return (
     <>
@@ -49,7 +51,7 @@ export default function PreciosPage() {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
-            {/* Info sobre implementacion */}
+            {/* Info sobre como funciona */}
             <div className="bg-blue-50 border-l-4 border-blue-500 p-4 mb-12">
               <div className="flex items-start gap-2">
                 <Info className="w-5 h-5 text-blue-600 mt-0.5" />
@@ -63,11 +65,11 @@ export default function PreciosPage() {
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              {tp.planes.map((plan, index) => (
+              {tp.planes.map((plan: { nombre: string; descripcion: string; precio_unico: number; ejemplos: string; caracteristicas: string[]; popular?: boolean }, index: number) => (
                 <div key={index}
                      className={`rounded-xl shadow-lg p-8 border-2 transition relative
                        ${plan.popular
-                         ? 'bg-green-50 border-green-500 transform scale-105'
+                         ? 'bg-green-50 border-green-500 md:transform md:scale-105'
                          : 'bg-white border-gray-200 hover:border-green-500'}`}>
 
                   {plan.popular && (
@@ -81,66 +83,50 @@ export default function PreciosPage() {
                   <h3 className="text-2xl font-bold mb-2">{plan.nombre}</h3>
                   <p className="text-gray-600 mb-6">{plan.descripcion}</p>
 
-                  {/* Opcion 1: Pago unico */}
+                  {/* Precio unico */}
                   <div className="bg-gray-50 rounded-lg p-4 mb-4">
                     <p className="text-sm text-gray-500 mb-1">{tp.labelPagoUnico}</p>
-                    <p className="text-3xl font-bold text-gray-900">${plan.precio_unico}</p>
-                    <p className="text-xs text-gray-500">{tp.labelUnaVez}</p>
+                    <p className="text-4xl font-bold text-gray-900">${plan.precio_unico}</p>
                   </div>
 
-                  {/* Opcion 2: Suscripcion */}
-                  <div className="bg-green-50 rounded-lg p-4 mb-6">
-                    <p className="text-sm text-gray-500 mb-1">{tp.labelSuscripcion}</p>
-                    <p className="text-3xl font-bold text-green-600">${plan.precio_mensual}/mes</p>
-                    <p className="text-xs text-gray-500">
-                      + ${plan.costo_implementacion} {tp.labelImplementacion}
-                    </p>
-                  </div>
-
-                  <p className="text-sm font-semibold text-gray-700 mb-4">
-                    {plan.workflows}
+                  {/* Ejemplos */}
+                  <p className="text-sm text-gray-600 italic mb-6">
+                    {plan.ejemplos}
                   </p>
 
                   <ul className="space-y-3 mb-8">
-                    {plan.caracteristicas.map((car, idx) => (
+                    {plan.caracteristicas.map((car: string, idx: number) => (
                       <li key={idx} className="flex items-start gap-2">
-                        <Check className="w-5 h-5 text-green-500 mt-0.5" />
+                        <Check className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" />
                         <span className="text-gray-700">{car}</span>
                       </li>
                     ))}
                   </ul>
 
-                  <Link href="https://calendly.com/orlando-tuimpulsalab/30min"
-                        target="_blank"
-                        className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">
+                  <a href={whatsappUrl}
+                     target="_blank"
+                     rel="noopener noreferrer"
+                     className={`block w-full text-center py-3 rounded-lg transition font-semibold
+                       ${plan.popular
+                         ? 'bg-green-600 text-white hover:bg-green-700'
+                         : 'bg-green-600 text-white hover:bg-green-700'}`}>
                     {tp.ctaPlan}
-                  </Link>
+                  </a>
                 </div>
               ))}
             </div>
 
-            {/* Calculadora ROI */}
-            <div className="mt-16 bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-8">
-              <h3 className="text-2xl font-bold text-center mb-6 text-gray-900">
-                {tp.roiTitle}
-              </h3>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="bg-white rounded-lg p-6 text-center">
-                  <div className="text-sm text-gray-600 mb-2">{tp.roiSalarioLabel}</div>
-                  <div className="text-2xl font-bold text-gray-900">{tp.roiSalarioValue}</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 text-center">
-                  <div className="text-sm text-gray-600 mb-2">{tp.roiAgenteLabel}</div>
-                  <div className="text-2xl font-bold text-green-600">{tp.roiAgenteValue}</div>
-                </div>
-                <div className="bg-white rounded-lg p-6 text-center">
-                  <div className="text-sm text-gray-600 mb-2">{tp.roiAhorroLabel}</div>
-                  <div className="text-2xl font-bold text-blue-600">{tp.roiAhorroValue}</div>
+            {/* Nota sobre credenciales */}
+            <div className="mt-12 bg-amber-50 border border-amber-200 rounded-xl p-6">
+              <div className="flex items-start gap-3">
+                <AlertCircle className="w-6 h-6 text-amber-600 mt-0.5 flex-shrink-0" />
+                <div>
+                  <p className="font-semibold text-amber-900">{tp.condicionTitle}</p>
+                  <p className="text-amber-800 text-sm mt-1">
+                    {tp.condicionDesc}
+                  </p>
                 </div>
               </div>
-              <p className="text-center text-gray-600 mt-4">
-                {tp.roiDisclaimer}
-              </p>
             </div>
           </div>
         </div>
@@ -155,7 +141,7 @@ export default function PreciosPage() {
               <ArrowLeft className="w-5 h-5" />
               {tp.navBack}
             </Link>
-            <Link href="/servicios/operaciones/casos"
+            <Link href="/servicios/operaciones/arsenal"
                   className="text-green-600 hover:text-green-700 font-semibold">
               {tp.navNext} →
             </Link>
