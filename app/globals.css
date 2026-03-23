@@ -122,8 +122,8 @@
 
 /* Animations for mobile */
 @media (max-width: 640px) {
-  /* Reduce motion on mobile for better performance */
-  * {
+  /* Reduce motion on mobile for better performance, except tickers/marquees */
+  *:not(.ai-banner-marquee):not(.horizontal-tech-ticker-content) {
     animation-duration: 0.2s !important;
     transition-duration: 0.2s !important;
   }
