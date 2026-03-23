@@ -398,7 +398,7 @@ export default function MarketingPage() {
                    {t.marketingPage.planIdentidad.description}
                  </p>
                  <div className="text-3xl font-bold mb-6">
-                   {t.marketingPage.planIdentidad.priceFrom} <span className="text-purple-600">$1,200</span>
+                   <span className="text-purple-600">{t.marketingPage.planIdentidad.priceFrom}</span>
                    <div className="text-sm font-normal text-gray-500 mt-1">{t.marketingPage.planIdentidad.priceNote}</div>
                  </div>
                  <ul className="space-y-3 mb-8">
@@ -432,7 +432,7 @@ export default function MarketingPage() {
                    {t.marketingPage.planCrecimiento.description}
                  </p>
                  <div className="text-3xl font-bold mb-6">
-                   {t.marketingPage.planCrecimiento.priceFrom} <span className="text-purple-600">$2,500</span>
+                   <span className="text-purple-600">{t.marketingPage.planCrecimiento.priceFrom}</span>
                    <div className="text-sm font-normal text-gray-600 mt-1">{t.marketingPage.planCrecimiento.priceNote}</div>
                  </div>
                  <ul className="space-y-3 mb-8">
