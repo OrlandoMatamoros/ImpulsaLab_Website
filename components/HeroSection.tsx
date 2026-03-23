@@ -3,8 +3,24 @@
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+// Genera un número estable por mes (8, 9 o 10) usando el mes como seed
+function getMonthlySlots(): number {
+  const now = new Date()
+  const seed = now.getFullYear() * 12 + now.getMonth()
+  return [8, 9, 10][seed % 3]
+}
+
+function getCurrentMonth(lang: string): string {
+  const now = new Date()
+  return now.toLocaleDateString(lang === 'ES' ? 'es-ES' : 'en-US', { month: 'long', year: 'numeric' })
+}
+
 export default function HeroSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
+  const slots = getMonthlySlots()
+  const month = getCurrentMonth(language)
+  // Capitalize first letter
+  const monthLabel = month.charAt(0).toUpperCase() + month.slice(1)
 
   return (
     <section className="bg-brand-navy text-white pt-24 pb-16 lg:pb-20 min-h-[90vh] flex items-center">
@@ -76,6 +92,17 @@ export default function HeroSection() {
           <div className="flex justify-center mt-8 md:mt-0">
             <div className="w-full max-w-lg">
               <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
+
+                {/* Badge de urgencia — esquina superior */}
+                <div className="absolute top-4 right-4 z-10">
+                  <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-orange-500 text-white text-xs font-bold rounded-full shadow-lg animate-pulse">
+                    <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                    </svg>
+                    {t.hero.urgenciaBadge}
+                  </span>
+                </div>
+
                 {/* Header del card */}
                 <div className="bg-gradient-to-r from-brand-navy to-brand-cyan p-6 text-center">
                   <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 rounded-full mb-4">
@@ -91,6 +118,11 @@ export default function HeroSection() {
                   <p className="text-white/80 text-sm mt-2">
                     {t.hero.diagSubtitulo}
                   </p>
+                  {/* Oferta temporal */}
+                  <div className="mt-3 inline-flex items-center gap-2 bg-white/15 backdrop-blur-sm px-4 py-1.5 rounded-full">
+                    <span className="text-yellow-300 text-xs font-bold">{monthLabel}:</span>
+                    <span className="text-white text-xs">{t.hero.ofertaMes}</span>
+                  </div>
                 </div>
 
                 {/* Los 3 ejes */}
@@ -144,6 +176,16 @@ export default function HeroSection() {
                     {t.hero.diagCta}
                     <span className="ml-2 inline-block group-hover:translate-x-1 transition-transform">→</span>
                   </Link>
+
+                  {/* Escasez real — consultas limitadas */}
+                  <div className="flex items-center justify-center gap-2 text-xs text-gray-500">
+                    <svg className="w-4 h-4 text-orange-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M12.395 2.553a1 1 0 00-1.45-.385c-.345.23-.614.558-.822.88-.214.33-.403.713-.57 1.116-.334.804-.614 1.768-.84 2.734a31.365 31.365 0 00-.613 3.58 2.64 2.64 0 01-.945-1.067c-.328-.68-.398-1.534-.398-2.654A1 1 0 005.05 6.05 6.981 6.981 0 003 11a7 7 0 1011.95-4.95c-.592-.591-.98-.985-1.348-1.467-.363-.476-.724-1.063-1.207-2.03zM12.12 15.12A3 3 0 017 13s.879.5 2.5.5c0-1 .5-2 1-3 .5 1.5 1 2 1 3a3 3 0 01-.38 1.62z" clipRule="evenodd" />
+                    </svg>
+                    <span className="font-semibold text-orange-600">
+                      {t.hero.escasez.replace('{slots}', String(slots))}
+                    </span>
+                  </div>
 
                   <p className="text-center text-xs text-gray-400">
                     {t.hero.diagTiempo}

@@ -52,7 +52,10 @@ export const homeES = {
     diagEje3: "Marketing",
     diagEje3Desc: "\u00BFTus clientes te encuentran o tu los buscas?",
     diagCta: "Iniciar Diagnostico Gratis",
-    diagTiempo: "5 min \u2022 Sin compromiso \u2022 Resultados inmediatos",
+    diagTiempo: "5 min \u2022 Sin compromiso \u2022 Incluye consulta personalizada",
+    urgenciaBadge: "Cupos limitados",
+    ofertaMes: "Diagnostico + Consulta de 30 min GRATIS",
+    escasez: "Solo {slots} consultas disponibles este mes",
     // Hub de herramientas (movido a seccion propia)
     hubTitulo: "Hub de Herramientas IA",
     hubSubtitulo: "Tu arsenal completo para dominar la IA en tu negocio",
@@ -284,7 +287,10 @@ export const homeEN = {
     diagEje3: "Marketing",
     diagEje3Desc: "Do customers find you, or do you chase them?",
     diagCta: "Start Free Diagnostic",
-    diagTiempo: "5 min \u2022 No commitment \u2022 Instant results",
+    diagTiempo: "5 min \u2022 No commitment \u2022 Includes personal consultation",
+    urgenciaBadge: "Limited spots",
+    ofertaMes: "Diagnostic + 30 min Consultation FREE",
+    escasez: "Only {slots} consultations available this month",
     // Tools hub (moved to own section)
     hubTitulo: "AI Tools Hub",
     hubSubtitulo: "Your complete arsenal to master AI in your business",
