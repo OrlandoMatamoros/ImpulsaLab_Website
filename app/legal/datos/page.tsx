@@ -481,8 +481,8 @@ export default function ProteccionDatos() {
                           <FaPhone className="text-blue-600 text-xl" />
                           <span className="font-semibold">{t.datosPage.phone}</span>
                         </div>
-                        <a href="tel:+19295001850" className="text-blue-600 hover:text-blue-800">
-                          +1 929 500 1850
+                        <a href="tel:+13474509281" className="text-blue-600 hover:text-blue-800">
+                          +1 347 450 9281
                         </a>
                       </div>
                     </div>

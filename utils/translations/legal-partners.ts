@@ -64,7 +64,7 @@ export const legalPartnersES = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'privacidad@tuimpulsalab.com',
     contactoTelefonoLabel: 'Telefono:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
     contactoDireccionLabel: 'Direccion:',
     contactoDireccion: 'Brooklyn, NY, Estados Unidos',
   },
@@ -130,7 +130,7 @@ export const legalPartnersES = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'legal@tuimpulsalab.com',
     contactoTelefonoLabel: 'Telefono:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
   },
 
   cookiesPage: {
@@ -210,7 +210,7 @@ export const legalPartnersES = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'cookies@tuimpulsalab.com',
     contactoTelefonoLabel: 'Telefono:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
   },
 
   datosPage: {
@@ -302,7 +302,7 @@ export const legalPartnersES = {
     step3Title: 'Envia tu Solicitud',
     step3Text: 'Puedes enviarnos tu solicitud a traves de cualquiera de estos canales:',
     step3Email: 'Email: privacidad@tuimpulsalab.com',
-    step3Phone: 'Telefono: +1 929 500 1850',
+    step3Phone: 'Telefono: +1 347 450 9281',
     step4Title: 'Confirmacion y Procesamiento',
     step4Text: 'Recibiras una confirmacion de recepcion dentro de 48 horas. Procesaremos tu solicitud y responderemos dentro del plazo legal de 30 dias.',
     formsTitle: 'Formularios y Plantillas',
@@ -501,7 +501,7 @@ export const legalPartnersES = {
     emailPartnersLabel: 'Email para Partners',
     emailPartners: 'partners@tuimpulsalab.com',
     telefonoDirecto: 'Telefono Directo',
-    telefono: '+1 929 500 1850',
+    telefono: '+1 347 450 9281',
     oficinaPrincipal: 'Oficina Principal',
     oficinaCiudad: 'Brooklyn, NY',
     oficinaPais: 'Estados Unidos',
@@ -591,7 +591,7 @@ export const legalPartnersEN = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'privacidad@tuimpulsalab.com',
     contactoTelefonoLabel: 'Phone:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
     contactoDireccionLabel: 'Address:',
     contactoDireccion: 'Brooklyn, NY, United States',
   },
@@ -657,7 +657,7 @@ export const legalPartnersEN = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'legal@tuimpulsalab.com',
     contactoTelefonoLabel: 'Phone:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
   },
 
   cookiesPage: {
@@ -737,7 +737,7 @@ export const legalPartnersEN = {
     contactoEmailLabel: 'Email:',
     contactoEmail: 'cookies@tuimpulsalab.com',
     contactoTelefonoLabel: 'Phone:',
-    contactoTelefono: '+1 929 500 1850',
+    contactoTelefono: '+1 347 450 9281',
   },
 
   datosPage: {
@@ -829,7 +829,7 @@ export const legalPartnersEN = {
     step3Title: 'Submit Your Request',
     step3Text: 'You can send us your request through any of these channels:',
     step3Email: 'Email: privacidad@tuimpulsalab.com',
-    step3Phone: 'Phone: +1 929 500 1850',
+    step3Phone: 'Phone: +1 347 450 9281',
     step4Title: 'Confirmation and Processing',
     step4Text: 'You will receive a confirmation of receipt within 48 hours. We will process your request and respond within the legal deadline of 30 days.',
     formsTitle: 'Forms and Templates',
@@ -1028,7 +1028,7 @@ export const legalPartnersEN = {
     emailPartnersLabel: 'Partners Email',
     emailPartners: 'partners@tuimpulsalab.com',
     telefonoDirecto: 'Direct Phone',
-    telefono: '+1 929 500 1850',
+    telefono: '+1 347 450 9281',
     oficinaPrincipal: 'Main Office',
     oficinaCiudad: 'Brooklyn, NY',
     oficinaPais: 'United States',

@@ -308,7 +308,7 @@ export default function Partners() {
                                           <FaPhone className="text-blue-600 text-xl mt-1" />
                                           <div>
                                               <p className="font-semibold">{t.partnersPage.telefonoDirecto}</p>
-                                              <a href="tel:+19295001850" className="text-blue-600 hover:underline">
+                                              <a href="tel:+13474509281" className="text-blue-600 hover:underline">
                                                   {t.partnersPage.telefono}
                                               </a>
                                           </div>
@@ -372,7 +372,7 @@ export default function Partners() {
                                   </p>
                                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                                       <a
-                                          href="tel:+19295001850"
+                                          href="tel:+13474509281"
                                           className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105"
                                       >
                                           <FaPhone />
@@ -411,7 +411,7 @@ export default function Partners() {
                               <FaArrowRight />
                           </Link>
                           <a
-                              href="tel:+19295001850"
+                              href="tel:+13474509281"
                               className="inline-flex items-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"
                           >
                               <FaPhone />

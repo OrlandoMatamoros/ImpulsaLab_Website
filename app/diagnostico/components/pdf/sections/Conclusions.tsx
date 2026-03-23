@@ -284,7 +284,7 @@ export async function generateConclusions(
   pdf.text(tp?.directContact ?? 'Contacto Directo:', pageWidth - 80, yPos + 10);
   pdf.setFont('helvetica', 'normal');
   pdf.text(styles.contactInfo?.email || 'contacto@tuimpulsalab.com', pageWidth - 80, yPos + 15);
-  pdf.text(styles.contactInfo?.phoneCalls || '+1 929 500-1850', pageWidth - 80, yPos + 20);
+  pdf.text(styles.contactInfo?.phoneCalls || '+1 347 450-9281', pageWidth - 80, yPos + 20);
   pdf.text(styles.contactInfo?.website || 'www.tuimpulsalab.com', pageWidth - 80, yPos + 25);
 
   // Agregar información del usuario si está disponible

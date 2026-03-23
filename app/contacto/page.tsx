@@ -302,7 +302,7 @@ export default function Contacto() {
               {t.contactoPage.agendaDiagnostico}
             </a>
             <a
-              href="tel:+19295001850"
+              href="tel:+13474509281"
               className="inline-flex items-center justify-center gap-2 bg-blue-500 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-400 transition-all duration-300"
             >
               <FaPhone />
@@ -321,8 +321,8 @@ export default function Contacto() {
                 <FaPhone className="text-blue-600 text-xl" />
               </div>
               <h3 className="font-semibold mb-2">{t.contactoPage.telefono}</h3>
-              <a href="tel:+19295001850" className="text-blue-600 hover:underline">
-                +1 929 500 1850
+              <a href="tel:+13474509281" className="text-blue-600 hover:underline">
+                +1 347 450 9281
               </a>
             </div>
             

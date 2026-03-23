@@ -163,5 +163,5 @@ export async function generateCoverPage(
   // Teléfono
   pdf.setFontSize(10);
   pdf.setFont('helvetica', 'bold');
-  pdf.text('+1 929 500-1850', pageWidth/2, 290, { align: 'center' });
+  pdf.text('+1 347 450-9281', pageWidth/2, 290, { align: 'center' });
 }

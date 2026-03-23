@@ -19,7 +19,7 @@ export default function WidgetProvider() {
 
   // NÚMEROS ACTUALIZADOS
   const whatsappNumber = '19295007815'  // WhatsApp con IA
-  const phoneNumber = '19295001850'      // Número para llamadas
+  const phoneNumber = '13474509281'      // Número para llamadas
 
   const initialMessage: Message = {
     id: '1',
@@ -218,7 +218,7 @@ export default function WidgetProvider() {
           </div>
           <div className="text-left">
             <p className="text-sm font-semibold text-gray-800">Llamar</p>
-            <p className="text-xs text-gray-500">+1 929 500 1850</p>
+            <p className="text-xs text-gray-500">+1 347 450 9281</p>
           </div>
         </button>
       </div>
