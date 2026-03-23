@@ -1186,7 +1186,7 @@ function HorizontalTechTicker() {
               alignItems: 'center',
               gap: '24px',
               padding: '0 24px',
-              animation: `ticker-scroll ${isMobile ? '60s' : '120s'} linear infinite`
+              animation: `ticker-scroll ${isMobile ? '30s' : '120s'} linear infinite`
             }}
           >
             {duplicatedTools.map((tool, index) => {

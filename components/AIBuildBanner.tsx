@@ -28,7 +28,7 @@ export default function AIBuildBanner() {
         }
         @media (max-width: 768px) {
           .ai-banner-marquee {
-            animation: ai-banner-scroll 80s linear infinite;
+            animation: ai-banner-scroll 25s linear infinite;
           }
         }
       `}} />
