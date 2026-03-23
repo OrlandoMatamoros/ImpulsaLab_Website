@@ -101,7 +101,7 @@ export const legalPartnersES = {
       'Violar derechos de propiedad intelectual',
     ],
     seccion5Titulo: '5. Propiedad Intelectual',
-    seccion5Texto: 'Todo el contenido, diseno, codigo y tecnologia de Impulsa Lab esta protegido por derechos de autor y otras leyes de propiedad intelectual. No puedes copiar, modificar, distribuir o crear trabajos derivados sin nuestro consentimiento por escrito.',
+    seccion5Texto: 'Todo el contenido, dise\u00f1o, codigo y tecnologia de Impulsa Lab esta protegido por derechos de autor y otras leyes de propiedad intelectual. No puedes copiar, modificar, distribuir o crear trabajos derivados sin nuestro consentimiento por escrito.',
     seccion6Titulo: '6. Pagos y Facturacion',
     seccion6Items: [
       'Los precios estan sujetos a cambios con previo aviso',

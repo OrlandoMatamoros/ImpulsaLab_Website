@@ -132,10 +132,10 @@ const Footer = () => {
             {/* Contact Info */}
             <div className="space-y-2 text-sm text-gray-400">
               <a 
-                href="tel:+19295001850" 
+                href="tel:+13474509281"
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
-                <FaPhone /> +1 929 500 1850
+                <FaPhone /> +1 347 450 9281
               </a>
               <a 
                 href="mailto:contacto@tuimpulsalab.com" 
