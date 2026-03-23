@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { X, Phone, Bot, Send } from 'lucide-react'
+import { useLanguage } from '@/contexts/LanguageContext'
 
 interface Message {
   id: string
@@ -11,6 +12,7 @@ interface Message {
 }
 
 export default function WidgetProvider() {
+  const { language } = useLanguage()
   const [isOpen, setIsOpen] = useState(false)
   const [showOptions, setShowOptions] = useState(false)
   const [showWebChat, setShowWebChat] = useState(false)
@@ -217,7 +219,7 @@ export default function WidgetProvider() {
             <Phone className="w-6 h-6 text-white" />
           </div>
           <div className="text-left">
-            <p className="text-sm font-semibold text-gray-800">Llamar</p>
+            <p className="text-sm font-semibold text-gray-800">{language === 'es' ? 'Llamar' : 'Call'}</p>
             <p className="text-xs text-gray-500">+1 347 450 9281</p>
           </div>
         </button>
