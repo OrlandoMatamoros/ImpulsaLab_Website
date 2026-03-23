@@ -5,6 +5,12 @@ export const serviciosMarketingES = {
     heroTitle: 'Landing Express para Negocios Locales',
     heroSubtitle: 'Tu negocio en internet con una máquina de ventas directa. Una página profesional que tus clientes encuentran en Google y te contactan por WhatsApp.',
     heroPriceAnchor: 'Desde $350 + $15/mes hosting',
+    beforeAfter: {
+      before: 'No aparecia en Google, mis clientes no me encontraban',
+      after: 'Optimizaron mi Shopify y ahora mis clientes me encuentran solos',
+      name: 'Pris',
+      business: 'Chocolateria, Brooklyn',
+    },
     ctaDiagnostico: 'Quiero Mi Landing Express',
 
     // Portfolio Section
@@ -146,6 +152,12 @@ export const serviciosMarketingEN = {
     heroTitle: 'Landing Express for Local Businesses',
     heroSubtitle: 'Get your business online with a direct sales machine. A professional page your customers find on Google and contact you via WhatsApp.',
     heroPriceAnchor: 'From $350 + $15/mo hosting',
+    beforeAfter: {
+      before: "Didn't show up on Google, my customers couldn't find me",
+      after: 'They optimized my Shopify and now customers find me on their own',
+      name: 'Pris',
+      business: 'Chocolate Shop, Brooklyn',
+    },
     ctaDiagnostico: 'I Want My Landing Express',
 
     // Portfolio Section

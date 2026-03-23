@@ -5,6 +5,12 @@ export const serviciosOperacionesES = {
     heroTitle: 'Eliminamos las Tareas que te Roban Tiempo.',
     heroSubtitle: 'Conectamos tus apps para que trabajen solas. Tu te enfocas en atender a tus clientes y hacer crecer tu negocio.',
     heroBadge: 'Desde $200 por automatizacion',
+    beforeAfter: {
+      before: 'Contestaba WhatsApps y correos uno por uno, perdia horas cada dia',
+      after: 'Un chatbot atiende 24/7 y yo me enfoco en hacer crecer el negocio',
+      name: 'Fabio',
+      business: 'Panaderia, Queens',
+    },
     // Problem section
     problemTitle: 'Te Suena Familiar?',
     problemas: [
@@ -329,6 +335,12 @@ export const serviciosOperacionesEN = {
     heroTitle: 'We Eliminate the Tasks That Steal Your Time.',
     heroSubtitle: 'We connect your apps so they work on their own. You focus on serving your customers and growing your business.',
     heroBadge: 'Starting at $200 per automation',
+    beforeAfter: {
+      before: 'Answered WhatsApps and emails one by one, lost hours every day',
+      after: 'A chatbot handles 24/7 and I focus on growing the business',
+      name: 'Fabio',
+      business: 'Bakery, Queens',
+    },
     // Problem section
     problemTitle: 'Does This Sound Familiar?',
     problemas: [

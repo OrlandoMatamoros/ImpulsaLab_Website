@@ -91,6 +91,24 @@ export default function FinanzasPage() {
         </div>
       </section>
 
+      {/* Antes → Después */}
+      <div className="bg-slate-100 border-b border-gray-200 py-4">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center gap-3 sm:gap-6 text-center sm:text-left">
+            <div className="flex-1 flex items-center gap-2">
+              <span className="flex-shrink-0 w-8 h-8 bg-red-100 rounded-full flex items-center justify-center text-red-500 font-bold text-sm">✗</span>
+              <p className="text-sm text-gray-600 italic">&ldquo;{t.finanzasPage.beforeAfter.before}&rdquo;</p>
+            </div>
+            <span className="text-2xl text-brand-cyan font-bold">→</span>
+            <div className="flex-1 flex items-center gap-2">
+              <span className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-sm">✓</span>
+              <p className="text-sm text-gray-800 font-medium">&ldquo;{t.finanzasPage.beforeAfter.after}&rdquo;</p>
+            </div>
+            <span className="text-xs text-gray-400 whitespace-nowrap">— {t.finanzasPage.beforeAfter.name}, {t.finanzasPage.beforeAfter.business}</span>
+          </div>
+        </div>
+      </div>
+
       {/* Sección 2: El Problema - SIEMPRE VISIBLE */}
       <section className="py-20 bg-slate-50">
         <div className="container mx-auto px-4">
