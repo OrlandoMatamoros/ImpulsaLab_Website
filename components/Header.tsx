@@ -382,7 +382,7 @@ export default function Header() {
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center gap-2 xl:gap-4">
               <nav className="flex items-center gap-1 xl:gap-3">
-                <Link href="/#diagnostico" className="nav-link text-sm xl:text-base whitespace-nowrap">
+                <Link href="/diagnostico" className="nav-link text-sm xl:text-base whitespace-nowrap">
                   {t.nav.diagnostico}
                 </Link>
 
@@ -597,7 +597,7 @@ export default function Header() {
               </div>
 
               <Link
-                href="/#diagnostico"
+                href="/diagnostico"
                 className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
