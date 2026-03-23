@@ -1159,12 +1159,9 @@ const techTools: TechTool[] = [
   { name: 'OpenAI', category: 'IA Tools', logo: OpenAIIcon, url: 'https://openai.com', color: '#00A67E' },
 ];
 function HorizontalTechTicker() {
-  // Duplicamos los logos solo una vez para crear el efecto infinito
-  const duplicatedTools = [...techTools, ...techTools];
-  
   // Detectar si es móvil
   const [isMobile, setIsMobile] = useState(false);
-  
+
   useEffect(() => {
     const checkMobile = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -1173,6 +1170,10 @@ function HorizontalTechTicker() {
     window.addEventListener('resize', checkMobile);
     return () => window.removeEventListener('resize', checkMobile);
   }, []);
+
+  // En móvil mostramos solo 30 herramientas para que la velocidad sea legible
+  const visibleTools = isMobile ? techTools.slice(0, 30) : techTools;
+  const duplicatedTools = [...visibleTools, ...visibleTools];
 
   return (
     <>
@@ -1185,7 +1186,7 @@ function HorizontalTechTicker() {
               alignItems: 'center',
               gap: '24px',
               padding: '0 24px',
-              animation: `ticker-scroll ${isMobile ? '180s' : '120s'} linear infinite`
+              animation: `ticker-scroll ${isMobile ? '60s' : '120s'} linear infinite`
             }}
           >
             {duplicatedTools.map((tool, index) => {
