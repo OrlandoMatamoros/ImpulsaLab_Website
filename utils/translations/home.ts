@@ -232,6 +232,28 @@ export const homeES = {
     text: "Esta pagina fue disenada y construida con ayuda de un agente de IA en terminal usando Claude Code",
     separator: "\u2022",
   },
+  testimonials: {
+    items: [
+      {
+        quote: "Me ensenaron a usar IA para manejar mi inventario y mis numeros. Ahora tomo decisiones con datos, no con intuicion.",
+        name: "Mirian",
+        business: "Mini Market",
+        location: "Brooklyn, NY",
+      },
+      {
+        quote: "Me hicieron la pagina web y el diseno de etiquetas para mis productos. Desde entonces las ventas subieron notablemente.",
+        name: "Fabio",
+        business: "Panaderia",
+        location: "Queens, NY",
+      },
+      {
+        quote: "Me optimizaron el SEO de mi tienda en Shopify y por fin mis clientes me encuentran en Google. Fue un cambio enorme.",
+        name: "Pris",
+        business: "Chocolateria",
+        location: "Brooklyn, NY",
+      },
+    ],
+  },
 }
 
 export const homeEN = {
@@ -466,5 +488,27 @@ export const homeEN = {
   aiBanner: {
     text: "This page was designed and built with the help of an AI agent in terminal using Claude Code",
     separator: "\u2022",
+  },
+  testimonials: {
+    items: [
+      {
+        quote: "They taught me to use AI to manage my inventory and numbers. Now I make decisions with data, not intuition.",
+        name: "Mirian",
+        business: "Mini Market",
+        location: "Brooklyn, NY",
+      },
+      {
+        quote: "They built my website and designed labels for my products. Since then, sales went up noticeably.",
+        name: "Fabio",
+        business: "Bakery",
+        location: "Queens, NY",
+      },
+      {
+        quote: "They optimized the SEO on my Shopify store and my customers finally find me on Google. It was a huge change.",
+        name: "Pris",
+        business: "Chocolate Shop",
+        location: "Brooklyn, NY",
+      },
+    ],
   },
 }
