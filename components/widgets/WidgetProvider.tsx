@@ -219,7 +219,7 @@ export default function WidgetProvider() {
             <Phone className="w-6 h-6 text-white" />
           </div>
           <div className="text-left">
-            <p className="text-sm font-semibold text-gray-800">{language === 'es' ? 'Llamar' : 'Call'}</p>
+            <p className="text-sm font-semibold text-gray-800">{language === 'ES' ? 'Llamar' : 'Call'}</p>
             <p className="text-xs text-gray-500">+1 347 450 9281</p>
           </div>
         </button>
