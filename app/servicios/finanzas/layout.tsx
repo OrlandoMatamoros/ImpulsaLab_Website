@@ -1,8 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Servicios de Finanzas - Nova Finance',
-  description: 'Automatiza tus procesos financieros con IA. Proyecciones, analisis de riesgo y dashboards inteligentes para tu PYME.',
+  title: 'CFO en tu Excel con IA - Servicios de Finanzas',
+  description: 'Automatiza tus procesos financieros con IA. Dashboards inteligentes, proyecciones y analisis de riesgo para tu PYME. Desde $250.',
+  alternates: {
+    canonical: 'https://www.tuimpulsalab.com/servicios/finanzas',
+  },
 }
 
 export default function FinanzasLayout({ children }: { children: React.ReactNode }) {

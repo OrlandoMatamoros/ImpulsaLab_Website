@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
   alternates: {
-    canonical: './',
+    canonical: 'https://www.tuimpulsalab.com/',
   },
   icons: {
     icon: [

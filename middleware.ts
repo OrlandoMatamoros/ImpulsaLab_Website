@@ -1,48 +1,48 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-// Rutas públicas que no requieren autenticación
-const publicRoutes = [
-  '/',
-  '/login',
-  '/signup',
-  '/verify-email',
-  '/api/auth',
-  '/api/ai/chat',
-  '/diagnostico',
-  '/herramientas',
-  '/servicios',
-  '/nosotros',
-  '/contacto',
-  '/faq',
-  '/legal',
-  '/blog',
-  '/recursos'
+// Rutas protegidas que requieren autenticación
+// IMPORTANTE: Solo estas rutas requieren auth. Todo lo demás pasa directo
+// a Next.js para que sirva la página o un 404 real.
+const protectedRoutes = [
+  '/dashboard',
+  '/consultant',
+  '/admin',
+  '/diagnostico-interno',
 ];
 
-// Rutas y roles requeridos - CORREGIDO AQUÍ
-const roleBasedRoutes = {
+// Rutas de API protegidas
+const protectedApiRoutes = [
+  '/api/admin',
+  '/api/consultant',
+];
+
+// Rutas y roles requeridos
+const roleBasedRoutes: Record<string, string[]> = {
   '/dashboard': ['registered', 'client', 'consultant', 'admin', 'free', 'premium'],
   '/consultant': ['consultant', 'admin'],
-  '/admin': ['admin', 'consultant'],  // ← AHORA PERMITE CONSULTANT
-  '/api/admin': ['admin', 'consultant'],  // ← TAMBIÉN EN LAS APIs
+  '/admin': ['admin', 'consultant'],
+  '/api/admin': ['admin', 'consultant'],
   '/api/consultant': ['consultant', 'admin'],
 };
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
-  
-  // Permitir rutas públicas
-  if (publicRoutes.some(route => path.startsWith(route))) {
+
+  // Solo interceptar rutas protegidas. Todo lo demás pasa directo
+  // a Next.js routing (que devolverá 404 real si la ruta no existe).
+  const isProtectedPage = protectedRoutes.some(route => path.startsWith(route));
+  const isProtectedApi = protectedApiRoutes.some(route => path.startsWith(route));
+
+  if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
   }
 
   // Verificar autenticación para rutas protegidas
   const token = request.cookies.get('auth-token');
-  
+
   if (!token) {
-    // Si no hay token, redirigir al login
-    if (path.startsWith('/api/')) {
+    if (isProtectedApi) {
       return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
     }
     return NextResponse.redirect(new URL('/login', request.url));
@@ -52,12 +52,10 @@ export async function middleware(request: NextRequest) {
   for (const [route, allowedRoles] of Object.entries(roleBasedRoutes)) {
     if (path.startsWith(route)) {
       try {
-        // Aquí deberías verificar el token y obtener el rol del usuario
-        // Por ahora, asumimos que el token contiene el rol
         const userRole = await getUserRoleFromToken(token.value);
-        
+
         if (!allowedRoles.includes(userRole)) {
-          if (path.startsWith('/api/')) {
+          if (isProtectedApi) {
             return NextResponse.json({ error: 'Sin permisos suficientes' }, { status: 403 });
           }
           return NextResponse.redirect(new URL('/unauthorized', request.url));
@@ -73,16 +71,11 @@ export async function middleware(request: NextRequest) {
 }
 
 // Función auxiliar para obtener el rol del token
-async function getUserRoleFromToken(token: string): Promise<string> {
+async function getUserRoleFromToken(_token: string): Promise<string> {
   try {
-    // Aquí deberías decodificar el JWT o verificar con Firebase
-    // Por ahora retornamos un valor por defecto
-    // En producción, esto debería verificar el token real
-    
-    // Si estás usando Firebase Auth, podrías hacer algo como:
-    // const decodedToken = await admin.auth().verifyIdToken(token);
+    // TODO: Decodificar JWT o verificar con Firebase Admin SDK
+    // const decodedToken = await admin.auth().verifyIdToken(_token);
     // return decodedToken.role || 'registered';
-    
     return 'registered';
   } catch (error) {
     console.error('Error decodificando token:', error);
