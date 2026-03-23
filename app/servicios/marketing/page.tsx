@@ -85,15 +85,20 @@ export default function MarketingPage() {
            <p className="text-xl mb-8 text-purple-100">
              {t.marketingPage.heroSubtitle}
            </p>
-           <Link
-             href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
-             target="_blank"
-             rel="noopener noreferrer"
-             className="inline-flex items-center gap-2 bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"
-           >
-             {t.marketingPage.ctaDiagnostico}
-             <ArrowRight className="w-5 h-5" />
-           </Link>
+           <div className="mb-8 inline-flex items-center gap-2 px-6 py-3 bg-purple-800/60 backdrop-blur-sm rounded-full border border-white/20">
+             <span className="text-2xl font-bold text-white">{t.marketingPage.heroPriceAnchor}</span>
+           </div>
+           <div>
+             <Link
+               href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
+               target="_blank"
+               rel="noopener noreferrer"
+               className="inline-flex items-center gap-2 bg-white text-purple-900 px-8 py-4 rounded-lg font-semibold hover:bg-purple-50 transition-all transform hover:scale-105 shadow-2xl"
+             >
+               {t.marketingPage.ctaDiagnostico}
+               <ArrowRight className="w-5 h-5" />
+             </Link>
+           </div>
          </div>
        </div>
      </section>

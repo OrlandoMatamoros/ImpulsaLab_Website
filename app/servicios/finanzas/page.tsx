@@ -84,6 +84,9 @@ export default function FinanzasPage() {
             <p className="text-xl md:text-2xl text-gray-200">
               {t.finanzasPage.heroSubtitle}
             </p>
+            <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-blue-800/60 backdrop-blur-sm rounded-full border border-white/20">
+              <span className="text-2xl font-bold text-white">{t.finanzasPage.heroPriceAnchor}</span>
+            </div>
           </div>
         </div>
       </section>

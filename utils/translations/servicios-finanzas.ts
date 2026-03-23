@@ -4,6 +4,7 @@ export const serviciosFinanzasES = {
     // Hero
     heroTitle: 'CFO en tu Excel con IA',
     heroSubtitle: 'Conectamos Claude Code a tu Excel o Google Sheets para que tengas análisis financiero profesional sin contratar un contador de tiempo completo. Perfecto para pizzerías, salones, panaderías y negocios locales.',
+    heroPriceAnchor: 'Desde $250 \u2022 Pago unico',
 
     // Problems
     problemsTitle: '¿Te Suena Familiar?',
@@ -244,6 +245,7 @@ export const serviciosFinanzasEN = {
     // Hero
     heroTitle: 'CFO in Your Spreadsheet, Powered by AI',
     heroSubtitle: 'We connect Claude Code to your Excel or Google Sheets so you get professional financial analysis without hiring a full-time accountant. Perfect for pizzerias, salons, bakeries, and local businesses.',
+    heroPriceAnchor: 'From $250 \u2022 One-time payment',
 
     // Problems
     problemsTitle: 'Sound Familiar?',

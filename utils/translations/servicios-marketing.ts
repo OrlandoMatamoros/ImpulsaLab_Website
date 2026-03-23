@@ -4,6 +4,7 @@ export const serviciosMarketingES = {
     // Hero Section
     heroTitle: 'Landing Express para Negocios Locales',
     heroSubtitle: 'Tu negocio en internet con una máquina de ventas directa. Una página profesional que tus clientes encuentran en Google y te contactan por WhatsApp.',
+    heroPriceAnchor: 'Desde $350 + $15/mes hosting',
     ctaDiagnostico: 'Quiero Mi Landing Express',
 
     // Portfolio Section
@@ -144,6 +145,7 @@ export const serviciosMarketingEN = {
     // Hero Section
     heroTitle: 'Landing Express for Local Businesses',
     heroSubtitle: 'Get your business online with a direct sales machine. A professional page your customers find on Google and contact you via WhatsApp.',
+    heroPriceAnchor: 'From $350 + $15/mo hosting',
     ctaDiagnostico: 'I Want My Landing Express',
 
     // Portfolio Section
