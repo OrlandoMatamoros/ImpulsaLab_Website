@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/casos-de-exito', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/diagnostico', priority: 0.9, changeFrequency: 'monthly' as const },
     // Servicios
+    { path: '/servicios', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/finanzas', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/agentes', priority: 0.7, changeFrequency: 'monthly' as const },

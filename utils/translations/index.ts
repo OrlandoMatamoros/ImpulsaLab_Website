@@ -5,6 +5,7 @@ import { faqES, faqEN } from './faq'
 import { serviciosMarketingES, serviciosMarketingEN } from './servicios-marketing'
 import { serviciosOperacionesES, serviciosOperacionesEN } from './servicios-operaciones'
 import { blogAyudaES, blogAyudaEN } from './blog-ayuda'
+import { serviciosHubES, serviciosHubEN } from './servicios-hub'
 import { serviciosFinanzasES, serviciosFinanzasEN } from './servicios-finanzas'
 import { capacitacionSubES, capacitacionSubEN } from './capacitacion-sub'
 import { herramientasES, herramientasEN } from './herramientas'
@@ -19,6 +20,7 @@ export const translations = {
     ...pagesES,
     ...capacitacionES,
     ...faqES,
+    ...serviciosHubES,
     ...serviciosMarketingES,
     ...serviciosOperacionesES,
     ...blogAyudaES,
@@ -35,6 +37,7 @@ export const translations = {
     ...pagesEN,
     ...capacitacionEN,
     ...faqEN,
+    ...serviciosHubEN,
     ...serviciosMarketingEN,
     ...serviciosOperacionesEN,
     ...blogAyudaEN,
