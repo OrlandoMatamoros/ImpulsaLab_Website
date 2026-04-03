@@ -1,0 +1,61 @@
+# Impulsa Lab
+
+> Consultora de transformacion digital con IA para PYMEs latinas en Nueva York. Servicios de Finanzas, Operaciones y Marketing con precios transparentes y resultados medibles.
+
+Impulsa Lab es una firma de consultoria digital con sede en Forest Hills, Queens, NY. Ayudamos a pequenas y medianas empresas (PYMEs) — especialmente negocios latinos en Brooklyn y Queens — a modernizar sus operaciones usando inteligencia artificial, automatizacion y estrategia digital. Operamos en espanol e ingles.
+
+## Servicios principales
+
+- [Servicios (Hub)](https://www.tuimpulsalab.com/servicios): Vision general de los 3 pilares de servicio — Finanzas, Operaciones y Marketing — con precios desde $200.
+- [Finanzas — CFO en tu Excel con IA](https://www.tuimpulsalab.com/servicios/finanzas): Dashboards financieros automatizados con IA que transforman tu Excel en un centro de control. Plan Piloto Automatico $250 unico pago. Plan Cohete $250 + $15/mes con infraestructura Impulsa.
+- [Operaciones — Automatizacion de Choque](https://www.tuimpulsalab.com/servicios/operaciones): Eliminamos tareas repetitivas con automatizaciones y agentes de IA. Desde $200 por automatizacion, pack de 3 por $500, paquete completo $1,000.
+- [Marketing — Landing Express](https://www.tuimpulsalab.com/servicios/marketing): Landing pages profesionales para negocios locales. Setup $350 + $15/mes hosting. Identidad de marca desde $450. Portfolio con 13+ disenos de ejemplo.
+
+## Operaciones (subpaginas)
+
+- [Agentes de IA](https://www.tuimpulsalab.com/servicios/operaciones/agentes): Que son los agentes de IA, ejemplos practicos y herramientas disponibles para automatizar procesos de negocio.
+- [Arsenal de Automatizaciones](https://www.tuimpulsalab.com/servicios/operaciones/arsenal): Catalogo de automatizaciones predefinidas listas para implementar en tu negocio.
+- [Nuestro Proceso](https://www.tuimpulsalab.com/servicios/operaciones/proceso): Metodologia de 3 pasos para implementar automatizaciones de forma efectiva.
+- [Plataformas](https://www.tuimpulsalab.com/servicios/operaciones/plataformas): Herramientas que usamos — Make, Zapier, n8n y mas — para construir automatizaciones.
+- [Precios de Operaciones](https://www.tuimpulsalab.com/servicios/operaciones/precios): Planes y precios detallados para servicios de automatizacion y agentes de IA.
+
+## Diagnostico y herramientas
+
+- [Diagnostico 3D Gratis](https://www.tuimpulsalab.com/diagnostico): Herramienta interactiva gratuita que evalua tu negocio en 3 ejes — Finanzas, Operaciones y Marketing — y genera un plan de accion personalizado.
+- [Hub de Herramientas](https://www.tuimpulsalab.com/herramientas): Acceso a arsenal de 100+ herramientas de IA, agentes inteligentes y noticias del sector tecnologico.
+- [Arsenal de Herramientas IA](https://www.tuimpulsalab.com/herramientas/arsenal): Directorio searchable con mas de 100 herramientas de inteligencia artificial organizadas por categoria.
+- [Agentes IA](https://www.tuimpulsalab.com/herramientas/agentes): Agentes de inteligencia artificial disponibles para tareas especificas de negocio.
+- [Noticias IA](https://www.tuimpulsalab.com/herramientas/noticias): Feed diario de noticias y actualizaciones del mundo de la inteligencia artificial.
+
+## Capacitacion
+
+- [Academia Impulsa](https://www.tuimpulsalab.com/capacitacion): Programas de formacion practica en IA y herramientas digitales. Duracion de 2 a 12 horas, 100% practico, presencial en NYC.
+- [Mentoria Personalizada](https://www.tuimpulsalab.com/capacitacion/mentoria-personalizada): Sesiones 1-a-1 de mentoria adaptadas a las necesidades especificas de tu negocio.
+- [Equipos Empresariales](https://www.tuimpulsalab.com/capacitacion/equipos-empresariales): Formacion grupal para equipos de trabajo en herramientas de IA y automatizacion.
+
+## Casos de exito y blog
+
+- [Casos de Exito](https://www.tuimpulsalab.com/casos-de-exito): 4 estudios de caso reales — restaurante, tecnologia, salon de belleza y firma legal — con metricas de resultados y testimonios de clientes.
+- [Blog](https://www.tuimpulsalab.com/blog): Articulos sobre inteligencia artificial, transformacion digital, automatizacion, finanzas y marketing para PYMEs. Autores incluyen el equipo de Impulsa Lab y colaboradores especializados.
+
+## Informacion de la empresa
+
+- [Nosotros](https://www.tuimpulsalab.com/nosotros): Historia de la empresa, mision, vision, valores fundamentales (Colaboracion, Innovacion, Personas, Resultados), equipo y compromiso con la comunidad latina de NYC.
+- [Contacto](https://www.tuimpulsalab.com/contacto): Formulario de contacto, telefono +1 (347) 450-9281, email contacto@tuimpulsalab.com. Oficina en 118-35 Queens Blvd #400, Forest Hills, NY.
+- [Preguntas Frecuentes](https://www.tuimpulsalab.com/faq): FAQ organizado en 9 categorias — general, IA, finanzas, operaciones, marketing, precios, proceso, soporte y seguridad.
+
+## Legal
+
+- [Politica de Privacidad](https://www.tuimpulsalab.com/legal/privacidad)
+- [Terminos de Servicio](https://www.tuimpulsalab.com/legal/terminos)
+- [Politica de Cookies](https://www.tuimpulsalab.com/legal/cookies)
+
+## Datos clave
+
+- **Ubicacion:** Forest Hills, Queens, NY (118-35 Queens Blvd #400)
+- **Idiomas:** Espanol e Ingles (sitio completamente bilingue)
+- **Publico objetivo:** PYMEs latinas en Nueva York (Brooklyn, Queens y alrededores)
+- **Contacto principal:** WhatsApp, telefono +1 (347) 450-9281, email contacto@tuimpulsalab.com
+- **Precios:** Finanzas desde $250, Operaciones desde $200, Marketing desde $350 + $15/mes
+- **Metodologia:** Diagnostico 3D gratuito → Plan personalizado → Implementacion con IA → Seguimiento con KPIs
+- **Diferenciadores:** Bilingue, enfoque local NYC, implementacion practica (no solo teoria), precios transparentes, resultados medibles con KPIs
