@@ -237,6 +237,78 @@ export default function MarketingPage() {
        </div>
      </section>
 
+     {/* Servicios por Etapa de Negocio */}
+     <section className="py-20 bg-gradient-to-b from-white to-purple-50">
+       <div className="container mx-auto px-4">
+         <div className="max-w-6xl mx-auto">
+           <div className="text-center mb-6">
+             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+               Soluciones de Marketing para Cada Etapa de tu Negocio
+             </h2>
+             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+               Desde tu primera landing page hasta una app web completa — escalamos contigo.
+             </p>
+           </div>
+           <div className="grid md:grid-cols-3 gap-8 mt-12">
+             {/* Supervivencia */}
+             <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-purple-400 hover:shadow-2xl transition-all duration-300">
+               <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
+               <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
+               <p className="text-gray-600 text-sm mb-4">Negocio nuevo que necesita presencia digital</p>
+               <div className="text-3xl font-bold text-gray-900 mb-1">$800 - $1,500</div>
+               <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
+               <h4 className="font-semibold text-gray-800 mb-3">Landing Page + Social Media Setup</h4>
+               <div className="space-y-2 mb-8">
+                 {['Landing page profesional optimizada para conversión', 'Setup de redes sociales (Instagram, Facebook, Google Business)', 'Identidad visual básica (logo, colores, tipografía)', 'Social Media Setup: $500-$800 adicional'].map((item, i) => (
+                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
+                 ))}
+               </div>
+               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Empezar con lo Básico</Link>
+             </div>
+             {/* Crecimiento */}
+             <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl shadow-xl border-2 border-purple-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
+               <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
+               <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
+               <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
+               <p className="text-gray-600 text-sm mb-4">Negocio listo para escalar su presencia digital</p>
+               <div className="text-3xl font-bold text-gray-900 mb-1">$3,000 - $5,000</div>
+               <div className="text-sm text-gray-500 mb-6">Setup + desde $197/mes</div>
+               <h4 className="font-semibold text-gray-800 mb-3">Website Profesional + Add-ons</h4>
+               <div className="space-y-2 mb-8">
+                 {['Sitio web multi-página con diseño premium', 'SEO técnico y optimización de velocidad', 'Blog integrado con estrategia de contenido AI', 'Integración con CRM y herramientas de marketing', 'Add-ons: Email marketing, Google Ads, Social Ads'].map((item, i) => (
+                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
+                 ))}
+               </div>
+               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Agenda tu Diagnóstico</Link>
+             </div>
+             {/* Expansión */}
+             <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-purple-400 hover:shadow-2xl transition-all duration-300">
+               <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
+               <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
+               <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ listo para dominar su mercado</p>
+               <div className="text-3xl font-bold text-gray-900 mb-1">$5,000 - $15,000</div>
+               <div className="text-sm text-gray-500 mb-6">Setup + desde $497/mes</div>
+               <h4 className="font-semibold text-gray-800 mb-3">App Web Custom</h4>
+               <div className="space-y-2 mb-8">
+                 {['App web a medida (portal de clientes, e-commerce, SaaS)', 'Automatización de marketing end-to-end', 'Dashboard de métricas y analytics en tiempo real', 'Integraciones API con todas tus herramientas', 'Soporte prioritario y mantenimiento continuo'].map((item, i) => (
+                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
+                 ))}
+               </div>
+               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Solicitar Propuesta</Link>
+             </div>
+           </div>
+           <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+             <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
+             <div className="grid md:grid-cols-3 gap-6 text-center">
+               <div><div className="text-sm text-gray-500 mb-1">Landing Page</div><div className="text-gray-400 line-through text-sm">NYC: $3,000-$8,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: $800-$1,500</div></div>
+               <div><div className="text-sm text-gray-500 mb-1">Website Profesional</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$25,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: $3,000-$5,000</div></div>
+               <div><div className="text-sm text-gray-500 mb-1">App Web Custom</div><div className="text-gray-400 line-through text-sm">NYC: $20,000-$150,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: $5,000-$15,000</div></div>
+             </div>
+           </div>
+         </div>
+       </div>
+     </section>
+
      {/* VIDEO SECTION CENTRAL - POSICIÓN ESTRATÉGICA */}
      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">
        <div className="container mx-auto px-4">

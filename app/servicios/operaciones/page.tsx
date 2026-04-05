@@ -111,6 +111,78 @@ export default function OperacionesPage() {
         </div>
       </section>
 
+      {/* Servicios por Etapa de Negocio */}
+      <section className="py-20 bg-gradient-to-b from-white to-green-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-6">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                Automatización para Cada Etapa de tu Negocio
+              </h2>
+              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+                Desde tu primer workflow hasta una suite completa — eliminamos trabajo manual para que te enfoques en crecer.
+              </p>
+            </div>
+            <div className="grid md:grid-cols-3 gap-8 mt-12">
+              {/* Supervivencia */}
+              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-green-400 hover:shadow-2xl transition-all duration-300">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
+                <p className="text-gray-600 text-sm mb-4">Negocio nuevo o con procesos 100% manuales</p>
+                <div className="text-3xl font-bold text-gray-900 mb-1">$500 - $1,000</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
+                <h4 className="font-semibold text-gray-800 mb-3">1 Workflow Automatizado</h4>
+                <div className="space-y-2 mb-8">
+                  {['Lead Capture & Auto-Response desde tu sitio web', 'Invoice Processing automático por email', 'Daily Business Digest con resumen AI', 'Appointment Reminders automáticos'].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
+                  ))}
+                </div>
+                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Empezar con lo Básico</Link>
+              </div>
+              {/* Crecimiento */}
+              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-xl border-2 border-green-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
+                <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
+                <p className="text-gray-600 text-sm mb-4">Negocio listo para automatizar múltiples procesos</p>
+                <div className="text-3xl font-bold text-gray-900 mb-1">$2,000 - $4,000</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $297/mes</div>
+                <h4 className="font-semibold text-gray-800 mb-3">Suite 3-5 Workflows + AI Chatbot</h4>
+                <div className="space-y-2 mb-8">
+                  {['Suite de 3-5 workflows integrados ($2,000-$4,000 + $297-$397/mes)', 'AI Chatbot WhatsApp/Web ($2,500-$4,000 + $297-$497/mes)', 'CRM automatizado con seguimiento de leads', 'Integraciones con Gmail, Sheets, Calendar, Slack', 'Soporte prioritario y optimización mensual'].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
+                  ))}
+                </div>
+                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Agenda tu Diagnóstico</Link>
+              </div>
+              {/* Expansión */}
+              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-green-400 hover:shadow-2xl transition-all duration-300">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
+                <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ listo para automatización total</p>
+                <div className="text-3xl font-bold text-gray-900 mb-1">$4,000 - $8,000</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $497/mes</div>
+                <h4 className="font-semibold text-gray-800 mb-3">Suite Completa 6-10 Workflows</h4>
+                <div className="space-y-2 mb-8">
+                  {['6-10 workflows cubriendo todos los procesos del negocio', 'AI Agents avanzados con base de conocimiento', 'Dashboard de operaciones en tiempo real', 'Integraciones API custom con tus sistemas', 'Mantenimiento proactivo y escalado continuo'].map((item, i) => (
+                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
+                  ))}
+                </div>
+                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Solicitar Propuesta</Link>
+              </div>
+            </div>
+            <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
+              <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
+              <div className="grid md:grid-cols-3 gap-6 text-center">
+                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $2,000-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $500-$1,000</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $8,000-$20,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $2,000-$4,000</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Suite Completa + AI</div><div className="text-gray-400 line-through text-sm">NYC: $15,000-$50,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $4,000-$8,000</div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* NUEVA SECCION: Cards de navegacion */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
         <div className="container mx-auto px-4">
