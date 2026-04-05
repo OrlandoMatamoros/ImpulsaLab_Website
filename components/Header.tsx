@@ -466,13 +466,28 @@ export default function Header() {
 
               {/* Auth section - separated with divider */}
               <div className="flex items-center gap-2 ml-2 pl-3 border-l border-gray-200">
-                <button
-                  onClick={handleLanguageToggle}
-                  className="flex items-center gap-1 px-2 py-2 text-sm font-medium text-gray-700 hover:text-brand-navy transition-colors"
-                  title={language === 'ES' ? 'Switch to English' : 'Cambiar a Español'}
-                >
-                  <span className="text-lg">{language === 'ES' ? '🇬🇧' : '🇪🇸'}</span>
-                </button>
+                <div className="flex items-center bg-gray-100 rounded-full p-0.5">
+                  <button
+                    onClick={() => setLanguage('EN')}
+                    className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 ${
+                      language === 'EN'
+                        ? 'bg-brand-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => setLanguage('ES')}
+                    className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 ${
+                      language === 'ES'
+                        ? 'bg-brand-navy text-white shadow-sm'
+                        : 'text-gray-500 hover:text-gray-700'
+                    }`}
+                  >
+                    ES
+                  </button>
+                </div>
 
                 {user ? (
                   <DropdownMenu>
@@ -524,13 +539,28 @@ export default function Header() {
 
             {/* Mobile menu button */}
             <div className="flex lg:hidden items-center gap-2">
-              <button
-                onClick={handleLanguageToggle}
-                className="p-2 text-2xl"
-                title={language === 'ES' ? 'EN' : 'ES'}
-              >
-                {language === 'ES' ? '🇬🇧' : '🇪🇸'}
-              </button>
+              <div className="flex items-center bg-gray-100 rounded-full p-0.5">
+                <button
+                  onClick={() => setLanguage('EN')}
+                  className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 ${
+                    language === 'EN'
+                      ? 'bg-brand-navy text-white shadow-sm'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  EN
+                </button>
+                <button
+                  onClick={() => setLanguage('ES')}
+                  className={`px-2.5 py-1 text-xs font-bold rounded-full transition-all duration-200 ${
+                    language === 'ES'
+                      ? 'bg-brand-navy text-white shadow-sm'
+                      : 'text-gray-500 hover:text-gray-700'
+                  }`}
+                >
+                  ES
+                </button>
+              </div>
 
               <button
                 className="p-2 text-gray-700 hover:text-brand-navy transition-colors"
