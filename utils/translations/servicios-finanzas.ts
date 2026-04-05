@@ -4,7 +4,7 @@ export const serviciosFinanzasES = {
     // Hero
     heroTitle: 'CFO en tu Excel con IA',
     heroSubtitle: 'Conectamos Claude Code a tu Excel o Google Sheets para que tengas análisis financiero profesional sin contratar un contador de tiempo completo. Perfecto para pizzerías, salones, panaderías y negocios locales.',
-    heroPriceAnchor: 'Desde $250 \u2022 Pago unico',
+    heroPriceAnchor: 'Desde $500 setup + $97/mes',
     beforeAfter: {
       before: 'Apuntaba todo en un cuaderno y no sabia a donde se iba la plata',
       after: 'Dashboard automatico en mi Excel — veo mis numeros en tiempo real',
@@ -213,13 +213,14 @@ export const serviciosFinanzasES = {
     planPilot: {
       title: 'CFO en tu Excel con IA',
       idealFor: 'Ideal para: Negocios locales que quieren ver sus números claros sin gastar una fortuna.',
-      price: '$250',
-      pricePeriod: 'Pago único',
+      price: '$500 setup + $97/mes',
+      pricePeriod: 'Setup + suscripción mensual',
       deliverablesTitle: 'Incluye:',
       deliverables: [
         'Instalación de Claude Code en tu Excel o Google Sheets',
         'Creación de tu primer dashboard personalizado',
         'Capacitación para que lo uses sin ayuda',
+        'Soporte y mantenimiento mensual continuo',
       ],
       cta: 'Agendar Diagnóstico Gratis',
     },
@@ -227,7 +228,7 @@ export const serviciosFinanzasES = {
       title: 'Soporte Mensual',
       badge: 'Si usas infraestructura Impulsa',
       idealFor: 'Ideal para: Negocios que prefieren no manejar su propia API key de Claude Code.',
-      price: '$15/mes',
+      price: '$97/mes',
       pricePeriod: 'Suscripción mensual',
       deliverablesTitle: 'Incluye:',
       deliverables: [
@@ -251,7 +252,7 @@ export const serviciosFinanzasEN = {
     // Hero
     heroTitle: 'CFO in Your Spreadsheet, Powered by AI',
     heroSubtitle: 'We connect Claude Code to your Excel or Google Sheets so you get professional financial analysis without hiring a full-time accountant. Perfect for pizzerias, salons, bakeries, and local businesses.',
-    heroPriceAnchor: 'From $250 \u2022 One-time payment',
+    heroPriceAnchor: 'From $500 setup + $97/mo',
     beforeAfter: {
       before: 'Wrote everything in a notebook and had no idea where the money went',
       after: 'Automatic dashboard in my Excel — I see my numbers in real time',
@@ -460,13 +461,14 @@ export const serviciosFinanzasEN = {
     planPilot: {
       title: 'CFO in Your Spreadsheet with AI',
       idealFor: 'Ideal for: Local businesses that want to see their numbers clearly without spending a fortune.',
-      price: '$250',
-      pricePeriod: 'One-time payment',
+      price: '$500 setup + $97/mo',
+      pricePeriod: 'Setup + monthly subscription',
       deliverablesTitle: 'Includes:',
       deliverables: [
         'Claude Code installation in your Excel or Google Sheets',
         'Creation of your first custom dashboard',
         'Training so you can use it on your own',
+        'Ongoing monthly support and maintenance',
       ],
       cta: 'Schedule Free Diagnostic',
     },
@@ -474,7 +476,7 @@ export const serviciosFinanzasEN = {
       title: 'Monthly Support',
       badge: 'If using Impulsa infrastructure',
       idealFor: 'Ideal for: Businesses that prefer not to manage their own Claude Code API key.',
-      price: '$15/mo',
+      price: '$97/mo',
       pricePeriod: 'Monthly subscription',
       deliverablesTitle: 'Includes:',
       deliverables: [

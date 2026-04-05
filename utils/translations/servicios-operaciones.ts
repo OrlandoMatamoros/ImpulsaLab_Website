@@ -4,7 +4,7 @@ export const serviciosOperacionesES = {
     // Hero
     heroTitle: 'Eliminamos las Tareas que te Roban Tiempo.',
     heroSubtitle: 'Conectamos tus apps para que trabajen solas. Tu te enfocas en atender a tus clientes y hacer crecer tu negocio.',
-    heroBadge: 'Desde $200 por automatizacion',
+    heroBadge: 'Desde $500 setup + $97/mes',
     beforeAfter: {
       before: 'Contestaba WhatsApps y correos uno por uno, perdia horas cada dia',
       after: 'Un chatbot atiende 24/7 y yo me enfoco en hacer crecer el negocio',
@@ -53,7 +53,7 @@ export const serviciosOperacionesES = {
     cardPlataformasDesc: 'Las herramientas que usamos: Claude Code, Make, Zapier y mas',
     cardPlataformasCta: 'Descubrir',
     cardPreciosTitle: 'Precios',
-    cardPreciosDesc: 'Desde $200 por automatizacion. Sin letra chica.',
+    cardPreciosDesc: 'Desde $500 setup + $97/mes. Sin letra chica.',
     cardPreciosCta: 'Ver precios',
     cardProcesoTitle: 'Nuestro Proceso',
     cardProcesoDesc: '3 pasos simples: diagnostico, implementacion y capacitacion',
@@ -117,7 +117,7 @@ export const serviciosOperacionesES = {
     breadcrumbArsenal: 'Automatizaciones',
     heroBadge: 'Procesos que puedes automatizar hoy',
     heroTitle: 'Automatizaciones para tu Negocio',
-    heroSubtitle: 'Estas son tareas que hacemos automaticas para que dejes de perder tiempo. Cada una desde $200.',
+    heroSubtitle: 'Estas son tareas que hacemos automaticas para que dejes de perder tiempo. Cada una desde $500 setup + $97/mes.',
     sectionTitle: 'Que Puedes Automatizar?',
     categorias: [
       {
@@ -244,7 +244,7 @@ export const serviciosOperacionesES = {
       {
         nombre: 'Automatizacion Individual',
         descripcion: 'Una tarea especifica automatizada',
-        precio_unico: 200,
+        precio_unico: 500,
         ejemplos: 'Ej: emails a tabla, chatbot FAQ, notificaciones WhatsApp',
         caracteristicas: [
           'Configuracion completa',
@@ -254,9 +254,9 @@ export const serviciosOperacionesES = {
         ],
       },
       {
-        nombre: 'Pack 3 Automatizaciones',
-        descripcion: 'Las 3 tareas que mas tiempo te quitan',
-        precio_unico: 500,
+        nombre: 'Suite 3-5 Automatizaciones',
+        descripcion: 'Las tareas que mas tiempo te quitan',
+        precio_unico: 2000,
         ejemplos: 'Ej: emails + chatbot + reportes automaticos',
         caracteristicas: [
           'Diagnostico de procesos incluido',
@@ -270,7 +270,7 @@ export const serviciosOperacionesES = {
       {
         nombre: 'Transformacion Completa',
         descripcion: 'Automatizamos todo tu flujo operativo',
-        precio_unico: 1000,
+        precio_unico: 4000,
         ejemplos: 'Ej: ventas + inventario + atencion + reportes',
         caracteristicas: [
           'Auditoria operativa completa',
@@ -282,7 +282,7 @@ export const serviciosOperacionesES = {
       },
     ],
     condicionTitle: 'Nota sobre credenciales',
-    condicionDesc: 'El precio base aplica cuando tu aportas tus credenciales (cuentas de email, apps, etc). Si necesitas que usemos la infraestructura de Impulsa Lab, se agrega $15/mes por mantenimiento y soporte.',
+    condicionDesc: 'El precio base aplica cuando tu aportas tus credenciales (cuentas de email, apps, etc). Todos los planes incluyen soporte mensual de $97/mes por mantenimiento y soporte continuo.',
     ctaWhatsappMessage: 'Hola Impulsa Lab, me interesa el paquete de Automatizacion de Choque para mi negocio.',
     navBack: 'Volver a Operaciones',
     navNext: 'Ver Automatizaciones',
@@ -334,7 +334,7 @@ export const serviciosOperacionesEN = {
     // Hero
     heroTitle: 'We Eliminate the Tasks That Steal Your Time.',
     heroSubtitle: 'We connect your apps so they work on their own. You focus on serving your customers and growing your business.',
-    heroBadge: 'Starting at $200 per automation',
+    heroBadge: 'From $500 setup + $97/mo',
     beforeAfter: {
       before: 'Answered WhatsApps and emails one by one, lost hours every day',
       after: 'A chatbot handles 24/7 and I focus on growing the business',
@@ -383,7 +383,7 @@ export const serviciosOperacionesEN = {
     cardPlataformasDesc: 'The tools we use: Claude Code, Make, Zapier and more',
     cardPlataformasCta: 'Discover',
     cardPreciosTitle: 'Pricing',
-    cardPreciosDesc: 'Starting at $200 per automation. No fine print.',
+    cardPreciosDesc: 'From $500 setup + $97/mo. No fine print.',
     cardPreciosCta: 'See pricing',
     cardProcesoTitle: 'Our Process',
     cardProcesoDesc: '3 simple steps: diagnostic, implementation, and training',
@@ -447,7 +447,7 @@ export const serviciosOperacionesEN = {
     breadcrumbArsenal: 'Automations',
     heroBadge: 'Processes you can automate today',
     heroTitle: 'Automations for Your Business',
-    heroSubtitle: 'These are tasks we make automatic so you stop wasting time. Each one starting at $200.',
+    heroSubtitle: 'These are tasks we make automatic so you stop wasting time. Each one from $500 setup + $97/mo.',
     sectionTitle: 'What Can You Automate?',
     categorias: [
       {
@@ -574,7 +574,7 @@ export const serviciosOperacionesEN = {
       {
         nombre: 'Individual Automation',
         descripcion: 'One specific task automated',
-        precio_unico: 200,
+        precio_unico: 500,
         ejemplos: 'Ex: emails to spreadsheet, FAQ chatbot, WhatsApp notifications',
         caracteristicas: [
           'Complete setup',
@@ -584,9 +584,9 @@ export const serviciosOperacionesEN = {
         ],
       },
       {
-        nombre: '3-Automation Pack',
-        descripcion: 'The 3 tasks that waste most of your time',
-        precio_unico: 500,
+        nombre: '3-5 Automation Suite',
+        descripcion: 'The tasks that waste most of your time',
+        precio_unico: 2000,
         ejemplos: 'Ex: emails + chatbot + automatic reports',
         caracteristicas: [
           'Process diagnostic included',
@@ -600,7 +600,7 @@ export const serviciosOperacionesEN = {
       {
         nombre: 'Complete Transformation',
         descripcion: 'We automate your entire operations flow',
-        precio_unico: 1000,
+        precio_unico: 4000,
         ejemplos: 'Ex: sales + inventory + customer service + reports',
         caracteristicas: [
           'Full operational audit',
@@ -612,7 +612,7 @@ export const serviciosOperacionesEN = {
       },
     ],
     condicionTitle: 'Note about credentials',
-    condicionDesc: 'Base price applies when you provide your own credentials (email accounts, apps, etc). If you need to use Impulsa Lab\'s infrastructure, $15/month is added for maintenance and support.',
+    condicionDesc: 'Base price applies when you provide your own credentials (email accounts, apps, etc). All plans include $97/month for ongoing maintenance and support.',
     ctaWhatsappMessage: 'Hi Impulsa Lab, I\'m interested in the Quick-Impact Automation package for my business.',
     navBack: 'Back to Operations',
     navNext: 'See Automations',
