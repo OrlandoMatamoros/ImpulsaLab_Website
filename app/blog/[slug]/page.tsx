@@ -30,8 +30,21 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   return {
     title: `${titulo} - Blog`,
-    description: `Articulo en desarrollo: ${titulo}. Proximamente en el blog de Impulsa Lab.`,
-    robots: { index: false, follow: true },
+    description: `Lee sobre ${titulo} en el blog de Impulsa Lab. Guias, consejos y tendencias de IA y transformacion digital para PYMEs.`,
+    alternates: { canonical: `https://www.tuimpulsalab.com/blog/${slug}` },
+    openGraph: {
+      title: `${titulo} - Blog | Impulsa Lab`,
+      description: `Lee sobre ${titulo}. Guias, consejos y tendencias de IA y transformacion digital para PYMEs.`,
+      url: `https://www.tuimpulsalab.com/blog/${slug}`,
+      type: 'article',
+      images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: `Impulsa Lab - ${titulo}` }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: `${titulo} - Blog | Impulsa Lab`,
+      description: `Lee sobre ${titulo}. Guias, consejos y tendencias de IA y transformacion digital para PYMEs.`,
+      images: ['/images/og-image.jpg'],
+    },
   };
 }
 

@@ -3,6 +3,72 @@
 const nextConfig = {
   reactStrictMode: true,
   
+  // Redirects para SEO - evitar 404s en URLs antiguas o mal escritas
+  async redirects() {
+    return [
+      {
+        source: '/services',
+        destination: '/servicios',
+        permanent: true,
+      },
+      {
+        source: '/services/:path*',
+        destination: '/servicios/:path*',
+        permanent: true,
+      },
+      {
+        source: '/about',
+        destination: '/nosotros',
+        permanent: true,
+      },
+      {
+        source: '/contact',
+        destination: '/contacto',
+        permanent: true,
+      },
+      {
+        source: '/help',
+        destination: '/ayuda',
+        permanent: true,
+      },
+      {
+        source: '/privacy',
+        destination: '/legal/privacidad',
+        permanent: true,
+      },
+      {
+        source: '/terms',
+        destination: '/legal/terminos',
+        permanent: true,
+      },
+      {
+        source: '/tools',
+        destination: '/herramientas',
+        permanent: true,
+      },
+      {
+        source: '/tools/:path*',
+        destination: '/herramientas/:path*',
+        permanent: true,
+      },
+      {
+        source: '/training',
+        destination: '/capacitacion',
+        permanent: true,
+      },
+      {
+        source: '/careers',
+        destination: '/carreras',
+        permanent: true,
+      },
+      {
+        source: '/diagnostic',
+        destination: '/diagnostico',
+        permanent: true,
+      },
+    ];
+  },
+
   // Configuración para manejar Firebase Auth en Codespaces
   async rewrites() {
     // Solo aplicar rewrites en desarrollo

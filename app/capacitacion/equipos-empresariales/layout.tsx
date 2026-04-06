@@ -1,9 +1,22 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Capacitacion para Equipos Empresariales',
-  description: 'Capacitacion corporativa en IA, automatizacion y transformacion digital para equipos de trabajo.',
+  title: 'Capacitacion en IA para Equipos Empresariales',
+  description: 'Capacitacion corporativa en inteligencia artificial, automatizacion y transformacion digital para equipos de trabajo. Desde $500 USD.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/capacitacion/equipos-empresariales' },
+  openGraph: {
+    title: 'Capacitacion en IA para Equipos Empresariales',
+    description: 'Capacitacion corporativa en IA y automatizacion para equipos de trabajo. Desde $500 USD.',
+    url: 'https://www.tuimpulsalab.com/capacitacion/equipos-empresariales',
+    type: 'website',
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Capacitacion Empresarial' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Capacitacion en IA para Equipos Empresariales',
+    description: 'Capacitacion corporativa en IA y automatizacion para equipos de trabajo. Desde $500 USD.',
+    images: ['/images/og-image.jpg'],
+  },
 }
 
 export default function EquiposLayout({ children }: { children: React.ReactNode }) {
