@@ -31,6 +31,8 @@ export const homeES = {
     dashboardChatbot: "Dashboard Chatbot",
     dashboardConsultor: "Dashboard Consultor",
     panelAdmin: "Panel Administracion",
+    auditoriaWeb: "Auditoria Web",
+    juntaEstrategica: "Junta Estrategica",
   },
   hero: {
     badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
@@ -288,6 +290,8 @@ export const homeEN = {
     dashboardChatbot: "Chatbot Dashboard",
     dashboardConsultor: "Consultant Dashboard",
     panelAdmin: "Admin Panel",
+    auditoriaWeb: "Web Audit",
+    juntaEstrategica: "Strategic Board",
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",

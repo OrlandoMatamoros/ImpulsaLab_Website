@@ -46,12 +46,19 @@ export default function Header() {
     }
   }
 
+  const isAdmin = user?.email === 'orlando@tuimpulsalab.com'
+
   const toolsItems = [
     { name: t.nav.verTodas, href: '/herramientas', className: 'dropdown-item-all' },
     { name: t.nav.arsenalTec, href: '/herramientas/arsenal', className: 'dropdown-item-arsenal' },
     { name: t.nav.agentesIA, href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
     { name: t.nav.promptDesigner, href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
     { name: t.nav.agenteNoticias, href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
+  ]
+
+  const adminToolsItems = [
+    { name: t.nav.auditoriaWeb, href: 'https://audit.tuimpulsalab.com', className: 'dropdown-item-nova', external: true },
+    { name: t.nav.juntaEstrategica, href: 'https://board.tuimpulsalab.com', className: 'dropdown-item-nova', external: true }
   ]
 
   const academyItems = [
@@ -398,6 +405,19 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
+                    {isAdmin && (
+                      <>
+                        <div className="border-t border-gray-200 my-1" />
+                        {adminToolsItems.map((item) => (
+                          <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" className={`dropdown-item ${item.className}`}>
+                            <span className="flex items-center justify-between">
+                              <span>{item.name}</span>
+                              <span className="text-xs text-gray-400">&#8599;</span>
+                            </span>
+                          </a>
+                        ))}
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -661,6 +681,26 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
+                    {isAdmin && (
+                      <>
+                        <div className="border-t border-gray-200 my-2" />
+                        {adminToolsItems.map((item) => (
+                          <a
+                            key={item.href}
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm"
+                            onClick={() => {
+                              setIsMenuOpen(false)
+                              setShowMobileTools(false)
+                            }}
+                          >
+                            {item.name} &#8599;
+                          </a>
+                        ))}
+                      </>
+                    )}
                   </div>
                 )}
               </div>
