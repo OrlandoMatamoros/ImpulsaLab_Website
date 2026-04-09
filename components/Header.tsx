@@ -366,8 +366,8 @@ export default function Header() {
       `}</style>
 
       <header className="bg-white shadow-md fixed w-full top-0 z-50">
-        <div className="container mx-auto px-4 py-3">
-          <div className="flex justify-between items-center">
+        <div className="container mx-auto px-4 2xl:px-6 py-3 max-w-[1600px]">
+          <div className="flex justify-between items-center gap-2">
             {/* Logo */}
             <Link href="/" className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0">
               <Image
@@ -375,28 +375,28 @@ export default function Header() {
                 alt={COMPANY_INFO.name}
                 width={40}
                 height={40}
-                className="w-10 h-10 md:w-11 md:h-11 mr-2"
+                className="w-9 h-9 md:w-10 md:h-10 2xl:w-11 2xl:h-11 mr-2"
               />
               <div className="flex items-baseline">
-                <span className="text-xl md:text-2xl font-bold text-brand-navy tracking-tight">
+                <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-brand-navy tracking-tight">
                   IMPULSA
                 </span>
-                <span className="text-xl md:text-2xl font-bold text-brand-cyan tracking-tight ml-1">
+                <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-brand-cyan tracking-tight ml-1">
                   LAB
                 </span>
               </div>
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-2 xl:gap-4">
-              <nav className="flex items-center gap-1 xl:gap-3">
-                <Link href="/diagnostico" className="nav-link text-sm xl:text-base whitespace-nowrap">
+            <div className="hidden xl:flex items-center gap-1 2xl:gap-4 min-w-0">
+              <nav className="flex items-center gap-0.5 2xl:gap-2 min-w-0">
+                <Link href="/diagnostico" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   {t.nav.diagnostico}
                 </Link>
 
                 {/* Herramientas dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/herramientas" className="nav-link text-sm xl:text-base flex items-center gap-1">
+                  <Link href="/herramientas" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
                     {t.nav.herramientas}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
@@ -421,7 +421,7 @@ export default function Header() {
 
                 {/* Finanzas dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/servicios/finanzas" className="nav-link text-sm xl:text-base flex items-center gap-1">
+                  <Link href="/servicios/finanzas" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
                     {t.nav.finanzas}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
@@ -442,7 +442,7 @@ export default function Header() {
 
                 {/* Operaciones dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/servicios/operaciones" className="nav-link text-sm xl:text-base flex items-center gap-1">
+                  <Link href="/servicios/operaciones" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
                     {t.nav.operaciones}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
@@ -455,13 +455,13 @@ export default function Header() {
                   </div>
                 </div>
 
-                <Link href="/servicios/marketing" className="nav-link text-sm xl:text-base whitespace-nowrap">
+                <Link href="/servicios/marketing" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   {t.nav.marketing}
                 </Link>
 
                 {/* Academy dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/capacitacion" className="nav-link text-sm xl:text-base whitespace-nowrap flex items-center gap-1">
+                  <Link href="/capacitacion" className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
                     {t.nav.academy}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
@@ -474,16 +474,16 @@ export default function Header() {
                   </div>
                 </div>
 
-                <Link href="/#equipo" className="nav-link text-sm xl:text-base whitespace-nowrap">
+                <Link href="/#equipo" className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
                   {t.nav.nosotros}
                 </Link>
-                <Link href="/#contacto" className="nav-link text-sm xl:text-base whitespace-nowrap">
+                <Link href="/#contacto" className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
                   {t.nav.contacto}
                 </Link>
               </nav>
 
               {/* Auth section - separated with divider */}
-              <div className="flex items-center gap-2 ml-2 pl-3 border-l border-gray-200">
+              <div className="flex items-center gap-1.5 2xl:gap-2 ml-1 2xl:ml-2 pl-2 2xl:pl-3 border-l border-gray-200 flex-shrink-0">
                 <div className="flex items-center bg-gray-100 rounded-full p-0.5">
                   <button
                     onClick={() => setLanguage('EN')}
@@ -510,9 +510,9 @@ export default function Header() {
                 {user ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size="sm" className="flex items-center gap-2 border-brand-navy/20 hover:border-brand-cyan">
-                        <User className="h-4 w-4" />
-                        <span className="hidden xl:inline max-w-[120px] truncate">{userData?.name || user.email}</span>
+                      <Button variant="outline" size="sm" className="flex items-center gap-1.5 2xl:gap-2 border-brand-navy/20 hover:border-brand-cyan px-2 2xl:px-3 flex-shrink-0">
+                        <User className="h-4 w-4 flex-shrink-0" />
+                        <span className="hidden 2xl:inline max-w-[140px] truncate">{userData?.name || user.email}</span>
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
@@ -537,16 +537,16 @@ export default function Header() {
                     </DropdownMenuContent>
                   </DropdownMenu>
                 ) : (
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-1 2xl:gap-2 flex-shrink-0">
                     <Link
                       href="/login"
-                      className="px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-brand-cyan transition-colors whitespace-nowrap"
+                      className="px-2 2xl:px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-brand-cyan transition-colors whitespace-nowrap"
                     >
                       {t.nav.iniciarSesion}
                     </Link>
                     <Link
                       href="/signup"
-                      className="px-4 py-1.5 text-sm font-medium text-white bg-brand-navy rounded-lg hover:bg-brand-navy/90 transition-all whitespace-nowrap"
+                      className="px-3 2xl:px-4 py-1.5 text-sm font-medium text-white bg-brand-navy rounded-lg hover:bg-brand-navy/90 transition-all whitespace-nowrap"
                     >
                       {t.nav.crearCuenta}
                     </Link>
@@ -556,7 +556,7 @@ export default function Header() {
             </div>
 
             {/* Mobile menu button */}
-            <div className="flex lg:hidden items-center gap-2">
+            <div className="flex xl:hidden items-center gap-2">
               <div className="flex items-center bg-gray-100 rounded-full p-0.5">
                 <button
                   onClick={() => setLanguage('EN')}
@@ -596,7 +596,7 @@ export default function Header() {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-white border-t shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
+          <div className="xl:hidden bg-white border-t shadow-lg max-h-[calc(100vh-80px)] overflow-y-auto">
             <nav className="px-4 py-4 space-y-1">
               {/* Auth section móvil */}
               <div className="flex flex-col gap-3 pb-4 mb-4 border-b border-gray-100">
