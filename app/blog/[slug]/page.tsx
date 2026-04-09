@@ -32,6 +32,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${titulo} - Blog`,
     description: `Lee sobre ${titulo} en el blog de Impulsa Lab. Guias, consejos y tendencias de IA y transformacion digital para PYMEs.`,
     alternates: { canonical: `https://www.tuimpulsalab.com/blog/${slug}` },
+    // Placeholder "Artículo en desarrollo" — excluded from indexing until real content exists.
+    // Google was marking these as "Crawled — currently not indexed" due to thin/duplicate content.
+    // Remove this line when the post is published with real content.
+    robots: { index: false, follow: true },
     openGraph: {
       title: `${titulo} - Blog | Impulsa Lab`,
       description: `Lee sobre ${titulo}. Guias, consejos y tendencias de IA y transformacion digital para PYMEs.`,

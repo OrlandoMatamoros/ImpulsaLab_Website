@@ -75,6 +75,57 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
+        {/* JSON-LD Organization + WebSite schema (Google knows who we are and how to search us) */}
+        <Script
+          id="ld-organization"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Organization',
+              '@id': 'https://www.tuimpulsalab.com/#organization',
+              name: 'Impulsa Lab',
+              legalName: 'Impulsa Lab',
+              url: 'https://www.tuimpulsalab.com',
+              logo: 'https://www.tuimpulsalab.com/images/og-image.jpg',
+              description:
+                'Consultoría en transformación digital con IA para PYMEs latinas en EE.UU. Servicios de finanzas, operaciones y marketing potenciados por inteligencia artificial.',
+              foundingDate: '2024',
+              areaServed: ['US', 'LATAM'],
+              knowsLanguage: ['es', 'en'],
+              contactPoint: {
+                '@type': 'ContactPoint',
+                contactType: 'customer service',
+                email: 'orlando@tuimpulsalab.com',
+                areaServed: ['US', 'LATAM'],
+                availableLanguage: ['Spanish', 'English'],
+              },
+              sameAs: [
+                'https://www.linkedin.com/company/impulsa-lab',
+              ],
+            }),
+          }}
+        />
+        <Script
+          id="ld-website"
+          type="application/ld+json"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'WebSite',
+              '@id': 'https://www.tuimpulsalab.com/#website',
+              url: 'https://www.tuimpulsalab.com',
+              name: 'Impulsa Lab',
+              description:
+                'Transformación digital empresarial con IA para PYMEs latinas',
+              publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+              inLanguage: 'es-ES',
+            }),
+          }}
+        />
+
         {/* Google Ads (gtag.js) */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17854811161"

@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: 'Webinars sobre IA y Automatizacion para Negocios | Impulsa Lab',
   description: 'Webinars gratuitos sobre inteligencia artificial, automatizacion y transformacion digital para PYMEs latinas en Estados Unidos.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/recursos/webinars' },
+  // Placeholder "En desarrollo" — excluded from indexing until real content exists.
+  // Remove this line when webinars are published.
+  robots: { index: false, follow: true },
   openGraph: {
     title: 'Webinars sobre IA y Automatizacion para Negocios',
     description: 'Webinars gratuitos sobre IA, automatizacion y transformacion digital para PYMEs latinas.',
