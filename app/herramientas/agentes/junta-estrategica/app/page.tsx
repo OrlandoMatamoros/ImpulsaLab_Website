@@ -393,7 +393,7 @@ function ResolutionCard({ resolution }: { resolution: Resolution }) {
 /*  Main Page Component                                                */
 /* ------------------------------------------------------------------ */
 
-export default function StrategicBoardPage() {
+export default function JuntaEstrategicaAppPage() {
   const { t, language } = useLanguage()
   const { user, loading: authLoading } = useAuth()
   const router = useRouter()
@@ -414,11 +414,11 @@ export default function StrategicBoardPage() {
 
   const abortRef = useRef<AbortController | null>(null)
 
-  // Admin gate
+  // Admin gate: non-admins are sent back to the public marketing page
   useEffect(() => {
     if (authLoading) return
     if (!user || user.email !== 'orlando@tuimpulsalab.com') {
-      router.replace('/unauthorized')
+      router.replace('/herramientas/agentes/junta-estrategica')
     }
   }, [user, authLoading, router])
 

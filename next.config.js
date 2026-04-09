@@ -66,6 +66,18 @@ const nextConfig = {
         destination: '/diagnostico',
         permanent: true,
       },
+      // Junta Estrategica AI — relocated to /herramientas/agentes/junta-estrategica
+      // (public marketing) with the private app at /app
+      {
+        source: '/herramientas/strategic-board',
+        destination: '/herramientas/agentes/junta-estrategica',
+        permanent: true,
+      },
+      {
+        source: '/herramientas/strategic-board/:path*',
+        destination: '/herramientas/agentes/junta-estrategica/app/:path*',
+        permanent: true,
+      },
     ];
   },
 

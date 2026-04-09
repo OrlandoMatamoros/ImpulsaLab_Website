@@ -210,11 +210,11 @@ export function Navigation() {
                           <div className="text-xs text-gray-500">Herramienta interna</div>
                         </div>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/herramientas/strategic-board')}>
+                      <DropdownMenuItem onClick={() => router.push('/herramientas/agentes/junta-estrategica/app')}>
                         <BookOpen className="h-4 w-4 mr-2" />
                         <div className="flex-1">
-                          <div>Strategic Board</div>
-                          <div className="text-xs text-gray-500">Junta Estratégica AI</div>
+                          <div>Junta Estratégica AI</div>
+                          <div className="text-xs text-gray-500">4 cerebros, 1 decisión</div>
                         </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => router.push('/herramientas/facturacion')}>

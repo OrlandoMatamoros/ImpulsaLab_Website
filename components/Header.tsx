@@ -58,7 +58,7 @@ export default function Header() {
 
   const adminToolsItems = [
     { name: t.nav.auditoriaWeb, href: '/herramientas/auditoria-web', className: 'dropdown-item-nova', external: false },
-    { name: t.nav.juntaEstrategica, href: '/herramientas/strategic-board', className: 'dropdown-item-nova', external: false },
+    { name: t.nav.juntaEstrategica, href: '/herramientas/agentes/junta-estrategica/app', className: 'dropdown-item-nova', external: false },
     { name: t.nav.facturacion, href: '/herramientas/facturacion', className: 'dropdown-item-nova', external: false }
   ]
 
