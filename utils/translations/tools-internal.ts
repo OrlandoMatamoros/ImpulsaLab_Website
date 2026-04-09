@@ -136,6 +136,13 @@ export const toolsInternalES = {
     printQuery: 'Consulta',
     printDomain: 'Dominio',
   },
+
+  // ===== INVOICING (herramientas/facturacion) =====
+  facturacionPage: {
+    title: 'Facturacion',
+    subtitle: 'Sistema interno de facturacion - Impulsa Lab',
+    openInNewTab: 'Abrir en pestana nueva',
+  },
 }
 
 export const toolsInternalEN = {
@@ -252,5 +259,12 @@ export const toolsInternalEN = {
     printTitle: 'AI Strategic Board Minutes',
     printQuery: 'Query',
     printDomain: 'Domain',
+  },
+
+  // ===== INVOICING (herramientas/facturacion) =====
+  facturacionPage: {
+    title: 'Invoicing',
+    subtitle: 'Internal invoicing system - Impulsa Lab',
+    openInNewTab: 'Open in new tab',
   },
 }

@@ -217,6 +217,13 @@ export function Navigation() {
                           <div className="text-xs text-gray-500">Junta Estratégica AI</div>
                         </div>
                       </DropdownMenuItem>
+                      <DropdownMenuItem onClick={() => router.push('/herramientas/facturacion')}>
+                        <BookOpen className="h-4 w-4 mr-2" />
+                        <div className="flex-1">
+                          <div>Facturación</div>
+                          <div className="text-xs text-gray-500">Sistema de facturación</div>
+                        </div>
+                      </DropdownMenuItem>
                     </>
                   )}
                 </DropdownMenuContent>

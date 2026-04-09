@@ -33,6 +33,7 @@ export const homeES = {
     panelAdmin: "Panel Administracion",
     auditoriaWeb: "Auditoria Web",
     juntaEstrategica: "Junta Estrategica",
+    facturacion: "Facturacion",
   },
   hero: {
     badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
@@ -292,6 +293,7 @@ export const homeEN = {
     panelAdmin: "Admin Panel",
     auditoriaWeb: "Web Audit",
     juntaEstrategica: "Strategic Board",
+    facturacion: "Invoicing",
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",
