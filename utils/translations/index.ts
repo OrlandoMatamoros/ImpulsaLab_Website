@@ -13,6 +13,7 @@ import { carrerasCasosES, carrerasCasosEN } from './carreras-casos'
 import { legalPartnersES, legalPartnersEN } from './legal-partners'
 import { internalES, internalEN } from './internal'
 import { diagnosticoUiES, diagnosticoUiEN } from './diagnostico-ui'
+import { toolsInternalES, toolsInternalEN } from './tools-internal'
 
 export const translations = {
   ES: {
@@ -31,6 +32,7 @@ export const translations = {
     ...legalPartnersES,
     ...internalES,
     ...diagnosticoUiES,
+    ...toolsInternalES,
   },
   EN: {
     ...homeEN,
@@ -48,6 +50,7 @@ export const translations = {
     ...legalPartnersEN,
     ...internalEN,
     ...diagnosticoUiEN,
+    ...toolsInternalEN,
   },
 }
 

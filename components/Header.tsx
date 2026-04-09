@@ -57,8 +57,8 @@ export default function Header() {
   ]
 
   const adminToolsItems = [
-    { name: t.nav.auditoriaWeb, href: 'https://audit.tuimpulsalab.com', className: 'dropdown-item-nova', external: true },
-    { name: t.nav.juntaEstrategica, href: 'https://board.tuimpulsalab.com', className: 'dropdown-item-nova', external: true }
+    { name: t.nav.auditoriaWeb, href: '/herramientas/auditoria-web', className: 'dropdown-item-nova', external: false },
+    { name: t.nav.juntaEstrategica, href: '/herramientas/strategic-board', className: 'dropdown-item-nova', external: false }
   ]
 
   const academyItems = [
@@ -409,12 +409,9 @@ export default function Header() {
                       <>
                         <div className="border-t border-gray-200 my-1" />
                         {adminToolsItems.map((item) => (
-                          <a key={item.href} href={item.href} target="_blank" rel="noopener noreferrer" className={`dropdown-item ${item.className}`}>
-                            <span className="flex items-center justify-between">
-                              <span>{item.name}</span>
-                              <span className="text-xs text-gray-400">&#8599;</span>
-                            </span>
-                          </a>
+                          <Link key={item.href} href={item.href} className={`dropdown-item ${item.className}`}>
+                            {item.name}
+                          </Link>
                         ))}
                       </>
                     )}
@@ -685,19 +682,17 @@ export default function Header() {
                       <>
                         <div className="border-t border-gray-200 my-2" />
                         {adminToolsItems.map((item) => (
-                          <a
+                          <Link
                             key={item.href}
                             href={item.href}
-                            target="_blank"
-                            rel="noopener noreferrer"
                             className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm"
                             onClick={() => {
                               setIsMenuOpen(false)
                               setShowMobileTools(false)
                             }}
                           >
-                            {item.name} &#8599;
-                          </a>
+                            {item.name}
+                          </Link>
                         ))}
                       </>
                     )}

@@ -10,6 +10,7 @@
     "tree": "tree -I 'node_modules|.next|.git' -a --dirs-first -o estructura.txt"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.86.1",
     "@google/generative-ai": "^0.24.1",
     "@radix-ui/react-alert-dialog": "^1.1.14",
     "@radix-ui/react-dialog": "^1.1.15",

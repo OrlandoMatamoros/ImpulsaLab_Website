@@ -203,15 +203,15 @@ export function Navigation() {
                   {user?.email === 'orlando@tuimpulsalab.com' && (
                     <>
                       <DropdownMenuSeparator />
-                      <DropdownMenuItem onClick={() => window.open('https://audit.tuimpulsalab.com', '_blank')}>
-                        <ExternalLink className="h-4 w-4 mr-2" />
+                      <DropdownMenuItem onClick={() => router.push('/herramientas/auditoria-web')}>
+                        <BookOpen className="h-4 w-4 mr-2" />
                         <div className="flex-1">
                           <div>Auditoría Web</div>
                           <div className="text-xs text-gray-500">Herramienta interna</div>
                         </div>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => window.open('https://board.tuimpulsalab.com', '_blank')}>
-                        <ExternalLink className="h-4 w-4 mr-2" />
+                      <DropdownMenuItem onClick={() => router.push('/herramientas/strategic-board')}>
+                        <BookOpen className="h-4 w-4 mr-2" />
                         <div className="flex-1">
                           <div>Strategic Board</div>
                           <div className="text-xs text-gray-500">Junta Estratégica AI</div>
