@@ -200,6 +200,22 @@ export function Navigation() {
                     </div>
                   </DropdownMenuItem>
 
+                  <DropdownMenuItem
+                    onClick={() =>
+                      router.push(
+                        user?.email === 'orlando@tuimpulsalab.com'
+                          ? '/herramientas/agentes/junta-estrategica/app'
+                          : '/herramientas/agentes/junta-estrategica'
+                      )
+                    }
+                  >
+                    <Bot className="h-4 w-4 mr-2" />
+                    <div className="flex-1">
+                      <div>Junta Estratégica AI</div>
+                      <div className="text-xs text-gray-500">4 cerebros, 1 decisión</div>
+                    </div>
+                  </DropdownMenuItem>
+
                   {user?.email === 'orlando@tuimpulsalab.com' && (
                     <>
                       <DropdownMenuSeparator />
@@ -208,13 +224,6 @@ export function Navigation() {
                         <div className="flex-1">
                           <div>Auditoría Web</div>
                           <div className="text-xs text-gray-500">Herramienta interna</div>
-                        </div>
-                      </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/herramientas/agentes/junta-estrategica/app')}>
-                        <BookOpen className="h-4 w-4 mr-2" />
-                        <div className="flex-1">
-                          <div>Junta Estratégica AI</div>
-                          <div className="text-xs text-gray-500">4 cerebros, 1 decisión</div>
                         </div>
                       </DropdownMenuItem>
                       <DropdownMenuItem onClick={() => router.push('/herramientas/facturacion')}>

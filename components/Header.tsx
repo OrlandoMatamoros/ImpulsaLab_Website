@@ -48,17 +48,21 @@ export default function Header() {
 
   const isAdmin = user?.email === 'orlando@tuimpulsalab.com'
 
+  const juntaHref = isAdmin
+    ? '/herramientas/agentes/junta-estrategica/app'
+    : '/herramientas/agentes/junta-estrategica'
+
   const toolsItems = [
     { name: t.nav.verTodas, href: '/herramientas', className: 'dropdown-item-all' },
     { name: t.nav.arsenalTec, href: '/herramientas/arsenal', className: 'dropdown-item-arsenal' },
     { name: t.nav.agentesIA, href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
+    { name: t.nav.juntaEstrategica, href: juntaHref, className: 'dropdown-item-agentes' },
     { name: t.nav.promptDesigner, href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
     { name: t.nav.agenteNoticias, href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
   ]
 
   const adminToolsItems = [
     { name: t.nav.auditoriaWeb, href: '/herramientas/auditoria-web', className: 'dropdown-item-nova', external: false },
-    { name: t.nav.juntaEstrategica, href: '/herramientas/agentes/junta-estrategica/app', className: 'dropdown-item-nova', external: false },
     { name: t.nav.facturacion, href: '/herramientas/facturacion', className: 'dropdown-item-nova', external: false }
   ]
 
