@@ -80,11 +80,10 @@ const Footer = () => {
             <Link href="/" className="inline-block mb-6">
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/images/logo-fondo-negro.png"  // ✅ Usa el logo #3
+                  src="/images/isotipo-color.png"
                   alt="Impulsa Lab"
                   width={40}
                   height={40}
-                  // Sin filtros CSS porque el logo ya es blanco
                 />
                 <span className="text-xl font-bold">IMPULSA LAB</span>
               </div>
@@ -113,20 +112,24 @@ const Footer = () => {
               >
                 <FaInstagram size={24} />
               </a>
-              <span 
-                className="text-gray-600 cursor-not-allowed"
-                aria-label="Facebook (Próximamente)"
-                title="Próximamente"
+              <a
+                href="https://www.facebook.com/Tuimpulsalab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="Facebook"
               >
                 <FaFacebook size={24} />
-              </span>
-              <span 
-                className="text-gray-600 cursor-not-allowed"
-                aria-label="YouTube (Próximamente)"
-                title="Próximamente"
+              </a>
+              <a
+                href="https://www.youtube.com/@TuImpulsaLab"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors"
+                aria-label="YouTube"
               >
                 <FaYoutube size={24} />
-              </span>
+              </a>
             </div>
 
             {/* Contact Info */}
@@ -147,6 +150,7 @@ const Footer = () => {
                 <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
                 <div>
                   <span>118-35 Queens Blvd #400<br />Forest Hills, NY 11375</span>
+                  <span className="block text-xs text-gray-500 mt-0.5">Registered Agent Address</span>
                 </div>
               </div>
             </div>
