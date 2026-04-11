@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       )
     }
 
-    const lang = locale === 'en' ? 'English' : 'Spanish'
+    const lang = locale?.toUpperCase() === 'EN' ? 'English' : 'Spanish'
 
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 

@@ -285,7 +285,7 @@ export default function BusinessPlanPage() {
             </section>
 
             {/* Export */}
-            <PlanExport onReset={handleReset} />
+            <PlanExport onReset={handleReset} plan={result} />
           </div>
         )}
 
