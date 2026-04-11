@@ -80,11 +80,11 @@ const Footer = () => {
             <Link href="/" className="inline-block mb-6">
               <div className="flex items-center space-x-2">
                 <Image
-                  src="/images/logo-fondo-negro.png"
+                  src="/images/isotipo-color.png"
                   alt="Impulsa Lab"
                   width={40}
                   height={40}
-                  className="rounded"
+                  className="rounded-lg"
                 />
                 <span className="text-xl font-bold">IMPULSA LAB</span>
               </div>
@@ -150,7 +150,7 @@ const Footer = () => {
               <div className="flex items-start gap-2">
                 <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
                 <div>
-                  <span>10723 103rd Street, Fl.2<br />Ozone Park, NY 11417</span>
+                  <span>54 State Street, Ste 804<br />Albany, NY 12207</span>
                   <span className="block text-xs text-gray-500 mt-0.5">Mail address only</span>
                 </div>
               </div>
