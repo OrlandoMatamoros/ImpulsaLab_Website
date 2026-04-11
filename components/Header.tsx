@@ -32,6 +32,18 @@ export default function Header() {
   const [showMobileOperations, setShowMobileOperations] = useState(false)
   const [showMobileAcademy, setShowMobileAcademy] = useState(false)
   const { user, userData, signOut } = useAuth()
+
+  const userInitials = (() => {
+    const name = userData?.name || user?.displayName || user?.email || ''
+    if (name.includes('@')) return name[0].toUpperCase()
+    const parts = name.trim().split(/\s+/)
+    return parts.length >= 2
+      ? (parts[0][0] + parts[parts.length - 1][0]).toUpperCase()
+      : name.slice(0, 2).toUpperCase()
+  })()
+
+  const userDisplayName = userData?.name || user?.displayName || user?.email || ''
+  const userPhotoURL = user?.photoURL || null
   const { language, setLanguage, t } = useLanguage()
   const router = useRouter()
 
@@ -515,22 +527,37 @@ export default function Header() {
                 {user ? (
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
-                      <Button variant="outline" size="sm" className="flex items-center gap-1.5 2xl:gap-2 border-brand-navy/20 hover:border-brand-cyan px-2 2xl:px-3 flex-shrink-0">
-                        <User className="h-4 w-4 flex-shrink-0" />
-                        <span className="hidden 2xl:inline max-w-[140px] truncate">{userData?.name || user.email}</span>
+                      <Button variant="ghost" size="sm" className="relative flex items-center gap-1.5 hover:bg-gray-100 px-1.5 flex-shrink-0 rounded-full" title={userDisplayName}>
+                        {userPhotoURL ? (
+                          <img
+                            src={userPhotoURL}
+                            alt=""
+                            className="w-8 h-8 rounded-full object-cover ring-2 ring-brand-navy/10"
+                            referrerPolicy="no-referrer"
+                          />
+                        ) : (
+                          <span className="w-8 h-8 rounded-full bg-brand-navy text-white flex items-center justify-center text-xs font-bold ring-2 ring-brand-navy/10">
+                            {userInitials}
+                          </span>
+                        )}
                       </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-56">
-                      <DropdownMenuLabel>
-                        {t.nav.miCuenta}
-                        {userData?.role && (
-                          <span className="ml-2 text-xs font-normal text-gray-500">
-                            ({userData.role === 'admin' ? 'Administrador' :
-                              userData.role === 'consultant' ? 'Consultor' :
-                              userData.role === 'premium' ? 'Premium' :
-                              userData.role === 'free' ? 'Free' : 'Usuario'})
-                          </span>
-                        )}
+                      <DropdownMenuLabel className="font-normal">
+                        <div className="flex flex-col space-y-1">
+                          <p className="text-sm font-medium">{userDisplayName}</p>
+                          {user.email && userData?.name && (
+                            <p className="text-xs text-gray-500 truncate">{user.email}</p>
+                          )}
+                          {userData?.role && (
+                            <span className="text-xs text-gray-400">
+                              {userData.role === 'admin' ? 'Administrador' :
+                                userData.role === 'consultant' ? 'Consultor' :
+                                userData.role === 'premium' ? 'Premium' :
+                                userData.role === 'free' ? 'Free' : 'Usuario'}
+                            </span>
+                          )}
+                        </div>
                       </DropdownMenuLabel>
                       <DropdownMenuSeparator />
                       {renderMenuItems()}
@@ -607,16 +634,30 @@ export default function Header() {
               <div className="flex flex-col gap-3 pb-4 mb-4 border-b border-gray-100">
                 {user ? (
                   <div className="w-full space-y-2">
-                    <div className="px-3 py-2 text-sm font-medium text-gray-900">
-                      {userData?.name || user.email}
-                      {userData?.role && (
-                        <span className="ml-2 text-xs text-gray-500">
-                          ({userData.role === 'admin' ? 'Admin' :
-                            userData.role === 'consultant' ? 'Consultor' :
-                            userData.role === 'premium' ? 'Premium' :
-                            userData.role === 'free' ? 'Free' : 'Usuario'})
+                    <div className="flex items-center gap-3 px-3 py-2">
+                      {userPhotoURL ? (
+                        <img
+                          src={userPhotoURL}
+                          alt=""
+                          className="w-9 h-9 rounded-full object-cover ring-2 ring-brand-navy/10 flex-shrink-0"
+                          referrerPolicy="no-referrer"
+                        />
+                      ) : (
+                        <span className="w-9 h-9 rounded-full bg-brand-navy text-white flex items-center justify-center text-sm font-bold ring-2 ring-brand-navy/10 flex-shrink-0">
+                          {userInitials}
                         </span>
                       )}
+                      <div className="min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{userDisplayName}</p>
+                        {userData?.role && (
+                          <span className="text-xs text-gray-500">
+                            {userData.role === 'admin' ? 'Admin' :
+                              userData.role === 'consultant' ? 'Consultor' :
+                              userData.role === 'premium' ? 'Premium' :
+                              userData.role === 'free' ? 'Free' : 'Usuario'}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     {renderMobileMenuItems()}
                     <button

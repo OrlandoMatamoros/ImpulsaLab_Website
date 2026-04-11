@@ -7,7 +7,7 @@ import {
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
-import { signUpUser, signInUser, signOutUser } from '@/lib/auth-helper'
+import { signUpUser, signInUser, signOutUser, signInWithGoogleUser } from '@/lib/auth-helper'
 import { useRouter } from 'next/navigation'
 
 // Definir roles
@@ -38,6 +38,7 @@ interface AuthContextType {
   loading: boolean
   signIn: (email: string, password: string) => Promise<void>
   signUp: (email: string, password: string, consultantCode?: string, additionalData?: any) => Promise<void>
+  signInWithGoogle: () => Promise<void>
   signOut: () => Promise<void>
 }
 
@@ -47,6 +48,7 @@ const AuthContext = createContext<AuthContextType>({
   loading: true,
   signIn: async () => {},
   signUp: async () => {},
+  signInWithGoogle: async () => {},
   signOut: async () => {}
 })
 
@@ -173,6 +175,33 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
     }
   }
 
+  const signInWithGoogle = async () => {
+    try {
+      const result = await signInWithGoogleUser()
+      if (!result.success) return
+
+      if (result.userData) {
+        const role = result.userData.role || 'registered'
+        switch (role) {
+          case 'admin':
+            router.push('/admin')
+            break
+          case 'consultant':
+            router.push('/consultant')
+            break
+          case 'client':
+            router.push('/dashboard')
+            break
+          default:
+            router.push('/diagnostico')
+        }
+      }
+    } catch (error: any) {
+      console.error('Google sign-in error:', error)
+      throw new Error('Error al iniciar sesión con Google')
+    }
+  }
+
   const signOut = async () => {
     try {
       await signOutUser()
@@ -191,6 +220,7 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
       loading,
       signIn,
       signUp,
+      signInWithGoogle,
       signOut
     }}>
       {children}

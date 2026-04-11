@@ -1,14 +1,22 @@
 // lib/auth-helper.ts - Versión mejorada con verificación de email
 import { auth, db } from './firebase';
-import { 
+import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
   sendEmailVerification,
   signOut,
   updateProfile,
   User
 } from 'firebase/auth';
 import { doc, setDoc, getDoc, updateDoc } from 'firebase/firestore';
+
+let _googleProvider: GoogleAuthProvider | null = null;
+function getGoogleProvider(): GoogleAuthProvider {
+  if (!_googleProvider) _googleProvider = new GoogleAuthProvider();
+  return _googleProvider;
+}
 
 export interface SignUpData {
   email: string;
@@ -231,6 +239,48 @@ export const resendVerificationEmail = async (user: User) => {
     return { success: true, message: 'Email de verificación enviado' };
   } catch (error) {
     console.error('Error sending verification email:', error);
+    throw error;
+  }
+};
+
+export const signInWithGoogleUser = async () => {
+  try {
+    const result = await signInWithPopup(auth, getGoogleProvider());
+    const firebaseUser = result.user;
+
+    const userRef = doc(db, 'users', firebaseUser.uid);
+    const userDoc = await getDoc(userRef);
+
+    if (userDoc.exists()) {
+      // Returning user — update photo + last login
+      await updateDoc(userRef, {
+        photoURL: firebaseUser.photoURL || '',
+        lastLoginAt: new Date()
+      });
+      return { success: true, user: firebaseUser, userData: userDoc.data(), isNewUser: false };
+    }
+
+    // New user — create Firestore document
+    const userData = {
+      uid: firebaseUser.uid,
+      email: firebaseUser.email || '',
+      name: firebaseUser.displayName || '',
+      photoURL: firebaseUser.photoURL || '',
+      phone: firebaseUser.phoneNumber || '',
+      role: 'registered',
+      authProvider: 'google',
+      consultantCode: null,
+      createdAt: new Date(),
+      emailVerified: true,
+      phoneVerified: false,
+      subscriptionStatus: 'inactive' as const
+    };
+
+    await setDoc(userRef, userData);
+    return { success: true, user: firebaseUser, userData, isNewUser: true };
+  } catch (error: any) {
+    console.error('Google sign-in error:', error);
+    if (error.code === 'auth/popup-closed-by-user') return { success: false, cancelled: true };
     throw error;
   }
 };
