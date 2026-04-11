@@ -137,8 +137,9 @@ export default function BusinessPlanPage() {
       const count = parseInt(localStorage.getItem(FREE_PLAN_KEY) || '0', 10)
       localStorage.setItem(FREE_PLAN_KEY, String(count + 1))
       setHasFreePlan(count + 1 < 1)
-    } catch {
-      setError(bp.connectionError)
+    } catch (err) {
+      console.error('Business plan fetch error:', err)
+      setError(err instanceof Error ? err.message : bp.connectionError)
     } finally {
       clearInterval(interval)
       setLoading(false)
