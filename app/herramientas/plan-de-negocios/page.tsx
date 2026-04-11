@@ -1,10 +1,16 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/contexts/FirebaseAuthContext'
 import BusinessPlanForm, { type BusinessPlanFormData } from './components/BusinessPlanForm'
 import SectionCard, { type PlanSection } from './components/SectionCard'
 import PlanExport from './components/PlanExport'
 import { useLanguage } from '@/contexts/LanguageContext'
+
+const ALLOWED_EMAILS = [
+  'orlando@tuimpulsalab.com',
+]
 
 interface KeyMetrics {
   estimatedRevYear1: string
@@ -70,6 +76,8 @@ function LoadingSkeleton({ step }: { step: number }) {
 
 export default function BusinessPlanPage() {
   const { t, language } = useLanguage()
+  const { user, loading: authLoading } = useAuth()
+  const router = useRouter()
   const bp = t.businessPlanPage
 
   const [loading, setLoading] = useState(false)
@@ -77,6 +85,13 @@ export default function BusinessPlanPage() {
   const [result, setResult] = useState<PlanResult | null>(null)
   const [error, setError] = useState('')
   const [hasFreePlan, setHasFreePlan] = useState(true)
+
+  useEffect(() => {
+    if (authLoading) return
+    if (!user || !ALLOWED_EMAILS.includes(user.email || '')) {
+      router.replace('/unauthorized')
+    }
+  }, [user, authLoading, router])
 
   useEffect(() => {
     const count = parseInt(localStorage.getItem(FREE_PLAN_KEY) || '0', 10)
@@ -128,6 +143,14 @@ export default function BusinessPlanPage() {
       clearInterval(interval)
       setLoading(false)
     }
+  }
+
+  if (authLoading || !user || !ALLOWED_EMAILS.includes(user.email || '')) {
+    return (
+      <div className="bg-slate-950 text-white min-h-[calc(100vh-4rem)] flex items-center justify-center">
+        <div className="w-8 h-8 border-2 border-[#00BCD4] border-t-transparent rounded-full animate-spin" />
+      </div>
+    )
   }
 
   return (
