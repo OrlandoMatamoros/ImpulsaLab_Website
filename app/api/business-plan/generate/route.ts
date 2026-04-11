@@ -1,0 +1,192 @@
+import { NextRequest, NextResponse } from 'next/server'
+import Anthropic from '@anthropic-ai/sdk'
+
+export const maxDuration = 120
+
+export async function POST(req: NextRequest) {
+  try {
+    const {
+      businessName,
+      industry,
+      location,
+      stage,
+      description,
+      mainProduct,
+      idealClient,
+      differentiator,
+      initialInvestment,
+      monthlySales,
+      seeksFunding,
+      fundingAmount,
+      employees,
+      locale,
+    } = await req.json()
+
+    if (!businessName || !industry || !description) {
+      return NextResponse.json(
+        { error: 'Se requiere nombre del negocio, industria y descripcion.' },
+        { status: 400 }
+      )
+    }
+
+    const lang = locale === 'en' ? 'English' : 'Spanish'
+
+    const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+
+    const prompt = `You are a senior business consultant for Impulsa Lab, a tech consultancy for small businesses. Generate a professional, comprehensive business plan in ${lang} based on the following information.
+
+BUSINESS INFORMATION:
+- Business Name: ${businessName}
+- Industry: ${industry}
+- Location: ${location || 'Not specified'}
+- Stage: ${stage || 'Not specified'}
+- Description: ${description}
+- Main Product/Service: ${mainProduct || 'Not specified'}
+- Ideal Customer: ${idealClient || 'Not specified'}
+- Differentiator: ${differentiator || 'Not specified'}
+- Initial Investment: ${initialInvestment || 'Not specified'}
+- Monthly Sales (current or projected): ${monthlySales || 'Not specified'}
+- Seeks Funding: ${seeksFunding ? `Yes - $${fundingAmount || 'amount not specified'}` : 'No'}
+- Number of Employees: ${employees || 'Not specified'}
+
+Generate ONLY valid JSON (no markdown, no backticks, pure JSON) with this exact structure:
+
+{
+  "businessName": "${businessName}",
+  "sections": [
+    {
+      "id": "executive-summary",
+      "title": "Resumen Ejecutivo / Executive Summary",
+      "content": "2-3 paragraph executive summary",
+      "highlights": ["key highlight 1", "key highlight 2", "key highlight 3"]
+    },
+    {
+      "id": "company-description",
+      "title": "Descripcion de la Empresa / Company Description",
+      "content": "detailed company description",
+      "highlights": ["mission statement", "vision", "legal structure recommendation"]
+    },
+    {
+      "id": "market-analysis",
+      "title": "Analisis de Mercado / Market Analysis",
+      "content": "market size, target segments, competition analysis",
+      "highlights": ["target market size", "main competitors", "market opportunity"]
+    },
+    {
+      "id": "products-services",
+      "title": "Productos y Servicios / Products & Services",
+      "content": "detailed product/service description, pricing strategy",
+      "highlights": ["core offering", "pricing model", "competitive advantage"]
+    },
+    {
+      "id": "marketing-sales",
+      "title": "Estrategia de Marketing y Ventas / Marketing & Sales Strategy",
+      "content": "channels, positioning, customer acquisition strategy",
+      "highlights": ["primary channels", "customer acquisition cost estimate", "growth strategy"]
+    },
+    {
+      "id": "operations",
+      "title": "Plan Operativo / Operations Plan",
+      "content": "day-to-day operations, processes, technology needs",
+      "highlights": ["key processes", "technology stack", "supplier/vendor strategy"]
+    },
+    {
+      "id": "team",
+      "title": "Equipo y Organizacion / Team & Organization",
+      "content": "org structure, key roles, hiring plan",
+      "highlights": ["key roles needed", "org structure", "hiring timeline"]
+    },
+    {
+      "id": "financial-projections",
+      "title": "Proyecciones Financieras / Financial Projections",
+      "content": "3-year projections with revenue, costs, profit. Include a markdown table with Year 1, Year 2, Year 3 columns showing: Revenue, COGS, Gross Profit, Operating Expenses, Net Profit, Profit Margin %",
+      "highlights": ["year 1 revenue projection", "break-even timeline", "3-year profit trend"]
+    },
+    {
+      "id": "risk-analysis",
+      "title": "Analisis de Riesgos / Risk Analysis",
+      "content": "top risks with mitigation strategies",
+      "highlights": ["risk 1 + mitigation", "risk 2 + mitigation", "risk 3 + mitigation"]
+    },
+    {
+      "id": "implementation",
+      "title": "Plan de Implementacion / Implementation Plan",
+      "content": "12-month timeline with milestones. Include a markdown table: Month | Milestone | Key Actions",
+      "highlights": ["months 1-3 focus", "months 4-6 focus", "months 7-12 focus"]
+    }
+  ],
+  "keyMetrics": {
+    "estimatedRevYear1": "$X",
+    "breakEvenMonths": "X months",
+    "initialInvestmentNeeded": "$X",
+    "projectedMarginYear3": "X%"
+  }
+}
+
+IMPORTANT INSTRUCTIONS:
+- All section content should be detailed (3-5 paragraphs each minimum)
+- Financial projections should be realistic for the industry and location
+- Include specific, actionable recommendations
+- Highlights should be concise bullet points (max 15 words each)
+- The financial table should use realistic numbers based on the industry
+- Write entirely in ${lang}
+- Be specific to the business described, not generic`
+
+    const message = await client.messages.create({
+      model: 'claude-sonnet-4-20250514',
+      max_tokens: 8192,
+      messages: [{ role: 'user', content: prompt }],
+    })
+
+    const textBlock = message.content.find((b) => b.type === 'text')
+    if (!textBlock || textBlock.type !== 'text') {
+      return NextResponse.json(
+        { error: 'No se recibio respuesta del analisis.' },
+        { status: 500 }
+      )
+    }
+
+    let resultText = textBlock.text.trim()
+
+    if (resultText.startsWith('```')) {
+      resultText = resultText.replace(/^```(?:json)?\s*\n?/, '').replace(/\n?```\s*$/, '')
+    }
+
+    let plan
+    try {
+      plan = JSON.parse(resultText)
+    } catch {
+      const jsonMatch = resultText.match(/\{[\s\S]*\}/)
+      if (jsonMatch) {
+        try {
+          plan = JSON.parse(jsonMatch[0])
+        } catch {
+          return NextResponse.json(
+            {
+              error: 'Error al procesar el plan. Intenta de nuevo.',
+              raw: resultText.substring(0, 500),
+            },
+            { status: 500 }
+          )
+        }
+      } else {
+        return NextResponse.json(
+          {
+            error: 'Error al procesar el plan. Intenta de nuevo.',
+            raw: resultText.substring(0, 500),
+          },
+          { status: 500 }
+        )
+      }
+    }
+
+    return NextResponse.json({
+      success: true,
+      plan,
+    })
+  } catch (error: unknown) {
+    console.error('Business plan generation error:', error)
+    const message = error instanceof Error ? error.message : 'Error interno del servidor'
+    return NextResponse.json({ error: message }, { status: 500 })
+  }
+}

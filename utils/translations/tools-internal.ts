@@ -222,6 +222,140 @@ export const toolsInternalES = {
     ctaButton: 'Solicitar Demo Enterprise',
   },
 
+  // ===== BUSINESS PLAN BUILDER (herramientas/plan-de-negocios) =====
+  businessPlanPage: {
+    // Hero
+    heroTitle: 'Plan de Negocios',
+    heroHighlight: 'con AI',
+    heroSubtitle:
+      'Genera un plan de negocios profesional en minutos. Gratis, bilingue, disenado para pequenos negocios.',
+    poweredBy: 'Powered by',
+
+    // Steps
+    step1Title: 'Info Basica',
+    step2Title: 'Detalles',
+    step3Title: 'Financiero',
+
+    // Step 1 fields
+    businessNameLabel: 'Nombre del negocio',
+    businessNamePlaceholder: 'Ej: Mi Restaurante LLC',
+    industryLabel: 'Industria',
+    industryPlaceholder: 'Selecciona una industria',
+    industries: [
+      'Restaurante',
+      'Retail',
+      'Servicios Profesionales',
+      'Tecnologia',
+      'Belleza y Salud',
+      'Construccion',
+      'Alimentos y Bebidas',
+      'Educacion',
+      'Transporte',
+      'Otro',
+    ],
+    locationLabel: 'Ubicacion',
+    locationPlaceholder: 'Ej: Miami, FL',
+    stageLabel: 'Etapa del negocio',
+    stagePlaceholder: 'Selecciona una etapa',
+    stages: ['Idea / Pre-lanzamiento', 'Menos de 1 ano', '1-3 anos', 'Mas de 3 anos'],
+
+    // Step 2 fields
+    descriptionLabel: 'Descripcion del negocio',
+    descriptionPlaceholder:
+      'Describe tu negocio en 2-3 oraciones. Que haces, para quien, y como generas ingresos.',
+    mainProductLabel: 'Producto o servicio principal',
+    mainProductPlaceholder: 'Ej: Comida colombiana autentica para llevar y delivery',
+    idealClientLabel: 'Cliente ideal',
+    idealClientPlaceholder: 'Ej: Familias latinas de 25-45 anos en el area de Queens',
+    differentiatorLabel: 'Diferenciador (que los hace unicos)',
+    differentiatorPlaceholder: 'Ej: Recetas familiares de 3 generaciones, ingredientes importados',
+
+    // Step 3 fields
+    investmentLabel: 'Inversion inicial estimada',
+    investmentPlaceholder: 'Selecciona un rango',
+    investmentRanges: [
+      'Menos de $5,000',
+      '$5,000 - $15,000',
+      '$15,000 - $50,000',
+      '$50,000 - $100,000',
+      '$100,000 - $250,000',
+      'Mas de $250,000',
+    ],
+    monthlySalesLabel: 'Ventas mensuales (actuales o proyectadas)',
+    monthlySalesPlaceholder: 'Ej: $8,000/mes',
+    seeksFundingLabel: 'Busca financiamiento?',
+    yes: 'Si',
+    no: 'No',
+    fundingAmountLabel: 'Cuanto financiamiento busca?',
+    fundingAmountPlaceholder: 'Ej: $50,000',
+    employeesLabel: 'Numero de empleados',
+    employeesPlaceholder: 'Selecciona un rango',
+    employeeRanges: ['Solo yo', '2-5', '6-10', '11-25', '26-50', 'Mas de 50'],
+
+    // Navigation
+    back: 'Atras',
+    next: 'Siguiente',
+    generatePlan: 'Generar Plan de Negocios',
+    generating: 'Generando...',
+
+    // Loading
+    loadingSteps: [
+      'Analizando tu industria...',
+      'Investigando el mercado...',
+      'Evaluando competencia...',
+      'Disenando estrategia de marketing...',
+      'Calculando proyecciones financieras...',
+      'Planificando operaciones...',
+      'Evaluando riesgos...',
+      'Creando plan de implementacion...',
+      'Generando plan de negocios con IA...',
+    ],
+
+    // Results
+    planGenerated: 'Plan de negocios generado con inteligencia artificial',
+    planSections: 'Secciones del Plan',
+    highlightsCount: 'puntos clave',
+    keyHighlights: 'Puntos Clave',
+    fullContent: 'Contenido Completo',
+
+    // Metrics
+    metricRevenue: 'Ingresos Ano 1',
+    metricBreakEven: 'Punto de Equilibrio',
+    metricInvestment: 'Inversion Necesaria',
+    metricMargin: 'Margen Ano 3',
+
+    // CTA
+    ctaTitle: 'Necesitas ayuda implementando este plan?',
+    ctaDescription:
+      'Impulsa Lab puede automatizar tus operaciones, construir tu presencia digital y acelerar el crecimiento de tu negocio.',
+    ctaButton: 'Hablar con un consultor',
+
+    // Actions
+    exportPdf: 'Exportar PDF',
+    newPlan: 'Nuevo Plan',
+    freePlanUsed:
+      'Ya generaste tu plan gratuito. Contactanos para generar planes adicionales.',
+    contactUs: 'Contactanos',
+
+    // Errors
+    unexpectedError: 'Error inesperado. Intenta de nuevo.',
+    connectionError: 'Error de conexion. Verifica tu internet e intenta de nuevo.',
+
+    // Print
+    printTitle: 'Plan de Negocios AI',
+
+    // Features
+    feature1Title: '10 Secciones',
+    feature1Desc:
+      'Desde resumen ejecutivo hasta plan de implementacion. Un plan completo y profesional.',
+    feature2Title: 'Generado con IA',
+    feature2Desc:
+      'Claude AI analiza tu industria y genera proyecciones financieras realistas.',
+    feature3Title: 'Proyecciones Financieras',
+    feature3Desc:
+      'Tabla de 3 anos con ingresos, costos y margen. Listo para presentar a inversores.',
+  },
+
   // ===== INVOICING (herramientas/facturacion) =====
   facturacionPage: {
     title: 'Facturacion',
@@ -428,6 +562,126 @@ export const toolsInternalEN = {
       'Every Enterprise client gets a dedicated instance with pre-loaded context about their company, metrics, market and past decisions.',
     ctaFootnote: 'Also available as a custom integration into your existing workflow.',
     ctaButton: 'Request Enterprise Demo',
+  },
+
+  // ===== BUSINESS PLAN BUILDER (herramientas/plan-de-negocios) =====
+  businessPlanPage: {
+    heroTitle: 'Business Plan',
+    heroHighlight: 'with AI',
+    heroSubtitle:
+      'Generate a professional business plan in minutes. Free, bilingual, designed for small businesses.',
+    poweredBy: 'Powered by',
+
+    step1Title: 'Basic Info',
+    step2Title: 'Details',
+    step3Title: 'Financial',
+
+    businessNameLabel: 'Business name',
+    businessNamePlaceholder: 'E.g.: My Restaurant LLC',
+    industryLabel: 'Industry',
+    industryPlaceholder: 'Select an industry',
+    industries: [
+      'Restaurant',
+      'Retail',
+      'Professional Services',
+      'Technology',
+      'Beauty & Health',
+      'Construction',
+      'Food & Beverage',
+      'Education',
+      'Transportation',
+      'Other',
+    ],
+    locationLabel: 'Location',
+    locationPlaceholder: 'E.g.: Miami, FL',
+    stageLabel: 'Business stage',
+    stagePlaceholder: 'Select a stage',
+    stages: ['Idea / Pre-launch', 'Less than 1 year', '1-3 years', 'More than 3 years'],
+
+    descriptionLabel: 'Business description',
+    descriptionPlaceholder:
+      'Describe your business in 2-3 sentences. What you do, for whom, and how you generate revenue.',
+    mainProductLabel: 'Main product or service',
+    mainProductPlaceholder: 'E.g.: Authentic Colombian food for takeout and delivery',
+    idealClientLabel: 'Ideal customer',
+    idealClientPlaceholder: 'E.g.: Latino families aged 25-45 in the Queens area',
+    differentiatorLabel: 'Differentiator (what makes you unique)',
+    differentiatorPlaceholder: 'E.g.: 3-generation family recipes, imported ingredients',
+
+    investmentLabel: 'Estimated initial investment',
+    investmentPlaceholder: 'Select a range',
+    investmentRanges: [
+      'Less than $5,000',
+      '$5,000 - $15,000',
+      '$15,000 - $50,000',
+      '$50,000 - $100,000',
+      '$100,000 - $250,000',
+      'More than $250,000',
+    ],
+    monthlySalesLabel: 'Monthly sales (current or projected)',
+    monthlySalesPlaceholder: 'E.g.: $8,000/mo',
+    seeksFundingLabel: 'Seeking funding?',
+    yes: 'Yes',
+    no: 'No',
+    fundingAmountLabel: 'How much funding are you seeking?',
+    fundingAmountPlaceholder: 'E.g.: $50,000',
+    employeesLabel: 'Number of employees',
+    employeesPlaceholder: 'Select a range',
+    employeeRanges: ['Just me', '2-5', '6-10', '11-25', '26-50', 'More than 50'],
+
+    back: 'Back',
+    next: 'Next',
+    generatePlan: 'Generate Business Plan',
+    generating: 'Generating...',
+
+    loadingSteps: [
+      'Analyzing your industry...',
+      'Researching the market...',
+      'Evaluating competition...',
+      'Designing marketing strategy...',
+      'Calculating financial projections...',
+      'Planning operations...',
+      'Assessing risks...',
+      'Creating implementation plan...',
+      'Generating business plan with AI...',
+    ],
+
+    planGenerated: 'Business plan generated with artificial intelligence',
+    planSections: 'Plan Sections',
+    highlightsCount: 'key highlights',
+    keyHighlights: 'Key Highlights',
+    fullContent: 'Full Content',
+
+    metricRevenue: 'Year 1 Revenue',
+    metricBreakEven: 'Break-Even',
+    metricInvestment: 'Investment Needed',
+    metricMargin: 'Year 3 Margin',
+
+    ctaTitle: 'Need help implementing this plan?',
+    ctaDescription:
+      'Impulsa Lab can automate your operations, build your digital presence, and accelerate your business growth.',
+    ctaButton: 'Talk to a consultant',
+
+    exportPdf: 'Export PDF',
+    newPlan: 'New Plan',
+    freePlanUsed:
+      'You already generated your free plan. Contact us to generate additional plans.',
+    contactUs: 'Contact us',
+
+    unexpectedError: 'Unexpected error. Please try again.',
+    connectionError: 'Connection error. Check your internet and try again.',
+
+    printTitle: 'AI Business Plan',
+
+    feature1Title: '10 Sections',
+    feature1Desc:
+      'From executive summary to implementation plan. A complete, professional plan.',
+    feature2Title: 'AI-Generated',
+    feature2Desc:
+      'Claude AI analyzes your industry and generates realistic financial projections.',
+    feature3Title: 'Financial Projections',
+    feature3Desc:
+      '3-year table with revenue, costs and margin. Ready to present to investors.',
   },
 
   // ===== INVOICING (herramientas/facturacion) =====

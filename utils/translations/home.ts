@@ -34,6 +34,7 @@ export const homeES = {
     auditoriaWeb: "Auditoria Web",
     juntaEstrategica: "Junta Estrategica",
     facturacion: "Facturacion",
+    planDeNegocios: "Plan de Negocios AI",
   },
   hero: {
     badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
@@ -294,6 +295,7 @@ export const homeEN = {
     auditoriaWeb: "Web Audit",
     juntaEstrategica: "Strategic Board",
     facturacion: "Invoicing",
+    planDeNegocios: "AI Business Plan",
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",

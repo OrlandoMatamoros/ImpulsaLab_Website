@@ -58,7 +58,8 @@ export default function Header() {
     { name: t.nav.agentesIA, href: '/herramientas/agentes', className: 'dropdown-item-agentes' },
     { name: t.nav.juntaEstrategica, href: juntaHref, className: 'dropdown-item-agentes' },
     { name: t.nav.promptDesigner, href: '/herramientas/prompt-designer', className: 'dropdown-item-prompt' },
-    { name: t.nav.agenteNoticias, href: '/herramientas/noticias', className: 'dropdown-item-noticias' }
+    { name: t.nav.agenteNoticias, href: '/herramientas/noticias', className: 'dropdown-item-noticias' },
+    { name: t.nav.planDeNegocios, href: '/herramientas/plan-de-negocios', className: 'dropdown-item-plan' }
   ]
 
   const adminToolsItems = [
