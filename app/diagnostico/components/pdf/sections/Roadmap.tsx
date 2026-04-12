@@ -13,51 +13,39 @@ export async function generateRoadmap(
   pdf: jsPDF,
   roadmapData: RoadmapPhase[] | undefined,
   styles: typeof PDFStyles,
-  translations?: any
+  translations: any
 ) {
   const tp = translations;
   const pageWidth = pdf.internal.pageSize.getWidth();
   const pageHeight = pdf.internal.pageSize.getHeight();
   const maxY = pageHeight - 30;
 
-  // Función helper para verificar espacio
   const checkPageSpace = (currentY: number, requiredSpace: number): number => {
     if (currentY + requiredSpace > maxY) {
       pdf.addPage();
-      // Header en nueva página
       pdf.setFillColor(...styles.colors.primary);
       pdf.rect(0, 0, pageWidth, 35, 'F');
       pdf.setTextColor(255, 255, 255);
       pdf.setFontSize(20);
       pdf.setFont('helvetica', 'bold');
-      pdf.text(tp?.headerTitleCont ?? 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS (Cont.)', 20, 22);
+      pdf.text(tp.headerTitleCont, 20, 22);
       return 45;
     }
     return currentY;
   };
 
-  // Header principal
   pdf.setFillColor(...styles.colors.primary);
   pdf.rect(0, 0, pageWidth, 35, 'F');
   pdf.setTextColor(255, 255, 255);
   pdf.setFontSize(20);
   pdf.setFont('helvetica', 'bold');
-  pdf.text(tp?.headerTitle ?? 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS', 20, 22);
+  pdf.text(tp.headerTitle, 20, 22);
 
   let yPos = 50;
 
-  // Timeline visual
   pdf.setDrawColor(200, 200, 200);
   pdf.setLineWidth(3);
   pdf.line(30, yPos, pageWidth - 30, yPos);
-
-  // Marcadores de fases
-  const defaultTimelineLabels = [
-    { label: 'Inicio', day: '0' },
-    { label: 'Fase 1', day: '30' },
-    { label: 'Fase 2', day: '60' },
-    { label: 'Fase 3', day: '90' }
-  ];
 
   const phases = [
     { x: 30, color: styles.colors.primary },
@@ -67,7 +55,7 @@ export async function generateRoadmap(
   ];
 
   phases.forEach((phase, i) => {
-    const tl = tp?.timelineLabels?.[i] ?? defaultTimelineLabels[i];
+    const tl = tp.timelineLabels[i];
     pdf.setFillColor(...phase.color);
     pdf.circle(phase.x, yPos, 5, 'F');
     pdf.setTextColor(...styles.colors.black);
@@ -76,22 +64,19 @@ export async function generateRoadmap(
     pdf.text(tl.label, phase.x, yPos - 10, { align: 'center' });
     pdf.setFont('helvetica', 'normal');
     pdf.setFontSize(8);
-    pdf.text(`${tp?.dayPrefix ?? 'Día'} ${tl.day}`, phase.x, yPos + 12, { align: 'center' });
+    pdf.text(`${tp.dayPrefix} ${tl.day}`, phase.x, yPos + 12, { align: 'center' });
   });
 
   yPos += 30;
 
-  // Si hay datos del roadmap de IA, usarlos
   if (roadmapData && roadmapData.length > 0) {
     roadmapData.forEach((phase, index) => {
       const phaseColor = index === 0 ? styles.colors.secondary :
                         index === 1 ? styles.colors.purple :
                         styles.colors.success;
 
-      // Verificar espacio para toda la fase
       yPos = checkPageSpace(yPos, 70);
 
-      // Header de fase
       pdf.setFillColor(...phaseColor);
       pdf.rect(15, yPos - 8, pageWidth - 30, 12, 'F');
       pdf.setTextColor(255, 255, 255);
@@ -101,14 +86,13 @@ export async function generateRoadmap(
 
       yPos += 10;
 
-      // Card de contenido
       pdf.setFillColor(245, 245, 245);
       pdf.roundedRect(20, yPos, pageWidth - 40, 45, 3, 3, 'F');
 
       pdf.setTextColor(...styles.colors.black);
       pdf.setFont('helvetica', 'bold');
       pdf.setFontSize(11);
-      pdf.text(tp?.keyActions ?? 'Acciones clave:', 25, yPos + 8);
+      pdf.text(tp.keyActions, 25, yPos + 8);
 
       pdf.setFont('helvetica', 'normal');
       pdf.setFontSize(10);
@@ -117,7 +101,6 @@ export async function generateRoadmap(
       phase.keyActions.forEach(action => {
         const actionLines = pdf.splitTextToSize(`• ${action}`, pageWidth - 50);
 
-        // Verificar si necesitamos nueva página
         if (tempY + (actionLines.length * 5) > maxY) {
           pdf.addPage();
           pdf.setFillColor(...styles.colors.primary);
@@ -125,7 +108,7 @@ export async function generateRoadmap(
           pdf.setTextColor(255, 255, 255);
           pdf.setFontSize(20);
           pdf.setFont('helvetica', 'bold');
-          pdf.text(tp?.headerTitleCont ?? 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS (Cont.)', 20, 22);
+          pdf.text(tp.headerTitleCont, 20, 22);
           tempY = 45;
 
           pdf.setFont('helvetica', 'normal');
@@ -139,66 +122,28 @@ export async function generateRoadmap(
         });
       });
 
-      // Resultado esperado
       pdf.setFont('helvetica', 'bold');
       pdf.setTextColor(...phaseColor);
-      pdf.text(`${tp?.expectedResult ?? 'Resultado esperado:'} ${phase.expectedOutcome}`, 25, tempY + 3);
+      pdf.text(`${tp.expectedResult} ${phase.expectedOutcome}`, 25, tempY + 3);
 
       yPos = tempY + 15;
     });
   } else {
-    // Roadmap por defecto si no hay datos de IA
-    const defaultPhases = tp?.defaultPhases ?? [
-      {
-        title: 'FASE 1: FUNDAMENTOS (Días 1-30)',
-        color: styles.colors.secondary,
-        objective: 'Establecer las bases sólidas',
-        actions: [
-          'Auditoría completa de sistemas y procesos actuales',
-          'Implementación de quick wins identificados',
-          'Configuración de herramientas básicas de monitoreo',
-          'Capacitación inicial del equipo'
-        ],
-        result: 'Sistema básico operativo con 40% más visibilidad'
-      },
-      {
-        title: 'FASE 2: OPTIMIZACIÓN (Días 31-60)',
-        color: styles.colors.purple,
-        objective: 'Automatizar y optimizar procesos clave',
-        actions: [
-          'Automatización de 3-5 procesos críticos',
-          'Implementación de dashboards avanzados',
-          'Optimización de flujos de trabajo',
-          'Establecimiento de métricas automatizadas'
-        ],
-        result: 'Eficiencia operativa mejorada 35-45%'
-      },
-      {
-        title: 'FASE 3: ESCALAMIENTO (Días 61-90)',
-        color: styles.colors.success,
-        objective: 'Escalar el sistema y preparar crecimiento',
-        actions: [
-          'Expansión del sistema a todas las áreas',
-          'Implementación de analytics predictivos',
-          'Optimización continua basada en datos',
-          'Preparación para scaling 2-3X'
-        ],
-        result: 'Sistema completo con capacidad de escalar'
-      }
-    ];
+    const defaultPhases: Array<{
+      title: string;
+      objective: string;
+      actions: string[];
+      result: string;
+    }> = tp.defaultPhases;
 
-    defaultPhases.forEach((phase: any, index: number) => {
-      // Use color from translation data or fall back to defaults
-      const phaseColor: [number, number, number] = phase.color ?? (
+    defaultPhases.forEach((phase, index) => {
+      const phaseColor: [number, number, number] =
         index === 0 ? styles.colors.secondary :
         index === 1 ? styles.colors.purple :
-        styles.colors.success
-      );
+        styles.colors.success;
 
-      // Verificar espacio para toda la fase
       yPos = checkPageSpace(yPos, 70);
 
-      // Header de fase
       pdf.setFillColor(...phaseColor);
       pdf.rect(15, yPos - 8, pageWidth - 30, 12, 'F');
       pdf.setTextColor(255, 255, 255);
@@ -208,48 +153,43 @@ export async function generateRoadmap(
 
       yPos += 10;
 
-      // Card de contenido con fondo gris muy claro
       pdf.setFillColor(245, 245, 245);
       pdf.roundedRect(20, yPos, pageWidth - 40, 55, 3, 3, 'F');
 
       pdf.setFont('helvetica', 'bold');
       pdf.setFontSize(11);
       pdf.setTextColor(...phaseColor);
-      pdf.text(`${tp?.objectiveLabel ?? 'Objetivo:'} ${phase.objective}`, 25, yPos + 8);
+      pdf.text(`${tp.objectiveLabel} ${phase.objective}`, 25, yPos + 8);
 
       pdf.setFont('helvetica', 'normal');
       pdf.setFontSize(10);
       pdf.setTextColor(...styles.colors.black);
 
       let tempY = yPos + 15;
-      pdf.text(tp?.actionsLabel ?? 'Acciones:', 25, tempY);
+      pdf.text(tp.actionsLabel, 25, tempY);
       tempY += 5;
 
       phase.actions.forEach((action: string) => {
         const actionLines = pdf.splitTextToSize(`• ${action}`, pageWidth - 50);
 
-        // Verificar si necesitamos nueva página para esta acción
         if (tempY + (actionLines.length * 5) > maxY) {
           pdf.addPage();
-          // Header en nueva página
           pdf.setFillColor(...styles.colors.primary);
           pdf.rect(0, 0, pageWidth, 35, 'F');
           pdf.setTextColor(255, 255, 255);
           pdf.setFontSize(20);
           pdf.setFont('helvetica', 'bold');
-          pdf.text(tp?.headerTitleCont ?? 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS (Cont.)', 20, 22);
+          pdf.text(tp.headerTitleCont, 20, 22);
           tempY = 45;
 
-          // Continuar con el título de la fase
           pdf.setFillColor(...phaseColor);
           pdf.rect(15, tempY - 8, pageWidth - 30, 12, 'F');
           pdf.setTextColor(255, 255, 255);
           pdf.setFontSize(14);
           pdf.setFont('helvetica', 'bold');
-          pdf.text(`${phase.title} ${tp?.continuation ?? '(Continuación)'}`, 20, tempY);
+          pdf.text(`${phase.title} ${tp.continuation}`, 20, tempY);
           tempY += 15;
 
-          // Reestablecer el color y fuente para el texto
           pdf.setFont('helvetica', 'normal');
           pdf.setFontSize(10);
           pdf.setTextColor(...styles.colors.black);
@@ -261,29 +201,25 @@ export async function generateRoadmap(
         });
       });
 
-      // Verificar espacio para el resultado
       if (tempY + 10 > maxY) {
         pdf.addPage();
-        // Header en nueva página
         pdf.setFillColor(...styles.colors.primary);
         pdf.rect(0, 0, pageWidth, 35, 'F');
         pdf.setTextColor(255, 255, 255);
         pdf.setFontSize(20);
         pdf.setFont('helvetica', 'bold');
-        pdf.text(tp?.headerTitleCont ?? 'ROADMAP DE TRANSFORMACIÓN - 90 DÍAS (Cont.)', 20, 22);
+        pdf.text(tp.headerTitleCont, 20, 22);
         tempY = 45;
       }
 
-      // Resultado esperado
       pdf.setFont('helvetica', 'bold');
       pdf.setTextColor(...styles.colors.success);
-      pdf.text(`${tp?.resultLabel ?? 'Resultado:'} ${phase.result}`, 25, tempY + 5);
+      pdf.text(`${tp.resultLabel} ${phase.result}`, 25, tempY + 5);
 
       yPos = tempY + 15;
     });
   }
 
-  // Indicadores de éxito si hay espacio
   yPos = checkPageSpace(yPos, 40);
 
   if (yPos < maxY - 35) {
@@ -295,20 +231,13 @@ export async function generateRoadmap(
     pdf.setFont('helvetica', 'bold');
     pdf.setFontSize(12);
     pdf.setTextColor(...styles.colors.primary);
-    pdf.text(`🎯 ${tp?.successIndicatorsTitle ?? 'INDICADORES DE ÉXITO DEL ROADMAP'}`, pageWidth/2, yPos + 10, { align: 'center' });
+    pdf.text(`🎯 ${tp.successIndicatorsTitle}`, pageWidth/2, yPos + 10, { align: 'center' });
 
     pdf.setFont('helvetica', 'normal');
     pdf.setFontSize(10);
     pdf.setTextColor(...styles.colors.black);
 
-    const metrics = tp?.successIndicators ?? [
-      '✓ Reducción 40-60% en tareas manuales',
-      '✓ Incremento 2-3X en capacidad',
-      '✓ ROI positivo desde mes 3'
-    ];
-
-    // Dividir métricas en líneas si es necesario
-    const metricsText = metrics.join('  |  ');
+    const metricsText = tp.successIndicators.join('  |  ');
     const metricsLines = pdf.splitTextToSize(metricsText, pageWidth - 50);
 
     let metricY = yPos + 18;
@@ -318,8 +247,7 @@ export async function generateRoadmap(
     });
   }
 
-  // Número de página
   pdf.setFontSize(9);
   pdf.setTextColor(...styles.colors.gray);
-  pdf.text(tp?.pageOf ? tp.pageOf(5, 7) : 'Página 5 de 7', pageWidth - 20, pageHeight - 10, { align: 'right' });
+  pdf.text(tp.pageOf(5, 7), pageWidth - 20, pageHeight - 10, { align: 'right' });
 }

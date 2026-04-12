@@ -593,6 +593,8 @@ export const diagnosticoUiES = {
     axisLabels: { finance: 'Finanzas', operations: 'Operaciones', marketing: 'Marketing' },
     kpiSectionTitle: 'INDICADORES CLAVE DE ÉXITO (KPIs)',
     tableHeaders: { metric: 'Métrica', current: 'Actual', target: 'Objetivo', timeline: 'Plazo', impact: 'Impacto' },
+    scoreKpiPrefix: 'Score',
+    scoreKpiImpact: 'ALTO',
     kpis: [
       { metric: 'Eficiencia Operativa', current: '100%', target: '145%', timeline: '60 días', impact: 'ALTO' },
       { metric: 'Tiempo en Tareas Manuales', current: '100%', target: '60%', timeline: '30 días', impact: 'MEDIO' },
@@ -1407,6 +1409,8 @@ export const diagnosticoUiEN = {
     axisLabels: { finance: 'Finance', operations: 'Operations', marketing: 'Marketing' },
     kpiSectionTitle: 'KEY SUCCESS INDICATORS (KPIs)',
     tableHeaders: { metric: 'Metric', current: 'Current', target: 'Target', timeline: 'Timeline', impact: 'Impact' },
+    scoreKpiPrefix: 'Score',
+    scoreKpiImpact: 'HIGH',
     kpis: [
       { metric: 'Operational Efficiency', current: '100%', target: '145%', timeline: '60 days', impact: 'HIGH' },
       { metric: 'Time on Manual Tasks', current: '100%', target: '60%', timeline: '30 days', impact: 'MEDIUM' },

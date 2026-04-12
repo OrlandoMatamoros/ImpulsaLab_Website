@@ -48,46 +48,6 @@ export const PDFStyles = {
     'Alimentos': { finance: 65, operations: 70, marketing: 65 },
     'Otro': { finance: 65, operations: 70, marketing: 60 }
   },
-  
-  // Mensajes personalizados según score
-  getStageMessage: (score: number, translations?: {
-    expansion?: string; growth?: string; survival?: string;
-    expansionMsg?: string; growthMsg?: string; survivalMsg?: string;
-  }) => {
-    if (score >= 70) return {
-      stage: translations?.expansion ?? 'Expansión',
-      color: [16, 185, 129] as [number, number, number],
-      message: translations?.expansionMsg ?? 'Tu negocio está listo para escalar'
-    };
-    if (score >= 40) return {
-      stage: translations?.growth ?? 'Crecimiento',
-      color: [59, 130, 246] as [number, number, number],
-      message: translations?.growthMsg ?? 'Tienes una base sólida para crecer'
-    };
-    return {
-      stage: translations?.survival ?? 'Supervivencia',
-      color: [245, 158, 11] as [number, number, number],
-      message: translations?.survivalMsg ?? 'Es momento de fortalecer los fundamentos'
-    };
-  },
-
-  // Helpers para formateo
-  formatCurrency: (amount: number, locale?: string): string => {
-    return new Intl.NumberFormat(locale ?? 'es-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0
-    }).format(amount);
-  },
-
-  formatDate: (date: Date, locale?: string): string => {
-    return date.toLocaleDateString(locale ?? 'es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
-  }
 };
 
 export default PDFStyles;

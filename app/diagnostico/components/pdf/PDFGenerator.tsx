@@ -1,4 +1,6 @@
 // app/diagnostico/components/pdf/PDFGenerator.tsx
+'use client';
+
 import { useState } from 'react';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -140,20 +142,17 @@ export function PDFGenerator({
       // Progreso: 100%
       setProgress(100);
 
-      // Generar nombre del archivo
-      const companyName = (clientInfo?.companyName || (tp?.defaultCompany ?? 'Empresa'))
+      const companyName = (clientInfo?.companyName || tp.defaultCompany)
         .replace(/[^a-zA-Z0-9]/g, '-')
         .substring(0, 30);
       const date = new Date().toISOString().split('T')[0];
       const fileName = `Diagnostico-3D-${companyName}-${date}.pdf`;
 
-      // Guardar PDF
       pdf.save(fileName);
 
-      // Guardar metadata en localStorage
       const pdfMetadata = {
         fileName,
-        companyName: clientInfo?.companyName || (tp?.defaultCompany ?? 'Empresa'),
+        companyName: clientInfo?.companyName || tp.defaultCompany,
         scores,
         generatedAt: new Date().toISOString(),
         generatedBy: userData?.email
@@ -166,7 +165,7 @@ export function PDFGenerator({
 
     } catch (error) {
       console.error('Error generating PDF:', error);
-      alert(tp?.errorGenerating ?? 'Hubo un error al generar el PDF. Por favor intenta de nuevo.');
+      alert(tp.errorGenerating);
     } finally {
       setGenerating(false);
       setProgress(0);
@@ -192,20 +191,20 @@ export function PDFGenerator({
         {generating ? (
           <>
             <Loader2 className="w-5 h-5 mr-2 animate-spin" />
-            {tp?.generatingPdf ?? 'Generando PDF...'} {progress}%
+            {tp.generatingPdf} {progress}%
           </>
         ) : (
           <>
             {canDownloadPDF ? (
               <>
                 <Download className="w-5 h-5 mr-2" />
-                {tp?.downloadFull ?? 'Descargar PDF Completo'}
+                {tp.downloadFull}
               </>
             ) : (
               <>
                 <Lock className="w-4 h-4 mr-2" />
                 <FileText className="w-5 h-5 mr-2" />
-                {tp?.pdfAvailable ?? 'PDF Disponible (Agenda Consultoría)'}
+                {tp.pdfAvailable}
               </>
             )}
           </>
@@ -224,13 +223,9 @@ export function PDFGenerator({
         </div>
       )}
 
-      {/* Mensaje para usuarios sin acceso */}
       {!canDownloadPDF && !generating && (
         <p className="text-xs text-gray-500 mt-2 text-center">
-          {userData ?
-            (tp?.scheduleConsultation ?? 'Agenda tu consultoría gratuita para obtener el PDF completo') :
-            (tp?.loginForMore ?? 'Inicia sesión para acceder a más funciones')
-          }
+          {userData ? tp.scheduleConsultation : tp.loginForMore}
         </p>
       )}
     </div>
