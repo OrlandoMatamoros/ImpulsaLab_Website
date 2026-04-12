@@ -31,7 +31,12 @@ function LoadingSkeleton({ step }: { step: number }) {
   const loadingSteps = t.businessPlanPage.loadingSteps
 
   return (
-    <div className="mt-12 space-y-6 max-w-4xl mx-auto w-full">
+    <div
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      className="mt-12 space-y-6 max-w-4xl mx-auto w-full"
+    >
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900/80 border border-slate-800">
           <svg className="w-5 h-5 animate-spin text-[#00BCD4]" fill="none" viewBox="0 0 24 24">
@@ -85,6 +90,7 @@ export default function BusinessPlanPage() {
   const [result, setResult] = useState<PlanResult | null>(null)
   const [error, setError] = useState('')
   const [hasFreePlan, setHasFreePlan] = useState(true)
+  const [showReadyToast, setShowReadyToast] = useState(false)
 
   useEffect(() => {
     if (isUnlimited) {
@@ -99,6 +105,7 @@ export default function BusinessPlanPage() {
     setResult(null)
     setError('')
     setLoadingStep(0)
+    setShowReadyToast(false)
   }, [])
 
   async function handleSubmit(formData: BusinessPlanFormData) {
@@ -124,11 +131,17 @@ export default function BusinessPlanPage() {
       const data = await res.json()
 
       if (!res.ok || data.error) {
-        setError(data.error || bp.unexpectedError)
+        if (res.status === 429) {
+          setError(bp.rateLimitError)
+        } else {
+          setError(data.error || bp.unexpectedError)
+        }
         return
       }
 
       setResult(data.plan)
+      setShowReadyToast(true)
+      setTimeout(() => setShowReadyToast(false), 3500)
 
       // Track free plan usage (skip for unlimited users)
       if (!isUnlimited) {
@@ -147,6 +160,20 @@ export default function BusinessPlanPage() {
 
   return (
     <div className="bg-slate-950 text-white min-h-[calc(100vh-4rem)]">
+      {/* Success toast */}
+      {showReadyToast && (
+        <div
+          role="status"
+          aria-live="polite"
+          className="fixed top-20 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl bg-[#00BCD4] text-[#002D62] font-semibold shadow-2xl flex items-center gap-2 no-print animate-in fade-in slide-in-from-top-4"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
+          </svg>
+          {bp.planReady}
+        </div>
+      )}
+
       {/* Print-only header */}
       <div className="print-header hidden print:block text-center py-4 border-b border-slate-300 mb-6">
         <p className="text-lg font-bold" style={{ color: '#002D62' }}>

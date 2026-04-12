@@ -1,6 +1,20 @@
 'use client'
 
 import { useState } from 'react'
+import {
+  AlertTriangle,
+  Building2,
+  Calendar,
+  ChevronDown,
+  ClipboardList,
+  DollarSign,
+  Megaphone,
+  Package,
+  Settings,
+  TrendingUp,
+  Users,
+  type LucideIcon,
+} from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export interface PlanSection {
@@ -10,17 +24,17 @@ export interface PlanSection {
   highlights: string[]
 }
 
-const sectionIcons: Record<string, string> = {
-  'executive-summary': '\uD83D\uDCCB',
-  'company-description': '\uD83C\uDFE2',
-  'market-analysis': '\uD83D\uDCC8',
-  'products-services': '\uD83D\uDCE6',
-  'marketing-sales': '\uD83D\uDCE3',
-  'operations': '\u2699\uFE0F',
-  'team': '\uD83D\uDC65',
-  'financial-projections': '\uD83D\uDCB0',
-  'risk-analysis': '\u26A0\uFE0F',
-  'implementation': '\uD83D\uDCC5',
+const sectionIcons: Record<string, LucideIcon> = {
+  'executive-summary': ClipboardList,
+  'company-description': Building2,
+  'market-analysis': TrendingUp,
+  'products-services': Package,
+  'marketing-sales': Megaphone,
+  operations: Settings,
+  team: Users,
+  'financial-projections': DollarSign,
+  'risk-analysis': AlertTriangle,
+  implementation: Calendar,
 }
 
 export default function SectionCard({
@@ -33,36 +47,34 @@ export default function SectionCard({
   const { t } = useLanguage()
   const bp = t.businessPlanPage
   const [expanded, setExpanded] = useState(defaultExpanded)
-  const icon = sectionIcons[section.id] || '\uD83D\uDCCA'
+  const Icon = sectionIcons[section.id] || ClipboardList
 
   return (
     <div className="rounded-xl border border-slate-800 bg-slate-900/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:border-slate-700">
       <button
+        type="button"
         onClick={() => setExpanded(!expanded)}
+        aria-expanded={expanded}
         className="w-full p-6 flex items-center gap-4 text-left cursor-pointer"
       >
-        <span className="text-2xl flex-shrink-0">{icon}</span>
+        <span className="w-10 h-10 rounded-lg bg-[#00BCD4]/10 border border-[#00BCD4]/20 flex items-center justify-center flex-shrink-0 text-[#00BCD4]">
+          <Icon className="w-5 h-5" />
+        </span>
         <div className="flex-1 min-w-0">
           <h3 className="text-lg font-semibold text-white">{section.title}</h3>
           <p className="text-sm text-slate-400 mt-1">
             {section.highlights.length} {bp.highlightsCount}
           </p>
         </div>
-        <svg
+        <ChevronDown
           className={`w-5 h-5 text-slate-500 transition-transform duration-300 flex-shrink-0 ${
             expanded ? 'rotate-180' : ''
           }`}
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-        </svg>
+        />
       </button>
 
       {expanded && (
         <div className="px-6 pb-6 border-t border-slate-800 audit-slide-down">
-          {/* Highlights */}
           {section.highlights.length > 0 && (
             <div className="mt-4">
               <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
@@ -79,7 +91,6 @@ export default function SectionCard({
             </div>
           )}
 
-          {/* Full content */}
           <div className="mt-5">
             <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">
               {bp.fullContent}

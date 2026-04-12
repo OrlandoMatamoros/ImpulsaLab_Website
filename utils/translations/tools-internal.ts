@@ -226,10 +226,11 @@ export const toolsInternalES = {
   businessPlanPage: {
     // Hero
     heroTitle: 'Plan de Negocios',
-    heroHighlight: 'con AI',
+    heroHighlight: 'con IA',
     heroSubtitle:
       'Genera un plan de negocios profesional en minutos. Gratis, bilingue, disenado para pequenos negocios.',
-    poweredBy: 'Powered by',
+    poweredBy: 'Creado por',
+    timeWarning: 'El plan tarda entre 30 y 90 segundos en generarse. No cierres esta ventana.',
 
     // Steps
     step1Title: 'Info Basica',
@@ -253,6 +254,8 @@ export const toolsInternalES = {
       'Transporte',
       'Otro',
     ],
+    industryOtherLabel: 'Especifica tu industria',
+    industryOtherPlaceholder: 'Ej: Agricultura urbana, logistica, etc.',
     locationLabel: 'Ubicacion',
     locationPlaceholder: 'Ej: Miami, FL',
     stageLabel: 'Etapa del negocio',
@@ -281,13 +284,13 @@ export const toolsInternalES = {
       '$100,000 - $250,000',
       'Mas de $250,000',
     ],
-    monthlySalesLabel: 'Ventas mensuales (actuales o proyectadas)',
-    monthlySalesPlaceholder: 'Ej: $8,000/mes',
-    seeksFundingLabel: 'Busca financiamiento?',
+    monthlySalesLabel: 'Ventas mensuales en USD (actuales o proyectadas)',
+    monthlySalesPlaceholder: '8000',
+    seeksFundingLabel: '¿Busca financiamiento?',
     yes: 'Si',
     no: 'No',
-    fundingAmountLabel: 'Cuanto financiamiento busca?',
-    fundingAmountPlaceholder: 'Ej: $50,000',
+    fundingAmountLabel: '¿Cuanto financiamiento busca? (USD)',
+    fundingAmountPlaceholder: '50000',
     employeesLabel: 'Numero de empleados',
     employeesPlaceholder: 'Selecciona un rango',
     employeeRanges: ['Solo yo', '2-5', '6-10', '11-25', '26-50', 'Mas de 50'],
@@ -297,6 +300,7 @@ export const toolsInternalES = {
     next: 'Siguiente',
     generatePlan: 'Generar Plan de Negocios',
     generating: 'Generando...',
+    planReady: 'Tu plan esta listo',
 
     // Loading
     loadingSteps: [
@@ -325,7 +329,7 @@ export const toolsInternalES = {
     metricMargin: 'Margen Ano 3',
 
     // CTA
-    ctaTitle: 'Necesitas ayuda implementando este plan?',
+    ctaTitle: '¿Necesitas ayuda implementando este plan?',
     ctaDescription:
       'Impulsa Lab puede automatizar tus operaciones, construir tu presencia digital y acelerar el crecimiento de tu negocio.',
     ctaButton: 'Hablar con un consultor',
@@ -337,9 +341,21 @@ export const toolsInternalES = {
       'Ya generaste tu plan gratuito. Contactanos para generar planes adicionales.',
     contactUs: 'Contactanos',
 
+    // Email gate (for PDF download)
+    emailGateTitle: 'Ingresa tu email para descargar el PDF',
+    emailGateSubtitle:
+      'Te enviaremos tambien consejos practicos de IA y automatizacion para tu negocio. Sin spam.',
+    emailGatePlaceholder: 'tu@email.com',
+    emailGateSubmit: 'Descargar PDF',
+    emailGateCancel: 'Cancelar',
+    emailGateSending: 'Preparando PDF...',
+    emailInvalid: 'Ingresa un email valido.',
+
     // Errors
     unexpectedError: 'Error inesperado. Intenta de nuevo.',
     connectionError: 'Error de conexion. Verifica tu internet e intenta de nuevo.',
+    rateLimitError:
+      'Has alcanzado el limite de planes por hora. Intenta de nuevo mas tarde o contactanos.',
 
     // Print
     printTitle: 'Plan de Negocios AI',
@@ -570,7 +586,8 @@ export const toolsInternalEN = {
     heroHighlight: 'with AI',
     heroSubtitle:
       'Generate a professional business plan in minutes. Free, bilingual, designed for small businesses.',
-    poweredBy: 'Powered by',
+    poweredBy: 'Built by',
+    timeWarning: 'Plan generation takes 30 to 90 seconds. Please do not close this window.',
 
     step1Title: 'Basic Info',
     step2Title: 'Details',
@@ -592,6 +609,8 @@ export const toolsInternalEN = {
       'Transportation',
       'Other',
     ],
+    industryOtherLabel: 'Specify your industry',
+    industryOtherPlaceholder: 'E.g.: Urban farming, logistics, etc.',
     locationLabel: 'Location',
     locationPlaceholder: 'E.g.: Miami, FL',
     stageLabel: 'Business stage',
@@ -618,13 +637,13 @@ export const toolsInternalEN = {
       '$100,000 - $250,000',
       'More than $250,000',
     ],
-    monthlySalesLabel: 'Monthly sales (current or projected)',
-    monthlySalesPlaceholder: 'E.g.: $8,000/mo',
+    monthlySalesLabel: 'Monthly sales in USD (current or projected)',
+    monthlySalesPlaceholder: '8000',
     seeksFundingLabel: 'Seeking funding?',
     yes: 'Yes',
     no: 'No',
-    fundingAmountLabel: 'How much funding are you seeking?',
-    fundingAmountPlaceholder: 'E.g.: $50,000',
+    fundingAmountLabel: 'How much funding are you seeking? (USD)',
+    fundingAmountPlaceholder: '50000',
     employeesLabel: 'Number of employees',
     employeesPlaceholder: 'Select a range',
     employeeRanges: ['Just me', '2-5', '6-10', '11-25', '26-50', 'More than 50'],
@@ -633,6 +652,7 @@ export const toolsInternalEN = {
     next: 'Next',
     generatePlan: 'Generate Business Plan',
     generating: 'Generating...',
+    planReady: 'Your plan is ready',
 
     loadingSteps: [
       'Analyzing your industry...',
@@ -668,8 +688,19 @@ export const toolsInternalEN = {
       'You already generated your free plan. Contact us to generate additional plans.',
     contactUs: 'Contact us',
 
+    emailGateTitle: 'Enter your email to download the PDF',
+    emailGateSubtitle:
+      'We will also send you practical AI and automation tips for your business. No spam.',
+    emailGatePlaceholder: 'you@email.com',
+    emailGateSubmit: 'Download PDF',
+    emailGateCancel: 'Cancel',
+    emailGateSending: 'Preparing PDF...',
+    emailInvalid: 'Please enter a valid email.',
+
     unexpectedError: 'Unexpected error. Please try again.',
     connectionError: 'Connection error. Check your internet and try again.',
+    rateLimitError:
+      'You have reached the hourly plan limit. Please try again later or contact us.',
 
     printTitle: 'AI Business Plan',
 

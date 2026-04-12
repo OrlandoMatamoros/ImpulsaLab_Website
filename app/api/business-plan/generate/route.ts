@@ -3,8 +3,50 @@ import Anthropic from '@anthropic-ai/sdk'
 
 export const maxDuration = 120
 
+// Simple in-memory rate limit: 5 requests / IP / hour.
+// Resets on cold start — acceptable for MVP, upgrade to Upstash later.
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const RATE_LIMIT_MAX = 5
+const ipHits = new Map<string, number[]>()
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const hits = ipHits.get(ip) || []
+  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT_MAX) {
+    ipHits.set(ip, recent)
+    return false
+  }
+  recent.push(now)
+  ipHits.set(ip, recent)
+  return true
+}
+
+const ERRORS = {
+  ES: {
+    missing: 'Se requiere nombre del negocio, industria y descripcion.',
+    noResponse: 'No se recibio respuesta del analisis.',
+    parseError: 'Error al procesar el plan. Intenta de nuevo.',
+    internal: 'Error interno del servidor.',
+    rateLimit: 'Has alcanzado el limite de planes por hora. Intenta de nuevo mas tarde.',
+  },
+  EN: {
+    missing: 'Business name, industry and description are required.',
+    noResponse: 'No response received from the analysis.',
+    parseError: 'Failed to process the plan. Please try again.',
+    internal: 'Internal server error.',
+    rateLimit: 'You have reached the hourly plan limit. Please try again later.',
+  },
+} as const
+
 export async function POST(req: NextRequest) {
+  const clientIp =
+    req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    req.headers.get('x-real-ip') ||
+    'unknown'
+
   try {
+    const body = await req.json()
     const {
       businessName,
       industry,
@@ -20,20 +62,23 @@ export async function POST(req: NextRequest) {
       fundingAmount,
       employees,
       locale,
-    } = await req.json()
+    } = body
 
-    if (!businessName || !industry || !description) {
-      return NextResponse.json(
-        { error: 'Se requiere nombre del negocio, industria y descripcion.' },
-        { status: 400 }
-      )
+    const lang = locale?.toUpperCase() === 'EN' ? 'EN' : 'ES'
+    const errors = ERRORS[lang]
+
+    if (!checkRateLimit(clientIp)) {
+      return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
     }
 
-    const lang = locale?.toUpperCase() === 'EN' ? 'English' : 'Spanish'
+    if (!businessName || !industry || !description) {
+      return NextResponse.json({ error: errors.missing }, { status: 400 })
+    }
 
+    const promptLang = lang === 'EN' ? 'English' : 'Spanish'
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
-    const prompt = `You are a senior business consultant for Impulsa Lab, a tech consultancy for small businesses. Generate a professional, comprehensive business plan in ${lang} based on the following information.
+    const prompt = `You are a senior business consultant for Impulsa Lab, a tech consultancy for small Latino businesses. Generate a professional, comprehensive business plan in ${promptLang} based on the following information.
 
 BUSINESS INFORMATION:
 - Business Name: ${businessName}
@@ -45,7 +90,7 @@ BUSINESS INFORMATION:
 - Ideal Customer: ${idealClient || 'Not specified'}
 - Differentiator: ${differentiator || 'Not specified'}
 - Initial Investment: ${initialInvestment || 'Not specified'}
-- Monthly Sales (current or projected): ${monthlySales || 'Not specified'}
+- Monthly Sales (USD, current or projected): ${monthlySales ? `$${monthlySales}` : 'Not specified'}
 - Seeks Funding: ${seeksFunding ? `Yes - $${fundingAmount || 'amount not specified'}` : 'No'}
 - Number of Employees: ${employees || 'Not specified'}
 
@@ -125,25 +170,23 @@ Generate ONLY valid JSON (no markdown, no backticks, pure JSON) with this exact 
 
 IMPORTANT INSTRUCTIONS:
 - All section content should be detailed (3-5 paragraphs each minimum)
-- Financial projections should be realistic for the industry and location
-- Include specific, actionable recommendations
+- Financial projections must use specific USD dollar amounts based on industry benchmarks and the stated monthly sales
+- If a US state or city is provided in Location, localize insights: reference state-specific regulations, local market dynamics, and demographic data
+- Include specific, actionable recommendations (not generic advice)
 - Highlights should be concise bullet points (max 15 words each)
-- The financial table should use realistic numbers based on the industry
-- Write entirely in ${lang}
-- Be specific to the business described, not generic`
+- The financial table must use realistic numbers based on the industry and any monthly sales provided
+- Write ALL prose entirely in ${promptLang} — section titles stay bilingual as shown
+- Be specific to the business described, avoid filler language`
 
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-20250514',
+      model: 'claude-sonnet-4-6',
       max_tokens: 8192,
       messages: [{ role: 'user', content: prompt }],
     })
 
     const textBlock = message.content.find((b) => b.type === 'text')
     if (!textBlock || textBlock.type !== 'text') {
-      return NextResponse.json(
-        { error: 'No se recibio respuesta del analisis.' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: errors.noResponse }, { status: 500 })
     }
 
     let resultText = textBlock.text.trim()
@@ -162,31 +205,23 @@ IMPORTANT INSTRUCTIONS:
           plan = JSON.parse(jsonMatch[0])
         } catch {
           return NextResponse.json(
-            {
-              error: 'Error al procesar el plan. Intenta de nuevo.',
-              raw: resultText.substring(0, 500),
-            },
+            { error: errors.parseError, raw: resultText.substring(0, 500) },
             { status: 500 }
           )
         }
       } else {
         return NextResponse.json(
-          {
-            error: 'Error al procesar el plan. Intenta de nuevo.',
-            raw: resultText.substring(0, 500),
-          },
+          { error: errors.parseError, raw: resultText.substring(0, 500) },
           { status: 500 }
         )
       }
     }
 
-    return NextResponse.json({
-      success: true,
-      plan,
-    })
+    return NextResponse.json({ success: true, plan })
   } catch (error: unknown) {
     console.error('Business plan generation error:', error)
-    const message = error instanceof Error ? error.message : 'Error interno del servidor'
+    const lang = 'ES' // best effort when body parsing itself failed
+    const message = error instanceof Error ? error.message : ERRORS[lang].internal
     return NextResponse.json({ error: message }, { status: 500 })
   }
 }
