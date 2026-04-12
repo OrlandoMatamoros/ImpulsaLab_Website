@@ -15,10 +15,12 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tuimpulsalab.com'),
   title: {
-    default: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
+    default: 'Impulsa Lab — IA y Automatización para PYMEs',
     template: '%s | Impulsa Lab',
   },
-  description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
+  description: 'Diagnóstico 3D gratuito, agentes de IA y consultoría en Finanzas, Operaciones y Marketing. Transformación digital para PYMEs con resultados medibles.',
+  applicationName: 'Impulsa Lab',
+  manifest: '/manifest.webmanifest',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/',
   },
@@ -33,22 +35,24 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'es_ES',
+    alternateLocale: ['en_US'],
     siteName: 'Impulsa Lab',
-    title: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
-    description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
+    title: 'Impulsa Lab — IA y Automatización para PYMEs',
+    description: 'Diagnóstico 3D gratuito, agentes de IA y consultoría en Finanzas, Operaciones y Marketing. Transformación digital para PYMEs con resultados medibles.',
+    url: 'https://www.tuimpulsalab.com/',
     images: [
       {
         url: '/images/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
+        alt: 'Impulsa Lab — IA y Automatización para PYMEs',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Impulsa Lab - Transformacion Digital Empresarial con IA',
-    description: 'Diagnostico 3D, herramientas de IA, y servicios de consultoria en Finanzas, Operaciones y Marketing para PYMEs.',
+    title: 'Impulsa Lab — IA y Automatización para PYMEs',
+    description: 'Diagnóstico 3D gratuito, agentes de IA y consultoría en Finanzas, Operaciones y Marketing. Transformación digital para PYMEs con resultados medibles.',
     images: ['/images/og-image.jpg'],
   },
   verification: {
@@ -90,7 +94,7 @@ export default function RootLayout({
               url: 'https://www.tuimpulsalab.com',
               logo: 'https://www.tuimpulsalab.com/images/og-image.jpg',
               description:
-                'Consultoría en transformación digital con IA para PYMEs latinas en EE.UU. Servicios de finanzas, operaciones y marketing potenciados por inteligencia artificial.',
+                'Consultoría en transformación digital con IA para PYMEs. Servicios de finanzas, operaciones y marketing potenciados por inteligencia artificial.',
               foundingDate: '2024',
               areaServed: ['US', 'LATAM'],
               knowsLanguage: ['es', 'en'],
@@ -119,7 +123,7 @@ export default function RootLayout({
               url: 'https://www.tuimpulsalab.com',
               name: 'Impulsa Lab',
               description:
-                'Transformación digital empresarial con IA para PYMEs latinas',
+                'Transformación digital empresarial con IA para PYMEs',
               publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
               inLanguage: 'es-ES',
             }),

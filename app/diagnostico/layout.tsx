@@ -42,10 +42,9 @@ export default function DiagnosticoLayout({
             El Diagnóstico 3D de Impulsa Lab es una evaluación gratuita de 15 minutos
             que analiza el nivel de madurez digital de tu empresa en tres dimensiones
             críticas: <strong>Finanzas</strong>, <strong>Operaciones</strong> y{' '}
-            <strong>Marketing</strong>. Diseñado específicamente para pequeñas y
-            medianas empresas latinas en Estados Unidos que quieren entender dónde
-            están parados y qué pasos concretos tomar para crecer con inteligencia
-            artificial y automatización.
+            <strong>Marketing</strong>. Diseñado para pequeñas y medianas empresas
+            que quieren entender dónde están parados y qué pasos concretos tomar
+            para crecer con inteligencia artificial y automatización.
           </p>
           <h2 className="text-2xl font-semibold text-[#002D62] mt-8 mb-4">
             ¿Qué obtienes al completar el diagnóstico?
@@ -78,13 +77,13 @@ export default function DiagnosticoLayout({
           </h2>
           <ol className="list-decimal pl-6 space-y-2 text-gray-700 mb-6">
             <li>
-              <strong>Responde ~30 preguntas</strong> sobre cómo opera hoy tu
+              <strong>Respondes 18 preguntas</strong> sobre cómo opera hoy tu
               empresa en las tres dimensiones. No hay respuestas correctas o
               incorrectas — solo honestidad sobre tu realidad actual.
             </li>
             <li>
               <strong>Nuestra IA analiza tus respuestas</strong> contra un
-              benchmark de más de 500 PYMEs latinas evaluadas por Impulsa Lab.
+              benchmark de más de 500 PYMEs evaluadas por Impulsa Lab.
             </li>
             <li>
               <strong>Recibes tu reporte 3D al instante</strong> en pantalla, con
@@ -96,9 +95,9 @@ export default function DiagnosticoLayout({
             </li>
           </ol>
           <p className="text-lg text-gray-700 mb-4">
-            Más de <strong>500 dueños de PYMEs</strong> latinas en Nueva York,
-            Texas, Florida y Colombia ya completaron su Diagnóstico 3D. Es 100%
-            gratis, no requiere tarjeta de crédito, y los resultados son tuyos sin
+            Más de <strong>500 dueños de PYMEs</strong> en Estados Unidos y
+            Latinoamérica ya completaron su Diagnóstico 3D. Es 100% gratis, no
+            requiere tarjeta de crédito, y los resultados son tuyos sin
             compromiso. Empieza ahora mismo y en 15 minutos sabrás exactamente
             cuánto potencial de crecimiento tiene tu empresa y por dónde
             empezar.
