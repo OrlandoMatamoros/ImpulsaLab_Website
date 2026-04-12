@@ -4,7 +4,6 @@ import React, { useState, useMemo } from 'react';
 import { Search, Grid, List, Filter, ExternalLink, ChevronLeft, X } from 'lucide-react';
 import Link from 'next/link';
 import { tools } from '@/lib/tools-data';
-import ProtectedSection from '@/components/ProtectedSection';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function ArsenalPage() {
@@ -83,12 +82,7 @@ export default function ArsenalPage() {
         </div>
       </div>
 
-      {/* CONTENIDO PROTEGIDO - Herramientas y filtros */}
-      <ProtectedSection
-        message={t.herramientasArsenalPage.protectedMessage}
-        showPreview={true}
-        previewBlur={false}
-      >
+      <>
         {/* Filtros */}
         <div className={`${showFilters ? 'block' : 'hidden'} sm:block`}>
           <div className="fixed inset-0 bg-black bg-opacity-50 z-50 sm:hidden" onClick={() => setShowFilters(false)}></div>
@@ -213,7 +207,7 @@ export default function ArsenalPage() {
                     rel="noopener noreferrer"
                     className="group bg-white rounded-lg sm:rounded-xl shadow-md sm:shadow-lg hover:shadow-xl sm:hover:shadow-2xl transition-all duration-300 p-4 sm:p-6 relative overflow-hidden cursor-pointer block"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-purple-500/5 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block"></div>
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#002D62]/5 to-[#00BCD4]/5 opacity-0 group-hover:opacity-100 transition-opacity hidden sm:block"></div>
                     
                     <div className="relative z-10">
                       <div className="flex justify-between items-start mb-3 sm:mb-4">
@@ -232,12 +226,12 @@ export default function ArsenalPage() {
                       </h3>
                       
                       <div className="mb-3 sm:mb-4">
-                        <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800">
+                        <span className="inline-flex items-center px-2 sm:px-3 py-1 rounded-full text-xs font-medium bg-[#00BCD4]/10 border border-[#00BCD4]/30 text-[#002D62]">
                           {tool.category}
                         </span>
                       </div>
 
-                      <div className="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-1.5 sm:py-2 rounded-lg group-hover:from-blue-700 group-hover:to-purple-700 transition-all font-medium text-sm sm:text-base">
+                      <div className="block w-full text-center bg-gradient-to-r from-[#002D62] to-[#00BCD4] text-white py-1.5 sm:py-2 rounded-lg group-hover:brightness-110 transition-all font-medium text-sm sm:text-base">
                         {t.herramientasArsenalPage.acceder}
                       </div>
                     </div>
@@ -303,7 +297,7 @@ export default function ArsenalPage() {
             </div>
           )}
         </div>
-      </ProtectedSection>
+      </>
     </div>
   );
 }

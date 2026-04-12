@@ -443,6 +443,10 @@ export default function JuntaEstrategicaAppPage() {
 
   const handleSubmit = useCallback(async () => {
     if (!question.trim()) return
+    if (!user) {
+      setError('Session expired. Please sign in again.')
+      return
+    }
 
     setError(null)
     setAppState('debate')
@@ -456,9 +460,13 @@ export default function JuntaEstrategicaAppPage() {
 
     try {
       const locale = language === 'EN' ? 'en' : 'es'
+      const idToken = await user.getIdToken()
       const res = await fetch('/api/strategic-board/debate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
         body: JSON.stringify({ question: question.trim(), domain, locale }),
         signal: controller.signal,
       })
@@ -497,7 +505,7 @@ export default function JuntaEstrategicaAppPage() {
       setError(err instanceof Error ? err.message : 'Unexpected error')
       setAppState('lobby')
     }
-  }, [question, domain, t, language])
+  }, [question, domain, t, language, user])
 
   const handlePrint = () => {
     window.print()

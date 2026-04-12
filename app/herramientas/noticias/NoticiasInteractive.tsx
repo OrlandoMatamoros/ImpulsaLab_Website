@@ -19,7 +19,6 @@ import {
   Trophy,
   BarChart3,
 } from 'lucide-react'
-import ProtectedSection from '@/components/ProtectedSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Tipos de datos
@@ -149,7 +148,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
       <div className="min-h-screen bg-black text-white">
         <section className="relative py-20 px-4">
           <div className="max-w-7xl mx-auto text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
+            <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#00BCD4] to-white">
               {t.herramientasNoticiasPage.titulo}
             </h1>
             <div className="mt-12 p-8 border border-white/10 rounded-xl">
@@ -226,10 +225,10 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
 
       {/* Hero Section */}
       <section className="relative py-20 px-4 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-black" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#002D62]/40 to-black" />
 
         <div className="relative z-10 max-w-7xl mx-auto text-center animate-fadeInUp">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-purple-200 to-white">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-white via-[#00BCD4] to-white">
             {t.herramientasNoticiasPage.titulo}
           </h1>
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
@@ -245,7 +244,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                 placeholder={t.herramientasNoticiasPage.buscarPlaceholder}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition-all shadow-lg"
+                className="w-full pl-12 pr-4 py-4 bg-white border border-gray-200 rounded-2xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-transparent transition-all shadow-lg"
               />
             </div>
           </div>
@@ -273,7 +272,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                     onClick={() => setSelectedCategory(category.id)}
                     className={`flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all ${
                       selectedCategory === category.id
-                        ? 'bg-purple-600 text-white'
+                        ? 'bg-[#00BCD4] text-white'
                         : 'bg-white/10 text-gray-300 hover:bg-white/20'
                     }`}
                   >
@@ -289,7 +288,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-purple-500"
+                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-[#00BCD4]"
               >
                 {sortOptions.map(option => (
                   <option key={option.value} value={option.value} className="bg-gray-900">
@@ -303,11 +302,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
       </section>
 
       {/* Contenido Principal */}
-      <ProtectedSection
-        message={t.herramientasNoticiasPage.protectedMessage}
-        showPreview={true}
-        previewBlur={false}
-      >
+      <div>
         <div className="max-w-7xl mx-auto px-4 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* Columna Principal - Noticias */}
@@ -319,10 +314,10 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                     href={featuredNews[0].sourceUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="relative block h-full overflow-hidden rounded-2xl bg-gradient-to-br from-purple-900/20 to-blue-900/20 border border-white/10 group"
+                    className="relative block h-full overflow-hidden rounded-2xl bg-gradient-to-br from-[#002D62]/30 to-[#00BCD4]/10 border border-white/10 group"
                   >
                     <div className="absolute top-4 left-4 z-10">
-                      <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
+                      <span className="px-3 py-1 bg-[#00BCD4] text-white text-xs font-semibold rounded-full">
                         {t.herramientasNoticiasPage.destacado}
                       </span>
                     </div>
@@ -337,7 +332,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
 
                     <div className="absolute bottom-0 left-0 right-0 p-8">
                       <div className="flex items-center gap-4 mb-4">
-                        <span className="text-purple-400 text-sm font-medium">
+                        <span className="text-[#00BCD4] text-sm font-medium">
                           {featuredNews[0].source}
                         </span>
                         <span className="text-gray-400 text-sm">
@@ -349,7 +344,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                         </span>
                       </div>
 
-                      <h2 className="text-3xl font-bold mb-3 transition-colors group-hover:text-purple-400">
+                      <h2 className="text-3xl font-bold mb-3 transition-colors group-hover:text-[#00BCD4]">
                         {featuredNews[0].title}
                       </h2>
 
@@ -373,7 +368,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                           ))}
                         </div>
 
-                        <div className="flex items-center gap-1 text-purple-400">
+                        <div className="flex items-center gap-1 text-[#00BCD4]">
                           <span className="text-sm font-medium">{t.herramientasNoticiasPage.leerMas}</span>
                           <ChevronRight className="w-4 h-4" />
                         </div>
@@ -416,7 +411,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
 
                       <div className="p-6 flex-1 flex flex-col">
                         <div className="flex items-center gap-3 mb-3 text-sm">
-                          <span className="text-purple-400 font-medium">{news.source}</span>
+                          <span className="text-[#00BCD4] font-medium">{news.source}</span>
                           <span className="text-gray-500">•</span>
                           <span className="text-gray-400">
                             {new Date(news.date).toLocaleDateString('es-ES')}
@@ -428,7 +423,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                           </span>
                         </div>
 
-                        <h3 className="text-xl font-bold mb-2 transition-colors group-hover:text-purple-400 line-clamp-2">
+                        <h3 className="text-xl font-bold mb-2 transition-colors group-hover:text-[#00BCD4] line-clamp-2">
                           {news.title}
                         </h3>
 
@@ -452,7 +447,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                             ))}
                           </div>
 
-                          <ExternalLink className="w-4 h-4 text-purple-400 opacity-0 transition-opacity group-hover:opacity-100" />
+                          <ExternalLink className="w-4 h-4 text-[#00BCD4] opacity-0 transition-opacity group-hover:opacity-100" />
                         </div>
                       </div>
                     </a>
@@ -470,9 +465,9 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
             {/* Sidebar */}
             <aside className="lg:col-span-1">
               {/* Newsletter */}
-              <div className="bg-gradient-to-br from-purple-900/30 to-blue-900/30 border border-white/10 rounded-xl p-6 mb-8 animate-fadeInUp">
+              <div className="bg-gradient-to-br from-[#002D62]/40 to-[#00BCD4]/10 border border-white/10 rounded-xl p-6 mb-8 animate-fadeInUp">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="p-2 bg-purple-600 rounded-lg">
+                  <div className="p-2 bg-[#00BCD4] rounded-lg">
                     <Mail className="w-5 h-5" />
                   </div>
                   <h3 className="text-xl font-bold">{t.herramientasNoticiasPage.newsletterTitulo}</h3>
@@ -484,7 +479,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
 
                 <button
                   onClick={() => setShowNewsletter(true)}
-                  className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
+                  className="w-full py-3 bg-[#00BCD4] hover:bg-[#00BCD4]/80 rounded-lg font-medium transition-colors"
                 >
                   {t.herramientasNoticiasPage.suscribirseGratis}
                 </button>
@@ -512,7 +507,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                             {String(index + 1).padStart(2, '0')}
                           </span>
                           <div className="flex-1">
-                            <h4 className="font-medium transition-colors group-hover:text-purple-400 line-clamp-2">
+                            <h4 className="font-medium transition-colors group-hover:text-[#00BCD4] line-clamp-2">
                               {news.title}
                             </h4>
                             <p className="text-sm text-gray-400 mt-1">
@@ -546,7 +541,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
             </aside>
           </div>
         </div>
-      </ProtectedSection>
+      </div>
 
       {/* Modal Newsletter */}
       {showNewsletter && (
@@ -579,12 +574,12 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="tu@email.com"
                 required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 mb-4"
+                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] mb-4"
               />
 
               <button
                 type="submit"
-                className="w-full py-3 bg-purple-600 hover:bg-purple-700 rounded-lg font-medium transition-colors"
+                className="w-full py-3 bg-[#00BCD4] hover:bg-[#00BCD4]/80 rounded-lg font-medium transition-colors"
               >
                 {t.herramientasNoticiasPage.suscribirse}
               </button>

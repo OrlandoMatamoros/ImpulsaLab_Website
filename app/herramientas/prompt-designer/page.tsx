@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'
 import { Copy, Check, Save, History, Sparkles, Target, FileText, Palette, Shield, Package, ChevronRight, ChevronLeft, X, Trash2, Clock } from 'lucide-react'
-import ProtectedSection from '@/components/ProtectedSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Tipos para el formulario
@@ -296,27 +295,22 @@ ${labels.instruccion5}
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-[#00BCD4]/5 py-12 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header - SIEMPRE VISIBLE */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-blue-500 to-purple-600 rounded-2xl mb-6">
+          <div className="inline-flex items-center justify-center p-3 bg-gradient-to-r from-[#002D62] to-[#00BCD4] rounded-2xl mb-6 shadow-lg">
             <Sparkles className="w-8 h-8 text-white" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
             {tp.titulo}
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-xl text-slate-600 max-w-2xl mx-auto">
             {tp.subtitulo}
           </p>
         </div>
 
-        {/* CONTENIDO PROTEGIDO - Toda la herramienta interactiva */}
-        <ProtectedSection
-          message={tp.protectedMessage}
-          showPreview={true}
-          previewBlur={false}
-        >
+        <>
           {/* Botones de acción superior */}
           <div className="flex justify-center gap-4 mb-8">
             <button
@@ -378,7 +372,7 @@ ${labels.instruccion5}
                 </div>
                 <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-gradient-to-r from-blue-500 to-purple-600 transition-all duration-500"
+                    className="h-full bg-gradient-to-r from-[#002D62] to-[#00BCD4] transition-all duration-500"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -400,7 +394,7 @@ ${labels.instruccion5}
                       <div
                         className={`w-12 h-12 rounded-full flex items-center justify-center transition-all ${
                           isActive
-                            ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg scale-110'
+                            ? 'bg-gradient-to-r from-[#002D62] to-[#00BCD4] text-white shadow-lg scale-110'
                             : isComplete
                             ? 'bg-green-500 text-white'
                             : 'bg-gray-200 text-gray-500'
@@ -468,7 +462,7 @@ ${labels.instruccion5}
                   className={`flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
                     currentStep === steps.length - 1
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg'
+                      : 'bg-gradient-to-r from-[#002D62] to-[#00BCD4] text-white hover:shadow-lg'
                   }`}
                 >
                   {tp.siguiente}
@@ -507,7 +501,7 @@ ${labels.instruccion5}
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6 min-h-[400px] font-mono text-sm">
+              <div className="bg-gradient-to-br from-slate-50 to-[#00BCD4]/5 rounded-xl p-6 min-h-[400px] font-mono text-sm">
                 {generatePrompt() ? (
                   <div className="space-y-1">
                     {generatePrompt().split('\n').map((line, index) => {
@@ -551,7 +545,7 @@ ${labels.instruccion5}
                   disabled={!generatePrompt()}
                   className={`w-full py-3 px-6 rounded-lg font-medium transition-all flex items-center justify-center gap-2 ${
                     generatePrompt()
-                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white hover:shadow-lg'
+                      ? 'bg-gradient-to-r from-[#002D62] to-[#00BCD4] text-white hover:shadow-lg'
                       : 'bg-gray-100 text-gray-400 cursor-not-allowed'
                   }`}
                 >
@@ -589,7 +583,7 @@ ${labels.instruccion5}
               labels={{ title: tp.historialDePrompts, empty: tp.noHayPrompts }}
             />
           )}
-        </ProtectedSection>
+        </>
       </div>
 
       <style jsx>{`

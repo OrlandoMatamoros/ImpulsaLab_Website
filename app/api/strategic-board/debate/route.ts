@@ -1,8 +1,31 @@
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import OpenAI from 'openai'
+import { NextRequest } from 'next/server'
+import { adminAuth } from '@/lib/firebase-admin'
 
 export const maxDuration = 120
+
+const ADMIN_EMAIL = 'orlando@tuimpulsalab.com'
+
+// Rate limit: 20 debates / IP / hour. Internal tool — generous but capped
+// because each debate fires 4 LLM calls serially (~$0.05-0.10 each).
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const RATE_LIMIT_MAX = 20
+const ipHits = new Map<string, number[]>()
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const hits = ipHits.get(ip) || []
+  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT_MAX) {
+    ipHits.set(ip, recent)
+    return false
+  }
+  recent.push(now)
+  ipHits.set(ip, recent)
+  return true
+}
 
 /* ------------------------------------------------------------------ */
 /*  System prompts                                                     */
@@ -141,7 +164,7 @@ async function callClaude(question: string, systemPrompt: string): Promise<strin
 
   const client = new Anthropic({ apiKey })
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 1500,
     system: systemPrompt,
     messages: [{ role: 'user', content: question }],
@@ -198,7 +221,7 @@ async function callNova(systemPrompt: string): Promise<string> {
 
   const client = new Anthropic({ apiKey })
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-20250514',
+    model: 'claude-sonnet-4-6',
     max_tokens: 2000,
     system: systemPrompt,
     messages: [
@@ -218,8 +241,40 @@ async function callNova(systemPrompt: string): Promise<string> {
 /*  Route handler                                                      */
 /* ------------------------------------------------------------------ */
 
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
+  const clientIp =
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    request.headers.get('x-real-ip') ||
+    'unknown'
+
   try {
+    // ===== 1. Admin auth gate (Firebase ID token) =====
+    const authHeader = request.headers.get('authorization') || ''
+    if (!authHeader.startsWith('Bearer ')) {
+      return Response.json({ error: 'Acceso restringido.' }, { status: 401 })
+    }
+    const idToken = authHeader.slice(7)
+
+    let decoded
+    try {
+      decoded = await adminAuth.verifyIdToken(idToken)
+    } catch {
+      return Response.json({ error: 'Token invalido.' }, { status: 401 })
+    }
+
+    if (decoded.email !== ADMIN_EMAIL) {
+      return Response.json({ error: 'Acceso restringido.' }, { status: 403 })
+    }
+
+    // ===== 2. Rate limit =====
+    if (!checkRateLimit(clientIp)) {
+      return Response.json(
+        { error: 'Has alcanzado el limite de debates por hora. Intenta mas tarde.' },
+        { status: 429 }
+      )
+    }
+
+    // ===== 3. Parse body =====
     const body = await request.json()
     const { question, domain = 'General', locale = 'es' } = body as {
       question: string
