@@ -70,6 +70,14 @@ export const toolsInternalES = {
     // Errors
     unexpectedError: 'Error inesperado. Intenta de nuevo.',
     connectionError: 'Error de conexion. Verifica tu internet e intenta de nuevo.',
+    unauthorizedError: 'Acceso restringido. Debes iniciar sesion como administrador.',
+    rateLimitError:
+      'Has alcanzado el limite de auditorias por hora. Intenta de nuevo mas tarde.',
+
+    // PDF Export
+    exportPdf: 'Descargar reporte PDF',
+    exportingPdf: 'Generando PDF...',
+    exportPdfTitle: 'Reporte de Auditoria Web',
 
     // Print
     printTitle: 'Auditoria Web Inteligente',
@@ -439,6 +447,12 @@ export const toolsInternalEN = {
 
     unexpectedError: 'Unexpected error. Please try again.',
     connectionError: 'Connection error. Check your internet and try again.',
+    unauthorizedError: 'Restricted access. You must sign in as an administrator.',
+    rateLimitError: 'You have reached the hourly audit limit. Please try again later.',
+
+    exportPdf: 'Download PDF report',
+    exportingPdf: 'Generating PDF...',
+    exportPdfTitle: 'Web Audit Report',
 
     printTitle: 'Smart Web Audit',
   },

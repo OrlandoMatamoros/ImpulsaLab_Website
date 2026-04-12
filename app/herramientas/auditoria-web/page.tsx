@@ -4,6 +4,7 @@ import { useState, useEffect, FormEvent } from 'react'
 import { useRouter } from 'next/navigation'
 import ScoreGauge from './components/ScoreGauge'
 import SectionCard from './components/SectionCard'
+import AuditExport from './components/AuditExport'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
 
@@ -29,7 +30,12 @@ function LoadingSkeleton({ step }: { step: number }) {
   const loadingSteps = t.auditPage.loadingSteps
 
   return (
-    <div className="mt-12 space-y-6 max-w-4xl mx-auto w-full">
+    <div
+      role="status"
+      aria-live="polite"
+      aria-busy="true"
+      className="mt-12 space-y-6 max-w-4xl mx-auto w-full"
+    >
       <div className="text-center mb-8">
         <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-slate-900/80 border border-slate-800">
           <svg className="w-5 h-5 animate-spin text-[#00BCD4]" fill="none" viewBox="0 0 24 24">
@@ -72,7 +78,7 @@ function LoadingSkeleton({ step }: { step: number }) {
 }
 
 export default function AuditoriaWebPage() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const { user, loading: authLoading } = useAuth()
   const router = useRouter()
 
@@ -96,6 +102,10 @@ export default function AuditoriaWebPage() {
   async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (!url && !sourceCode) return
+    if (!user) {
+      setError(t.auditPage.unauthorizedError)
+      return
+    }
 
     setLoading(true)
     setError('')
@@ -110,16 +120,31 @@ export default function AuditoriaWebPage() {
     }, 2500)
 
     try {
+      const idToken = await user.getIdToken()
+
       const res = await fetch('/api/auditoria-web/analyze', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ url: url.trim(), sourceCode: sourceCode.trim() }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          url: url.trim(),
+          sourceCode: sourceCode.trim(),
+          locale: language,
+        }),
       })
 
       const data = await res.json()
 
       if (!res.ok || data.error) {
-        setError(data.error || t.auditPage.unexpectedError)
+        if (res.status === 401 || res.status === 403) {
+          setError(t.auditPage.unauthorizedError)
+        } else if (res.status === 429) {
+          setError(t.auditPage.rateLimitError)
+        } else {
+          setError(data.error || t.auditPage.unexpectedError)
+        }
         return
       }
 
@@ -131,10 +156,6 @@ export default function AuditoriaWebPage() {
       clearInterval(interval)
       setLoading(false)
     }
-  }
-
-  function handlePrint() {
-    window.print()
   }
 
   function handleReset() {
@@ -337,12 +358,7 @@ export default function AuditoriaWebPage() {
             )}
 
             <div className="flex flex-wrap gap-3 justify-center no-print pb-8">
-              <button
-                onClick={handlePrint}
-                className="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors text-sm cursor-pointer"
-              >
-                {t.auditPage.downloadPdf}
-              </button>
+              <AuditExport analyzedUrl={analyzedUrl} analysis={result} />
               <button
                 onClick={handleReset}
                 className="px-5 py-2.5 rounded-xl border border-slate-700 text-slate-300 hover:bg-slate-800 transition-colors text-sm cursor-pointer"
