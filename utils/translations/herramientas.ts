@@ -2,8 +2,50 @@ export const herramientasES = {
   herramientasPage: {
     titulo: 'Hub de Herramientas',
     subtitulo: 'Arsenal completo de herramientas de IA para impulsar tu negocio',
-    herramientasDisponibles: 'Mas de 100 herramientas disponibles',
+    herramientasDisponibles: 'Herramientas gratuitas y de acceso directo',
     protectedMessage: 'Registrate gratis para acceder a nuestro Hub completo de herramientas de IA y acelerar tu transformacion digital',
+    toolsSection: {
+      eyebrow: 'Herramientas Impulsa Lab',
+      sectionTitle: 'Todo lo que necesitas para',
+      sectionTitleHighlight: 'impulsar tu negocio',
+      sectionSubtitle: 'Herramientas practicas construidas con IA para pymes latinas. Usalas gratis ahora mismo.',
+      newBadge: 'NUEVO',
+      freeBadge: 'GRATIS',
+      adminBadge: 'Solo Admin',
+      cta: 'Usar herramienta',
+      internalTitle: 'Herramientas Internas',
+      internalSubtitle: 'Acceso restringido al equipo Impulsa Lab',
+      needHelp: 'No sabes por donde empezar?',
+      scheduleConsultation: 'Agenda una Asesoria Gratuita',
+      planNegocios: {
+        title: 'Plan de Negocios con IA',
+        description: 'Genera un plan de negocios ejecutivo completo en minutos. Ideal para validar una idea o presentar a inversionistas.',
+      },
+      agentes: {
+        title: 'Agentes IA Playground',
+        description: 'Prueba en vivo 4 agentes especializados: Estratega de Contenidos, Unificador Multi-IA, Disenador de Prompts y Agente de Noticias.',
+      },
+      promptDesigner: {
+        title: 'Prompt Designer',
+        description: 'Construye prompts profesionales paso a paso con plantillas por industria e historial local.',
+      },
+      noticias: {
+        title: 'Agente de Noticias IA',
+        description: 'Noticias curadas sobre IA y tecnologia aplicada a negocios. Actualizado cada hora desde Google Alerts.',
+      },
+      arsenal: {
+        title: 'Arsenal Tecnologico',
+        description: 'Catalogo de {count}+ herramientas de IA organizadas por categoria. Chat, imagenes, video, codigo, productividad y mas.',
+      },
+      auditoriaWeb: {
+        title: 'Web Analyzer',
+        description: 'Auditoria completa de un sitio web en 6 dimensiones con score, recomendaciones y reporte PDF.',
+      },
+      facturacion: {
+        title: 'Facturacion',
+        description: 'Sistema interno de facturacion embebido para clientes Impulsa Lab.',
+      },
+    },
   },
   herramientasAgentesPage: {
     // Hero section
@@ -289,8 +331,50 @@ export const herramientasEN = {
   herramientasPage: {
     titulo: 'Tools Hub',
     subtitulo: 'Complete arsenal of AI tools to boost your business',
-    herramientasDisponibles: 'Over 100 tools available',
+    herramientasDisponibles: 'Free tools, direct access',
     protectedMessage: 'Sign up free to access our complete AI Tools Hub and accelerate your digital transformation',
+    toolsSection: {
+      eyebrow: 'Impulsa Lab Tools',
+      sectionTitle: 'Everything you need to',
+      sectionTitleHighlight: 'grow your business',
+      sectionSubtitle: 'Practical AI-powered tools built for Latin SMBs. Use them free, right now.',
+      newBadge: 'NEW',
+      freeBadge: 'FREE',
+      adminBadge: 'Admin Only',
+      cta: 'Open tool',
+      internalTitle: 'Internal Tools',
+      internalSubtitle: 'Restricted access for the Impulsa Lab team',
+      needHelp: 'Not sure where to start?',
+      scheduleConsultation: 'Book a Free Consultation',
+      planNegocios: {
+        title: 'AI Business Plan Builder',
+        description: 'Generate a complete executive business plan in minutes. Perfect for validating an idea or pitching investors.',
+      },
+      agentes: {
+        title: 'AI Agents Playground',
+        description: 'Try 4 specialized agents live: Content Strategist, Multi-AI Unifier, Prompt Designer and News Agent.',
+      },
+      promptDesigner: {
+        title: 'Prompt Designer',
+        description: 'Build professional prompts step by step with industry templates and local history.',
+      },
+      noticias: {
+        title: 'AI News Agent',
+        description: 'Curated news on AI and tech applied to business. Updated hourly from Google Alerts.',
+      },
+      arsenal: {
+        title: 'Tech Arsenal',
+        description: 'Catalog of {count}+ AI tools organized by category. Chat, images, video, code, productivity and more.',
+      },
+      auditoriaWeb: {
+        title: 'Web Analyzer',
+        description: 'Complete website audit across 6 dimensions with score, recommendations and PDF report.',
+      },
+      facturacion: {
+        title: 'Invoicing',
+        description: 'Internal invoicing system embedded for Impulsa Lab clients.',
+      },
+    },
   },
   herramientasAgentesPage: {
     // Hero section

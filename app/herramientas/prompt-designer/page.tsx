@@ -309,9 +309,6 @@ ${labels.instruccion5}
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             {tp.subtitulo}
           </p>
-          <div className="mt-6 inline-flex items-center gap-2 px-6 py-3 bg-blue-100 text-blue-700 rounded-full">
-            <span className="font-medium">{tp.proximamente}</span>
-          </div>
         </div>
 
         {/* CONTENIDO PROTEGIDO - Toda la herramienta interactiva */}

@@ -2,11 +2,11 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Herramientas de IA Gratuitas para Negocios Latinos',
-  description: 'Accede a nuestro arsenal de herramientas de IA: agentes inteligentes, prompt designer, noticias y mas para tu empresa latina.',
+  description: 'Plan de negocios con IA, agentes especializados, prompt designer, noticias curadas y catalogo de 130+ herramientas. Todo gratis para pymes latinas.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/herramientas' },
   openGraph: {
     title: 'Herramientas de IA Gratuitas para Negocios Latinos',
-    description: 'Arsenal de herramientas de IA: agentes inteligentes, prompt designer, noticias y mas para tu empresa.',
+    description: 'Plan de negocios con IA, agentes especializados, prompt designer, noticias y catalogo de 130+ herramientas. Todo gratis.',
     url: 'https://www.tuimpulsalab.com/herramientas',
     type: 'website',
     images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Herramientas de IA' }],
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Herramientas de IA Gratuitas para Negocios Latinos',
-    description: 'Arsenal de herramientas de IA: agentes inteligentes, prompt designer, noticias y mas para tu empresa.',
+    description: 'Plan de negocios con IA, agentes especializados, prompt designer y catalogo de 130+ herramientas. Todo gratis.',
     images: ['/images/og-image.jpg'],
   },
 }
