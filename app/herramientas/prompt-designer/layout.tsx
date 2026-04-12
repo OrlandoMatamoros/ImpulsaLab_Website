@@ -1,16 +1,16 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Prompt Designer Gratis para IA | Impulsa Lab',
+  title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
   description:
-    'Construye prompts profesionales paso a paso con plantillas por industria (marketing, desarrollo, educacion, negocios). Gratis, sin registro.',
+    'Construye prompts profesionales adaptados a cada modelo (Claude, GPT, Gemini). Few-shot examples, templates reales de pyme latina, y un optimizador con IA. Gratis.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/herramientas/prompt-designer',
   },
   openGraph: {
-    title: 'Prompt Designer Gratis para IA | Impulsa Lab',
+    title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
     description:
-      'Construye prompts profesionales paso a paso con plantillas por industria. Gratis, sin registro.',
+      'Arma prompts con formato optimo para cada modelo. Templates por industria y optimizador con IA.',
     url: 'https://www.tuimpulsalab.com/herramientas/prompt-designer',
     type: 'website',
     images: [
@@ -19,8 +19,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Prompt Designer Gratis para IA | Impulsa Lab',
-    description: 'Construye prompts profesionales paso a paso con plantillas por industria.',
+    title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
+    description:
+      'Arma prompts con formato optimo para cada modelo. Templates y optimizador con IA.',
     images: ['/images/og-image.jpg'],
   },
 }
