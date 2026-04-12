@@ -6,7 +6,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const VALID_SOURCES = [
   'business-plan-builder',
   'content-strategist',
-  'unified-agent',
+  'ask-the-board',
   'web-analyzer',
   'prompt-designer',
 ] as const

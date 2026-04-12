@@ -96,19 +96,49 @@ export const herramientasES = {
         description: 'Mantente a la vanguardia. Este agente revisa nuestras alertas de Google y te presenta las noticias mas relevantes sobre IA aplicada a negocios.',
       },
     ],
-    clickParaAbrir: 'Click para abrir',
-    probarAhora: 'Probar Ahora',
-    usosRestantesHoy: 'usos restantes hoy',
-    limiteAlcanzado: 'Has alcanzado el limite diario. Agenda tu Diagnostico 3D para acceso ilimitado!',
-    // Email gate (shared across embedded agents)
-    emailGateTitle: 'Un paso antes de empezar',
-    emailGateSubtitle:
-      'Ingresa tu email para probar este agente. Te enviaremos consejos practicos de IA y automatizacion. Sin spam.',
-    emailGatePlaceholder: 'tu@email.com',
-    emailGateStart: 'Empezar',
-    emailGateCancel: 'Cancelar',
-    emailInvalid: 'Ingresa un email valido.',
-    // Content Strategist (real)
+    // Ask the Board (unified public agent)
+    askTheBoardTitle: 'El Panel de las 3 IAs',
+    askTheBoardSubtitle: '1 pregunta, 3 perspectivas, 1 respuesta unificada',
+    askTheBoardDescription:
+      'Hazle cualquier pregunta de negocio a nuestro panel de IAs. Consultamos a GPT, Claude y Gemini en paralelo y un sintetizador une sus mejores ideas en una respuesta accionable.',
+    // Gate (not authenticated)
+    askTheBoardGateTitle: 'Regístrate gratis para probarlo',
+    askTheBoardGateDescription:
+      'Crea una cuenta (o inicia sesión) y obtén 3 preguntas gratis al Panel de las 3 IAs. Usamos modelos económicos para que sea una experiencia real, no un demo.',
+    askTheBoardSignupCTA: 'Crear cuenta gratis',
+    askTheBoardLoginCTA: 'Ya tengo cuenta',
+    // Widget (authenticated)
+    askTheBoardQuestionsUsed: 'preguntas usadas',
+    askTheBoardQuestionsLeft: 'preguntas restantes',
+    askTheBoardPlaceholder: 'Ej: ¿Cómo automatizo el cobro de facturas de mi restaurante?',
+    askTheBoardAnalyze: 'Consultar al panel',
+    askTheBoardAnalyzing: 'Consultando a las 3 IAs y sintetizando...',
+    askTheBoardNewQuestion: 'Nueva pregunta',
+    askTheBoardError: 'Hubo un problema. Intenta de nuevo.',
+    // Labels
+    askTheBoardGPTLabel: 'Perspectiva Técnica (GPT)',
+    askTheBoardClaudeLabel: 'Perspectiva Humana (Claude)',
+    askTheBoardGeminiLabel: 'Perspectiva de Mercado (Gemini)',
+    askTheBoardSynthLabel: 'Síntesis Ejecutiva',
+    // Locked state
+    askTheBoardLockedTitle: 'Has usado tus 3 preguntas gratuitas',
+    askTheBoardLockedDescription:
+      'En una sesión de 30 minutos diseñamos contigo una estrategia de automatización personalizada para tu negocio.',
+    askTheBoardLockedCTA: 'Agendar consultoría gratuita',
+    // Secondary links
+    moreToolsTitle: 'Otras herramientas gratuitas',
+    moreToolsPromptDesigner: 'Diseña prompts',
+    moreToolsPromptDesignerDesc: 'Construye prompts profesionales paso a paso',
+    moreToolsNews: 'Noticias IA',
+    moreToolsNewsDesc: 'Las últimas novedades curadas para negocios',
+    // CTA section
+    ctaTitle: 'Impresionado? Esto es solo una demostracion.',
+    ctaDescription: 'El verdadero poder no esta en usar un agente generico, sino en construir un equipo de agentes',
+    ctaPersonalizados: 'personalizados',
+    ctaDescriptionSuffix: 'que trabajen para los procesos especificos de TU negocio. En Impulsa Lab, no vendemos herramientas; disenamos, construimos e implementamos tu futuro equipo digital.',
+    ctaButton: 'Agenda tu Diagnostico 3D y Disenemos tu Estrategia de Automatizacion',
+  },
+  contentStrategistChat: {
     contentStrategistTitle: 'Estratega de Contenidos IA',
     contentStrategistSubtitle: 'Tu plan personalizado en 60 segundos',
     contentStrategistWelcome:
@@ -131,24 +161,12 @@ export const herramientasES = {
     contentStrategistBlog: 'Blog (2 articulos este mes)',
     contentStrategistVideo: 'Video Viral',
     contentStrategistEmail: 'Email Marketing',
-    // Unified Agent (real)
-    unifiedAgentTitle: 'Agente Unificador',
-    unifiedAgentSubtitle: 'Tres cerebros IA + sintesis final',
-    unifiedAgentPlaceholder: 'Escribe tu pregunta de negocio...',
-    unifiedAgentAnalyze: 'Analizar con 4 IAs',
-    unifiedAgentAnalyzing: 'Consultando GPT + Claude + Gemini...',
-    unifiedAgentChatGPTLabel: 'Perspectiva Tecnica (GPT)',
-    unifiedAgentClaudeLabel: 'Perspectiva Humana (Claude)',
-    unifiedAgentGeminiLabel: 'Perspectiva de Mercado (Gemini)',
-    unifiedAgentUnifiedLabel: 'Sintesis Ejecutiva (Claude)',
-    unifiedAgentNewQuery: 'Nueva pregunta',
-    unifiedAgentError: 'Hubo un problema. Intenta de nuevo.',
-    // CTA section
-    ctaTitle: 'Impresionado? Esto es solo una demostracion.',
-    ctaDescription: 'El verdadero poder no esta en usar un agente generico, sino en construir un equipo de agentes',
-    ctaPersonalizados: 'personalizados',
-    ctaDescriptionSuffix: 'que trabajen para los procesos especificos de TU negocio. En Impulsa Lab, no vendemos herramientas; disenamos, construimos e implementamos tu futuro equipo digital.',
-    ctaButton: 'Agenda tu Diagnostico 3D y Disenemos tu Estrategia de Automatizacion',
+    emailInvalid: 'Ingresa un email valido.',
+    emailGateTitle: 'Un paso antes de empezar',
+    emailGateSubtitle:
+      'Ingresa tu email para probar este agente. Te enviaremos consejos practicos de IA y automatizacion. Sin spam.',
+    emailGatePlaceholder: 'tu@email.com',
+    emailGateStart: 'Empezar',
   },
   herramientasArsenalPage: {
     volver: 'Volver',
@@ -468,19 +486,49 @@ export const herramientasEN = {
         description: 'Stay ahead of the curve. This agent reviews our Google alerts and presents you with the most relevant news about AI applied to business.',
       },
     ],
-    clickParaAbrir: 'Click to open',
-    probarAhora: 'Try Now',
-    usosRestantesHoy: 'uses remaining today',
-    limiteAlcanzado: 'You have reached your daily limit. Schedule your 3D Diagnostic for unlimited access!',
-    // Email gate (shared across embedded agents)
-    emailGateTitle: 'One step before we start',
-    emailGateSubtitle:
-      'Enter your email to try this agent. We will also send practical AI and automation tips. No spam.',
-    emailGatePlaceholder: 'you@email.com',
-    emailGateStart: 'Start',
-    emailGateCancel: 'Cancel',
-    emailInvalid: 'Please enter a valid email.',
-    // Content Strategist (real)
+    // Ask the Board (unified public agent)
+    askTheBoardTitle: 'The 3 AIs Board',
+    askTheBoardSubtitle: '1 question, 3 perspectives, 1 unified answer',
+    askTheBoardDescription:
+      'Ask any business question to our AI board. We query GPT, Claude and Gemini in parallel and a synthesizer combines their best insights into one actionable answer.',
+    // Gate (not authenticated)
+    askTheBoardGateTitle: 'Sign up free to try it',
+    askTheBoardGateDescription:
+      'Create an account (or sign in) and get 3 free questions to the 3 AIs Board. We use budget-friendly models so it feels real, not a demo.',
+    askTheBoardSignupCTA: 'Create free account',
+    askTheBoardLoginCTA: 'I already have an account',
+    // Widget (authenticated)
+    askTheBoardQuestionsUsed: 'questions used',
+    askTheBoardQuestionsLeft: 'questions remaining',
+    askTheBoardPlaceholder: 'E.g.: How do I automate invoice collection at my restaurant?',
+    askTheBoardAnalyze: 'Ask the board',
+    askTheBoardAnalyzing: 'Querying 3 AIs and synthesizing...',
+    askTheBoardNewQuestion: 'New question',
+    askTheBoardError: 'Something went wrong. Please try again.',
+    // Labels
+    askTheBoardGPTLabel: 'Technical Perspective (GPT)',
+    askTheBoardClaudeLabel: 'Human Perspective (Claude)',
+    askTheBoardGeminiLabel: 'Market Perspective (Gemini)',
+    askTheBoardSynthLabel: 'Executive Synthesis',
+    // Locked state
+    askTheBoardLockedTitle: 'You have used your 3 free questions',
+    askTheBoardLockedDescription:
+      'In a 30-minute session we design a personalized automation strategy for your business.',
+    askTheBoardLockedCTA: 'Book a free consultation',
+    // Secondary links
+    moreToolsTitle: 'More free tools',
+    moreToolsPromptDesigner: 'Design prompts',
+    moreToolsPromptDesignerDesc: 'Build professional prompts step by step',
+    moreToolsNews: 'AI News',
+    moreToolsNewsDesc: 'The latest curated news for businesses',
+    // CTA section
+    ctaTitle: 'Impressed? This is just a demo.',
+    ctaDescription: 'The real power is not in using a generic agent, but in building a team of',
+    ctaPersonalizados: 'custom',
+    ctaDescriptionSuffix: 'agents that work for YOUR specific business processes. At Impulsa Lab, we don\'t sell tools; we design, build, and implement your future digital team.',
+    ctaButton: 'Schedule Your 3D Diagnostic and Let\'s Design Your Automation Strategy',
+  },
+  contentStrategistChat: {
     contentStrategistTitle: 'AI Content Strategist',
     contentStrategistSubtitle: 'Your personalized plan in 60 seconds',
     contentStrategistWelcome:
@@ -503,24 +551,12 @@ export const herramientasEN = {
     contentStrategistBlog: 'Blog (2 articles this month)',
     contentStrategistVideo: 'Viral Video',
     contentStrategistEmail: 'Email Marketing',
-    // Unified Agent (real)
-    unifiedAgentTitle: 'Unified Agent',
-    unifiedAgentSubtitle: 'Three AI brains + final synthesis',
-    unifiedAgentPlaceholder: 'Type your business question...',
-    unifiedAgentAnalyze: 'Analyze with 4 AIs',
-    unifiedAgentAnalyzing: 'Querying GPT + Claude + Gemini...',
-    unifiedAgentChatGPTLabel: 'Technical Perspective (GPT)',
-    unifiedAgentClaudeLabel: 'Human Perspective (Claude)',
-    unifiedAgentGeminiLabel: 'Market Perspective (Gemini)',
-    unifiedAgentUnifiedLabel: 'Executive Synthesis (Claude)',
-    unifiedAgentNewQuery: 'New question',
-    unifiedAgentError: 'Something went wrong. Please try again.',
-    // CTA section
-    ctaTitle: 'Impressed? This is just a demo.',
-    ctaDescription: 'The real power is not in using a generic agent, but in building a team of',
-    ctaPersonalizados: 'custom',
-    ctaDescriptionSuffix: 'agents that work for YOUR specific business processes. At Impulsa Lab, we don\'t sell tools; we design, build, and implement your future digital team.',
-    ctaButton: 'Schedule Your 3D Diagnostic and Let\'s Design Your Automation Strategy',
+    emailInvalid: 'Please enter a valid email.',
+    emailGateTitle: 'One step before we start',
+    emailGateSubtitle:
+      'Enter your email to try this agent. We will also send practical AI and automation tips. No spam.',
+    emailGatePlaceholder: 'you@email.com',
+    emailGateStart: 'Start',
   },
   herramientasArsenalPage: {
     volver: 'Back',

@@ -34,7 +34,7 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 const ContentStrategistChat = () => {
   const { t, language } = useLanguage()
-  const tp = t.herramientasAgentesPage
+  const tp = t.contentStrategistChat
 
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
