@@ -1,210 +1,235 @@
-// app/api/unified-agent/route.ts
+import Anthropic from '@anthropic-ai/sdk'
+import { GoogleGenerativeAI } from '@google/generative-ai'
+import OpenAI from 'openai'
+import { NextRequest, NextResponse } from 'next/server'
+import { adminDb } from '@/lib/firebase-admin'
 
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { NextResponse } from 'next/server';
+export const maxDuration = 60
 
-// Cache simple en memoria
-const responseCache = new Map();
-const CACHE_DURATION = 3600000; // 1 hora en millisegundos
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-function getCacheKey(query: string) {
-  return query.toLowerCase().trim();
+// Rate limit: 5 queries / IP / hour (each query = 4 LLM calls, so this
+// caps real cost exposure).
+const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const RATE_LIMIT_MAX = 5
+const ipHits = new Map<string, number[]>()
+
+function checkRateLimit(ip: string): boolean {
+  const now = Date.now()
+  const hits = ipHits.get(ip) || []
+  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
+  if (recent.length >= RATE_LIMIT_MAX) {
+    ipHits.set(ip, recent)
+    return false
+  }
+  recent.push(now)
+  ipHits.set(ip, recent)
+  return true
 }
 
-export async function POST(request: Request) {
+// Simple response cache (1h TTL, in-memory).
+interface CachedResponses {
+  chatgpt: string
+  claude: string
+  gemini: string
+  unified: string
+}
+const responseCache = new Map<string, { data: CachedResponses; timestamp: number }>()
+const CACHE_DURATION = 3600000
+
+const ERRORS = {
+  ES: {
+    missing: 'Se requiere una pregunta.',
+    invalidEmail: 'Email invalido.',
+    rateLimit: 'Has alcanzado el limite por hora. Intenta de nuevo mas tarde.',
+    internal: 'Error interno del servidor.',
+  },
+  EN: {
+    missing: 'A query is required.',
+    invalidEmail: 'Invalid email.',
+    rateLimit: 'You have reached the hourly limit. Please try again later.',
+    internal: 'Internal server error.',
+  },
+} as const
+
+export async function POST(request: NextRequest) {
+  const clientIp =
+    request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+    request.headers.get('x-real-ip') ||
+    'unknown'
+
+  let lang: 'ES' | 'EN' = 'ES'
+
   try {
-    const { query } = await request.json();
-    
-    if (!query) {
-      return NextResponse.json(
-        { error: 'Query is required' },
-        { status: 400 }
-      );
+    const body = await request.json()
+    const { query, email, locale } = body
+    lang = locale?.toUpperCase() === 'EN' ? 'EN' : 'ES'
+    const errors = ERRORS[lang]
+
+    if (!checkRateLimit(clientIp)) {
+      return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
     }
 
-    // Verificar caché
-    const cacheKey = getCacheKey(query);
-    const cached = responseCache.get(cacheKey);
+    if (!query || typeof query !== 'string') {
+      return NextResponse.json({ error: errors.missing }, { status: 400 })
+    }
+
+    if (typeof email !== 'string' || !EMAIL_RE.test(email.trim())) {
+      return NextResponse.json({ error: errors.invalidEmail }, { status: 400 })
+    }
+
+    // Fire-and-forget lead capture (one doc per query, so multiple queries
+    // from the same session produce multiple docs — use email to dedupe
+    // downstream if needed).
+    adminDb
+      .collection('leads')
+      .add({
+        email: email.trim().toLowerCase(),
+        source: 'unified-agent',
+        locale: lang,
+        metadata: { query: String(query).slice(0, 500) },
+        ip: clientIp,
+        userAgent: request.headers.get('user-agent')?.slice(0, 300) || '',
+        createdAt: new Date().toISOString(),
+      })
+      .catch((err) => console.error('unified-agent lead capture failed:', err))
+
+    // Cache key by query only (same question -> same 4 responses).
+    const cacheKey = query.toLowerCase().trim()
+    const cached = responseCache.get(cacheKey)
     if (cached && Date.now() - cached.timestamp < CACHE_DURATION) {
-      return NextResponse.json(cached.data);
+      return NextResponse.json(cached.data)
     }
 
-    // Inicializar respuestas
-    const responses = {
-      chatgpt: '',
-      claude: '',
-      gemini: '',
-      unified: ''
-    };
+    const responses: CachedResponses = { chatgpt: '', claude: '', gemini: '', unified: '' }
+    const promptLang = lang === 'EN' ? 'English' : 'Spanish'
 
-    // Promesas para consultas paralelas
-    const aiPromises = [];
+    // ===== 1. Run GPT + Claude + Gemini in parallel =====
+    const aiPromises: Promise<void>[] = []
 
-    // 1. ChatGPT
     if (process.env.OPENAI_API_KEY) {
+      const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
       aiPromises.push(
-        fetch('https://api.openai.com/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`
-          },
-          body: JSON.stringify({
-            model: 'gpt-3.5-turbo',
+        openai.chat.completions
+          .create({
+            model: 'gpt-4o-mini',
             messages: [
               {
                 role: 'system',
-                content: 'Eres un experto en automatización empresarial. Responde de forma técnica y específica en máximo 80 palabras.'
+                content: `You are a business automation expert. Respond technically and specifically in at most 80 words. Write in ${promptLang}.`,
               },
-              {
-                role: 'user',
-                content: query
-              }
+              { role: 'user', content: query },
             ],
-            max_tokens: 80,
-            temperature: 0.7
+            max_tokens: 180,
+            temperature: 0.7,
           })
-        })
-        .then(res => res.json())
-        .then(data => {
-          responses.chatgpt = data.choices?.[0]?.message?.content || 'Error al obtener respuesta de ChatGPT';
-        })
-        .catch(err => {
-          console.error('Error ChatGPT:', err);
-          responses.chatgpt = 'ChatGPT: Analizando desde la perspectiva técnica...';
-        })
-      );
+          .then((r) => {
+            responses.chatgpt = r.choices?.[0]?.message?.content?.trim() || ''
+          })
+          .catch((err) => {
+            console.error('unified-agent GPT error:', err)
+          })
+      )
     }
 
-    // 2. Claude
     if (process.env.ANTHROPIC_API_KEY) {
+      const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
       aiPromises.push(
-        fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'x-api-key': process.env.ANTHROPIC_API_KEY,
-            'anthropic-version': '2023-06-01'
-          },
-          body: JSON.stringify({
-            model: 'claude-3-haiku-20240307', // Modelo más económico
-            max_tokens: 80,
+        anthropic.messages
+          .create({
+            model: 'claude-haiku-4-5',
+            max_tokens: 180,
             messages: [
               {
                 role: 'user',
-                content: `Como experto en transformación digital y gestión del cambio, responde en máximo 80 palabras: ${query}`
-              }
-            ]
+                content: `As a digital transformation and change management expert, respond in at most 80 words and in ${promptLang}: ${query}`,
+              },
+            ],
           })
-        })
-        .then(res => res.json())
-        .then(data => {
-          responses.claude = data.content?.[0]?.text || 'Error al obtener respuesta de Claude';
-        })
-        .catch(err => {
-          console.error('Error Claude:', err);
-          responses.claude = 'Claude: Considerando el impacto humano y organizacional...';
-        })
-      );
+          .then((m) => {
+            const block = m.content.find((b) => b.type === 'text')
+            responses.claude = block && block.type === 'text' ? block.text.trim() : ''
+          })
+          .catch((err) => {
+            console.error('unified-agent Claude error:', err)
+          })
+      )
     }
 
-    // 3. Gemini
-    const geminiKey = process.env.GEMINI_API_KEY || process.env.GOOGLE_GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+    const geminiKey =
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_GEMINI_API_KEY ||
+      process.env.GOOGLE_AI_API_KEY
     if (geminiKey) {
-      const genAI = new GoogleGenerativeAI(geminiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-      
+      const genAI = new GoogleGenerativeAI(geminiKey)
+      const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
       aiPromises.push(
-        model.generateContent(`Como especialista en IA y automatización empresarial, responde en máximo 80 palabras: ${query}`)
-          .then(result => {
-            responses.gemini = result.response.text() || 'Error al obtener respuesta de Gemini';
+        model
+          .generateContent(
+            `As an AI and business automation specialist, respond in at most 80 words and in ${promptLang}: ${query}`
+          )
+          .then((r) => {
+            responses.gemini = r.response.text()?.trim() || ''
           })
-          .catch(err => {
-            console.error('Error Gemini:', err);
-            responses.gemini = 'Gemini: Analizando las mejores prácticas del mercado...';
+          .catch((err) => {
+            console.error('unified-agent Gemini error:', err)
           })
-      );
+      )
     }
 
-    // Esperar todas las respuestas
-    await Promise.all(aiPromises);
+    await Promise.all(aiPromises)
 
-    // Generar respuesta unificada con Gemini (simulando Claude Opus)
-    if (geminiKey) {
+    // ===== 2. Synthesize with Claude Sonnet 4.6 (the real synthesizer) =====
+    if (process.env.ANTHROPIC_API_KEY && (responses.chatgpt || responses.claude || responses.gemini)) {
       try {
-        const genAI = new GoogleGenerativeAI(geminiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-        
-        const unifiedPrompt = `
-        Eres Claude Opus, un modelo avanzado de IA que unifica y sintetiza respuestas. 
-        Basándote en estas 3 perspectivas sobre "${query}":
-        
-        ChatGPT (técnica): ${responses.chatgpt}
-        Claude (humana): ${responses.claude}
-        Gemini (práctica): ${responses.gemini}
-        
-        Crea una síntesis ejecutiva que:
-        1. Combine los mejores insights de cada modelo
-        2. Elimine redundancias y contradicciones
-        3. Presente una solución clara y accionable
-        4. Use emojis para destacar puntos clave
-        5. Incluya métricas específicas cuando sea posible
-        
-        Formato: 4-5 puntos detallados con acciones específicas. Máximo 250 palabras.
-        `;
+        const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
+        const synth = await anthropic.messages.create({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 700,
+          messages: [
+            {
+              role: 'user',
+              content: `You are the Executive Synthesizer for Impulsa Lab. Three AI advisors analyzed the business question "${query}":
 
-        const unifiedResult = await model.generateContent(unifiedPrompt);
-        responses.unified = unifiedResult.response.text();
-      } catch (error) {
-        // Respuesta unificada de respaldo
-        responses.unified = `🎯 SÍNTESIS UNIFICADA 4IA (Claude Opus):
+GPT (technical perspective): ${responses.chatgpt || 'no response'}
 
-✅ **Perspectiva Técnica (ChatGPT)**: ${responses.chatgpt.substring(0, 60)}...
+Claude Haiku (human perspective): ${responses.claude || 'no response'}
 
-✅ **Perspectiva Humana (Claude)**: ${responses.claude.substring(0, 60)}...
+Gemini (market perspective): ${responses.gemini || 'no response'}
 
-✅ **Perspectiva Práctica (Gemini)**: ${responses.gemini.substring(0, 60)}...
-
-💡 **Recomendación Impulsa Lab**: Basándonos en el análisis conjunto de las 3 IAs principales, recomendamos implementar una solución gradual que combine:
-1. Automatización técnica robusta (ChatGPT)
-2. Gestión del cambio organizacional (Claude)
-3. Mejores prácticas del mercado (Gemini)
-
-📊 ROI estimado: 40-60% reducción en costos operativos en 3-6 meses.`;
+Produce an executive synthesis in ${promptLang} that:
+1. Combines the strongest insights from each perspective
+2. Resolves contradictions with a clear recommendation
+3. Gives 4-5 specific, actionable steps with concrete metrics where possible
+4. Is written in plain prose (no emojis)
+5. Is at most 250 words`,
+            },
+          ],
+        })
+        const synthBlock = synth.content.find((b) => b.type === 'text')
+        responses.unified = synthBlock && synthBlock.type === 'text' ? synthBlock.text.trim() : ''
+      } catch (err) {
+        console.error('unified-agent synthesis error:', err)
       }
     }
 
-    // Guardar en caché
-    responseCache.set(cacheKey, {
-      data: responses,
-      timestamp: Date.now()
-    });
-
-    return NextResponse.json(responses);
-
+    responseCache.set(cacheKey, { data: responses, timestamp: Date.now() })
+    return NextResponse.json(responses)
   } catch (error) {
-    console.error('Error general:', error);
-    // Respuestas de fallback
-    return NextResponse.json({
-      chatgpt: 'Perspectiva técnica: Implementa automatización con herramientas no-code como Make o Zapier.',
-      claude: 'Perspectiva humana: Considera el impacto en tu equipo y capacítalos gradualmente.',
-      gemini: 'Perspectiva práctica: Comienza con procesos simples y escala progresivamente.',
-      unified: '🎯 Recomendación: Inicia con un piloto pequeño, mide resultados y expande.'
-    });
+    console.error('unified-agent error:', error)
+    return NextResponse.json({ error: ERRORS[lang].internal }, { status: 500 })
   }
 }
 
-// Endpoint para verificar el estado de las APIs
 export async function GET() {
   const status = {
     openai: !!process.env.OPENAI_API_KEY,
     anthropic: !!process.env.ANTHROPIC_API_KEY,
-    gemini: !!(process.env.GEMINI_API_KEY || process.env.GOOGLE_GEMINI_API_KEY || process.env.NEXT_PUBLIC_GEMINI_API_KEY),
-  };
-
-  return NextResponse.json({
-    status,
-    message: 'API status check',
-    cache_size: responseCache.size
-  });
+    gemini: !!(
+      process.env.GEMINI_API_KEY ||
+      process.env.GOOGLE_GEMINI_API_KEY ||
+      process.env.GOOGLE_AI_API_KEY
+    ),
+  }
+  return NextResponse.json({ status, cache_size: responseCache.size })
 }

@@ -100,6 +100,49 @@ export const herramientasES = {
     probarAhora: 'Probar Ahora',
     usosRestantesHoy: 'usos restantes hoy',
     limiteAlcanzado: 'Has alcanzado el limite diario. Agenda tu Diagnostico 3D para acceso ilimitado!',
+    // Email gate (shared across embedded agents)
+    emailGateTitle: 'Un paso antes de empezar',
+    emailGateSubtitle:
+      'Ingresa tu email para probar este agente. Te enviaremos consejos practicos de IA y automatizacion. Sin spam.',
+    emailGatePlaceholder: 'tu@email.com',
+    emailGateStart: 'Empezar',
+    emailGateCancel: 'Cancelar',
+    emailInvalid: 'Ingresa un email valido.',
+    // Content Strategist (real)
+    contentStrategistTitle: 'Estratega de Contenidos IA',
+    contentStrategistSubtitle: 'Tu plan personalizado en 60 segundos',
+    contentStrategistWelcome:
+      'Hola! Soy el Estratega de Contenidos IA de Impulsa Lab. Voy a crear un plan personalizado para tu negocio. Solo 3 preguntas rapidas:',
+    contentStrategistQ1:
+      'Primero, a que industria pertenece tu negocio y que producto o servicio principal ofreces?',
+    contentStrategistQ2:
+      'Describe en una frase a tu cliente ideal. Que problema o necesidad le resuelves?',
+    contentStrategistQ3: 'Cual es tu objetivo numero uno con tu contenido este mes?',
+    contentStrategistAnalyzing:
+      'Analizando tus respuestas y preparando un plan personalizado con IA...',
+    contentStrategistError: 'Hubo un problema generando tu plan. Intenta de nuevo.',
+    contentStrategistPlanTitle: 'Tu Plan de Contenidos Personalizado',
+    contentStrategistCTA: 'Quiero una estrategia completa',
+    contentStrategistRestart: 'Reiniciar',
+    contentStrategistSend: 'Enviar',
+    contentStrategistInputPlaceholder: 'Escribe tu respuesta aqui...',
+    contentStrategistObjective: 'Objetivo Principal',
+    contentStrategistInstagram: 'Instagram (3 posts esta semana)',
+    contentStrategistBlog: 'Blog (2 articulos este mes)',
+    contentStrategistVideo: 'Video Viral',
+    contentStrategistEmail: 'Email Marketing',
+    // Unified Agent (real)
+    unifiedAgentTitle: 'Agente Unificador',
+    unifiedAgentSubtitle: 'Tres cerebros IA + sintesis final',
+    unifiedAgentPlaceholder: 'Escribe tu pregunta de negocio...',
+    unifiedAgentAnalyze: 'Analizar con 4 IAs',
+    unifiedAgentAnalyzing: 'Consultando GPT + Claude + Gemini...',
+    unifiedAgentChatGPTLabel: 'Perspectiva Tecnica (GPT)',
+    unifiedAgentClaudeLabel: 'Perspectiva Humana (Claude)',
+    unifiedAgentGeminiLabel: 'Perspectiva de Mercado (Gemini)',
+    unifiedAgentUnifiedLabel: 'Sintesis Ejecutiva (Claude)',
+    unifiedAgentNewQuery: 'Nueva pregunta',
+    unifiedAgentError: 'Hubo un problema. Intenta de nuevo.',
     // CTA section
     ctaTitle: 'Impresionado? Esto es solo una demostracion.',
     ctaDescription: 'El verdadero poder no esta en usar un agente generico, sino en construir un equipo de agentes',
@@ -429,6 +472,49 @@ export const herramientasEN = {
     probarAhora: 'Try Now',
     usosRestantesHoy: 'uses remaining today',
     limiteAlcanzado: 'You have reached your daily limit. Schedule your 3D Diagnostic for unlimited access!',
+    // Email gate (shared across embedded agents)
+    emailGateTitle: 'One step before we start',
+    emailGateSubtitle:
+      'Enter your email to try this agent. We will also send practical AI and automation tips. No spam.',
+    emailGatePlaceholder: 'you@email.com',
+    emailGateStart: 'Start',
+    emailGateCancel: 'Cancel',
+    emailInvalid: 'Please enter a valid email.',
+    // Content Strategist (real)
+    contentStrategistTitle: 'AI Content Strategist',
+    contentStrategistSubtitle: 'Your personalized plan in 60 seconds',
+    contentStrategistWelcome:
+      "Hi! I'm Impulsa Lab's AI Content Strategist. I'll create a personalized plan for your business. Just 3 quick questions:",
+    contentStrategistQ1:
+      'First — what industry is your business in and what is your main product or service?',
+    contentStrategistQ2:
+      'Describe your ideal customer in one sentence. What problem or need do you solve for them?',
+    contentStrategistQ3: 'What is your #1 content goal this month?',
+    contentStrategistAnalyzing:
+      'Analyzing your answers and preparing a personalized plan with AI...',
+    contentStrategistError: 'There was a problem generating your plan. Please try again.',
+    contentStrategistPlanTitle: 'Your Personalized Content Plan',
+    contentStrategistCTA: 'I want a full strategy',
+    contentStrategistRestart: 'Restart',
+    contentStrategistSend: 'Send',
+    contentStrategistInputPlaceholder: 'Type your answer here...',
+    contentStrategistObjective: 'Main Objective',
+    contentStrategistInstagram: 'Instagram (3 posts this week)',
+    contentStrategistBlog: 'Blog (2 articles this month)',
+    contentStrategistVideo: 'Viral Video',
+    contentStrategistEmail: 'Email Marketing',
+    // Unified Agent (real)
+    unifiedAgentTitle: 'Unified Agent',
+    unifiedAgentSubtitle: 'Three AI brains + final synthesis',
+    unifiedAgentPlaceholder: 'Type your business question...',
+    unifiedAgentAnalyze: 'Analyze with 4 AIs',
+    unifiedAgentAnalyzing: 'Querying GPT + Claude + Gemini...',
+    unifiedAgentChatGPTLabel: 'Technical Perspective (GPT)',
+    unifiedAgentClaudeLabel: 'Human Perspective (Claude)',
+    unifiedAgentGeminiLabel: 'Market Perspective (Gemini)',
+    unifiedAgentUnifiedLabel: 'Executive Synthesis (Claude)',
+    unifiedAgentNewQuery: 'New question',
+    unifiedAgentError: 'Something went wrong. Please try again.',
     // CTA section
     ctaTitle: 'Impressed? This is just a demo.',
     ctaDescription: 'The real power is not in using a generic agent, but in building a team of',

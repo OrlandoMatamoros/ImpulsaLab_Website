@@ -50,13 +50,14 @@ export default function PlanExport({
     setGenerating(true)
 
     // Fire-and-forget lead capture — do not block the PDF if it fails.
-    fetch('/api/business-plan/capture-lead', {
+    fetch('/api/leads/capture', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
         email: trimmed,
-        businessName: plan.businessName,
+        source: 'business-plan-builder',
         locale: language,
+        metadata: { businessName: plan.businessName },
       }),
     }).catch((err) => {
       console.error('Lead capture failed:', err)

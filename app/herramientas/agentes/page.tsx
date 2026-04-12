@@ -1,9 +1,9 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { Bot, Sparkles, Brain, Zap, ArrowRight, Clock, TrendingUp } from 'lucide-react'
+import { Sparkles, Brain, Zap, ArrowRight, TrendingUp } from 'lucide-react'
 import ContentStrategistChat from '@/components/services/marketing/ContentStrategistChat'
-import OperationsEnhancedSection from '@/components/operations/OperationsEnhancedSection'
+import UnifiedAgentWidget from '@/components/operations/UnifiedAgentWidget'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 type AgentType = 'content' | 'unified' | 'prompt' | 'news'
@@ -87,8 +87,7 @@ export default function AgentesPlayground() {
       subtitle: translatedAgents[0].subtitle,
       description: translatedAgents[0].description,
       icon: <Sparkles className="w-6 h-6" />,
-      color: 'purple',
-      isEmbedded: true
+      isEmbedded: true,
     },
     {
       id: 'unified' as AgentType,
@@ -96,8 +95,7 @@ export default function AgentesPlayground() {
       subtitle: translatedAgents[1].subtitle,
       description: translatedAgents[1].description,
       icon: <Brain className="w-6 h-6" />,
-      color: 'blue',
-      isEmbedded: true
+      isEmbedded: true,
     },
     {
       id: 'prompt' as AgentType,
@@ -105,8 +103,7 @@ export default function AgentesPlayground() {
       subtitle: translatedAgents[2].subtitle,
       description: translatedAgents[2].description,
       icon: <Zap className="w-6 h-6" />,
-      color: 'green',
-      link: '/herramientas/prompt-designer'
+      link: '/herramientas/prompt-designer',
     },
     {
       id: 'news' as AgentType,
@@ -114,60 +111,63 @@ export default function AgentesPlayground() {
       subtitle: translatedAgents[3].subtitle,
       description: translatedAgents[3].description,
       icon: <TrendingUp className="w-6 h-6" />,
-      color: 'orange',
-      link: '/herramientas/noticias'
-    }
+      link: '/herramientas/noticias',
+    },
   ]
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 text-white">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 -left-4 w-72 h-72 bg-purple-500 rounded-full filter blur-xl"></div>
-          <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-500 rounded-full filter blur-xl"></div>
-          <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-500 rounded-full filter blur-xl"></div>
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#001a3a] via-[#002D62] to-[#003a7a] text-white">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-0 -left-4 w-72 h-72 bg-[#00BCD4] rounded-full filter blur-3xl"></div>
+          <div className="absolute -bottom-8 right-20 w-72 h-72 bg-[#00BCD4] rounded-full filter blur-3xl opacity-60"></div>
         </div>
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full mb-6">
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-[#00BCD4]/10 backdrop-blur-sm border border-[#00BCD4]/30 rounded-full mb-6">
               <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75 animate-ping"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-green-500"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-[#00BCD4] opacity-75 animate-ping"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#00BCD4]"></span>
               </span>
-              <span className="text-sm font-medium">{t.herramientasAgentesPage.playgroundActive} • {t.herramientasAgentesPage.pruebaSinRegistro}</span>
+              <span className="text-sm font-medium text-[#00BCD4]">
+                {t.herramientasAgentesPage.playgroundActive} &middot; {t.herramientasAgentesPage.pruebaSinRegistro}
+              </span>
             </div>
 
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
-              {t.herramientasAgentesPage.heroTitle}<br />
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-pink-200">
+              {t.herramientasAgentesPage.heroTitle}
+              <br />
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-[#00BCD4] to-white">
                 {t.herramientasAgentesPage.heroTitleHighlight}
               </span>
             </h1>
 
-            <p className="text-xl text-purple-100 max-w-3xl mx-auto mb-12">
-              {t.herramientasAgentesPage.heroDescription} <span className="font-bold text-white">{t.herramientasAgentesPage.heroDescriptionBold}</span> {t.herramientasAgentesPage.heroDescriptionSuffix}
-              <span className="block mt-2 text-lg">{t.herramientasAgentesPage.heroDescriptionCTA}</span>
+            <p className="text-xl text-white/80 max-w-3xl mx-auto mb-12">
+              {t.herramientasAgentesPage.heroDescription}{' '}
+              <span className="font-bold text-white">{t.herramientasAgentesPage.heroDescriptionBold}</span>{' '}
+              {t.herramientasAgentesPage.heroDescriptionSuffix}
+              <span className="block mt-2 text-lg text-[#00BCD4]">
+                {t.herramientasAgentesPage.heroDescriptionCTA}
+              </span>
             </p>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto">
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <div className="text-3xl font-bold text-white">4</div>
-                <div className="text-purple-200 text-sm">{t.herramientasAgentesPage.agentesActivos}</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <div className="text-3xl font-bold text-white">24/7</div>
-                <div className="text-purple-200 text-sm">{t.herramientasAgentesPage.disponibilidad}</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <div className="text-3xl font-bold text-white">3</div>
-                <div className="text-purple-200 text-sm">{t.herramientasAgentesPage.usosGratis}</div>
-              </div>
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
-                <div className="text-3xl font-bold text-white">$0</div>
-                <div className="text-purple-200 text-sm">{t.herramientasAgentesPage.sinTarjeta}</div>
-              </div>
+              {[
+                { v: '4', l: t.herramientasAgentesPage.agentesActivos },
+                { v: '24/7', l: t.herramientasAgentesPage.disponibilidad },
+                { v: '3', l: t.herramientasAgentesPage.usosGratis },
+                { v: '$0', l: t.herramientasAgentesPage.sinTarjeta },
+              ].map((s) => (
+                <div
+                  key={s.l}
+                  className="bg-white/5 backdrop-blur-sm border border-[#00BCD4]/20 rounded-lg p-4"
+                >
+                  <div className="text-3xl font-bold text-[#00BCD4]">{s.v}</div>
+                  <div className="text-white/70 text-sm">{s.l}</div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -177,41 +177,25 @@ export default function AgentesPlayground() {
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
               {t.herramientasAgentesPage.especialistaTitle}
             </h2>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center">
-              <div className="w-20 h-20 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Brain className="w-10 h-10 text-purple-600" />
+            {[
+              { Icon: Brain, title: t.herramientasAgentesPage.cerebroTitle, desc: t.herramientasAgentesPage.cerebroDesc },
+              { Icon: Zap, title: t.herramientasAgentesPage.conectadoTitle, desc: t.herramientasAgentesPage.conectadoDesc },
+              { Icon: TrendingUp, title: t.herramientasAgentesPage.aprendeTitle, desc: t.herramientasAgentesPage.aprendeDesc },
+            ].map(({ Icon, title, desc }) => (
+              <div key={title} className="text-center">
+                <div className="w-20 h-20 bg-[#00BCD4]/10 border border-[#00BCD4]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                  <Icon className="w-10 h-10 text-[#002D62]" />
+                </div>
+                <h3 className="text-xl font-bold mb-3 text-slate-900">{title}</h3>
+                <p className="text-slate-600">{desc}</p>
               </div>
-              <h3 className="text-xl font-bold mb-3">{t.herramientasAgentesPage.cerebroTitle}</h3>
-              <p className="text-gray-600">
-                {t.herramientasAgentesPage.cerebroDesc}
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-blue-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Zap className="w-10 h-10 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{t.herramientasAgentesPage.conectadoTitle}</h3>
-              <p className="text-gray-600">
-                {t.herramientasAgentesPage.conectadoDesc}
-              </p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-20 h-20 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <TrendingUp className="w-10 h-10 text-green-600" />
-              </div>
-              <h3 className="text-xl font-bold mb-3">{t.herramientasAgentesPage.aprendeTitle}</h3>
-              <p className="text-gray-600">
-                {t.herramientasAgentesPage.aprendeDesc}
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -232,66 +216,49 @@ export default function AgentesPlayground() {
             {agents.map((agent) => {
               const usageData = usage[agent.id] || { count: 0, lastReset: new Date().toDateString() }
               const remainingUses = DAILY_LIMIT - usageData.count
-              const colorClasses = {
-                purple: 'border-purple-500 bg-purple-50 hover:bg-purple-100',
-                blue: 'border-blue-500 bg-blue-50 hover:bg-blue-100',
-                green: 'border-green-500 bg-green-50 hover:bg-green-100',
-                orange: 'border-orange-500 bg-orange-50 hover:bg-orange-100'
-              }
+
+              const cardClass =
+                'block relative border border-slate-200 bg-white rounded-xl p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:border-[#00BCD4] group no-underline cursor-pointer'
+
+              const iconBox = (
+                <div className="w-12 h-12 rounded-lg bg-gradient-to-br from-[#002D62] to-[#00BCD4] text-white flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                  {agent.icon}
+                </div>
+              )
+
+              const cardHeader = (
+                <>
+                  <div className="flex items-start justify-between mb-4">
+                    <div className="flex-1 min-w-0 pr-4">
+                      <h3 className="text-2xl font-bold text-slate-900 mb-1">{agent.title}</h3>
+                      <p className="text-lg text-[#00BCD4] font-semibold">{agent.subtitle}</p>
+                    </div>
+                    {iconBox}
+                  </div>
+                  <p className="text-slate-600 mb-4">{agent.description}</p>
+                </>
+              )
 
               return agent.link ? (
-                // Enlaces externos para Prompt Designer y Noticias
-                <a
-                  key={agent.id}
-                  href={agent.link}
-                  className={`block relative border-2 ${colorClasses[agent.color as keyof typeof colorClasses]}
-                             rounded-xl p-8 cursor-pointer transition-all duration-300 hover:shadow-xl
-                             hover:scale-[1.02] group no-underline`}
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-1">{agent.title}</h3>
-                      <p className="text-lg text-gray-700 font-medium">{agent.subtitle}</p>
-                    </div>
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center
-                                   shadow-md group-hover:scale-110 transition-transform">
-                      {agent.icon}
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{agent.description}</p>
-
+                <a key={agent.id} href={agent.link} className={cardClass}>
+                  {cardHeader}
                   <div className="flex items-center justify-between">
-                    <span className="text-sm text-gray-600">{t.herramientasAgentesPage.clickParaAbrir}</span>
-                    <span className="flex items-center gap-2 text-gray-700 font-medium
-                                     group-hover:text-gray-900 transition-colors">
+                    <span className="text-sm text-slate-500">
+                      {t.herramientasAgentesPage.clickParaAbrir}
+                    </span>
+                    <span className="flex items-center gap-2 text-[#002D62] font-semibold group-hover:text-[#00BCD4] transition-colors">
                       {t.herramientasAgentesPage.probarAhora}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
                   </div>
                 </a>
               ) : (
-                // Modales embebidos para Content y Unified
                 <div
                   key={agent.id}
                   onClick={() => handleAgentClick(agent.id)}
-                  className={`relative border-2 ${colorClasses[agent.color as keyof typeof colorClasses]}
-                             rounded-xl p-8 cursor-pointer transition-all duration-300 hover:shadow-xl
-                             hover:scale-[1.02] group`}
+                  className={cardClass}
                 >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-gray-900 mb-1">{agent.title}</h3>
-                      <p className="text-lg text-gray-700 font-medium">{agent.subtitle}</p>
-                    </div>
-                    <div className="w-12 h-12 bg-white rounded-lg flex items-center justify-center
-                                   shadow-md group-hover:scale-110 transition-transform">
-                      {agent.icon}
-                    </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{agent.description}</p>
-
+                  {cardHeader}
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
                       <div className="flex gap-1">
@@ -299,17 +266,16 @@ export default function AgentesPlayground() {
                           <div
                             key={i}
                             className={`w-2 h-2 rounded-full ${
-                              i < remainingUses ? 'bg-green-500' : 'bg-gray-300'
+                              i < remainingUses ? 'bg-[#00BCD4]' : 'bg-slate-300'
                             }`}
                           />
                         ))}
                       </div>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-slate-500">
                         {remainingUses} {t.herramientasAgentesPage.usosRestantesHoy}
                       </span>
                     </div>
-                    <span className="flex items-center gap-2 text-gray-700 font-medium
-                                     group-hover:text-gray-900 transition-colors">
+                    <span className="flex items-center gap-2 text-[#002D62] font-semibold group-hover:text-[#00BCD4] transition-colors">
                       {t.herramientasAgentesPage.probarAhora}
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </span>
@@ -342,7 +308,7 @@ export default function AgentesPlayground() {
 
               <div className="p-8 overflow-y-auto max-h-[90vh]">
                 {selectedAgent === 'content' && <ContentStrategistChat />}
-                {selectedAgent === 'unified' && <OperationsEnhancedSection />}
+                {selectedAgent === 'unified' && <UnifiedAgentWidget />}
               </div>
             </div>
           </div>
@@ -350,22 +316,25 @@ export default function AgentesPlayground() {
       )}
 
       {/* CTA Final */}
-      <section className="py-20 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section className="relative overflow-hidden py-20 bg-gradient-to-br from-[#001a3a] via-[#002D62] to-[#003a7a] text-white">
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#00BCD4] rounded-full blur-3xl" />
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             {t.herramientasAgentesPage.ctaTitle}
           </h2>
-          <p className="text-xl text-gray-300 mb-8">
+          <p className="text-xl text-white/80 mb-8">
             {t.herramientasAgentesPage.ctaDescription}
-            <span className="text-white font-bold"> {t.herramientasAgentesPage.ctaPersonalizados}</span> {t.herramientasAgentesPage.ctaDescriptionSuffix}
+            <span className="text-[#00BCD4] font-bold"> {t.herramientasAgentesPage.ctaPersonalizados}</span>{' '}
+            {t.herramientasAgentesPage.ctaDescriptionSuffix}
           </p>
 
           <a
             href="https://calendly.com/orlando-tuimpulsalab/30min"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-8 py-4 bg-white text-gray-900 rounded-lg
-                     font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-[#00BCD4] text-[#001a3a] rounded-xl font-bold text-lg hover:bg-white transition-all duration-300 hover:scale-105 shadow-xl"
           >
             {t.herramientasAgentesPage.ctaButton}
             <ArrowRight className="w-5 h-5" />
