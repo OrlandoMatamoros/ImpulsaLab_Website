@@ -1,14 +1,17 @@
 import { NextResponse } from 'next/server'
-import { GmailNewsService } from '@/lib/gmail-news-service'
+import { RssNewsService } from '@/lib/rss-news-service'
+
+export const dynamic = 'force-dynamic'
+export const maxDuration = 30
 
 export async function GET() {
   try {
-    const service = new GmailNewsService()
+    const service = new RssNewsService()
     const news = await service.getLatestNews()
     return NextResponse.json(news)
   } catch (error: any) {
-    console.error('Error:', error)
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    console.error('[news/sync] error:', error)
+    return NextResponse.json({ error: error.message || 'unknown_error' }, { status: 500 })
   }
 }
 
