@@ -197,8 +197,16 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
         }
       }
     } catch (error: any) {
-      console.error('Google sign-in error:', error)
-      throw new Error('Error al iniciar sesión con Google')
+      // auth-helper already logged the raw error — just map to a user-facing message
+      const code = error?.code || 'unknown'
+      const msg =
+        code === 'auth/popup-blocked' ? 'El popup fue bloqueado por tu navegador. Permite ventanas emergentes e intenta de nuevo.' :
+        code === 'auth/operation-not-allowed' ? 'Google sign-in no está habilitado. Contacta al administrador.' :
+        code === 'auth/unauthorized-domain' ? 'Este dominio no está autorizado para Firebase Auth.' :
+        code === 'auth/network-request-failed' ? 'Error de red. Verifica tu conexión e intenta de nuevo.' :
+        code === 'auth/cancelled-popup-request' ? '' :
+        `No pudimos iniciarte con Google (${code})`
+      if (msg) throw new Error(msg)
     }
   }
 
