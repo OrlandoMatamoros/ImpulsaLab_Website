@@ -9,6 +9,7 @@ const VALID_SOURCES = [
   'ask-the-board',
   'web-analyzer',
   'prompt-designer',
+  'noticias-newsletter',
 ] as const
 
 type LeadSource = (typeof VALID_SOURCES)[number]

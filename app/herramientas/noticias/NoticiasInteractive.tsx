@@ -21,6 +21,11 @@ import {
 } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext'
 
+const NEWS_PLACEHOLDER =
+  "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 450'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0%25' stop-color='%23002D62'/><stop offset='100%25' stop-color='%2300BCD4'/></linearGradient></defs><rect width='800' height='450' fill='url(%23g)'/><text x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='white' font-family='system-ui,sans-serif' font-size='32' font-weight='700' opacity='0.85'>Impulsa Lab</text></svg>"
+
+type NewsletterStatus = 'idle' | 'loading' | 'success' | 'error'
+
 // Tipos de datos
 export interface NewsItem {
   id: string
@@ -54,12 +59,14 @@ interface NoticiasInteractiveProps {
 }
 
 export default function NoticiasInteractive({ initialNews }: NoticiasInteractiveProps) {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('date')
   const [showNewsletter, setShowNewsletter] = useState(false)
   const [email, setEmail] = useState('')
+  const [newsletterStatus, setNewsletterStatus] = useState<NewsletterStatus>('idle')
+  const [newsletterError, setNewsletterError] = useState('')
 
   // Initial state hydrated from server-fetched data — Google sees the full grid in SSR HTML.
   const [newsData, setNewsData] = useState<NewsItem[]>(initialNews)
@@ -131,11 +138,51 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
   const featuredNews = newsData.filter(news => news.isFeatured)
   const trendingNews = newsData.filter(news => news.isTrending)
 
-  const handleNewsletterSubmit = (e: React.FormEvent) => {
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Email subscrito:', email)
-    setEmail('')
-    setShowNewsletter(false)
+    setNewsletterStatus('loading')
+    setNewsletterError('')
+
+    try {
+      const res = await fetch('/api/leads/capture', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email.trim(),
+          source: 'noticias-newsletter',
+          locale: language,
+          metadata: {
+            selectedCategory,
+            currentCategoryCount: String(filteredNews.length),
+          },
+        }),
+      })
+
+      const data = await res.json().catch(() => ({}))
+
+      if (res.status === 400 && data?.error === 'invalid_email') {
+        setNewsletterStatus('error')
+        setNewsletterError(t.herramientasNoticiasPage.newsletterErrorInvalido)
+        return
+      }
+
+      if (!res.ok) {
+        setNewsletterStatus('error')
+        setNewsletterError(t.herramientasNoticiasPage.newsletterErrorGeneral)
+        return
+      }
+
+      setNewsletterStatus('success')
+      setEmail('')
+      setTimeout(() => {
+        setShowNewsletter(false)
+        setNewsletterStatus('idle')
+      }, 2200)
+    } catch (err) {
+      console.error('newsletter submit error:', err)
+      setNewsletterStatus('error')
+      setNewsletterError(t.herramientasNoticiasPage.newsletterErrorGeneral)
+    }
   }
 
   const handleTagClick = (tag: string) => {
@@ -323,8 +370,12 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                     </div>
 
                     <img
-                      src={featuredNews[0].imageUrl}
+                      src={featuredNews[0].imageUrl || NEWS_PLACEHOLDER}
                       alt={featuredNews[0].title}
+                      onError={(e) => {
+                        const img = e.currentTarget
+                        if (img.src !== NEWS_PLACEHOLDER) img.src = NEWS_PLACEHOLDER
+                      }}
                       className="w-full h-96 object-cover opacity-80 transition-transform duration-500 group-hover:scale-105"
                     />
 
@@ -395,8 +446,12 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
                     >
                       <div className="relative h-48 overflow-hidden">
                         <img
-                          src={news.imageUrl}
+                          src={news.imageUrl || NEWS_PLACEHOLDER}
                           alt={news.title}
+                          onError={(e) => {
+                            const img = e.currentTarget
+                            if (img.src !== NEWS_PLACEHOLDER) img.src = NEWS_PLACEHOLDER
+                          }}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                         {news.isTrending && (
@@ -547,7 +602,11 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
       {showNewsletter && (
         <div
           className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
-          onClick={() => setShowNewsletter(false)}
+          onClick={() => {
+            setShowNewsletter(false)
+            setNewsletterStatus('idle')
+            setNewsletterError('')
+          }}
         >
           <div
             className="bg-gray-900 border border-white/10 rounded-2xl p-8 max-w-md w-full animate-scaleIn"
@@ -556,8 +615,13 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-2xl font-bold">{t.herramientasNoticiasPage.suscribirseAlNewsletter}</h3>
               <button
-                onClick={() => setShowNewsletter(false)}
+                onClick={() => {
+                  setShowNewsletter(false)
+                  setNewsletterStatus('idle')
+                  setNewsletterError('')
+                }}
                 className="p-2 hover:bg-white/10 rounded-lg transition-colors"
+                aria-label="close"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -567,23 +631,46 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
               {t.herramientasNoticiasPage.newsletterModalDesc}
             </p>
 
-            <form onSubmit={handleNewsletterSubmit}>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="tu@email.com"
-                required
-                className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] mb-4"
-              />
-
-              <button
-                type="submit"
-                className="w-full py-3 bg-[#00BCD4] hover:bg-[#00BCD4]/80 rounded-lg font-medium transition-colors"
+            {newsletterStatus === 'success' ? (
+              <div
+                role="status"
+                aria-live="polite"
+                className="p-4 rounded-lg bg-[#00BCD4]/15 border border-[#00BCD4]/40 text-[#00BCD4] text-sm text-center"
               >
-                {t.herramientasNoticiasPage.suscribirse}
-              </button>
-            </form>
+                {t.herramientasNoticiasPage.newsletterExito}
+              </div>
+            ) : (
+              <form onSubmit={handleNewsletterSubmit}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="tu@email.com"
+                  required
+                  disabled={newsletterStatus === 'loading'}
+                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] mb-4 disabled:opacity-60"
+                />
+
+                {newsletterStatus === 'error' && newsletterError && (
+                  <p
+                    role="alert"
+                    className="text-sm text-red-400 mb-3"
+                  >
+                    {newsletterError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={newsletterStatus === 'loading'}
+                  className="w-full py-3 bg-[#00BCD4] hover:bg-[#00BCD4]/80 rounded-lg font-medium transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {newsletterStatus === 'loading'
+                    ? t.herramientasNoticiasPage.suscribiendo
+                    : t.herramientasNoticiasPage.suscribirse}
+                </button>
+              </form>
+            )}
 
             <p className="text-xs text-gray-500 mt-4 text-center">
               {t.herramientasNoticiasPage.newsletterPrivacidad}

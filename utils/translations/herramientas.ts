@@ -214,6 +214,10 @@ export const herramientasES = {
     suscribirseAlNewsletter: 'Suscribete al Newsletter',
     newsletterModalDesc: 'Mantente al dia con las ultimas noticias y tendencias en inteligencia artificial.',
     suscribirse: 'Suscribirse',
+    suscribiendo: 'Enviando...',
+    newsletterExito: '¡Listo! Te avisamos apenas llegue una noticia importante.',
+    newsletterErrorInvalido: 'Revisa el email, parece incorrecto.',
+    newsletterErrorGeneral: 'No pudimos registrarte ahora. Intenta en un momento.',
     newsletterPrivacidad: 'No compartiremos tu email. Puedes cancelar cuando quieras.',
     // Sidebar
     enTendencia: 'En Tendencia',
@@ -713,6 +717,10 @@ export const herramientasEN = {
     suscribirseAlNewsletter: 'Subscribe to Newsletter',
     newsletterModalDesc: 'Stay up to date with the latest news and trends in artificial intelligence.',
     suscribirse: 'Subscribe',
+    suscribiendo: 'Sending...',
+    newsletterExito: 'Done! We will notify you as soon as an important story lands.',
+    newsletterErrorInvalido: 'That email looks off — please double-check.',
+    newsletterErrorGeneral: 'We could not sign you up right now. Try again in a moment.',
     newsletterPrivacidad: 'We won\'t share your email. You can unsubscribe anytime.',
     // Sidebar
     enTendencia: 'Trending',
