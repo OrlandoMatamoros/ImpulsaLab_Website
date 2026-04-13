@@ -188,6 +188,10 @@ export const herramientasES = {
     herramienta: 'Herramienta',
     accion: 'Accion',
     todas: 'todas',
+    gateTitle: 'Vista previa agotada',
+    gateSubtitle:
+      'Ya usaste tu preview gratuito del Arsenal. Conversemos 15 minutos y te damos acceso completo a las 89 herramientas curadas, filtros avanzados y recomendaciones por industria.',
+    gateCta: 'Agendar demo gratis',
   },
   herramientasNoticiasPage: {
     titulo: 'Noticias IA',
@@ -683,6 +687,10 @@ export const herramientasEN = {
     herramienta: 'Tool',
     accion: 'Action',
     todas: 'all',
+    gateTitle: 'Preview used up',
+    gateSubtitle:
+      'You already used your free Arsenal preview. Let us talk for 15 minutes and get full access to the 89 curated tools, advanced filters and industry-specific recommendations.',
+    gateCta: 'Book a free demo',
   },
   herramientasNoticiasPage: {
     titulo: 'AI News',

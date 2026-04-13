@@ -983,182 +983,126 @@ const OpenAIIcon: React.FC<{ className?: string }> = ({ className }) => (
   </svg>
 );
 
-// ARRAY COMPLETO DE HERRAMIENTAS CON CATEGORÍAS
+// ARRAY CURADO 2026-04 — 89 tools en 15 categorías (ver docs/arsenal-research-2026-04.md)
 const techTools: TechTool[] = [
-  // Chat & Asistentes IA
-  { name: 'ChatGPT', category: 'Chat IA', logo: ChatGPTIcon, url: 'https://chatgpt.com', color: '#00A67E' },
-  { name: 'Claude', category: 'Chat IA', logo: ClaudeIcon, url: 'https://claude.ai', color: '#D97757' },
-  { name: 'Gemini', category: 'Chat IA', logo: GeminiIcon, url: 'https://gemini.google.com', color: '#4285F4' },
-  { name: 'Perplexity', category: 'Chat IA', logo: PerplexityIcon, url: 'https://perplexity.ai', color: '#20B2AA' },
-  { name: 'Copilot', category: 'Chat IA', logo: CopilotIcon, url: 'https://copilot.microsoft.com', color: '#0078D4' },
-  { name: 'Poe', category: 'Chat IA', logo: PoeIcon, url: 'https://poe.com', color: '#7B3FF2' },
-  { name: 'You.com', category: 'Chat IA', logo: YouComIcon, url: 'https://you.com', color: '#FF6B6B' },
-  { name: 'Phind', category: 'Chat IA', logo: PhindIcon, url: 'https://phind.com', color: '#00D9B1' },
-  
-  // Diseño & Creatividad
-  { name: 'Figma', category: 'Diseño', logo: FigmaIcon, url: 'https://figma.com', color: '#F24E1E' },
-  { name: 'Canva', category: 'Diseño', logo: CanvaIcon, url: 'https://canva.com', color: '#00C4CC' },
-  { name: 'Adobe Firefly', category: 'Diseño', logo: AdobeFireflyIcon, url: 'https://firefly.adobe.com', color: '#FF0000' },
-  { name: 'Framer', category: 'Diseño', logo: FramerIcon, url: 'https://framer.com', color: '#0055FF' },
-  { name: 'Sketch', category: 'Diseño', logo: SketchIcon, url: 'https://sketch.com', color: '#F7B500' },
-  { name: 'Adobe XD', category: 'Diseño', logo: AdobeXDIcon, url: 'https://adobe.com/products/xd', color: '#FF61F6' },
-  { name: 'InVision', category: 'Diseño', logo: InVisionIcon, url: 'https://invisionapp.com', color: '#FF3366' },
-  { name: 'Penpot', category: 'Diseño', logo: PenpotIcon, url: 'https://penpot.app', color: '#000000' },
-  { name: 'Lunacy', category: 'Diseño', logo: LunacyIcon, url: 'https://icons8.com/lunacy', color: '#179DE3' },
-  
+  // Chat IA & LLMs
+  { name: 'ChatGPT', category: 'Chat IA & LLMs', logo: ChatGPTIcon, url: 'https://chatgpt.com', color: '#00A67E' },
+  { name: 'Claude', category: 'Chat IA & LLMs', logo: ClaudeIcon, url: 'https://claude.ai', color: '#D97757' },
+  { name: 'Gemini', category: 'Chat IA & LLMs', logo: GeminiIcon, url: 'https://gemini.google.com', color: '#4285F4' },
+  { name: 'Perplexity', category: 'Chat IA & LLMs', logo: PerplexityIcon, url: 'https://perplexity.ai', color: '#20B2AA' },
+  { name: 'Copilot', category: 'Chat IA & LLMs', logo: CopilotIcon, url: 'https://copilot.microsoft.com', color: '#0078D4' },
+  { name: 'Hugging Face', category: 'Chat IA & LLMs', logo: HuggingFaceIcon, url: 'https://huggingface.co', color: '#FFD21E' },
+  { name: 'Replicate', category: 'Chat IA & LLMs', logo: ReplicateIcon, url: 'https://replicate.com', color: '#000000' },
+
   // Imágenes IA
   { name: 'Midjourney', category: 'Imágenes IA', logo: MidjourneyIcon, url: 'https://midjourney.com', color: '#5865F2' },
   { name: 'DALL-E 3', category: 'Imágenes IA', logo: DallE3Icon, url: 'https://openai.com/dall-e-3', color: '#00A67E' },
   { name: 'Stable Diffusion', category: 'Imágenes IA', logo: StableDiffusionIcon, url: 'https://stability.ai', color: '#9333EA' },
   { name: 'Leonardo AI', category: 'Imágenes IA', logo: LeonardoAIIcon, url: 'https://leonardo.ai', color: '#5C16C5' },
   { name: 'Ideogram', category: 'Imágenes IA', logo: IdeogramIcon, url: 'https://ideogram.ai', color: '#6366F1' },
-  { name: 'Bing Image Creator', category: 'Imágenes IA', logo: BingImageIcon, url: 'https://bing.com/create', color: '#0078D4' },
-  { name: 'NightCafe', category: 'Imágenes IA', logo: NightCafeIcon, url: 'https://nightcafe.studio', color: '#FF6B6B' },
-  { name: 'Artbreeder', category: 'Imágenes IA', logo: ArtbreederIcon, url: 'https://artbreeder.com', color: '#1A1A1A' },
-  
+  { name: 'Adobe Firefly', category: 'Imágenes IA', logo: AdobeFireflyIcon, url: 'https://firefly.adobe.com', color: '#FF0000' },
+
   // Video IA
-  { name: 'Synthesia', category: 'Video IA', logo: SynthesiaIcon, url: 'https://synthesia.io', color: '#4353FF' },
   { name: 'RunwayML', category: 'Video IA', logo: RunwayMLIcon, url: 'https://runwayml.com', color: '#000000' },
   { name: 'Pika Labs', category: 'Video IA', logo: PikaLabsIcon, url: 'https://pika.art', color: '#FF4B4B' },
   { name: 'HeyGen', category: 'Video IA', logo: HeyGenIcon, url: 'https://heygen.com', color: '#5C3EE8' },
-  { name: 'D-ID', category: 'Video IA', logo: DIDIcon, url: 'https://d-id.com', color: '#6C5CE7' },
-  { name: 'Fliki', category: 'Video IA', logo: FlikiIcon, url: 'https://fliki.ai', color: '#FF6B6B' },
-  { name: 'Pictory', category: 'Video IA', logo: PictoryIcon, url: 'https://pictory.ai', color: '#00D4FF' },
+  { name: 'Synthesia', category: 'Video IA', logo: SynthesiaIcon, url: 'https://synthesia.io', color: '#4353FF' },
   { name: 'Descript', category: 'Video IA', logo: DescriptIcon, url: 'https://descript.com', color: '#5E5ADB' },
-  { name: 'Lumen5', category: 'Video IA', logo: Lumen5Icon, url: 'https://lumen5.com', color: '#5846F6' },
-  
+
+  // Audio IA
+  { name: 'ElevenLabs', category: 'Audio IA', logo: ElevenLabsIcon, url: 'https://elevenlabs.io', color: '#000000' },
+  { name: 'Suno AI', category: 'Audio IA', logo: SunoAIIcon, url: 'https://suno.ai', color: '#FA5252' },
+  { name: 'Murf AI', category: 'Audio IA', logo: MurfAIIcon, url: 'https://murf.ai', color: '#6C5CE7' },
+  { name: 'AIVA', category: 'Audio IA', logo: AIVAIcon, url: 'https://aiva.ai', color: '#000000' },
+
+  // Escritura IA
+  { name: 'Grammarly', category: 'Escritura IA', logo: GrammarlyIcon, url: 'https://grammarly.com', color: '#15B67A' },
+  { name: 'Jasper', category: 'Escritura IA', logo: JasperIcon, url: 'https://jasper.ai', color: '#5C16C5' },
+  { name: 'Copy.ai', category: 'Escritura IA', logo: CopyAIIcon, url: 'https://copy.ai', color: '#7C3AED' },
+  { name: 'Writesonic', category: 'Escritura IA', logo: WritesonicIcon, url: 'https://writesonic.com', color: '#006AFF' },
+
+  // Diseño
+  { name: 'Figma', category: 'Diseño', logo: FigmaIcon, url: 'https://figma.com', color: '#F24E1E' },
+  { name: 'Canva', category: 'Diseño', logo: CanvaIcon, url: 'https://canva.com', color: '#00C4CC' },
+  { name: 'Framer', category: 'Diseño', logo: FramerIcon, url: 'https://framer.com', color: '#0055FF' },
+  { name: 'Sketch', category: 'Diseño', logo: SketchIcon, url: 'https://sketch.com', color: '#F7B500' },
+
+  // Desarrollo & Cloud
+  { name: 'GitHub', category: 'Desarrollo & Cloud', logo: GitHubIcon, url: 'https://github.com', color: '#24292E' },
+  { name: 'GitHub Copilot', category: 'Desarrollo & Cloud', logo: GitHubCopilotIcon, url: 'https://github.com/features/copilot', color: '#24292E' },
+  { name: 'Cursor', category: 'Desarrollo & Cloud', logo: CursorIcon, url: 'https://cursor.sh', color: '#000000' },
+  { name: 'Replit', category: 'Desarrollo & Cloud', logo: ReplitIcon, url: 'https://replit.com', color: '#F26207' },
+  { name: 'Vercel', category: 'Desarrollo & Cloud', logo: VercelIcon, url: 'https://vercel.com', color: '#000000' },
+  { name: 'Netlify', category: 'Desarrollo & Cloud', logo: NetlifyIcon, url: 'https://netlify.com', color: '#00C7B7' },
+  { name: 'Supabase', category: 'Desarrollo & Cloud', logo: SupabaseIcon, url: 'https://supabase.com', color: '#3ECF8E' },
+  { name: 'AWS', category: 'Desarrollo & Cloud', logo: AWSIcon, url: 'https://aws.amazon.com', color: '#FF9900' },
+  { name: 'Google Cloud', category: 'Desarrollo & Cloud', logo: GoogleCloudIcon, url: 'https://cloud.google.com', color: '#4285F4' },
+  { name: 'Microsoft Azure', category: 'Desarrollo & Cloud', logo: MicrosoftAzureIcon, url: 'https://azure.microsoft.com', color: '#0078D4' },
+  { name: 'Cloudflare', category: 'Desarrollo & Cloud', logo: CloudflareIcon, url: 'https://cloudflare.com', color: '#F38020' },
+
   // Productividad
   { name: 'Notion', category: 'Productividad', logo: NotionIcon, url: 'https://notion.so', color: '#000000' },
   { name: 'Obsidian', category: 'Productividad', logo: ObsidianIcon, url: 'https://obsidian.md', color: '#7C3AED' },
-  { name: 'Monday', category: 'Productividad', logo: MondayIcon, url: 'https://monday.com', color: '#FF3D71' },
   { name: 'ClickUp', category: 'Productividad', logo: ClickUpIcon, url: 'https://clickup.com', color: '#7B68EE' },
+  { name: 'Monday', category: 'Productividad', logo: MondayIcon, url: 'https://monday.com', color: '#FF3D71' },
   { name: 'Asana', category: 'Productividad', logo: AsanaIcon, url: 'https://asana.com', color: '#F06A6A' },
-  { name: 'Trello', category: 'Productividad', logo: TrelloIcon, url: 'https://trello.com', color: '#0079BF' },
-  { name: 'Todoist', category: 'Productividad', logo: TodoistIcon, url: 'https://todoist.com', color: '#E44332' },
   { name: 'Linear', category: 'Productividad', logo: LinearIcon, url: 'https://linear.app', color: '#5E6AD2' },
-  { name: 'Coda', category: 'Productividad', logo: CodaIcon, url: 'https://coda.io', color: '#F46A54' },
   { name: 'Airtable', category: 'Productividad', logo: AirtableIcon, url: 'https://airtable.com', color: '#FCB400' },
-  
-  // Audio
-  { name: 'AIVA', category: 'Audio', logo: AIVAIcon, url: 'https://aiva.ai', color: '#000000' },
-  { name: 'ElevenLabs', category: 'Audio', logo: ElevenLabsIcon, url: 'https://elevenlabs.io', color: '#000000' },
-  { name: 'Murf AI', category: 'Audio', logo: MurfAIIcon, url: 'https://murf.ai', color: '#6C5CE7' },
-  { name: 'Suno AI', category: 'Audio', logo: SunoAIIcon, url: 'https://suno.ai', color: '#FA5252' },
-  { name: 'Soundraw', category: 'Audio', logo: SoundrawIcon, url: 'https://soundraw.io', color: '#6366F1' },
-  { name: 'Boomy', category: 'Audio', logo: BoomyIcon, url: 'https://boomy.com', color: '#FF006E' },
-  { name: 'Splash Pro', category: 'Audio', logo: SplashProIcon, url: 'https://splashpro.com', color: '#7C3AED' },
-  { name: 'Voicemod', category: 'Audio', logo: VoicemodIcon, url: 'https://voicemod.net', color: '#01E5C0' },
-  
-  // Escritura
-  { name: 'Jasper', category: 'Escritura', logo: JasperIcon, url: 'https://jasper.ai', color: '#5C16C5' },
-  { name: 'Copy.ai', category: 'Escritura', logo: CopyAIIcon, url: 'https://copy.ai', color: '#7C3AED' },
-  { name: 'Grammarly', category: 'Escritura', logo: GrammarlyIcon, url: 'https://grammarly.com', color: '#15B67A' },
-  { name: 'Hemingway', category: 'Escritura', logo: HemingwayIcon, url: 'https://hemingwayapp.com', color: '#F7BE16' },
-  { name: 'ProWritingAid', category: 'Escritura', logo: ProWritingAidIcon, url: 'https://prowritingaid.com', color: '#00A8E1' },
-  { name: 'Rytr', category: 'Escritura', logo: RytrIcon, url: 'https://rytr.me', color: '#FF5A5F' },
-  { name: 'Wordtune', category: 'Escritura', logo: WordtuneIcon, url: 'https://wordtune.com', color: '#6B46C1' },
-  { name: 'Writesonic', category: 'Escritura', logo: WritesonicIcon, url: 'https://writesonic.com', color: '#006AFF' },
-  
-  // Código
-  { name: 'GitHub', category: 'Código', logo: GitHubIcon, url: 'https://github.com', color: '#24292E' },
-  { name: 'GitHub Copilot', category: 'Código', logo: GitHubCopilotIcon, url: 'https://github.com/features/copilot', color: '#24292E' },
-  { name: 'Cursor', category: 'Código', logo: CursorIcon, url: 'https://cursor.sh', color: '#000000' },
-  { name: 'Tabnine', category: 'Código', logo: TabnineIcon, url: 'https://tabnine.com', color: '#FF6B6B' },
-  { name: 'Replit', category: 'Código', logo: ReplitIcon, url: 'https://replit.com', color: '#F26207' },
-  { name: 'CodePen', category: 'Código', logo: CodePenIcon, url: 'https://codepen.io', color: '#000000' },
-  { name: 'CodeSandbox', category: 'Código', logo: CodeSandboxIcon, url: 'https://codesandbox.io', color: '#040404' },
-  { name: 'Vercel', category: 'Código', logo: VercelIcon, url: 'https://vercel.com', color: '#000000' },
-  { name: 'Netlify', category: 'Código', logo: NetlifyIcon, url: 'https://netlify.com', color: '#00C7B7' },
-  { name: 'Railway', category: 'Código', logo: RailwayIcon, url: 'https://railway.app', color: '#853BCE' },
-  { name: 'Supabase', category: 'Código', logo: SupabaseIcon, url: 'https://supabase.com', color: '#3ECF8E' },
-  
-  // Marketing
-  { name: 'Buffer', category: 'Marketing', logo: BufferIcon, url: 'https://buffer.com', color: '#168EEA' },
-  { name: 'Hootsuite', category: 'Marketing', logo: HootsuiteIcon, url: 'https://hootsuite.com', color: '#000000' },
-  { name: 'Mailchimp', category: 'Marketing', logo: MailchimpIcon, url: 'https://mailchimp.com', color: '#FFE01B' },
-  { name: 'HubSpot', category: 'Marketing', logo: HubSpotIcon, url: 'https://hubspot.com', color: '#FF7A59' },
-  
-  // SEO
-  { name: 'Semrush', category: 'SEO', logo: SemrushIcon, url: 'https://semrush.com', color: '#FF642D' },
-  { name: 'Ahrefs', category: 'SEO', logo: AhrefsIcon, url: 'https://ahrefs.com', color: '#FF6B00' },
-  { name: 'Moz', category: 'SEO', logo: MozIcon, url: 'https://moz.com', color: '#4285F4' },
-  { name: 'Screaming Frog', category: 'SEO', logo: ScreamingFrogIcon, url: 'https://screamingfrog.co.uk', color: '#8CC63F' },
-  
-  // Analytics
-  { name: 'Google Analytics', category: 'Analytics', logo: GoogleAnalyticsIcon, url: 'https://analytics.google.com', color: '#E37400' },
-  { name: 'Mixpanel', category: 'Analytics', logo: MixpanelIcon, url: 'https://mixpanel.com', color: '#7856FF' },
-  { name: 'Hotjar', category: 'Analytics', logo: HotjarIcon, url: 'https://hotjar.com', color: '#FF3C00' },
-  { name: 'Amplitude', category: 'Analytics', logo: AmplitudeIcon, url: 'https://amplitude.com', color: '#136ACD' },
-  { name: 'Tableau', category: 'Analytics', logo: TableauIcon, url: 'https://tableau.com', color: '#E97627' },
-  { name: 'Power BI', category: 'Analytics', logo: PowerBIIcon, url: 'https://powerbi.microsoft.com', color: '#F2C811' },
-  { name: 'Looker', category: 'Analytics', logo: LookerIcon, url: 'https://looker.com', color: '#4285F4' },
-  { name: 'Segment', category: 'Analytics', logo: SegmentIcon, url: 'https://segment.com', color: '#52BD94' },
-  
-  // E-commerce
-  { name: 'Shopify', category: 'E-commerce', logo: ShopifyIcon, url: 'https://shopify.com', color: '#96BF48' },
-  { name: 'WooCommerce', category: 'E-commerce', logo: WooCommerceIcon, url: 'https://woocommerce.com', color: '#96588A' },
-  { name: 'BigCommerce', category: 'E-commerce', logo: BigCommerceIcon, url: 'https://bigcommerce.com', color: '#121118' },
-  { name: 'Square', category: 'E-commerce', logo: SquareIcon, url: 'https://squareup.com', color: '#3E4348' },
-  { name: 'PayPal', category: 'E-commerce', logo: PayPalIcon, url: 'https://paypal.com', color: '#003087' },
-  { name: 'Stripe', category: 'E-commerce', logo: StripeIcon, url: 'https://stripe.com', color: '#635BFF' },
-  { name: 'Etsy', category: 'E-commerce', logo: EtsyIcon, url: 'https://etsy.com', color: '#F14000' },
-  { name: 'Gumroad', category: 'E-commerce', logo: GumroadIcon, url: 'https://gumroad.com', color: '#36A9AE' },
-  
+  { name: 'Todoist', category: 'Productividad', logo: TodoistIcon, url: 'https://todoist.com', color: '#E44332' },
+
+  // Automatización
+  { name: 'Zapier', category: 'Automatización', logo: ZapierIcon, url: 'https://zapier.com', color: '#FF4A00' },
+  { name: 'Make', category: 'Automatización', logo: MakeIcon, url: 'https://make.com', color: '#6D00CC' },
+  { name: 'n8n', category: 'Automatización', logo: N8nIcon, url: 'https://n8n.io', color: '#EA4B71' },
+
+  // Marketing & CRM
+  { name: 'HubSpot', category: 'Marketing & CRM', logo: HubSpotIcon, url: 'https://hubspot.com', color: '#FF7A59' },
+  { name: 'Mailchimp', category: 'Marketing & CRM', logo: MailchimpIcon, url: 'https://mailchimp.com', color: '#FFE01B' },
+  { name: 'Buffer', category: 'Marketing & CRM', logo: BufferIcon, url: 'https://buffer.com', color: '#168EEA' },
+  { name: 'Hootsuite', category: 'Marketing & CRM', logo: HootsuiteIcon, url: 'https://hootsuite.com', color: '#000000' },
+
+  // SEO & Analytics
+  { name: 'Semrush', category: 'SEO & Analytics', logo: SemrushIcon, url: 'https://semrush.com', color: '#FF642D' },
+  { name: 'Ahrefs', category: 'SEO & Analytics', logo: AhrefsIcon, url: 'https://ahrefs.com', color: '#FF6B00' },
+  { name: 'Moz', category: 'SEO & Analytics', logo: MozIcon, url: 'https://moz.com', color: '#4285F4' },
+  { name: 'Google Analytics', category: 'SEO & Analytics', logo: GoogleAnalyticsIcon, url: 'https://analytics.google.com', color: '#E37400' },
+  { name: 'Mixpanel', category: 'SEO & Analytics', logo: MixpanelIcon, url: 'https://mixpanel.com', color: '#7856FF' },
+  { name: 'Hotjar', category: 'SEO & Analytics', logo: HotjarIcon, url: 'https://hotjar.com', color: '#FF3C00' },
+  { name: 'Power BI', category: 'SEO & Analytics', logo: PowerBIIcon, url: 'https://powerbi.microsoft.com', color: '#F2C811' },
+  { name: 'Tableau', category: 'SEO & Analytics', logo: TableauIcon, url: 'https://tableau.com', color: '#E97627' },
+
+  // E-commerce & Pagos
+  { name: 'Shopify', category: 'E-commerce & Pagos', logo: ShopifyIcon, url: 'https://shopify.com', color: '#96BF48' },
+  { name: 'WooCommerce', category: 'E-commerce & Pagos', logo: WooCommerceIcon, url: 'https://woocommerce.com', color: '#96588A' },
+  { name: 'Stripe', category: 'E-commerce & Pagos', logo: StripeIcon, url: 'https://stripe.com', color: '#635BFF' },
+  { name: 'PayPal', category: 'E-commerce & Pagos', logo: PayPalIcon, url: 'https://paypal.com', color: '#003087' },
+  { name: 'Square', category: 'E-commerce & Pagos', logo: SquareIcon, url: 'https://squareup.com', color: '#3E4348' },
+  { name: 'Etsy', category: 'E-commerce & Pagos', logo: EtsyIcon, url: 'https://etsy.com', color: '#F14000' },
+
   // Comunicación
   { name: 'Slack', category: 'Comunicación', logo: SlackIcon, url: 'https://slack.com', color: '#4A154B' },
   { name: 'Zoom', category: 'Comunicación', logo: ZoomIcon, url: 'https://zoom.us', color: '#2D8CFF' },
   { name: 'Discord', category: 'Comunicación', logo: DiscordIcon, url: 'https://discord.com', color: '#5865F2' },
   { name: 'Microsoft Teams', category: 'Comunicación', logo: MicrosoftTeamsIcon, url: 'https://teams.microsoft.com', color: '#6264A7' },
   { name: 'Google Meet', category: 'Comunicación', logo: GoogleMeetIcon, url: 'https://meet.google.com', color: '#00897B' },
-  { name: 'Skype', category: 'Comunicación', logo: SkypeIcon, url: 'https://skype.com', color: '#00AFF0' },
-  { name: 'Telegram', category: 'Comunicación', logo: TelegramIcon, url: 'https://telegram.org', color: '#229ED9' },
   { name: 'WhatsApp', category: 'Comunicación', logo: WhatsAppIcon, url: 'https://whatsapp.com', color: '#25D366' },
-  
-  // Educación
-  { name: 'Duolingo', category: 'Educación', logo: DuolingoIcon, url: 'https://duolingo.com', color: '#58CC02' },
-  { name: 'Coursera', category: 'Educación', logo: CourseraIcon, url: 'https://coursera.org', color: '#0056D2' },
-  { name: 'Khan Academy', category: 'Educación', logo: KhanAcademyIcon, url: 'https://khanacademy.org', color: '#14BF96' },
-  { name: 'Udemy', category: 'Educación', logo: UdemyIcon, url: 'https://udemy.com', color: '#A435F0' },
-  { name: 'edX', category: 'Educación', logo: EdXIcon, url: 'https://edx.org', color: '#02262B' },
-  { name: 'Skillshare', category: 'Educación', logo: SkillshareIcon, url: 'https://skillshare.com', color: '#00FF84' },
-  { name: 'MasterClass', category: 'Educación', logo: MasterClassIcon, url: 'https://masterclass.com', color: '#000000' },
-  { name: 'Pluralsight', category: 'Educación', logo: PluralsightIcon, url: 'https://pluralsight.com', color: '#F15B2A' },
-  
+
   // Social Media
   { name: 'Instagram', category: 'Social Media', logo: InstagramIcon, url: 'https://instagram.com', color: '#E4405F' },
   { name: 'LinkedIn', category: 'Social Media', logo: LinkedInIcon, url: 'https://linkedin.com', color: '#0A66C2' },
   { name: 'TikTok', category: 'Social Media', logo: TikTokIcon, url: 'https://tiktok.com', color: '#000000' },
-  { name: 'Pinterest', category: 'Social Media', logo: PinterestIcon, url: 'https://pinterest.com', color: '#E60023' },
+  { name: 'YouTube', category: 'Social Media', logo: YouTubeIcon, url: 'https://youtube.com', color: '#FF0000' },
   { name: 'Twitter/X', category: 'Social Media', logo: TwitterXIcon, url: 'https://twitter.com', color: '#000000' },
   { name: 'Facebook', category: 'Social Media', logo: FacebookIcon, url: 'https://facebook.com', color: '#1877F2' },
+  { name: 'Pinterest', category: 'Social Media', logo: PinterestIcon, url: 'https://pinterest.com', color: '#E60023' },
   { name: 'Reddit', category: 'Social Media', logo: RedditIcon, url: 'https://reddit.com', color: '#FF4500' },
-  { name: 'YouTube', category: 'Social Media', logo: YouTubeIcon, url: 'https://youtube.com', color: '#FF0000' },
-  
-  // Automatización
-  { name: 'Zapier', category: 'Automatización', logo: ZapierIcon, url: 'https://zapier.com', color: '#FF4A00' },
-  { name: 'Make', category: 'Automatización', logo: MakeIcon, url: 'https://make.com', color: '#6D00CC' },
-  { name: 'IFTTT', category: 'Automatización', logo: IFTTTIcon, url: 'https://ifttt.com', color: '#000000' },
-  { name: 'n8n', category: 'Automatización', logo: N8nIcon, url: 'https://n8n.io', color: '#EA4B71' },
-  { name: 'Integromat', category: 'Automatización', logo: IntegromatIcon, url: 'https://integromat.com', color: '#2F8EED' },
-  { name: 'Automate.io', category: 'Automatización', logo: AutomateIOIcon, url: 'https://automate.io', color: '#27AE60' },
-  { name: 'Pabbly', category: 'Automatización', logo: PabblyIcon, url: 'https://pabbly.com', color: '#FF6900' },
-  { name: 'Workato', category: 'Automatización', logo: WorkatoIcon, url: 'https://workato.com', color: '#1063E1' },
-  
-  // Cloud
-  { name: 'AWS', category: 'Cloud', logo: AWSIcon, url: 'https://aws.amazon.com', color: '#FF9900' },
-  { name: 'Google Cloud', category: 'Cloud', logo: GoogleCloudIcon, url: 'https://cloud.google.com', color: '#4285F4' },
-  { name: 'Microsoft Azure', category: 'Cloud', logo: MicrosoftAzureIcon, url: 'https://azure.microsoft.com', color: '#0078D4' },
-  { name: 'DigitalOcean', category: 'Cloud', logo: DigitalOceanIcon, url: 'https://digitalocean.com', color: '#0080FF' },
-  { name: 'Linode', category: 'Cloud', logo: LinodeIcon, url: 'https://linode.com', color: '#00A95C' },
-  { name: 'Cloudflare', category: 'Cloud', logo: CloudflareIcon, url: 'https://cloudflare.com', color: '#F38020' },
-  { name: 'Heroku', category: 'Cloud', logo: HerokuIcon, url: 'https://heroku.com', color: '#430098' },
-  
-  // IA Tools
-  { name: 'Hugging Face', category: 'IA Tools', logo: HuggingFaceIcon, url: 'https://huggingface.co', color: '#FFD21E' },
-  { name: 'Replicate', category: 'IA Tools', logo: ReplicateIcon, url: 'https://replicate.com', color: '#000000' },
-  { name: 'Cohere', category: 'IA Tools', logo: CohereIcon, url: 'https://cohere.ai', color: '#39594D' },
-  { name: 'Anthropic', category: 'IA Tools', logo: AnthropicIcon, url: 'https://anthropic.com', color: '#D97757' },
-  { name: 'OpenAI', category: 'IA Tools', logo: OpenAIIcon, url: 'https://openai.com', color: '#00A67E' },
+
+  // Educación
+  { name: 'Duolingo', category: 'Educación', logo: DuolingoIcon, url: 'https://duolingo.com', color: '#58CC02' },
+  { name: 'Coursera', category: 'Educación', logo: CourseraIcon, url: 'https://coursera.org', color: '#0056D2' },
+  { name: 'Udemy', category: 'Educación', logo: UdemyIcon, url: 'https://udemy.com', color: '#A435F0' },
+  { name: 'Khan Academy', category: 'Educación', logo: KhanAcademyIcon, url: 'https://khanacademy.org', color: '#14BF96' },
+  { name: 'MasterClass', category: 'Educación', logo: MasterClassIcon, url: 'https://masterclass.com', color: '#000000' },
 ];
 // Función helper para obtener herramientas por categoría
 export const getToolsByCategory = (category: string): TechTool[] => {
