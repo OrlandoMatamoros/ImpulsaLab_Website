@@ -265,13 +265,18 @@ Be specific in findings (mention concrete data from the site). Recommendations m
 
     const message = await client.messages.create({
       model: 'claude-haiku-4-5-20251001',
-      max_tokens: 2500,
+      max_tokens: 4000,
       messages: [{ role: 'user', content: prompt }],
     })
 
     const textBlock = message.content.find((b) => b.type === 'text')
     if (!textBlock || textBlock.type !== 'text') {
       return NextResponse.json({ error: errors.noResponse }, { status: 500 })
+    }
+
+    if (message.stop_reason === 'max_tokens') {
+      console.error('Analyze: response truncated at max_tokens', message.usage)
+      return NextResponse.json({ error: errors.parseError + ' (max_tokens)' }, { status: 500 })
     }
 
     let analysisText = textBlock.text.trim()
