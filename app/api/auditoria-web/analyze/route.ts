@@ -3,6 +3,7 @@ import Anthropic from '@anthropic-ai/sdk'
 import { adminAuth } from '@/lib/firebase-admin'
 
 export const maxDuration = 60
+export const runtime = 'nodejs'
 
 const ADMIN_EMAIL = 'orlando@tuimpulsalab.com'
 
@@ -174,7 +175,7 @@ export async function POST(req: NextRequest) {
     meta.hasHttps = isHttps
 
     const truncatedHtml =
-      html.length > 60000 ? html.substring(0, 60000) + '\n[...truncado...]' : html
+      html.length > 25000 ? html.substring(0, 25000) + '\n[...truncado...]' : html
 
     const client = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
 
@@ -263,8 +264,8 @@ SECTION CRITERIA:
 Be specific in findings (mention concrete data from the site). Recommendations must be actionable. Each section should have 3-6 findings and 3-5 recommendations. Write ALL findings and recommendations in ${promptLang}.`
 
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-6',
-      max_tokens: 4096,
+      model: 'claude-haiku-4-5-20251001',
+      max_tokens: 2500,
       messages: [{ role: 'user', content: prompt }],
     })
 
