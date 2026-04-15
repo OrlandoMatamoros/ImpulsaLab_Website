@@ -4,6 +4,7 @@ import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { isAdminEmail } from '@/lib/admin-emails'
 
 const INVOICING_APP_URL = 'https://impulsa-invoicing.vercel.app'
 
@@ -12,15 +13,14 @@ export default function FacturacionPage() {
   const router = useRouter()
   const { t } = useLanguage()
 
-  // Admin gate: only orlando@tuimpulsalab.com
   useEffect(() => {
     if (authLoading) return
-    if (!user || user.email !== 'orlando@tuimpulsalab.com') {
+    if (!isAdminEmail(user?.email)) {
       router.replace('/unauthorized')
     }
   }, [user, authLoading, router])
 
-  if (authLoading || !user || user.email !== 'orlando@tuimpulsalab.com') {
+  if (authLoading || !isAdminEmail(user?.email)) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-slate-950 text-slate-400">
         <div className="flex items-center gap-3">

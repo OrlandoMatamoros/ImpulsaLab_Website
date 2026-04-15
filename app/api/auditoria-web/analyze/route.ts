@@ -1,11 +1,10 @@
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminAuth } from '@/lib/firebase-admin'
+import { isAdminEmail } from '@/lib/admin-emails'
 
 export const maxDuration = 60
 export const runtime = 'nodejs'
-
-const ADMIN_EMAIL = 'orlando@tuimpulsalab.com'
 
 // Rate limit: 20 req / IP / hour. Internal tool — generous but still capped.
 const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
@@ -113,7 +112,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: ERRORS.ES.unauthorized }, { status: 401 })
     }
 
-    if (decoded.email !== ADMIN_EMAIL) {
+    if (!isAdminEmail(decoded.email)) {
       return NextResponse.json({ error: ERRORS.ES.unauthorized }, { status: 403 })
     }
 

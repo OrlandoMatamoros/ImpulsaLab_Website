@@ -6,10 +6,7 @@ import BusinessPlanForm, { type BusinessPlanFormData } from './components/Busine
 import SectionCard, { type PlanSection } from './components/SectionCard'
 import PlanExport from './components/PlanExport'
 import { useLanguage } from '@/contexts/LanguageContext'
-
-const UNLIMITED_EMAILS = [
-  'orlando@tuimpulsalab.com',
-]
+import { isAdminEmail } from '@/lib/admin-emails'
 
 interface KeyMetrics {
   estimatedRevYear1: string
@@ -83,7 +80,7 @@ export default function BusinessPlanPage() {
   const { user } = useAuth()
   const bp = t.businessPlanPage
 
-  const isUnlimited = UNLIMITED_EMAILS.includes(user?.email || '')
+  const isUnlimited = isAdminEmail(user?.email)
 
   const [loading, setLoading] = useState(false)
   const [loadingStep, setLoadingStep] = useState(0)

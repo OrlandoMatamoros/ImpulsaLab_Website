@@ -3,10 +3,9 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import OpenAI from 'openai'
 import { NextRequest } from 'next/server'
 import { adminAuth } from '@/lib/firebase-admin'
+import { isAdminEmail } from '@/lib/admin-emails'
 
 export const maxDuration = 120
-
-const ADMIN_EMAIL = 'orlando@tuimpulsalab.com'
 
 // Rate limit: 20 debates / IP / hour. Internal tool — generous but capped
 // because each debate fires 4 LLM calls serially (~$0.05-0.10 each).
@@ -262,7 +261,7 @@ export async function POST(request: NextRequest) {
       return Response.json({ error: 'Token invalido.' }, { status: 401 })
     }
 
-    if (decoded.email !== ADMIN_EMAIL) {
+    if (!isAdminEmail(decoded.email)) {
       return Response.json({ error: 'Acceso restringido.' }, { status: 403 })
     }
 

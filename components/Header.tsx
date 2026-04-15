@@ -4,6 +4,7 @@ import { useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { COMPANY_INFO, IMAGES } from '@/lib/constants'
+import { isAdminEmail } from '@/lib/admin-emails'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useRouter } from 'next/navigation'
@@ -58,7 +59,7 @@ export default function Header() {
     }
   }
 
-  const isAdmin = user?.email === 'orlando@tuimpulsalab.com'
+  const isAdmin = isAdminEmail(user?.email)
 
   const juntaHref = isAdmin
     ? '/herramientas/agentes/junta-estrategica/app'

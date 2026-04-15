@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
+import { isAdminEmail } from '@/lib/admin-emails'
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -414,10 +415,9 @@ export default function JuntaEstrategicaAppPage() {
 
   const abortRef = useRef<AbortController | null>(null)
 
-  // Admin gate: non-admins are sent back to the public marketing page
   useEffect(() => {
     if (authLoading) return
-    if (!user || user.email !== 'orlando@tuimpulsalab.com') {
+    if (!isAdminEmail(user?.email)) {
       router.replace('/herramientas/agentes/junta-estrategica')
     }
   }, [user, authLoading, router])
@@ -517,7 +517,7 @@ export default function JuntaEstrategicaAppPage() {
     return 'waiting'
   }
 
-  if (authLoading || !user || user.email !== 'orlando@tuimpulsalab.com') {
+  if (authLoading || !isAdminEmail(user?.email)) {
     return (
       <div className="min-h-[60vh] flex items-center justify-center bg-slate-950 text-slate-400">
         <p>Loading...</p>

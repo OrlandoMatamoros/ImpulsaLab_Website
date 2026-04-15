@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
+import { isAdminEmail } from '@/lib/admin-emails'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -203,7 +204,7 @@ export function Navigation() {
                   <DropdownMenuItem
                     onClick={() =>
                       router.push(
-                        user?.email === 'orlando@tuimpulsalab.com'
+                        isAdminEmail(user?.email)
                           ? '/herramientas/agentes/junta-estrategica/app'
                           : '/herramientas/agentes/junta-estrategica'
                       )
@@ -216,7 +217,7 @@ export function Navigation() {
                     </div>
                   </DropdownMenuItem>
 
-                  {user?.email === 'orlando@tuimpulsalab.com' && (
+                  {isAdminEmail(user?.email) && (
                     <>
                       <DropdownMenuSeparator />
                       <DropdownMenuItem onClick={() => router.push('/herramientas/auditoria-web')}>

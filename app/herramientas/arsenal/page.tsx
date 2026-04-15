@@ -6,8 +6,8 @@ import Link from 'next/link';
 import { tools } from '@/lib/tools-data';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/FirebaseAuthContext';
+import { isAdminEmail } from '@/lib/admin-emails';
 
-const UNLIMITED_EMAILS = ['orlando@tuimpulsalab.com'];
 const FREE_PLAN_KEY = 'impulsa_arsenal_count';
 
 export default function ArsenalPage() {
@@ -15,7 +15,7 @@ export default function ArsenalPage() {
   const { user } = useAuth();
   const arsenal = t.herramientasArsenalPage;
 
-  const isUnlimited = UNLIMITED_EMAILS.includes(user?.email || '');
+  const isUnlimited = isAdminEmail(user?.email);
 
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('todas');
