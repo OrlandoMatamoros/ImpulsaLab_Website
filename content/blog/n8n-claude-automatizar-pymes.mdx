@@ -1,0 +1,129 @@
+---
+title: "Como Impulsa Lab conecta n8n + Claude para automatizar PYMEs"
+excerpt: "La receta que usamos en todos los clientes: n8n como orquestador, Claude como cerebro, Firebase como memoria. Arquitectura, costos reales y los errores que ya aprendimos a evitar."
+author: "Orlando Matamoros"
+date: "2026-04-05"
+image: "https://images.pexels.com/photos/8386434/pexels-photo-8386434.jpeg?auto=compress&cs=tinysrgb&w=1600"
+category: "Arquitectura"
+readTime: "11 min"
+slug: "n8n-claude-automatizar-pymes"
+---
+
+Cada vez que alguien nos pregunta "y como hacen ustedes los agentes?", la respuesta cabe en una sola linea: **n8n + Claude + Firebase**. Lo que no cabe en una linea es **por que** elegimos ese stack y **como** lo orquestamos cuando el cliente tiene ya un CRM, una plantilla de Google Sheets sagrada y tres numeros de WhatsApp distintos.
+
+Este post es la receta completa. Sin marketing. Con los numeros de costo que vemos mes a mes.
+
+## Por que n8n y no Zapier o Make
+
+Hemos corrido workflows en los tres. Nuestra conclusion despues de 30+ clientes:
+
+- **Zapier** es mas rapido de onboardear pero cobra por tarea. Con volumen PYME (>5,000 tasks/mes) te cobra entre 60 y 200 USD/mes y te encierra en su sandbox.
+- **Make** es mas potente que Zapier y mas barato, pero su paradigma visual de escenarios se vuelve incomprensible cuando cruzas los 20 nodos.
+- **n8n** es self-hostable o Cloud, open source, permite codigo JavaScript inline para casos raros, y tiene un nodo nativo para Claude. El plan Cloud Starter cuesta 20 USD/mes y aguanta hasta 20-30 workflows activos.
+
+Para nosotros gano n8n por una razon mas: **cuando algo se rompe, podemos leer el JSON del workflow y arreglarlo sin depender de un soporte externo**. Con Zapier cuando el tutorial no existe, te quedas fuera.
+
+## La arquitectura de 4 capas
+
+Todos nuestros agentes se ven asi:
+
+### Capa 1: Triggers
+
+Los eventos que arrancan todo. Los mas comunes:
+
+- **Webhook HTTP** (para formularios web, Stripe, Calendly, Typeform)
+- **Schedule** (para digest diarios, reportes semanales)
+- **Gmail / Outlook** (correo entrante)
+- **WhatsApp** (via Twilio o Meta Cloud API)
+
+n8n ya trae todos estos nativos. No escribimos una linea.
+
+### Capa 2: Preprocesamiento
+
+Antes de meter nada en el modelo:
+
+- **Normalizar** (campos vacios, encodings, fechas a ISO)
+- **Deduplicar** (evitar procesar el mismo correo dos veces si el trigger re-dispara)
+- **Filtrar** (si no aplica, terminar aqui y no gastar tokens)
+- **Extraer contexto** relevante del CRM o Firestore
+
+Esta capa es puro JavaScript en un nodo Code. Ahorra entre 40% y 70% de tokens.
+
+### Capa 3: Cerebro
+
+El nodo de Claude recibe un prompt estructurado con:
+
+- **Rol del agente** (quien eres, que puedes/no puedes hacer)
+- **Contexto** (el evento actual + memoria relevante)
+- **Tools disponibles** (crear factura, buscar en CRM, enviar WhatsApp...)
+- **Formato de salida** (JSON estricto con Zod schema)
+
+Elegimos Claude Sonnet 4.5 para el 80% de los casos. Para clasificacion simple y alta volumen usamos Gemini 2.5 Flash. Nunca mezclamos ambos en el mismo flujo salvo que haya razon medible.
+
+### Capa 4: Ejecucion + Log
+
+La salida del modelo se valida contra schema, y cada tool call se ejecuta con manejo de error:
+
+- **Idempotencia**: cada evento tiene un ID y Firestore verifica que no se procese dos veces
+- **Retry con backoff**: si la API externa falla, reintentar hasta 3 veces con espera exponencial
+- **Log estructurado**: cada decision queda en Firestore con timestamp, input, output, costo en tokens
+
+Ese log es oro cuando el cliente pregunta "por que el agente respondio X?" tres semanas despues.
+
+## Los costos reales que vemos
+
+Esta es la distribucion de costos mensual para un cliente tipo (WhatsApp AI Customer Service con ~400 conversaciones/mes):
+
+| Concepto | USD/mes |
+|---|---:|
+| n8n Cloud Starter | 20 |
+| Claude API (entrada + salida) | 8 a 25 |
+| Firebase Firestore free tier | 0 |
+| Twilio WhatsApp Business | 18 a 35 |
+| Vercel hosting | 0 |
+| **Total infra** | **46 a 80** |
+
+Y le facturamos al cliente **397 USD/mes** por el servicio completo. El margen cubre soporte, ajustes mensuales y mejoras. No cobramos per-message ni por complejidad porque la experiencia nos mostro que los clientes odian facturas sorpresa.
+
+## Los 5 errores que ya no cometemos
+
+### 1. Dar al agente acceso de escritura sin confirmacion
+
+En uno de nuestros primeros despliegues, el agente creo 80 tareas duplicadas en el CRM porque interpretaba cada correo entrante como una tarea nueva. Desde entonces, **todo tool call destructivo pasa por un nodo de idempotencia** que verifica en Firestore si ya ejecutamos esa accion.
+
+### 2. Prompts largos sin secciones
+
+Claude funciona mejor con prompts marcados con tags XML (`<rol>`, `<contexto>`, `<output>`). Cuando empezamos con prose libre perdiamos 15-20% de adherencia a formato.
+
+### 3. No loguear los tokens
+
+Hasta que un cliente facturo 80 USD en un mes por un loop de contexto que no vimos, no loggeabamos input/output tokens por ejecucion. Ahora Firestore guarda `{in, out, cost_usd}` en cada run y revisamos el dashboard semanalmente.
+
+### 4. Dejar el prompt en el nodo de n8n
+
+Los prompts largos adentro del nodo son dificiles de versionar. Los tenemos en un archivo markdown dentro del repo del cliente y los cargamos via HTTP al arrancar el workflow. Asi puedes hacer `git diff` cuando algo cambia.
+
+### 5. No tener un "kill switch"
+
+Cada workflow tiene una variable de entorno `AGENT_ENABLED=true`. Si algo se va de madre, lo pones en `false` y el agente devuelve un mensaje neutral ("estamos revisando tu solicitud, te contactamos en breve"). Esto nos ha salvado dos veces cuando una API de terceros cambio y empezamos a generar respuestas incorrectas.
+
+## Como empezar
+
+Si queres montar tu propio agente sobre este stack:
+
+1. **Plan Cloud Starter de n8n** (20 USD/mes) — [n8n.io](https://n8n.io)
+2. **Cuenta Anthropic** con Claude Sonnet 4.5 (pay-as-you-go, primeros 5 USD gratis)
+3. **Firebase Firestore** en free tier
+4. **Un caso de uso claro**: elige UNO, no intentes automatizar todo a la vez
+
+El consejo mas util que podemos darte: **no automatices un proceso que no funciona manualmente**. Primero limpia el proceso, documenta las reglas de negocio, y despues decide si necesita un workflow lineal o un agente.
+
+## Conclusion
+
+El stack n8n + Claude + Firebase no es magia. Es la combinacion mas barata, mas mantenible y mas debuggeable que encontramos para montar automatizaciones inteligentes en PYMEs reales. Si tienes un proceso repetitivo que toca lenguaje humano y cuesta mas de 300 USD/mes en tiempo de alguien de tu equipo, el retorno es obvio.
+
+En Impulsa Lab lo tenemos como template en los 8 productos de nuestro catalogo. Cada uno se activa en 3-5 dias con tu logo, tus credenciales y tus reglas.
+
+---
+
+**Quieres ver un agente armado sobre este stack antes de decidir?** Pide un diagnostico y te muestro uno en vivo con datos de prueba. 20 minutos, sin compromiso.
