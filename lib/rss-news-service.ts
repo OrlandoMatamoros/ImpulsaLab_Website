@@ -3,8 +3,13 @@
  *
  * Fetches and normalizes news from curated tier-1 AI/tech RSS feeds.
  * Zero external deps — manual RSS 2.0 + Atom parser.
- * Replaces GmailNewsService (deprecated 2026-04-13) which depended on
- * Google Alerts emails with unreliable parsing.
+ *
+ * 2026-04-14 updates (fase 3):
+ *   - Per-feed User-Agent override. MIT Technology Review now uses a
+ *     Googlebot UA to avoid its WAF silently dropping our default agent.
+ *   - og:image fallback: when the RSS item has no inline image we do a
+ *     cheap HTML HEAD + GET on the source URL and regex the og:image
+ *     out of <head>. In-memory cache per request batch.
  */
 
 export interface NewsItem {
@@ -24,11 +29,16 @@ export interface NewsItem {
 }
 
 interface FeedConfig {
-  name: string      // Display name shown in the UI ("TechCrunch")
-  slug: string      // Stable source key ("techcrunch")
-  url: string       // RSS / Atom feed URL
+  name: string
+  slug: string
+  url: string
+  userAgent?: string // optional per-feed UA override
   defaultCategory?: string
 }
+
+const DEFAULT_UA =
+  'Mozilla/5.0 (compatible; ImpulsaLabNewsBot/1.0; +https://www.tuimpulsalab.com)'
+const GOOGLEBOT_UA = 'Googlebot/2.1 (+http://www.google.com/bot.html)'
 
 // Curated tier-1 AI/tech feeds. Keep the list short — quality over quantity.
 const FEEDS: FeedConfig[] = [
@@ -46,6 +56,7 @@ const FEEDS: FeedConfig[] = [
     name: 'MIT Technology Review',
     slug: 'mit-tech-review',
     url: 'https://www.technologyreview.com/topic/artificial-intelligence/feed',
+    userAgent: GOOGLEBOT_UA, // WAF blocks our default UA from Vercel egress IPs
   },
   {
     name: 'Ars Technica',
@@ -60,8 +71,8 @@ const FEEDS: FeedConfig[] = [
 ]
 
 const FEED_TIMEOUT_MS = 10000
+const OG_FETCH_TIMEOUT_MS = 5000
 const MAX_ITEMS = 24
-const UA = 'Mozilla/5.0 (compatible; ImpulsaLabNewsBot/1.0; +https://www.tuimpulsalab.com)'
 
 // ---------- Parsing helpers ----------
 
@@ -90,7 +101,6 @@ function stripHtml(html: string): string {
 }
 
 function extractTag(block: string, tag: string): string | null {
-  // CDATA-first, fall back to plain inner text
   const cdata = new RegExp(`<${tag}[^>]*><!\\[CDATA\\[([\\s\\S]*?)\\]\\]></${tag}>`, 'i').exec(block)
   if (cdata) return cdata[1].trim()
   const plain = new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i').exec(block)
@@ -105,17 +115,13 @@ function extractAttr(block: string, tag: string, attr: string): string | null {
 }
 
 function extractImage(itemBlock: string, description: string): string {
-  // 1. media:content url="..."
   const media = extractAttr(itemBlock, 'media:content', 'url')
   if (media) return media
-  // 2. media:thumbnail url="..."
   const thumb = extractAttr(itemBlock, 'media:thumbnail', 'url')
   if (thumb) return thumb
-  // 3. <enclosure url="..." type="image/*">
   const encRe = /<enclosure[^>]*url="([^"]+)"[^>]*type="image\/[^"]+"/i
   const enc = encRe.exec(itemBlock)
   if (enc) return enc[1]
-  // 4. First <img src="..."> in the description
   const imgRe = /<img[^>]+src="([^"]+)"/i
   const img = imgRe.exec(description)
   if (img) return img[1]
@@ -123,19 +129,15 @@ function extractImage(itemBlock: string, description: string): string {
 }
 
 function parseRssItems(xml: string): string[] {
-  // RSS 2.0: <item>...</item>
   const items = xml.match(/<item\b[\s\S]*?<\/item>/gi)
   if (items && items.length > 0) return items
-  // Atom: <entry>...</entry>
   const entries = xml.match(/<entry\b[\s\S]*?<\/entry>/gi)
   return entries || []
 }
 
 function extractLink(block: string): string {
-  // RSS 2.0 plain: <link>https://...</link>
   const rss = /<link>([^<]+)<\/link>/i.exec(block)
   if (rss && rss[1]) return rss[1].trim()
-  // Atom: <link href="..." rel="alternate"/> (rel optional)
   const atomRel = /<link[^>]*rel="alternate"[^>]*href="([^"]+)"/i.exec(block)
   if (atomRel) return atomRel[1]
   const atomAny = /<link[^>]*href="([^"]+)"/i.exec(block)
@@ -166,7 +168,6 @@ function extractDate(block: string): string {
 
 function categorize(title: string, summary: string): string {
   const text = `${title} ${summary}`.toLowerCase()
-
   if (/\b(regulat|law|policy|eu act|ban|lawsuit|compliance|antitrust|ftc|sec)\b/.test(text)) {
     return 'regulations'
   }
@@ -216,15 +217,71 @@ function extractTags(title: string, summary: string): string[] {
 
 function estimateReadTime(summary: string): number {
   const words = summary.trim().split(/\s+/).filter(Boolean).length
-  // Summaries are short; scale reasonably to 3-8 minutes
   return Math.max(3, Math.min(8, Math.round(words / 60) + 3))
 }
 
 function stableId(url: string): string {
-  // Simple 32-bit hash, good enough for React keys and de-dup
   let h = 5381
   for (let i = 0; i < url.length; i++) h = ((h * 33) ^ url.charCodeAt(i)) >>> 0
   return `news-${h.toString(36)}`
+}
+
+// ---------- og:image fallback ----------
+
+/**
+ * Fetch the source URL and pull <meta property="og:image" content="..."> out of
+ * the <head>. Short timeout, graceful fail — we never throw, we return ''.
+ * Cached in-memory per instance to avoid re-fetching the same URL across runs
+ * within the same serverless container.
+ */
+const ogImageCache = new Map<string, string>()
+
+async function fetchOgImage(url: string): Promise<string> {
+  if (!url) return ''
+  const cached = ogImageCache.get(url)
+  if (cached !== undefined) return cached
+
+  const controller = new AbortController()
+  const timer = setTimeout(() => controller.abort(), OG_FETCH_TIMEOUT_MS)
+
+  try {
+    const res = await fetch(url, {
+      headers: {
+        'User-Agent': GOOGLEBOT_UA,
+        Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      },
+      signal: controller.signal,
+      cache: 'no-store',
+    })
+    if (!res.ok) {
+      ogImageCache.set(url, '')
+      return ''
+    }
+    // Read only the first ~200KB — og:image lives in <head>, no need for whole page.
+    const text = await res.text()
+    const head = text.slice(0, 200_000)
+    // Match both og:image and og:image:secure_url / twitter:image
+    const patterns = [
+      /<meta[^>]+property=["']og:image["'][^>]+content=["']([^"']+)["']/i,
+      /<meta[^>]+content=["']([^"']+)["'][^>]+property=["']og:image["']/i,
+      /<meta[^>]+name=["']twitter:image["'][^>]+content=["']([^"']+)["']/i,
+    ]
+    for (const p of patterns) {
+      const m = p.exec(head)
+      if (m && m[1]) {
+        const found = m[1].trim()
+        ogImageCache.set(url, found)
+        return found
+      }
+    }
+    ogImageCache.set(url, '')
+    return ''
+  } catch {
+    ogImageCache.set(url, '')
+    return ''
+  } finally {
+    clearTimeout(timer)
+  }
 }
 
 // ---------- Service ----------
@@ -249,23 +306,41 @@ export class RssNewsService {
     // Sort newest first
     deduped.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-    // Cap and flag trending/featured based on recency
-    const top = deduped.slice(0, MAX_ITEMS).map((n, i) => ({
+    // Cap early so we only do og:image lookups on items that will ship.
+    const top = deduped.slice(0, MAX_ITEMS)
+
+    // og:image fallback in parallel — only for items missing an image.
+    const needsImage = top.filter((n) => !n.imageUrl)
+    if (needsImage.length > 0) {
+      const ogResults = await Promise.allSettled(
+        needsImage.map((n) => fetchOgImage(n.sourceUrl))
+      )
+      ogResults.forEach((r, i) => {
+        if (r.status === 'fulfilled' && r.value) {
+          needsImage[i].imageUrl = r.value
+        }
+      })
+    }
+
+    // Flag trending/featured based on final order.
+    return top.map((n, i) => ({
       ...n,
       isTrending: i < 5,
       isFeatured: i === 0,
     }))
-
-    return top
   }
 
   private async fetchFeed(feed: FeedConfig): Promise<NewsItem[]> {
     const controller = new AbortController()
     const timer = setTimeout(() => controller.abort(), FEED_TIMEOUT_MS)
+    const ua = feed.userAgent || DEFAULT_UA
 
     try {
       const res = await fetch(feed.url, {
-        headers: { 'User-Agent': UA, Accept: 'application/rss+xml, application/xml, text/xml, */*' },
+        headers: {
+          'User-Agent': ua,
+          Accept: 'application/rss+xml, application/xml, text/xml, */*',
+        },
         signal: controller.signal,
         cache: 'no-store',
       })
