@@ -1,129 +1,157 @@
-'use client';
+import Link from 'next/link'
+import { MDXRemote } from 'next-mdx-remote/rsc'
+import { FaArrowLeft, FaClock, FaUser, FaCalendar, FaArrowRight } from 'react-icons/fa'
+import type { Post } from '@/lib/blog'
 
-import Link from 'next/link';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { FaArrowLeft, FaPencilAlt, FaBell, FaRocket } from 'react-icons/fa';
+// Server Component — renders MDX with Tailwind prose styling.
+// next-mdx-remote/rsc compiles MDX at request/build time; no client bundle.
 
-export default function BlogPostContent({ slug }: { slug: string }) {
-  const { t } = useLanguage();
+const mdxComponents = {
+  h2: (props: React.ComponentProps<'h2'>) => (
+    <h2 className="text-3xl font-bold mt-12 mb-4 text-gray-900" {...props} />
+  ),
+  h3: (props: React.ComponentProps<'h3'>) => (
+    <h3 className="text-2xl font-bold mt-8 mb-3 text-gray-900" {...props} />
+  ),
+  p: (props: React.ComponentProps<'p'>) => (
+    <p className="my-5 text-gray-700 leading-relaxed text-lg" {...props} />
+  ),
+  a: (props: React.ComponentProps<'a'>) => (
+    <a className="text-blue-600 underline hover:text-blue-800" {...props} />
+  ),
+  ul: (props: React.ComponentProps<'ul'>) => (
+    <ul className="my-5 list-disc list-inside space-y-2 text-gray-700 text-lg" {...props} />
+  ),
+  ol: (props: React.ComponentProps<'ol'>) => (
+    <ol className="my-5 list-decimal list-inside space-y-2 text-gray-700 text-lg" {...props} />
+  ),
+  li: (props: React.ComponentProps<'li'>) => <li className="leading-relaxed" {...props} />,
+  strong: (props: React.ComponentProps<'strong'>) => (
+    <strong className="font-semibold text-gray-900" {...props} />
+  ),
+  blockquote: (props: React.ComponentProps<'blockquote'>) => (
+    <blockquote
+      className="border-l-4 border-blue-600 pl-6 my-6 italic text-gray-700 bg-blue-50 py-4 rounded-r"
+      {...props}
+    />
+  ),
+  code: (props: React.ComponentProps<'code'>) => (
+    <code className="bg-gray-100 text-pink-700 px-1.5 py-0.5 rounded text-sm" {...props} />
+  ),
+  pre: (props: React.ComponentProps<'pre'>) => (
+    <pre
+      className="bg-gray-900 text-gray-100 rounded-lg p-4 my-6 overflow-x-auto text-sm"
+      {...props}
+    />
+  ),
+  hr: (props: React.ComponentProps<'hr'>) => (
+    <hr className="my-10 border-gray-300" {...props} />
+  ),
+  table: (props: React.ComponentProps<'table'>) => (
+    <div className="my-6 overflow-x-auto">
+      <table className="min-w-full border-collapse border border-gray-200" {...props} />
+    </div>
+  ),
+  th: (props: React.ComponentProps<'th'>) => (
+    <th
+      className="border border-gray-200 bg-gray-50 px-4 py-2 text-left font-semibold text-gray-900"
+      {...props}
+    />
+  ),
+  td: (props: React.ComponentProps<'td'>) => (
+    <td className="border border-gray-200 px-4 py-2 text-gray-700" {...props} />
+  ),
+}
 
-  // Convertir el slug en un título más legible
-  const titulo = slug
-    .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
+function formatDate(iso: string): string {
+  try {
+    const d = new Date(iso)
+    return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+  } catch {
+    return iso
+  }
+}
 
+export default function BlogPostContent({ post }: { post: Post }) {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-50">
-      {/* Header simple */}
-      <div className="bg-white shadow-sm">
+    <article className="min-h-screen bg-white">
+      {/* Top nav */}
+      <div className="bg-white border-b">
         <div className="container mx-auto px-4 py-4">
           <Link
             href="/blog"
             className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors"
           >
             <FaArrowLeft className="mr-2" />
-            {t.blogPostPage.volverBlog}
+            Volver al blog
           </Link>
         </div>
       </div>
 
-      {/* Contenido principal */}
-      <div className="flex items-center justify-center py-20">
-        <div className="max-w-2xl mx-auto px-4 text-center">
-          {/* Icono principal */}
-          <div className="mb-8 flex justify-center">
-            <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-8 rounded-full shadow-2xl">
-              <FaPencilAlt className="text-6xl text-white animate-pulse" />
-            </div>
-          </div>
+      {/* Hero image */}
+      {post.image && (
+        <div className="w-full h-[420px] relative overflow-hidden">
+          <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
+        </div>
+      )}
 
-          {/* Mensaje principal */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            {t.blogPostPage.articuloEnDesarrollo}
-          </h1>
+      {/* Header */}
+      <header className="container mx-auto px-4 max-w-3xl pt-12">
+        <span className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-full mb-4">
+          {post.category}
+        </span>
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+          {post.title}
+        </h1>
+        <p className="text-xl text-gray-600 mb-8 leading-relaxed">{post.excerpt}</p>
+        <div className="flex flex-wrap items-center gap-6 text-sm text-gray-500 mb-8 pb-8 border-b">
+          <span className="flex items-center gap-2">
+            <FaUser />
+            {post.author}
+          </span>
+          <span className="flex items-center gap-2">
+            <FaCalendar />
+            {formatDate(post.date)}
+          </span>
+          <span className="flex items-center gap-2">
+            <FaClock />
+            {post.readTime}
+          </span>
+        </div>
+      </header>
 
-          <div className="bg-white rounded-lg shadow-md p-4 mb-6 inline-block">
-            <p className="text-lg text-gray-600">
-              <span className="font-semibold">{titulo}</span>
-            </p>
-          </div>
-
-          <p className="text-xl text-gray-600 mb-8">
-            {t.blogPostPage.enDesarrolloDesc}
-          </p>
-
-          {/* Features próximas */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <FaRocket className="text-3xl text-blue-500 mb-3 mx-auto" />
-              <h3 className="font-semibold mb-2">{t.blogPostPage.contenidoPremium}</h3>
-              <p className="text-sm text-gray-600">
-                {t.blogPostPage.contenidoPremiumDesc}
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <FaPencilAlt className="text-3xl text-purple-500 mb-3 mx-auto" />
-              <h3 className="font-semibold mb-2">{t.blogPostPage.guiasPracticas}</h3>
-              <p className="text-sm text-gray-600">
-                {t.blogPostPage.guiasPracticasDesc}
-              </p>
-            </div>
-
-            <div className="bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-shadow">
-              <FaBell className="text-3xl text-green-500 mb-3 mx-auto" />
-              <h3 className="font-semibold mb-2">{t.blogPostPage.actualizaciones}</h3>
-              <p className="text-sm text-gray-600">
-                {t.blogPostPage.actualizacionesDesc}
-              </p>
-            </div>
-          </div>
-
-          {/* Newsletter CTA */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white mb-8">
-            <h2 className="text-2xl font-bold mb-4">
-              {t.blogPostPage.primerEnLeer}
-            </h2>
-            <p className="mb-6">
-              {t.blogPostPage.suscribeteNotif}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="tu@email.com"
-                className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white"
-              />
-              <button className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                {t.blogPostPage.notificarme}
-              </button>
-            </div>
-          </div>
-
-          {/* CTAs alternativos */}
-          <div className="space-y-4">
-            <p className="text-gray-600 mb-4">{t.blogPostPage.mientrasTanto}</p>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/blog"
-                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-              >
-                <FaArrowLeft className="mr-2" />
-                {t.blogPostPage.explorarArticulos}
-              </Link>
-
-              <Link
-                href="/diagnostico"
-                className="inline-flex items-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
-              >
-                {t.blogPostPage.diagnosticoGratis}
-                <FaRocket className="ml-2" />
-              </Link>
-            </div>
-          </div>
+      {/* Body */}
+      <div className="container mx-auto px-4 max-w-3xl pb-16">
+        <div className="prose prose-lg max-w-none">
+          <MDXRemote source={post.content} components={mdxComponents} />
         </div>
       </div>
-    </div>
-  );
+
+      {/* Bottom CTA */}
+      <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <h2 className="text-3xl font-bold mb-4">Listo para automatizar lo que lees aqui?</h2>
+          <p className="text-xl mb-8 opacity-95">
+            Agenda un diagnostico gratuito de 20 minutos y sal con un plan concreto.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              href="/diagnostico"
+              className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all"
+            >
+              Diagnostico gratuito
+              <FaArrowRight />
+            </Link>
+            <Link
+              href="/blog"
+              className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"
+            >
+              Ver mas articulos
+            </Link>
+          </div>
+        </div>
+      </section>
+    </article>
+  )
 }
