@@ -79,11 +79,12 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={inter.className}>
-        {/* JSON-LD Organization + WebSite schema (Google knows who we are and how to search us) */}
-        <Script
-          id="ld-organization"
+        {/* JSON-LD Organization + WebSite schema — native <script> tags render server-side
+            and appear in initial HTML so Google crawlers (which don't execute JS) can parse them.
+            Previously used next/script with strategy="afterInteractive" which injects post-hydration,
+            invisible to crawlers. Fixed 2026-04-15 after Security/SEO Auditor flagged json_ld_count=0. */}
+        <script
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
@@ -111,10 +112,8 @@ export default function RootLayout({
             }),
           }}
         />
-        <Script
-          id="ld-website"
+        <script
           type="application/ld+json"
-          strategy="afterInteractive"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',

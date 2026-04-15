@@ -1,5 +1,4 @@
 import { Metadata } from 'next'
-import Script from 'next/script'
 import DiagnosticoSEOHero from './components/DiagnosticoSEOHero'
 
 export const metadata: Metadata = {
@@ -36,11 +35,10 @@ export default function DiagnosticoLayout({
           still see real content; hydration swaps to EN when the user has it. */}
       <DiagnosticoSEOHero />
 
-      {/* JSON-LD WebPage schema for the Diagnostico — tells Google this is a Service page */}
-      <Script
-        id="ld-diagnostico"
+      {/* JSON-LD Service schema — native <script> renders server-side so crawlers see it.
+          Previously used next/script strategy="afterInteractive" which is invisible to bots. */}
+      <script
         type="application/ld+json"
-        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',
