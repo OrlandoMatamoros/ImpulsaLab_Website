@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { FaArrowLeft, FaClock, FaUser, FaCalendar, FaArrowRight } from 'react-icons/fa'
-import type { Post } from '@/lib/blog'
+import type { Post, Locale } from '@/lib/blog'
 
 // Server Component — renders MDX with Tailwind prose styling.
 // next-mdx-remote/rsc compiles MDX at request/build time; no client bundle.
@@ -63,16 +63,55 @@ const mdxComponents = {
   ),
 }
 
-function formatDate(iso: string): string {
+const ui = {
+  es: {
+    back: 'Volver al blog',
+    ctaTitle: 'Listo para automatizar lo que lees aqui?',
+    ctaSubtitle: 'Agenda un diagnostico gratuito de 20 minutos y sal con un plan concreto.',
+    ctaPrimary: 'Diagnostico gratuito',
+    ctaSecondary: 'Ver mas articulos',
+    fallbackBanner:
+      'Esta nota aun no esta disponible en ingles. Mostrando version en espanol.',
+    dateLocale: 'es-ES',
+  },
+  en: {
+    back: 'Back to blog',
+    ctaTitle: 'Ready to automate what you just read?',
+    ctaSubtitle: 'Book a free 20-minute diagnostic and walk away with a concrete plan.',
+    ctaPrimary: 'Free diagnostic',
+    ctaSecondary: 'See more posts',
+    fallbackBanner: 'This post is not yet available in English. Showing Spanish version.',
+    dateLocale: 'en-US',
+  },
+} as const
+
+function formatDate(iso: string, dateLocale: string): string {
   try {
     const d = new Date(iso)
-    return d.toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })
+    return d.toLocaleDateString(dateLocale, {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
   } catch {
     return iso
   }
 }
 
-export default function BlogPostContent({ post }: { post: Post }) {
+export default function BlogPostContent({
+  post,
+  requestedLocale,
+}: {
+  post: Post
+  /** Locale the user asked for; may differ from `post.locale` when falling back. */
+  requestedLocale: Locale
+}) {
+  // UI chrome should follow the user's chosen language even when the
+  // body falls back to ES — that way an EN visitor sees an EN banner
+  // explaining why the article is in Spanish.
+  const t = ui[requestedLocale]
+  const showFallbackBanner = post.isFallback === true
+
   return (
     <article className="min-h-screen bg-white">
       {/* Top nav */}
@@ -83,7 +122,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
             className="inline-flex items-center text-gray-600 hover:text-blue-600 transition-colors"
           >
             <FaArrowLeft className="mr-2" />
-            Volver al blog
+            {t.back}
           </Link>
         </div>
       </div>
@@ -98,6 +137,14 @@ export default function BlogPostContent({ post }: { post: Post }) {
 
       {/* Header */}
       <header className="container mx-auto px-4 max-w-3xl pt-12">
+        {showFallbackBanner && (
+          <div
+            role="status"
+            className="mb-6 rounded-lg border border-gray-200 bg-gray-50 px-4 py-3 text-sm text-gray-700"
+          >
+            {t.fallbackBanner}
+          </div>
+        )}
         <span className="inline-block px-4 py-2 bg-blue-600 text-white text-sm font-semibold rounded-full mb-4">
           {post.category}
         </span>
@@ -112,7 +159,7 @@ export default function BlogPostContent({ post }: { post: Post }) {
           </span>
           <span className="flex items-center gap-2">
             <FaCalendar />
-            {formatDate(post.date)}
+            {formatDate(post.date, t.dateLocale)}
           </span>
           <span className="flex items-center gap-2">
             <FaClock />
@@ -131,23 +178,21 @@ export default function BlogPostContent({ post }: { post: Post }) {
       {/* Bottom CTA */}
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center max-w-2xl">
-          <h2 className="text-3xl font-bold mb-4">Listo para automatizar lo que lees aqui?</h2>
-          <p className="text-xl mb-8 opacity-95">
-            Agenda un diagnostico gratuito de 20 minutos y sal con un plan concreto.
-          </p>
+          <h2 className="text-3xl font-bold mb-4">{t.ctaTitle}</h2>
+          <p className="text-xl mb-8 opacity-95">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/diagnostico"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all"
             >
-              Diagnostico gratuito
+              {t.ctaPrimary}
               <FaArrowRight />
             </Link>
             <Link
               href="/blog"
               className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"
             >
-              Ver mas articulos
+              {t.ctaSecondary}
             </Link>
           </div>
         </div>

@@ -1,12 +1,53 @@
 import Link from 'next/link'
+import { cookies } from 'next/headers'
 import { FaArrowRight, FaClock, FaUser } from 'react-icons/fa'
-import { getAllPosts } from '@/lib/blog'
+import { getAllPosts, type Locale } from '@/lib/blog'
 
-// Server Component — reads MDX from content/blog at build time.
-export const revalidate = 3600
+// Server Component — reads MDX from content/blog/{es,en} based on the
+// `lang` cookie set by LanguageContext on the client. Because we use
+// cookies(), Next renders this route dynamically per request, which is
+// exactly what we want for an i18n switch without changing the URL.
+export const dynamic = 'force-dynamic'
+
+async function resolveLocale(): Promise<Locale> {
+  const c = await cookies()
+  const raw = c.get('lang')?.value?.toUpperCase()
+  return raw === 'EN' ? 'en' : 'es'
+}
+
+const ui = {
+  es: {
+    breadcrumbHome: 'Inicio',
+    breadcrumbBlog: 'Blog',
+    heroTitle: 'Blog Impulsa Lab',
+    heroSubtitle: 'Agentes AI, automatizacion y arquitectura para PYMEs que van en serio.',
+    featuredLabel: 'Articulo destacado',
+    readMore: 'Leer mas',
+    empty: 'Aun no hay articulos publicados.',
+    ctaTitle: 'Necesitas ayuda para automatizar tu negocio?',
+    ctaSubtitle: 'Agenda un diagnostico gratuito de 20 minutos y sal con un plan claro.',
+    ctaPrimary: 'Diagnostico gratuito',
+    ctaSecondary: 'Hablar con un experto',
+  },
+  en: {
+    breadcrumbHome: 'Home',
+    breadcrumbBlog: 'Blog',
+    heroTitle: 'Impulsa Lab Blog',
+    heroSubtitle: 'AI agents, automation, and architecture for SMBs that mean business.',
+    featuredLabel: 'Featured post',
+    readMore: 'Read more',
+    empty: 'No posts published yet.',
+    ctaTitle: 'Need help automating your business?',
+    ctaSubtitle: 'Book a free 20-minute diagnostic and walk away with a clear plan.',
+    ctaPrimary: 'Free diagnostic',
+    ctaSecondary: 'Talk to an expert',
+  },
+} as const
 
 export default async function BlogPage() {
-  const posts = await getAllPosts()
+  const locale = await resolveLocale()
+  const t = ui[locale]
+  const posts = await getAllPosts(locale)
   const featured = posts.find((p) => p.featured) || posts[0]
   const rest = posts.filter((p) => p.slug !== featured?.slug)
 
@@ -17,10 +58,10 @@ export default async function BlogPage() {
         <div className="container mx-auto px-4 py-4">
           <nav className="text-sm">
             <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
-              Inicio
+              {t.breadcrumbHome}
             </Link>
             <span className="mx-2 text-gray-400">/</span>
-            <span className="text-gray-900 font-medium">Blog</span>
+            <span className="text-gray-900 font-medium">{t.breadcrumbBlog}</span>
           </nav>
         </div>
       </div>
@@ -29,11 +70,9 @@ export default async function BlogPage() {
       <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10" />
         <div className="container mx-auto px-4 text-center relative z-10">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            Blog Impulsa Lab
-          </h1>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{t.heroTitle}</h1>
           <p className="text-xl md:text-2xl mb-2 max-w-3xl mx-auto opacity-95">
-            Agentes AI, automatizacion y arquitectura para PYMEs que van en serio.
+            {t.heroSubtitle}
           </p>
         </div>
       </section>
@@ -42,7 +81,7 @@ export default async function BlogPage() {
       {featured && (
         <section className="py-12 bg-white">
           <div className="container mx-auto px-4">
-            <h2 className="text-2xl font-bold mb-8 text-gray-900">Articulo destacado</h2>
+            <h2 className="text-2xl font-bold mb-8 text-gray-900">{t.featuredLabel}</h2>
             <Link
               href={`/blog/${featured.slug}`}
               className="block bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow"
@@ -79,7 +118,7 @@ export default async function BlogPage() {
                       </span>
                     </div>
                     <span className="inline-flex items-center gap-2 text-blue-600 font-semibold">
-                      Leer mas
+                      {t.readMore}
                       <FaArrowRight className="text-sm" />
                     </span>
                   </div>
@@ -137,7 +176,7 @@ export default async function BlogPage() {
           )}
           {posts.length === 0 && (
             <div className="text-center py-12">
-              <p className="text-gray-500 text-lg">Aun no hay articulos publicados.</p>
+              <p className="text-gray-500 text-lg">{t.empty}</p>
             </div>
           )}
         </div>
@@ -146,25 +185,21 @@ export default async function BlogPage() {
       {/* CTA */}
       <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Necesitas ayuda para automatizar tu negocio?
-          </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-95">
-            Agenda un diagnostico gratuito de 20 minutos y sal con un plan claro.
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{t.ctaTitle}</h2>
+          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-95">{t.ctaSubtitle}</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               href="/diagnostico"
               className="inline-flex items-center justify-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
             >
-              Diagnostico gratuito
+              {t.ctaPrimary}
               <FaArrowRight />
             </Link>
             <Link
               href="/contacto"
               className="inline-flex items-center justify-center gap-2 bg-transparent border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-all"
             >
-              Hablar con un experto
+              {t.ctaSecondary}
             </Link>
           </div>
         </div>
