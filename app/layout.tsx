@@ -129,12 +129,14 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google Ads (gtag.js) */}
+        {/* Google Ads (gtag.js) — lazyOnload defers loading until browser is idle,
+            reducing main-thread contention and improving LCP/TBT on mobile.
+            Conversion tracking still works; pixels fire after user interaction. */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17854811161"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
-        <Script id="google-ads-init" strategy="afterInteractive">
+        <Script id="google-ads-init" strategy="lazyOnload">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
