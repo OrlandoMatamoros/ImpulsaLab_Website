@@ -477,6 +477,10 @@ export default function Header() {
                   {t.nav.marketing}
                 </Link>
 
+                <Link href="/blog" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
+                  Blog
+                </Link>
+
                 {/* Academy dropdown */}
                 <div className="nav-dropdown">
                   <Link href="/capacitacion" className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
@@ -793,6 +797,14 @@ export default function Header() {
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.nav.marketing}
+              </Link>
+
+              <Link
+                href="/blog"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Blog
               </Link>
 
               {/* Academy móvil */}
