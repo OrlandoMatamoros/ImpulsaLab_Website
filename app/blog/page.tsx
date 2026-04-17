@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { cookies } from 'next/headers'
+import type { Metadata } from 'next'
 import { FaArrowRight, FaClock, FaUser } from 'react-icons/fa'
 import { getAllPosts, type Locale } from '@/lib/blog'
 
@@ -13,6 +14,42 @@ async function resolveLocale(): Promise<Locale> {
   const c = await cookies()
   const raw = c.get('lang')?.value?.toUpperCase()
   return raw === 'EN' ? 'en' : 'es'
+}
+
+const metaByLocale = {
+  es: {
+    title: 'Blog - Agentes AI y Automatizacion para PYMEs | Impulsa Lab',
+    description:
+      'Articulos sobre agentes AI, automatizacion de procesos y arquitectura de negocio para PYMEs que van en serio. Escrito por el equipo de Impulsa Lab.',
+  },
+  en: {
+    title: 'Blog - AI Agents and Automation for SMBs | Impulsa Lab',
+    description:
+      'Articles on AI agents, process automation, and business architecture for SMBs that mean business. Written by the Impulsa Lab team.',
+  },
+} as const
+
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await resolveLocale()
+  const m = metaByLocale[locale]
+  return {
+    title: m.title,
+    description: m.description,
+    alternates: { canonical: 'https://tuimpulsalab.com/blog' },
+    openGraph: {
+      title: m.title,
+      description: m.description,
+      url: 'https://tuimpulsalab.com/blog',
+      siteName: 'Impulsa Lab',
+      locale: locale === 'en' ? 'en_US' : 'es_ES',
+      type: 'website',
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: m.title,
+      description: m.description,
+    },
+  }
 }
 
 const ui = {
