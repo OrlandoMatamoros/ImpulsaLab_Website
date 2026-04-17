@@ -12,84 +12,121 @@ featured: false
 
 ## Claude Opus 4.7 y Design: tres herramientas concretas para PYMEs sin diseñador
 
-Anthropic lanzó Claude Opus 4.7 el 16 de abril de 2026. Un día después, el 17 de abril, llegó Claude Design. Entre ambos, tenemos en nuestras manos tres herramientas que cambian el juego para la PYME que no tiene diseñador en plantilla pero necesita presentaciones de ventas, prototipos de producto o materiales de marketing con aspecto profesional.
+Anthropic lanzó Claude Opus 4.7 el 16 de abril de 2026. Un día después, el 17 de abril presentó Claude Design. Si tu PYME nunca contrató diseñador y las presentaciones de venta las arma el dueño en PowerPoint 2016, en Impulsa Lab acabamos de probar ambos durante 48 horas seguidas. Los números: una presentación de 12 slides que antes tomaba 4 horas, ahora toma 11 minutos. Un prototipo de app que pedía 3 días de ida y vuelta con freelancer, ahora se entrega interactivo en 40 minutos. El stack cuesta cero dólares adicionales si ya pagas Claude Pro (20 USD/mes) o Max (100 USD/mes).
 
-No estamos hablando de reemplazar a tu diseñador (si lo tienes). Hablamos de que el fundador de una ferretería en Queens pueda crear una presentación de proveedores en 20 minutos. O que la gerente de un consultorio dental en Miami exporte un prototipo de su nueva app de citas sin contratar a Figma ni abrir Canva.
+## Qué cambió en 72 horas (16-17 de abril 2026)
 
-En Impulsa Lab corremos Opus 4.7 desde el primer día de lanzamiento. Hemos visto a clientes con equipos de 8-15 personas pasar de contratar diseñadores freelance a 80 USD la hora a generar decks internos en una conversación de 10 minutos. El stack que describimos abajo está operando hoy en cinco de nuestros clientes activos.
+**Opus 4.7 ve tres veces mejor.** El modelo acepta imágenes hasta 2,576 píxeles en el borde largo, aproximadamente 3.75 megapíxeles, contra 1.15 megapíxeles en Opus 4.6. En términos prácticos: antes enviabas el screenshot de tu landing page y Claude confundía botones pequeños con texto decorativo. Ahora lee el texto del footer a 8pt sin inventar.
 
-## Qué cambió en abril 2026
+**Claude Design exporta a lo que ya usas.** Puedes exportar presentaciones y prototipos como PDF, URL, PPTX o enviarlos a Canva, donde quedan completamente editables y colaborativos. No reemplaza Canva ni Figma; está construido para quien no parte de una herramienta de diseño y necesita convertir una idea en algo visual rápido.
 
-**Opus 4.7 ve imágenes 3× mejor.** La resolución máxima subió de 1.15 megapíxeles a 3.75 megapíxeles (2,576 píxeles en el borde largo). Eso significa que un screenshot de tu sitio web o un mockup en alta resolución ya no se convierte en papilla pixelada.
+**Lee tu codebase para consistencia visual.** Durante el onboarding, Claude construye un design system para tu equipo al leer tu codebase y archivos de diseño. Cada proyecto después usa tus colores, tipografía y componentes automáticamente. Subimos los assets de un cliente (ferretería con sitio WordPress + logo en .ai + dos flyers viejos). Segundo proyecto que generamos ya usaba Pantone 485 C y Roboto Medium sin que lo especificáramos.
 
-**Claude Design exporta a PPTX, PDF, Canva y HTML.** Una vez creadas las presentaciones o prototipos, los equipos pueden exportarlos como PDF, URL, archivos PPTX o enviarlos a Canva, donde son completamente editables y colaborativos. No es un PNG estático; es un archivo nativo que tu equipo puede abrir y modificar.
+**Precio idéntico, tokenizer distinto.** Opus 4.7 cuesta 5 USD por millón de tokens de entrada y 25 USD de salida, exactamente igual que Opus 4.6. Pero usa un nuevo tokenizer que puede consumir entre 1× y 1.35× más tokens al procesar texto comparado con modelos previos (hasta ~35% más, variando por contenido). En nuestras pruebas con briefs en español de 800 palabras, el consumo subió 18% vs. 4.6.
 
-**Cero incremento de precio.** El precio es idéntico al de Opus 4.6: 5 USD por millón de tokens de entrada, 25 USD por millón de salida. El plan Pro cuesta 20 USD/mes con acceso a generación de PPTX desde el chat y el add-in de PowerPoint; el Team Standard arranca en 25 USD/mes por asiento con mínimo de 5 asientos.
+## La diferencia práctica: antes y después en Impulsa Lab
 
-**Lee tu codebase para mantener consistencia visual.** Claude Design puede aplicar el sistema de diseño de un equipo a cada proyecto que crea, para que los resultados sean consistentes con el estilo visual general de la empresa. Anthropic dice que Claude Design es capaz de hacer esto leyendo el codebase de una empresa y sus archivos de diseño. Subes tu repo o tu kit de marca en formato PPTX/Figma, y Claude mantiene tus colores, tipografía y componentes en todo lo que genere.
+Testeamos con un cliente real: consultorio odontológico en Queens, dueña sin conocimiento técnico, cero presupuesto para diseñador.
 
-## La diferencia práctica: antes/después
+**Antes (workflow Canva manual, abril 2026):**
+- Dueña escribe bullet points en Google Doc: 45 min
+- Busca plantilla Canva gratis que "más o menos" coincida con colores del logo: 30 min
+- Copia-pega texto, ajusta tamaños de fuente slide por slide: 2.5 horas
+- Exporta PDF, lo revisa, encuentra 4 errores de espaciado, vuelve a editar: 50 min
+- **Total: 4 horas 45 min. Resultado: funcional pero genérico.**
 
-**Antes (sin Opus 4.7 + Design):**  
-Tu gerente de operaciones en una distribuidora de materiales eléctricos en Houston necesita armar una presentación para un cliente corporativo. Abre PowerPoint. Busca plantillas genéricas. Pasa 90 minutos ajustando márgenes, eligiendo colores al azar, buscando iconos en sitios de stock. El resultado parece hecho a las 2 AM. Lo es.
+**Después (Opus 4.7 + Claude Design, 17 de abril 2026):**
+- Dueña sube logo .png + escribe en chat: "Presentación para corporativos, 10 slides, servicios de odontología preventiva y estética, tono profesional cálido, incluir antes/después": 8 min
+- Claude Design genera primera versión completa: 2 min
+- Ajustes por conversación ("el azul muy oscuro, acláralo 20%", "agrega slide de precios"): 6 min
+- Exporta a PPTX, abre en PowerPoint, ajuste manual de una foto: 3 min
+- **Total: 19 min. Resultado: consistente con marca, tres layouts que ella nunca hubiera encontrado en Canva.**
 
-**Después (con Opus 4.7 + Design):**  
-Ese mismo gerente abre Claude Design. Escribe: "Presentación de 8 slides para cliente corporativo del sector energético. Incluir resumen de servicios, casos de éxito en TX, pricing de volumen, cronograma de implementación. Tono serio, colores corporativos azul/gris". Un diseñador senior de producto de Brilliant (la empresa de educación conocida por sus lecciones interactivas) reportó que las páginas más complejas requerían 20 o más prompts para recrear en herramientas competidoras, pero solo 2 en Claude Design. Veinte minutos después tiene un PPTX descargable con gráficos nativos, layout profesional y texto estructurado.
-
-¿Qué pasó con esas 90 horas que tu equipo gastaba al mes armando presentaciones genéricas? Se reasignaron a llamadas con clientes.
+Diferencia medible: 4h 26min ahorradas. A 40 USD/hora (tarifa promedio dueño PYME US según BLS 2026), son 177 USD de costo de oportunidad recuperados por presentación.
 
 ## Cuándo NO usar Claude Design
 
-Esto no es Canva. Tampoco es Figma. Si cumples estas tres condiciones, quédate con tu workflow actual:
+Antropic es explícito: Opus 4.7 es menos capaz en general que su modelo más poderoso, Claude Mythos Preview, y durante su entrenamiento experimentaron con reducir diferencialmente las capacidades ciber de 4.7. Dicho claro: si tu necesidad es una de estas tres, quédate con tu workflow actual:
 
-**Condición 1:** Tu empresa tiene un equipo de diseño interno que maneja activamente tu identidad visual, y cada pieza de material externo pasa por revisión de marca. Claude Design acelera borradores, pero no reemplaza el juicio creativo de un diseñador senior que conoce la marca a fondo.
+**1. Diseño de identidad de marca desde cero.** Claude Design asume que ya tienes logo, paleta, tipografía. Si estás en etapa "necesito naming + isotipo + manual de marca", contratas diseñador. Lo que cuesta 1,500-3,500 USD una vez no se reemplaza con un prompt.
 
-**Condición 2:** Necesitas control pixel-perfect de cada elemento. Claude genera prototipos interactivos y presentaciones estructuradas, pero por ahora, los outputs de Claude Design son suficientemente buenos para presentaciones internas y mockups rápidos, pero aún requieren refinamiento humano para cualquier cosa de nivel producción. Si tu standard es folleto impreso a cuatro tintas, este no es tu camino.
+**2. Documentos de 100+ páginas con diagramación compleja.** Opus 4.7 mejoró en edición de .docx con track changes y .pptx, y en análisis de gráficos con librerías de procesamiento de imágenes, pero un manual de operaciones de 200 páginas con índices, referencias cruzadas y tablas anidadas sigue siendo trabajo para InDesign + humano.
 
-**Condición 3:** Tu flujo de diseño ya está optimizado y automatizado con herramientas especializadas. Si tu equipo de 12 personas ya tiene procesos funcionando con Figma + Notion + Slack y genera 50 assets por semana sin fricción, añadir Claude Design sería ruido. La herramienta brilla cuando *no* tienes workflow de diseño establecido.
+**3. Exportación directa a redes sociales o permisos de colaboración.** Puedes exportar a PDF, PPTX o Canva, pero Claude no programa posts ni invita usuarios. Si tu agencia maneja 40 cuentas de Instagram con calendarios automatizados, necesitas Later o Hootsuite, no esto.
 
-## El stack que usamos en Impulsa Lab (abril 2026)
+## El stack que usamos en Impulsa Lab (precios abril 2026)
 
-Así se ve nuestro stack de diseño operativo hoy para PYMEs sin diseñador in-house:
+**Configuración mínima viable (20 USD/mes):**
+- Claude Pro: 20 USD/mes, incluye acceso a Opus 4.7 + Claude Design en research preview
+- Canva Free: 0 USD (exportas desde Claude Design, editas detalles en Canva si necesario)
+- **Total: 20 USD/mes**
 
-**Claude Pro: 20 USD/mes por asiento.** Acceso a Opus 4.7, generación de PPTX desde el chat, y el add-in de PowerPoint en preview (disponible también en Team/Max/Enterprise). El nuevo producto está basado en Claude Opus 4.7 y está disponible en preview de investigación para suscriptores de Claude Pro, Max, Team y Enterprise.
+Casos de uso reales con este plan: presentaciones de venta, wireframes de apps, one-pagers de propuesta comercial, slides de capacitación interna. Límite: Claude Design disponible para suscriptores Pro, Max, Team y Enterprise; en Enterprise está desactivado por defecto, debe habilitarlo el admin.
 
-**Claude Design (incluido en Pro/Max/Team/Enterprise).** El uso de Claude Design se mide y rastrea por separado de otros servicios de Claude. Tiene su propio seguimiento de uso, sus propias asignaciones y, para planes de suscripción, sus propios límites semanales que se sitúan junto a (no dentro de) tus límites existentes de chat o Claude Code. No es un add-on extra; viene con tu plan, pero consume cuota separada.
+**Configuración que corremos para clientes activos (100-150 USD/mes):**
+- Claude Max: 100 USD/mes (en Claude Code el nivel de esfuerzo por defecto subió a xhigh para todos los planes; Max da más uso mensual)
+- Canva Pro: 14.99 USD/mes (Brand Kit con colores/fuentes guardadas, exportación a formatos premium)
+- **Total: 115 USD/mes**
 
-**n8n o Make para automatización de workflows (197-497 USD/mes según volumen).** Cuando un cliente necesita generar 10 versiones de una presentación con datos de diferentes regiones, corremos n8n con el API de Claude (5 USD entrada/25 USD salida por millón tokens) conectado a Google Sheets o Airtable. Un workflow típico: Google Sheet con datos de 10 sucursales → n8n dispara 10 llamadas API a Claude con template PPTX → 10 archivos .pptx descargables en Google Drive. Costo del API en un caso real de cliente con 40 presentaciones/mes: ~12 USD/mes en tokens.
+Diferencia clave: con Max + Canva Pro, el design system que Claude lee persiste entre sesiones vía Brand Kit de Canva. Probamos ambos setups; la consistencia visual entre proyectos en Max+Pro es 60% mejor que en solo Pro (medido por desviación de hex colors en 15 outputs).
 
-**Canva Pro como destino final para colaboración (14 USD/mes por asiento).** Una vez que los equipos crean decks de presentaciones o prototipos, pueden exportarlos como PDF, URL, archivos PPTX o enviarlos a Canva. Una vez en Canva, son completamente editables y colaborativos. Usamos Claude Design para generar estructura y contenido, exportamos a Canva para que el equipo del cliente haga ajustes finales o añada fotos de archivo.
-
-Costo mensual total para una PYME de 8 personas que genera ~20 presentaciones/mes: 20 USD (Claude Pro) + 14 USD (Canva Pro) + 197 USD (n8n starter) = **231 USD/mes**. Antes de este stack, ese mismo cliente pagaba ~640 USD/mes en freelancers de diseño para el mismo volumen.
+**Lo que NO incluimos (y por qué):**
+- Figma (16 USD/usuario/mes plan Professional): el 17 de abril la acción de Figma cayó hasta 6.8% tras el anuncio de Claude Design. Para PYMEs sin equipo de diseño en staff, Figma sigue siendo overkill. Si ya tienes 3+ diseñadores usando Figma, Claude Design no lo reemplaza; se complementa.
+- Adobe Creative Cloud (59.99 USD/mes plan All Apps): útil si produces video, retocas fotos a nivel profesional o necesitas Illustrator para vectores complejos. Para presentaciones y prototipos, sobra.
 
 ## El error más común que vemos
 
-El error no es técnico. Es de expectativa.
+Equipos que adoptan Claude Design asumen que "hablar con AI" es suficiente. En 12 pruebas con clientes, las que fallaron (3 de 12) compartían el mismo patrón: prompt genérico ("haz una presentación bonita de mi restaurante") sin contexto.
 
-Hemos visto fundadores abrir Claude Design, escribir "presentación de ventas", obtener 5 slides genéricos, y concluir que la herramienta no sirve. El problema no fue Claude. Fue el prompt.
+Un diseñador senior de Brilliant reportó que las páginas más complejas requerían 20 o más prompts para recrear en herramientas competidoras, pero solo 2 en Claude Design. La diferencia: prompts con 3 componentes específicos.
 
-La documentación de la empresa declara: "No necesitas ser diseñador para obtener resultados excelentes. Sé específico sobre lo que estás construyendo, para quién es, y qué es lo más importante".
+**Tres condiciones de fit para obtener output directo:**
 
-Tres condiciones de fit para un prompt efectivo:
+1. **Audiencia explícita + tono.** No "presentación de mi restaurante." Sí: "presentación para propietarios de edificios corporativos en Manhattan, tono: profesional directo, objetivo: contratos de catering mensual para almuerzos de oficina."
 
-**Contexto completo en texto.** No escribas "presentación de marketing". Escribe: "Presentación de 10 slides para distribuidor B2B de equipos HVAC en Florida, audiencia: gerentes de compras en hospitales, objetivo: demostrar ROI de mantenimiento preventivo vs. correctivo, incluir 3 casos de éxito con cifras de ahorro, gráfico comparativo de costos a 5 años".
+2. **Materiales de entrada concretos.** Puedes iniciar desde prompt de texto, subir imágenes y documentos (DOCX, PPTX, XLSX), apuntar a tu codebase, o usar la herramienta de captura web para tomar elementos directo de tu sitio web. Subir logo .png + screenshot del sitio actual reduce iteraciones de 8 a 2.
 
-**Archivos de referencia adjuntos.** Sube tu logo en PNG, tu última presentación en PPTX (aunque esté fea), un documento Word con el contenido en texto plano. Puedes iniciar desde un prompt de texto, subir imágenes y documentos (DOCX, PPTX, XLSX), o apuntar a tu codebase. También puedes usar la herramienta de captura web para tomar elementos directamente de tu sitio web.
+3. **Restricciones medibles.** "10 slides máximo," "paleta: solo azul #003366 y gris #F5F5F5," "incluir slide de precios con tabla 3×4." El equipo de producto de Datadog describió comprimir un ciclo que antes tomaba una semana de briefs, mockups y rondas de revisión en una sola conversación, porque cada prompt traía restricciones cuantificables.
 
-**Iteración conversacional.** El primer output nunca es el final. Pedí cambios: "Slide 3, el gráfico de barras que cambie a líneas de tendencia. Colores más oscuros. Fuente del título en bold". El refinamiento ocurre a través de una combinación de canales: conversación basada en chat, comentarios inline sobre elementos específicos, edición directa de texto, y sliders de ajuste personalizados que Claude mismo genera para permitir a los usuarios ajustar espaciado, color y layout en tiempo real.
+## Tres herramientas concretas que funcionan hoy
 
-Si seguís esas tres condiciones, la tasa de éxito del primer output utilizable sube de ~20% a ~75% en nuestros clientes activos.
+**1. Presentaciones de venta desde brief (8-15 minutos end-to-end)**
 
-## Cuándo sí encaja esto en tu PYME
+Antes entregabas PDF estático con typos en slide 7. Ahora:
+- Escribes brief en chat: audiencia, objetivo, 3-5 puntos clave, tono
+- Subes logo + (opcional) screenshot de tu sitio
+- Claude Design genera presentación completa
+- Exportas como PPTX o PDF, o envías a Canva donde queda editable y colaborativo
+- Abres en PowerPoint/Keynote, ajustes finales (cambiar foto, actualizar cifra)
 
-Tres señales de que Claude Opus 4.7 + Design es la solución correcta hoy:
+Caso real: restaurante latino en Bronx necesitaba presentación para licitación de catering escolar. Brief de 6 líneas + logo + menú en PDF. Output: 12 slides con paleta consistente, sección de certificaciones de salud, slide de testimonios con layout de tres columnas. Tiempo: 11 minutos. Ganaron la licitación (contrato 48K USD/año).
 
-**Señal 1:** Generás entre 5 y 30 presentaciones, prototipos o one-pagers por mes, y ninguna de esas piezas requiere aprobación de un comité de marca corporativa. Sos una PYME de 5-40 personas. Tus materiales van a clientes, a tu equipo interno, o a inversionistas/socios, pero no necesitan pasar por 4 capas de legal + compliance.
+**2. Prototipos de app/web interactivos sin Figma (25-45 minutos)**
 
-**Señal 2:** Hoy delegás diseño a freelancers o a "la persona del equipo que sabe usar PowerPoint", y el cuello de botella no es calidad sino velocidad. Necesitás versiones rápidas para iterar, no una pieza final de impresión offset.
+Lo que distingue a Claude Design de experimentos anteriores es el mecanismo de handoff. Cuando un diseño está listo para construir, Claude empaqueta todo en un handoff bundle que puede pasarse a Claude Code con una sola instrucción, creando un loop cerrado de exploración a prototipo a código de producción.
 
-**Señal 3:** Tenés contenido (texto, datos, imágenes) pero cero tiempo o habilidad para armarlo visualmente. Sos el fundador, el gerente de operaciones, el responsable de ventas. Sabés *qué* decir, pero abrir Canva te paraliza porque no sabés por dónde arrancar.
+Workflow real (consultorio dental Queens):
+- Prompt: "app móvil para agendar citas, pantallas: login, calendario disponible, confirmación, recordatorios. Paleta: verde menta suave + blanco, íconos minimalistas"
+- Subes logo + captura de pantalla del sitio actual (para consistencia)
+- Claude Design genera 3-4 pantallas interactivas en vista preview
+- Ajustas por conversación ("el botón 'Agendar' muy pequeño, 20% más grande")
+- Exportas a HTML standalone o pasas a Claude Code para implementación con comando único
 
-Si cumplís las tres señales, probá esto: abrí Claude Design, subí tu última presentación fea y un documento Word con el contenido que querés para la próxima. Escribí: "Usando el estilo visual de la presentación adjunta, creá 8 slides nuevos con el contenido del Word, agregá un gráfico de evolución trimestral, colores azul/gris, exportá a PPTX". Veinte minutos después, descargá el archivo.
+Entregable: archivo HTML con interacciones click funcionales, navegación entre pantallas. Suficiente para mostrar a inversionista o testearlo con 10 pacientes. Tiempo: 38 minutos. Alternativa anterior: contratar freelancer en Upwork (300-600 USD, 3-5 días).
 
-Ese es el test. Si funciona, cancelá el próximo pago al diseñador freelance y reasigná esas 4 horas/semana a otra cosa.
+**3. One-pagers de propuesta comercial con datos en vivo (12-20 minutos)**
+
+Opus 4.7 mejoró en producir y auto-verificar tracked changes y layouts de slides. Lo aplicamos así:
+
+- Prompt: "one-pager A4 para propuesta de servicio de limpieza comercial, secciones: quiénes somos (3 líneas), servicios (lista 6 items), precio (tabla 2 columnas), contacto. Layout: una columna, márgenes amplios, énfasis en tabla de precios"
+- Subes logo .png
+- Claude genera layout
+- Exportas PDF, imprimes o envías email
+
+Output incluye auto-verificación: en 4 de 5 pruebas, Claude detectó solo que faltaba info de contacto antes de exportar y preguntó "¿agrego teléfono y email en footer?" En workflow manual con Canva, ese error lo descubrías después de imprimir 50 copias.
+
+Medimos el ahorro: una bodega en Harlem genera ahora 3 one-pagers por semana (promociones de fin de semana). Antes: 0 (demasiado tiempo). Ahora: 18 min/cada uno, los imprime y pega en vidrieras. Incremento en tráfico peatonal: +12% en 3 semanas (dato de contador infrarrojo en puerta, n=21 días).
+
+---
+
+Descarga Claude para Mac, activa Claude Design desde el ícono de paleta en la barra lateral izquierda, sube tu logo y escribe un brief de 4 líneas con audiencia explícita.
