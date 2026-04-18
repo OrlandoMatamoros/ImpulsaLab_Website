@@ -118,7 +118,7 @@ export default function HeroSection() {
 
             {/* Título principal */}
             <motion.h1 variants={heroItem} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight min-h-[1.05em]">
-              <TypewriterTitle base={t.hero.titulo} accent={t.hero.tituloAccent} delayMs={400} speedMs={38} />
+              <TypewriterTitle base={t.hero.titulo} accent={t.hero.tituloAccent} delayMs={500} speedMs={60} />
             </motion.h1>
 
             {/* Subtítulo */}
