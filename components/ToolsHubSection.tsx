@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const ToolsIcon = ({ className }: { className?: string }) => (
@@ -36,6 +37,7 @@ const PromptIcon = ({ className }: { className?: string }) => (
 
 export default function ToolsHubSection() {
   const { t } = useLanguage()
+  const prefersReduced = useReducedMotion()
 
   const tools = [
     {
@@ -101,11 +103,17 @@ export default function ToolsHubSection() {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-6xl mx-auto">
-          {tools.map((tool) => (
-            <Link
+          {tools.map((tool, index) => (
+            <motion.div
               key={tool.href}
+              initial={prefersReduced ? false : { opacity: 0, y: 30 }}
+              whileInView={prefersReduced ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+            <Link
               href={tool.href}
-              className={`group relative bg-gradient-to-br ${tool.gradient} p-5 rounded-xl border-2 ${tool.border} transition-all duration-500 hover:scale-105 hover:shadow-xl ${tool.shadow} overflow-hidden`}
+              className={`group relative bg-gradient-to-br ${tool.gradient} p-5 rounded-xl border-2 ${tool.border} transition-all duration-500 hover:scale-105 hover:shadow-xl ${tool.shadow} overflow-hidden block h-full`}
             >
               <div className="absolute top-2 right-2 bg-white text-xs px-2 py-1 rounded-full animate-pulse font-bold">
                 <span className={tool.badgeColor}>{tool.badge}</span>
@@ -122,6 +130,7 @@ export default function ToolsHubSection() {
                 <p className="text-xs text-white/80">{tool.meta}</p>
               </div>
             </Link>
+            </motion.div>
           ))}
         </div>
 

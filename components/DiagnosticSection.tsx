@@ -1,10 +1,21 @@
 'use client'
 
 import Link from 'next/link'
+import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function DiagnosticSection() {
   const { t } = useLanguage()
+  const prefersReduced = useReducedMotion()
+  const revealProps = (index: number) =>
+    prefersReduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 30 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-100px' },
+          transition: { duration: 0.5, delay: index * 0.1 },
+        }
 
   return (
     <section id="diagnostico" className="py-20 bg-gray-50">
@@ -64,6 +75,7 @@ export default function DiagnosticSection() {
 
         <div className="grid md:grid-cols-3 gap-8">
           {/* Eje X: FINANZAS */}
+          <motion.div {...revealProps(0)}>
           <Link href="/servicios/finanzas" className="block">
             <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
               <div className="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center mb-6">
@@ -82,8 +94,10 @@ export default function DiagnosticSection() {
               </p>
             </div>
           </Link>
+          </motion.div>
 
           {/* Eje Y: OPERACIONES */}
+          <motion.div {...revealProps(1)}>
           <Link href="/servicios/operaciones" className="block">
             <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -104,8 +118,10 @@ export default function DiagnosticSection() {
               </p>
             </div>
           </Link>
+          </motion.div>
 
           {/* Eje Z: MARKETING */}
+          <motion.div {...revealProps(2)}>
           <Link href="/servicios/marketing" className="block">
             <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
               <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
@@ -124,6 +140,7 @@ export default function DiagnosticSection() {
               </p>
             </div>
           </Link>
+          </motion.div>
         </div>
       </div>
     </section>

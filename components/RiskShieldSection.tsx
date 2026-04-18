@@ -1,10 +1,21 @@
 'use client';
 
 import React from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 export default function RiskShieldSection() {
   const { t } = useLanguage();
+  const prefersReduced = useReducedMotion();
+  const rowReveal = (index: number) =>
+    prefersReduced
+      ? {}
+      : {
+          initial: { opacity: 0, y: 30 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, margin: '-100px' },
+          transition: { duration: 0.5, delay: index * 0.1 },
+        };
 
   // Data para la comparación - usando translation keys
   const comparisons = [
@@ -80,12 +91,10 @@ export default function RiskShieldSection() {
             </thead>
             <tbody>
               {comparisons.map((item, index) => (
-                <tr
+                <motion.tr
                   key={index}
                   className={`${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'} hover:bg-cyan-50 transition-colors duration-200`}
-                  style={{
-                    animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
-                  }}
+                  {...rowReveal(index)}
                 >
                   <td className="p-6 font-bold text-gray-900 border-r-2 border-gray-200">{item.aspect}</td>
                   <td className="p-6 text-center text-gray-600 font-medium border-r-2 border-gray-200">{item.generic}</td>
@@ -93,7 +102,7 @@ export default function RiskShieldSection() {
                     <span className="text-green-600 font-bold text-xl mr-2">✓</span>
                     <span className="text-gray-900 font-bold">{item.impulsaLab}</span>
                   </td>
-                </tr>
+                </motion.tr>
               ))}
             </tbody>
           </table>
@@ -102,12 +111,10 @@ export default function RiskShieldSection() {
         {/* Versión Móvil - Cards MEJORADAS */}
         <div className="md:hidden space-y-4">
           {comparisons.map((item, index) => (
-            <div
+            <motion.div
               key={index}
               className="bg-white rounded-xl shadow-xl border-2 border-gray-200 p-6 hover:shadow-2xl transition-all duration-200"
-              style={{
-                animation: `fadeInUp 0.5s ease-out ${index * 0.1}s both`
-              }}
+              {...rowReveal(index)}
             >
               <h3 className="font-bold text-xl text-gray-900 mb-4 border-b-2 border-gray-200 pb-2">
                 {item.aspect}
@@ -128,7 +135,7 @@ export default function RiskShieldSection() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
