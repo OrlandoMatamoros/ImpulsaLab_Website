@@ -1,7 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
+import { useMagnetic } from '@/lib/hooks/useMagnetic'
 
 // Genera un número estable por mes (8, 9 o 10) usando el mes como seed
 function getMonthlySlots(): number {
@@ -21,6 +23,9 @@ export default function HeroSection() {
   const month = getCurrentMonth(language)
   // Capitalize first letter
   const monthLabel = month.charAt(0).toUpperCase() + month.slice(1)
+
+  const primaryCta = useMagnetic<HTMLDivElement>(15, 150)
+  const secondaryCta = useMagnetic<HTMLDivElement>(15, 150)
 
   return (
     <section className="relative bg-brand-navy text-white pt-24 pb-16 lg:pb-20 min-h-[90vh] flex items-center overflow-hidden">
@@ -52,25 +57,37 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Link
-                href="/diagnostico"
-                className="inline-flex items-center justify-center bg-brand-cyan text-brand-navy px-8 py-4 rounded-lg
-                         font-bold text-lg transition-all duration-300
-                         hover:scale-105 hover:bg-cyan-300 hover:shadow-xl hover:shadow-brand-cyan/30 group"
+              <motion.div
+                ref={primaryCta.ref}
+                style={{ x: primaryCta.x, y: primaryCta.y }}
+                className="inline-block"
               >
-                {t.hero.cta}
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
-              <Link
-                href="#servicios-pilares"
-                className="inline-flex items-center justify-center bg-transparent border-2 border-white/30 text-white
-                         px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300
-                         hover:bg-white/10 hover:border-white/50 backdrop-blur-sm"
+                <Link
+                  href="/diagnostico"
+                  className="inline-flex items-center justify-center bg-brand-cyan text-brand-navy px-8 py-4 rounded-lg
+                           font-bold text-lg transition-all duration-300
+                           hover:bg-cyan-300 hover:shadow-xl hover:shadow-brand-cyan/30 group"
+                >
+                  {t.hero.cta}
+                  <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                  </svg>
+                </Link>
+              </motion.div>
+              <motion.div
+                ref={secondaryCta.ref}
+                style={{ x: secondaryCta.x, y: secondaryCta.y }}
+                className="inline-block"
               >
-                {t.hero.ctaSecundario}
-              </Link>
+                <Link
+                  href="#servicios-pilares"
+                  className="inline-flex items-center justify-center bg-transparent border-2 border-white/30 text-white
+                           px-8 py-4 rounded-lg font-semibold text-lg transition-all duration-300
+                           hover:bg-white/10 hover:border-white/50 backdrop-blur-sm"
+                >
+                  {t.hero.ctaSecundario}
+                </Link>
+              </motion.div>
             </div>
 
             {/* Métricas honestas */}
