@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import AIBuildBanner from '@/components/AIBuildBanner'
 import HeroSection from '@/components/HeroSection'
+import StatsBar from '@/components/StatsBar'
 import TestimonialsBar from '@/components/TestimonialsBar'
 import DiagnosticSection from '@/components/DiagnosticSection'
 import ToolsHubSection from '@/components/ToolsHubSection'
@@ -17,6 +18,7 @@ export default function Home() {
     <main className="min-h-screen">
       <AIBuildBanner />
       <HeroSection />
+      <StatsBar />
       <TestimonialsBar />
       <DiagnosticSection />
       <ToolsHubSection />
