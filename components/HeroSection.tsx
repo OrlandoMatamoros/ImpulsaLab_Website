@@ -1,11 +1,11 @@
 'use client'
 
 import Link from 'next/link'
-import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useMagnetic } from '@/lib/hooks/useMagnetic'
 
-// Genera un número estable por mes (8, 9 o 10) usando el mes como seed
 function getMonthlySlots(): number {
   const now = new Date()
   const seed = now.getFullYear() * 12 + now.getMonth()
@@ -15,6 +15,68 @@ function getMonthlySlots(): number {
 function getCurrentMonth(lang: string): string {
   const now = new Date()
   return now.toLocaleDateString(lang === 'ES' ? 'es-ES' : 'en-US', { month: 'long', year: 'numeric' })
+}
+
+function TypewriterAccent({ text, delayMs = 800, speedMs = 55 }: { text: string; delayMs?: number; speedMs?: number }) {
+  const [out, setOut] = useState('')
+  const [done, setDone] = useState(false)
+  const prefersReduced = useReducedMotion()
+
+  useEffect(() => {
+    setOut('')
+    setDone(false)
+    if (prefersReduced) { setOut(text); setDone(true); return }
+    let i = 0
+    let id: ReturnType<typeof setInterval>
+    const start = setTimeout(() => {
+      id = setInterval(() => {
+        i++
+        setOut(text.slice(0, i))
+        if (i >= text.length) { clearInterval(id); setDone(true) }
+      }, speedMs)
+    }, delayMs)
+    return () => { clearTimeout(start); if (id) clearInterval(id) }
+  }, [text, delayMs, speedMs, prefersReduced])
+
+  return (
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">
+      {out}
+      {!done && <span className="inline-block w-[3px] h-[0.85em] align-[-0.05em] ml-1 bg-brand-cyan animate-pulse" aria-hidden />}
+    </span>
+  )
+}
+
+function CountUp({ end, suffix = '', duration = 1500 }: { end: number; suffix?: string; duration?: number }) {
+  const [val, setVal] = useState(0)
+  const ref = useRef<HTMLSpanElement>(null)
+  const inView = useInView(ref, { once: true, margin: '-50px' })
+  const prefersReduced = useReducedMotion()
+
+  useEffect(() => {
+    if (!inView) return
+    if (prefersReduced) { setVal(end); return }
+    const start = performance.now()
+    let raf = 0
+    const tick = (now: number) => {
+      const t = Math.min(1, (now - start) / duration)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setVal(Math.round(eased * end))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
+  }, [inView, end, duration, prefersReduced])
+
+  return <span ref={ref} className="tabular-nums">{val}{suffix}</span>
+}
+
+const heroStagger = {
+  hidden: { opacity: 1 },
+  visible: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
+}
+const heroItem = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const } },
 }
 
 export default function HeroSection() {
@@ -35,28 +97,33 @@ export default function HeroSection() {
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* COLUMNA IZQUIERDA — Copy + CTA */}
-          <div className="flex flex-col justify-center h-full">
+          <motion.div
+            className="flex flex-col justify-center h-full"
+            variants={heroStagger}
+            initial="hidden"
+            animate="visible"
+          >
             {/* Badge */}
-            <div className="mb-6">
+            <motion.div variants={heroItem} className="mb-6">
               <span className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-blue-200 border border-white/20">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
                 {t.hero.badge}
               </span>
-            </div>
+            </motion.div>
 
             {/* Título principal */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+            <motion.h1 variants={heroItem} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight">
               {t.hero.titulo}
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">{t.hero.tituloAccent}</span>
-            </h1>
+              <TypewriterAccent text={t.hero.tituloAccent} delayMs={700} />
+            </motion.h1>
 
             {/* Subtítulo */}
-            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
+            <motion.p variants={heroItem} className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
               {t.hero.subtitulo}
-            </p>
+            </motion.p>
 
             {/* CTAs */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <motion.div variants={heroItem} className="flex flex-col sm:flex-row gap-4 mb-8">
               <motion.div
                 ref={primaryCta.ref}
                 style={{ x: primaryCta.x, y: primaryCta.y }}
@@ -88,24 +155,24 @@ export default function HeroSection() {
                   {t.hero.ctaSecundario}
                 </Link>
               </motion.div>
-            </div>
+            </motion.div>
 
             {/* Métricas honestas */}
-            <div className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
+            <motion.div variants={heroItem} className="grid grid-cols-3 gap-6 pt-8 border-t border-white/20">
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1">50+</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white mb-1 tracking-tight"><CountUp end={50} suffix="+" /></div>
                 <div className="text-sm md:text-base text-gray-300">{t.hero.metricaEmpresas}</div>
               </div>
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1">3</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white mb-1 tracking-tight"><CountUp end={3} /></div>
                 <div className="text-sm md:text-base text-gray-300">{t.hero.metricaPilares}</div>
               </div>
               <div>
-                <div className="text-3xl md:text-4xl font-bold text-white mb-1">100%</div>
+                <div className="text-3xl md:text-4xl font-extrabold text-white mb-1 tracking-tight"><CountUp end={100} suffix="%" /></div>
                 <div className="text-sm md:text-base text-gray-300">{t.hero.metricaSoporte}</div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
 
           {/* COLUMNA DERECHA — DIAGNOSTICO 3D (Lead Magnet) */}
           <div className="flex justify-center mt-8 md:mt-0">
