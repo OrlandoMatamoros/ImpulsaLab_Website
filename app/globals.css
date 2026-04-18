@@ -347,6 +347,9 @@
   position: relative;
   isolation: isolate;
 }
+.border-beam.border-beam-lg::before {
+  padding: 4px;
+}
 .border-beam::before {
   content: '';
   position: absolute;

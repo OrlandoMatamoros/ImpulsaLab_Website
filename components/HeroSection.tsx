@@ -182,7 +182,7 @@ export default function HeroSection() {
           {/* COLUMNA DERECHA — DIAGNOSTICO 3D (Lead Magnet) */}
           <div className="flex justify-center mt-8 md:mt-0">
             <div className="w-full max-w-lg">
-              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border-beam">
+              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border-beam border-beam-lg">
 
                 {/* Badge de urgencia — esquina superior */}
                 <div className="absolute top-4 right-4 z-10">
