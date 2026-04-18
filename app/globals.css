@@ -334,6 +334,50 @@
 }
 
 /* ============================================================
+   Border Beam — conic trail orbiting a card perimeter.
+   Uses CSS @property for angle animation. Mask-composite
+   clips the fill so only the border glows. Cyan trail on brand.
+   ============================================================ */
+@property --border-beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.border-beam {
+  position: relative;
+  isolation: isolate;
+}
+.border-beam::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 2px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--border-beam-angle),
+    transparent 0deg,
+    transparent 300deg,
+    rgba(0, 191, 255, 0.9) 340deg,
+    rgba(0, 191, 255, 1) 355deg,
+    rgba(0, 191, 255, 0.9) 360deg
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  animation: border-beam-rotate 6s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+@keyframes border-beam-rotate {
+  to { --border-beam-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .border-beam::before { animation: none; }
+}
+
+/* ============================================================
    Tool Logos Marquee — infinite horizontal scroll.
    Track is duplicated in JSX (2x list), so translating -50%
    completes one cycle with no visible jump.
