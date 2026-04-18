@@ -67,17 +67,17 @@ export default function HeroSpotlightGrid() {
           translateX: '-50%',
           translateY: '-50%',
           background:
-            'radial-gradient(circle, rgba(0,191,255,0.18) 0%, rgba(0,191,255,0.08) 35%, transparent 70%)',
+            'radial-gradient(circle, rgba(0,191,255,0.14) 0%, rgba(0,191,255,0.06) 35%, transparent 70%)',
           filter: 'blur(20px)',
         }}
       />
 
-      {/* Subtle outer vignette for depth */}
+      {/* Strong outer vignette — preserves navy deep tone */}
       <div
         className="absolute inset-0"
         style={{
           background:
-            'radial-gradient(ellipse at center, transparent 40%, rgba(10,14,26,0.6) 100%)',
+            'radial-gradient(ellipse 80% 60% at 50% 45%, transparent 25%, rgba(5,8,18,0.7) 85%, rgba(5,8,18,0.95) 100%)',
         }}
       />
     </div>
