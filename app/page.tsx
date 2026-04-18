@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic'
 import AIBuildBanner from '@/components/AIBuildBanner'
 import HeroSection from '@/components/HeroSection'
 import StatsBar from '@/components/StatsBar'
+import ToolLogosMarquee from '@/components/ToolLogosMarquee'
 import TestimonialsBar from '@/components/TestimonialsBar'
 import DiagnosticSection from '@/components/DiagnosticSection'
 import ToolsHubSection from '@/components/ToolsHubSection'
@@ -19,6 +20,7 @@ export default function Home() {
       <AIBuildBanner />
       <HeroSection />
       <StatsBar />
+      <ToolLogosMarquee />
       <TestimonialsBar />
       <DiagnosticSection />
       <ToolsHubSection />

@@ -305,3 +305,47 @@
     animation: none;
   }
 }
+
+/* ============================================================
+   Tool Logos Marquee — infinite horizontal scroll.
+   Track is duplicated in JSX (2x list), so translating -50%
+   completes one cycle with no visible jump.
+   ============================================================ */
+.tool-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+          mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.tool-marquee__track {
+  display: flex;
+  gap: 3rem;
+  width: max-content;
+  animation: tool-marquee-scroll 50s linear infinite;
+  will-change: transform;
+}
+
+.tool-marquee:hover .tool-marquee__track {
+  animation-play-state: paused;
+}
+
+.tool-marquee__item {
+  white-space: nowrap;
+  flex-shrink: 0;
+  letter-spacing: -0.02em;
+}
+
+@keyframes tool-marquee-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tool-marquee__track {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+  }
+}
