@@ -125,7 +125,7 @@ export default function Header() {
         <DropdownMenuItem
           key="admin-panel"
           onClick={() => router.push('/admin')}
-          className="text-brand-cyan font-medium"
+          className="text-cyan-700 font-medium"
         >
           <Shield className="mr-2 h-4 w-4" />
           {t.nav.panelAdmin}
@@ -190,7 +190,7 @@ export default function Header() {
         <div key="separator-mobile" className="border-t pt-2 mt-2">
           <Link
             href="/admin"
-            className="block px-3 py-2 text-sm text-brand-cyan font-medium hover:bg-cyan-50 rounded"
+            className="block px-3 py-2 text-sm text-cyan-700 font-medium hover:bg-cyan-50 rounded"
             onClick={() => setIsMenuOpen(false)}
           >
             {t.nav.panelAdmin}
@@ -399,7 +399,7 @@ export default function Header() {
                 <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-brand-navy tracking-tight">
                   IMPULSA
                 </span>
-                <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-brand-cyan tracking-tight ml-1">
+                <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-cyan-700 tracking-tight ml-1">
                   LAB
                 </span>
               </div>
@@ -577,7 +577,7 @@ export default function Header() {
                   <div className="flex items-center gap-1 2xl:gap-2 flex-shrink-0">
                     <Link
                       href="/login"
-                      className="px-2 2xl:px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-brand-cyan transition-colors whitespace-nowrap"
+                      className="px-2 2xl:px-3 py-1.5 text-sm font-medium text-brand-navy hover:text-cyan-700 transition-colors whitespace-nowrap"
                     >
                       {t.nav.iniciarSesion}
                     </Link>

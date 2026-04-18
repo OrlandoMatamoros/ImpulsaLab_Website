@@ -59,7 +59,7 @@ const Footer = () => {
               <button
                 type="submit"
                 disabled={isSubscribing}
-                className="px-6 py-3 bg-white text-blue-600 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="px-6 py-3 bg-white text-cyan-700 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isSubscribing ? t.footer.suscribiendo : t.footer.suscribirse}
               </button>
@@ -202,7 +202,7 @@ const Footer = () => {
               <li><Link href="/casos-de-exito" className="text-gray-400 hover:text-white transition-colors">{t.footer.casosExito}</Link></li>
               <li><Link href="/herramientas" className="text-gray-400 hover:text-white transition-colors">{t.footer.todasHerramientas}</Link></li>
               <li><Link href="/herramientas/noticias" className="text-gray-400 hover:text-white transition-colors">{t.footer.noticiasIA}</Link></li>
-              <li><Link href="/diagnostico" className="text-blue-400 font-semibold hover:text-blue-300 transition-colors inline-flex items-center gap-1">{t.nav.diagnostico} ⭐</Link></li>
+              <li><Link href="/diagnostico" className="text-cyan-500 font-semibold hover:text-blue-300 transition-colors inline-flex items-center gap-1">{t.nav.diagnostico} ⭐</Link></li>
             </ul>
           </div>
 

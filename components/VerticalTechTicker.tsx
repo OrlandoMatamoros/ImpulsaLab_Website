@@ -272,7 +272,7 @@ const VerticalTechTicker: React.FC = () => {
             className="group flex items-center justify-center w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
             title={tool.name}
           >
-            <tool.logo className="w-8 h-8 text-slate-400 group-hover:text-blue-400 transition-colors duration-300" />
+            <tool.logo className="w-8 h-8 text-slate-400 group-hover:text-cyan-500 transition-colors duration-300" />
           </a>
         ))}
       </div>
@@ -288,7 +288,7 @@ const VerticalTechTicker: React.FC = () => {
             className="group flex items-center justify-center w-16 h-16 bg-gradient-to-br from-slate-800 to-slate-900 rounded-xl border border-slate-700 hover:border-blue-500 transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-blue-500/20"
             title={tool.name}
           >
-            <tool.logo className="w-8 h-8 text-slate-400 group-hover:text-blue-400 transition-colors duration-300" />
+            <tool.logo className="w-8 h-8 text-slate-400 group-hover:text-cyan-500 transition-colors duration-300" />
           </a>
         ))}
       </div>

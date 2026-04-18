@@ -58,7 +58,7 @@ export function Navigation() {
                     variant="ghost" 
                     size="sm" 
                     className={`flex items-center ${
-                      pathname?.startsWith('/servicios') ? 'text-blue-600' : ''
+                      pathname?.startsWith('/servicios') ? 'text-cyan-700' : ''
                     }`}
                   >
                     Servicios
@@ -81,7 +81,7 @@ export function Navigation() {
                       onClick={() => router.push('/servicios/finanzas')}
                       className="py-3"
                     >
-                      <TrendingUp className="h-5 w-5 mr-3 text-blue-600" />
+                      <TrendingUp className="h-5 w-5 mr-3 text-cyan-700" />
                       <div className="flex-1">
                         <div className="font-medium">Consultoría Financiera</div>
                         <div className="text-xs text-gray-500">Análisis y estrategia personalizada</div>
@@ -158,7 +158,7 @@ export function Navigation() {
                     variant="ghost" 
                     size="sm" 
                     className={`flex items-center ${
-                      pathname?.startsWith('/herramientas') ? 'text-blue-600' : ''
+                      pathname?.startsWith('/herramientas') ? 'text-cyan-700' : ''
                     }`}
                   >
                     Herramientas
@@ -244,7 +244,7 @@ export function Navigation() {
                 href="/diagnostico" 
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   pathname === '/diagnostico' 
-                    ? 'text-blue-600 bg-blue-50' 
+                    ? 'text-cyan-700 bg-blue-50' 
                     : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
@@ -256,7 +256,7 @@ export function Navigation() {
                 href="/blog" 
                 className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                   pathname?.startsWith('/blog')
-                    ? 'text-blue-600 bg-blue-50' 
+                    ? 'text-cyan-700 bg-blue-50' 
                     : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
@@ -270,7 +270,7 @@ export function Navigation() {
                     href="/dashboard" 
                     className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                       pathname === '/dashboard'
-                        ? 'text-blue-600 bg-blue-50' 
+                        ? 'text-cyan-700 bg-blue-50' 
                         : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >

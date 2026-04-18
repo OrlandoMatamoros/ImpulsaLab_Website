@@ -40,7 +40,7 @@ export default function DiagnosticSection() {
                 <span className="text-2xl">💨</span>
               </div>
               <p className="text-sm text-gray-600">
-                <span className="font-semibold text-brand-cyan">{t.diagnostic.finanzasLabel}</span> {t.diagnostic.finanzasDesc}
+                <span className="font-semibold text-cyan-700">{t.diagnostic.finanzasLabel}</span> {t.diagnostic.finanzasDesc}
               </p>
             </div>
             <div className="text-center">
@@ -85,11 +85,11 @@ export default function DiagnosticSection() {
                 </svg>
               </div>
               <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeX}</h3>
-              <h4 className="text-lg font-medium mb-3 text-brand-cyan">{t.diagnostic.ejeXTitulo}</h4>
+              <h4 className="text-lg font-medium mb-3 text-cyan-700">{t.diagnostic.ejeXTitulo}</h4>
               <p className="text-gray-600">
                 {t.diagnostic.ejeXDesc}
               </p>
-              <p className="text-brand-cyan text-sm mt-4 font-medium">
+              <p className="text-cyan-700 text-sm mt-4 font-medium">
                 {t.diagnostic.conoceMas}
               </p>
             </div>

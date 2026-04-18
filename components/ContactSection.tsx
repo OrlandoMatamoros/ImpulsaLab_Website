@@ -408,7 +408,7 @@ export default function ContactSection() {
             <div className="mt-6 text-gray-600">
               <p className="mb-2">{t.contact.oPrefieres}</p>
               <a href={`mailto:${LINKS.email}`}
-                 className="text-brand-cyan hover:underline block">
+                 className="text-cyan-700 hover:underline block">
                 {LINKS.email}
               </a>
             </div>

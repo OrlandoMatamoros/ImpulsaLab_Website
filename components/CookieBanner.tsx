@@ -35,7 +35,7 @@ const CookieBanner = () => {
         <div className="flex-1">
           <p className="text-sm">
             🍪 Utilizamos cookies para mejorar tu experiencia y analizar el tráfico del sitio. 
-            <Link href="/legal/cookies" className="underline ml-1 hover:text-blue-400">
+            <Link href="/legal/cookies" className="underline ml-1 hover:text-cyan-500">
               Más información
             </Link>
           </p>
