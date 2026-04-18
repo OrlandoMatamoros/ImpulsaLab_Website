@@ -23,8 +23,10 @@ export default function HeroSection() {
   const monthLabel = month.charAt(0).toUpperCase() + month.slice(1)
 
   return (
-    <section className="bg-brand-navy text-white pt-24 pb-16 lg:pb-20 min-h-[90vh] flex items-center">
-      <div className="container mx-auto px-4">
+    <section className="relative bg-brand-navy text-white pt-24 pb-16 lg:pb-20 min-h-[90vh] flex items-center overflow-hidden">
+      {/* Animated aurora background (pure CSS, respects prefers-reduced-motion) */}
+      <div className="hero-aurora" aria-hidden="true" />
+      <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
 
           {/* COLUMNA IZQUIERDA — Copy + CTA */}

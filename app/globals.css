@@ -247,3 +247,61 @@
 .board-pulse-dot {
   animation: board-pulse-dot 1.5s ease-in-out infinite;
 }
+
+/* ============================================================
+   Hero Gradient Aurora — animated mesh background
+   Navy base + cyan accent, 20s slow drift, GPU-accelerated.
+   ============================================================ */
+.hero-aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+  background-color: #0a0e1a;
+}
+
+.hero-aurora::before,
+.hero-aurora::after {
+  content: '';
+  position: absolute;
+  inset: -25%;
+  background-repeat: no-repeat;
+  filter: blur(60px);
+  will-change: transform;
+}
+
+.hero-aurora::before {
+  background-image:
+    radial-gradient(closest-side at 20% 30%, rgba(0, 191, 255, 0.35), transparent 70%),
+    radial-gradient(closest-side at 80% 20%, rgba(0, 191, 255, 0.22), transparent 70%),
+    radial-gradient(closest-side at 60% 80%, rgba(10, 14, 26, 0.9), transparent 70%);
+  animation: hero-aurora-drift-a 20s ease-in-out infinite alternate;
+}
+
+.hero-aurora::after {
+  background-image:
+    radial-gradient(closest-side at 70% 60%, rgba(0, 191, 255, 0.25), transparent 70%),
+    radial-gradient(closest-side at 30% 70%, rgba(56, 189, 248, 0.18), transparent 70%);
+  animation: hero-aurora-drift-b 24s ease-in-out infinite alternate;
+  mix-blend-mode: screen;
+}
+
+@keyframes hero-aurora-drift-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(3%, -2%, 0) scale(1.05); }
+  100% { transform: translate3d(-2%, 3%, 0) scale(1.02); }
+}
+
+@keyframes hero-aurora-drift-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1.05); }
+  50%  { transform: translate3d(-3%, 2%, 0) scale(1); }
+  100% { transform: translate3d(2%, -3%, 0) scale(1.08); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-aurora::before,
+  .hero-aurora::after {
+    animation: none;
+  }
+}
