@@ -391,6 +391,15 @@
   animation: breathing-orb 8s ease-in-out infinite;
   pointer-events: none;
 }
+@media (max-width: 768px) {
+  .breathing-orb {
+    filter: blur(60px);
+  }
+  @keyframes breathing-orb {
+    0%, 100% { transform: scale(0.55); opacity: 0.35; }
+    50%      { transform: scale(0.65); opacity: 0.55; }
+  }
+}
 @keyframes breathing-orb {
   0%, 100% { transform: scale(1); opacity: 0.4; }
   50%      { transform: scale(1.15); opacity: 0.65; }
@@ -425,6 +434,13 @@
   animation: conic-aurora-spin 22s linear infinite;
   pointer-events: none;
 }
+@media (max-width: 768px) {
+  .conic-aurora {
+    inset: -20%;
+    filter: blur(35px);
+    opacity: 0.7;
+  }
+}
 @keyframes conic-aurora-spin {
   to { --conic-angle: 360deg; }
 }
@@ -448,8 +464,14 @@
   display: flex;
   gap: 3rem;
   width: max-content;
-  animation: tool-marquee-scroll 50s linear infinite;
+  animation: tool-marquee-scroll 60s linear infinite;
   will-change: transform;
+}
+@media (max-width: 768px) {
+  .tool-marquee__track {
+    animation-duration: 90s;
+    gap: 2rem;
+  }
 }
 
 .tool-marquee:hover .tool-marquee__track {
