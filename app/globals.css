@@ -7,13 +7,26 @@
   * {
     @apply m-0 p-0 box-border;
   }
-  
+
   html {
     @apply scroll-smooth;
   }
-  
+
   body {
     @apply overflow-x-hidden;
+    font-feature-settings: 'ss01', 'ss02', 'cv11';
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2 {
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  h3, h4 {
+    text-wrap: balance;
+    letter-spacing: -0.01em;
   }
 }
 
