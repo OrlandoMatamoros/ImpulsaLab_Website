@@ -5,7 +5,9 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useMagnetic } from '@/lib/hooks/useMagnetic'
-import HeroSpotlightGrid from '@/components/HeroSpotlightGrid'
+import dynamic from 'next/dynamic'
+import HeroGrainVignette from '@/components/HeroGrainVignette'
+const HeroConstellation = dynamic(() => import('@/components/HeroConstellation'), { ssr: false })
 
 function getMonthlySlots(): number {
   const now = new Date()
@@ -97,8 +99,9 @@ export default function HeroSection() {
 
   return (
     <section className="relative bg-brand-navy text-white pt-24 pb-16 lg:pb-20 min-h-[90vh] flex items-center overflow-hidden">
-      {/* Animated spotlight grid (mouse-aware, reemplaza aurora) */}
-      <HeroSpotlightGrid />
+      {/* Constellation network (autonomous) + cinematic grain/vignette overlay */}
+      <HeroConstellation />
+      <HeroGrainVignette />
       <div className="container mx-auto px-4 relative z-10">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-12 items-center">
 
