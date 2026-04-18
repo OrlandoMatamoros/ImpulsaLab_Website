@@ -17,32 +17,37 @@ function getCurrentMonth(lang: string): string {
   return now.toLocaleDateString(lang === 'ES' ? 'es-ES' : 'en-US', { month: 'long', year: 'numeric' })
 }
 
-function TypewriterAccent({ text, delayMs = 800, speedMs = 55 }: { text: string; delayMs?: number; speedMs?: number }) {
-  const [out, setOut] = useState('')
+function TypewriterTitle({ base, accent, delayMs = 300, speedMs = 38 }: { base: string; accent: string; delayMs?: number; speedMs?: number }) {
+  const full = base + accent
+  const [count, setCount] = useState(0)
   const [done, setDone] = useState(false)
   const prefersReduced = useReducedMotion()
 
   useEffect(() => {
-    setOut('')
+    setCount(0)
     setDone(false)
-    if (prefersReduced) { setOut(text); setDone(true); return }
+    if (prefersReduced) { setCount(full.length); setDone(true); return }
     let i = 0
     let id: ReturnType<typeof setInterval>
     const start = setTimeout(() => {
       id = setInterval(() => {
         i++
-        setOut(text.slice(0, i))
-        if (i >= text.length) { clearInterval(id); setDone(true) }
+        setCount(i)
+        if (i >= full.length) { clearInterval(id); setDone(true) }
       }, speedMs)
     }, delayMs)
     return () => { clearTimeout(start); if (id) clearInterval(id) }
-  }, [text, delayMs, speedMs, prefersReduced])
+  }, [full, delayMs, speedMs, prefersReduced])
+
+  const typedBase = full.slice(0, Math.min(count, base.length))
+  const typedAccent = count > base.length ? full.slice(base.length, count) : ''
 
   return (
-    <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">
-      {out}
+    <>
+      <span>{typedBase}</span>
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">{typedAccent}</span>
       {!done && <span className="inline-block w-[3px] h-[0.85em] align-[-0.05em] ml-1 bg-brand-cyan animate-pulse" aria-hidden />}
-    </span>
+    </>
   )
 }
 
@@ -112,9 +117,8 @@ export default function HeroSection() {
             </motion.div>
 
             {/* Título principal */}
-            <motion.h1 variants={heroItem} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight">
-              {t.hero.titulo}
-              <TypewriterAccent text={t.hero.tituloAccent} delayMs={700} />
+            <motion.h1 variants={heroItem} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight min-h-[1.05em]">
+              <TypewriterTitle base={t.hero.titulo} accent={t.hero.tituloAccent} delayMs={400} speedMs={38} />
             </motion.h1>
 
             {/* Subtítulo */}
