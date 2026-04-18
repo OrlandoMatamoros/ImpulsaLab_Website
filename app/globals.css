@@ -378,6 +378,56 @@
 }
 
 /* ============================================================
+   Breathing Orb — radial blur that pulses. Decorative bg only.
+   ============================================================ */
+.breathing-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(90px);
+  opacity: 0.5;
+  animation: breathing-orb 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes breathing-orb {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50%      { transform: scale(1.15); opacity: 0.65; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .breathing-orb { animation: none; }
+}
+
+/* ============================================================
+   Conic Aurora — gradient cónico rotando perpetuamente.
+   ============================================================ */
+@property --conic-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+.conic-aurora {
+  position: absolute;
+  inset: 0;
+  background: conic-gradient(
+    from var(--conic-angle),
+    rgba(10,14,26,0) 0deg,
+    rgba(0,191,255,0.45) 90deg,
+    rgba(10,14,26,0) 180deg,
+    rgba(0,191,255,0.3) 270deg,
+    rgba(10,14,26,0) 360deg
+  );
+  filter: blur(60px);
+  opacity: 0.6;
+  animation: conic-aurora-spin 28s linear infinite;
+  pointer-events: none;
+}
+@keyframes conic-aurora-spin {
+  to { --conic-angle: 360deg; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .conic-aurora { animation: none; }
+}
+
+/* ============================================================
    Tool Logos Marquee — infinite horizontal scroll.
    Track is duplicated in JSX (2x list), so translating -50%
    completes one cycle with no visible jump.

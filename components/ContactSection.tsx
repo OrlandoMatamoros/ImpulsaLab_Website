@@ -236,7 +236,9 @@ export default function ContactSection() {
   }
 
   return (
-    <section id="contacto" className="py-20 bg-white overflow-hidden">
+    <section id="contacto" className="py-20 bg-white overflow-hidden relative">
+      <div className="breathing-orb" style={{ width: 500, height: 500, top: '-120px', left: '-120px', background: 'radial-gradient(circle, rgba(0,191,255,0.55) 0%, rgba(0,191,255,0) 70%)' }} />
+      <div className="breathing-orb" style={{ width: 420, height: 420, bottom: '-80px', right: '-100px', background: 'radial-gradient(circle, rgba(10,14,26,0.35) 0%, rgba(10,14,26,0) 70%)', animationDelay: '-4s' }} />
       <div className="container mx-auto px-4 max-w-7xl">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
