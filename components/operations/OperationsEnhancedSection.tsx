@@ -454,7 +454,7 @@ export default function OperationsEnhancedSection() {
                 Tareas Reales que un Agente IA hace HOY
               </h3>
               <div className="grid md:grid-cols-3 gap-6">
-                <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl">
+                <div className="text-center p-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl">
                   <Bot className="w-12 h-12 text-blue-600 mx-auto mb-4" />
                   <h4 className="font-bold mb-2">Ventas 24/7</h4>
                   <p className="text-sm text-gray-600">
@@ -468,7 +468,7 @@ export default function OperationsEnhancedSection() {
                     Monitorea métricas, detecta anomalías y sugiere acciones correctivas
                   </p>
                 </div>
-                <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl">
+                <div className="text-center p-6 bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl">
                   <Zap className="w-12 h-12 text-purple-600 mx-auto mb-4" />
                   <h4 className="font-bold mb-2">Automatización Total</h4>
                   <p className="text-sm text-gray-600">
@@ -482,7 +482,7 @@ export default function OperationsEnhancedSection() {
       </section>
 
       {/* Sección 2: Agente Unificador 4IA */}
-      <section className="py-20 bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 text-white overflow-hidden relative">
+      <section className="py-20 bg-gradient-to-br from-brand-navy via-slate-900 to-black text-white overflow-hidden relative">
         <div className="absolute inset-0 opacity-20">
           <div className="absolute top-0 left-0 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob"></div>
           <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000"></div>
@@ -699,7 +699,7 @@ export default function OperationsEnhancedSection() {
                     {/* Métricas */}
                     <div className="mt-6 grid grid-cols-3 gap-4">
                       {Object.entries(caseStudy.aiSolution.metrics).map(([key, value]) => (
-                        <div key={key} className="text-center p-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg">
+                        <div key={key} className="text-center p-4 bg-gradient-to-br from-slate-50 to-slate-100 rounded-lg">
                           <div className="text-2xl font-bold text-blue-600">{value}</div>
                           <div className="text-sm text-gray-600 capitalize">{key}</div>
                         </div>

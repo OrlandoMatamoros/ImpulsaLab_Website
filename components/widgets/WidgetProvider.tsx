@@ -106,7 +106,7 @@ export default function WidgetProvider() {
       {showWebChat && (
         <div className="fixed bottom-24 right-6 z-50 bg-white rounded-2xl shadow-2xl w-[380px] max-w-[calc(100vw-3rem)] h-[500px] flex flex-col">
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 rounded-t-2xl text-white flex justify-between items-center">
+          <div className="bg-gradient-to-r from-brand-navy to-slate-800 p-4 rounded-t-2xl text-white flex justify-between items-center">
             <div>
               <h3 className="font-semibold">Chat Impulsa Lab</h3>
               <p className="text-xs opacity-90">Respuesta inmediata</p>
@@ -228,7 +228,7 @@ export default function WidgetProvider() {
       {/* Botón principal con ícono WhatsApp y gradiente morado/azul */}
       <button
         onClick={() => setShowOptions(!showOptions)}
-        className={`fixed bottom-6 right-6 z-50 bg-gradient-to-r from-blue-600 to-purple-600 
+        className={`fixed bottom-6 right-6 z-50 bg-gradient-to-r from-brand-navy to-slate-800 
                    text-white rounded-full p-4 shadow-lg hover:shadow-xl transform 
                    transition-all duration-300 hover:scale-110 ${showOptions ? 'rotate-45' : ''}`}
       >

@@ -79,7 +79,7 @@ export default function Carreras() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-blue-700 to-purple-600 text-white py-20 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-brand-navy via-slate-800 to-slate-900 text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
@@ -127,7 +127,7 @@ export default function Carreras() {
             </div>
 
             <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 p-8 rounded-xl">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-8 rounded-xl">
                 <FaBrain className="text-4xl text-blue-600 mb-4" />
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">{t.carrerasPage.labMentalidadTitle}</h3>
                 <p className="text-gray-700 mb-4">
@@ -143,7 +143,7 @@ export default function Carreras() {
                 </ul>
               </div>
 
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-xl">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 p-8 rounded-xl">
                 <FaUsers className="text-4xl text-purple-600 mb-4" />
                 <h3 className="text-2xl font-bold text-gray-900 mb-3">{t.carrerasPage.impactoTitle}</h3>
                 <p className="text-gray-700 mb-4">
@@ -214,7 +214,7 @@ export default function Carreras() {
               </div>
             </div>
 
-            <div className="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white">
+            <div className="mt-12 bg-gradient-to-r from-brand-navy to-slate-800 rounded-xl p-8 text-white">
               <div className="max-w-3xl mx-auto text-center">
                 <FaLightbulb className="text-5xl mb-4 text-yellow-300 mx-auto" />
                 <h3 className="text-2xl font-bold mb-3">{t.carrerasPage.seParteTitulo}</h3>
@@ -270,7 +270,7 @@ export default function Carreras() {
                     </div>
                   </div>
 
-                  <button className="mt-6 w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all flex items-center justify-center gap-2">
+                  <button className="mt-6 w-full bg-gradient-to-r from-brand-navy to-slate-800 text-white py-3 rounded-lg font-semibold hover:from-slate-900 hover:to-slate-900 transition-all flex items-center justify-center gap-2">
                     {t.carrerasPage.verDetalles}
                     <FaArrowRight />
                   </button>
@@ -355,7 +355,7 @@ export default function Carreras() {
                                 setSelectedJob(null);
                                 setFormData({...formData, posicion: job.titulo});
                               }}
-                              className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all text-center"
+                              className="flex-1 bg-gradient-to-r from-brand-navy to-slate-800 text-white py-3 rounded-lg font-semibold hover:from-slate-900 hover:to-slate-900 transition-all text-center"
                             >
                               {t.carrerasPage.aplicarAhora}
                             </a>
@@ -512,7 +512,7 @@ export default function Carreras() {
 
                 <button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2"
+                  className="w-full bg-gradient-to-r from-brand-navy to-slate-800 text-white py-4 rounded-lg font-semibold hover:from-slate-900 hover:to-slate-900 transition-all transform hover:scale-[1.02] shadow-lg flex items-center justify-center gap-2"
                 >
                   {t.carrerasPage.formEnviar}
                   <FaArrowRight />
@@ -558,7 +558,7 @@ export default function Carreras() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
+      <section className="bg-gradient-to-r from-brand-navy to-slate-800 text-white py-16">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">

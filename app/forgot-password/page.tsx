@@ -57,7 +57,7 @@ export default function ForgotPasswordPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-white to-blue-50 p-4">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-white to-slate-100 p-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h1 className="text-4xl font-bold text-gray-900 mb-2">Impulsa Lab</h1>
@@ -96,7 +96,7 @@ export default function ForgotPasswordPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full py-3 px-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg font-medium hover:brightness-110 disabled:opacity-50 transition-all"
+              className="w-full py-3 px-4 bg-gradient-to-r from-slate-800 to-brand-navy text-white rounded-lg font-medium hover:brightness-110 disabled:opacity-50 transition-all"
             >
               {loading ? t.sending : t.submit}
             </button>

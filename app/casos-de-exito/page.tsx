@@ -84,7 +84,7 @@ export default function CasosDeExito() {
       </div>
 
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-blue-600 via-purple-600 to-blue-700 text-white py-20 relative overflow-hidden">
+      <section className="bg-gradient-to-br from-brand-navy via-slate-800 to-slate-900 text-white py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-10"></div>
         <div className="container mx-auto px-4 text-center relative z-10">
           <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
@@ -229,13 +229,13 @@ export default function CasosDeExito() {
             </div>
 
             {/* Testimonio */}
-            <div className="bg-gradient-to-br from-purple-100 to-blue-100 rounded-2xl p-8">
+            <div className="bg-gradient-to-br from-slate-100 to-slate-200 rounded-2xl p-8">
               <FaQuoteLeft className="text-4xl text-purple-300 mb-4" />
               <blockquote className="text-lg text-gray-800 italic mb-4">
                 &ldquo;{selectedCaseData.testimonio.texto}&rdquo;
               </blockquote>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-gradient-to-br from-purple-600 to-blue-600 rounded-full"></div>
+                <div className="w-12 h-12 bg-gradient-to-br from-slate-800 to-brand-navy rounded-full"></div>
                 <div>
                   <p className="font-bold text-gray-900">{selectedCaseData.testimonio.autor}</p>
                   <p className="text-sm text-gray-600">{selectedCaseData.testimonio.cargo}</p>
@@ -255,7 +255,7 @@ export default function CasosDeExito() {
               {tp.impactoSubtitle}
             </p>
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6">
                 <FaDollarSign className="text-4xl text-blue-600 mx-auto mb-3" />
                 <div className="text-4xl font-bold text-gray-900 mb-2">185%</div>
                 <p className="text-gray-600">{tp.aumentoRentabilidad}</p>
@@ -265,7 +265,7 @@ export default function CasosDeExito() {
                 <div className="text-4xl font-bold text-gray-900 mb-2">32h</div>
                 <p className="text-gray-600">{tp.horasLiberadasSemana}</p>
               </div>
-              <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6">
+              <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6">
                 <FaUsers className="text-4xl text-purple-600 mx-auto mb-3" />
                 <div className="text-4xl font-bold text-gray-900 mb-2">2.3x</div>
                 <p className="text-gray-600">{tp.crecimientoClientes}</p>
@@ -289,7 +289,7 @@ export default function CasosDeExito() {
               {tp.procesoSteps.map((item: any, index: number) => (
                 <div key={index} className="flex gap-4 bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-gradient-to-br from-blue-600 to-purple-600 text-white rounded-full flex items-center justify-center font-bold text-lg">
+                    <div className="w-12 h-12 bg-gradient-to-br from-brand-navy to-slate-800 text-white rounded-full flex items-center justify-center font-bold text-lg">
                       {index + 1}
                     </div>
                   </div>
@@ -329,7 +329,7 @@ export default function CasosDeExito() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-blue-600 to-purple-600 text-white py-20">
+      <section className="bg-gradient-to-br from-brand-navy to-slate-800 text-white py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
             {tp.ctaTitle}
