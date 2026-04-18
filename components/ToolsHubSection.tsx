@@ -91,13 +91,13 @@ export default function ToolsHubSection() {
   ]
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-brand-navy">
       <div className="container mx-auto px-4">
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-brand-navy mb-3">
+          <h2 className="text-3xl md:text-4xl font-bold text-white mb-3">
             {t.hero.hubTitulo}
           </h2>
-          <p className="text-gray-600 text-lg">
+          <p className="text-gray-300 text-lg">
             {t.hero.hubSubtitulo}
           </p>
         </div>
@@ -137,13 +137,13 @@ export default function ToolsHubSection() {
         <div className="mt-8 text-center">
           <Link
             href="/herramientas"
-            className="inline-flex items-center px-8 py-3 bg-brand-navy text-white rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg group"
+            className="inline-flex items-center px-8 py-3 bg-brand-cyan text-brand-navy rounded-xl font-bold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:bg-cyan-300 group"
           >
             <ToolsIcon className="w-5 h-5 mr-2 group-hover:rotate-12 transition-transform" />
             {t.hero.explorar}
             <span className="ml-2 group-hover:translate-x-1 transition-transform">→</span>
           </Link>
-          <p className="text-xs text-gray-500 mt-3">{t.hero.sinTarjeta}</p>
+          <p className="text-xs text-gray-400 mt-3">{t.hero.sinTarjeta}</p>
         </div>
       </div>
     </section>
