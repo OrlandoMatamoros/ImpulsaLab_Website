@@ -258,6 +258,10 @@ export const homeES = {
       },
     ],
   },
+  toolsMarquee: {
+    heading: "Integramos las herramientas que ya usas",
+    ariaLabel: "Herramientas que integramos",
+  },
 }
 
 export const homeEN = {
@@ -518,5 +522,9 @@ export const homeEN = {
         location: "Brooklyn, NY",
       },
     ],
+  },
+  toolsMarquee: {
+    heading: "We integrate the tools you already use",
+    ariaLabel: "Tools we integrate",
   },
 }

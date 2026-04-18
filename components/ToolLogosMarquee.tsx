@@ -1,5 +1,7 @@
 'use client'
 
+import { useLanguage } from '@/contexts/LanguageContext'
+
 /**
  * ToolLogosMarquee — infinite horizontal scroll banner of AI/automation
  * tool names. Pure CSS keyframes animation, duplicated track for seamless
@@ -23,13 +25,14 @@ const TOOLS = [
 ]
 
 export default function ToolLogosMarquee() {
+  const { t } = useLanguage()
   return (
     <section
-      aria-label="Herramientas que integramos"
+      aria-label={t.toolsMarquee.ariaLabel}
       className="bg-gray-50 border-y border-gray-200 py-8 overflow-hidden"
     >
       <p className="text-center text-sm uppercase tracking-wider text-gray-500 font-semibold mb-6">
-        Integramos las herramientas que ya usás
+        {t.toolsMarquee.heading}
       </p>
       <div className="tool-marquee group relative">
         <div className="tool-marquee__track">
