@@ -391,9 +391,10 @@
   animation: breathing-orb 8s ease-in-out infinite;
   pointer-events: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .breathing-orb {
     filter: blur(60px);
+    animation-duration: 14s;
   }
   @keyframes breathing-orb {
     0%, 100% { transform: scale(0.55); opacity: 0.35; }
@@ -434,11 +435,12 @@
   animation: conic-aurora-spin 22s linear infinite;
   pointer-events: none;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .conic-aurora {
     inset: -20%;
     filter: blur(35px);
     opacity: 0.7;
+    animation-duration: 40s;
   }
 }
 @keyframes conic-aurora-spin {
@@ -467,9 +469,9 @@
   animation: tool-marquee-scroll 60s linear infinite;
   will-change: transform;
 }
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .tool-marquee__track {
-    animation-duration: 90s;
+    animation-duration: 120s;
     gap: 2rem;
   }
 }
