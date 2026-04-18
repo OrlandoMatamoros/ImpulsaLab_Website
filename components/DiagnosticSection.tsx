@@ -20,7 +20,7 @@ export default function DiagnosticSection() {
 
   return (
     <section id="diagnostico" className="py-20 bg-gray-50 relative overflow-hidden">
-      <OrbitalRings className="top-0 left-1/2 -translate-x-1/2 w-[700px] h-[700px] opacity-40 -translate-y-1/4" />
+      <OrbitalRings className="top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] opacity-80 -translate-y-1/5" />
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">

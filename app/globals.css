@@ -406,18 +406,20 @@
 }
 .conic-aurora {
   position: absolute;
-  inset: 0;
+  inset: -40%;
   background: conic-gradient(
     from var(--conic-angle),
     rgba(10,14,26,0) 0deg,
-    rgba(0,191,255,0.45) 90deg,
-    rgba(10,14,26,0) 180deg,
-    rgba(0,191,255,0.3) 270deg,
+    rgba(0,191,255,0.9) 80deg,
+    rgba(0,191,255,0.2) 160deg,
+    rgba(10,14,26,0) 200deg,
+    rgba(0,191,255,0.7) 280deg,
+    rgba(0,191,255,0.15) 340deg,
     rgba(10,14,26,0) 360deg
   );
-  filter: blur(60px);
-  opacity: 0.6;
-  animation: conic-aurora-spin 28s linear infinite;
+  filter: blur(45px);
+  opacity: 0.85;
+  animation: conic-aurora-spin 22s linear infinite;
   pointer-events: none;
 }
 @keyframes conic-aurora-spin {
