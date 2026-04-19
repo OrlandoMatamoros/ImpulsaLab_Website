@@ -244,6 +244,26 @@ export const serviciosFinanzasES = {
     finalCtaTitle: '¿Listo para Ver tus Números Claros?',
     finalCtaSubtitle: 'Agenda tu diagnóstico gratuito de 30 minutos. Te mostramos cómo Claude Code puede convertir tu Excel en un centro de control financiero.',
     finalCtaButton: 'Agendar Mi Diagnóstico Gratis',
+
+    // Nova Finance section
+    novaFinance: {
+      badge: 'NUEVO: Ya Disponible en Beta',
+      title: 'Nova Finance: Tu CFO Virtual con IA',
+      subtitle: 'Dashboard financiero en tiempo real que analiza, predice y optimiza las finanzas de tu negocio automáticamente',
+      demoStatus: 'Demo en vivo · Requiere cuenta',
+      previewDescription: 'Dashboard financiero en tiempo real. Abre el CFO virtual de Impulsa Lab en una pestaña nueva para explorarlo.',
+      previewCta: 'Abrir Nova Finance',
+      previewAriaLabel: 'Abrir Nova Finance en una nueva pestaña',
+      feature1Title: 'Análisis Predictivo',
+      feature1Desc: 'IA que anticipa tendencias y te alerta antes de problemas',
+      feature2Title: 'Decisiones Inteligentes',
+      feature2Desc: 'Simulador What-If y optimización automática',
+      feature3Title: 'Alertas Proactivas',
+      feature3Desc: 'WhatsApp y email cuando algo requiere tu atención',
+      mainCta: 'Explorar Nova Finance',
+      mainCtaAriaLabel: 'Explorar Nova Finance (se abre en una nueva pestaña)',
+      footerLine: '✅ Demo funcional • 14 días gratis • Sin tarjeta de crédito',
+    },
   },
 }
 
@@ -492,5 +512,25 @@ export const serviciosFinanzasEN = {
     finalCtaTitle: 'Ready to See Your Numbers Clearly?',
     finalCtaSubtitle: 'Schedule your free 30-minute diagnostic. We\'ll show you how Claude Code can turn your spreadsheet into a financial command center.',
     finalCtaButton: 'Schedule My Free Diagnostic',
+
+    // Nova Finance section
+    novaFinance: {
+      badge: 'NEW: Now Available in Beta',
+      title: 'Nova Finance: Your AI-Powered Virtual CFO',
+      subtitle: 'Real-time financial dashboard that analyzes, predicts, and optimizes your business finances automatically',
+      demoStatus: 'Live demo · Account required',
+      previewDescription: "Real-time financial dashboard. Open Impulsa Lab's virtual CFO in a new tab to explore.",
+      previewCta: 'Open Nova Finance',
+      previewAriaLabel: 'Open Nova Finance in a new tab',
+      feature1Title: 'Predictive Analytics',
+      feature1Desc: 'AI that anticipates trends and alerts you before problems arise',
+      feature2Title: 'Smart Decisions',
+      feature2Desc: 'What-If simulator and automatic optimization',
+      feature3Title: 'Proactive Alerts',
+      feature3Desc: 'WhatsApp and email when something needs your attention',
+      mainCta: 'Explore Nova Finance',
+      mainCtaAriaLabel: 'Explore Nova Finance (opens in a new tab)',
+      footerLine: '✅ Functional demo • 14 days free • No credit card',
+    },
   },
 }
