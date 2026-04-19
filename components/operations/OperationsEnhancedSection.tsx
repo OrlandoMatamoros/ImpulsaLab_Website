@@ -627,8 +627,8 @@ export default function OperationsEnhancedSection() {
               <p className="text-sm text-gray-400 mb-4">
                 🔐 Requiere cuenta activa. <Link href="/login" className="text-blue-300 hover:text-blue-200 underline">Inicia sesión</Link> o <Link href="/signup" className="text-blue-300 hover:text-blue-200 underline">regístrate</Link> para comenzar.
               </p>
-              <Link href="/herramientas/agentes" className="inline-block px-8 py-3 bg-white text-purple-900 rounded-lg font-semibold hover:bg-gray-100 transition">
-                Ver Planes Premium →
+              <Link href="/servicios/operaciones/precios" className="inline-block px-8 py-3 bg-white text-purple-900 rounded-lg font-semibold hover:bg-gray-100 transition">
+                Ver Planes y Precios →
               </Link>
             </div>
           </div>
@@ -890,8 +890,8 @@ export default function OperationsEnhancedSection() {
                   <Zap className="w-5 h-5" />
                   Obtén tu Diagnóstico IA Gratis
                 </Link>
-                <Link href="/herramientas/agentes" className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg font-bold text-lg hover:bg-white/20 transition inline-flex items-center gap-2">
-                  Explorar Catálogo de Agentes
+                <Link href="/servicios/operaciones/precios" className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/30 rounded-lg font-bold text-lg hover:bg-white/20 transition inline-flex items-center gap-2">
+                  Cotizar mi Agente Personalizado
                   <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
@@ -908,8 +908,8 @@ export default function OperationsEnhancedSection() {
               <ChevronLeft className="w-5 h-5" />
               <span>Marketing Digital</span>
             </Link>
-            <Link href="/herramientas/agentes" className="flex items-center gap-2 text-green-600 hover:text-green-700 transition font-semibold">
-              <span>Ver Catálogo Completo de Agentes</span>
+            <Link href="/servicios/operaciones/precios" className="flex items-center gap-2 text-green-600 hover:text-green-700 transition font-semibold">
+              <span>Ver Planes de Agentes a Medida</span>
               <ArrowRight className="w-5 h-5" />
             </Link>
           </div>

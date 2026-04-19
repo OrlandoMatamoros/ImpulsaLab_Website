@@ -466,7 +466,7 @@ export default function Header() {
                   </Link>
                   <div className="nav-dropdown-menu">
                     <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
-                    <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
+                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
                     <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
                     <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
                     <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
