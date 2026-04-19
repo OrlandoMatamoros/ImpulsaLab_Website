@@ -36,17 +36,36 @@ export function NovaFinanceShowcase() {
             </div>
           </div>
 
-          <div className="aspect-video bg-gray-100 rounded-b-lg relative overflow-hidden">
-            <iframe
-              src="https://nova.tuimpulsalab.com"
-              className="w-full h-full"
-              title="Nova Finance Live Demo"
-              loading="lazy"
-            />
-            <div className="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-medium animate-pulse">
-              🔴 Demo en Vivo
+          <a
+            href="https://nova.tuimpulsalab.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Abrir Nova Finance en una nueva pestaña"
+            className="group block aspect-video rounded-b-lg relative overflow-hidden bg-gradient-to-br from-slate-900 via-blue-900 to-purple-900 hover:shadow-2xl transition-shadow"
+          >
+            <div className="absolute inset-0 opacity-40 pointer-events-none">
+              <div className="absolute top-10 left-10 w-32 h-32 bg-cyan-500 rounded-full blur-3xl" />
+              <div className="absolute bottom-10 right-10 w-40 h-40 bg-purple-500 rounded-full blur-3xl" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-blue-500 rounded-full blur-3xl" />
             </div>
-          </div>
+            <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white text-xs font-medium mb-4">
+                <span className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                Demo en vivo · Requiere cuenta
+              </div>
+              <h3 className="text-2xl md:text-4xl font-bold text-white mb-3">
+                nova.tuimpulsalab.com
+              </h3>
+              <p className="text-white/70 text-sm md:text-base mb-6 max-w-md">
+                Dashboard financiero en tiempo real. Abre el CFO virtual de Impulsa Lab en una pestaña nueva para explorarlo.
+              </p>
+              <span className="inline-flex items-center gap-2 px-6 py-3 bg-white text-slate-900 rounded-lg font-semibold group-hover:scale-105 transition-transform shadow-xl">
+                <Play className="w-4 h-4" />
+                Abrir Nova Finance
+                <ExternalLink className="w-4 h-4" />
+              </span>
+            </div>
+          </a>
         </div>
 
         {/* Features Grid */}
