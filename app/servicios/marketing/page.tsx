@@ -8,6 +8,7 @@ import { ArrowRight, Target, Megaphone, PenTool, TrendingUp, CheckCircle2, Packa
 import ProtectedSection from '@/components/ProtectedSection'
 import ContentStrategistChat from '@/components/services/marketing/ContentStrategistChat'
 import AIToolsShowcase from '@/components/services/marketing/AIToolsShowcase'
+import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const methodologyIcons = [Target, PenTool, Megaphone, TrendingUp]
@@ -308,6 +309,23 @@ export default function MarketingPage() {
          </div>
        </div>
      </section>
+
+     {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
+     <AutomationVsEmployee
+       vertical="marketing"
+       accent="purple"
+       headline="Un equipo de marketing digital, al precio de un freelancer"
+       subtitle="Publicar, prospectar y responder reseñas de forma consistente tiene costo real en Nueva York. Compara lo que te ahorras al automatizarlo."
+       ctaLabel="Agenda tu diagnóstico"
+       ctaHref={LINKS.calendly}
+       ctaTarget="_blank"
+       rows={[
+         { product: 'LinkedIn Publisher',   productPrice: '$197-297/mes', humanRole: 'Social Media Specialist',  nycMonthly: 9017, hoursSaved: 50,  roiNote: '30-46×' },
+         { product: 'Social Media Factory', productPrice: '$197-297/mes', humanRole: 'Content Creator jr',        nycMonthly: 6765, hoursSaved: 60,  roiNote: '23-34×' },
+         { product: 'Review Manager',       productPrice: '$297-497/mes', humanRole: 'Community Manager',         nycMonthly: 6756, hoursSaved: 30,  roiNote: '14-23×' },
+         { product: 'Cold Outreach Engine', productPrice: '$197-797/mes', humanRole: 'SDR',                       nycMonthly: 7960, hoursSaved: 160, roiNote: '10-40×' },
+       ]}
+     />
 
      {/* VIDEO SECTION CENTRAL - POSICIÓN ESTRATÉGICA */}
      <section className="py-16 bg-gradient-to-b from-gray-50 to-white">

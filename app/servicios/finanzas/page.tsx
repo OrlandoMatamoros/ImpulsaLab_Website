@@ -7,6 +7,7 @@ import ProtectedSection from '@/components/ProtectedSection'
 import { NovaFinanceShowcase } from './NovaFinanceShowcase';
 import IntegrationsShowcase from '@/components/services/IntegrationsShowcase'
 import IntegrationsTicker from '@/components/services/IntegrationsTicker'
+import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Definir tipos para TypeScript
@@ -246,6 +247,22 @@ export default function FinanzasPage() {
           </div>
         </div>
       </section>
+
+      {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
+      <AutomationVsEmployee
+        vertical="finanzas"
+        accent="navy"
+        headline="El costo de tu próximo contador vs el de su dashboard automático"
+        subtitle="Tracking de facturas, reconciliación y KPIs ya no requieren un auxiliar contable full-time — y dejan de depender de una persona con gripa."
+        ctaLabel="Hablar por WhatsApp"
+        ctaHref={LINKS.whatsapp}
+        ctaTarget="_blank"
+        rows={[
+          { product: 'Smart Invoice Tracker',  productPrice: '$97-197/mes',  humanRole: 'Bookkeeping Clerk',          nycMonthly: 5331,  hoursSaved: 60,  roiNote: '27-55×' },
+          { product: 'AI Financial Dashboard', productPrice: '$697-997/mes', humanRole: 'Financial Analyst jr',       nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
+          { product: 'Medical Bill Auditor',   productPrice: 'custom',       humanRole: 'Medical Billing Specialist', nycMonthly: 5643,  hoursSaved: 100, roiNote: 'por volumen' },
+        ]}
+      />
 
       {/* INTEGRACIONES: POS + Contables (14 plataformas) */}
       <IntegrationsShowcase />

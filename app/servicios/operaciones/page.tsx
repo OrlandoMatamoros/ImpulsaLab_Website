@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { LINKS } from '@/lib/constants'
 import { Bot, Search, Zap, DollarSign, Layers } from 'lucide-react'
+import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 export default function OperacionesPage() {
@@ -182,6 +183,23 @@ export default function OperacionesPage() {
           </div>
         </div>
       </section>
+
+      {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
+      <AutomationVsEmployee
+        vertical="operaciones"
+        accent="green"
+        headline="Un agente de IA cuesta menos que una semana de nómina"
+        subtitle="Lo que un customer service, recepcionista o back-office cobra en un mes en Nueva York, Impulsa Lab lo automatiza por menos de lo que gastas en café de oficina."
+        ctaLabel="Cotizar mi automatización"
+        ctaHref="/servicios/operaciones/precios"
+        rows={[
+          { product: 'WhatsApp AI Bot',         productPrice: '$297-497/mes', humanRole: 'Customer Service Rep',    nycMonthly: 4870, hoursSaved: 160, roiNote: '10-16×' },
+          { product: 'Appointment Scheduler',   productPrice: '$297-497/mes', humanRole: 'Recepcionista',            nycMonthly: 4314, hoursSaved: 80,  roiNote: '9-15×' },
+          { product: 'Daily Digest Agent',      productPrice: '$297-497/mes', humanRole: 'Asistente administrativo', nycMonthly: 5735, hoursSaved: 40,  roiNote: '12-19×' },
+          { product: 'Lead Capture Auto-Reply', productPrice: '$97-197/mes',  humanRole: 'SDR junior',               nycMonthly: 7960, hoursSaved: 60,  roiNote: '40-82×' },
+          { product: 'Review Manager',          productPrice: '$297-497/mes', humanRole: 'Community/Reputation Mgr', nycMonthly: 6756, hoursSaved: 30,  roiNote: '14-23×' },
+        ]}
+      />
 
       {/* NUEVA SECCION: Cards de navegacion */}
       <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
