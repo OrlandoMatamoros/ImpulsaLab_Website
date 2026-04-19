@@ -1,6 +1,7 @@
 'use client'
 
 import { useLanguage } from '@/contexts/LanguageContext'
+import PlatformLogo from '@/components/PlatformLogo'
 
 type Integration = { name: string; domain: string }
 
@@ -32,22 +33,10 @@ export default function IntegrationsTicker() {
         <div className="integrations-ticker__track">
           {[...INTEGRATIONS, ...INTEGRATIONS].map((item, i) => (
             <div key={`${item.name}-${i}`} className="integrations-ticker__item" title={item.name}>
-              <img
-                src={`https://logo.clearbit.com/${item.domain}`}
-                alt={item.name}
+              <PlatformLogo
+                domain={item.domain}
+                name={item.name}
                 className="h-10 max-w-[140px] w-auto object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all"
-                loading="lazy"
-                onError={(e) => {
-                  const el = e.currentTarget
-                  const parent = el.parentElement
-                  if (parent && !parent.querySelector('.integrations-ticker__fallback')) {
-                    el.style.display = 'none'
-                    const span = document.createElement('span')
-                    span.className = 'integrations-ticker__fallback text-slate-600 font-semibold text-base whitespace-nowrap'
-                    span.textContent = item.name
-                    parent.appendChild(span)
-                  }
-                }}
               />
             </div>
           ))}
