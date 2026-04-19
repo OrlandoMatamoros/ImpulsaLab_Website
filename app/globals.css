@@ -140,12 +140,30 @@
     animation-duration: 0.2s !important;
     transition-duration: 0.2s !important;
   }
-  
+
+  /* Curated ambient animations — restore proper duration overridden by the
+     universal 0.2s reset above. Class specificity + !important wins over * */
+  .tool-marquee__track {
+    animation-duration: 90s !important;
+    gap: 1.5rem !important;
+  }
+  .conic-aurora {
+    animation-duration: 50s !important;
+    filter: blur(25px) !important;
+    opacity: 0.55 !important;
+    inset: -15% !important;
+  }
+  .breathing-orb {
+    animation-duration: 14s !important;
+    filter: blur(45px) !important;
+    opacity: 0.4 !important;
+  }
+
   /* Improve tap targets */
   button, a, input, select, textarea {
     min-height: 44px;
   }
-  
+
   /* Prevent horizontal scroll */
   body {
     overflow-x: hidden;
