@@ -418,7 +418,7 @@ export default function JuntaEstrategicaAppPage() {
   useEffect(() => {
     if (authLoading) return
     if (!isAdminEmail(user?.email)) {
-      router.replace('/herramientas/agentes/junta-estrategica')
+      router.replace('/unauthorized')
     }
   }, [user, authLoading, router])
 

@@ -22,6 +22,7 @@ interface PlanResult {
 }
 
 const FREE_PLAN_KEY = 'impulsa_bp_count'
+const FREE_PLAN_LIMIT = 1
 
 function LoadingSkeleton({ step }: { step: number }) {
   const { t } = useLanguage()
@@ -95,7 +96,7 @@ export default function BusinessPlanPage() {
       return
     }
     const count = parseInt(localStorage.getItem(FREE_PLAN_KEY) || '0', 10)
-    setHasFreePlan(count < 1)
+    setHasFreePlan(count < FREE_PLAN_LIMIT)
   }, [isUnlimited])
 
   const handleReset = useCallback(() => {
@@ -144,7 +145,7 @@ export default function BusinessPlanPage() {
       if (!isUnlimited) {
         const count = parseInt(localStorage.getItem(FREE_PLAN_KEY) || '0', 10)
         localStorage.setItem(FREE_PLAN_KEY, String(count + 1))
-        setHasFreePlan(count + 1 < 1)
+        setHasFreePlan(count + 1 < FREE_PLAN_LIMIT)
       }
     } catch (err) {
       console.error('Business plan fetch error:', err)
