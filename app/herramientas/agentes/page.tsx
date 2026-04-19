@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Brain, Newspaper, TrendingUp, Wand2, Zap } from 'lucide-react'
+import { ArrowRight, Newspaper, Wand2 } from 'lucide-react'
 import AskTheBoardWidget from '@/components/agents/AskTheBoardWidget'
 import { useLanguage } from '@/contexts/LanguageContext'
 
@@ -11,6 +11,18 @@ export default function AgentesPlayground() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      {/* Banner de diferenciación: este es el playground, no el servicio */}
+      <div className="bg-amber-50 border-b border-amber-200 py-2.5">
+        <div className="max-w-7xl mx-auto px-4 text-center text-sm">
+          <span className="text-amber-900">
+            🧪 Playground gratis sin registro. ¿Buscas un agente hecho a medida para tu negocio?{' '}
+            <Link href="/servicios/operaciones" className="underline font-semibold text-amber-950 hover:text-amber-700">
+              Ve a Servicios IA →
+            </Link>
+          </span>
+        </div>
+      </div>
+
       {/* Hero */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#001a3a] via-[#002D62] to-[#003a7a] text-white">
         <div className="absolute inset-0 opacity-20 pointer-events-none">
@@ -60,33 +72,6 @@ export default function AgentesPlayground() {
                 </div>
               ))}
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ¿Qué es un Agente IA? */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
-              {tp.especialistaTitle}
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              { Icon: Brain, title: tp.cerebroTitle, desc: tp.cerebroDesc },
-              { Icon: Zap, title: tp.conectadoTitle, desc: tp.conectadoDesc },
-              { Icon: TrendingUp, title: tp.aprendeTitle, desc: tp.aprendeDesc },
-            ].map(({ Icon, title, desc }) => (
-              <div key={title} className="text-center">
-                <div className="w-20 h-20 bg-[#00BCD4]/10 border border-[#00BCD4]/20 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                  <Icon className="w-10 h-10 text-[#002D62]" />
-                </div>
-                <h3 className="text-xl font-bold mb-3 text-slate-900">{title}</h3>
-                <p className="text-slate-600">{desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>

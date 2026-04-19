@@ -491,9 +491,14 @@ export default function OperationsEnhancedSection() {
 
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-6">
-              <Sparkles className="w-5 h-5" />
-              <span className="font-semibold">EXCLUSIVO IMPULSA LAB</span>
+            <div className="inline-flex flex-wrap items-center justify-center gap-2 mb-6">
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-amber-500/20 backdrop-blur-sm border border-amber-400/40 rounded-full text-sm font-semibold text-amber-100">
+                🛠️ Servicio custom · Desde $99/mes
+              </span>
+              <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/20 backdrop-blur-sm rounded-full text-sm font-semibold">
+                <Sparkles className="w-4 h-4" />
+                Exclusivo Impulsa Lab
+              </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
               Agente Unificador 4IA
