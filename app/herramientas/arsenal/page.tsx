@@ -7,6 +7,16 @@ import { tools } from '@/lib/tools-data';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { useAuth } from '@/contexts/FirebaseAuthContext';
 import { isAdminEmail } from '@/lib/admin-emails';
+import PlatformLogo from '@/components/PlatformLogo';
+
+function extractDomain(url: string): string {
+  try {
+    const { hostname } = new URL(url);
+    return hostname.replace(/^www\./, '');
+  } catch {
+    return url;
+  }
+}
 
 const FREE_PLAN_KEY = 'impulsa_arsenal_count';
 
@@ -248,6 +258,7 @@ export default function ArsenalPage() {
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
                 {filteredTools.map((tool, index) => {
                   const ToolIcon = tool.logo;
+                  const domain = extractDomain(tool.url);
                   return (
                     <a
                       key={index}
@@ -261,10 +272,10 @@ export default function ArsenalPage() {
                       <div className="relative z-10">
                         <div className="flex justify-between items-start mb-3 sm:mb-4">
                           <div
-                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 p-2 flex items-center justify-center"
+                            className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 p-1.5 flex items-center justify-center"
                             style={{ color: tool.color }}
                           >
-                            <ToolIcon className="w-full h-full" />
+                            <PlatformLogo domain={domain} name={tool.name} fallback={ToolIcon} className="w-full h-full object-contain" />
                           </div>
 
                           <ExternalLink className="h-4 w-4 sm:h-5 sm:w-5 text-gray-400 group-hover:text-gray-600 transition-colors" />
@@ -307,15 +318,16 @@ export default function ArsenalPage() {
                   <tbody className="bg-white divide-y divide-gray-200">
                     {filteredTools.map((tool, index) => {
                       const ToolIcon = tool.logo;
+                      const domain = extractDomain(tool.url);
                       return (
                         <tr key={index} className="hover:bg-gray-50">
                           <td className="px-4 sm:px-6 py-3 sm:py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div
-                                className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 p-1.5 sm:p-2 flex items-center justify-center mr-3"
+                                className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-gray-50 to-gray-100 p-1 flex items-center justify-center mr-3"
                                 style={{ color: tool.color }}
                               >
-                                <ToolIcon className="w-full h-full" />
+                                <PlatformLogo domain={domain} name={tool.name} fallback={ToolIcon} className="w-full h-full object-contain" />
                               </div>
                               <div>
                                 <div className="text-sm font-medium text-gray-900">{tool.name}</div>
