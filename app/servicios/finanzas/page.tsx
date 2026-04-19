@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import ProtectedSection from '@/components/ProtectedSection'
 import { NovaFinanceShowcase } from './NovaFinanceShowcase';
 import IntegrationsShowcase from '@/components/services/IntegrationsShowcase'
+import IntegrationsTicker from '@/components/services/IntegrationsTicker'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Definir tipos para TypeScript
@@ -91,6 +92,9 @@ export default function FinanzasPage() {
           </div>
         </div>
       </section>
+
+      {/* Ticker de integraciones: 14 POS/contables con logos reales */}
+      <IntegrationsTicker />
 
       {/* Antes → Después */}
       <div className="bg-slate-100 border-b border-gray-200 py-4">
