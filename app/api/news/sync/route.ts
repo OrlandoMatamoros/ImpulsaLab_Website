@@ -9,9 +9,9 @@ export async function GET() {
     const service = new RssNewsService()
     const news = await service.getLatestNews()
     return NextResponse.json(news)
-  } catch (error: any) {
+  } catch (error) {
     console.error('[news/sync] error:', error)
-    return NextResponse.json({ error: error.message || 'unknown_error' }, { status: 500 })
+    return NextResponse.json({ error: 'news_sync_failed' }, { status: 500 })
   }
 }
 

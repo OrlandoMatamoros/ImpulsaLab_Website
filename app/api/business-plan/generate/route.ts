@@ -72,7 +72,20 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
     }
 
-    if (!businessName || !industry || !description) {
+    const str = (v: unknown, max = 500) =>
+      typeof v === 'string' ? v.trim().slice(0, max) : ''
+
+    const required = {
+      businessName: str(businessName, 200),
+      industry: str(industry, 200),
+      description: str(description, 1000),
+    }
+
+    if (
+      required.businessName.length < 2 ||
+      required.industry.length < 2 ||
+      required.description.length < 10
+    ) {
       return NextResponse.json({ error: errors.missing }, { status: 400 })
     }
 
@@ -82,18 +95,18 @@ export async function POST(req: NextRequest) {
     const prompt = `You are a senior business consultant for Impulsa Lab, a tech consultancy for small Latino businesses. Generate a professional, comprehensive business plan in ${promptLang} based on the following information.
 
 BUSINESS INFORMATION:
-- Business Name: ${businessName}
-- Industry: ${industry}
-- Location: ${location || 'Not specified'}
-- Stage: ${stage || 'Not specified'}
-- Description: ${description}
-- Main Product/Service: ${mainProduct || 'Not specified'}
-- Ideal Customer: ${idealClient || 'Not specified'}
-- Differentiator: ${differentiator || 'Not specified'}
-- Initial Investment: ${initialInvestment || 'Not specified'}
-- Monthly Sales (USD, current or projected): ${monthlySales ? `$${monthlySales}` : 'Not specified'}
-- Seeks Funding: ${seeksFunding ? `Yes - $${fundingAmount || 'amount not specified'}` : 'No'}
-- Number of Employees: ${employees || 'Not specified'}
+- Business Name: ${required.businessName}
+- Industry: ${required.industry}
+- Location: ${str(location, 200) || 'Not specified'}
+- Stage: ${str(stage, 100) || 'Not specified'}
+- Description: ${required.description}
+- Main Product/Service: ${str(mainProduct, 500) || 'Not specified'}
+- Ideal Customer: ${str(idealClient, 500) || 'Not specified'}
+- Differentiator: ${str(differentiator, 500) || 'Not specified'}
+- Initial Investment: ${str(initialInvestment, 100) || 'Not specified'}
+- Monthly Sales (USD, current or projected): ${monthlySales ? `$${str(monthlySales, 50)}` : 'Not specified'}
+- Seeks Funding: ${seeksFunding ? `Yes - $${str(fundingAmount, 50) || 'amount not specified'}` : 'No'}
+- Number of Employees: ${str(employees, 50) || 'Not specified'}
 
 Generate ONLY valid JSON (no markdown, no backticks, pure JSON) with this exact structure:
 
