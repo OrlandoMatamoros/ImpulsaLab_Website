@@ -1,3 +1,4 @@
+import { AI_MODELS } from '@/lib/ai-models'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminDb } from '@/lib/firebase-admin'
@@ -125,7 +126,7 @@ RULES:
 - Instagram post "content" fields should be 2-3 sentences max with a real angle.`
 
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: AI_MODELS.SONNET,
       max_tokens: 2048,
       messages: [{ role: 'user', content: prompt }],
     })

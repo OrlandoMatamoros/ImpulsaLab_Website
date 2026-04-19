@@ -1,3 +1,4 @@
+import { AI_MODELS } from '@/lib/ai-models'
 import Anthropic from '@anthropic-ai/sdk'
 import { NextRequest, NextResponse } from 'next/server'
 import { adminAuth, adminDb } from '@/lib/firebase-admin'
@@ -227,7 +228,7 @@ export async function POST(req: NextRequest) {
     // 6. Run Haiku analyzer
     const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
     const message = await anthropic.messages.create({
-      model: 'claude-haiku-4-5',
+      model: AI_MODELS.HAIKU,
       max_tokens: 2000,
       messages: [
         {

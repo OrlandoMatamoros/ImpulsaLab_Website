@@ -457,6 +457,7 @@ export default function JuntaEstrategicaAppPage() {
 
     const controller = new AbortController()
     abortRef.current = controller
+    const timeoutId = setTimeout(() => controller.abort(), 120000)
 
     try {
       const locale = language === 'EN' ? 'en' : 'es'
@@ -504,6 +505,8 @@ export default function JuntaEstrategicaAppPage() {
       if (err instanceof DOMException && err.name === 'AbortError') return
       setError(err instanceof Error ? err.message : 'Unexpected error')
       setAppState('lobby')
+    } finally {
+      clearTimeout(timeoutId)
     }
   }, [question, domain, t, language, user])
 

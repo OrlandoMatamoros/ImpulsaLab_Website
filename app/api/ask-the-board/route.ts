@@ -1,3 +1,4 @@
+import { AI_MODELS } from '@/lib/ai-models'
 import Anthropic from '@anthropic-ai/sdk'
 import { GoogleGenerativeAI } from '@google/generative-ai'
 import OpenAI from 'openai'
@@ -181,7 +182,7 @@ export async function POST(req: NextRequest) {
       aiPromises.push(
         anthropic.messages
           .create({
-            model: 'claude-haiku-4-5',
+            model: AI_MODELS.HAIKU,
             max_tokens: 200,
             messages: [
               {
@@ -228,7 +229,7 @@ export async function POST(req: NextRequest) {
       try {
         const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY })
         const synth = await anthropic.messages.create({
-          model: 'claude-haiku-4-5',
+          model: AI_MODELS.HAIKU,
           max_tokens: 500,
           messages: [
             {

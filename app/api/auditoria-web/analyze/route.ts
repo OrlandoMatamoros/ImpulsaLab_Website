@@ -1,3 +1,4 @@
+import { AI_MODELS } from '@/lib/ai-models'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminAuth } from '@/lib/firebase-admin'
@@ -263,7 +264,7 @@ SECTION CRITERIA:
 Be specific in findings (mention concrete data from the site). Recommendations must be actionable. Each section should have 3-6 findings and 3-5 recommendations. Write ALL findings and recommendations in ${promptLang}.`
 
     const message = await client.messages.create({
-      model: 'claude-haiku-4-5-20251001',
+      model: AI_MODELS.HAIKU,
       max_tokens: 4000,
       messages: [{ role: 'user', content: prompt }],
     })

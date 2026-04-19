@@ -124,6 +124,7 @@ export default function BusinessPlanPage() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ ...formData, locale: language }),
+        signal: AbortSignal.timeout(90000),
       })
 
       const data = await res.json()

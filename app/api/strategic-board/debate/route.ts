@@ -4,6 +4,7 @@ import OpenAI from 'openai'
 import { NextRequest } from 'next/server'
 import { adminAuth } from '@/lib/firebase-admin'
 import { isAdminEmail } from '@/lib/admin-emails'
+import { AI_MODELS } from '@/lib/ai-models'
 
 export const maxDuration = 120
 
@@ -163,7 +164,7 @@ async function callClaude(question: string, systemPrompt: string): Promise<strin
 
   const client = new Anthropic({ apiKey })
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: AI_MODELS.SONNET,
     max_tokens: 1500,
     system: systemPrompt,
     messages: [{ role: 'user', content: question }],
@@ -220,7 +221,7 @@ async function callNova(systemPrompt: string): Promise<string> {
 
   const client = new Anthropic({ apiKey })
   const message = await client.messages.create({
-    model: 'claude-sonnet-4-6',
+    model: AI_MODELS.SONNET,
     max_tokens: 2000,
     system: systemPrompt,
     messages: [

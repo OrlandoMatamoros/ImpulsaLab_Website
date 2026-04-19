@@ -334,6 +334,7 @@ export default function PromptDesigner() {
         const idToken = await user.getIdToken()
         const res = await fetch('/api/prompt-optimizer', {
           headers: { Authorization: `Bearer ${idToken}` },
+          signal: AbortSignal.timeout(15000),
         })
         if (!res.ok) return
         const data = await res.json()
@@ -538,6 +539,7 @@ export default function PromptDesigner() {
           targetModel,
           locale: language,
         }),
+        signal: AbortSignal.timeout(60000),
       })
       const data = await res.json()
       if (!res.ok) {

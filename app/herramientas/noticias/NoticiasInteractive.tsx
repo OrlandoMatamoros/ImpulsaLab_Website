@@ -85,7 +85,9 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
   useEffect(() => {
     const refresh = async () => {
       try {
-        const response = await fetch('/api/news/sync')
+        const response = await fetch('/api/news/sync', {
+          signal: AbortSignal.timeout(30000),
+        })
         const data = await response.json()
         if (Array.isArray(data) && data.length > 0) {
           setNewsData(data)
@@ -156,6 +158,7 @@ export default function NoticiasInteractive({ initialNews }: NoticiasInteractive
             currentCategoryCount: String(filteredNews.length),
           },
         }),
+        signal: AbortSignal.timeout(15000),
       })
 
       const data = await res.json().catch(() => ({}))

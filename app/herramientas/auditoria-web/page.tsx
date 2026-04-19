@@ -133,6 +133,7 @@ export default function AuditoriaWebPage() {
           sourceCode: sourceCode.trim(),
           locale: language,
         }),
+        signal: AbortSignal.timeout(90000),
       })
 
       const data = await res.json()

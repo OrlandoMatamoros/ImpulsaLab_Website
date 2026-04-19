@@ -59,6 +59,7 @@ export default function PlanExport({
         locale: language,
         metadata: { businessName: plan.businessName },
       }),
+      signal: AbortSignal.timeout(15000),
     }).catch((err) => {
       console.error('Lead capture failed:', err)
     })

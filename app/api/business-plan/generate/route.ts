@@ -1,3 +1,4 @@
+import { AI_MODELS } from '@/lib/ai-models'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 
@@ -179,7 +180,7 @@ IMPORTANT INSTRUCTIONS:
 - Be specific to the business described, avoid filler language`
 
     const message = await client.messages.create({
-      model: 'claude-sonnet-4-6',
+      model: AI_MODELS.SONNET,
       max_tokens: 8192,
       messages: [{ role: 'user', content: prompt }],
     })
