@@ -15,6 +15,7 @@ export const LINKS = {
   calendly: 'https://calendly.com/orlando-tuimpulsalab/30min',
   email: 'contacto@tuimpulsalab.com',
   linkedin: 'https://linkedin.com/in/orlando-matamoros',
+  whatsapp: 'https://wa.me/13474509281',
 }
 
 export const COMPANY_INFO = {

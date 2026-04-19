@@ -5,6 +5,7 @@ import { LINKS } from '@/lib/constants'
 import { useState, useEffect } from 'react'
 import ProtectedSection from '@/components/ProtectedSection'
 import { NovaFinanceShowcase } from './NovaFinanceShowcase';
+import IntegrationsShowcase from '@/components/services/IntegrationsShowcase'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Definir tipos para TypeScript
@@ -241,6 +242,9 @@ export default function FinanzasPage() {
           </div>
         </div>
       </section>
+
+      {/* INTEGRACIONES: POS + Contables (14 plataformas) */}
+      <IntegrationsShowcase />
 
       {/* SECCIÓN PROTEGIDA: Ve Tu Negocio en Acción + Planes */}
       <ProtectedSection
