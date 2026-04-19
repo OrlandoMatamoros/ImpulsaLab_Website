@@ -15,9 +15,9 @@ export default function AgentesPlayground() {
       <div className="bg-amber-50 border-b border-amber-200 py-2.5">
         <div className="max-w-7xl mx-auto px-4 text-center text-sm">
           <span className="text-amber-900">
-            🧪 Playground gratis sin registro. ¿Buscas un agente hecho a medida para tu negocio?{' '}
+            🧪 {tp.playgroundBanner}{' '}
             <Link href="/servicios/operaciones" className="underline font-semibold text-amber-950 hover:text-amber-700">
-              Ve a Servicios IA →
+              {tp.playgroundBannerLink}
             </Link>
           </span>
         </div>

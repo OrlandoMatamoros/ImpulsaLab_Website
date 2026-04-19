@@ -51,6 +51,8 @@ export const herramientasES = {
     // Hero section
     playgroundActive: 'Playground Activo',
     pruebaSinRegistro: 'Prueba Sin Registro',
+    playgroundBanner: 'Playground gratis sin registro. ¿Buscas un agente hecho a medida para tu negocio?',
+    playgroundBannerLink: 'Ve a Servicios IA →',
     heroTitle: 'Mas Alla de un Chatbot:',
     heroTitleHighlight: 'Conoce a tu Futuro Equipo Digital',
     heroDescription: 'Imagina tener un equipo de especialistas trabajando para ti 24/7. Un agente que disena tu estrategia de marketing, otro que califica a tus clientes potenciales, y uno que unifica la inteligencia de los mejores modelos del mundo. Eso no es ciencia ficcion. Bienvenido al',
@@ -554,6 +556,8 @@ export const herramientasEN = {
     // Hero section
     playgroundActive: 'Playground Active',
     pruebaSinRegistro: 'Try Without Signing Up',
+    playgroundBanner: 'Free playground, no signup. Looking for a custom-built AI agent for your business?',
+    playgroundBannerLink: 'Go to AI Services →',
     heroTitle: 'Beyond a Chatbot:',
     heroTitleHighlight: 'Meet Your Future Digital Team',
     heroDescription: 'Imagine having a team of specialists working for you 24/7. An agent that designs your marketing strategy, another that qualifies your leads, and one that unifies the intelligence of the best models in the world. This is not science fiction. Welcome to the',

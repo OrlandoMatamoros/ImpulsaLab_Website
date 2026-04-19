@@ -380,7 +380,7 @@ export default function OperationsEnhancedSection() {
   return (
     <>
       {/* Sección 1: ¿Qué es un Agente de IA? */}
-      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+      <section id="agentes-ia" className="py-20 bg-gradient-to-br from-green-50 to-emerald-50 scroll-mt-24">
         <div className="container mx-auto px-4">
           <div className="max-w-6xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900">

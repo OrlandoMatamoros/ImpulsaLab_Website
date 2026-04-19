@@ -466,7 +466,7 @@ export default function Header() {
                   </Link>
                   <div className="nav-dropdown-menu">
                     <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
-                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
+                    <Link href="/servicios/operaciones#agentes-ia" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
                     <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
                     <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
                     <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
@@ -775,7 +775,7 @@ export default function Header() {
                     <Link href="/servicios/operaciones" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       {t.nav.vistaGeneral}
                     </Link>
-                    <Link href="/servicios/operaciones/agentes" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
+                    <Link href="/servicios/operaciones#agentes-ia" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       {t.nav.agente4IA}
                     </Link>
                     <Link href="/servicios/operaciones/arsenal" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>

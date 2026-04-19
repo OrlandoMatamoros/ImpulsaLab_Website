@@ -261,6 +261,7 @@ export const homeES = {
   toolsMarquee: {
     heading: "Integramos las herramientas que ya usas",
     ariaLabel: "Herramientas que integramos",
+    integrationsHeading: "Conectamos directo con tu sistema",
   },
 }
 
@@ -526,5 +527,6 @@ export const homeEN = {
   toolsMarquee: {
     heading: "We integrate the tools you already use",
     ariaLabel: "Tools we integrate",
+    integrationsHeading: "We connect directly with your system",
   },
 }

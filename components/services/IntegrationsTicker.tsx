@@ -1,5 +1,7 @@
 'use client'
 
+import { useLanguage } from '@/contexts/LanguageContext'
+
 type Integration = { name: string; domain: string }
 
 const INTEGRATIONS: Integration[] = [
@@ -20,10 +22,11 @@ const INTEGRATIONS: Integration[] = [
 ]
 
 export default function IntegrationsTicker() {
+  const { t } = useLanguage()
   return (
     <section aria-label="Integraciones POS y contables" className="bg-white border-y border-slate-200 py-10">
       <p className="text-center text-sm uppercase tracking-wider text-slate-500 font-semibold mb-6 px-4">
-        Conectamos directo con tu sistema
+        {t.toolsMarquee.integrationsHeading}
       </p>
       <div className="integrations-ticker group relative">
         <div className="integrations-ticker__track">
