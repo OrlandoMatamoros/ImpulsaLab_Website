@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Manrope } from 'next/font/google'
+import { Manrope, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
 import { FirebaseAuthProvider } from '@/contexts/FirebaseAuthContext'
@@ -10,7 +10,16 @@ import Footer from '@/components/Footer'
 import WidgetProvider from '@/components/widgets/WidgetProvider'
 import CookieBanner from '@/components/CookieBanner'
 
-const manrope = Manrope({ subsets: ['latin'], display: 'swap', weight: ['400', '500', '600', '700', '800'] })
+const manrope = Manrope({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-manrope',
+})
+const geistMono = Geist_Mono({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-mono',
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tuimpulsalab.com'),
@@ -78,7 +87,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es">
-      <body className={manrope.className}>
+      <body className={`${manrope.variable} ${geistMono.variable} font-sans`}>
         {/* JSON-LD Organization + WebSite schema — native <script> tags render server-side
             and appear in initial HTML so Google crawlers (which don't execute JS) can parse them.
             Previously used next/script with strategy="afterInteractive" which injects post-hydration,

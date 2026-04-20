@@ -28,6 +28,14 @@
     text-wrap: balance;
     letter-spacing: -0.01em;
   }
+
+  /* Fluid typography (Utopia-style clamp) — aplica a <h1..h4> SIN className utility text-*.
+     Secciones con Tailwind text-4xl md:text-5xl lg:text-6xl siguen funcionando igual (override).
+     Elementos nuevos que usan <h1> pelado obtienen smooth scaling sin breakpoints. */
+  h1:not([class*="text-"]) { font-size: clamp(2.25rem, 1.5rem + 3.5vw, 4.5rem); line-height: 1.05; }
+  h2:not([class*="text-"]) { font-size: clamp(1.875rem, 1.25rem + 2.8vw, 3.5rem); line-height: 1.1; }
+  h3:not([class*="text-"]) { font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.25rem); line-height: 1.2; }
+  h4:not([class*="text-"]) { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.25; }
 }
 
 @layer components {
@@ -116,10 +124,22 @@
   .mobile-only {
     @apply block sm:hidden;
   }
-  
+
   .desktop-only {
     @apply hidden sm:block;
   }
+
+  /* Display typography — fluid clamp utility classes para headings.
+     Uso: <h1 className="display-xl">...</h1>. Reemplaza la cascada text-4xl md:text-5xl lg:text-6xl
+     con un solo valor que escala suavemente desde mobile hasta desktop. */
+  .display-xl { font-size: clamp(2.5rem, 1.5rem + 4vw, 5rem); line-height: 1.05; letter-spacing: -0.025em; font-weight: 700; text-wrap: balance; }
+  .display-lg { font-size: clamp(2rem, 1.2rem + 3vw, 3.75rem); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; text-wrap: balance; }
+  .display-md { font-size: clamp(1.5rem, 1.1rem + 1.8vw, 2.5rem); line-height: 1.2; letter-spacing: -0.015em; font-weight: 700; text-wrap: balance; }
+  .display-sm { font-size: clamp(1.25rem, 1rem + 1vw, 1.75rem); line-height: 1.25; letter-spacing: -0.01em; font-weight: 600; text-wrap: balance; }
+
+  /* Tabular numerals — para dashboards financieros, precios alineados en columnas.
+     Uso: <span className="nums-tabular">$12,345</span> */
+  .nums-tabular { font-feature-settings: 'tnum', 'cv11'; font-variant-numeric: tabular-nums; }
 }
 
 @layer utilities {
