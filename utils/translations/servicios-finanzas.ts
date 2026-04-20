@@ -245,6 +245,20 @@ export const serviciosFinanzasES = {
     finalCtaSubtitle: 'Agenda tu diagnóstico gratuito de 30 minutos. Te mostramos cómo Claude Code puede convertir tu Excel en un centro de control financiero.',
     finalCtaButton: 'Agendar Mi Diagnóstico Gratis',
 
+    // Integrations Showcase (grid 14 POS/contables con chips)
+    integrationsShowcase: {
+      chip: 'Conectamos con tu sistema actual',
+      heading: '¿Ya usas alguno de estos? Hablamos tu idioma.',
+      subtitle: '14 plataformas con las que Impulsa Lab integra directo. Si usas una (o varias), la conectamos a tu dashboard financiero sin migrar nada. Si no la ves acá, la cotizamos custom.',
+      sectionPOS: 'POS y ventas',
+      sectionAccounting: 'Contabilidad y facturación',
+      statusReady: 'Integración lista',
+      statusCustom: 'Custom',
+      footerTitle: '¿Usas algo que no está acá?',
+      footerDesc: 'Si tu sistema tiene API (la mayoría la tienen), la conectamos. Cotización custom sin sorpresas.',
+      footerCta: 'Pregúntanos por WhatsApp →',
+    },
+
     // Nova Finance section
     novaFinance: {
       badge: 'NUEVO: Ya Disponible en Beta',
@@ -512,6 +526,20 @@ export const serviciosFinanzasEN = {
     finalCtaTitle: 'Ready to See Your Numbers Clearly?',
     finalCtaSubtitle: 'Schedule your free 30-minute diagnostic. We\'ll show you how Claude Code can turn your spreadsheet into a financial command center.',
     finalCtaButton: 'Schedule My Free Diagnostic',
+
+    // Integrations Showcase (grid 14 POS/accounting with chips)
+    integrationsShowcase: {
+      chip: 'We connect with your current system',
+      heading: 'Already using any of these? We speak your language.',
+      subtitle: '14 platforms that Impulsa Lab integrates with directly. If you use one (or several), we connect them to your financial dashboard with no migration. If you don\'t see yours here, we scope it custom.',
+      sectionPOS: 'POS & Sales',
+      sectionAccounting: 'Accounting & Invoicing',
+      statusReady: 'Integration ready',
+      statusCustom: 'Custom',
+      footerTitle: 'Using something not on this list?',
+      footerDesc: 'If your system has an API (most do), we connect it. Custom scope with no surprises.',
+      footerCta: 'Ask us on WhatsApp →',
+    },
 
     // Nova Finance section
     novaFinance: {
