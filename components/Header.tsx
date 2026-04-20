@@ -84,7 +84,8 @@ export default function Header() {
   const academyItems = [
     { name: t.nav.vistaGeneral, href: '/capacitacion', className: 'dropdown-item-all' },
     { name: t.nav.mentoria, href: '/capacitacion/mentoria-personalizada', className: 'dropdown-item-mentoria' },
-    { name: t.nav.capacitacionCorporativa, href: '/capacitacion/equipos-empresariales', className: 'dropdown-item-corporate' }
+    { name: t.nav.capacitacionCorporativa, href: '/capacitacion/equipos-empresariales', className: 'dropdown-item-corporate' },
+    { name: t.nav.planesPrecios, href: '/capacitacion#precios', className: 'dropdown-item-nova' }
   ]
 
   const renderMenuItems = () => {

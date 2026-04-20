@@ -3,31 +3,24 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { 
-  GraduationCap, 
-  Users, 
-  UserCheck, 
-  Clock, 
-  DollarSign, 
+import {
+  GraduationCap,
+  Clock,
+  DollarSign,
   CheckCircle2,
   ArrowRight,
   Sparkles,
-  Target,
   Zap,
   TrendingUp,
-  Brain,
   MapPin,
   Video,
-  Award,
   Calendar,
   MessageSquare,
   Building2,
-  Rocket
 } from 'lucide-react'
 
 export default function ImpulsaAcademyPage() {
   const { t } = useLanguage()
-  const [selectedProgram, setSelectedProgram] = useState<'mentoria' | 'teams' | null>(null)
 
   return (
     <div className="pt-24 pb-20">
@@ -140,198 +133,7 @@ export default function ImpulsaAcademyPage() {
         </div>
       </section>
 
-      {/* Comparación de Programas */}
-      <section id="programas" className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
-              {t.capacitacionPage.eligeCamino}
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              {t.capacitacionPage.eligeDesc}
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            {/* Mentoría 1-a-1 Card */}
-            <div 
-              className={`bg-gradient-to-br from-emerald-50 to-teal-50 rounded-3xl shadow-2xl border-4 transition-all duration-300 overflow-hidden ${
-                selectedProgram === 'mentoria' 
-                  ? 'border-emerald-500 scale-105' 
-                  : 'border-transparent hover:border-emerald-200 hover:scale-102'
-              }`}
-              onMouseEnter={() => setSelectedProgram('mentoria')}
-              onMouseLeave={() => setSelectedProgram(null)}
-            >
-              {/* Header */}
-              <div className="bg-gradient-to-br from-emerald-600 to-teal-600 p-8 text-white">
-                <div className="flex items-center justify-between mb-4">
-                  <UserCheck className="w-12 h-12" />
-                  <span className="bg-white/20 px-4 py-1 rounded-full text-sm font-semibold">
-                    {t.capacitacionPage.individual}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold mb-2">{t.capacitacionPage.mentoria1a1}</h3>
-                <p className="text-emerald-50 mb-4">
-                  {t.capacitacionPage.mentoriaDesc}
-                </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl text-emerald-200">{t.capacitacionPage.desde}</span>
-                  <span className="text-5xl font-bold">$200</span>
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8">
-                {/* Tiers */}
-                <div className="space-y-4 mb-8">
-                  <div className="bg-white rounded-xl p-4 border-2 border-emerald-100">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">BASIC</span>
-                      <span className="text-2xl font-bold text-emerald-600">$200</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.basicHoras}</div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-4 border-2 border-emerald-300 relative">
-                    <div className="absolute -top-2 -right-2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                      {t.capacitacionPage.popular}
-                    </div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">STANDARD</span>
-                      <span className="text-2xl font-bold text-emerald-600">$349</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.standardHoras}</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border-2 border-amber-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">PREMIUM</span>
-                      <span className="text-2xl font-bold text-amber-600">$899</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.premiumHoras}</div>
-                  </div>
-                </div>
-
-                {/* Highlights */}
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-start gap-3">
-                    <Sparkles className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.gptsPersonalizados}</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Brain className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.casosEstrategicos}</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Target className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.blueprintAuto}</span>
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <Link
-                  href="/capacitacion/mentoria-personalizada"
-                  className="block w-full py-4 bg-gradient-to-r from-emerald-600 to-teal-600 text-white rounded-xl font-semibold text-center hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  {t.capacitacionPage.verDetalles}
-                </Link>
-              </div>
-            </div>
-
-            {/* Impulsa Teams Card */}
-            <div 
-              className={`bg-gradient-to-br from-blue-50 to-purple-50 rounded-3xl shadow-2xl border-4 transition-all duration-300 overflow-hidden ${
-                selectedProgram === 'teams' 
-                  ? 'border-blue-500 scale-105' 
-                  : 'border-transparent hover:border-blue-200 hover:scale-102'
-              }`}
-              onMouseEnter={() => setSelectedProgram('teams')}
-              onMouseLeave={() => setSelectedProgram(null)}
-            >
-              {/* Header */}
-              <div className="bg-gradient-to-br from-blue-600 to-purple-700 p-8 text-white">
-                <div className="flex items-center justify-between mb-4">
-                  <Users className="w-12 h-12" />
-                  <span className="bg-white/20 px-4 py-1 rounded-full text-sm font-semibold">
-                    {t.capacitacionPage.hasta5}
-                  </span>
-                </div>
-                <h3 className="text-3xl font-bold mb-2">{t.capacitacionPage.impulsaTeams}</h3>
-                <p className="text-blue-50 mb-4">
-                  {t.capacitacionPage.teamsDesc}
-                </p>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-2xl text-blue-200">{t.capacitacionPage.desde}</span>
-                  <span className="text-5xl font-bold">$400</span>
-                </div>
-                <div className="text-sm text-blue-100 mt-2">
-                  {t.capacitacionPage.porPersona}
-                </div>
-              </div>
-
-              {/* Content */}
-              <div className="p-8">
-                {/* Tiers */}
-                <div className="space-y-4 mb-8">
-                  <div className="bg-white rounded-xl p-4 border-2 border-blue-100">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">WORKSHOP</span>
-                      <span className="text-2xl font-bold text-blue-600">$400</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.workshopHoras}</div>
-                  </div>
-
-                  <div className="bg-white rounded-xl p-4 border-2 border-blue-300 relative">
-                    <div className="absolute -top-2 -right-2 bg-blue-500 text-white text-xs px-3 py-1 rounded-full font-bold">
-                      {t.capacitacionPage.popular}
-                    </div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">STANDARD</span>
-                      <span className="text-2xl font-bold text-blue-600">$749</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.standardTeamHoras}</div>
-                  </div>
-                  
-                  <div className="bg-gradient-to-r from-amber-50 to-orange-50 rounded-xl p-4 border-2 border-amber-200">
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="font-bold text-slate-900">PREMIUM</span>
-                      <span className="text-2xl font-bold text-amber-600">$2,099</span>
-                    </div>
-                    <div className="text-sm text-gray-600">{t.capacitacionPage.premiumTeamHoras}</div>
-                  </div>
-                </div>
-
-                {/* Highlights */}
-                <div className="space-y-3 mb-8">
-                  <div className="flex items-start gap-3">
-                    <Rocket className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.setupColaborativo}</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Zap className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.casosImplementados}</span>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <Award className="w-5 h-5 text-blue-500 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700">{t.capacitacionPage.certificadosPremium}</span>
-                  </div>
-                </div>
-
-                {/* CTA */}
-                <Link
-                  href="/capacitacion/equipos-empresariales"
-                  className="block w-full py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl font-semibold text-center hover:shadow-xl transform hover:scale-105 transition-all duration-300"
-                >
-                  {t.capacitacionPage.verDetalles}
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Qué obtienes en cada nivel */}
+      {/* Precios unificados: "Qué obtienes en cada nivel" (antes había una sección duplicada "Elige tu Camino" — removida 2026-04-20) */}
       {(() => {
         const tn = t.capacitacionPage.tresNiveles
         const tiers = [
@@ -340,7 +142,7 @@ export default function ImpulsaAcademyPage() {
           { data: tn.expansion, chipBg: 'bg-purple-100', chipText: 'text-purple-700', cardCls: 'bg-white border-2 border-gray-200 hover:border-emerald-400 shadow-lg', popularBadge: false, href: '/capacitacion/equipos-empresariales' },
         ]
         return (
-          <section className="py-20 bg-white">
+          <section id="precios" className="py-20 bg-white scroll-mt-24">
             <div className="container mx-auto px-4">
               <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-6">
