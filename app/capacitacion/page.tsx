@@ -332,77 +332,52 @@ export default function ImpulsaAcademyPage() {
       </section>
 
       {/* Qué obtienes en cada nivel */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                ¿Qué obtienes en cada nivel?
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Tres niveles diseñados para llevarte de principiante a experto en AI aplicada a tu negocio.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              {/* Supervivencia - Fundamentos */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-emerald-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Supervivencia</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Fundamentos AI</h3>
-                <p className="text-gray-600 text-sm mb-4">Para dueños de negocio que quieren entender y usar AI desde cero</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">Desde $200 / $400</div>
-                <div className="text-sm text-gray-500 mb-6">Individual / Equipo (por persona)</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Al terminar podrás:</h4>
-                <div className="space-y-2 mb-8">
-                  {['Usar ChatGPT/Claude para tareas diarias del negocio', 'Crear prompts efectivos para emails, propuestas y contenido', 'Identificar 3+ procesos automatizables en tu operación', 'Entender qué herramientas AI necesitas (y cuáles no)', 'Tener un plan de acción personalizado de 30 días'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item}</span>
+      {(() => {
+        const tn = t.capacitacionPage.tresNiveles
+        const tiers = [
+          { data: tn.supervivencia, chipBg: 'bg-orange-100', chipText: 'text-orange-700', cardCls: 'bg-white border-2 border-gray-200 hover:border-emerald-400 shadow-lg', popularBadge: false, href: '/capacitacion/mentoria-personalizada' },
+          { data: tn.crecimiento, chipBg: 'bg-emerald-100', chipText: 'text-emerald-700', cardCls: 'bg-gradient-to-br from-emerald-50 to-teal-50 border-2 border-emerald-500 shadow-xl transform scale-105', popularBadge: true, href: '/capacitacion/mentoria-personalizada' },
+          { data: tn.expansion, chipBg: 'bg-purple-100', chipText: 'text-purple-700', cardCls: 'bg-white border-2 border-gray-200 hover:border-emerald-400 shadow-lg', popularBadge: false, href: '/capacitacion/equipos-empresariales' },
+        ]
+        return (
+          <section className="py-20 bg-white">
+            <div className="container mx-auto px-4">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-6">
+                  <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">{tn.heading}</h2>
+                  <p className="text-lg text-gray-600 max-w-3xl mx-auto">{tn.subheading}</p>
+                </div>
+                <div className="grid md:grid-cols-3 gap-8 mt-12">
+                  {tiers.map((tier, idx) => (
+                    <div key={idx} className={`rounded-2xl p-8 hover:shadow-2xl transition-all duration-300 relative ${tier.cardCls}`}>
+                      {tier.popularBadge && (
+                        <div className="absolute -top-4 left-1/2 -translate-x-1/2">
+                          <span className="bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-semibold">{tn.mostPopular}</span>
+                        </div>
+                      )}
+                      <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold mb-4 ${tier.chipBg} ${tier.chipText}`}>{tier.data.chip}</div>
+                      <h3 className="text-2xl font-bold text-gray-900 mb-2">{tier.data.name}</h3>
+                      <p className="text-gray-600 text-sm mb-4">{tier.data.desc}</p>
+                      <div className="text-3xl font-bold text-gray-900 mb-1">{tier.data.price}</div>
+                      <div className="text-sm text-gray-500 mb-6">{tn.priceSubtitle}</div>
+                      <h4 className="font-semibold text-gray-800 mb-3">{tn.outcomesLabel}</h4>
+                      <div className="space-y-2 mb-8">
+                        {tier.data.outcomes.map((item: string, i: number) => (
+                          <div key={i} className="flex items-start gap-2">
+                            <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
+                            <span className="text-gray-700 text-sm">{item}</span>
+                          </div>
+                        ))}
+                      </div>
+                      <Link href={tier.href} className="block w-full text-center py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold">{tier.data.cta}</Link>
                     </div>
                   ))}
                 </div>
-                <Link href="/capacitacion/mentoria-personalizada" className="block w-full text-center py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold">Empezar desde Cero</Link>
-              </div>
-              {/* Crecimiento - AI en Acción */}
-              <div className="bg-gradient-to-br from-emerald-50 to-teal-50 rounded-2xl shadow-xl border-2 border-emerald-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-emerald-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold mb-4">Crecimiento</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">AI en Acción</h3>
-                <p className="text-gray-600 text-sm mb-4">Para equipos listos para implementar AI en sus procesos</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">Desde $349 / $749</div>
-                <div className="text-sm text-gray-500 mb-6">Individual / Equipo (por persona)</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Al terminar podrás:</h4>
-                <div className="space-y-2 mb-8">
-                  {['Construir GPTs personalizados para tu negocio', 'Implementar workflows de automatización reales', 'Usar AI para análisis financiero y reportes', 'Crear contenido de marketing con AI (texto, imagen, video)', 'Tener 2-3 automatizaciones funcionando en producción', 'Blueprint de automatización para escalar'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/capacitacion/mentoria-personalizada" className="block w-full text-center py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold">Agenda tu Sesión</Link>
-              </div>
-              {/* Expansión - Transformación AI */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-emerald-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Expansión</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Transformación AI</h3>
-                <p className="text-gray-600 text-sm mb-4">Para empresas que quieren transformar toda su operación con AI</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">Desde $899 / $2,099</div>
-                <div className="text-sm text-gray-500 mb-6">Individual / Equipo (por persona)</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Al terminar podrás:</h4>
-                <div className="space-y-2 mb-8">
-                  {['Diseñar la estrategia AI completa de tu empresa', 'Implementar AI Agents con base de conocimiento propia', 'Integrar AI en finanzas, operaciones y marketing', 'Medir ROI de cada implementación AI', 'Certificado Premium de Impulsa Academy', 'Roadmap de transformación digital a 12 meses'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2">
-                      <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-0.5 flex-shrink-0" />
-                      <span className="text-gray-700 text-sm">{item}</span>
-                    </div>
-                  ))}
-                </div>
-                <Link href="/capacitacion/equipos-empresariales" className="block w-full text-center py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition font-semibold">Solicitar Propuesta</Link>
               </div>
             </div>
-          </div>
-        </div>
-      </section>
+          </section>
+        )
+      })()}
 
       {/* Por qué funciona */}
       <section className="py-20 bg-slate-50">
