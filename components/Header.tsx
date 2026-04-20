@@ -31,6 +31,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMobileTools, setShowMobileTools] = useState(false)
   const [showMobileOperations, setShowMobileOperations] = useState(false)
+  const [showMobileMarketing, setShowMobileMarketing] = useState(false)
   const [showMobileAcademy, setShowMobileAcademy] = useState(false)
   const { user, userData, signOut } = useAuth()
 
@@ -445,7 +446,7 @@ export default function Header() {
                   </Link>
                   <div className="nav-dropdown-menu">
                     <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all">
-                      {t.nav.consultoriaFinanciera}
+                      {t.nav.vistaGeneral}
                     </Link>
                     <Link href="https://nova.tuimpulsalab.com" target="_blank" rel="noopener noreferrer" className="dropdown-item dropdown-item-nova">
                       <span className="flex items-center justify-between">
@@ -454,6 +455,9 @@ export default function Header() {
                           NUEVO
                         </span>
                       </span>
+                    </Link>
+                    <Link href="/servicios/finanzas#precios" className="dropdown-item dropdown-item-nova">
+                      {t.nav.planesPrecios}
                     </Link>
                   </div>
                 </div>
@@ -473,9 +477,18 @@ export default function Header() {
                   </div>
                 </div>
 
-                <Link href="/servicios/marketing" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
-                  {t.nav.marketing}
-                </Link>
+                {/* Marketing dropdown */}
+                <div className="nav-dropdown">
+                  <Link href="/servicios/marketing" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
+                    {t.nav.marketing}
+                    <ChevronDown className="w-3 h-3 opacity-50" />
+                  </Link>
+                  <div className="nav-dropdown-menu">
+                    <Link href="/servicios/marketing" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
+                    <Link href="/servicios/marketing#arsenal-ia" className="dropdown-item dropdown-item-prompt">{t.nav.arsenalIA}</Link>
+                    <Link href="/servicios/marketing#precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
+                  </div>
+                </div>
 
                 <Link href="/blog" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   Blog
@@ -791,13 +804,30 @@ export default function Header() {
                 )}
               </div>
 
-              <Link
-                href="/servicios/marketing"
-                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.nav.marketing}
-              </Link>
+              {/* Marketing móvil */}
+              <div>
+                <button
+                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
+                  onClick={() => setShowMobileMarketing(!showMobileMarketing)}
+                >
+                  <span>{t.nav.marketing}</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileMarketing ? 'rotate-180' : ''}`} />
+                </button>
+
+                {showMobileMarketing && (
+                  <div className="pl-4 space-y-1 mt-2">
+                    <Link href="/servicios/marketing" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
+                      {t.nav.vistaGeneral}
+                    </Link>
+                    <Link href="/servicios/marketing#arsenal-ia" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
+                      {t.nav.arsenalIA}
+                    </Link>
+                    <Link href="/servicios/marketing#precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
+                      {t.nav.planesPrecios}
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               <Link
                 href="/blog"

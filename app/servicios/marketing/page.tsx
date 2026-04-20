@@ -359,7 +359,9 @@ export default function MarketingPage() {
      </section>
 
      {/* Herramientas de IA Section */}
-     <AIToolsShowcase />
+     <div id="arsenal-ia" className="scroll-mt-24">
+       <AIToolsShowcase />
+     </div>
 
      {/* Video Hub Section */}
      <section className="py-16 bg-white">
@@ -493,7 +495,7 @@ export default function MarketingPage() {
        </section>
 
        {/* Planes Section - MANTENIDO */}
-       <section className="py-16 bg-white">
+       <section id="precios" className="py-16 bg-white scroll-mt-24">
          <div className="container mx-auto px-4">
            <div className="max-w-4xl mx-auto">
              <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
