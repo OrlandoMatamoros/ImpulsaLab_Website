@@ -87,6 +87,7 @@ export default function OperationsEnhancedSection() {
       id: 'make',
       name: "Make (Integromat)",
       domain: 'make.com',
+      slug: 'make',
       icon: <MakeIcon className="w-8 h-8" />,
       description: "Automatización visual sin código para conectar apps y servicios",
       features: [
@@ -104,6 +105,7 @@ export default function OperationsEnhancedSection() {
       id: 'n8n',
       name: "n8n",
       domain: 'n8n.io',
+      slug: 'n8n',
       icon: <N8nIcon className="w-8 h-8" />,
       description: "Plataforma de automatización de código abierto y auto-hospedable",
       features: [
@@ -121,6 +123,7 @@ export default function OperationsEnhancedSection() {
       id: 'zapier',
       name: "Zapier",
       domain: 'zapier.com',
+      slug: 'zapier',
       icon: <ZapierIcon className="w-8 h-8" />,
       description: "El líder mundial en automatización no-code",
       features: [
@@ -276,6 +279,7 @@ export default function OperationsEnhancedSection() {
     {
       name: "OpenAI (ChatGPT)",
       domain: 'openai.com',
+      slug: 'openai',
       icon: <ChatGPTIcon className="w-12 h-12" />,
       strengths: [
         "Mejor razonamiento lógico",
@@ -295,6 +299,7 @@ export default function OperationsEnhancedSection() {
     {
       name: "Anthropic (Claude)",
       domain: 'anthropic.com',
+      slug: 'anthropic',
       icon: <ClaudeIcon className="w-12 h-12" />,
       strengths: [
         "Respuestas más naturales",
@@ -314,6 +319,7 @@ export default function OperationsEnhancedSection() {
     {
       name: "Google (Gemini)",
       domain: 'gemini.google.com',
+      slug: 'googlegemini',
       icon: <GeminiIcon className="w-12 h-12" />,
       strengths: [
         "Multimodal nativo",
@@ -561,7 +567,7 @@ export default function OperationsEnhancedSection() {
                     <div className={`p-4 bg-white/10 rounded-lg ${aiResponses.chatgpt ? 'animate-fadeIn' : ''}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                          <PlatformLogo domain="openai.com" name="ChatGPT" className="max-h-6 max-w-[24px] w-auto object-contain" />
+                          <PlatformLogo slug="openai" domain="openai.com" name="ChatGPT" className="max-h-6 max-w-[24px] w-auto object-contain" />
                         </div>
                         <span className="font-semibold">ChatGPT</span>
                       </div>
@@ -574,7 +580,7 @@ export default function OperationsEnhancedSection() {
                     <div className={`p-4 bg-white/10 rounded-lg ${aiResponses.claude ? 'animate-fadeIn' : ''}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                          <PlatformLogo domain="anthropic.com" name="Claude" className="max-h-6 max-w-[24px] w-auto object-contain" />
+                          <PlatformLogo slug="anthropic" domain="anthropic.com" name="Claude" className="max-h-6 max-w-[24px] w-auto object-contain" />
                         </div>
                         <span className="font-semibold">Claude</span>
                       </div>
@@ -587,7 +593,7 @@ export default function OperationsEnhancedSection() {
                     <div className={`p-4 bg-white/10 rounded-lg ${aiResponses.gemini ? 'animate-fadeIn' : ''}`}>
                       <div className="flex items-center gap-2 mb-2">
                         <div className="w-8 h-8 bg-white rounded flex items-center justify-center">
-                          <PlatformLogo domain="gemini.google.com" name="Gemini" className="max-h-6 max-w-[24px] w-auto object-contain" />
+                          <PlatformLogo slug="googlegemini" domain="gemini.google.com" name="Gemini" className="max-h-6 max-w-[24px] w-auto object-contain" />
                         </div>
                         <span className="font-semibold">Gemini</span>
                       </div>
@@ -616,7 +622,7 @@ export default function OperationsEnhancedSection() {
                   <div key={idx} className="bg-white/5 rounded-lg p-4 border border-white/10">
                     <div className="flex items-center gap-3 mb-3">
                       <div className="p-2 rounded-lg bg-white/90 flex items-center justify-center" style={{ minWidth: '56px', minHeight: '56px' }}>
-                        <PlatformLogo domain={ai.domain} name={ai.name} className="max-h-10 max-w-[44px] w-auto object-contain" />
+                        <PlatformLogo slug={ai.slug} domain={ai.domain} name={ai.name} className="max-h-10 max-w-[44px] w-auto object-contain" />
                       </div>
                       <div>
                         <h4 className="font-semibold">{ai.name}</h4>
@@ -753,7 +759,7 @@ export default function OperationsEnhancedSection() {
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex items-center gap-4">
                         <div className="p-3 rounded-xl bg-white border border-slate-100 flex items-center justify-center" style={{ minWidth: '64px', minHeight: '64px' }}>
-                          <PlatformLogo domain={platform.domain} name={platform.name} className="max-h-10 max-w-[60px] w-auto object-contain" />
+                          <PlatformLogo slug={platform.slug} domain={platform.domain} name={platform.name} className="max-h-10 max-w-[60px] w-auto object-contain" />
                         </div>
                         <div>
                           <h3 className="text-xl font-bold">{platform.name}</h3>
