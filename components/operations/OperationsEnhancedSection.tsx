@@ -141,6 +141,7 @@ export default function OperationsEnhancedSection() {
       id: 'dapta',
       name: "DAPTA AI",
       domain: 'dapta.ai',
+      slug: 'dapta',
       icon: <Phone className="w-8 h-8" />,
       description: "Agentes de voz con IA para atención al cliente",
       features: [

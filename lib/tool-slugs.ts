@@ -17,12 +17,26 @@ export const TOOL_SLUGS: Record<string, string> = {
   // Imágenes IA
   'DALL-E 3': 'dalle3',
   'Adobe Firefly': 'adobefirefly',
-  // Video IA — Simple Icons no tiene ninguno (RunwayML, Pika, HeyGen, Synthesia, Descript)
+  'Midjourney': 'midjourney',
+  'Stable Diffusion': 'stablediffusion',
+  'Leonardo AI': 'leonardoai',
+  'Ideogram': 'ideogram',
+  // Video IA
+  'RunwayML': 'runwayml',
+  'Pika Labs': 'pikalabs',
+  'HeyGen': 'heygen',
+  'Synthesia': 'synthesia',
+  'Descript': 'descript',
   // Audio IA
   'ElevenLabs': 'elevenlabs',
   'Suno AI': 'sunoai',
+  'Murf AI': 'murfai',
+  'AIVA': 'aiva',
   // Escritura IA
   'Grammarly': 'grammarly',
+  'Jasper': 'jasper',
+  'Copy.ai': 'copyai',
+  'Writesonic': 'writesonic',
   // Diseño
   'Figma': 'figma',
   'Canva': 'canva',
@@ -38,11 +52,13 @@ export const TOOL_SLUGS: Record<string, string> = {
   'Supabase': 'supabase',
   'AWS': 'aws',
   'Google Cloud': 'googlecloud',
+  'Microsoft Azure': 'microsoftazure',
   'Cloudflare': 'cloudflare',
   // Productividad
   'Notion': 'notion',
   'Obsidian': 'obsidian',
   'ClickUp': 'clickup',
+  'Monday': 'monday',
   'Asana': 'asana',
   'Linear': 'linear',
   'Airtable': 'airtable',
@@ -58,9 +74,12 @@ export const TOOL_SLUGS: Record<string, string> = {
   'Hootsuite': 'hootsuite',
   // SEO & Analytics
   'Semrush': 'semrush',
+  'Ahrefs': 'ahrefs',
+  'Moz': 'moz',
   'Google Analytics': 'googleanalytics',
   'Mixpanel': 'mixpanel',
   'Hotjar': 'hotjar',
+  'Power BI': 'powerbi',
   'Tableau': 'tableau',
   // E-commerce & Pagos
   'Shopify': 'shopify',
@@ -73,6 +92,7 @@ export const TOOL_SLUGS: Record<string, string> = {
   'Slack': 'slack',
   'Zoom': 'zoom',
   'Discord': 'discord',
+  'Microsoft Teams': 'microsoftteams',
   'Google Meet': 'googlemeet',
   'WhatsApp': 'whatsapp',
   // Social Media
@@ -89,4 +109,5 @@ export const TOOL_SLUGS: Record<string, string> = {
   'Coursera': 'coursera',
   'Udemy': 'udemy',
   'Khan Academy': 'khanacademy',
+  'MasterClass': 'masterclass',
 }
