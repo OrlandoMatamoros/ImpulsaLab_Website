@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link'
-import { Image, Video, Mic, Zap, ChevronDown, ChevronUp, Code2, ArrowRight, Copy } from 'lucide-react';
+import { ChevronDown, ChevronUp, Code2, ArrowRight, Copy } from 'lucide-react';
+import PlatformLogo from '@/components/PlatformLogo';
 
 const AIToolsShowcase = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -13,52 +14,57 @@ const AIToolsShowcase = () => {
     {
       id: 1,
       name: 'Freepik AI',
+      slug: 'freepik',
+      domain: 'freepik.com',
       category: 'imagen',
       description: 'Generación de imágenes profesionales con IA',
       features: ['Mockups instantáneos', 'Fondos removibles', 'Estilo consistente'],
       pricing: 'Gratis / Pro $9/mes',
       useCase: 'Perfecto para posts de Instagram y material de marketing',
-      icon: <Image className="w-6 h-6" />
     },
     {
       id: 2,
       name: 'HeyGen',
+      slug: 'heygen',
+      domain: 'heygen.com',
       category: 'video',
       description: 'Avatares digitales que hablan por tu marca',
       features: ['Avatares realistas', 'Multi-idioma', 'Sincronización labial perfecta'],
       pricing: 'Gratis limitado / $24/mes',
       useCase: 'Ideal para videos explicativos y presentaciones',
-      icon: <Video className="w-6 h-6" />
     },
     {
       id: 3,
       name: 'ElevenLabs',
+      slug: 'elevenlabs',
+      domain: 'elevenlabs.io',
       category: 'audio',
       description: 'Voces ultra-realistas para tus contenidos',
       features: ['Clonación de voz', 'Emociones ajustables', '29 idiomas'],
       pricing: 'Gratis 10k chars / $5/mes',
       useCase: 'Podcasts, audiolibros y narraciones profesionales',
-      icon: <Mic className="w-6 h-6" />
     },
     {
       id: 4,
       name: 'Midjourney',
+      slug: 'midjourney',
+      domain: 'midjourney.com',
       category: 'imagen',
       description: 'Arte y diseño creativo de siguiente nivel',
       features: ['Estilos artísticos únicos', 'Alta resolución', 'Personalización extrema'],
       pricing: '$10/mes básico',
       useCase: 'Branding visual, ilustraciones y conceptos creativos',
-      icon: <Image className="w-6 h-6" />
     },
     {
       id: 5,
       name: 'Gumloop',
+      slug: 'gumloop',
+      domain: 'gumloop.com',
       category: 'automatizacion',
       description: 'Automatización sin código para marketing',
       features: ['Workflows visuales', 'Integraciones múltiples', 'Triggers automáticos'],
       pricing: 'Gratis / $97/mes',
       useCase: 'Automatizar campañas de email y redes sociales',
-      icon: <Zap className="w-6 h-6" />
     }
   ];
 
@@ -240,8 +246,13 @@ const AIToolsShowcase = () => {
             >
               <div className="p-6">
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center text-purple-600">
-                    {tool.icon}
+                  <div className="w-12 h-12 bg-white rounded-lg border border-slate-100 flex items-center justify-center p-1.5">
+                    <PlatformLogo
+                      slug={tool.slug}
+                      domain={tool.domain}
+                      name={tool.name}
+                      className="max-h-full max-w-full w-auto object-contain"
+                    />
                   </div>
                   <span className="text-xs font-semibold text-purple-600 bg-purple-50 px-3 py-1 rounded-full">
                     {tool.category}
