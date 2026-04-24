@@ -111,8 +111,8 @@ export default function WidgetProvider() {
               <h3 className="font-semibold">Chat Impulsa Lab</h3>
               <p className="text-xs opacity-90">Respuesta inmediata</p>
             </div>
-            <button onClick={() => setShowWebChat(false)} className="hover:opacity-80">
-              <X className="w-5 h-5" />
+            <button onClick={() => setShowWebChat(false)} className="hover:opacity-80" aria-label="Cerrar chat">
+              <X className="w-5 h-5" aria-hidden="true" />
             </button>
           </div>
 
@@ -165,8 +165,9 @@ export default function WidgetProvider() {
               <button
                 onClick={handleSendMessage}
                 className="bg-blue-600 text-white p-2 rounded-full hover:bg-blue-700"
+                aria-label="Enviar mensaje"
               >
-                <Send className="w-4 h-4" />
+                <Send className="w-4 h-4" aria-hidden="true" />
               </button>
             </div>
           </div>
@@ -228,8 +229,10 @@ export default function WidgetProvider() {
       {/* Botón principal con ícono WhatsApp y gradiente morado/azul */}
       <button
         onClick={() => setShowOptions(!showOptions)}
-        className={`fixed bottom-6 right-6 z-50 bg-gradient-to-r from-brand-navy to-slate-800 
-                   text-white rounded-full p-4 shadow-lg hover:shadow-xl transform 
+        aria-label={showOptions ? 'Cerrar opciones de contacto' : 'Abrir opciones de contacto'}
+        aria-expanded={showOptions}
+        className={`fixed bottom-6 right-6 z-50 bg-gradient-to-r from-brand-navy to-slate-800
+                   text-white rounded-full p-4 shadow-lg hover:shadow-xl transform
                    transition-all duration-300 hover:scale-110 ${showOptions ? 'rotate-45' : ''}`}
       >
         {showOptions ? (
