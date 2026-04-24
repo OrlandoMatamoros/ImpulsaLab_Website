@@ -634,7 +634,8 @@ export default function Header() {
               <button
                 className="p-2 text-gray-700 hover:text-brand-navy transition-colors"
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                aria-label="Toggle menu"
+                aria-label={isMenuOpen ? "Cerrar menú de navegación" : "Abrir menú de navegación"}
+                aria-expanded={isMenuOpen}
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}
@@ -722,13 +723,16 @@ export default function Header() {
                 <button
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileTools(!showMobileTools)}
+                  aria-label="Expandir sección Herramientas"
+                  aria-expanded={showMobileTools}
+                  aria-controls="mobile-panel-herramientas"
                 >
                   <span>{t.nav.herramientas}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileTools ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showMobileTools && (
-                  <div className="pl-4 space-y-1 mt-2">
+                  <div id="mobile-panel-herramientas" className="pl-4 space-y-1 mt-2">
                     {toolsItems.map((item, index) => (
                       <Link
                         key={item.href}
@@ -779,13 +783,16 @@ export default function Header() {
                 <button
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileOperations(!showMobileOperations)}
+                  aria-label="Expandir sección Operaciones"
+                  aria-expanded={showMobileOperations}
+                  aria-controls="mobile-panel-operaciones"
                 >
                   <span>{t.nav.operaciones}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileOperations ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showMobileOperations && (
-                  <div className="pl-4 space-y-1 mt-2">
+                  <div id="mobile-panel-operaciones" className="pl-4 space-y-1 mt-2">
                     <Link href="/servicios/operaciones" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
                       {t.nav.vistaGeneral}
                     </Link>
@@ -810,13 +817,16 @@ export default function Header() {
                 <button
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileMarketing(!showMobileMarketing)}
+                  aria-label="Expandir sección Marketing"
+                  aria-expanded={showMobileMarketing}
+                  aria-controls="mobile-panel-marketing"
                 >
                   <span>{t.nav.marketing}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileMarketing ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showMobileMarketing && (
-                  <div className="pl-4 space-y-1 mt-2">
+                  <div id="mobile-panel-marketing" className="pl-4 space-y-1 mt-2">
                     <Link href="/servicios/marketing" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
                       {t.nav.vistaGeneral}
                     </Link>
@@ -843,13 +853,16 @@ export default function Header() {
                 <button
                   className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
                   onClick={() => setShowMobileAcademy(!showMobileAcademy)}
+                  aria-label="Expandir sección Academy"
+                  aria-expanded={showMobileAcademy}
+                  aria-controls="mobile-panel-academy"
                 >
                   <span>{t.nav.academy}</span>
                   <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileAcademy ? 'rotate-180' : ''}`} />
                 </button>
 
                 {showMobileAcademy && (
-                  <div className="pl-4 space-y-1 mt-2">
+                  <div id="mobile-panel-academy" className="pl-4 space-y-1 mt-2">
                     {academyItems.map((item, index) => (
                       <Link
                         key={item.href}
