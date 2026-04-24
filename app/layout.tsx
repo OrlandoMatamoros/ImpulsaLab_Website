@@ -1,7 +1,13 @@
 import type { Metadata } from 'next'
 import { Manrope, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
+import { FirebaseProviders } from '@/components/FirebaseProviders'
 import './globals.css'
+
+// FirebaseProviders is a 'use client' component that internally uses
+// dynamic({ ssr: false }) to keep Firebase SDK out of the SSR payload.
+// Mounting it here at root ensures auth state persists across all route groups
+// ((public) and (tools)) — no more "logged-out on navigate to /" bug.
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -143,7 +149,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        {children}
+        <FirebaseProviders>{children}</FirebaseProviders>
       </body>
     </html>
   )
