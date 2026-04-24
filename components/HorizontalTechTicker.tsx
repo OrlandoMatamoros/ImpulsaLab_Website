@@ -1273,6 +1273,11 @@ function HorizontalTechTicker() {
           .horizontal-tech-ticker-wrapper:hover .horizontal-tech-ticker-content {
             animation-play-state: paused !important;
           }
+          @media (prefers-reduced-motion: reduce) {
+            .horizontal-tech-ticker-content {
+              animation: none !important;
+            }
+          }
         `
       }} />
     </>

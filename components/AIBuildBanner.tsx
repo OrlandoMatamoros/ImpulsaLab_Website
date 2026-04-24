@@ -31,6 +31,11 @@ export default function AIBuildBanner() {
             animation: ai-banner-scroll 18s linear infinite;
           }
         }
+        @media (prefers-reduced-motion: reduce) {
+          .ai-banner-marquee {
+            animation: none;
+          }
+        }
       `}} />
     </div>
   )
