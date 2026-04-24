@@ -2,9 +2,8 @@ import type { Metadata } from 'next'
 import { Manrope, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import { FirebaseAuthProvider } from '@/contexts/FirebaseAuthContext'
 import { LanguageProvider } from '@/contexts/LanguageContext'
-import { AuthTokenProvider } from '@/components/AuthTokenProvider'
+import { FirebaseProviders } from '@/components/FirebaseProviders'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import WidgetProvider from '@/components/widgets/WidgetProvider'
@@ -155,16 +154,14 @@ export default function RootLayout({
         </Script>
 
         <LanguageProvider>
-          <FirebaseAuthProvider>
-            <AuthTokenProvider>
-              <Header />
-              <main className="min-h-screen pt-16">
-                {children}
-              </main>
-              <Footer />
-              <WidgetProvider />
-            </AuthTokenProvider>
-          </FirebaseAuthProvider>
+          <FirebaseProviders>
+            <Header />
+            <main className="min-h-screen pt-16">
+              {children}
+            </main>
+            <Footer />
+            <WidgetProvider />
+          </FirebaseProviders>
         </LanguageProvider>
         <CookieBanner />
       </body>
