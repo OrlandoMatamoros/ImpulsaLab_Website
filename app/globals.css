@@ -396,14 +396,10 @@
 
 /* ============================================================
    Border Beam — conic trail orbiting a card perimeter.
-   Uses CSS @property for angle animation. Mask-composite
-   clips the fill so only the border glows. Cyan trail on brand.
+   GPU-composited: rotates the pseudo-element via transform: rotate()
+   instead of animating a CSS custom property in conic-gradient
+   (which triggered non-composited paint on every frame).
    ============================================================ */
-@property --border-beam-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
 .border-beam {
   position: relative;
   isolation: isolate;
@@ -417,8 +413,9 @@
   inset: 0;
   padding: 2px;
   border-radius: inherit;
+  /* Static conic-gradient at 0deg — element is rotated via transform */
   background: conic-gradient(
-    from var(--border-beam-angle),
+    from 0deg,
     transparent 0deg,
     transparent 300deg,
     rgba(0, 191, 255, 0.9) 340deg,
@@ -430,12 +427,16 @@
     linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
+  /* transform: rotate() is GPU-composited (no paint on each frame) */
   animation: border-beam-rotate 6s linear infinite;
+  will-change: transform;
+  transform-origin: center center;
   pointer-events: none;
   z-index: 1;
 }
 @keyframes border-beam-rotate {
-  to { --border-beam-angle: 360deg; }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   .border-beam::before { animation: none; }
@@ -472,17 +473,15 @@
 
 /* ============================================================
    Conic Aurora — gradient cónico rotando perpetuamente.
+   GPU-composited: uses transform: rotate() instead of animating
+   --conic-angle inside conic-gradient (paint-triggering).
    ============================================================ */
-@property --conic-angle {
-  syntax: '<angle>';
-  inherits: false;
-  initial-value: 0deg;
-}
 .conic-aurora {
   position: absolute;
   inset: -40%;
+  /* Static conic-gradient at 0deg — element rotated via transform */
   background: conic-gradient(
-    from var(--conic-angle),
+    from 0deg,
     rgba(10,14,26,0) 0deg,
     rgba(0,191,255,0.9) 80deg,
     rgba(0,191,255,0.2) 160deg,
@@ -493,7 +492,9 @@
   );
   filter: blur(45px);
   opacity: 0.85;
+  /* transform: rotate() is GPU-composited */
   animation: conic-aurora-spin 22s linear infinite;
+  will-change: transform;
   pointer-events: none;
 }
 @media (max-width: 1024px) {
@@ -505,7 +506,8 @@
   }
 }
 @keyframes conic-aurora-spin {
-  to { --conic-angle: 360deg; }
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
 }
 @media (prefers-reduced-motion: reduce) {
   .conic-aurora { animation: none; }
