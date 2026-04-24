@@ -2,6 +2,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // Optimizar tree-shaking de librerías con muchos re-exports (IL-1, IL-3)
+  experimental: {
+    optimizePackageImports: ['react-icons', 'lucide-react', 'framer-motion'],
+  },
+
+  // Eliminar console.* en producción para reducir bundle y evitar info leakage
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production',
+  },
   
   // Redirects para SEO - evitar 404s en URLs antiguas o mal escritas
   async redirects() {
