@@ -1,25 +1,40 @@
 // Archivo: /hooks/useTranslation.ts
+// NOTE: This hook is unused — components use useLanguage() from LanguageContext instead.
+// Updated to avoid pulling the full translations bundle (ES+EN) synchronously.
 
 import { useState, useEffect } from 'react'
-import { translations, type Language, type Translations } from '@/utils/translations'
+import { translationsES } from '@/utils/translations/translations-es'
+
+export type Language = 'ES' | 'EN'
+export type Translations = typeof translationsES
 
 export function useTranslation() {
   const [language, setLanguage] = useState<Language>('ES')
-  const [t, setT] = useState<Translations>(translations.ES)
+  const [t, setT] = useState<Translations>(translationsES)
 
   useEffect(() => {
-    // Obtener idioma guardado o usar el del navegador
-    const savedLang = localStorage.getItem('language') as Language
-    const browserLang = navigator.language.startsWith('en') ? 'EN' : 'ES'
+    const savedLang = localStorage.getItem('language') as Language | null
+    const browserLang: Language = navigator.language.startsWith('en') ? 'EN' : 'ES'
     const currentLang = savedLang || browserLang
 
-    setLanguage(currentLang)
-    setT(translations[currentLang])
+    if (currentLang === 'EN') {
+      import('@/utils/translations/translations-en').then((mod) => {
+        setT(mod.default as unknown as Translations)
+        setLanguage('EN')
+      })
+    } else {
+      setLanguage('ES')
+    }
   }, [])
 
-  const changeLanguage = (newLang: Language) => {
+  const changeLanguage = async (newLang: Language) => {
+    if (newLang === 'EN') {
+      const mod = await import('@/utils/translations/translations-en')
+      setT(mod.default as unknown as Translations)
+    } else {
+      setT(translationsES)
+    }
     setLanguage(newLang)
-    setT(translations[newLang])
     localStorage.setItem('language', newLang)
   }
 
@@ -31,7 +46,7 @@ export function useLanguage() {
   const [language, setLanguage] = useState<Language>('ES')
 
   useEffect(() => {
-    const savedLang = localStorage.getItem('language') as Language
+    const savedLang = localStorage.getItem('language') as Language | null
     if (savedLang) {
       setLanguage(savedLang)
     }

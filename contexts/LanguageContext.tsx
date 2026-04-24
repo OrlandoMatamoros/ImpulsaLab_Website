@@ -1,12 +1,17 @@
 'use client'
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { translations, type Language } from '@/utils/translations'
+import { createContext, useContext, useState, useEffect, useCallback, ReactNode } from 'react'
+import { translationsES } from '@/utils/translations/translations-es'
+
+// EN is loaded dynamically only when the user switches language.
+// This keeps the EN blob (~210 KB) out of the initial JS bundle.
+type Language = 'ES' | 'EN'
+type Translations = typeof translationsES
 
 interface LanguageContextType {
   language: Language
   setLanguage: (lang: Language) => void
-  t: typeof translations.ES
+  t: Translations
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined)
@@ -20,33 +25,43 @@ function writeLangCookie(lang: Language) {
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguage] = useState<Language>('ES')
-  const [t, setT] = useState(translations.ES)
+  const [t, setT] = useState<Translations>(translationsES)
 
   useEffect(() => {
-    // Detectar idioma del navegador o cargar el guardado
-    const savedLang = localStorage.getItem('language') as Language
-    const browserLang = navigator.language.startsWith('es') ? 'ES' : 'EN'
+    // Detect saved language or browser preference
+    const savedLang = localStorage.getItem('language') as Language | null
+    const browserLang: Language = navigator.language.startsWith('es') ? 'ES' : 'EN'
     const initialLang = savedLang || browserLang
 
-    setLanguage(initialLang)
-    setT(translations[initialLang])
-    // Mirror to a cookie so server components (e.g. /blog) can pick the
-    // active locale on the next request.
-    writeLangCookie(initialLang)
+    if (initialLang === 'EN') {
+      // Load EN bundle dynamically even on first render if user had switched
+      import('@/utils/translations/translations-en').then((mod) => {
+        setT(mod.default as unknown as Translations)
+        setLanguage('EN')
+        writeLangCookie('EN')
+      })
+    } else {
+      setLanguage('ES')
+      writeLangCookie('ES')
+      // translationsES already set as initial state — no-op
+    }
   }, [])
 
-  const handleSetLanguage = (lang: Language) => {
+  const handleSetLanguage = useCallback(async (lang: Language) => {
+    if (lang === 'EN') {
+      const mod = await import('@/utils/translations/translations-en')
+      setT(mod.default as unknown as Translations)
+    } else {
+      setT(translationsES)
+    }
     setLanguage(lang)
-    setT(translations[lang])
     localStorage.setItem('language', lang)
     writeLangCookie(lang)
-    // Hard refresh server-rendered routes that depend on the cookie
-    // (e.g. /blog/*). For client-only pages this is a no-op once they
-    // are hydrated since they react to context changes.
+    // Hard refresh server-rendered routes that depend on the cookie (e.g. /blog/*).
     if (typeof window !== 'undefined' && window.location.pathname.startsWith('/blog')) {
       window.location.reload()
     }
-  }
+  }, [])
 
   return (
     <LanguageContext.Provider value={{ language, setLanguage: handleSetLanguage, t }}>
@@ -62,3 +77,6 @@ export function useLanguage() {
   }
   return context
 }
+
+// Re-export Language type for consumers that imported it from here
+export type { Language }

@@ -1,26 +1,24 @@
 // Spanish-only translations bundle.
 // Imported synchronously by LanguageContext so ES text is available on
-// first render without waiting for the EN blob.  The EN side is lazy-loaded
-// via dynamic import() only when the user switches language.
-//
-// NOTE: keep the re-export list in sync with index.ts.
+// first render without waiting for the EN blob.
+// Each *-es.ts file contains ONLY the ES object — webpack will NOT include EN.
 
-import { homeES } from './home'
-import { pagesES } from './pages'
-import { capacitacionES } from './capacitacion'
-import { faqES } from './faq'
-import { serviciosMarketingES } from './servicios-marketing'
-import { serviciosOperacionesES } from './servicios-operaciones'
-import { blogAyudaES } from './blog-ayuda'
-import { serviciosHubES } from './servicios-hub'
-import { serviciosFinanzasES } from './servicios-finanzas'
-import { capacitacionSubES } from './capacitacion-sub'
-import { herramientasES } from './herramientas'
-import { carrerasCasosES } from './carreras-casos'
-import { legalPartnersES } from './legal-partners'
-import { internalES } from './internal'
-import { diagnosticoUiES } from './diagnostico-ui'
-import { toolsInternalES } from './tools-internal'
+import homeES from './home-es'
+import pagesES from './pages-es'
+import capacitacionES from './capacitacion-es'
+import faqES from './faq-es'
+import serviciosMarketingES from './servicios-marketing-es'
+import serviciosOperacionesES from './servicios-operaciones-es'
+import blogAyudaES from './blog-ayuda-es'
+import serviciosHubES from './servicios-hub-es'
+import serviciosFinanzasES from './servicios-finanzas-es'
+import capacitacionSubES from './capacitacion-sub-es'
+import herramientasES from './herramientas-es'
+import carrerasCasosES from './carreras-casos-es'
+import legalPartnersES from './legal-partners-es'
+import internalES from './internal-es'
+import diagnosticoUiES from './diagnostico-ui-es'
+import toolsInternalES from './tools-internal-es'
 
 export const translationsES = {
   ...homeES,
