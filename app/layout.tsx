@@ -6,7 +6,7 @@ import { LanguageProvider } from '@/contexts/LanguageContext'
 import { FirebaseProviders } from '@/components/FirebaseProviders'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
-import WidgetProvider from '@/components/widgets/WidgetProvider'
+import DeferredWidgetProvider from '@/components/widgets/DeferredWidgetProvider'
 import CookieBanner from '@/components/CookieBanner'
 
 const manrope = Manrope({
@@ -160,7 +160,7 @@ export default function RootLayout({
               {children}
             </main>
             <Footer />
-            <WidgetProvider />
+            <DeferredWidgetProvider />
           </FirebaseProviders>
         </LanguageProvider>
         <CookieBanner />
