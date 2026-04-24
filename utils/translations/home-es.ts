@@ -234,6 +234,7 @@ export const homeES = {
     terminos: "Terminos de Servicio",
     cookies: "Politica de Cookies",
     proteccionDatos: "Proteccion de Datos",
+    tagline: "La fuerza que impulsa tu negocio",
   },
   aiBanner: {
     text: "Esta pagina fue disenada y construida con ayuda de un agente de IA en terminal usando Claude Code",

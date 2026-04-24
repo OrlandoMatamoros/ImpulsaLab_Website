@@ -91,7 +91,7 @@ const Footer = () => {
               </div>
             </Link>
             <p className="text-gray-300 mb-6 text-sm leading-relaxed">
-              {COMPANY_INFO.tagline || 'Transformamos negocios con inteligencia artificial y datos'}
+              {t.footer.tagline}
             </p>
             
             {/* Social Links */}
