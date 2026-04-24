@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import { FaArrowLeft, FaClock, FaUser, FaCalendar, FaArrowRight } from 'react-icons/fa'
 import type { Post, Locale } from '@/lib/blog'
@@ -130,7 +131,13 @@ export default function BlogPostContent({
       {/* Hero image */}
       {post.image && (
         <div className="w-full h-[420px] relative overflow-hidden">
-          <img src={post.image} alt={post.title} className="w-full h-full object-cover" />
+          <Image
+            src={post.image}
+            alt={post.title}
+            fill
+            className="object-cover"
+            sizes="100vw"
+          />
           <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
         </div>
       )}
