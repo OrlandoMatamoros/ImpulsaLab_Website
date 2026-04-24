@@ -271,9 +271,12 @@
   50% { transform: translateY(-10px); }
 }
 
+/* animate-shrink: converted from width-based (non-composited) to
+   scaleX (GPU-composited). Uses transform-origin: left so it shrinks
+   left-to-right, identical visual to the old width: 100% → 0% trick. */
 @keyframes shrink {
-  from { width: 100%; }
-  to { width: 0%; }
+  from { transform: scaleX(1); }
+  to   { transform: scaleX(0); }
 }
 
 .animate-slideIn {
@@ -290,18 +293,31 @@
 
 .animate-shrink {
   animation: shrink 7s linear;
+  transform-origin: left center;
+  will-change: transform;
 }
 
-/* ===== Internal tools: Web Analyzer + Strategic Board ===== */
+/* ===== Internal tools: Web Analyzer + Strategic Board =====
+   audit-shimmer: converted from background-position (non-composited/paint-triggering)
+   to a pseudo-element sliding via transform: translateX (GPU-composited).
+   Visual result identical — the light sweep across the skeleton element. */
 @keyframes audit-shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .audit-shimmer {
-  background: linear-gradient(90deg, #1e293b 25%, #334155 50%, #1e293b 75%);
-  background-size: 200% 100%;
+  position: relative;
+  overflow: hidden;
+  background: #1e293b;
+}
+.audit-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(51, 65, 85, 0.8), transparent);
   animation: audit-shimmer 1.5s ease-in-out infinite;
+  will-change: transform;
 }
 
 @keyframes audit-slide-down {
@@ -380,18 +396,29 @@
   }
 }
 
-.hero-grain {
+/* Grain shifts via transform on wrapper instead of background-position
+   (background-position is non-composited; transform: translate is GPU-composited).
+   The grain tile is larger than its container so panning via translate hides the edge. */
+.hero-grain-wrapper {
+  position: absolute;
+  inset: -80px;                /* bleed so the translate panning stays within bounds */
+  pointer-events: none;
   animation: hero-grain-shift 0.6s steps(4) infinite;
+  will-change: transform;
+}
+.hero-grain {
+  position: absolute;
+  inset: 0;
 }
 @keyframes hero-grain-shift {
-  0%   { background-position: 0 0; }
-  25%  { background-position: -40px 20px; }
-  50%  { background-position: 30px -30px; }
-  75%  { background-position: -20px -40px; }
-  100% { background-position: 40px 10px; }
+  0%   { transform: translate3d(0, 0, 0); }
+  25%  { transform: translate3d(-40px, 20px, 0); }
+  50%  { transform: translate3d(30px, -30px, 0); }
+  75%  { transform: translate3d(-20px, -40px, 0); }
+  100% { transform: translate3d(40px, 10px, 0); }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero-grain { animation: none; }
+  .hero-grain-wrapper { animation: none; }
 }
 
 /* ============================================================
@@ -604,5 +631,20 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+  }
+}
+
+/* ============================================================
+   Universal prefers-reduced-motion catch-all.
+   Catches any animation not explicitly handled above.
+   Applies 0.01ms duration (effectively instant) so JS animation
+   listeners still fire without lingering motion.
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
