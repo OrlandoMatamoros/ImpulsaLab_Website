@@ -48,6 +48,8 @@ export default function PlatformLogo({
       alt={name}
       className={className}
       loading="lazy"
+      width={140}
+      height={40}
       onError={() => {
         if (step === 'local-svg' && slug) setStep('local-png')
         else if (step === 'local-png' && domain) setStep('clearbit')
