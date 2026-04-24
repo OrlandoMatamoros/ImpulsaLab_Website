@@ -37,6 +37,8 @@ const HeaderAuthSectionMobile = dynamic(
   }
 )
 
+const HeaderAdminTools = dynamic(() => import('@/components/HeaderAdminTools'), { ssr: false })
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMobileTools, setShowMobileTools] = useState(false)
@@ -175,6 +177,16 @@ export default function Header() {
           color: #ffffff;
         }
 
+        .dropdown-item-audit:hover {
+          background: #ecfeff;
+          color: #0e7490;
+        }
+
+        .dropdown-item-invoice:hover {
+          background: #f0fdf4;
+          color: #15803d;
+        }
+
         .dropdown-item-nova {
           position: relative;
           overflow: hidden;
@@ -285,6 +297,7 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
+                    <HeaderAdminTools />
                   </div>
                 </div>
 
@@ -484,6 +497,7 @@ export default function Header() {
                         {item.name}
                       </Link>
                     ))}
+                    <HeaderAdminTools mobile onClose={() => { setIsMenuOpen(false); setShowMobileTools(false) }} />
                   </div>
                 )}
               </div>
