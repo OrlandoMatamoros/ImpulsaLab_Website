@@ -2,12 +2,6 @@ import type { Metadata } from 'next'
 import { Manrope, Geist_Mono } from 'next/font/google'
 import Script from 'next/script'
 import './globals.css'
-import { LanguageProvider } from '@/contexts/LanguageContext'
-import { FirebaseProviders } from '@/components/FirebaseProviders'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
-import DeferredWidgetProvider from '@/components/widgets/DeferredWidgetProvider'
-import CookieBanner from '@/components/CookieBanner'
 
 const manrope = Manrope({
   subsets: ['latin'],
@@ -88,9 +82,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={`${manrope.variable} ${geistMono.variable} font-sans`}>
         {/* JSON-LD Organization + WebSite schema — native <script> tags render server-side
-            and appear in initial HTML so Google crawlers (which don't execute JS) can parse them.
-            Previously used next/script with strategy="afterInteractive" which injects post-hydration,
-            invisible to crawlers. Fixed 2026-04-15 after Security/SEO Auditor flagged json_ld_count=0. */}
+            and appear in initial HTML so Google crawlers (which don't execute JS) can parse them. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -137,9 +129,7 @@ export default function RootLayout({
           }}
         />
 
-        {/* Google Ads (gtag.js) — lazyOnload defers loading until browser is idle,
-            reducing main-thread contention and improving LCP/TBT on mobile.
-            Conversion tracking still works; pixels fire after user interaction. */}
+        {/* Google Ads (gtag.js) — lazyOnload defers loading until browser is idle */}
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=AW-17854811161"
           strategy="lazyOnload"
@@ -153,17 +143,7 @@ export default function RootLayout({
           `}
         </Script>
 
-        <LanguageProvider>
-          <FirebaseProviders>
-            <Header />
-            <main className="min-h-screen pt-16">
-              {children}
-            </main>
-            <Footer />
-            <DeferredWidgetProvider />
-          </FirebaseProviders>
-        </LanguageProvider>
-        <CookieBanner />
+        {children}
       </body>
     </html>
   )

@@ -45,7 +45,7 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType>({
   user: null,
   userData: null,
-  loading: true,
+  loading: false,
   signIn: async () => {},
   signUp: async () => {},
   signInWithGoogle: async () => {},
