@@ -10,8 +10,6 @@ export default function robots(): MetadataRoute.Robots {
           '/admin/',
           '/dashboard/',
           '/api/',
-          '/api-docs/',
-          '/docs/',
           '/consultant/',
           '/diagnostico-interno/',
           '/login/',
