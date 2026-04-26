@@ -47,6 +47,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: '/legal',
+        destination: '/legal/privacidad',
+        permanent: true,
+      },
+      {
         source: '/terms',
         destination: '/legal/terminos',
         permanent: true,
