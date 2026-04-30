@@ -1,20 +1,19 @@
 import { MetadataRoute } from 'next'
+import { listSlugs, getPostBySlug } from '@/lib/blog'
 
 const BASE_URL = 'https://www.tuimpulsalab.com'
 
-// NOTE: Blog posts, /recursos/guias, /recursos/webinars are placeholder pages
-// ("Artículo en desarrollo") and are INTENTIONALLY excluded from the sitemap
-// until real content exists. Including them causes Google to mark them
-// "Crawled — currently not indexed" due to thin/duplicate content, and hurts
-// the whole site's indexing signal. Re-add each URL here only after its
-// real content is published.
+// NOTE: /recursos/guias, /recursos/webinars are placeholder pages and are
+// INTENTIONALLY excluded until real content exists. Blog posts are now
+// included dynamically — only slugs that have real MDX content in
+// content/blog/es/ are emitted here.
+// Excluded: /status, /api-docs, /docs/* (technical), auth routes, /gracias,
+// /herramientas/facturacion (auth-gated), /herramientas/auditoria-web (auth-gated).
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date()
 
   // Solo incluir rutas con contenido sustancial y valor SEO.
-  // Excluidas: /status, /api-docs, /docs/* (técnicas), rutas auth, /gracias,
-  // placeholders "en desarrollo" (blog posts, recursos/*).
   const publicRoutes = [
     // Páginas principales
     { path: '/', priority: 1.0, changeFrequency: 'weekly' as const },
@@ -41,12 +40,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/capacitacion', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/capacitacion/mentoria-personalizada', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/capacitacion/equipos-empresariales', priority: 0.6, changeFrequency: 'monthly' as const },
-    // Herramientas
+    // Herramientas (public, no auth-gated)
     { path: '/herramientas', priority: 0.7, changeFrequency: 'weekly' as const },
     { path: '/herramientas/arsenal', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/herramientas/agentes', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/herramientas/agentes/junta-estrategica', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/herramientas/noticias', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/herramientas/prompt-designer', priority: 0.7, changeFrequency: 'monthly' as const },
+    { path: '/herramientas/plan-de-negocios', priority: 0.7, changeFrequency: 'monthly' as const },
     // Legal (baja prioridad pero necesarias)
     { path: '/legal/privacidad', priority: 0.3, changeFrequency: 'yearly' as const },
     { path: '/legal/terminos', priority: 0.3, changeFrequency: 'yearly' as const },
@@ -54,10 +55,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: '/legal/datos', priority: 0.3, changeFrequency: 'yearly' as const },
   ]
 
-  return publicRoutes.map((route) => ({
+  const staticEntries: MetadataRoute.Sitemap = publicRoutes.map((route) => ({
     url: `${BASE_URL}${route.path}`,
     lastModified: now,
     changeFrequency: route.changeFrequency,
     priority: route.priority,
   }))
+
+  // Blog posts — dynamic from content/blog/es/*.mdx
+  // Uses the post's own `date` frontmatter as lastModified so Googlebot
+  // knows which posts were recently updated.
+  const slugs = await listSlugs()
+  const blogRaw = await Promise.all(
+    slugs.map(async (slug) => {
+      const post = await getPostBySlug(slug, 'es')
+      if (!post) return null
+      return {
+        url: `${BASE_URL}/blog/${slug}`,
+        lastModified: post.date ? new Date(post.date) : now,
+        changeFrequency: 'monthly' as const,
+        priority: 0.7,
+      }
+    }),
+  )
+  const blogEntries: MetadataRoute.Sitemap = blogRaw.filter(
+    (e): e is NonNullable<typeof e> => e !== null,
+  )
+
+  return [...staticEntries, ...blogEntries]
 }
