@@ -66,7 +66,7 @@ export default async function BlogPostPage({
   const locale = await resolveLocale()
   const post = await getPostBySlug(slug, locale)
 
-  if (!post) notFound()
+  if (!post) return notFound()
 
   return <BlogPostContent post={post} requestedLocale={locale} />
 }

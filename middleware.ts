@@ -1,6 +1,14 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+// Blog slugs eliminados permanentemente — devuelven 410 Gone para limpiar GSC.
+// 410 es preferible a 404 porque Google lo desindexará más rápido.
+// Actualizado: 2026-04-28 (sesión SEO fix — slugs eran soft-404 en GSC)
+const DELETED_BLOG_SLUGS = new Set([
+  '/blog/marketing-digital-presupuesto-limitado',
+  '/blog/automatizacion-procesos-restaurantes',
+]);
+
 // Rutas protegidas que requieren autenticación
 // IMPORTANTE: Solo estas rutas requieren auth. Todo lo demás pasa directo
 // a Next.js para que sirva la página o un 404 real.
@@ -28,6 +36,17 @@ const roleBasedRoutes: Record<string, string[]> = {
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
+
+  // Slugs de blog eliminados: responder 410 Gone para que Google los desindexe.
+  if (DELETED_BLOG_SLUGS.has(path)) {
+    return new NextResponse(
+      '<!DOCTYPE html><html><head><title>410 Gone</title></head><body><h1>410 Gone</h1><p>This page has been permanently removed.</p></body></html>',
+      {
+        status: 410,
+        headers: { 'Content-Type': 'text/html; charset=utf-8' },
+      },
+    );
+  }
 
   // Solo interceptar rutas protegidas. Todo lo demás pasa directo
   // a Next.js routing (que devolverá 404 real si la ruta no existe).
