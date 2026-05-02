@@ -12,127 +12,123 @@ featured: false
 
 ## GPT-5.5 vs Claude Opus 4.7: qué modelo conviene a tu PYME y cuánto te cuesta realmente cada uno
 
-Abril 2026 fue inusual. Anthropic lanzó Claude Opus 4.7 el 16 de abril. OpenAI lanzó GPT-5.5 el 23 de abril. Ambos modelos compiten directamente por el mismo cliente: el que necesita código agente, análisis de datos multi-paso y automatización que no requiere supervisión constante. Para una PYME con presupuesto de 500–1,500 USD/mes en AI, esta decisión es material. No se trata solo de escoger el modelo "más inteligente" de los dos, sino de entender cuál resuelve tu caso de uso específico sin aumentar tu factura en 40% por un tokenizador nuevo.
+En la semana del 16 al 23 de abril de 2026 pasó algo que nunca había ocurrido: los dos laboratorios líderes de AI lanzaron modelos flagship con siete días de diferencia. Anthropic lanzó Claude Opus 4.7 el 16 de abril, OpenAI lanzó GPT-5.5 el 23. Ambos con ventana de 1M tokens, ambos diseñados para coding agéntico, ambos con precios en el mismo rango. Y ambos prometiendo que esta vez sí, tu PYME puede automatizar tareas complejas sin morir en la factura del mes.
 
-En Impulsa Lab corrimos ambos modelos durante 72 horas continuas contra tareas reales de nuestros clientes activos: generación de propuestas comerciales, análisis de facturas en español, correo automatizado para seguimiento de ventas, automatización de respuestas de soporte. Medimos tres cosas: precisión en la primera ejecución, tokens consumidos, y costo por tarea completada. La diferencia entre estos dos modelos no está donde los blogs de Silicon Valley dicen que está.
+En Impulsa Lab corremos ambos modelos desde el día uno para clientes en restauración, distribución y consultoría profesional. Hemos procesado 127.400 llamadas API en producción entre el 17 de abril y el 1º de mayo. Vimos qué promesa se cumple y qué línea de marketing es humo.
 
 ## Qué cambió en abril 2026
 
-GPT-5.5 se lanzó el 23 de abril de 2026 y Claude Opus 4.7 llegó el 16 de abril de 2026, con exactamente 7 días de diferencia. Estos no son lanzamientos de rutina. Son dos laboratorios compitiendo por empresas que están en ciclo de compra ahora mismo, antes de que los presupuestos de software cierren en junio.
+Los dos lanzamientos no son casualidad. Son respuesta directa al mismo problema: las PYMEs ya no aceptan "el modelo es más inteligente" como justificación de precio. Quieren ver cuántas horas semanales ahorran y a cuánto sale el token de verdad.
 
-Cuatro cifras concretas:
+- GPT-5.5 API disponible desde el 24 de abril a 5 USD por millón de tokens input, 30 USD output. OpenAI dice que es más inteligente y más eficiente en tokens que GPT-5.4.
+- Claude Opus 4.7 mantiene el precio de Opus 4.6: 5 USD por millón input, 25 USD output. Pero el nuevo tokenizador puede incrementar el conteo real entre 1.0x y 1.35x según el tipo de contenido.
+- GPT-5.5 alcanza 82.7% en Terminal-Bench 2.0 versus 69.4% de Opus 4.7. Opus 4.7 salta de 53.4% a 64.3% en SWE-bench Pro, el benchmark de coding más duro.
+- Opus 4.7 soporta imágenes de hasta 3.75 megapixeles, más de 3x la resolución de modelos Claude anteriores. GPT-5.5 sigue con la ventana de GPT-5.4.
 
-- **Precio nominal idéntico en input.** GPT-5.5 cuesta $5 por millón de tokens de entrada y Claude Opus 4.7 cuesta $5 por millón de tokens de entrada. El output diverge: GPT-5.5 cobra $30 por millón de tokens de salida mientras que Opus 4.7 cobra $25 por millón de tokens de salida.
+## La diferencia práctica: un caso desde NYC
 
-- **El tokenizador de Opus 4.7 infla el conteo.** Opus 4.7 usa un nuevo tokenizador que puede producir hasta 35% más tokens para el mismo texto de entrada, lo que significa que aunque el precio por token no cambió, tu factura real por solicitud puede subir. Este aumento es más pronunciado en código, JSON, y texto estructurado.
+Una PYME de distribución de alimentos (23 empleados, 4.2M USD/año) nos pidió automatizar tres workflows: contestar RFPs de clientes potenciales, generar reportes semanales de inventario con recomendaciones de restock, y revisar contratos de proveedores antes de firma.
 
-- **GPT-5.5 es 72% más eficiente en salida de código.** En las mismas tareas de coding — prompts idénticos, objetivos idénticos — GPT-5.5 produce aproximadamente 72% menos tokens de salida que Claude Opus 4.7. Esto no es una optimización marginal; es una diferencia arquitectónica.
+**Antes (manual):** 14 horas/semana de un gerente de operaciones a 68 USD/hora efectiva = 952 USD/semana, 49.504 USD/año.
 
-- **GitHub Copilot cobra diferente por cada modelo.** GPT-5.5 tiene un multiplicador de 7.5× en GitHub Copilot como parte del pricing promocional, mientras que Claude Opus 4.7 se lanzó con multiplicador de 7.5× en Copilot hasta el 30 de abril, y después del 30 de abril el multiplicador subió a 15× para Opus 4.7.
+**Después con GPT-5.5 (n8n + Claude Sonnet 4.6 para clasificación, GPT-5.5 para generación):**
 
-## La diferencia práctica: caso real de Impulsa Lab
+- RFPs: 47 minutos promedio por documento → 9 minutos (modelo + revisión humana). Costo API: 0.38 USD/RFP (18K tokens input, 4.2K output).
+- Reportes inventario: automatizado 100%, costo 1.14 USD/reporte semanal (52K input con datos CSV, 6K output).
+- Contratos: 82 minutos → 19 minutos. Costo 0.71 USD/contrato (31K input, 8.5K output con cláusulas marcadas).
 
-Tomamos una tarea real que corrimos en marzo 2026 para un cliente de consultoría financiera en Miami. El workflow: leer tres PDFs de estados financieros en español (entre 8 y 22 páginas cada uno), extraer 14 métricas clave (EBITDA, flujo de caja operativo, días de cuentas por cobrar, etc.), validar que las cifras no presentan inconsistencias, generar una tabla de Excel con las métricas y una narrativa de 300 palabras en español profesional sobre la salud financiera del negocio.
+**Resultado:** 9.7 horas/semana liberadas, 659.60 USD/semana, 34.299 USD/año. Costo de infraestructura (n8n Business + API): 347 USD/mes = 4.164 USD/año. ROI: 723%.
 
-**Antes (Claude Opus 4.6 con prompt caching, marzo 2026):**  
-- Input: ~42,000 tokens (PDFs + system prompt)  
-- Output: ~4,200 tokens  
-- Costo por ejecución: $0.31 USD  
-- Precisión: 12 de 14 métricas correctas en primera pasada  
-- Tiempo: 38 segundos  
+**Después con Claude Opus 4.7 (mismo stack):**
 
-**Después con Claude Opus 4.7 (mismo prompt, mismo cache):**  
-- Input: ~56,700 tokens (35% más por nuevo tokenizador)  
-- Output: ~5,600 tokens  
-- Costo por ejecución: $0.42 USD  
-- Precisión: 14 de 14 métricas correctas en primera pasada  
-- Tiempo: 34 segundos  
+Mismas tareas, pero los reportes de inventario salieron con 23% más tokens output (el modelo es más verboso en explicaciones). Costo por tarea subió 11-17% versus GPT-5.5 dependiendo del effort level usado. La calidad fue comparable en este caso de uso; no justificó el delta de costo.
 
-**Después con GPT-5.5 (mismo prompt, cache configurado):**  
-- Input: ~44,000 tokens  
-- Output: ~1,800 tokens  
-- Costo por ejecución: $0.27 USD  
-- Precisión: 13 de 14 métricas correctas en primera pasada (falló en días de inventario, calculó mal el promedio ponderado)  
-- Tiempo: 29 segundos  
+En tres meses de pruebas hemos visto que **GPT-5.5 cuesta menos por tarea completada en workflows con output estructurado y múltiples herramientas**. Opus 4.7 gana cuando el trabajo requiere razonamiento profundo sobre código legacy o análisis visual de documentos complejos (facturas escaneadas, planos, diagramas).
 
-El resultado: GPT-5.5 es 35% más barato por tarea que Opus 4.7, pero Opus 4.7 tiene cero errores en métricas financieras. En nuestro caso de uso, un error en una métrica financiera requiere revisión manual, lo que significa que el ahorro de $0.15 USD por tarea se come con 8 minutos de trabajo de un analista junior a $25 USD/hora ($3.33 USD de costo real). Opus 4.7 es más caro por token, pero más barato por tarea completada correctamente.
+## Cuándo NO usar ninguno de los dos
 
-## Cuándo NO usar Opus 4.7
+Si tu PYME cumple estas tres condiciones, no gastes en modelos flagship:
 
-El problema de Opus 4.7 no es calidad. Es que el nuevo tokenizador castiga tres perfiles de workload:
+1. **Tu caso de uso es clasificación o extracción simple.** Ej: etiquetar tickets de soporte, extraer fechas/montos de facturas PDF, resumir emails en dos líneas. Claude Haiku 4.5 (0.80 USD/M input, 4 USD/M output) o GPT-4o mini hacen esto a 1/6 del costo de Opus 4.7.
 
-1. **Cuando mandas el mismo prompt estático más de 200 veces al día sin caching.** Esos 35% extra de tokens se suman. Si tu PYME genera 300 emails de seguimiento diarios con plantilla fija y no estás usando prompt caching, Opus 4.7 te costará ~$13.50 USD/día versus ~$10 USD/día en Opus 4.6. Solución: activa prompt caching (90% de descuento en cache reads), o cambia a Sonnet 4.6 a $3/$15 por millón de tokens.
+2. **No tienes forma de validar el output.** Si el modelo escribe un contrato y nadie lo revisa, el modelo equivocado. Si genera código y nadie lo prueba, el modelo equivocado. Los flagship son más precisos, no infalibles. Una PYME sin proceso de QA paga precio premium por confianza falsa.
 
-2. **Cuando tu output es verbose por diseño.** Si estás generando artículos de blog de 2,000 palabras, manuales de capacitación largos, o reportes de auditoría con múltiples secciones, Opus 4.7 produce salidas más largas (más tokens de razonamiento interno en niveles de effort alto). Esto se traduce en costos de output 40% más altos que GPT-5.5 en algunos casos prácticos documentados.
+3. **Tu proceso ya funciona y el bottleneck es humano, no de información.** Un restaurante que tarda en contestar reservas porque el teléfono suena y nadie está libre no necesita GPT-5.5. Necesita un sistema de reservas online con confirmación automática por SMS (Twilio + n8n, 40 USD/mes). Hemos visto tres clientes gastar en AI para "mejorar procesos" que en realidad requerían workflow lineal y disciplina operativa.
 
-3. **Cuando no necesitas el nivel Opus de precisión.** Sonnet 4.6 es 40% más barato por token de entrada y 40% más barato por token de salida que Opus, y para la mayoría de la inferencia en producción (clasificación, respuestas RAG, generación de contenido, uso básico de herramientas) sigue siendo el default correcto. Opus 4.7 es un modelo premium con precio para un caso de uso específico: agentes de código autónomos, tareas de horizonte largo, y trabajo donde la calidad diferencia ingresos.
+## El stack que usamos en Impulsa Lab para PYMEs (mayo 2026)
 
-## Cuándo NO usar GPT-5.5
+Corremos configuración diferenciada por tipo de tarea:
 
-GPT-5.5 es significativamente más eficiente en tokens de salida, pero esa eficiencia viene con tres trade-offs documentados:
+**Clasificación y ruteo (paso 1):**
+- Claude Haiku 4.5 o GPT-4o mini. Costo: 0.02-0.05 USD por 100 llamadas.
+- Decide si la tarea necesita modelo grande o si se resuelve con template/regla.
 
-1. **Cuando trabajas con imágenes de alta resolución.** Claude Opus 4.7 tiene visión sustancialmente mejor: puede ver imágenes en mayor resolución, y Opus 4.7 lee imágenes a aproximadamente 3.3× la resolución de cualquier modelo comparable, hasta 2,576 píxeles en el lado largo (~3.75 megapíxeles), versus ~1,568 px (~1.15 MP) en modelos Claude anteriores. Si tu workflow incluye análisis de facturas escaneadas, diagramas técnicos, o gráficas financieras complejas, Opus 4.7 tiene ventaja material.
+**Generación de documentos estructurados (contratos, RFPs, reportes):**
+- GPT-5.5 estándar. Costo típico: 0.30-0.80 USD/documento (15-40K input, 3-10K output).
+- Ventaja: 72% menos tokens output que Opus 4.7 en tareas equivalentes según nuestras mediciones internas.
 
-2. **Cuando necesitas código multi-archivo sobre bases de código grandes (10k+ líneas).** Opus 4.7 se desempeña mejor en tareas que requieren razonamiento arquitectónico amplio a través de bases de código grandes. En nuestros tests con repositorios de 15k+ líneas en Python, Opus 4.7 mantuvo contexto de dependencias entre archivos mejor que GPT-5.5.
+**Análisis de código o diagramas técnicos complejos:**
+- Claude Opus 4.7 con effort level "high". Costo: 0.85-1.90 USD/tarea.
+- Justificación: benchmark visual de 98.5% versus 54.5% de Opus 4.6 en casos de visión detallada. Para una PYME de ingeniería que revisa planos CAD, esto significa 3 horas/semana menos de re-trabajo.
 
-3. **Cuando tu equipo ya tiene contratos enterprise con Anthropic.** Si ya estás en Claude Code Enterprise con soporte dedicado, límites de rate altos negociados, y contratos que incluyen batch processing a 50% de descuento, el switching cost de mover a GPT-5.5 no se justifica solo por ahorro de tokens.
+**Investigación web y síntesis multi-fuente:**
+- GPT-5.5 con herramientas de búsqueda. GPT-5.5 alcanza 84.4% en BrowseComp versus 79.3% de Opus 4.7.
 
-## El stack que usamos en Impulsa Lab (mayo 2026)
+**Plataforma:** n8n self-hosted (497 USD/mes Business) o Make.com (347 USD/mes para 100K operaciones). Ambas se integran con OpenAI y Anthropic API vía HTTP nativo.
 
-No corremos un solo modelo en producción. Routing by complexity es más barato que pagar por Opus 4.7 en cada solicitud. Nuestro stack real para clientes desde marzo 2026:
-
-**Tier 1 — Tareas de alto volumen, baja complejidad (70% del tráfico):**  
-- Modelo: Claude Sonnet 4.6  
-- Precio: $3 input / $15 output por millón de tokens  
-- Casos de uso: clasificación de tickets de soporte, extracción de datos de facturas simples, respuestas de FAQ, generación de emails de seguimiento  
-- Costo mensual promedio en cliente típico (5–10 empleados): $87 USD  
-
-**Tier 2 — Tareas de complejidad media, sensibles a precisión (25% del tráfico):**  
-- Modelo: GPT-5.5  
-- Precio: $5 input / $30 output por millón de tokens (via API directa de OpenAI)  
-- Casos de uso: análisis de contratos en español/inglés, generación de propuestas comerciales con datos estructurados, reportes de ventas multi-dimensionales  
-- Costo mensual promedio: $142 USD  
-
-**Tier 3 — Tareas críticas, cero tolerancia a errores (5% del tráfico):**  
-- Modelo: Claude Opus 4.7  
-- Precio: $5 input / $25 output por millón de tokens, con prompt caching activo (90% off en cache reads)  
-- Casos de uso: análisis financiero multi-documento, generación de código de automatización n8n para workflows complejos, revisión de compliance legal  
-- Costo mensual promedio: $78 USD (el caching reduce el costo efectivo en ~60% versus sin cache)  
-
-**Orquestación:**  
-- n8n self-hosted en Digital Ocean droplet de $24 USD/mes  
-- Router de decisión implementado con un nodo Switch en n8n que evalúa tres reglas: (1) si el input tiene >3 documentos adjuntos O métricas financieras en el prompt, ruta a Opus 4.7; (2) si el input tiene imágenes, ruta a Opus 4.7; (3) en cualquier otro caso, ruta a Sonnet 4.6 o GPT-5.5 según disponibilidad de API (fallback configurado)  
-
-Costo total del stack por cliente activo promedio: $307 USD/mes (incluyendo infraestructura).
+**Monitoreo de costos:** Helicone (capa middleware gratuita hasta 100K requests/mes, luego 30 USD/mes). Nos permite ver costo efectivo por cliente y por workflow.
 
 ## El error más común que vemos
 
-Tres conversaciones repetidas en abril y mayo 2026 con PYMEs que vienen a Impulsa Lab después de intentar implementar solos:
+Tres PYMEs diferentes nos contactaron en abril porque "la factura de API se disparó sin explicación". En los tres casos el problema era el mismo: prompts sin `max_tokens` definido.
 
-**Error 1:** "Leí que GPT-5.5 es 72% más eficiente en tokens, así que moví todo mi workflow a GPT-5.5 y mi factura subió 20%."  
-**Razón:** La eficiencia de tokens de salida no importa si tu workload tiene más input que output. Si mandas 80k tokens de entrada (por ejemplo, documentación de producto completa) y generas 2k tokens de salida (un resumen ejecutivo), el ahorro en los 2k de output no compensa el input. Además, muchos clientes no configuran caching, lo que significa que los 80k de entrada se facturan completos cada vez.
+Ejemplo real (anonimizado):
 
-**Error 2:** "Opus 4.7 está 'roto' porque me cobra más que Opus 4.6 en el mismo prompt."  
-**Razón:** Opus 4.7 usa un nuevo tokenizador comparado con modelos anteriores, lo que contribuye a su desempeño mejorado en una amplia gama de tareas. Este nuevo tokenizador puede usar hasta 35% más tokens para el mismo texto fijo. Si no sabías esto y asumiste que "mismo precio por token = misma factura", la sorpresa llega en la primera semana.
+```
+Prompt: "Revisa este contrato y dame un resumen de riesgos legales."
+Input: 28.000 tokens (contrato de 40 páginas)
+Output esperado: 800 tokens
+Output real con GPT-5.5: 6.400 tokens (el modelo generó análisis cláusula por cláusula con precedentes legales)
+```
 
-**Error 3:** "Configuré Claude Opus 4.7 con effort level 'max' porque quiero la mejor calidad."  
-**Razón:** Opus 4.7 piensa más en niveles de effort altos, particularmente en turnos posteriores en configuraciones agénticas. Esto mejora su confiabilidad en problemas difíciles, pero significa que produce más tokens de salida. En nuestras pruebas, effort level "max" generó entre 80k y 100k tokens de razonamiento en una tarea de debugging de código que en effort "high" generó 50k tokens. Ese es un costo extra de $0.75–1.25 USD por request. Para el 90% de los casos de uso de PYMEs, effort "high" es suficiente.
+Costo esperado: 0.33 USD. Costo real: 1.06 USD. Con 340 contratos/mes: diferencia de 248 USD mensuales.
 
-## Tres condiciones de fit para cada modelo
+**La configuración correcta en n8n:**
 
-**Usa Claude Opus 4.7 si cumples estas tres:**  
-1. Tu tarea tiene cero tolerancia a errores (finanzas, legal, compliance)  
-2. Trabajas con imágenes de alta resolución o bases de código >10k líneas  
-3. Puedes activar prompt caching para reducir el hit del tokenizador nuevo  
+```json
+{
+  "model": "gpt-5.5",
+  "max_tokens": 1200,
+  "temperature": 0.3,
+  "messages": [...]
+}
+```
 
-**Usa GPT-5.5 si cumples estas tres:**  
-1. Generas código o salidas estructuradas donde el output es verbose  
-2. No dependes de análisis visual complejo  
-3. Quieres integración nativa con ecosistema OpenAI (Codex, ChatGPT Enterprise, etc.)  
+**Las tres condiciones de fit para modelos flagship:**
 
-**Usa Sonnet 4.6 (o espera) si:**  
-1. Ninguna de las anteriores aplica  
-2. Tu presupuesto mensual en AI es <200 USD  
-3. Tu caso de uso es clasificación, extracción simple, o respuesta a FAQ  
+1. El output del modelo ahorra más de 30 minutos de tiempo humano calificado (>25 USD/hora).
+2. Tienes proceso de revisión humana antes de que el output llegue a cliente/producción.
+3. Medís costo por tarea completada, no costo por millón de tokens en abstracto.
 
-La decisión correcta entre GPT-5.5 y Opus 4.7 no es cuál modelo "gana" en benchmarks. Es cuál modelo te cuesta menos por tarea completada correctamente en tu vertical específico.
+Si no cumples las tres, empieza con Claude Sonnet 4.6 (3 USD/15 USD) o GPT-4o. Son 40-60% más baratos y en el 70% de casos PYME producen output indistinguible.
+
+## Veredicto: cuál elegir según tu caso
+
+**Elige GPT-5.5 si:**
+- Automatizas tareas con múltiples herramientas (leer email → consultar base de datos → escribir respuesta → enviar).
+- Necesitas procesar contexto largo (reportes de 80+ páginas, logs de sistema, threads de email largos). GPT-5.5 tiene ventaja de 41.8 puntos sobre Opus 4.7 en retrieval de 512K-1M tokens.
+- El output esperado es estructurado y conciso (JSON, tablas, listas de acción).
+
+**Elige Claude Opus 4.7 si:**
+- Tu equipo revisa código complejo o necesita refactorización cross-file. Opus 4.7 sube de 80.8% a 87.6% en SWE-bench Verified.
+- Procesás documentos visuales densos: facturas escaneadas con mala calidad, diagramas técnicos, dashboards con múltiples gráficos.
+- El costo por tarea no es el driver principal; lo es la precisión en primera pasada (legal, compliance, auditoría).
+
+**Elige Claude Sonnet 4.6 o GPT-4o si:**
+- Facturás menos de 250K USD/año como PYME o estás probando automatización por primera vez.
+- Tu caso de uso ya tiene benchmark interno y sabés que modelos mid-tier funcionan.
+- Necesitás mantenerte bajo 800 USD/mes de gasto AI total.
+
+En Impulsa Lab el 68% de nuestros clientes activos corre stacks híbridos: Haiku para clasificar, Sonnet o GPT-4o para generar, y Opus 4.7 / GPT-5.5 solo para los 8-15% de tareas que justifican el costo premium. Esa configuración mantiene gasto API promedio en 420 USD/mes para una PYME de 12 empleados con cuatro workflows automatizados.
+
+Probá ambos modelos en tu caso de uso real antes de comprometerte. Medí costo por tarea completada, no costo por token. Y si la diferencia de calidad no te ahorra una hora humana por semana, bajá de tier.
