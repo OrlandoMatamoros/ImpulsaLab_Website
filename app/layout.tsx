@@ -77,6 +77,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  other: {
+    copyright: '© 2026 Impulsa Lab LLC',
+  },
 }
 
 export default function RootLayout({
