@@ -111,7 +111,7 @@ BUSINESS INFORMATION:
 Generate ONLY valid JSON (no markdown, no backticks, pure JSON) with this exact structure:
 
 {
-  "businessName": "${businessName}",
+  "businessName": "${required.businessName}",
   "sections": [
     {
       "id": "executive-summary",
