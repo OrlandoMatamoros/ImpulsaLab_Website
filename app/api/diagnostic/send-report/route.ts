@@ -251,7 +251,7 @@ export async function POST(request: NextRequest) {
     console.log('📧 Enviando correo al admin...')
     const adminEmailResult = await resend.emails.send({
       from: 'Impulsa Lab Leads <noreply@tuimpulsalab.com>',
-      to: ['leads@tuimpulsalab.com', 'orlando@tuimpulsalab.com'], // Enviar a ambos emails
+      to: ['orlando@tuimpulsalab.com'],
       replyTo: leadData.email,
       subject: `🎯 Nuevo Lead: ${leadData.nombre} - Score: ${leadData.score_promedio}/100`,
       html: `
@@ -427,6 +427,35 @@ ${JSON.stringify(leadData, null, 2)}
       console.warn('⚠️ No se pudo guardar en Google Sheets:', sheetsResult.error)
       // No retornamos error porque los correos ya se enviaron
     }
+
+    // 4. NOTIFICAR AL LEAD ROUTER (Telegram/Slack/Gmail según scoring)
+    const ROUTER_URL =
+      process.env.LEADS_ROUTER_WEBHOOK_URL ||
+      'https://orlandom88.app.n8n.cloud/webhook/leads-router'
+
+    fetch(ROUTER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        source: 'diagnostico',
+        email: leadData.email,
+        name: leadData.nombre,
+        phone: leadData.telefono || '',
+        intent_text: `Diagnostico 3D completado. Industria: ${leadData.industria || '-'}. Empresa: ${leadData.empresa || '-'}. Empleados: ${leadData.empleados || '-'}. Facturacion: ${leadData.facturacion_anual ? '$' + leadData.facturacion_anual : '-'}.`,
+        metadata: {
+          score_promedio: leadData.score_promedio,
+          score_finanzas: leadData.score_finanzas,
+          score_operaciones: leadData.score_operaciones,
+          score_marketing: leadData.score_marketing,
+          industria: leadData.industria,
+          empresa: leadData.empresa,
+          empleados: leadData.empleados,
+          facturacion_anual: leadData.facturacion_anual,
+        },
+      }),
+    }).catch((err) => {
+      console.error('diagnostic router notify failed:', err)
+    })
 
     return NextResponse.json({
       success: true,

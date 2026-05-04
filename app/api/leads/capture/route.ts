@@ -46,14 +46,35 @@ export async function POST(req: NextRequest) {
           )
         : {}
 
+    const normalizedEmail = email.trim().toLowerCase()
+
     await adminDb.collection('leads').add({
-      email: email.trim().toLowerCase(),
+      email: normalizedEmail,
       source,
       locale: locale === 'EN' ? 'EN' : 'ES',
       metadata: safeMetadata,
       ip: clientIp,
       userAgent: req.headers.get('user-agent')?.slice(0, 300) || '',
       createdAt: new Date().toISOString(),
+    })
+
+    const ROUTER_URL =
+      process.env.LEADS_ROUTER_WEBHOOK_URL ||
+      'https://orlandom88.app.n8n.cloud/webhook/leads-router'
+
+    fetch(ROUTER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        source: 'leads_capture',
+        email: normalizedEmail,
+        name: typeof safeMetadata.name === 'string' ? safeMetadata.name : '',
+        phone: typeof safeMetadata.phone === 'string' ? safeMetadata.phone : '',
+        intent_text: '',
+        metadata: { ...safeMetadata, lead_source: source, locale },
+      }),
+    }).catch((err) => {
+      console.error('leads/capture router notify failed:', err)
     })
 
     return NextResponse.json({ success: true })
