@@ -1,27 +1,12 @@
 import { AI_MODELS } from '@/lib/ai-models'
+import { rateLimit } from '@/lib/rate-limit'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 
 export const maxDuration = 120
 
-// Simple in-memory rate limit: 5 requests / IP / hour.
-// Resets on cold start — acceptable for MVP, upgrade to Upstash later.
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+const RATE_LIMIT_WINDOW_SEC = 60 * 60
 const RATE_LIMIT_MAX = 5
-const ipHits = new Map<string, number[]>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const hits = ipHits.get(ip) || []
-  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX) {
-    ipHits.set(ip, recent)
-    return false
-  }
-  recent.push(now)
-  ipHits.set(ip, recent)
-  return true
-}
 
 const ERRORS = {
   ES: {
@@ -68,7 +53,12 @@ export async function POST(req: NextRequest) {
     const lang = locale?.toUpperCase() === 'EN' ? 'EN' : 'ES'
     const errors = ERRORS[lang]
 
-    if (!checkRateLimit(clientIp)) {
+    const rl = await rateLimit({
+      key: `bp:${clientIp}`,
+      limit: RATE_LIMIT_MAX,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    })
+    if (!rl.success) {
       return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
     }
 
