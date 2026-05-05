@@ -27,6 +27,7 @@
     "@supabase/auth-helpers-nextjs": "^0.10.0",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "^2.53.0",
+    "@upstash/ratelimit": "^2.0.8",
     "@upstash/redis": "^1.35.3",
     "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.0",

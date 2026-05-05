@@ -54,7 +54,8 @@ export async function POST(req: NextRequest) {
     const errors = ERRORS[lang]
 
     const rl = await rateLimit({
-      key: `bp:${clientIp}`,
+      prefix: 'bp',
+      identifier: clientIp,
       limit: RATE_LIMIT_MAX,
       windowSec: RATE_LIMIT_WINDOW_SEC,
     })
