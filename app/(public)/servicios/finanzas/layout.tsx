@@ -1,22 +1,22 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'CFO en tu Excel con IA - Finanzas Inteligentes para PYMEs',
-  description: 'Automatiza tus procesos financieros con IA. Dashboards inteligentes, proyecciones y analisis de riesgo para tu PYME latina. Desde $250 USD.',
+  title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
+  description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automaticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $250.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/finanzas',
   },
   openGraph: {
-    title: 'CFO en tu Excel con IA - Finanzas Inteligentes para PYMEs',
-    description: 'Dashboards inteligentes, proyecciones y analisis de riesgo automatizados con IA. Desde $250 USD.',
+    title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
+    description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automaticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $250.',
     url: 'https://www.tuimpulsalab.com/servicios/finanzas',
     type: 'website',
     images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - CFO en tu Excel con IA' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CFO en tu Excel con IA - Finanzas Inteligentes para PYMEs',
-    description: 'Dashboards inteligentes, proyecciones y analisis de riesgo automatizados con IA. Desde $250 USD.',
+    title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
+    description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automaticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $250.',
     images: ['/images/og-image.jpg'],
   },
 }
