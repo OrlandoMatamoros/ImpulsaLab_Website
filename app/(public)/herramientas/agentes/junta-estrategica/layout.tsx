@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Junta Estratégica AI | 4 cerebros, 1 decisión | Impulsa Lab',
@@ -32,10 +33,25 @@ export const metadata: Metadata = {
   robots: { index: true, follow: true },
 }
 
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Herramientas', path: '/herramientas' },
+  { name: 'Agentes', path: '/herramientas/agentes' },
+  { name: 'Junta Estratégica AI', path: '/herramientas/agentes/junta-estrategica' },
+])
+
 export default function JuntaEstrategicaLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }

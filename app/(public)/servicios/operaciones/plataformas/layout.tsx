@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Plataformas de Automatizacion - n8n, Make y Zapier',
@@ -21,6 +22,21 @@ export const metadata: Metadata = {
   },
 }
 
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Servicios', path: '/servicios' },
+  { name: 'Operaciones', path: '/servicios/operaciones' },
+  { name: 'Plataformas', path: '/servicios/operaciones/plataformas' },
+])
+
 export default function PlataformasLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }

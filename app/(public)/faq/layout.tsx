@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Preguntas Frecuentes - Servicios, Precios y Proceso',
@@ -77,12 +78,21 @@ const faqSchema = {
   })),
 }
 
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Preguntas Frecuentes', path: '/faq' },
+])
+
 export default function FAQLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       {children}
     </>

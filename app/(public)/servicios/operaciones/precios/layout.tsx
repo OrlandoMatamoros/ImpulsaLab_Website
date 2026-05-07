@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Precios de Automatizacion - Planes desde $97/mes',
@@ -21,6 +22,21 @@ export const metadata: Metadata = {
   },
 }
 
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Servicios', path: '/servicios' },
+  { name: 'Operaciones', path: '/servicios/operaciones' },
+  { name: 'Precios', path: '/servicios/operaciones/precios' },
+])
+
 export default function PreciosLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }

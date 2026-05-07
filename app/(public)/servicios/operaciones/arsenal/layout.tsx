@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Arsenal de Automatizacion - Herramientas y Plataformas IA',
@@ -21,6 +22,21 @@ export const metadata: Metadata = {
   },
 }
 
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Servicios', path: '/servicios' },
+  { name: 'Operaciones', path: '/servicios/operaciones' },
+  { name: 'Arsenal de Automatización', path: '/servicios/operaciones/arsenal' },
+])
+
 export default function ArsenalLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }

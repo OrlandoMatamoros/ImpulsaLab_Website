@@ -2,6 +2,7 @@ import { notFound } from 'next/navigation'
 import { cookies } from 'next/headers'
 import { Metadata } from 'next'
 import { getPostBySlug, listSlugs, type Locale } from '@/lib/blog'
+import { buildBreadcrumbLd } from '@/lib/schema'
 import BlogPostContent from './BlogPostContent'
 
 // Per-request locale resolution from the `lang` cookie set by the
@@ -72,6 +73,12 @@ export default async function BlogPostPage({
   const image = post.image || '/images/og-image.jpg'
   const inLanguage = post.locale === 'en' ? 'en-US' : 'es-ES'
 
+  const breadcrumbSchema = buildBreadcrumbLd([
+    { name: 'Inicio', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    { name: post.title, path: `/blog/${slug}` },
+  ])
+
   const articleSchema = {
     '@context': 'https://schema.org',
     '@type': 'Article',
@@ -103,6 +110,10 @@ export default async function BlogPostPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <BlogPostContent post={post} requestedLocale={locale} />
     </>
