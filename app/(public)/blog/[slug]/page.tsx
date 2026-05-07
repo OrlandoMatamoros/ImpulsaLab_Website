@@ -68,5 +68,43 @@ export default async function BlogPostPage({
 
   if (!post) return notFound()
 
-  return <BlogPostContent post={post} requestedLocale={locale} />
+  const url = `https://www.tuimpulsalab.com/blog/${slug}`
+  const image = post.image || '/images/og-image.jpg'
+  const inLanguage = post.locale === 'en' ? 'en-US' : 'es-ES'
+
+  const articleSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: post.title,
+    description: post.excerpt,
+    url,
+    datePublished: post.date,
+    dateModified: post.date,
+    inLanguage,
+    author: {
+      '@type': 'Person',
+      name: post.author,
+    },
+    publisher: {
+      '@id': 'https://www.tuimpulsalab.com/#organization',
+    },
+    image: {
+      '@type': 'ImageObject',
+      url: image.startsWith('http') ? image : `https://www.tuimpulsalab.com${image}`,
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': url,
+    },
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+      />
+      <BlogPostContent post={post} requestedLocale={locale} />
+    </>
+  )
 }
