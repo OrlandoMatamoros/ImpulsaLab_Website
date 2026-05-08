@@ -163,6 +163,12 @@ const Footer = () => {
             <h4 className="font-semibold text-lg mb-4">{t.footer.soluciones}</h4>
             <ul className="space-y-3 text-sm">
               <li>
+                <Link href="/servicios/consultoria-ia-para-pymes" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  Consultoría IA para PYMEs
+                  <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
                 <Link href="/servicios/finanzas" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
                   {t.footer.dashboardFinanciero}
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />

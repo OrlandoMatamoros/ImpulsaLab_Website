@@ -595,6 +595,24 @@ export default function MarketingPage() {
          </div>
        </div>
      </section>
+
+     {/* Interlinking: pillar consultoría IA general */}
+     <section className="py-10 bg-gray-50 border-t border-gray-200">
+       <div className="container mx-auto px-4 text-center">
+         <p className="text-gray-600 mb-3">
+           ¿Buscás una visión general de cómo implementar IA en tu PYME?
+         </p>
+         <Link
+           href="/servicios/consultoria-ia-para-pymes"
+           className="inline-flex items-center gap-2 text-[#002D62] font-semibold hover:underline text-lg"
+         >
+           Ver guía completa: Consultoría IA para PYMEs
+           <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+           </svg>
+         </Link>
+       </div>
+     </section>
    </div>
  )
 }
