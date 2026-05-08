@@ -28,6 +28,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/partners', priority: 0.5, changeFrequency: 'monthly' as const },
     // Servicios
     { path: '/servicios', priority: 0.9, changeFrequency: 'monthly' as const },
+    { path: '/servicios/consultoria-ia-para-pymes', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/finanzas', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/agentes', priority: 0.7, changeFrequency: 'monthly' as const },
