@@ -1,9 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Documentacion',
+  title: {
+    default: 'Documentacion | Impulsa Lab',
+    template: '%s | Documentacion | Impulsa Lab',
+  },
   description: 'Documentacion tecnica de Impulsa Lab: API, integraciones, webhooks y seguridad para desarrolladores.',
-  robots: { index: false, follow: false },
 }
 
 export default function DocsLayout({ children }: { children: React.ReactNode }) {
