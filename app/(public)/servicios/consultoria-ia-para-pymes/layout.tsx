@@ -41,22 +41,22 @@ const faqSchemaItems = [
   {
     question: '¿Necesito saber de tecnología para trabajar con ustedes?',
     answer:
-      'Cero conocimiento técnico requerido. Tu trabajo es contarnos cómo funciona tu negocio. Nuestro trabajo es automatizarlo. Usamos n8n con interfaz visual, dashboards listos para usar y capacitación incluida en todos los proyectos. Si sabés usar WhatsApp y Google Sheets, sabés usar lo que construimos.',
+      'Cero conocimiento técnico requerido. Tu trabajo es contarnos cómo funciona tu negocio. Nuestro trabajo es automatizarlo. Usamos n8n con interfaz visual, dashboards listos para usar y capacitación incluida en todos los proyectos. Si sabes usar WhatsApp y Google Sheets, sabes usar lo que construimos.',
   },
   {
     question: '¿Qué diferencia a Impulsa Lab de otras consultoras de IA?',
     answer:
-      'Tres diferencias concretas. Primero, implementamos — no solo asesoramos. Al final del proyecto tenés sistemas funcionando, no una presentación de PowerPoint. Segundo, precios PYME — nuestros proyectos cuestan 5-10 veces menos que agencias tradicionales de NYC porque eliminamos overhead de grandes consultoras. Tercero, contexto latino — entendemos los modelos de negocio, los procesos y los clientes de PYMEs latinas porque somos parte de esa comunidad.',
+      'Tres diferencias concretas. Primero, implementamos — no solo asesoramos. Al final del proyecto tienes sistemas funcionando, no una presentación de PowerPoint. Segundo, precios PYME — nuestros proyectos cuestan 5-10 veces menos que agencias tradicionales de NYC porque eliminamos overhead de grandes consultoras. Tercero, contexto latino — entendemos los modelos de negocio, los procesos y los clientes de PYMEs latinas porque somos parte de esa comunidad.',
   },
   {
     question: '¿Puedo automatizar solo una parte de mi negocio y escalar después?',
     answer:
-      'Esa es exactamente la estrategia recomendada. Empezamos con el punto de mayor dolor o mayor ROI (típicamente atención al cliente o tracking financiero), lo implementamos bien, medimos resultados y luego expandimos. No hay contratos de largo plazo obligatorios en los planes base — podés empezar con $97/mes y escalar cuando veas el valor.',
+      'Esa es exactamente la estrategia recomendada. Empezamos con el punto de mayor dolor o mayor ROI (típicamente atención al cliente o tracking financiero), lo implementamos bien, medimos resultados y luego expandimos. No hay contratos de largo plazo obligatorios en los planes base — puedes empezar con $97/mes y escalar cuando veas el valor.',
   },
   {
     question: '¿Qué pasa si el agente IA comete un error?',
     answer:
-      'Los agentes IA tienen límites configurados. Para transacciones, respuestas fuera de guión o situaciones de alta sensibilidad, el agente escala automáticamente al humano. Nuestros sistemas incluyen logging completo — podés ver exactamente qué respondió el agente y cuándo. El primer mes de operación incluye soporte activo para ajustar el comportamiento según los casos reales que aparezcan.',
+      'Los agentes IA tienen límites configurados. Para transacciones, respuestas fuera de guión o situaciones de alta sensibilidad, el agente escala automáticamente al humano. Nuestros sistemas incluyen logging completo — puedes ver exactamente qué respondió el agente y cuándo. El primer mes de operación incluye soporte activo para ajustar el comportamiento según los casos reales que aparezcan.',
   },
   {
     question: '¿Con qué plataformas trabajan? ¿Se integra con lo que ya uso?',

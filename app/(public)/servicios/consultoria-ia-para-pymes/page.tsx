@@ -159,7 +159,7 @@ export default function ConsultoriaIAPymesPage() {
             En 2024, el 67% de las PYMEs en Estados Unidos ya usaban alguna forma de automatización inteligente según datos del U.S. Chamber of Commerce. En 2026, ese número supera el 80%. La pregunta no es si la IA va a cambiar tu industria — ya la cambió. La pregunta es si tu negocio va a liderar ese cambio o va a reaccionar tarde.
           </p>
           <p className="text-lg text-gray-700 mb-6">
-            Para las PYMEs latinas en NYC y LATAM, la brecha es aún más crítica. Competís contra negocios que ya tienen chatbots atendiendo clientes a las 2am, sistemas que procesan facturas automáticamente y dashboards que muestran en tiempo real si el negocio está ganando o perdiendo. Mientras tanto, muchos dueños de PYMEs siguen copiando datos a mano en Excel los domingos.
+            Para las PYMEs latinas en NYC y LATAM, la brecha es aún más crítica. Compites contra negocios que ya tienen chatbots atendiendo clientes a las 2am, sistemas que procesan facturas automáticamente y dashboards que muestran en tiempo real si el negocio está ganando o perdiendo. Mientras tanto, muchos dueños de PYMEs siguen copiando datos a mano en Excel los domingos.
           </p>
 
           <h3 className="text-2xl font-bold text-gray-900 mb-4">La ventana de oportunidad se está cerrando</h3>
@@ -294,7 +294,7 @@ export default function ConsultoriaIAPymesPage() {
               {
                 week: 'Semana 0',
                 label: 'Diagnóstico 3D',
-                desc: '30 minutos gratuitos por videoconferencia. Analizamos tus procesos actuales en tres ejes: Finanzas, Operaciones y Marketing. Identificamos los 2-3 puntos donde la IA tiene mayor ROI para tu negocio específico. Salís con un plan de acción claro — independientemente de si contratás o no.',
+                desc: '30 minutos gratuitos por videoconferencia. Analizamos tus procesos actuales en tres ejes: Finanzas, Operaciones y Marketing. Identificamos los 2-3 puntos donde la IA tiene mayor ROI para tu negocio específico. Sales con un plan de acción claro — independientemente de si contratas o no.',
                 color: 'bg-gray-100 border-gray-300',
                 numColor: 'bg-gray-600',
               },
@@ -626,7 +626,7 @@ export default function ConsultoriaIAPymesPage() {
             Stack tecnológico: qué usamos y por qué
           </h2>
           <p className="text-lg text-gray-700 mb-8">
-            La transparencia tecnológica es parte de cómo trabajamos. No usamos herramientas de caja negra que no podés auditar. Nuestro stack es open-source donde puede ser, best-in-class donde es necesario, y siempre explicable al cliente.
+            La transparencia tecnológica es parte de cómo trabajamos. No usamos herramientas de caja negra que no puedes auditar. Nuestro stack es open-source donde puede ser, best-in-class donde es necesario, y siempre explicable al cliente.
           </p>
 
           <div className="grid md:grid-cols-3 gap-6 mb-8">
@@ -634,7 +634,7 @@ export default function ConsultoriaIAPymesPage() {
               {
                 tool: 'n8n',
                 role: 'Motor de automatización',
-                why: 'Open-source, self-hosteable, visual. 400+ integraciones nativas. Código auditable — sabés exactamente qué hace cada nodo del flujo. Sin dependencia de un vendor cerrado.',
+                why: 'Open-source, self-hosteable, visual. 400+ integraciones nativas. Código auditable — sabes exactamente qué hace cada nodo del flujo. Sin dependencia de un vendor cerrado.',
                 badge: 'Open Source',
                 badgeColor: 'bg-green-100 text-green-800',
               },
@@ -655,7 +655,7 @@ export default function ConsultoriaIAPymesPage() {
               {
                 tool: 'Google Workspace',
                 role: 'Productividad y datos',
-                why: 'La mayoría de PYMEs ya usan Gmail y Google Sheets. Integramos directamente con lo que ya tenés sin forzar migraciones.',
+                why: 'La mayoría de PYMEs ya usan Gmail y Google Sheets. Integramos directamente con lo que ya tienes sin forzar migraciones.',
                 badge: 'Integración nativa',
                 badgeColor: 'bg-yellow-100 text-yellow-800',
               },
@@ -686,9 +686,9 @@ export default function ConsultoriaIAPymesPage() {
           </div>
 
           <p className="text-gray-600">
-            ¿Querés ver el catálogo completo de herramientas que usamos?{' '}
+            ¿Quieres ver el catálogo completo de herramientas que usamos?{' '}
             <Link href="/herramientas/arsenal" className="text-[#002D62] font-semibold hover:underline">
-              Visitá el Arsenal Tecnológico
+              Visita el Arsenal Tecnológico
             </Link>
             .
           </p>
@@ -776,7 +776,7 @@ export default function ConsultoriaIAPymesPage() {
           <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
             <p className="font-bold text-amber-900 mb-2">Nota sobre sorpresas en el precio</p>
             <p className="text-amber-800">
-              Los únicos costos adicionales posibles son: (1) costos de plataformas de terceros que ya usás (ej: WhatsApp Business API ~$0.015/conversación), (2) costos de API de Claude si el volumen de mensajes es muy alto (raramente relevante para PYMEs con menos de 1,000 conversaciones/mes). Lo discutimos en detalle en el diagnóstico antes de cotizar.
+              Los únicos costos adicionales posibles son: (1) costos de plataformas de terceros que ya usas (ej: WhatsApp Business API ~$0.015/conversación), (2) costos de API de Claude si el volumen de mensajes es muy alto (raramente relevante para PYMEs con menos de 1,000 conversaciones/mes). Lo discutimos en detalle en el diagnóstico antes de cotizar.
             </p>
           </div>
         </section>
@@ -784,7 +784,7 @@ export default function ConsultoriaIAPymesPage() {
         {/* Inline CTA 2 */}
         <div className="bg-gradient-to-r from-[#002D62] to-[#0057b8] rounded-xl p-8 mb-14 text-center text-white">
           <p className="text-xl font-bold mb-2">¿Cuánto costaría tu proyecto específico?</p>
-          <p className="text-blue-100 mb-6">El diagnóstico de 30 minutos es gratis y salís con un presupuesto claro</p>
+          <p className="text-blue-100 mb-6">El diagnóstico de 30 minutos es gratis y sales con un presupuesto claro</p>
           <Link
             href="/diagnostico"
             className="inline-flex items-center justify-center gap-2 bg-white text-[#002D62] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300"
@@ -852,7 +852,7 @@ export default function ConsultoriaIAPymesPage() {
                 q: '¿Necesito saber de tecnología para trabajar con ustedes?',
                 a: (
                   <p className="text-gray-700">
-                    Cero conocimiento técnico requerido. Tu trabajo es contarnos cómo funciona tu negocio. Nuestro trabajo es automatizarlo. Usamos n8n con interfaz visual, dashboards listos para usar y capacitación incluida en todos los proyectos. Si sabés usar WhatsApp y Google Sheets, sabés usar lo que construimos.
+                    Cero conocimiento técnico requerido. Tu trabajo es contarnos cómo funciona tu negocio. Nuestro trabajo es automatizarlo. Usamos n8n con interfaz visual, dashboards listos para usar y capacitación incluida en todos los proyectos. Si sabes usar WhatsApp y Google Sheets, sabes usar lo que construimos.
                   </p>
                 ),
               },
@@ -860,7 +860,7 @@ export default function ConsultoriaIAPymesPage() {
                 q: '¿Qué diferencia a Impulsa Lab de otras consultoras de IA?',
                 a: (
                   <div className="text-gray-700 space-y-2">
-                    <p><strong>Primero, implementamos</strong> — no solo asesoramos. Al final del proyecto tenés sistemas funcionando, no una presentación de PowerPoint.</p>
+                    <p><strong>Primero, implementamos</strong> — no solo asesoramos. Al final del proyecto tienes sistemas funcionando, no una presentación de PowerPoint.</p>
                     <p><strong>Segundo, precios PYME</strong> — nuestros proyectos cuestan 5-10 veces menos que agencias tradicionales de NYC porque eliminamos overhead de grandes consultoras.</p>
                     <p><strong>Tercero, contexto latino</strong> — entendemos los modelos de negocio, los procesos y los clientes de PYMEs latinas porque somos parte de esa comunidad.</p>
                   </div>
@@ -870,7 +870,7 @@ export default function ConsultoriaIAPymesPage() {
                 q: '¿Puedo automatizar solo una parte de mi negocio y escalar después?',
                 a: (
                   <p className="text-gray-700">
-                    Esa es exactamente la estrategia recomendada. Empezamos con el punto de mayor dolor o mayor ROI (típicamente atención al cliente o tracking financiero), lo implementamos bien, medimos resultados y luego expandimos. No hay contratos de largo plazo obligatorios en los planes base — podés empezar con $97/mes y escalar cuando veas el valor.
+                    Esa es exactamente la estrategia recomendada. Empezamos con el punto de mayor dolor o mayor ROI (típicamente atención al cliente o tracking financiero), lo implementamos bien, medimos resultados y luego expandimos. No hay contratos de largo plazo obligatorios en los planes base — puedes empezar con $97/mes y escalar cuando veas el valor.
                   </p>
                 ),
               },
@@ -878,7 +878,7 @@ export default function ConsultoriaIAPymesPage() {
                 q: '¿Qué pasa si el agente IA comete un error?',
                 a: (
                   <p className="text-gray-700">
-                    Los agentes IA tienen límites configurados. Para transacciones, respuestas fuera de guión o situaciones de alta sensibilidad, el agente escala automáticamente al humano. Nuestros sistemas incluyen logging completo — podés ver exactamente qué respondió el agente y cuándo. El primer mes de operación incluye soporte activo para ajustar el comportamiento según los casos reales que aparezcan. Para leer más sobre la diferencia entre agentes y workflows lineales:{' '}
+                    Los agentes IA tienen límites configurados. Para transacciones, respuestas fuera de guión o situaciones de alta sensibilidad, el agente escala automáticamente al humano. Nuestros sistemas incluyen logging completo — puedes ver exactamente qué respondió el agente y cuándo. El primer mes de operación incluye soporte activo para ajustar el comportamiento según los casos reales que aparezcan. Para leer más sobre la diferencia entre agentes y workflows lineales:{' '}
                     <Link href="/blog/agentes-ai-vs-workflows-lineales-2026" className="text-[#002D62] font-semibold hover:underline">
                       Agentes IA vs Workflows lineales: cuándo usar cada uno
                     </Link>
@@ -925,7 +925,7 @@ export default function ConsultoriaIAPymesPage() {
               30 minutos de diagnóstico. Sin costo. Sin compromiso de contratación. Solo claridad sobre qué automatizar primero para el mayor ROI en tu negocio.
             </p>
             <p className="text-blue-200 mb-10 max-w-xl mx-auto">
-              Más de 20 PYMEs latinas en NYC y LATAM ya tienen sistemas IA funcionando. El siguiente podés ser vos.
+              Más de 20 PYMEs latinas en NYC y LATAM ya tienen sistemas IA funcionando. El siguiente puedes ser tú.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
