@@ -80,50 +80,60 @@ export default function DiagnosticSection() {
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">
-          {/* Eje X: FINANZAS */}
-          <motion.div {...revealProps(0)}>
-          <Link href="/servicios/finanzas" className="block">
-            <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
-              <div className="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
+          {/* Eje X: FINANZAS — con glow cyan ambient (Stage 3 SOMATT-style) */}
+          <motion.div {...revealProps(0)} className="relative">
+            {/* Outer glow cyan */}
+            <div
+              aria-hidden
+              className="absolute -inset-3 bg-brand-cyan/20 blur-2xl rounded-3xl pointer-events-none"
+            />
+            <Link href="/servicios/finanzas" className="block relative">
+              <div className="relative bg-white p-8 rounded-lg shadow-[0_0_40px_rgba(0,191,255,0.18)] border-2 border-brand-cyan/40 transition-all duration-300 hover:shadow-[0_0_50px_rgba(0,191,255,0.28)] hover:-translate-y-1 cursor-pointer h-full">
+                <div className="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                          d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeX}</h3>
+                <h4 className="text-lg font-medium mb-3 text-cyan-700">{t.diagnostic.ejeXTitulo}</h4>
+                <p className="text-gray-600">
+                  {t.diagnostic.ejeXDesc}
+                </p>
+                <p className="text-cyan-700 text-sm mt-4 font-medium">
+                  {t.diagnostic.conoceMas}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeX}</h3>
-              <h4 className="text-lg font-medium mb-3 text-cyan-700">{t.diagnostic.ejeXTitulo}</h4>
-              <p className="text-gray-600">
-                {t.diagnostic.ejeXDesc}
-              </p>
-              <p className="text-cyan-700 text-sm mt-4 font-medium">
-                {t.diagnostic.conoceMas}
-              </p>
-            </div>
-          </Link>
+            </Link>
           </motion.div>
 
-          {/* Eje Y: OPERACIONES */}
-          <motion.div {...revealProps(1)}>
-          <Link href="/servicios/operaciones" className="block">
-            <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
-              <div className="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
+          {/* Eje Y: OPERACIONES — con glow emerald ambient (Stage 3 SOMATT-style) */}
+          <motion.div {...revealProps(1)} className="relative">
+            {/* Outer glow emerald */}
+            <div
+              aria-hidden
+              className="absolute -inset-3 bg-emerald-400/20 blur-2xl rounded-3xl pointer-events-none"
+            />
+            <Link href="/servicios/operaciones" className="block relative">
+              <div className="relative bg-white p-8 rounded-lg shadow-[0_0_40px_rgba(16,185,129,0.18)] border-2 border-emerald-500/40 transition-all duration-300 hover:shadow-[0_0_50px_rgba(16,185,129,0.28)] hover:-translate-y-1 cursor-pointer h-full">
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeY}</h3>
+                <h4 className="text-lg font-medium mb-3 text-emerald-600">{t.diagnostic.ejeYTitulo}</h4>
+                <p className="text-gray-600">
+                  {t.diagnostic.ejeYDesc}
+                </p>
+                <p className="text-emerald-600 text-sm mt-4 font-medium">
+                  {t.diagnostic.conoceMas}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeY}</h3>
-              <h4 className="text-lg font-medium mb-3 text-green-600">{t.diagnostic.ejeYTitulo}</h4>
-              <p className="text-gray-600">
-                {t.diagnostic.ejeYDesc}
-              </p>
-              <p className="text-green-600 text-sm mt-4 font-medium">
-                {t.diagnostic.conoceMas}
-              </p>
-            </div>
-          </Link>
+            </Link>
           </motion.div>
 
           {/* Eje Z: MARKETING — con glow violet ambient (Stage 3 SOMATT-style) */}
