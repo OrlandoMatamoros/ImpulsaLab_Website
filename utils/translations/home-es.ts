@@ -237,27 +237,27 @@ export const homeES = {
     tagline: "La fuerza que impulsa tu negocio",
   },
   aiBanner: {
-    text: "Esta pagina fue disenada y construida con ayuda de un agente de IA en terminal usando Claude Code",
+    text: "Esta p\u00e1gina fue dise\u00f1ada y construida con ayuda de un agente de IA en terminal usando Claude Code",
     separator: "\u2022",
   },
   testimonials: {
     items: [
       {
-        quote: "Me ensenaron a usar IA para manejar mi inventario y mis numeros. Ahora tomo decisiones con datos, no con intuicion.",
+        quote: "Me ense\u00f1aron a usar IA para manejar mi inventario y mis n\u00fameros. Ahora tomo decisiones con datos, no con intuici\u00f3n.",
         name: "Mirian",
         business: "Mini Market",
         location: "Brooklyn, NY",
       },
       {
-        quote: "Me hicieron la pagina web y el diseno de etiquetas para mis productos. Desde entonces las ventas subieron notablemente.",
+        quote: "Me hicieron la p\u00e1gina web y el dise\u00f1o de etiquetas para mis productos. Desde entonces las ventas subieron notablemente.",
         name: "Fabio",
-        business: "Panaderia",
+        business: "Panader\u00eda",
         location: "Queens, NY",
       },
       {
         quote: "Me optimizaron el SEO de mi tienda en Shopify y por fin mis clientes me encuentran en Google. Fue un cambio enorme.",
         name: "Pris",
-        business: "Chocolateria",
+        business: "Chocolater\u00eda",
         location: "Brooklyn, NY",
       },
     ],
