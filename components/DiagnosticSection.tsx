@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { motion, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
-import OrbitalRings from '@/components/OrbitalRings'
 
 export default function DiagnosticSection() {
   const { t } = useLanguage()
@@ -20,7 +19,12 @@ export default function DiagnosticSection() {
 
   return (
     <section id="diagnostico" className="py-20 bg-gray-50 relative overflow-hidden">
-      <OrbitalRings className="top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] md:w-[800px] md:h-[800px] opacity-50 md:opacity-80 -translate-y-1/4 md:-translate-y-1/5" />
+      {/* Ambient gradient orbs — sutiles, sin animación infinita */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-32 -left-20 w-[420px] h-[420px] rounded-full bg-brand-cyan/10 blur-3xl" />
+        <div className="absolute top-1/3 right-[-80px] w-[380px] h-[380px] rounded-full bg-purple-400/15 blur-3xl" />
+        <div className="absolute -bottom-24 left-1/3 w-[340px] h-[340px] rounded-full bg-emerald-400/10 blur-3xl" />
+      </div>
       <div className="container mx-auto px-4 relative">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -122,26 +126,31 @@ export default function DiagnosticSection() {
           </Link>
           </motion.div>
 
-          {/* Eje Z: MARKETING */}
-          <motion.div {...revealProps(2)}>
-          <Link href="/servicios/marketing" className="block">
-            <div className="bg-white p-8 rounded-lg shadow-lg transition-all duration-300 hover:shadow-xl hover:-translate-y-1 cursor-pointer h-full">
-              <div className="w-16 h-16 bg-brand-cyan/10 rounded-full flex items-center justify-center mb-6">
-                <svg className="w-8 h-8 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
-                        d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
-                </svg>
+          {/* Eje Z: MARKETING — con glow violet ambient (Stage 3 SOMATT-style) */}
+          <motion.div {...revealProps(2)} className="relative">
+            {/* Outer glow purple */}
+            <div
+              aria-hidden
+              className="absolute -inset-3 bg-purple-400/20 blur-2xl rounded-3xl pointer-events-none"
+            />
+            <Link href="/servicios/marketing" className="block relative">
+              <div className="relative bg-white p-8 rounded-lg shadow-[0_0_40px_rgba(168,85,247,0.18)] border-2 border-purple-500/40 transition-all duration-300 hover:shadow-[0_0_50px_rgba(168,85,247,0.28)] hover:-translate-y-1 cursor-pointer h-full">
+                <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mb-6">
+                  <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
+                          d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeZ}</h3>
+                <h4 className="text-lg font-medium mb-3 text-purple-600">{t.diagnostic.ejeZTitulo}</h4>
+                <p className="text-gray-600">
+                  {t.diagnostic.ejeZDesc}
+                </p>
+                <p className="text-purple-600 text-sm mt-4 font-medium">
+                  {t.diagnostic.conoceMas}
+                </p>
               </div>
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeZ}</h3>
-              <h4 className="text-lg font-medium mb-3 text-purple-600">{t.diagnostic.ejeZTitulo}</h4>
-              <p className="text-gray-600">
-                {t.diagnostic.ejeZDesc}
-              </p>
-              <p className="text-purple-600 text-sm mt-4 font-medium">
-                {t.diagnostic.conoceMas}
-              </p>
-            </div>
-          </Link>
+            </Link>
           </motion.div>
         </div>
       </div>
