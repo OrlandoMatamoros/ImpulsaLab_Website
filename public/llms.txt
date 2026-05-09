@@ -22,8 +22,8 @@ Impulsa Lab es una firma de consultoria digital con sede en Forest Hills, Queens
 ## Diagnostico y herramientas
 
 - [Diagnostico 3D Gratis](https://www.tuimpulsalab.com/diagnostico): Herramienta interactiva gratuita que evalua tu negocio en 3 ejes — Finanzas, Operaciones y Marketing — y genera un plan de accion personalizado.
-- [Hub de Herramientas](https://www.tuimpulsalab.com/herramientas): Acceso a arsenal de 100+ herramientas de IA, agentes inteligentes y noticias del sector tecnologico.
-- [Arsenal de Herramientas IA](https://www.tuimpulsalab.com/herramientas/arsenal): Directorio searchable con mas de 100 herramientas de inteligencia artificial organizadas por categoria.
+- [Hub de Herramientas](https://www.tuimpulsalab.com/herramientas): Acceso a arsenal de 89+ herramientas de IA, agentes inteligentes y noticias del sector tecnologico.
+- [Arsenal de Herramientas IA](https://www.tuimpulsalab.com/herramientas/arsenal): Directorio searchable con 89+ herramientas de inteligencia artificial organizadas por categoria.
 - [Agentes IA](https://www.tuimpulsalab.com/herramientas/agentes): Agentes de inteligencia artificial disponibles para tareas especificas de negocio.
 - [Noticias IA](https://www.tuimpulsalab.com/herramientas/noticias): Feed diario de noticias y actualizaciones del mundo de la inteligencia artificial.
 
