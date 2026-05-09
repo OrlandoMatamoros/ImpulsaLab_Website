@@ -181,8 +181,13 @@ export default function HeroSection() {
 
           {/* COLUMNA DERECHA — DIAGNOSTICO 3D (Lead Magnet) */}
           <div className="flex justify-center mt-8 md:mt-0">
-            <div className="w-full max-w-lg">
-              <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden border-beam border-beam-lg">
+            <div className="relative w-full max-w-lg">
+              {/* Outer ambient glow — Stage 3 SOMATT-style en cyan brand */}
+              <div
+                aria-hidden
+                className="absolute -inset-3 bg-brand-cyan/20 blur-2xl rounded-3xl pointer-events-none"
+              />
+              <div className="relative bg-white rounded-2xl overflow-hidden border-2 border-brand-cyan/40 shadow-[0_0_45px_rgba(0,191,255,0.22)]">
 
                 {/* Badge de urgencia — esquina superior */}
                 <div className="absolute top-4 right-4 z-10">
@@ -216,11 +221,11 @@ export default function HeroSection() {
                   </div>
                 </div>
 
-                {/* Los 3 ejes */}
+                {/* Los 3 ejes — cada uno con su color brand para diferenciar */}
                 <div className="p-6 space-y-4">
-                  {/* Eje Finanzas */}
-                  <div className="flex items-start gap-4 p-3 rounded-lg bg-cyan-50 border border-cyan-100">
-                    <div className="flex-shrink-0 w-10 h-10 bg-brand-cyan/20 rounded-full flex items-center justify-center">
+                  {/* Eje Finanzas — cyan */}
+                  <div className="flex items-start gap-4 p-3.5 rounded-lg bg-cyan-50 border-2 border-cyan-200 shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 bg-brand-cyan/25 rounded-full flex items-center justify-center ring-2 ring-cyan-200/60">
                       <svg className="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                         <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -231,10 +236,10 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Eje Operaciones */}
-                  <div className="flex items-start gap-4 p-3 rounded-lg bg-cyan-50 border border-cyan-100">
-                    <div className="flex-shrink-0 w-10 h-10 bg-brand-cyan/20 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  {/* Eje Operaciones — verde */}
+                  <div className="flex items-start gap-4 p-3.5 rounded-lg bg-emerald-50 border-2 border-emerald-200 shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 bg-emerald-500/20 rounded-full flex items-center justify-center ring-2 ring-emerald-200/60">
+                      <svg className="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                         <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" strokeLinecap="round" strokeLinejoin="round" />
                         <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
@@ -245,10 +250,10 @@ export default function HeroSection() {
                     </div>
                   </div>
 
-                  {/* Eje Marketing */}
-                  <div className="flex items-start gap-4 p-3 rounded-lg bg-cyan-50 border border-cyan-100">
-                    <div className="flex-shrink-0 w-10 h-10 bg-brand-cyan/20 rounded-full flex items-center justify-center">
-                      <svg className="w-5 h-5 text-brand-cyan" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                  {/* Eje Marketing — violet */}
+                  <div className="flex items-start gap-4 p-3.5 rounded-lg bg-purple-50 border-2 border-purple-200 shadow-sm">
+                    <div className="flex-shrink-0 w-10 h-10 bg-purple-500/20 rounded-full flex items-center justify-center ring-2 ring-purple-200/60">
+                      <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
                         <path d="M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>

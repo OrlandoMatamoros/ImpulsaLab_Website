@@ -113,7 +113,7 @@ export default function ToolsHubSection() {
             >
             <Link
               href={tool.href}
-              className={`group relative bg-gradient-to-br ${tool.gradient} p-5 rounded-xl border-2 ${tool.border} transition-all duration-500 hover:scale-105 hover:shadow-xl ${tool.shadow} overflow-hidden block h-full ${index === 1 ? 'border-beam' : ''}`}
+              className={`group relative bg-gradient-to-br ${tool.gradient} p-5 rounded-xl border-2 ${tool.border} transition-all duration-500 hover:scale-105 hover:shadow-xl ${tool.shadow} overflow-hidden block h-full`}
             >
               <div className="absolute top-2 right-2 bg-white text-xs px-2 py-1 rounded-full animate-pulse font-bold">
                 <span className={tool.badgeColor}>{tool.badge}</span>

@@ -422,54 +422,6 @@
 }
 
 /* ============================================================
-   Border Beam — conic trail orbiting a card perimeter.
-   GPU-composited: rotates the pseudo-element via transform: rotate()
-   instead of animating a CSS custom property in conic-gradient
-   (which triggered non-composited paint on every frame).
-   ============================================================ */
-.border-beam {
-  position: relative;
-  isolation: isolate;
-}
-.border-beam.border-beam-lg::before {
-  padding: 4px;
-}
-.border-beam::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  padding: 2px;
-  border-radius: inherit;
-  /* Static conic-gradient at 0deg — element is rotated via transform */
-  background: conic-gradient(
-    from 0deg,
-    transparent 0deg,
-    transparent 300deg,
-    rgba(0, 191, 255, 0.9) 340deg,
-    rgba(0, 191, 255, 1) 355deg,
-    rgba(0, 191, 255, 0.9) 360deg
-  );
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  /* transform: rotate() is GPU-composited (no paint on each frame) */
-  animation: border-beam-rotate 6s linear infinite;
-  will-change: transform;
-  transform-origin: center center;
-  pointer-events: none;
-  z-index: 1;
-}
-@keyframes border-beam-rotate {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-@media (prefers-reduced-motion: reduce) {
-  .border-beam::before { animation: none; }
-}
-
-/* ============================================================
    Breathing Orb — radial blur that pulses. Decorative bg only.
    ============================================================ */
 .breathing-orb {
