@@ -152,7 +152,6 @@ const Footer = () => {
                 <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
                 <div>
                   <span>54 State Street, Ste 804<br />Albany, NY 12207</span>
-                  <span className="block text-xs text-gray-500 mt-0.5">Mail address only</span>
                 </div>
               </div>
             </div>
@@ -220,7 +219,6 @@ const Footer = () => {
               <li><Link href="/nosotros" className="text-gray-300 hover:text-white transition-colors">{t.footer.nosotros}</Link></li>
               <li><Link href="/#equipo" className="text-gray-300 hover:text-white transition-colors">{t.footer.equipo}</Link></li>
               <li><Link href="/carreras" className="text-gray-300 hover:text-white transition-colors">{t.footer.carreras}</Link></li>
-              <li><Link href="/partners" className="text-gray-300 hover:text-white transition-colors">{t.footer.partners}</Link></li>
               <li><Link href="/contacto" className="text-gray-300 hover:text-white transition-colors">{t.nav.contacto}</Link></li>
             </ul>
           </div>

@@ -796,10 +796,10 @@ export default function ConsultoriaIAPymesPage() {
         {/* ── H2.8 ── Quiénes somos */}
         <section className="mb-14">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-            Impulsa Lab: consultoría IA con raíces latinas, desde Forest Hills, NY
+            Impulsa Lab: consultoría IA con raíces latinas, desde Nueva York
           </h2>
           <p className="text-lg text-gray-700 mb-4">
-            Impulsa Lab nació en Forest Hills, Queens, NY — un barrio de inmigrantes donde crecen negocios latinoamericanos que se enfrentan a los mismos desafíos: competencia con cadenas grandes, márgenes ajustados, y procesos operativos que dependen de pocas personas.
+            Impulsa Lab nació trabajando con negocios latinoamericanos en los barrios de inmigrantes de Brooklyn y Queens — emprendimientos que se enfrentan a los mismos desafíos: competencia con cadenas grandes, márgenes ajustados, y procesos operativos que dependen de pocas personas.
           </p>
           <p className="text-lg text-gray-700 mb-4">
             Fundada por Orlando Matamoros, consultor con experiencia en implementaciones de inteligencia de negocio para organizaciones en LATAM y Estados Unidos, Impulsa Lab existe con una misión concreta: democratizar el acceso a herramientas de IA que hasta hace poco solo podían pagar las grandes corporaciones.

@@ -114,10 +114,10 @@ export default function RootLayout({
               },
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: '118-35 Queens Blvd #400',
-                addressLocality: 'Forest Hills',
+                streetAddress: '54 State Street, Ste 804',
+                addressLocality: 'Albany',
                 addressRegion: 'NY',
-                postalCode: '11375',
+                postalCode: '12207',
                 addressCountry: 'US',
               },
               areaServed: ['US', 'LATAM'],

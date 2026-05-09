@@ -601,11 +601,11 @@ export default function Contacto() {
                     <div>
                       <p className="font-medium">{t.contactoPage.direccion}</p>
                       <p className="text-gray-600 text-sm">
-                        118-35 Queens Blvd #400<br />
-                        Forest Hills, NY 11375
+                        54 State Street, Ste 804<br />
+                        Albany, NY 12207
                       </p>
                       <a
-                        href="https://maps.google.com/?q=118-35+Queens+Blvd+400+Forest+Hills+NY+11375"
+                        href="https://maps.google.com/?q=54+State+Street+Ste+804+Albany+NY+12207"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600 hover:underline text-sm mt-1 inline-block"

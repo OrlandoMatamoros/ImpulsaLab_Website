@@ -26,7 +26,7 @@ const faqSchemaItems = [
   {
     question: '¿Qué es Impulsa Lab?',
     answer:
-      'Impulsa Lab es una firma de consultoría de nueva generación con sede en Forest Hills, NY, especializada en democratizar la inteligencia de negocio para pequeñas y medianas empresas (PYMES). Utilizamos inteligencia artificial y análisis de datos para transformar los tres pilares fundamentales de tu negocio: Finanzas, Operaciones y Marketing.',
+      'Impulsa Lab es una firma de consultoría de nueva generación con sede en Albany, NY, especializada en democratizar la inteligencia de negocio para pequeñas y medianas empresas (PYMES). Utilizamos inteligencia artificial y análisis de datos para transformar los tres pilares fundamentales de tu negocio: Finanzas, Operaciones y Marketing.',
   },
   {
     question: '¿Qué es el Diagnóstico 3D?',
