@@ -25,7 +25,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/diagnostico', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/ayuda', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/carreras', priority: 0.5, changeFrequency: 'monthly' as const },
-    { path: '/partners', priority: 0.5, changeFrequency: 'monthly' as const },
     // Servicios
     { path: '/servicios', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/consultoria-ia-para-pymes', priority: 0.9, changeFrequency: 'monthly' as const },
