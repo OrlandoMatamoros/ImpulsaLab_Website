@@ -18,36 +18,14 @@ function getCurrentMonth(lang: string): string {
   return now.toLocaleDateString(lang === 'ES' ? 'es-ES' : 'en-US', { month: 'long', year: 'numeric' })
 }
 
-function TypewriterTitle({ base, accent, delayMs = 300, speedMs = 38 }: { base: string; accent: string; delayMs?: number; speedMs?: number }) {
-  const full = base + accent
-  const [count, setCount] = useState(0)
-  const [done, setDone] = useState(false)
-  const prefersReduced = useReducedMotion()
-
-  useEffect(() => {
-    setCount(0)
-    setDone(false)
-    if (prefersReduced) { setCount(full.length); setDone(true); return }
-    let i = 0
-    let id: ReturnType<typeof setInterval>
-    const start = setTimeout(() => {
-      id = setInterval(() => {
-        i++
-        setCount(i)
-        if (i >= full.length) { clearInterval(id); setDone(true) }
-      }, speedMs)
-    }, delayMs)
-    return () => { clearTimeout(start); if (id) clearInterval(id) }
-  }, [full, delayMs, speedMs, prefersReduced])
-
-  const typedBase = full.slice(0, Math.min(count, base.length))
-  const typedAccent = count > base.length ? full.slice(base.length, count) : ''
-
+// Hero title — texto completo desde SSR para que sea LCP-friendly.
+// El accent mantiene el gradient cyan permanente (sin animación typewriter
+// que hacía Googlebot/Lighthouse medir LCP como progresivo, llegando a 11s+).
+function HeroTitle({ base, accent }: { base: string; accent: string }) {
   return (
     <>
-      <span>{typedBase}</span>
-      <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">{typedAccent}</span>
-      {!done && <span className="inline-block w-[3px] h-[0.85em] align-[-0.05em] ml-1 bg-brand-cyan animate-pulse" aria-hidden />}
+      <span>{base}</span>
+      <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-cyan to-cyan-300">{accent}</span>
     </>
   )
 }
@@ -117,10 +95,11 @@ export default function HeroSection() {
               </span>
             </motion.div>
 
-            {/* Título principal */}
-            <motion.h1 variants={heroItem} className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight min-h-[1.05em]">
-              <TypewriterTitle base={t.hero.titulo} accent={t.hero.tituloAccent} delayMs={500} speedMs={60} />
-            </motion.h1>
+            {/* Título principal — render completo desde SSR sin opacity animation
+                para que sea elegible como LCP element en el primer paint */}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 leading-[1.05] tracking-tight">
+              <HeroTitle base={t.hero.titulo} accent={t.hero.tituloAccent} />
+            </h1>
 
             {/* Subtítulo */}
             <motion.p variants={heroItem} className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
