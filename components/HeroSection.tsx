@@ -283,7 +283,7 @@ export default function HeroSection() {
                     </span>
                   </div>
 
-                  <p className="text-center text-xs text-gray-400">
+                  <p className="text-center text-xs text-gray-600">
                     {t.hero.diagTiempo}
                   </p>
                 </div>

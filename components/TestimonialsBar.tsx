@@ -31,7 +31,7 @@ export default function TestimonialsBar() {
                 <p className="text-lg md:text-xl text-gray-800 italic font-medium mb-3">
                   &ldquo;{item.quote}&rdquo;
                 </p>
-                <div className="flex items-center gap-2 text-sm text-gray-500">
+                <div className="flex items-center gap-2 text-sm text-gray-600">
                   <span className="font-semibold text-gray-700">{item.name}</span>
                   <span>&mdash;</span>
                   <span>{item.business}, {item.location}</span>

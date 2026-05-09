@@ -66,7 +66,7 @@ export default function DiagnosticSection() {
               </p>
             </div>
           </div>
-          <p className="text-sm text-gray-500 mt-6">
+          <p className="text-sm text-gray-600 mt-6">
             {t.diagnostic.ponderacion}
           </p>
           {/* Botón para iniciar diagnóstico */}
