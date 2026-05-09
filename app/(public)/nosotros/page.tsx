@@ -256,23 +256,9 @@ export default function NosotrosPage() {
               {t.nosotrosPage.impactoDesc}
             </p>
 
-            <div className="grid md:grid-cols-4 gap-6">
-              <div className="bg-white rounded-lg p-6 shadow-md">
-                <div className="text-3xl font-bold text-blue-600 mb-2">500+</div>
-                <div className="text-sm text-gray-600">{t.nosotrosPage.empleosCreados}</div>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-md">
-                <div className="text-3xl font-bold text-blue-600 mb-2">$2M+</div>
-                <div className="text-sm text-gray-600">{t.nosotrosPage.ingresosGenerados}</div>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-md">
-                <div className="text-3xl font-bold text-blue-600 mb-2">50+</div>
-                <div className="text-sm text-gray-600">{t.nosotrosPage.negociosTransformados}</div>
-              </div>
-              <div className="bg-white rounded-lg p-6 shadow-md">
-                <div className="text-3xl font-bold text-blue-600 mb-2">95%</div>
-                <div className="text-sm text-gray-600">{t.nosotrosPage.tasaSatisfaccion}</div>
-              </div>
+            <div className="max-w-md mx-auto bg-white rounded-2xl p-10 shadow-lg">
+              <div className="text-6xl md:text-7xl font-bold text-blue-600 mb-3">50+</div>
+              <div className="text-lg text-gray-700 font-medium">{t.nosotrosPage.negociosTransformados}</div>
             </div>
           </div>
         </div>
