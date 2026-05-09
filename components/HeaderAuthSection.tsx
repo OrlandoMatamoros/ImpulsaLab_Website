@@ -1,14 +1,20 @@
 'use client'
 
 // Dynamically imported by Header — keeps Firebase SDK out of the initial
-// public-route bundle. On public routes FirebaseProviders is not mounted,
-// so useAuth() returns the safe-null default (user: null, loading: false).
-// The section renders the Login/Signup buttons in that case.
-import { useAuth } from '@/contexts/FirebaseAuthContext'
+// public-route bundle. Self-contained Firebase Auth listener: works on
+// BOTH (public) and (tools) routes regardless of whether FirebaseProviders
+// context is mounted. Fixes the bug where logging in via /login (in tools)
+// then navigating to / or /diagnostico (in public) would show the user
+// as logged out, even though Firebase still had the session.
+import { useEffect, useState } from 'react'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { isAdminEmail } from '@/lib/admin-emails'
+import { onAuthStateChanged, type User as FirebaseUser } from 'firebase/auth'
+import { doc, getDoc } from 'firebase/firestore'
+import { auth, db } from '@/lib/firebase'
+import { signOutUser } from '@/lib/auth-helper'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -20,8 +26,46 @@ import {
 import { Button } from '@/components/ui/button'
 import { User, LogOut, LayoutDashboard, Shield, UserCog, MessageSquare } from 'lucide-react'
 
+interface AuthAwareUserData {
+  name?: string
+  role?: string
+}
+
+// Self-contained Firebase Auth listener — independent of FirebaseProviders context.
+// Subscribes to onAuthStateChanged on mount, fetches the Firestore user doc for role/name,
+// and exposes a stable shape regardless of which route group we're in.
+function useFirebaseAuthDirect() {
+  const [user, setUser] = useState<FirebaseUser | null>(null)
+  const [userData, setUserData] = useState<AuthAwareUserData | null>(null)
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      setUser(firebaseUser)
+      if (!firebaseUser) {
+        setUserData(null)
+        return
+      }
+      try {
+        const snap = await getDoc(doc(db, 'users', firebaseUser.uid))
+        if (snap.exists()) {
+          const data = snap.data() as AuthAwareUserData
+          setUserData({ name: data.name, role: data.role })
+        } else {
+          setUserData(null)
+        }
+      } catch (err) {
+        console.error('HeaderAuthSection: failed to load user doc', err)
+        setUserData(null)
+      }
+    })
+    return () => unsubscribe()
+  }, [])
+
+  return { user, userData, signOut: signOutUser }
+}
+
 export function HeaderAuthSection() {
-  const { user, userData, signOut } = useAuth()
+  const { user, userData, signOut } = useFirebaseAuthDirect()
   const { t } = useLanguage()
   const router = useRouter()
 
@@ -41,6 +85,9 @@ export function HeaderAuthSection() {
   const handleSignOut = async () => {
     try {
       await signOut()
+      // Clear the auth-token cookie that the FirebaseAuthProvider used to set
+      // (kept here for symmetry — the context is no longer the source of truth).
+      document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       router.push('/')
     } catch (error) {
       console.error('Error al cerrar sesión:', error)
@@ -168,7 +215,7 @@ export function HeaderAuthSectionMobile({
 }: {
   onClose: () => void
 }) {
-  const { user, userData, signOut } = useAuth()
+  const { user, userData, signOut } = useFirebaseAuthDirect()
   const { t } = useLanguage()
   const router = useRouter()
 
@@ -187,6 +234,7 @@ export function HeaderAuthSectionMobile({
   const handleSignOut = async () => {
     try {
       await signOut()
+      document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
       onClose()
       router.push('/')
     } catch (error) {
