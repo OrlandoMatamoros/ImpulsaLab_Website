@@ -259,6 +259,24 @@ export const homeEN = {
         business: "Chocolate Shop",
         location: "Brooklyn, NY",
       },
+      {
+        quote: "They built our complete web application with a services marketplace and Stripe payments. International registrations and director network all in one place.",
+        name: "COERVER Team",
+        business: "Soccer Coaching",
+        location: "Colombia",
+      },
+      {
+        quote: "They deployed an AI WhatsApp agent that responds to families around the clock. Communication with the academy became smooth and automatic.",
+        name: "Cruzeiro Team",
+        business: "Soccer Academy",
+        location: "Brazil",
+      },
+      {
+        quote: "They designed a multi-language international landing page to enter several markets. Polished result, fully aligned with the brand identity.",
+        name: "Golden Touch Team",
+        business: "Premium Services",
+        location: "Singapore",
+      },
     ],
   },
   toolsMarquee: {
