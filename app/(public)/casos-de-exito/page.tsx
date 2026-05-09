@@ -20,31 +20,28 @@ import {
 } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Non-translatable config: icons, emojis, IDs
+// Non-translatable config: icons, IDs. Logos = first letter of each client.
+// 3 real cases: COERVER · Cruzeiro · Golden Touch
 const caseConfig = [
   {
     id: 1,
-    logo: '🍽️',
-    metricIcons: [FaChartLine, FaPercentage, FaUsers, FaClock],
+    logo: '⚽',
+    metricIcons: [FaClock, FaChartLine, FaUsers, FaIndustry],
   },
   {
     id: 2,
-    logo: '💻',
-    metricIcons: [FaDollarSign, FaChartLine, FaUsers, FaClock],
+    logo: '🤖',
+    metricIcons: [FaClock, FaUsers, FaChartLine, FaIndustry],
   },
   {
     id: 3,
-    logo: '💆‍♀️',
-    metricIcons: [FaMapMarkerAlt, FaDollarSign, FaPercentage, FaUsers],
-  },
-  {
-    id: 4,
-    logo: '⚖️',
-    metricIcons: [FaIndustry, FaClock, FaChartLine, FaUsers],
+    logo: '🌐',
+    metricIcons: [FaClock, FaIndustry, FaUsers, FaChartLine],
   },
 ];
 
-const industryIcons = ['🍽️', '💻', '💆‍♀️', '🛍️', '⚖️', '🏗️'];
+// Industry section: 6 sectors. First 3 = real delivered, last 3 = upcoming.
+const industryIcons = ['⚽', '🌐', '🛍️', '🥖', '🍫', '➕'];
 
 export default function CasosDeExito() {
   const { t } = useLanguage();
@@ -99,15 +96,15 @@ export default function CasosDeExito() {
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <span className="font-bold text-2xl">420%</span>
+              <span className="font-bold text-2xl">3</span>
               <p>{tp.roiPromedio}</p>
             </div>
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <span className="font-bold text-2xl">2.5x</span>
+              <span className="font-bold text-2xl">3</span>
               <p>{tp.aumentoVentas}</p>
             </div>
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <span className="font-bold text-2xl">30h</span>
+              <span className="font-bold text-2xl">3 sem</span>
               <p>{tp.horasLiberadas}</p>
             </div>
           </div>
@@ -256,18 +253,18 @@ export default function CasosDeExito() {
             </p>
             <div className="grid md:grid-cols-3 gap-8">
               <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6">
-                <FaDollarSign className="text-4xl text-blue-600 mx-auto mb-3" />
-                <div className="text-4xl font-bold text-gray-900 mb-2">185%</div>
+                <FaClock className="text-4xl text-blue-600 mx-auto mb-3" />
+                <div className="text-4xl font-bold text-gray-900 mb-2">3 sem</div>
                 <p className="text-gray-600">{tp.aumentoRentabilidad}</p>
               </div>
               <div className="bg-gradient-to-br from-green-50 to-blue-50 rounded-xl p-6">
-                <FaClock className="text-4xl text-green-600 mx-auto mb-3" />
-                <div className="text-4xl font-bold text-gray-900 mb-2">32h</div>
+                <FaIndustry className="text-4xl text-green-600 mx-auto mb-3" />
+                <div className="text-4xl font-bold text-gray-900 mb-2">3</div>
                 <p className="text-gray-600">{tp.horasLiberadasSemana}</p>
               </div>
               <div className="bg-gradient-to-br from-slate-50 to-slate-100 rounded-xl p-6">
-                <FaUsers className="text-4xl text-purple-600 mx-auto mb-3" />
-                <div className="text-4xl font-bold text-gray-900 mb-2">2.3x</div>
+                <FaRobot className="text-4xl text-purple-600 mx-auto mb-3" />
+                <div className="text-4xl font-bold text-gray-900 mb-2">Claude+n8n</div>
                 <p className="text-gray-600">{tp.crecimientoClientes}</p>
               </div>
             </div>
