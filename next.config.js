@@ -187,6 +187,16 @@ const nextConfig = {
           },
         ],
       },
+      // favicon.ico — Google lo rastrea como URL y lo reporta en GSC como "rastreada sin indexar"
+      {
+        source: '/favicon.ico',
+        headers: [
+          {
+            key: 'X-Robots-Tag',
+            value: 'noindex, nofollow',
+          },
+        ],
+      },
     ];
   },
   
