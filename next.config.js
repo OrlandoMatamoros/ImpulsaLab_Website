@@ -46,11 +46,9 @@ const nextConfig = {
         destination: '/legal/privacidad',
         permanent: true,
       },
-      {
-        source: '/legal',
-        destination: '/legal/privacidad',
-        permanent: true,
-      },
+      // NOTA: /legal → /legal/privacidad se maneja en middleware.ts con 301 explícito.
+      // Removido de aquí para evitar que Next.js emita 308 (permanent:true genera 308 desde Next.js 13+).
+      // GSC lo marcaba como "Error de redirección" al recibir 308.
       {
         source: '/terms',
         destination: '/legal/terminos',

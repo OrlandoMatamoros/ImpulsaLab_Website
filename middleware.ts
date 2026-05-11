@@ -37,6 +37,15 @@ const roleBasedRoutes: Record<string, string[]> = {
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
+  // /legal → /legal/privacidad con 301 explícito.
+  // next.config.js redirects() genera 308 (permanent:true en Next.js 13+),
+  // lo que GSC marca como "Error de redirección". Middleware emite 301 universal.
+  if (path === '/legal') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/legal/privacidad';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // Slugs de blog eliminados: responder 410 Gone para que Google los desindexe.
   if (DELETED_BLOG_SLUGS.has(path)) {
     return new NextResponse(
