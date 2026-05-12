@@ -1,30 +1,33 @@
+// app/api/verification/send-codes/route.ts
+// F-22 FIX (pentest interno 2026-05-12):
+// Antes: usaba Math.random + Map en memoria (no funciona serverless) + retornaba debugCode en HTTP response.
+// Ahora: crypto.randomInt + persist en Firestore (hashed + expiry) + sin leak en response.
+
 import { NextRequest, NextResponse } from 'next/server';
 import { Resend } from 'resend';
+import { generateSecureCode, saveCode } from '@/lib/verification-helper';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-// Almacenamiento temporal (en producción usar Firestore)
-const codes = new Map<string, string>();
-
-function generateCode(): string {
-  return Math.floor(100000 + Math.random() * 900000).toString();
-}
 
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
-    
-    if (!email) {
+
+    if (!email || typeof email !== 'string' || !email.includes('@')) {
       return NextResponse.json({ error: 'Email requerido' }, { status: 400 });
     }
 
-    const code = generateCode();
-    
-    // Guardar código temporalmente
-    codes.set(email, code);
-    console.log(`Código para ${email}: ${code}`);
+    const code = generateSecureCode();
+    const saveResult = await saveCode(email, code);
 
-    const { data, error } = await resend.emails.send({
+    if (!saveResult.ok) {
+      return NextResponse.json(
+        { error: saveResult.error || 'Error guardando código' },
+        { status: 429 } // rate limit
+      );
+    }
+
+    const { error } = await resend.emails.send({
       from: 'Impulsa Lab <noreply@tuimpulsalab.com>',
       to: email,
       subject: 'Tu código de verificación - Impulsa Lab',
@@ -55,7 +58,7 @@ export async function POST(request: NextRequest) {
               </p>
               <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee;">
                 <p style="color: #999; font-size: 12px; text-align: center;">
-                  ⚠️ <strong>Importante:</strong> Este email puede llegar a tu carpeta de SPAM. 
+                  Importante: Este email puede llegar a tu carpeta de SPAM.
                   Agrega noreply@tuimpulsalab.com a tu lista de contactos.
                 </p>
               </div>
@@ -63,20 +66,18 @@ export async function POST(request: NextRequest) {
           </div>
         </body>
         </html>
-      `
+      `,
     });
 
     if (error) {
       console.error('Error Resend:', error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
+      return NextResponse.json({ error: 'Error enviando email' }, { status: 500 });
     }
 
-    return NextResponse.json({ 
+    return NextResponse.json({
       success: true,
       message: 'Código enviado. Revisa tu email (y carpeta SPAM)',
-      debugCode: code // Solo para testing, quitar en producción
     });
-    
   } catch (error: any) {
     console.error('Error:', error);
     return NextResponse.json({ error: 'Error del servidor' }, { status: 500 });
