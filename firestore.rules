@@ -1,0 +1,102 @@
+// Firestore Security Rules — Impulsa Lab
+// Source of truth: this file. Deploy via Firebase Console → Firestore → Rules,
+// or via firebase CLI: `firebase deploy --only firestore:rules`
+//
+// Last hardening: 2026-05-11 (Pentest Interno Fase 2 — closed 4 critical vectors)
+// See: ~/OneDrive/Impulsa Lab/11_Seguridad/Pentest_Interno_2026/FINDINGS_CONFIG_FASE2.md
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ============== HELPERS ==============
+    function isAuthed() {
+      return request.auth != null;
+    }
+    function isOwner(userId) {
+      return isAuthed() && request.auth.uid == userId;
+    }
+    function isAdminClaim() {
+      // Preferred: custom claim (set via adminAuth.setCustomUserClaims)
+      return isAuthed() && request.auth.token.role == 'admin';
+    }
+    function isAdminFirestore() {
+      // Fallback: Firestore role field (compat with users without custom claim)
+      return isAuthed() &&
+        exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+    function isAdmin() {
+      return isAdminClaim() || isAdminFirestore();
+    }
+    function isConsultant() {
+      return isAuthed() && (
+        request.auth.token.role == 'consultant' ||
+        (exists(/databases/$(database)/documents/users/$(request.auth.uid)) &&
+         get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'consultant')
+      );
+    }
+
+    // ============== USERS ==============
+    match /users/{userId} {
+      // Read: owner + consultant + admin
+      allow read: if isOwner(userId) || isConsultant() || isAdmin();
+
+      // Create: only owner with limited role (NEVER self-promote to admin)
+      allow create: if isOwner(userId)
+        && request.resource.data.role in ['registered', 'free', 'consultant'];
+
+      // Update: admin can do everything; owner can update own data BUT NOT role
+      allow update: if isAdmin() || (
+        isOwner(userId) &&
+        request.resource.data.role == resource.data.role
+      );
+
+      // Delete: only admin
+      allow delete: if isAdmin();
+    }
+
+    // ============== VERIFICATION_CODES ==============
+    // 100% deny from client. Legitimate flow uses API route + Admin SDK.
+    match /verification_codes/{codeId} {
+      allow read, write: if false;
+    }
+
+    // ============== CHAT-SESSIONS ==============
+    // Chatbot writes via API route (Admin SDK bypasses rules). Admin can read.
+    match /chat-sessions/{sessionId} {
+      allow read: if isAdmin();
+      allow write: if false;
+      match /events/{eventId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+      match /messages/{messageId} {
+        allow read: if isAdmin();
+        allow write: if false;
+      }
+    }
+
+    // ============== CONSULTANT CODES ==============
+    match /consultantCodes/{codeId} {
+      allow read: if isAuthed();
+      allow update: if isAuthed() &&
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['isActive', 'usedBy', 'usedAt']);
+      allow create, delete: if isAdmin();
+    }
+
+    // ============== DIAGNOSTICS ==============
+    match /diagnostics/{diagnosticId} {
+      allow read: if isOwner(resource.data.userId) || isConsultant() || isAdmin();
+      allow create: if isAuthed() && request.auth.uid == request.resource.data.userId;
+      allow update: if isOwner(resource.data.userId);
+      allow delete: if isOwner(resource.data.userId) || isAdmin();
+    }
+
+    // ============== DENY ALL (catch-all) ==============
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
