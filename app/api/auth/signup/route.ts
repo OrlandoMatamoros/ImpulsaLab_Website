@@ -20,25 +20,37 @@ export async function POST(request: NextRequest) {
     }
 
     // Determinar rol basado en código de consultor
+    // F-21 FIX (pentest interno 2026-05-12): validar contra Firestore en lugar de array
+    // hardcoded en repo público. Los códigos válidos viven en consultantCodes/{code}
+    // con campo isActive=true. Marcar como inactivo tras uso para prevenir reutilización.
     let role = 'free';
+    let codeDocRef = null;
     if (consultantCode) {
-      const validCodes = [
-        'ALEX2025',
-        'CONS-2024-001', 
-        'DIEGO2025',
-        'IMP-STAFF-001',
-        'KATTY2025'
-      ];
-      
-      if (validCodes.includes(consultantCode)) {
+      try {
+        codeDocRef = adminDb.collection('consultantCodes').doc(consultantCode);
+        const codeDoc = await codeDocRef.get();
+
+        if (!codeDoc.exists) {
+          return NextResponse.json(
+            { success: false, error: 'Código de consultor inválido' },
+            { status: 400 }
+          );
+        }
+
+        const codeData = codeDoc.data();
+        if (!codeData?.isActive) {
+          return NextResponse.json(
+            { success: false, error: 'Código de consultor ya usado o inactivo' },
+            { status: 400 }
+          );
+        }
+
         role = 'consultant';
-      } else {
+      } catch (codeErr) {
+        console.error('Error verifying consultant code:', codeErr);
         return NextResponse.json(
-          { 
-            success: false, 
-            error: 'Código de consultor inválido' 
-          },
-          { status: 400 }
+          { success: false, error: 'Error verificando código de consultor' },
+          { status: 500 }
         );
       }
     }
@@ -69,8 +81,32 @@ export async function POST(request: NextRequest) {
 
       console.log('✅ Usuario guardado en Firestore con rol:', role);
 
-      // Crear custom token para auto-login
-      const customToken = await adminAuth.createCustomToken(userRecord.uid);
+      // F-21 FIX: marcar consultantCode como usado tras signup exitoso
+      // (previene reutilización del mismo código por múltiples users)
+      if (role === 'consultant' && codeDocRef) {
+        try {
+          await codeDocRef.update({
+            isActive: false,
+            usedBy: userRecord.uid,
+            usedAt: new Date()
+          });
+          console.log('✅ Consultant code marcado como usado');
+        } catch (updateErr) {
+          // No abortar el signup si el update del código falla; logear y continuar
+          console.error('⚠️ Error marcando consultantCode como usado:', updateErr);
+        }
+      }
+
+      // F-21 FIX: setear custom claim para role (fortifica rules nuevas con
+      // isAdminClaim() / request.auth.token.role como primary check)
+      try {
+        await adminAuth.setCustomUserClaims(userRecord.uid, { role });
+      } catch (claimErr) {
+        console.error('⚠️ Error seteando custom claim:', claimErr);
+      }
+
+      // Crear custom token para auto-login (incluye custom claim)
+      const customToken = await adminAuth.createCustomToken(userRecord.uid, { role });
 
       return NextResponse.json({
         success: true,
