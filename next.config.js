@@ -8,9 +8,11 @@ const nextConfig = {
     optimizePackageImports: ['react-icons', 'lucide-react', 'framer-motion'],
   },
 
-  // Eliminar console.* en producción para reducir bundle y evitar info leakage
+  // Eliminar console.log/info en producción para reducir bundle.
+  // Preservar console.warn y console.error — útiles para diagnostics post-deploy
+  // (App Check, Firebase init, etc.) sin recompilar para debugging.
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['warn', 'error'] } : false,
   },
   
   // Redirects para SEO - evitar 404s en URLs antiguas o mal escritas
