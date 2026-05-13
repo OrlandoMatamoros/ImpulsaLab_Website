@@ -28,7 +28,7 @@ if (missingFields.length > 0) {
 let app: FirebaseApp;
 try {
   app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-  console.log('✅ Firebase initialized successfully');
+  console.warn('[Firebase] initialized successfully (project: ' + firebaseConfig.projectId + ')');
 } catch (error) {
   console.error('❌ Firebase initialization error:', error);
   // Throw error para que la app no continúe sin Firebase
@@ -71,7 +71,7 @@ if (typeof window !== 'undefined') {
         provider: new ReCaptchaEnterpriseProvider(siteKey),
         isTokenAutoRefreshEnabled: true,
       });
-      console.log('✅ Firebase App Check initialized');
+      console.warn('[App Check] Firebase App Check initialized with Enterprise provider');
     } catch (err) {
       console.warn('⚠️ App Check initialization failed (non-blocking):', err);
     }
