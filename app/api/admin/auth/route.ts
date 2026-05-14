@@ -4,14 +4,9 @@ import bcrypt from 'bcryptjs';
 import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 
-// La contraseña está segura en el backend
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '';
+// Hash bcrypt precomputado del password admin — vive ya hasheado en env
+const ADMIN_PASSWORD_HASH = process.env.ADMIN_PASSWORD_HASH || '';
 const JWT_SECRET = process.env.JWT_SECRET || 'default-secret';
-
-// Hash de la contraseña
-const ADMIN_PASSWORD_HASH = ADMIN_PASSWORD 
-  ? bcrypt.hashSync(ADMIN_PASSWORD, 10)
-  : '';
 
 export async function POST(req: NextRequest) {
   try {
