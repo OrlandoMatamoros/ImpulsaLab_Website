@@ -587,6 +587,20 @@
 }
 
 /* ============================================================
+   Mascot V15 — animación ondulación sutil (float).
+   Simula mantarraya nadando. Respeta prefers-reduced-motion abajo.
+   ============================================================ */
+@keyframes mascot-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-6px) rotate(-1deg); }
+}
+.mascot-float {
+  animation: mascot-float 5s ease-in-out infinite;
+  transform-origin: center;
+  will-change: transform;
+}
+
+/* ============================================================
    Universal prefers-reduced-motion catch-all.
    Catches any animation not explicitly handled above.
    Applies 0.01ms duration (effectively instant) so JS animation

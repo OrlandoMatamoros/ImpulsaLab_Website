@@ -7,6 +7,7 @@ import dynamic from 'next/dynamic'
 import { COMPANY_INFO, IMAGES } from '@/lib/constants'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { ChevronDown } from 'lucide-react'
+import MascotV15 from '@/components/MascotV15'
 
 // Dynamically imported to keep Firebase SDK (~127 KB) out of the public bundle.
 // These components import useAuth → FirebaseAuthContext → firebase/auth + firebase/firestore.
@@ -259,14 +260,22 @@ export default function Header() {
       <header className="bg-white shadow-md fixed w-full top-0 z-50">
         <div className="container mx-auto px-4 2xl:px-6 py-3 max-w-[1600px]">
           <div className="flex justify-between items-center gap-2">
-            {/* Logo */}
-            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0">
+            {/* Logo: mascota V15 + isotipo + wordmark */}
+            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0" aria-label={COMPANY_INFO.name}>
+              <MascotV15
+                size={32}
+                variant="default"
+                expression="neutral"
+                className="w-7 h-7 md:w-8 md:h-8 2xl:w-9 2xl:h-9 mr-2"
+                ariaLabel=""
+              />
               <Image
                 src={IMAGES.isotipo}
-                alt={COMPANY_INFO.name}
+                alt=""
                 width={40}
                 height={40}
                 className="w-9 h-9 md:w-10 md:h-10 2xl:w-11 2xl:h-11 mr-2"
+                aria-hidden="true"
               />
               <div className="flex items-baseline">
                 <span className="text-lg md:text-xl 2xl:text-2xl font-bold text-brand-navy tracking-tight">

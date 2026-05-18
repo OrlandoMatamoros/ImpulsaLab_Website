@@ -6,6 +6,7 @@ import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useMagnetic } from '@/lib/hooks/useMagnetic'
 import HeroSpotlightGrid from '@/components/HeroSpotlightGrid'
+import MascotV15 from '@/components/MascotV15'
 
 function getMonthlySlots(): number {
   const now = new Date()
@@ -87,6 +88,21 @@ export default function HeroSection() {
             initial="hidden"
             animate="visible"
           >
+            {/* Mascota V15 flotante — identidad visual de marca */}
+            <motion.div variants={heroItem} className="mb-4 flex items-center gap-3">
+              <MascotV15
+                size={56}
+                variant="dark"
+                expression="neutral"
+                animate
+                ariaLabel="Mascota Impulsa Lab"
+                className="flex-shrink-0 drop-shadow-[0_0_20px_rgba(0,191,255,0.4)]"
+              />
+              <span className="text-xs md:text-sm text-cyan-200 uppercase tracking-[0.2em] font-semibold">
+                Impulsa Lab
+              </span>
+            </motion.div>
+
             {/* Badge */}
             <motion.div variants={heroItem} className="mb-6">
               <span className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-blue-200 border border-white/20">
