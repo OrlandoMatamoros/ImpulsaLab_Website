@@ -37,12 +37,26 @@ const roleBasedRoutes: Record<string, string[]> = {
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
 
-  // /legal → /legal/privacidad con 301 explícito.
+  // Redirects 301 explícitos.
   // next.config.js redirects() genera 308 (permanent:true en Next.js 13+),
   // lo que GSC marca como "Error de redirección". Middleware emite 301 universal.
   if (path === '/legal') {
     const url = request.nextUrl.clone();
     url.pathname = '/legal/privacidad';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // /partners → /casos-de-exito (slug legacy, renombrado 2026-05)
+  if (path === '/partners') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/casos-de-exito';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // /noticias → /herramientas/noticias (ruta movida a sección herramientas)
+  if (path === '/noticias') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/herramientas/noticias';
     return NextResponse.redirect(url, { status: 301 });
   }
 
