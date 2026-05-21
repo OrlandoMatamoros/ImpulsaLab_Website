@@ -599,19 +599,11 @@ export default function Contacto() {
                   <div className="flex items-start gap-3">
                     <FaMapMarkerAlt className="text-blue-600 mt-1 flex-shrink-0" />
                     <div>
-                      <p className="font-medium">{t.contactoPage.direccion}</p>
-                      <p className="text-gray-600 text-sm">
-                        54 State Street, Ste 804<br />
-                        Albany, NY 12207
+                      <p className="font-medium">Área de servicio: Nueva York (NYC y alrededores)</p>
+                      <p className="text-xs text-gray-500 mt-1 leading-snug">
+                        Domicilio legal y de correspondencia:<br />
+                        54 State Street, Ste 804, Albany, NY 12207
                       </p>
-                      <a
-                        href="https://maps.google.com/?q=54+State+Street+Ste+804+Albany+NY+12207"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:underline text-sm mt-1 inline-block"
-                      >
-                        {t.contactoPage.verGoogleMaps} &rarr;
-                      </a>
                     </div>
                   </div>
                   
