@@ -114,13 +114,14 @@ export default function RootLayout({
               },
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: '54 State Street, Ste 804',
-                addressLocality: 'Albany',
+                addressLocality: 'New York',
                 addressRegion: 'NY',
-                postalCode: '12207',
                 addressCountry: 'US',
               },
-              areaServed: ['US', 'LATAM'],
+              areaServed: [
+                { '@type': 'City', name: 'New York City' },
+                { '@type': 'Country', name: 'US' },
+              ],
               knowsLanguage: ['es', 'en'],
               contactPoint: {
                 '@type': 'ContactPoint',
@@ -151,6 +152,38 @@ export default function RootLayout({
                 'Transformación digital empresarial con IA para PYMEs',
               publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
               inLanguage: 'es-ES',
+            }),
+          }}
+        />
+
+        {/* JSON-LD LocalBusiness (Service Area Business) — no street address per SAB guidelines */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'LocalBusiness',
+              '@id': 'https://www.tuimpulsalab.com/#localbusiness',
+              name: 'Impulsa Lab',
+              url: 'https://www.tuimpulsalab.com',
+              telephone: '+1-347-450-9281',
+              email: 'contacto@tuimpulsalab.com',
+              address: {
+                '@type': 'PostalAddress',
+                addressLocality: 'New York',
+                addressRegion: 'NY',
+                addressCountry: 'US',
+              },
+              areaServed: [
+                { '@type': 'City', name: 'New York City' },
+                { '@type': 'Country', name: 'US' },
+              ],
+              priceRange: '$$',
+              sameAs: [
+                'https://www.linkedin.com/company/impulsa-lab',
+                'https://www.facebook.com/Tuimpulsalab',
+                'https://www.instagram.com/tuimpulsalabny/',
+              ],
             }),
           }}
         />
