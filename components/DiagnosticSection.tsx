@@ -96,7 +96,7 @@ export default function DiagnosticSection() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeX}</h3>
-                <h4 className="text-lg font-medium mb-3 text-cyan-700">{t.diagnostic.ejeXTitulo}</h4>
+                <h3 className="text-lg font-medium mb-3 text-cyan-700">{t.diagnostic.ejeXTitulo}</h3>
                 <p className="text-gray-600">
                   {t.diagnostic.ejeXDesc}
                 </p>
@@ -125,7 +125,7 @@ export default function DiagnosticSection() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeY}</h3>
-                <h4 className="text-lg font-medium mb-3 text-emerald-600">{t.diagnostic.ejeYTitulo}</h4>
+                <h3 className="text-lg font-medium mb-3 text-emerald-600">{t.diagnostic.ejeYTitulo}</h3>
                 <p className="text-gray-600">
                   {t.diagnostic.ejeYDesc}
                 </p>
@@ -152,7 +152,7 @@ export default function DiagnosticSection() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold mb-2 text-gray-900">{t.diagnostic.ejeZ}</h3>
-                <h4 className="text-lg font-medium mb-3 text-purple-600">{t.diagnostic.ejeZTitulo}</h4>
+                <h3 className="text-lg font-medium mb-3 text-purple-600">{t.diagnostic.ejeZTitulo}</h3>
                 <p className="text-gray-600">
                   {t.diagnostic.ejeZDesc}
                 </p>
