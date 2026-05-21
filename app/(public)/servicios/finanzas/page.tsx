@@ -110,7 +110,7 @@ export default function FinanzasPage() {
               <span className="flex-shrink-0 w-8 h-8 bg-green-100 rounded-full flex items-center justify-center text-green-600 font-bold text-sm">✓</span>
               <p className="text-sm text-gray-800 font-medium">&ldquo;{t.finanzasPage.beforeAfter.after}&rdquo;</p>
             </div>
-            <span className="text-xs text-gray-400 whitespace-nowrap">— {t.finanzasPage.beforeAfter.name}, {t.finanzasPage.beforeAfter.business}</span>
+            <span className="text-xs text-gray-600 whitespace-nowrap">— {t.finanzasPage.beforeAfter.name}, {t.finanzasPage.beforeAfter.business}</span>
           </div>
         </div>
       </div>

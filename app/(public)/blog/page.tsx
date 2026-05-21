@@ -97,7 +97,7 @@ export default async function BlogPage() {
             <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
               {t.breadcrumbHome}
             </Link>
-            <span className="mx-2 text-gray-400">/</span>
+            <span className="mx-2 text-gray-500" aria-hidden="true">/</span>
             <span className="text-gray-900 font-medium">{t.breadcrumbBlog}</span>
           </nav>
         </div>

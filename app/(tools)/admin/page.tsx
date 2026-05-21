@@ -400,10 +400,14 @@ export default function AdminDashboard() {
                     >
                       <div className="flex items-start justify-between">
                         <div className="flex items-start gap-3">
-                          <button className="mt-1">
-                            {expandedSession === session.id 
-                              ? <ChevronDown className="w-4 h-4 text-gray-500" />
-                              : <ChevronRight className="w-4 h-4 text-gray-500" />
+                          <button
+                            className="mt-1"
+                            aria-label={expandedSession === session.id ? "Colapsar sesión" : "Expandir sesión"}
+                            aria-expanded={expandedSession === session.id}
+                          >
+                            {expandedSession === session.id
+                              ? <ChevronDown className="w-4 h-4 text-gray-500" aria-hidden="true" />
+                              : <ChevronRight className="w-4 h-4 text-gray-500" aria-hidden="true" />
                             }
                           </button>
                           <div>

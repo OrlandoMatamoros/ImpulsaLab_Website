@@ -216,8 +216,8 @@ export default function ConsultantDashboard() {
                 <span className="text-sm text-gray-500">
                   {tp.codigo} <span className="font-mono font-bold">{consultantData.consultantCode || 'N/A'}</span>
                 </span>
-                <button className="p-2 rounded-lg hover:bg-gray-100">
-                  <Target className="h-6 w-6 text-gray-600" />
+                <button className="p-2 rounded-lg hover:bg-gray-100" aria-label="Ver métricas de rendimiento">
+                  <Target className="h-6 w-6 text-gray-600" aria-hidden="true" />
                 </button>
               </div>
             </div>
@@ -340,7 +340,7 @@ export default function ConsultantDashboard() {
                             </div>
                           </div>
                         ) : (
-                          <span className="text-sm text-gray-400">-</span>
+                          <span className="text-sm text-gray-500" aria-hidden="true">-</span>
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
@@ -348,8 +348,8 @@ export default function ConsultantDashboard() {
                           {tp.ver}
                         </button>
                         {diagnostic.status === 'completed' && (
-                          <button className="text-green-600 hover:text-green-900">
-                            <Download className="h-4 w-4 inline" />
+                          <button className="text-green-600 hover:text-green-900" aria-label="Descargar diagnóstico">
+                            <Download className="h-4 w-4 inline" aria-hidden="true" />
                           </button>
                         )}
                       </td>
@@ -392,7 +392,7 @@ export default function ConsultantDashboard() {
             <div className="space-y-3">
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center">
-                  <Clock className="h-5 w-5 text-gray-400 mr-3" />
+                  <Clock className="h-5 w-5 text-gray-400 mr-3" aria-hidden="true" />
                   <div>
                     <p className="text-sm font-medium text-gray-900">Ana Martínez</p>
                     <p className="text-xs text-gray-500">{tp.hoy3PM}</p>
@@ -402,13 +402,13 @@ export default function ConsultantDashboard() {
               </div>
               <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div className="flex items-center">
-                  <Clock className="h-5 w-5 text-gray-400 mr-3" />
+                  <Clock className="h-5 w-5 text-gray-400 mr-3" aria-hidden="true" />
                   <div>
                     <p className="text-sm font-medium text-gray-900">Roberto Silva</p>
                     <p className="text-xs text-gray-500">{tp.manana10AM}</p>
                   </div>
                 </div>
-                <XCircle className="h-5 w-5 text-gray-400" />
+                <XCircle className="h-5 w-5 text-gray-400" aria-hidden="true" />
               </div>
             </div>
           </div>

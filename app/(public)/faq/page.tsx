@@ -122,7 +122,7 @@ export default function FAQ() {
             <Link href="/" className="text-gray-500 hover:text-gray-700 transition-colors">
               {t.common.inicio}
             </Link>
-            <span className="mx-2 text-gray-400">/</span>
+            <span className="mx-2 text-gray-500" aria-hidden="true">/</span>
             <span className="text-gray-900 font-medium">{t.faqPage.breadcrumb}</span>
           </nav>
         </div>

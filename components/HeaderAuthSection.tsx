@@ -189,7 +189,7 @@ export function HeaderAuthSection() {
               <p className="text-xs text-gray-500 truncate">{user.email}</p>
             )}
             {userData?.role && (
-              <span className="text-xs text-gray-400">
+              <span className="text-xs text-gray-600">
                 {userData.role === 'admin' ? 'Administrador' :
                   userData.role === 'consultant' ? 'Consultor' :
                   userData.role === 'premium' ? 'Premium' :

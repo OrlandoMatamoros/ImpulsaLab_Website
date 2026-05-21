@@ -245,7 +245,7 @@ export default function MentoriaPersonalizadaPage() {
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-gray-100">
                 <div className="text-center">
                   <div className="text-sm text-gray-600 mb-2">{mp.valorMercado}</div>
-                  <div className="text-3xl font-bold text-gray-400 line-through mb-2">
+                  <div className="text-3xl font-bold text-gray-500 line-through mb-2">
                     ${currentPrice * 2}+
                   </div>
                   <div className="text-sm text-emerald-600 font-semibold mb-4">

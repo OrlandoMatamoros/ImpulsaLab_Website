@@ -288,7 +288,7 @@ export function InitialLeadCapture({ onComplete }: InitialLeadCaptureProps) {
             {/* Teléfono (Opcional) */}
             <div className="space-y-2">
               <label className="block text-sm font-semibold text-gray-700">
-                {tp.labelTelefono} <span className="text-gray-400 font-normal">{tp.telefonoOpcional}</span>
+                {tp.labelTelefono} <span className="text-gray-600 font-normal">{tp.telefonoOpcional}</span>
               </label>
               <input
                 type="tel"

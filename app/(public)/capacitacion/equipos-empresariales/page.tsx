@@ -337,7 +337,7 @@ export default function EquiposEmpresarialesPage() {
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-gray-100">
                 <div className="text-center">
                   <div className="text-sm text-gray-600 mb-2">{ep.valorMercado}</div>
-                  <div className="text-3xl font-bold text-gray-400 line-through mb-2">
+                  <div className="text-3xl font-bold text-gray-500 line-through mb-2">
                     ${(currentPrice * 2) + (additionalPeople * 118)}+
                   </div>
                   <div className="text-sm text-emerald-600 font-semibold mb-4">
@@ -351,7 +351,7 @@ export default function EquiposEmpresarialesPage() {
                         <span className="text-gray-700">
                           {ep.tierBase} <span className="font-bold">${currentPrice}</span>
                         </span>
-                        <span className="text-gray-400">+</span>
+                        <span className="text-gray-600" aria-hidden="true">+</span>
                         <span className="text-gray-700">
                           {additionalPeople} {ep.personasAdicionalesLabel}{additionalPeople > 1 ? '' : ''}: <span className="font-bold">${additionalPeople * 59}</span>
                         </span>
