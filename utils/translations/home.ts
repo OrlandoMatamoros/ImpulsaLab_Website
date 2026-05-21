@@ -3,6 +3,8 @@ export const homeES = {
   nav: {
     diagnostico: "Diagnostico 3D",
     herramientas: "Herramientas",
+    servicios: "Servicios",
+    verTodosServicios: "Ver todos los servicios",
     finanzas: "Finanzas",
     operaciones: "Operaciones",
     marketing: "Marketing",
@@ -288,6 +290,8 @@ export const homeEN = {
   nav: {
     diagnostico: "3D Diagnostic",
     herramientas: "Tools",
+    servicios: "Services",
+    verTodosServicios: "View all services",
     finanzas: "Finance",
     operaciones: "Operations",
     marketing: "Marketing",

@@ -4,6 +4,8 @@ export const homeEN = {
   nav: {
     diagnostico: "3D Diagnostic",
     herramientas: "Tools",
+    servicios: "Services",
+    verTodosServicios: "View all services",
     finanzas: "Finance",
     operaciones: "Operations",
     marketing: "Marketing",

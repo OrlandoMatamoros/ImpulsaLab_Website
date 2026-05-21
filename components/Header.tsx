@@ -216,6 +216,22 @@ export default function Header() {
           color: #5b21b6;
         }
 
+        .dropdown-section-label {
+          padding: 8px 16px 4px;
+          font-size: 11px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: 0.08em;
+          color: #9ca3af;
+          border-top: 1px solid #f3f4f6;
+          margin-top: 4px;
+        }
+
+        .dropdown-section-label:first-of-type {
+          border-top: none;
+          margin-top: 0;
+        }
+
         /* Nav link styling */
         .nav-link {
           position: relative;
@@ -310,14 +326,18 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Finanzas dropdown */}
+                {/* Servicios dropdown — agrupa Finanzas, Operaciones y Marketing */}
                 <div className="nav-dropdown">
-                  <Link href="/servicios/finanzas" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
-                    {t.nav.finanzas}
+                  <Link href="/servicios" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
+                    {t.nav.servicios}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
-                  <div className="nav-dropdown-menu">
-                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all">
+                  <div className="nav-dropdown-menu" style={{ minWidth: '270px' }}>
+                    <Link href="/servicios" className="dropdown-item dropdown-item-all">
+                      {t.nav.verTodosServicios} →
+                    </Link>
+                    <div className="dropdown-section-label">{t.nav.finanzas}</div>
+                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all" style={{ fontWeight: 400, borderBottom: 'none', marginBottom: 0 }}>
                       {t.nav.vistaGeneral}
                     </Link>
                     <Link href="https://nova.tuimpulsalab.com" target="_blank" rel="noopener noreferrer" className="dropdown-item dropdown-item-nova">
@@ -331,32 +351,14 @@ export default function Header() {
                     <Link href="/servicios/finanzas#precios" className="dropdown-item dropdown-item-nova">
                       {t.nav.planesPrecios}
                     </Link>
-                  </div>
-                </div>
-
-                {/* Operaciones dropdown */}
-                <div className="nav-dropdown">
-                  <Link href="/servicios/operaciones" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
-                    {t.nav.operaciones}
-                    <ChevronDown className="w-3 h-3 opacity-50" />
-                  </Link>
-                  <div className="nav-dropdown-menu">
-                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
+                    <div className="dropdown-section-label">{t.nav.operaciones}</div>
+                    <Link href="/servicios/operaciones" className="dropdown-item" style={{ fontWeight: 400 }}>{t.nav.vistaGeneral}</Link>
                     <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
                     <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
                     <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
                     <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
-                  </div>
-                </div>
-
-                {/* Marketing dropdown */}
-                <div className="nav-dropdown">
-                  <Link href="/servicios/marketing" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
-                    {t.nav.marketing}
-                    <ChevronDown className="w-3 h-3 opacity-50" />
-                  </Link>
-                  <div className="nav-dropdown-menu">
-                    <Link href="/servicios/marketing" className="dropdown-item dropdown-item-all">{t.nav.vistaGeneral}</Link>
+                    <div className="dropdown-section-label">{t.nav.marketing}</div>
+                    <Link href="/servicios/marketing" className="dropdown-item" style={{ fontWeight: 400 }}>{t.nav.vistaGeneral}</Link>
                     <Link href="/servicios/marketing#arsenal-ia" className="dropdown-item dropdown-item-prompt">{t.nav.arsenalIA}</Link>
                     <Link href="/servicios/marketing#precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
                   </div>
@@ -511,9 +513,19 @@ export default function Header() {
                 )}
               </div>
 
+              {/* Servicios — link a /servicios (paraguas) */}
+              <Link
+                href="/servicios"
+                className="block text-brand-navy font-semibold hover:text-brand-cyan py-3 text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.verTodosServicios} →
+              </Link>
+
+              {/* Finanzas móvil */}
               <Link
                 href="/servicios/finanzas"
-                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3 pl-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 {t.nav.finanzas}

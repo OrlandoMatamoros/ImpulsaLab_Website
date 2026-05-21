@@ -5,6 +5,8 @@ export const homeES = {
   nav: {
     diagnostico: "Diagnostico 3D",
     herramientas: "Herramientas",
+    servicios: "Servicios",
+    verTodosServicios: "Ver todos los servicios",
     finanzas: "Finanzas",
     operaciones: "Operaciones",
     marketing: "Marketing",
