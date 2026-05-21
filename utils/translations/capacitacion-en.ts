@@ -7,7 +7,7 @@ export const capacitacionEN = {
     heroAccent: "It will make them 3x more productive",
     heroDesc: "And that translates directly into",
     heroDescBold: "more money",
-    heroDesc2: "for your business. Practical AI training with immediate results.",
+    heroDesc2: "for your business. Our AI courses deliver results from day one.",
     statDuracion: "Flexible duration",
     statPractico: "Practical",
     statPresencial: "In-person",

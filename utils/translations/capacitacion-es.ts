@@ -8,7 +8,7 @@ export const capacitacionES = {
     heroAccent: "Los hara 3x mas productivos",
     heroDesc: "Y eso se traduce directamente en",
     heroDescBold: "mas dinero",
-    heroDesc2: "para tu negocio. Capacitacion practica en IA con resultados inmediatos.",
+    heroDesc2: "para tu negocio. Nuestros cursos de inteligencia artificial te dan resultados desde el primer dia.",
     statDuracion: "Duracion flexible",
     statPractico: "Practico",
     statPresencial: "Presencial",

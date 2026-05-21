@@ -333,6 +333,9 @@ export default function Header() {
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu" style={{ minWidth: '270px' }}>
+                    <Link href="/servicios/consultoria-ia-para-pymes" className="dropdown-item dropdown-item-agentes" style={{ fontWeight: 600 }}>
+                      {t.nav.consultoriaIA}
+                    </Link>
                     <Link href="/servicios" className="dropdown-item dropdown-item-all">
                       {t.nav.verTodosServicios} →
                     </Link>
@@ -514,6 +517,13 @@ export default function Header() {
               </div>
 
               {/* Servicios — link a /servicios (paraguas) */}
+              <Link
+                href="/servicios/consultoria-ia-para-pymes"
+                className="block text-gray-700 font-semibold hover:text-brand-navy py-3 pl-2 text-sm"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {t.nav.consultoriaIA}
+              </Link>
               <Link
                 href="/servicios"
                 className="block text-brand-navy font-semibold hover:text-brand-cyan py-3 text-sm"

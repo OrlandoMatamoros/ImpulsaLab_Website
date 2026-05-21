@@ -1,21 +1,21 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Capacitacion en IA para tu Equipo NYC — Impulsa Academy',
-  description: 'Talleres presenciales en NYC (2-12h) para equipos y mentoria 1-a-1. Aprende IA y automatizacion aplicada a tu negocio. Consulta gratuita disponible. Desde $300.',
-  keywords: 'capacitación en IA, mentoría tecnológica, formación digital, automatización empresarial, transformación digital',
+  title: 'Cursos de IA y Capacitación para Equipos NYC — Impulsa Lab',
+  description: 'Cursos de inteligencia artificial y talleres presenciales en NYC para equipos y mentoría 1-a-1. Aprende IA aplicada a tu negocio con resultados inmediatos. Consulta gratuita. Desde $300.',
+  keywords: 'cursos de IA, cursos de inteligencia artificial, capacitación en IA, mentoría tecnológica, formación digital, automatización empresarial, NYC',
   alternates: { canonical: 'https://www.tuimpulsalab.com/capacitacion' },
   openGraph: {
-    title: 'Capacitacion en IA para tu Equipo NYC — Impulsa Academy',
-    description: 'Talleres presenciales en NYC (2-12h) para equipos y mentoria 1-a-1. Aprende IA y automatizacion aplicada a tu negocio. Consulta gratuita disponible. Desde $300.',
+    title: 'Cursos de IA y Capacitación para Equipos NYC — Impulsa Lab',
+    description: 'Cursos de inteligencia artificial y talleres presenciales en NYC para equipos y mentoría 1-a-1. Aprende IA aplicada a tu negocio con resultados inmediatos. Consulta gratuita. Desde $300.',
     url: 'https://www.tuimpulsalab.com/capacitacion',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Academy - Capacitación en IA' }],
+    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Academy - Cursos de IA NYC' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Capacitacion en IA para tu Equipo NYC — Impulsa Academy',
-    description: 'Talleres presenciales en NYC (2-12h) para equipos y mentoria 1-a-1. Aprende IA y automatizacion aplicada a tu negocio. Consulta gratuita disponible. Desde $300.',
+    title: 'Cursos de IA y Capacitación para Equipos NYC — Impulsa Lab',
+    description: 'Cursos de inteligencia artificial y talleres presenciales en NYC para equipos y mentoría 1-a-1. Aprende IA aplicada a tu negocio con resultados inmediatos. Consulta gratuita. Desde $300.',
     images: ['/images/og-image.jpg'],
   },
 }

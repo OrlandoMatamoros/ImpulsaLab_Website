@@ -39,6 +39,7 @@ export const homeEN = {
     juntaEstrategica: "Strategic Board",
     facturacion: "Invoicing",
     planDeNegocios: "AI Business Plan",
+    consultoriaIA: "AI Consulting for SMBs",
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",
