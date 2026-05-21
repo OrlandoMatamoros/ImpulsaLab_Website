@@ -149,9 +149,13 @@ const Footer = () => {
                 <FaEnvelope /> contacto@tuimpulsalab.com
               </a>
               <div className="flex items-start gap-2">
-                <FaMapMarkerAlt className="mt-1 flex-shrink-0" />
+                <FaMapMarkerAlt className="mt-1 flex-shrink-0 text-cyan-400" />
                 <div>
-                  <span>54 State Street, Ste 804<br />Albany, NY 12207</span>
+                  <span className="text-gray-200">Área de servicio: Nueva York (NYC y alrededores)</span>
+                  <p className="text-xs text-gray-500 mt-1 leading-snug">
+                    Domicilio legal y de correspondencia:<br />
+                    54 State Street, Ste 804, Albany, NY 12207
+                  </p>
                 </div>
               </div>
             </div>
