@@ -18,12 +18,12 @@ async function resolveLocale(): Promise<Locale> {
 
 const metaByLocale = {
   es: {
-    title: 'Blog - Agentes AI y Automatizacion para PYMEs | Impulsa Lab',
+    title: 'Blog — Agentes AI y Automatizacion para PYMEs',
     description:
       'Articulos sobre agentes AI, automatizacion de procesos y arquitectura de negocio para PYMEs que van en serio. Escrito por el equipo de Impulsa Lab.',
   },
   en: {
-    title: 'Blog - AI Agents and Automation for SMBs | Impulsa Lab',
+    title: 'Blog — AI Agents and Automation for SMBs',
     description:
       'Articles on AI agents, process automation, and business architecture for SMBs that mean business. Written by the Impulsa Lab team.',
   },
@@ -35,11 +35,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: m.title,
     description: m.description,
-    alternates: { canonical: 'https://tuimpulsalab.com/blog' },
+    alternates: { canonical: 'https://www.tuimpulsalab.com/blog' },
     openGraph: {
       title: m.title,
       description: m.description,
-      url: 'https://tuimpulsalab.com/blog',
+      url: 'https://www.tuimpulsalab.com/blog',
       siteName: 'Impulsa Lab',
       locale: locale === 'en' ? 'en_US' : 'es_ES',
       type: 'website',

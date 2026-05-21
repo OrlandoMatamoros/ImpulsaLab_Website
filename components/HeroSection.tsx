@@ -203,9 +203,9 @@ export default function HeroSection() {
                       <line x1="12" y1="22.08" x2="12" y2="12" />
                     </svg>
                   </div>
-                  <h3 className="text-2xl md:text-3xl font-bold text-white">
+                  <h2 className="text-2xl md:text-3xl font-bold text-white">
                     {t.hero.diagTitulo}
-                  </h3>
+                  </h2>
                   <p className="text-white/80 text-sm mt-2">
                     {t.hero.diagSubtitulo}
                   </p>

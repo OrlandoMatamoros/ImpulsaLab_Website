@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Automatizacion IA para PYMEs Latinas NYC — Impulsa Lab',
+  title: 'Automatizacion IA para PYMEs Latinas NYC',
   description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/nosotros' },
   openGraph: {
-    title: 'Automatizacion IA para PYMEs Latinas NYC — Impulsa Lab',
+    title: 'Automatizacion IA para PYMEs Latinas NYC',
     description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
     url: 'https://www.tuimpulsalab.com/nosotros',
     type: 'website',
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatizacion IA para PYMEs Latinas NYC — Impulsa Lab',
+    title: 'Automatizacion IA para PYMEs Latinas NYC',
     description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
     images: ['/images/og-image.jpg'],
   },

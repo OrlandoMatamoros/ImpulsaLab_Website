@@ -227,17 +227,17 @@ export default function NosotrosPage() {
               <div className="grid md:grid-cols-3 gap-6 text-left">
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
                   <FaCheckCircle className="w-6 h-6 mb-2 text-green-300" />
-                  <h4 className="font-semibold mb-1">{t.nosotrosPage.transparenciaTotal}</h4>
+                  <h3 className="font-semibold mb-1">{t.nosotrosPage.transparenciaTotal}</h3>
                   <p className="text-sm text-white/90">{t.nosotrosPage.transparenciaDesc}</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
                   <FaCheckCircle className="w-6 h-6 mb-2 text-green-300" />
-                  <h4 className="font-semibold mb-1">{t.nosotrosPage.resultadosGarantizados}</h4>
+                  <h3 className="font-semibold mb-1">{t.nosotrosPage.resultadosGarantizados}</h3>
                   <p className="text-sm text-white/90">{t.nosotrosPage.resultadosDesc}</p>
                 </div>
                 <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4">
                   <FaCheckCircle className="w-6 h-6 mb-2 text-green-300" />
-                  <h4 className="font-semibold mb-1">{t.nosotrosPage.soporteContinuo}</h4>
+                  <h3 className="font-semibold mb-1">{t.nosotrosPage.soporteContinuo}</h3>
                   <p className="text-sm text-white/90">{t.nosotrosPage.soporteDesc}</p>
                 </div>
               </div>
