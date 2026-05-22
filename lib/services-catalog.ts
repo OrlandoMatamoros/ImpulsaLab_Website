@@ -126,6 +126,17 @@ export const SERVICIOS: Servicio[] = [
       'Setup de Instagram + Facebook + GBP con branding y 5 posts iniciales.',
   },
   {
+    sku: 'MKT-002',
+    nombre: 'Identidad de Marca / Branding',
+    categoria: 'marketing',
+    segmento: 'ambos',
+    precioAncla: 'desde $500',
+    setup: 500,
+    recurring: null,
+    descripcionCorta:
+      'Logo, paleta de colores, tipografía y diseño de etiquetas/empaques para tu marca.',
+  },
+  {
     sku: 'MKT-005',
     nombre: 'Google Business Profile Setup',
     categoria: 'marketing',
