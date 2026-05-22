@@ -259,7 +259,7 @@ export default function FinanzasPage() {
         ctaTarget="_blank"
         rows={[
           { product: 'Smart Invoice Tracker',  productPrice: '$97-197/mes',  humanRole: 'Bookkeeping Clerk',          nycMonthly: 5331,  hoursSaved: 60,  roiNote: '27-55×' },
-          { product: 'AI Financial Dashboard', productPrice: '$697-997/mes', humanRole: 'Financial Analyst jr',       nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
+          { product: 'AI Financial Dashboard', productPrice: '$2,000 setup + $197/mes', humanRole: 'Financial Analyst jr', nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
           { product: 'Medical Bill Auditor',   productPrice: 'custom',       humanRole: 'Medical Billing Specialist', nycMonthly: 5643,  hoursSaved: 100, roiNote: 'por volumen' },
         ]}
       />
