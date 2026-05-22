@@ -9,7 +9,10 @@ import ProtectedSection from '@/components/ProtectedSection'
 import ContentStrategistChat from '@/components/services/marketing/ContentStrategistChat'
 import AIToolsShowcase from '@/components/services/marketing/AIToolsShowcase'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
+import PricingColumns from '@/components/services/PricingColumns'
 import { useLanguage } from '@/contexts/LanguageContext'
+
+const WA = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
 
 const methodologyIcons = [Target, PenTool, Megaphone, TrendingUp]
 
@@ -595,6 +598,96 @@ export default function MarketingPage() {
          </div>
        </div>
      </section>
+
+     {/* Pricing por nivel — Presencia Web (catálogo v1.2) */}
+     <PricingColumns
+       title="Presencia Web: del primer paso a tu plataforma"
+       subtitle="Cada nivel construye sobre el anterior. Precios desde; el alcance final se cotiza según tu negocio."
+       accent="purple"
+       footnote="Precios desde, en USD. El alcance final se define en el diagnóstico. Hosting y mantenimiento desde $97/mes."
+       tiers={[
+         {
+           sku: 'WEB-001',
+           name: 'Landing Express',
+           price: 'desde $197',
+           subtitle: 'Tu puerta de entrada a internet',
+           features: [
+             '1 página',
+             'Destino para tu Google Business Profile',
+             'Botón de WhatsApp',
+             'Diseño responsive',
+             'Entrega en días',
+           ],
+           ctaLabel: 'Quiero mi Landing Express',
+           ctaHref: WA('Hola Impulsa Lab, me interesa la Landing Express para mi negocio.'),
+           ctaTarget: '_blank',
+         },
+         {
+           sku: 'WEB-003',
+           name: 'Landing Profesional',
+           price: 'desde $697',
+           subtitle: 'Una página que vende',
+           featured: true,
+           badge: 'MÁS POPULAR',
+           features: [
+             '1 página, 5 secciones',
+             'Diseño a medida orientado a conversión',
+             'WhatsApp + formulario de contacto',
+             'Responsive (perfecto en celular)',
+             'SEO on-page básico',
+           ],
+           ctaLabel: 'Quiero mi Landing Profesional',
+           ctaHref: WA('Hola Impulsa Lab, me interesa la Landing Profesional para mi negocio.'),
+           ctaTarget: '_blank',
+         },
+         {
+           sku: 'WEB-010',
+           name: 'Website',
+           price: 'desde $2,497',
+           subtitle: 'Presencia digital integral',
+           features: [
+             'Hasta 10 páginas',
+             'Navegación + blog',
+             'Formularios + booking',
+             'Integración WhatsApp / Google Business',
+             'SEO on-page · responsive',
+           ],
+           ctaLabel: 'Cotizar mi Website',
+           ctaHref: WA('Hola Impulsa Lab, me interesa un Website profesional para mi negocio.'),
+           ctaTarget: '_blank',
+         },
+         {
+           sku: 'WEB-020',
+           name: 'App Web Básica',
+           price: 'desde $4,997',
+           subtitle: 'Software a medida acotado',
+           features: [
+             'Hasta 3 módulos (dashboard / CRM / facturación)',
+             'Login + base de datos',
+             'Responsive',
+           ],
+           ctaLabel: 'Cotizar mi App Web',
+           ctaHref: WA('Hola Impulsa Lab, me interesa una App Web Básica a medida.'),
+           ctaTarget: '_blank',
+         },
+         {
+           sku: 'WEB-021',
+           name: 'Marketplace / MVP',
+           price: 'desde $11,997',
+           subtitle: 'Plataforma multi-módulo',
+           features: [
+             'Plataforma multi-módulo',
+             'Pagos con Stripe',
+             'Roles de usuario',
+             'Base de datos',
+             'Panel admin',
+           ],
+           ctaLabel: 'Cotizar mi plataforma',
+           ctaHref: WA('Hola Impulsa Lab, me interesa una plataforma Marketplace/MVP.'),
+           ctaTarget: '_blank',
+         },
+       ]}
+     />
 
      {/* Interlinking: pillar consultoría IA general */}
      <section className="py-10 bg-gray-50 border-t border-gray-200">
