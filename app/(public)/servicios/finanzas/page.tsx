@@ -8,6 +8,8 @@ import { NovaFinanceShowcase } from './NovaFinanceShowcase';
 import IntegrationsShowcase from '@/components/services/IntegrationsShowcase'
 import IntegrationsTicker from '@/components/services/IntegrationsTicker'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
+import PricingColumns from '@/components/services/PricingColumns'
+import SomattCard from '@/components/services/SomattCard'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 // Definir tipos para TypeScript
@@ -259,7 +261,7 @@ export default function FinanzasPage() {
         ctaTarget="_blank"
         rows={[
           { product: 'Smart Invoice Tracker',  productPrice: '$97-197/mes',  humanRole: 'Bookkeeping Clerk',          nycMonthly: 5331,  hoursSaved: 60,  roiNote: '27-55×' },
-          { product: 'AI Financial Dashboard', productPrice: '$2,000 setup + $197/mes', humanRole: 'Financial Analyst jr', nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
+          { product: 'AI Financial Dashboard', productPrice: '$997 setup + $147/mes', humanRole: 'Financial Analyst jr', nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
           { product: 'Medical Bill Auditor',   productPrice: 'custom',       humanRole: 'Medical Billing Specialist', nycMonthly: 5643,  hoursSaved: 100, roiNote: 'por volumen' },
         ]}
       />
@@ -623,6 +625,66 @@ export default function FinanzasPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing por nivel — Finanzas (catálogo v1.2) */}
+      <PricingColumns
+        title="Visibilidad financiera, sin contratar un equipo"
+        subtitle="Done-for-you: nosotros integramos tus datos y te entregamos el tablero listo para decidir."
+        accent="blue"
+        footnote="Precios desde, en USD. [CONFIRMAR] alcance fino de integraciones por plan en el diagnóstico. No es un sistema contable completo."
+        tiers={[
+          {
+            sku: 'PRD-001',
+            name: 'Captura de Facturas',
+            price: '$97/mes',
+            subtitle: 'Organiza lo que recibes',
+            features: [
+              'IA lee las facturas de tus proveedores',
+              'Extrae proveedor, monto, fecha y categoría',
+              'Registro automático en tu Excel / Sheets',
+              'Resumen periódico al correo',
+            ],
+            ctaLabel: 'Empezar con Captura',
+            ctaHref: whatsappUrl,
+            ctaTarget: '_blank',
+          },
+          {
+            sku: 'FIN-001',
+            name: 'Tablero Financiero Inteligente',
+            price: 'desde $997 + $147/mes',
+            subtitle: 'Tu CFO en datos, todos los días',
+            featured: true,
+            badge: 'MÁS POPULAR',
+            features: [
+              'Integración de tus fuentes de datos',
+              'Dashboard con KPIs de tu industria',
+              'Refresh diario de tus números',
+              'Asesoría mensual (1h $147 / 90min $197)',
+              '[CONFIRMAR] integraciones POS/contables incluidas',
+            ],
+            ctaLabel: 'Agendar diagnóstico',
+            ctaHref: whatsappUrl,
+            ctaTarget: '_blank',
+          },
+          {
+            sku: 'PRD-007',
+            name: 'AI Financial Dashboard Updater',
+            price: 'desde $697/mes',
+            subtitle: 'Actualización automática continua',
+            features: [
+              'Mantiene tu dashboard financiero al día',
+              'Pensado para operación recurrente',
+              '[CONFIRMAR] alcance según volumen de datos',
+            ],
+            ctaLabel: 'Hablar con un experto',
+            ctaHref: whatsappUrl,
+            ctaTarget: '_blank',
+          },
+        ]}
+      />
+
+      {/* SOMATT: alternativa self-serve (marca aparte) */}
+      <SomattCard />
 
       {/* NUEVA SECCIÓN: Nova Finance Showcase - SIEMPRE VISIBLE */}
       <NovaFinanceShowcase />

@@ -6,7 +6,7 @@ export const serviciosFinanzasES = {
     // Hero
     heroTitle: 'CFO en tu Excel con IA',
     heroSubtitle: 'Conectamos Claude Code a tu Excel o Google Sheets para que tengas análisis financiero profesional sin contratar un contador de tiempo completo. Perfecto para pizzerías, salones, panaderías y negocios locales.',
-    heroPriceAnchor: 'Desde $2,000 setup + $197/mes',
+    heroPriceAnchor: 'Desde $997 setup + $147/mes',
     beforeAfter: {
       before: 'Apuntaba todo en un cuaderno y no sabia a donde se iba la plata',
       after: 'Dashboard automatico en mi Excel — veo mis numeros en tiempo real',
@@ -215,7 +215,7 @@ export const serviciosFinanzasES = {
     planPilot: {
       title: 'CFO en tu Excel con IA',
       idealFor: 'Ideal para: Negocios locales que quieren ver sus números claros sin gastar una fortuna.',
-      price: '$2,000 setup + $197/mes',
+      price: '$997 setup + $147/mes',
       pricePeriod: 'Setup + suscripción mensual',
       deliverablesTitle: 'Incluye:',
       deliverables: [
