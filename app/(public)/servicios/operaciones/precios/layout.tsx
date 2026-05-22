@@ -3,13 +3,13 @@ import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Precios de Automatizacion - Planes desde $97/mes',
-  description: 'Planes claros de automatizacion: desde $400 setup + $97/mes por automatizacion individual, $2,000-$4,000 suite de 3-5 workflows. Sin costos ocultos para tu PYME.',
+  description: 'Planes claros de automatizacion: automatizacion agentica desde $747 setup, o suites $1,997-$3,997 de 3-10 workflows. Sin costos ocultos para tu PYME.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/operaciones/precios',
   },
   openGraph: {
     title: 'Precios de Automatizacion - Desde $97/mes',
-    description: 'Planes claros sin costos ocultos: $400 setup + $97/mes individual, o suites $2,000-$4,000 para tu PYME.',
+    description: 'Planes claros sin costos ocultos: automatizacion desde $747 setup, o suites $1,997-$3,997 para tu PYME.',
     url: 'https://www.tuimpulsalab.com/servicios/operaciones/precios',
     type: 'website',
     images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Precios de Automatizacion' }],
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Precios de Automatizacion - Desde $97/mes',
-    description: 'Planes claros sin costos ocultos: $400 setup + $97/mes individual, o suites $2,000-$4,000 para tu PYME.',
+    description: 'Planes claros sin costos ocultos: automatizacion desde $747 setup, o suites $1,997-$3,997 para tu PYME.',
     images: ['/images/og-image.jpg'],
   },
 }
