@@ -4,7 +4,10 @@ import Link from 'next/link'
 import { LINKS } from '@/lib/constants'
 import { Bot, Search, Zap, DollarSign, Layers } from 'lucide-react'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
+import PricingColumns from '@/components/services/PricingColumns'
 import { useLanguage } from '@/contexts/LanguageContext'
+
+const WA_OPS = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
 
 export default function OperacionesPage() {
   const { t } = useLanguage()
@@ -150,7 +153,7 @@ export default function OperacionesPage() {
                 <div className="text-sm text-gray-500 mb-6">Setup + desde $297/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">Suite 3-5 Workflows + AI Chatbot</h4>
                 <div className="space-y-2 mb-8">
-                  {['Suite de 3-5 workflows integrados ($2,000-$4,000 + $297-$397/mes)', 'AI Chatbot WhatsApp/Web ($2,500-$4,000 + $297-$497/mes)', 'CRM automatizado con seguimiento de leads', 'Integraciones con Gmail, Sheets, Calendar, Slack', 'Soporte prioritario y optimización mensual'].map((item, i) => (
+                  {['Suite de 3-5 workflows integrados (desde $1,997 + $357/mes)', 'AI Chatbot WhatsApp/Web (desde $1,497 + $437/mes)', 'CRM automatizado con seguimiento de leads', 'Integraciones con Gmail, Sheets, Calendar, Slack', 'Soporte prioritario y optimización mensual'].map((item, i) => (
                     <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
                   ))}
                 </div>
@@ -325,6 +328,62 @@ export default function OperacionesPage() {
           </div>
         </div>
       </section>
+
+      {/* Pricing por nivel — Operaciones (catálogo v1.2) */}
+      <PricingColumns
+        title="Automatización a la medida de tu operación"
+        subtitle="Desde un asistente de IA hasta una suite completa. El alcance se define por diagnóstico."
+        accent="green"
+        footnote="Precios desde, en USD. Setup único + retainer mensual (operación, monitoreo y soporte). Mantenimiento base $97-147/mes."
+        tiers={[
+          {
+            sku: 'BOT-001',
+            name: 'Chatbot Express',
+            price: '$597 + $297/mes',
+            subtitle: 'Atención por WhatsApp, lista rápido',
+            features: [
+              'Plantilla WhatsApp FAQ + captura de lead',
+              'Setup rápido',
+              'Integración con tus canales',
+              'Retainer de operación $297/mes',
+            ],
+            ctaLabel: 'Cotizar Chatbot Express',
+            ctaHref: WA_OPS('Hola Impulsa Lab, me interesa el Chatbot Express para mi negocio.'),
+            ctaTarget: '_blank',
+          },
+          {
+            sku: 'AUTO-002',
+            name: 'Automatización Agéntica',
+            price: 'desde $747 + retainer',
+            subtitle: 'Tu proceso, en piloto automático',
+            featured: true,
+            badge: 'MÁS POPULAR',
+            features: [
+              'Sistema agéntico scoped por diagnóstico',
+              'Calificación de leads, cotizaciones, documentos',
+              'Operación multi-sistema',
+              'Retainer desde $137/mes (operación)',
+            ],
+            ctaLabel: 'Cotizar mi automatización',
+            ctaHref: '/servicios/operaciones/precios',
+          },
+          {
+            sku: 'BOT-002',
+            name: 'Agente IA Custom',
+            price: 'desde $1,497 + $437/mes',
+            subtitle: 'Agéntico, a tu medida',
+            features: [
+              'RAG + agendamiento en vivo contra calendario',
+              'Multimodal + integraciones',
+              'Ideal dental / estético',
+              'Retainer $437/mes',
+            ],
+            ctaLabel: 'Hablar con un experto',
+            ctaHref: WA_OPS('Hola Impulsa Lab, me interesa un Agente IA Custom a medida.'),
+            ctaTarget: '_blank',
+          },
+        ]}
+      />
 
       {/* Interlinking: pillar consultoría IA general */}
       <section className="py-10 bg-gray-50 border-t border-gray-200">

@@ -72,9 +72,9 @@ export default function PreciosPage() {
                 <p className="text-gray-600 mb-4">1 workflow para automatizar tu primer proceso</p>
                 <div className="bg-gray-50 rounded-lg p-4 mb-2">
                   <p className="text-sm text-gray-500 mb-1">Setup único</p>
-                  <p className="text-3xl font-bold text-gray-900">$400 - $500</p>
+                  <p className="text-3xl font-bold text-gray-900">desde $747</p>
                 </div>
-                <div className="text-sm text-gray-500 mb-6">+ desde $134/mes mantenimiento</div>
+                <div className="text-sm text-gray-500 mb-6">+ $97-147/mes mantenimiento</div>
                 <p className="text-sm text-gray-600 italic mb-6">
                   Ej: Lead Capture, Invoice Tracker, Daily Digest, Appointment Reminders
                 </p>
@@ -103,12 +103,12 @@ export default function PreciosPage() {
                 <div className="space-y-3 mb-4">
                   <div className="bg-white rounded-lg p-3 border border-green-200">
                     <p className="text-xs text-gray-500 mb-1">Suite 3-5 Workflows</p>
-                    <p className="text-xl font-bold text-gray-900">$2,000 <span className="text-sm font-normal text-gray-500">setup</span></p>
-                    <p className="text-sm text-gray-500">+ $356/mes</p>
+                    <p className="text-xl font-bold text-gray-900">$1,997 <span className="text-sm font-normal text-gray-500">setup</span></p>
+                    <p className="text-sm text-gray-500">+ $357/mes</p>
                   </div>
                   <div className="bg-white rounded-lg p-3 border border-green-200">
                     <p className="text-xs text-gray-500 mb-1">AI Chatbot (WhatsApp/Web)</p>
-                    <p className="text-xl font-bold text-gray-900">$2,500 <span className="text-sm font-normal text-gray-500">setup</span></p>
+                    <p className="text-xl font-bold text-gray-900">desde $1,497 <span className="text-sm font-normal text-gray-500">setup</span></p>
                     <p className="text-sm text-gray-500">+ $437/mes</p>
                   </div>
                 </div>
@@ -135,13 +135,13 @@ export default function PreciosPage() {
                 <div className="space-y-3 mb-4">
                   <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                     <p className="text-xs text-gray-500 mb-1">Suite 6-10 Workflows</p>
-                    <p className="text-xl font-bold text-gray-900">$4,000 <span className="text-sm font-normal text-gray-500">setup</span></p>
-                    <p className="text-sm text-gray-500">+ $716/mes</p>
+                    <p className="text-xl font-bold text-gray-900">$3,997 <span className="text-sm font-normal text-gray-500">setup</span></p>
+                    <p className="text-sm text-gray-500">+ $717/mes</p>
                   </div>
                   <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
                     <p className="text-xs text-gray-500 mb-1">App Web Custom</p>
-                    <p className="text-xl font-bold text-gray-900">$5,000 <span className="text-sm font-normal text-gray-500">setup</span></p>
-                    <p className="text-sm text-gray-500">+ $726/mes</p>
+                    <p className="text-xl font-bold text-gray-900">desde $4,997 <span className="text-sm font-normal text-gray-500">setup</span></p>
+                    <p className="text-sm text-gray-500">+ $727/mes</p>
                   </div>
                 </div>
 
@@ -163,9 +163,9 @@ export default function PreciosPage() {
             <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
               <h3 className="text-xl font-bold text-center mb-6 text-gray-900">37-80% más accesible que agencias en NYC</h3>
               <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $1,500-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $400-$500</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$15,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $2,000</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">App Custom + Suite Completa</div><div className="text-gray-400 line-through text-sm">NYC: $40,000-$60,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $5,000-$9,000</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $1,500-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: desde $747</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$15,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $1,997</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">App Custom + Suite Completa</div><div className="text-gray-400 line-through text-sm">NYC: $40,000-$60,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $4,997-$8,997</div></div>
               </div>
             </div>
 
@@ -180,7 +180,7 @@ export default function PreciosPage() {
                 </div>
                 <div className="bg-white rounded-lg p-6 shadow">
                   <div className="text-sm text-gray-500 mb-2">Costo con Impulsa Lab</div>
-                  <div className="text-2xl font-bold text-green-600">$301-$437/mes</div>
+                  <div className="text-2xl font-bold text-green-600">$357-$437/mes</div>
                 </div>
                 <div className="bg-white rounded-lg p-6 shadow">
                   <div className="text-sm text-gray-500 mb-2">Ahorro estimado anual</div>
