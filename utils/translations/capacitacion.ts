@@ -56,12 +56,12 @@ export const capacitacionES = {
       subheading: "Tres niveles dise\u00f1ados para llevarte de principiante a experto en AI aplicada a tu negocio.",
       mostPopular: "M\u00c1S POPULAR",
       outcomesLabel: "Al terminar podr\u00e1s:",
-      priceSubtitle: "Individual / Equipo (por persona)",
+      priceSubtitle: "Precio por programa",
       supervivencia: {
         chip: "Supervivencia",
         name: "Fundamentos AI",
         desc: "Para due\u00f1os de negocio que quieren entender y usar AI desde cero",
-        price: "Desde $297 / $497",
+        price: "$297",
         outcomes: [
           "Usar ChatGPT/Claude para tareas diarias del negocio",
           "Crear prompts efectivos para emails, propuestas y contenido",
@@ -75,7 +75,7 @@ export const capacitacionES = {
         chip: "Crecimiento",
         name: "AI en Acci\u00f3n",
         desc: "Para equipos listos para implementar AI en sus procesos",
-        price: "Desde $497 / $747",
+        price: "$497",
         outcomes: [
           "Construir GPTs personalizados para tu negocio",
           "Implementar workflows de automatizaci\u00f3n reales",
@@ -90,7 +90,7 @@ export const capacitacionES = {
         chip: "Expansi\u00f3n",
         name: "Transformaci\u00f3n AI",
         desc: "Para empresas que quieren transformar toda su operaci\u00f3n con AI",
-        price: "Desde $997 / $1,497",
+        price: "$1,497",
         outcomes: [
           "Dise\u00f1ar la estrategia AI completa de tu empresa",
           "Implementar AI Agents con base de conocimiento propia",
@@ -177,12 +177,12 @@ export const capacitacionEN = {
       subheading: "Three levels designed to take you from beginner to expert in AI applied to your business.",
       mostPopular: "MOST POPULAR",
       outcomesLabel: "By the end, you will:",
-      priceSubtitle: "Individual / Team (per person)",
+      priceSubtitle: "Price per program",
       supervivencia: {
         chip: "Survival",
         name: "AI Fundamentals",
         desc: "For business owners who want to understand and use AI from scratch",
-        price: "From $297 / $497",
+        price: "$297",
         outcomes: [
           "Use ChatGPT/Claude for daily business tasks",
           "Craft effective prompts for emails, proposals, and content",
@@ -196,7 +196,7 @@ export const capacitacionEN = {
         chip: "Growth",
         name: "AI in Action",
         desc: "For teams ready to implement AI in their processes",
-        price: "From $497 / $747",
+        price: "$497",
         outcomes: [
           "Build custom GPTs for your business",
           "Deploy real automation workflows",
@@ -211,7 +211,7 @@ export const capacitacionEN = {
         chip: "Expansion",
         name: "AI Transformation",
         desc: "For companies ready to transform their whole operation with AI",
-        price: "From $997 / $1,497",
+        price: "$1,497",
         outcomes: [
           "Design your company's full AI strategy",
           "Deploy AI Agents with your own knowledge base",

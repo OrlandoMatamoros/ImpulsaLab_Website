@@ -57,12 +57,12 @@ export const capacitacionEN = {
       subheading: "Three levels designed to take you from beginner to expert in AI applied to your business.",
       mostPopular: "MOST POPULAR",
       outcomesLabel: "By the end, you will:",
-      priceSubtitle: "Individual / Team (per person)",
+      priceSubtitle: "Price per program",
       supervivencia: {
         chip: "Survival",
         name: "AI Fundamentals",
         desc: "For business owners who want to understand and use AI from scratch",
-        price: "From $297 / $497",
+        price: "$297",
         outcomes: [
           "Use ChatGPT/Claude for daily business tasks",
           "Craft effective prompts for emails, proposals, and content",
@@ -76,7 +76,7 @@ export const capacitacionEN = {
         chip: "Growth",
         name: "AI in Action",
         desc: "For teams ready to implement AI in their processes",
-        price: "From $497 / $747",
+        price: "$497",
         outcomes: [
           "Build custom GPTs for your business",
           "Deploy real automation workflows",
@@ -91,7 +91,7 @@ export const capacitacionEN = {
         chip: "Expansion",
         name: "AI Transformation",
         desc: "For companies ready to transform their whole operation with AI",
-        price: "From $997 / $1,497",
+        price: "$1,497",
         outcomes: [
           "Design your company's full AI strategy",
           "Deploy AI Agents with your own knowledge base",
