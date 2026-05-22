@@ -39,7 +39,6 @@ export const homeEN = {
     juntaEstrategica: "Strategic Board",
     facturacion: "Invoicing",
     planDeNegocios: "AI Business Plan",
-    consultoriaIA: "AI Consulting for SMBs",
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",
@@ -204,6 +203,7 @@ export const homeEN = {
     tiempoRestante: "Time remaining: {seconds} seconds",
   },
   footer: {
+    tagline: "Impulsa Lab - Transforming businesses with AI",
     newsletter: "Join the Digital Revolution",
     newsletterDesc: "Get insights, success stories, and AI strategies delivered straight to your inbox",
     suscribirse: "Subscribe",
@@ -236,7 +236,6 @@ export const homeEN = {
     terminos: "Terms of Service",
     cookies: "Cookie Policy",
     proteccionDatos: "Data Protection",
-    tagline: "The force that drives your business",
   },
   aiBanner: {
     text: "This page was designed and built with the help of an AI agent in terminal using Claude Code",

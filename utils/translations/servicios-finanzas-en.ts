@@ -5,7 +5,7 @@ export const serviciosFinanzasEN = {
     // Hero
     heroTitle: 'CFO in Your Spreadsheet, Powered by AI',
     heroSubtitle: 'We connect Claude Code to your Excel or Google Sheets so you get professional financial analysis without hiring a full-time accountant. Perfect for pizzerias, salons, bakeries, and local businesses.',
-    heroPriceAnchor: 'From $500 setup + $97/mo',
+    heroPriceAnchor: 'From $2,000 setup + $197/mo',
     beforeAfter: {
       before: 'Wrote everything in a notebook and had no idea where the money went',
       after: 'Automatic dashboard in my Excel — I see my numbers in real time',
@@ -214,7 +214,7 @@ export const serviciosFinanzasEN = {
     planPilot: {
       title: 'CFO in Your Spreadsheet with AI',
       idealFor: 'Ideal for: Local businesses that want to see their numbers clearly without spending a fortune.',
-      price: '$500 setup + $97/mo',
+      price: '$2,000 setup + $197/mo',
       pricePeriod: 'Setup + monthly subscription',
       deliverablesTitle: 'Includes:',
       deliverables: [

@@ -202,6 +202,7 @@ export const homeES = {
     tiempoRestante: "Tiempo restante: {seconds} segundos",
   },
   footer: {
+    tagline: "Impulsa Lab - Transformando negocios con IA",
     newsletter: "Unete a la Revolucion Digital",
     newsletterDesc: "Recibe insights, casos de exito y estrategias de IA directamente en tu inbox",
     suscribirse: "Suscribirse",
@@ -489,6 +490,7 @@ export const homeEN = {
     tiempoRestante: "Time remaining: {seconds} seconds",
   },
   footer: {
+    tagline: "Impulsa Lab - Transforming businesses with AI",
     newsletter: "Join the Digital Revolution",
     newsletterDesc: "Get insights, success stories, and AI strategies delivered straight to your inbox",
     suscribirse: "Subscribe",

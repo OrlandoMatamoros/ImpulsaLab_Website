@@ -5,7 +5,7 @@ export const serviciosMarketingEN = {
     // Hero Section
     heroTitle: 'Landing Express for Local Businesses',
     heroSubtitle: 'Get your business online with a direct sales machine. A professional page your customers find on Google and contact you via WhatsApp.',
-    heroPriceAnchor: 'From $800 setup + $97/mo',
+    heroPriceAnchor: 'From $700 setup + $97/mo',
     beforeAfter: {
       before: "Didn't show up on Google, my customers couldn't find me",
       after: 'They optimized my Shopify and now customers find me on their own',
@@ -114,7 +114,7 @@ export const serviciosMarketingEN = {
     planIdentidad: {
       name: 'Landing Express',
       description: 'Get your business online with a professional page that sells for you',
-      priceFrom: '$800',
+      priceFrom: 'From $700',
       priceNote: 'One-time setup + $97/mo hosting',
       features: [
         '5-section professional landing page',
@@ -143,7 +143,7 @@ export const serviciosMarketingEN = {
 
     // CTA Final
     ctaTitle: 'Ready for Your Customers to Find You on Google?',
-    ctaSubtitle: 'Starting at $800, get your business online with a page that sells. We also offer local SEO optimization and Google Ads (quoted separately).',
+    ctaSubtitle: 'Starting at $700, get your business online with a page that sells. We also offer local SEO optimization and Google Ads (quoted separately).',
   },
 }
 

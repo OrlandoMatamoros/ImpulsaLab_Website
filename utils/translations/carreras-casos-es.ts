@@ -343,9 +343,9 @@ export const carrerasCasosES = {
       { titulo: 'Diagnóstico 3D', descripcion: 'Analizamos tu negocio en Finanzas, Operaciones y Marketing para identificar oportunidades', duracion: '1 semana' },
       { titulo: 'Diseño de solución', descripcion: 'Creamos un plan personalizado con herramientas de IA y stack moderno (Claude, n8n, Vite, Stripe) específicas para tus necesidades', duracion: '1 semana' },
       { titulo: 'Implementación', descripcion: 'Desplegamos las soluciones, configuramos sistemas y entrenamos a tu equipo', duracion: '2-4 semanas' },
-      { titulo: 'Optimización', descripcion: 'Monitoreamos resultados y ajustamos para maximizar el valor entregado', duracion: 'Continuo' },
+      { titulo: 'Optimización', descripcion: 'Monitoreamos resultados y ajustamos para maximizar el ROI', duracion: 'Continuo' },
     ],
-    // Industries — solo sectores donde tenemos experiencia real entregada
+    // Industries
     industriasTitle: 'Sectores donde hemos entregado',
     industriasSubtitle: 'Experiencia real, no listado aspiracional',
     industrias: [

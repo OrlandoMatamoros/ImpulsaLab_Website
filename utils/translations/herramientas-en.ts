@@ -244,7 +244,7 @@ export const herramientasEN = {
     ],
   },
   herramientasPromptPage: {
-    titulo: 'Prompt Designer — Build prompts for Claude, GPT and Gemini',
+    titulo: 'Prompt Designer',
     subtitulo: 'Build professional prompts tailored to the model you use',
     historial: 'History',
     templatesPorIndustria: 'Templates by Industry',

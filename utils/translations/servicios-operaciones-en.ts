@@ -5,7 +5,7 @@ export const serviciosOperacionesEN = {
     // Hero
     heroTitle: 'We Eliminate the Tasks That Steal Your Time.',
     heroSubtitle: 'We connect your apps so they work on their own. You focus on serving your customers and growing your business.',
-    heroBadge: 'From $500 setup + $97/mo',
+    heroBadge: 'From $400 setup + $97/mo',
     beforeAfter: {
       before: 'Answered WhatsApps and emails one by one, lost hours every day',
       after: 'A chatbot handles 24/7 and I focus on growing the business',
@@ -54,7 +54,7 @@ export const serviciosOperacionesEN = {
     cardPlataformasDesc: 'The tools we use: Claude Code, Make, Zapier and more',
     cardPlataformasCta: 'Discover',
     cardPreciosTitle: 'Pricing',
-    cardPreciosDesc: 'From $500 setup + $97/mo. No fine print.',
+    cardPreciosDesc: 'From $400 setup + $97/mo. No fine print.',
     cardPreciosCta: 'See pricing',
     cardProcesoTitle: 'Our Process',
     cardProcesoDesc: '3 simple steps: diagnostic, implementation, and training',
@@ -118,7 +118,7 @@ export const serviciosOperacionesEN = {
     breadcrumbArsenal: 'Automations',
     heroBadge: 'Processes you can automate today',
     heroTitle: 'Automations for Your Business',
-    heroSubtitle: 'These are tasks we make automatic so you stop wasting time. Each one from $500 setup + $97/mo.',
+    heroSubtitle: 'These are tasks we make automatic so you stop wasting time. Each one from $400 setup + $97/mo.',
     sectionTitle: 'What Can You Automate?',
     categorias: [
       {
