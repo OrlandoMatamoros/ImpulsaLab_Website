@@ -235,6 +235,8 @@ export const homeES = {
     terminos: "Terminos de Servicio",
     cookies: "Politica de Cookies",
     proteccionDatos: "Proteccion de Datos",
+    areaServicio: "Área de servicio: Nueva York (NYC y alrededores)",
+    domicilioLegal: "Domicilio legal y de correspondencia:",
   },
   aiBanner: {
     text: "Esta p\u00e1gina fue dise\u00f1ada y construida con ayuda de un agente de IA en terminal usando Claude Code",
@@ -523,6 +525,8 @@ export const homeEN = {
     terminos: "Terms of Service",
     cookies: "Cookie Policy",
     proteccionDatos: "Data Protection",
+    areaServicio: "Service area: New York (NYC and surrounding areas)",
+    domicilioLegal: "Legal and mailing address:",
   },
   aiBanner: {
     text: "This page was designed and built with the help of an AI agent in terminal using Claude Code",

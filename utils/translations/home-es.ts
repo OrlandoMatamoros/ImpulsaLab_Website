@@ -237,6 +237,8 @@ export const homeES = {
     terminos: "Terminos de Servicio",
     cookies: "Politica de Cookies",
     proteccionDatos: "Proteccion de Datos",
+    areaServicio: "Área de servicio: Nueva York (NYC y alrededores)",
+    domicilioLegal: "Domicilio legal y de correspondencia:",
   },
   aiBanner: {
     text: "Esta p\u00e1gina fue dise\u00f1ada y construida con ayuda de un agente de IA en terminal usando Claude Code",
