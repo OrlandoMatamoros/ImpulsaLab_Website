@@ -4,7 +4,13 @@
  * Fuente única de verdad para precios y nombres en el sitio web.
  * Derivado de:
  *   OneDrive/Impulsa Lab/01_Catalogo_y_Servicios/Catalogo_Maestro/
- *   BIBLIA_SERVICIOS_IMPULSA_2026.md (v1.1 SELLADA, 2026-05-22)
+ *   BIBLIA_SERVICIOS_IMPULSA_2026.md (v1.2, 2026-05-22)
+ *
+ * v1.2: charm pricing global (todo termina en 7) + decisiones del
+ * brainstorm eje por eje. FIN-001 → Tablero Financiero Inteligente;
+ * PRD-001 → Captura Automática de Facturas de Proveedores; AUTO-002 →
+ * Automatización Agéntica a Medida; Academy a 2 dimensiones; MKT-011
+ * eliminado, MKT-020 archivado; +OPS-001 Investigador de Mercado Semanal.
  *
  * REGLAS:
  *  - Todos los precios y nombres salen de la biblia. NO inventar números.
@@ -30,6 +36,7 @@ export type CategoriaServicio =
   | 'capacitacion'
   | 'seo'
   | 'mantenimiento'
+  | 'operaciones'
   | 'producto';
 
 export interface Servicio {
@@ -64,74 +71,74 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Landing Express (GBP)',
     categoria: 'web',
     segmento: 'micro',
-    precioAncla: 'desde $200',
-    setup: 200,
+    precioAncla: 'desde $197',
+    setup: 197,
     recurring: 15,
     descripcionCorta:
-      'Landing de una página como destino para Google Business Profile. Puerta de entrada (no se publica sola).',
+      'Presencia Web nivel 1. Landing de una página como destino para Google Business Profile. Puerta de entrada.',
   },
   {
     sku: 'WEB-003',
     nombre: 'Landing Page Profesional (5 secciones)',
     categoria: 'web',
     segmento: 'micro',
-    precioAncla: 'desde $700',
-    setup: 800,
+    precioAncla: 'desde $697',
+    setup: 797,
     recurring: null,
     descripcionCorta:
-      'Landing de una página, 5 secciones, diseño responsive a medida orientado a conversión. No es un website.',
+      'Presencia Web nivel 2. Landing de una página, 5 secciones, diseño responsive a medida orientado a conversión.',
   },
   {
     sku: 'WEB-010',
     nombre: 'Website Profesional (hasta 10 páginas)',
     categoria: 'web',
     segmento: 'pequena',
-    precioAncla: 'desde $2,500',
-    setup: 3000,
+    precioAncla: 'desde $2,497',
+    setup: 2997,
     recurring: null,
     descripcionCorta:
-      'Sitio completo multi-página con navegación, blog, booking y pagos. Presencia digital integral.',
+      'Presencia Web nivel 3. Sitio completo multi-página con navegación, blog, booking y pagos. Presencia digital integral.',
   },
   {
     sku: 'WEB-020',
     nombre: 'App Web Básica (hasta 3 módulos)',
     categoria: 'web',
     segmento: 'pequena',
-    precioAncla: 'desde $5,000',
-    setup: 5000,
+    precioAncla: 'desde $4,997',
+    setup: 4997,
     recurring: null,
     descripcionCorta:
-      'Software a medida acotado: dashboard, CRM o facturación con login y base de datos. Hasta 3 módulos.',
+      'Presencia Web nivel 4. Software a medida acotado: dashboard, CRM o facturación con login y base de datos. Hasta 3 módulos.',
   },
   {
     sku: 'WEB-021',
     nombre: 'Marketplace / MVP',
     categoria: 'web',
     segmento: 'pequena',
-    precioAncla: 'desde $12,000',
-    setup: 12000,
+    precioAncla: 'desde $11,997',
+    setup: 11997,
     recurring: null,
     descripcionCorta:
-      'Plataforma multi-módulo con pagos y roles de usuario (tipo marketplace o MVP de producto).',
+      'Presencia Web nivel 5. Plataforma multi-módulo con pagos y roles de usuario (tipo marketplace o MVP de producto).',
   },
   {
     sku: 'MKT-001',
-    nombre: 'Configuración Redes Sociales (3 plataformas)',
+    nombre: 'Configuración Redes Sociales (SOLO setup)',
     categoria: 'marketing',
     segmento: 'ambos',
-    precioAncla: 'desde $650',
-    setup: 650,
+    precioAncla: '$647',
+    setup: 647,
     recurring: null,
     descripcionCorta:
-      'Setup de Instagram + Facebook + GBP con branding y 5 posts iniciales.',
+      'SOLO setup: Meta Business Suite + 3 plataformas (IG + FB + GBP) + bios + 5 posts iniciales, listo para que tú lo manejes. NO incluye gestión.',
   },
   {
     sku: 'MKT-002',
     nombre: 'Identidad de Marca / Branding',
     categoria: 'marketing',
     segmento: 'ambos',
-    precioAncla: 'desde $500',
-    setup: 500,
+    precioAncla: 'desde $497',
+    setup: 497,
     recurring: null,
     descripcionCorta:
       'Logo, paleta de colores, tipografía y diseño de etiquetas/empaques para tu marca.',
@@ -141,8 +148,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Google Business Profile Setup',
     categoria: 'marketing',
     segmento: 'micro',
-    precioAncla: 'desde $200',
-    setup: 200,
+    precioAncla: '$197',
+    setup: 197,
     recurring: null,
     descripcionCorta:
       'Creación y optimización de la ficha de Google Business Profile.',
@@ -152,101 +159,66 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Automatización Social (auto-posting)',
     categoria: 'marketing',
     segmento: 'ambos',
-    precioAncla: 'desde $196/mes',
-    setup: 800,
-    recurring: 196,
+    precioAncla: 'desde $197/mes',
+    setup: 797,
+    recurring: 197,
     descripcionCorta:
       'Workflow de generación IA + scheduling + posting automático multi-canal. Build inicial opcional.',
   },
-  {
-    sku: 'MKT-011',
-    nombre: 'Gestión de Redes Administrada',
-    categoria: 'marketing',
-    segmento: 'pequena',
-    precioAncla: 'desde $700/mes',
-    setup: null,
-    recurring: 700,
-    descripcionCorta:
-      'Servicio gestionado: creación de contenido bilingüe, calendario editorial, posteo y reporte mensual.',
-  },
-  {
-    sku: 'MKT-020',
-    nombre: 'Email Marketing (3 secuencias)',
-    categoria: 'marketing',
-    segmento: 'pequena',
-    precioAncla: 'desde $1,000',
-    setup: 1000,
-    recurring: null,
-    descripcionCorta:
-      'Templates + 3 secuencias automatizadas + segmentación.',
-  },
+  // MKT-011 (Gestión de Redes Administrada) ELIMINADO en v1.2 — no hay personal
+  // para sostener gestión. La config inicial se ofrece como SOLO setup (MKT-001).
+  // MKT-020 (Email Marketing) ARCHIVADO en v1.2 al backlog futuro (biblia §6.2).
 
   // ── 6.2 Automatización / Workflows (Nivel 1) ───────────────────────
   {
-    sku: 'AUTO-001',
-    nombre: 'Workflow Individual (Nivel 1)',
-    categoria: 'automatizacion',
-    segmento: 'ambos',
-    precioAncla: 'desde $400',
-    setup: 400,
-    recurring: 134,
-    descripcionCorta:
-      'Un workflow lineal sin IA (trigger → acción → resultado), vendido suelto. Retainer opcional SUP-001 $134/mes.',
-  },
-  {
     sku: 'AUTO-002',
-    nombre: 'Paquete Automatización Starter',
+    nombre: 'Automatización Agéntica a Medida',
     categoria: 'automatizacion',
     segmento: 'ambos',
-    precioAncla: 'desde $750',
-    setup: 750,
-    recurring: 134,
+    precioAncla: 'setup desde $747 + retainer',
+    setup: 747,
+    recurring: 137,
     descripcionCorta:
-      'Paquete de entrada vendible: 1 workflow + onboarding + primer mes de soporte. Retainer desde $134/mes (2º mes).',
-  },
-  {
-    sku: 'AUTO-003',
-    nombre: 'Workflow Nivel 1.5 (IA puntual)',
-    categoria: 'automatizacion',
-    segmento: 'ambos',
-    precioAncla: 'desde $500',
-    setup: 500,
-    recurring: 143,
-    descripcionCorta:
-      'Workflow con un nodo de IA puntual (ej. procesamiento de facturas). Retainer SUP-002 $143/mes.',
+      'Producto estrella: sistema agéntico scoped por diagnóstico (calificación de leads, cotizaciones, ops multi-sistema, documentos). Los flujos lineales son features, no producto. Retainer = operación.',
   },
   {
     sku: 'AUTO-010',
     nombre: 'Suite Automatización (3–5 workflows)',
     categoria: 'automatizacion',
     segmento: 'pequena',
-    precioAncla: 'desde $2,000',
-    setup: 2000,
-    recurring: 356,
+    precioAncla: 'desde $1,997',
+    setup: 1997,
+    recurring: 357,
     descripcionCorta:
-      'Diagnóstico + 3 a 5 workflows + dashboard + capacitación. Retainer SUP-010 $356/mes.',
+      'Diagnóstico + 3 a 5 workflows + dashboard + capacitación. Retainer SUP-010 $357/mes.',
   },
   {
     sku: 'AUTO-020',
     nombre: 'Suite Automatización Completa (6–10 workflows)',
     categoria: 'automatizacion',
     segmento: 'pequena',
-    precioAncla: 'desde $4,000',
-    setup: 4000,
-    recurring: 716,
+    precioAncla: 'desde $3,997',
+    setup: 3997,
+    recurring: 717,
     descripcionCorta:
-      'Auditoría + 6 a 10 workflows + chatbot + social media + soporte. Retainer SUP-020 $716/mes.',
+      'Auditoría + 6 a 10 workflows + chatbot + social media + soporte. Retainer SUP-020 $717/mes.',
   },
+  // AUTO-001 (Workflow Individual N1) ahora es componente interno de cotización,
+  // no tarjeta pública (flujos lineales commoditizados por MCP nativo, v1.2).
+  // AUTO-003 (Workflow N1.5 IA puntual) idem — componente interno.
+  // AUTO-030 (Sistema Reviews Automatizado) ARCHIVADO standalone en v1.2 (backlog).
+
+  // ── 6.7 Operaciones (agéntico recurrente) ──────────────────────────
   {
-    sku: 'AUTO-030',
-    nombre: 'Sistema Reviews Automatizado',
-    categoria: 'automatizacion',
+    sku: 'OPS-001',
+    nombre: 'Investigador de Mercado Semanal',
+    categoria: 'operaciones',
     segmento: 'ambos',
-    precioAncla: 'desde $800',
-    setup: 800,
-    recurring: null,
+    precioAncla: 'desde $97/mes',
+    setup: null,
+    recurring: 97,
     descripcionCorta:
-      'Monitoreo de GBP + respuestas con IA + solicitud automática de reviews.',
+      'Agente semanal que investiga tu nicho + tus 2 productos bandera → análisis de mercado al correo (tendencias, competencia, precios). $97/mes (entrada) / $147/mes (profundo). Señal pública curada + síntesis IA.',
   },
 
   // ── 6.3 Chatbots / Agentes IA (Nivel 2) ────────────────────────────
@@ -255,46 +227,57 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Chatbot Express (plantilla WhatsApp)',
     categoria: 'chatbot',
     segmento: 'micro',
-    precioAncla: 'desde $600 + $297/mes',
-    setup: 600,
+    precioAncla: '$597 + $297/mes',
+    setup: 597,
     recurring: 297,
     descripcionCorta:
-      'Bot de plantilla WhatsApp: FAQ + captura de lead. Setup rápido. Retainer desde $297/mes.',
+      'BOT Express (micro): plantilla WhatsApp FAQ + captura de lead. Setup rápido. Retainer $297/mes.',
   },
   {
     sku: 'BOT-002',
-    nombre: 'Chatbot Custom (flujos + integraciones)',
+    nombre: 'Chatbot / Agente IA Custom Agéntico',
     categoria: 'chatbot',
     segmento: 'pequena',
-    precioAncla: 'desde $2,500 + $297/mes',
-    setup: 2500,
+    precioAncla: '$1,497 + $437/mes',
+    setup: 1497,
     recurring: 437,
     descripcionCorta:
-      'Agente IA a medida con knowledge base (RAG), voz e integraciones. Retainer $437/mes (ancla pública desde $297/mes).',
+      'Agente IA agéntico a medida: RAG + agendamiento en vivo contra calendario + multimodal + integraciones. Ideal dental/estético. Retainer $437/mes.',
   },
   {
     sku: 'BOT-004',
     nombre: 'AI Chatbot Web',
     categoria: 'chatbot',
     segmento: 'ambos',
-    precioAncla: 'desde $2,500 + $297/mes',
-    setup: 2500,
+    precioAncla: 'desde $2,497 + $437/mes',
+    setup: 2497,
     recurring: 437,
     descripcionCorta:
       'Chatbot IA embebido en el sitio web con knowledge base y escalación. Retainer $437/mes.',
+  },
+  {
+    sku: 'BOT-VOZ',
+    nombre: 'Voz / Llamadas IA (referido)',
+    categoria: 'chatbot',
+    segmento: 'ambos',
+    precioAncla: 'integración + retainer',
+    setup: null,
+    recurring: null,
+    descripcionCorta:
+      'Integración y gestión sobre plataformas de terceros (Synthflow / Goodcall, ideal dental). NO se construye infra de voz; se integra y se gestiona.',
   },
 
   // ── 6.4 Finanzas ───────────────────────────────────────────────────
   {
     sku: 'FIN-001',
-    nombre: 'Dashboard Financiero con IA (PROYECTO)',
+    nombre: 'Tablero Financiero Inteligente',
     categoria: 'finanzas',
     segmento: 'pequena',
-    precioAncla: '$2,000 setup + $197/mes',
-    setup: 2000,
-    recurring: 197,
+    precioAncla: 'setup desde $997 + $147/mes',
+    setup: 997,
+    recurring: 147,
     descripcionCorta:
-      'PROYECTO a medida (NO SaaS): KPIs, gráficos, análisis IA y conexión POS/contabilidad. El SaaS de finanzas es SOMATT (marca aparte).',
+      'Bundle done-for-you de 3 capas: integración de datos + dashboard IA + asesoría. Visibilidad financiera diaria (refresh diario). NO es SOMATT (self-serve, marca aparte) ni un sistema contable completo. $147/mes (1h) o $197/mes (90min).',
   },
 
   // ── 6.5 Consultoría ────────────────────────────────────────────────
@@ -303,8 +286,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Consultoría Digital (por hora)',
     categoria: 'consultoria',
     segmento: 'ambos',
-    precioAncla: '$200/hr',
-    setup: 200,
+    precioAncla: '$197/hr',
+    setup: 197,
     recurring: null,
     descripcionCorta: 'Sesión de consultoría 1-on-1 por hora.',
   },
@@ -313,9 +296,9 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Diagnóstico de Automatización IA',
     categoria: 'consultoria',
     segmento: 'pequena',
-    precioAncla: '$497 one-shot + retainer desde $1,500/mes',
+    precioAncla: '$497 one-shot + retainer desde $1,497/mes',
     setup: 497,
-    recurring: 1500,
+    recurring: 1497,
     descripcionCorta:
       'One-shot $497: descubrimiento 90 min + auditoría + hoja de ruta priorizada + presentación. Acreditable a un proyecto. Retainer opcional.',
   },
@@ -324,8 +307,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Auditoría Presencia Digital',
     categoria: 'consultoria',
     segmento: 'pequena',
-    precioAncla: 'desde $1,500',
-    setup: 1500,
+    precioAncla: 'desde $1,497',
+    setup: 1497,
     recurring: null,
     descripcionCorta:
       'Análisis completo de presencia digital + reporte + plan de acción.',
@@ -335,8 +318,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Plan de Negocios Profesional',
     categoria: 'consultoria',
     segmento: 'pequena',
-    precioAncla: 'desde $5,000',
-    setup: 5000,
+    precioAncla: 'desde $4,997',
+    setup: 4997,
     recurring: null,
     descripcionCorta:
       'Plan de negocios completo con análisis de mercado y proyecciones financieras.',
@@ -353,28 +336,39 @@ export const SERVICIOS: Servicio[] = [
       'Evaluación gratuita de 30 min (Finanzas / Ops / Marketing). Lead magnet.',
   },
 
-  // ── 6.6 Capacitación ───────────────────────────────────────────────
-  {
-    sku: 'CAP-001',
-    nombre: 'Taller IA Grupal (flat, medio día)',
-    categoria: 'capacitacion',
-    segmento: 'pequena',
-    precioAncla: 'desde $1,500 (flat, no por persona)',
-    setup: 1500,
-    recurring: null,
-    descripcionCorta:
-      'Taller de capacitación en IA para todo el equipo, precio flat por taller. Medio día.',
-  },
+  // ── 6.6 Academy / Capacitación (2 dimensiones: 1-on-1 vs empresa) ───
   {
     sku: 'CAP-002',
-    nombre: 'Mentoría / Sesión Privada IA',
+    nombre: 'Academy — Sesión Esencial (1-on-1, 3h)',
     categoria: 'capacitacion',
     segmento: 'ambos',
-    precioAncla: 'desde $600 / 2h',
-    setup: 600,
+    precioAncla: '$297',
+    setup: 297,
     recurring: null,
     descripcionCorta:
-      'Mentoría privada 1-on-1 de capacitación en IA. Tiers $200 / $349 / $899 según duración.',
+      'Sesión privada 1-on-1 de 3h: configurar cuentas IA (Claude/Gemini) + Projects + NotebookLM + fundamentos + casos prácticos de tu negocio.',
+  },
+  {
+    sku: 'CAP-003',
+    nombre: 'Academy — Intensivo Personalizado (1-on-1, 6h)',
+    categoria: 'capacitacion',
+    segmento: 'ambos',
+    precioAncla: '$497',
+    setup: 497,
+    recurring: null,
+    descripcionCorta:
+      'Sesión/multi-sesión 1-on-1 de 6h: lo de la Sesión Esencial + automatización + arquitectura de workflows + (premium opcional) terminal/Claude Code con MCPs.',
+  },
+  {
+    sku: 'CAP-001',
+    nombre: 'Academy — Taller Empresarial (grupo, flat)',
+    categoria: 'capacitacion',
+    segmento: 'pequena',
+    precioAncla: '$1,497 (flat, no por persona)',
+    setup: 1497,
+    recurring: null,
+    descripcionCorta:
+      'Taller de capacitación en IA para todo el equipo/staff, precio flat por taller.',
   },
 
   // ── 6.7 SEO / Monitoreo ────────────────────────────────────────────
@@ -383,44 +377,66 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'SEO Local (setup + retainer)',
     categoria: 'seo',
     segmento: 'ambos',
-    precioAncla: 'setup desde $400 + desde $297/mes',
-    setup: 400,
-    recurring: 297,
+    precioAncla: 'setup $397 + $127/mes',
+    setup: 397,
+    recurring: 127,
     descripcionCorta:
-      'Optimización de SEO local (keywords, on-page, GBP) + monitoreo y mejora continua.',
+      'Optimización de SEO local (keywords, on-page, GBP) + monitoreo y mantenimiento continuo = SEO Sentinel aplicado. NO es campaña activa de contenido/links.',
   },
 
   // ── 6.8 Mantenimiento (retainers hosting/soporte) ──────────────────
   {
     sku: 'MNT-000',
-    nombre: 'Mantenimiento Essentials',
+    nombre: 'Mantenimiento Essentials (base)',
     categoria: 'mantenimiento',
     segmento: 'micro',
     precioAncla: '$97/mes',
     setup: null,
     recurring: 97,
     descripcionCorta:
-      'Monitoreo + 1 workflow ligero, hosting, SSL, uptime. Tier real de entrada (no es gancho falso).',
+      'Base sin asesoría: monitoreo + arreglo de APIs cuando se rompen + ajustes menores, hosting, SSL, uptime. Tier real de entrada.',
   },
   {
     sku: 'MNT-001',
-    nombre: 'Mantenimiento Standard',
+    nombre: 'Mantenimiento Standard (base)',
     categoria: 'mantenimiento',
     segmento: 'micro',
-    precioAncla: '$148/mes',
+    precioAncla: '$147/mes',
     setup: null,
-    recurring: 148,
+    recurring: 147,
     descripcionCorta:
-      'Workflow completo + soporte: hosting Vercel, SSL, monitoreo, 2 ajustes/mes, soporte por ticket.',
+      'Base sin asesoría: workflow completo + soporte, hosting Vercel, SSL, monitoreo, 2 ajustes/mes, soporte por ticket.',
+  },
+  {
+    sku: 'MNT-002',
+    nombre: 'Add-on Asesoría/Revisión (1h)',
+    categoria: 'mantenimiento',
+    segmento: 'ambos',
+    precioAncla: '+$147/mes',
+    setup: null,
+    recurring: 147,
+    descripcionCorta:
+      'Add-on de 1h de asesoría/revisión mensual sobre el mantenimiento base.',
+  },
+  {
+    sku: 'MNT-003',
+    nombre: 'Add-on Asesoría/Revisión (90min)',
+    categoria: 'mantenimiento',
+    segmento: 'ambos',
+    precioAncla: '+$197/mes',
+    setup: null,
+    recurring: 197,
+    descripcionCorta:
+      'Add-on de 90min de asesoría/revisión mensual sobre el mantenimiento base.',
   },
   {
     sku: 'MNT-010',
     nombre: 'Mantenimiento Web Growth',
     categoria: 'mantenimiento',
     segmento: 'pequena',
-    precioAncla: '$349/mes',
+    precioAncla: '$347/mes',
     setup: null,
-    recurring: 349,
+    recurring: 347,
     descripcionCorta: 'Standard + 5 ajustes/mes + analytics mensual.',
   },
   {
@@ -428,9 +444,9 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Mantenimiento App Scale',
     categoria: 'mantenimiento',
     segmento: 'pequena',
-    precioAncla: '$726/mes',
+    precioAncla: '$727/mes',
     setup: null,
-    recurring: 726,
+    recurring: 727,
     descripcionCorta: 'Growth + DB + updates + ajustes ilimitados.',
   },
 ];
@@ -444,14 +460,14 @@ export const SERVICIOS: Servicio[] = [
 export const PRODUCTOS: Servicio[] = [
   {
     sku: 'PRD-001',
-    nombre: 'Smart Invoice Tracker',
+    nombre: 'Captura Automática de Facturas de Proveedores',
     categoria: 'producto',
     segmento: 'ambos',
-    precioAncla: 'desde $97/mes',
+    precioAncla: '$97/mes',
     setup: null,
     recurring: 97,
     descripcionCorta:
-      'Rastrea facturas pendientes y envía recordatorios. $97 (Essentials) / $197 (Standard). En producción.',
+      'Un asistente de IA lee las facturas que te envían tus proveedores, extrae los datos (proveedor, monto, fecha, categoría) y los registra en tu Excel. NO genera facturas — organiza las que recibes. En producción.',
   },
   {
     sku: 'PRD-002',
