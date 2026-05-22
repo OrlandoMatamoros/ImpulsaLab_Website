@@ -33,9 +33,9 @@ export default function MentoriaPersonalizadaPage() {
   const [selectedTier, setSelectedTier] = useState<'basic' | 'standard' | 'premium'>('standard')
 
   const prices = {
-    basic: 200,
-    standard: 349,
-    premium: 899,
+    basic: 297,
+    standard: 497,
+    premium: 997,
   }
 
   const currentTierData = mp.tiers[selectedTier]
@@ -97,7 +97,7 @@ export default function MentoriaPersonalizadaPage() {
                   <DollarSign className="w-5 h-5" />
                   <span className="text-sm font-medium">{mp.desdeLabel}</span>
                 </div>
-                <div className="text-3xl font-bold">$200</div>
+                <div className="text-3xl font-bold">$297</div>
               </div>
             </div>
 
@@ -289,9 +289,9 @@ export default function MentoriaPersonalizadaPage() {
                 <thead>
                   <tr className="bg-slate-900 text-white">
                     <th className="p-4 text-left font-bold">{mp.caracteristica}</th>
-                    <th className="p-4 text-center font-bold">BASIC<br/><span className="text-emerald-400">$200</span></th>
-                    <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$349</span></th>
-                    <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$899</span></th>
+                    <th className="p-4 text-center font-bold">BASIC<br/><span className="text-emerald-400">$297</span></th>
+                    <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$497</span></th>
+                    <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$997</span></th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
@@ -359,8 +359,8 @@ export default function MentoriaPersonalizadaPage() {
               {mp.transformacion}
             </h2>
             <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              <span className="font-bold text-white text-3xl">$200</span> {mp.desdeFundamentos}
-              {' '}<span className="font-bold text-white text-3xl">$349</span> {mp.desdeImplementas}
+              <span className="font-bold text-white text-3xl">$297</span> {mp.desdeFundamentos}
+              {' '}<span className="font-bold text-white text-3xl">$497</span> {mp.desdeImplementas}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link

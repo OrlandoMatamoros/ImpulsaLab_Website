@@ -62,7 +62,7 @@ export const capacitacionEN = {
         chip: "Survival",
         name: "AI Fundamentals",
         desc: "For business owners who want to understand and use AI from scratch",
-        price: "From $200 / $400",
+        price: "From $297 / $497",
         outcomes: [
           "Use ChatGPT/Claude for daily business tasks",
           "Craft effective prompts for emails, proposals, and content",
@@ -76,7 +76,7 @@ export const capacitacionEN = {
         chip: "Growth",
         name: "AI in Action",
         desc: "For teams ready to implement AI in their processes",
-        price: "From $349 / $749",
+        price: "From $497 / $747",
         outcomes: [
           "Build custom GPTs for your business",
           "Deploy real automation workflows",
@@ -91,7 +91,7 @@ export const capacitacionEN = {
         chip: "Expansion",
         name: "AI Transformation",
         desc: "For companies ready to transform their whole operation with AI",
-        price: "From $899 / $2,099",
+        price: "From $997 / $1,497",
         outcomes: [
           "Design your company's full AI strategy",
           "Deploy AI Agents with your own knowledge base",

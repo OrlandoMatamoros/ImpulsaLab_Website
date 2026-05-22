@@ -36,9 +36,9 @@ export default function EquiposEmpresarialesPage() {
   const [additionalPeople, setAdditionalPeople] = useState(0)
 
   const prices = {
-    workshop: 400,
-    standard: 749,
-    premium: 2099,
+    workshop: 497,
+    standard: 997,
+    premium: 1497,
   }
 
   const currentTierData = ep.tiers[selectedTier]
@@ -110,7 +110,7 @@ export default function EquiposEmpresarialesPage() {
                   <DollarSign className="w-5 h-5" />
                   <span className="text-sm font-medium">{ep.desdeLabel}</span>
                 </div>
-                <div className="text-3xl font-bold">$400</div>
+                <div className="text-3xl font-bold">$497</div>
               </div>
             </div>
 
@@ -401,9 +401,9 @@ export default function EquiposEmpresarialesPage() {
                 <thead>
                   <tr className="bg-slate-900 text-white">
                     <th className="p-4 text-left font-bold">{ep.caracteristica}</th>
-                    <th className="p-4 text-center font-bold">WORKSHOP<br/><span className="text-emerald-400">$400</span></th>
-                    <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$749</span></th>
-                    <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$2,099</span></th>
+                    <th className="p-4 text-center font-bold">WORKSHOP<br/><span className="text-emerald-400">$497</span></th>
+                    <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$997</span></th>
+                    <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$1,497</span></th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
@@ -488,10 +488,10 @@ export default function EquiposEmpresarialesPage() {
               {ep.impulsaEquipo}
             </h2>
             <p className="text-xl text-blue-100 mb-4">
-              {ep.desdeLabel} <span className="font-bold text-white text-3xl">$400</span> (3h) {ep.desdeLabel.toLowerCase() === 'desde' ? 'hasta' : 'to'} <span className="font-bold text-white text-3xl">$2,099</span> (2 {ep.desdeLabel.toLowerCase() === 'desde' ? 'dias' : 'days'})
+              {ep.desdeLabel} <span className="font-bold text-white text-3xl">$497</span> (3h) {ep.desdeLabel.toLowerCase() === 'desde' ? 'hasta' : 'to'} <span className="font-bold text-white text-3xl">$1,497</span> (2 {ep.desdeLabel.toLowerCase() === 'desde' ? 'dias' : 'days'})
             </p>
             <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
-              {ep.inversionDesde} <span className="font-bold">$80-$150</span> {ep.porPersonaTransformar}
+              {ep.inversionDesde} <span className="font-bold">$99-$150</span> {ep.porPersonaTransformar}
               <br/>{ep.personaAdicionalPrecio} <span className="font-bold">+$59</span>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
