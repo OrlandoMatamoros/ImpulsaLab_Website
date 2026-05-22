@@ -58,6 +58,23 @@ export const serviciosHubES = {
       ],
       cta: 'Ver Servicios de Marketing',
     },
+    consultoriaIA: {
+      badge: 'Eje de IA',
+      title: 'Consultoría IA para PYMEs',
+      description: 'Implementamos inteligencia artificial real en tu operación: agentes, chatbots y automatizaciones con resultados medibles, no teoría.',
+      cta: 'Ver Consultoría IA',
+    },
+    capacitacion: {
+      badge: 'Academy',
+      title: 'Capacitación en IA',
+      description: 'Talleres y mentorías para que tu equipo domine la inteligencia artificial aplicada a tu negocio.',
+      cta: 'Ver Academy',
+    },
+    hubCards: {
+      sectionTitle: 'Nuestros servicios',
+      sectionSubtitle: 'Elige el eje donde tu negocio necesita avanzar primero.',
+      ctaLabel: 'Ver detalle',
+    },
     whySection: {
       title: 'Por que elegir el Metodo Impulsa?',
       description: 'A diferencia de las consultoras tradicionales, en Impulsa Lab utilizamos el Sistema de Navegacion por Coordenadas. No aplicamos la misma medicina a todos; primero diagnosticamos tu coordenada exacta de madurez y luego prescribimos la solucion que maximice tu ROI.',

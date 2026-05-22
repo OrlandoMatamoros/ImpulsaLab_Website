@@ -43,8 +43,6 @@ const HeaderAdminTools = dynamic(() => import('@/components/HeaderAdminTools'), 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMobileTools, setShowMobileTools] = useState(false)
-  const [showMobileOperations, setShowMobileOperations] = useState(false)
-  const [showMobileMarketing, setShowMobileMarketing] = useState(false)
   const [showMobileAcademy, setShowMobileAcademy] = useState(false)
 
   const { language, setLanguage, t } = useLanguage()
@@ -326,46 +324,10 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Servicios dropdown — agrupa Finanzas, Operaciones y Marketing */}
-                <div className="nav-dropdown">
-                  <Link href="/servicios" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
-                    {t.nav.servicios}
-                    <ChevronDown className="w-3 h-3 opacity-50" />
-                  </Link>
-                  <div className="nav-dropdown-menu" style={{ minWidth: '270px' }}>
-                    <Link href="/servicios/consultoria-ia-para-pymes" className="dropdown-item dropdown-item-agentes" style={{ fontWeight: 600 }}>
-                      {t.nav.consultoriaIA}
-                    </Link>
-                    <Link href="/servicios" className="dropdown-item dropdown-item-all">
-                      {t.nav.verTodosServicios} →
-                    </Link>
-                    <div className="dropdown-section-label">{t.nav.finanzas}</div>
-                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-all" style={{ fontWeight: 400, borderBottom: 'none', marginBottom: 0 }}>
-                      {t.nav.vistaGeneral}
-                    </Link>
-                    <Link href="https://nova.tuimpulsalab.com" target="_blank" rel="noopener noreferrer" className="dropdown-item dropdown-item-nova">
-                      <span className="flex items-center justify-between">
-                        <span>Nova Finance</span>
-                        <span className="text-xs bg-gradient-to-r from-brand-navy to-brand-cyan text-white px-2 py-0.5 rounded-full font-bold">
-                          NUEVO
-                        </span>
-                      </span>
-                    </Link>
-                    <Link href="/servicios/finanzas#precios" className="dropdown-item dropdown-item-nova">
-                      {t.nav.planesPrecios}
-                    </Link>
-                    <div className="dropdown-section-label">{t.nav.operaciones}</div>
-                    <Link href="/servicios/operaciones" className="dropdown-item" style={{ fontWeight: 400 }}>{t.nav.vistaGeneral}</Link>
-                    <Link href="/servicios/operaciones/agentes" className="dropdown-item dropdown-item-agentes">{t.nav.agente4IA}</Link>
-                    <Link href="/servicios/operaciones/arsenal" className="dropdown-item dropdown-item-arsenal">{t.nav.arsenal5670}</Link>
-                    <Link href="/servicios/operaciones/plataformas" className="dropdown-item dropdown-item-prompt">{t.nav.plataformas}</Link>
-                    <Link href="/servicios/operaciones/precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
-                    <div className="dropdown-section-label">{t.nav.marketing}</div>
-                    <Link href="/servicios/marketing" className="dropdown-item" style={{ fontWeight: 400 }}>{t.nav.vistaGeneral}</Link>
-                    <Link href="/servicios/marketing#arsenal-ia" className="dropdown-item dropdown-item-prompt">{t.nav.arsenalIA}</Link>
-                    <Link href="/servicios/marketing#precios" className="dropdown-item dropdown-item-nova">{t.nav.planesPrecios}</Link>
-                  </div>
-                </div>
+                {/* Servicios — link directo simple al hub /servicios (sin dropdown) */}
+                <Link href="/servicios" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
+                  {t.nav.servicios}
+                </Link>
 
                 <Link href="/blog" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   Blog
@@ -516,92 +478,14 @@ export default function Header() {
                 )}
               </div>
 
-              {/* Servicios — link a /servicios (paraguas) */}
-              <Link
-                href="/servicios/consultoria-ia-para-pymes"
-                className="block text-gray-700 font-semibold hover:text-brand-navy py-3 pl-2 text-sm"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.nav.consultoriaIA}
-              </Link>
+              {/* Servicios — link directo simple al hub /servicios (sin dropdown) */}
               <Link
                 href="/servicios"
-                className="block text-brand-navy font-semibold hover:text-brand-cyan py-3 text-sm"
+                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {t.nav.verTodosServicios} →
+                {t.nav.servicios}
               </Link>
-
-              {/* Finanzas móvil */}
-              <Link
-                href="/servicios/finanzas"
-                className="block text-gray-700 font-medium hover:text-brand-navy py-3 pl-2"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.nav.finanzas}
-              </Link>
-
-              {/* Operaciones móvil */}
-              <div>
-                <button
-                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
-                  onClick={() => setShowMobileOperations(!showMobileOperations)}
-                  aria-label="Expandir sección Operaciones"
-                  aria-expanded={showMobileOperations}
-                  aria-controls="mobile-panel-operaciones"
-                >
-                  <span>{t.nav.operaciones}</span>
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileOperations ? 'rotate-180' : ''}`} />
-                </button>
-
-                {showMobileOperations && (
-                  <div id="mobile-panel-operaciones" className="pl-4 space-y-1 mt-2">
-                    <Link href="/servicios/operaciones" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.vistaGeneral}
-                    </Link>
-                    <Link href="/servicios/operaciones/agentes" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.agente4IA}
-                    </Link>
-                    <Link href="/servicios/operaciones/arsenal" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.arsenal5670}
-                    </Link>
-                    <Link href="/servicios/operaciones/plataformas" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.plataformas}
-                    </Link>
-                    <Link href="/servicios/operaciones/precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileOperations(false) }}>
-                      {t.nav.planesPrecios}
-                    </Link>
-                  </div>
-                )}
-              </div>
-
-              {/* Marketing móvil */}
-              <div>
-                <button
-                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
-                  onClick={() => setShowMobileMarketing(!showMobileMarketing)}
-                  aria-label="Expandir sección Marketing"
-                  aria-expanded={showMobileMarketing}
-                  aria-controls="mobile-panel-marketing"
-                >
-                  <span>{t.nav.marketing}</span>
-                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileMarketing ? 'rotate-180' : ''}`} />
-                </button>
-
-                {showMobileMarketing && (
-                  <div id="mobile-panel-marketing" className="pl-4 space-y-1 mt-2">
-                    <Link href="/servicios/marketing" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
-                      {t.nav.vistaGeneral}
-                    </Link>
-                    <Link href="/servicios/marketing#arsenal-ia" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
-                      {t.nav.arsenalIA}
-                    </Link>
-                    <Link href="/servicios/marketing#precios" className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm" onClick={() => { setIsMenuOpen(false); setShowMobileMarketing(false) }}>
-                      {t.nav.planesPrecios}
-                    </Link>
-                  </div>
-                )}
-              </div>
 
               <Link
                 href="/blog"

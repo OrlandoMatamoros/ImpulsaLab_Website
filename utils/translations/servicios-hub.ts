@@ -56,6 +56,23 @@ export const serviciosHubES = {
       ],
       cta: 'Ver Servicios de Marketing',
     },
+    consultoriaIA: {
+      badge: 'Eje de IA',
+      title: 'Consultoría IA para PYMEs',
+      description: 'Implementamos inteligencia artificial real en tu operación: agentes, chatbots y automatizaciones con resultados medibles, no teoría.',
+      cta: 'Ver Consultoría IA',
+    },
+    capacitacion: {
+      badge: 'Academy',
+      title: 'Capacitación en IA',
+      description: 'Talleres y mentorías para que tu equipo domine la inteligencia artificial aplicada a tu negocio.',
+      cta: 'Ver Academy',
+    },
+    hubCards: {
+      sectionTitle: 'Nuestros servicios',
+      sectionSubtitle: 'Elige el eje donde tu negocio necesita avanzar primero.',
+      ctaLabel: 'Ver detalle',
+    },
     whySection: {
       title: 'Por que elegir el Metodo Impulsa?',
       description: 'A diferencia de las consultoras tradicionales, en Impulsa Lab utilizamos el Sistema de Navegacion por Coordenadas. No aplicamos la misma medicina a todos; primero diagnosticamos tu coordenada exacta de madurez y luego prescribimos la solucion que maximice tu ROI.',
@@ -132,6 +149,23 @@ export const serviciosHubEN = {
         },
       ],
       cta: 'View Marketing Services',
+    },
+    consultoriaIA: {
+      badge: 'AI Pillar',
+      title: 'AI Consulting for SMBs',
+      description: 'We implement real artificial intelligence into your operation: agents, chatbots and automations with measurable results, not theory.',
+      cta: 'View AI Consulting',
+    },
+    capacitacion: {
+      badge: 'Academy',
+      title: 'AI Training',
+      description: 'Workshops and mentoring so your team masters artificial intelligence applied to your business.',
+      cta: 'View Academy',
+    },
+    hubCards: {
+      sectionTitle: 'Our services',
+      sectionSubtitle: 'Choose the pillar where your business needs to move forward first.',
+      ctaLabel: 'View details',
     },
     whySection: {
       title: 'Why choose the Impulsa Method?',

@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { DollarSign, Cog, Megaphone, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react'
+import { DollarSign, Cog, Megaphone, BrainCircuit, GraduationCap, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react'
+import { getServicioPorSku } from '@/lib/services-catalog'
 
 const pillarConfig = [
   {
@@ -34,6 +35,66 @@ const pillarConfig = [
   },
 ]
 
+// Tarjetas-hub: una por servicio. Precio "desde $X" y descripción corta
+// se LEEN del catálogo canónico (lib/services-catalog.ts) — no se hardcodean.
+const hubCardConfig = [
+  {
+    key: 'finanzas' as const,
+    href: '/servicios/finanzas',
+    sku: 'FIN-001',
+    icon: DollarSign,
+    iconBg: 'bg-blue-100',
+    iconColor: 'text-blue-700',
+    badge: 'bg-blue-100 text-blue-800',
+    border: 'border-blue-200',
+    accent: 'text-blue-700',
+  },
+  {
+    key: 'operaciones' as const,
+    href: '/servicios/operaciones',
+    sku: 'AUTO-002',
+    icon: Cog,
+    iconBg: 'bg-green-100',
+    iconColor: 'text-green-700',
+    badge: 'bg-green-100 text-green-800',
+    border: 'border-green-200',
+    accent: 'text-green-700',
+  },
+  {
+    key: 'marketing' as const,
+    href: '/servicios/marketing',
+    sku: 'MKT-001',
+    icon: Megaphone,
+    iconBg: 'bg-purple-100',
+    iconColor: 'text-purple-700',
+    badge: 'bg-purple-100 text-purple-800',
+    border: 'border-purple-200',
+    accent: 'text-purple-700',
+  },
+  {
+    key: 'consultoriaIA' as const,
+    href: '/servicios/consultoria-ia-para-pymes',
+    sku: 'CON-002',
+    icon: BrainCircuit,
+    iconBg: 'bg-cyan-100',
+    iconColor: 'text-cyan-700',
+    badge: 'bg-cyan-100 text-cyan-800',
+    border: 'border-cyan-200',
+    accent: 'text-cyan-700',
+  },
+  {
+    key: 'capacitacion' as const,
+    href: '/capacitacion',
+    sku: 'CAP-001',
+    icon: GraduationCap,
+    iconBg: 'bg-amber-100',
+    iconColor: 'text-amber-700',
+    badge: 'bg-amber-100 text-amber-800',
+    border: 'border-amber-200',
+    accent: 'text-amber-700',
+  },
+]
+
 export default function ServiciosPage() {
   const { t } = useLanguage()
   const tp = t.serviciosHubPage
@@ -58,6 +119,57 @@ export default function ServiciosPage() {
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
               {tp.heroSubtitle}
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Tarjetas-hub: una por servicio, precio "desde $X" leído del catálogo */}
+      <section className="py-16 bg-slate-50">
+        <div className="container mx-auto px-4">
+          <div className="max-w-5xl mx-auto text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+              {tp.hubCards.sectionTitle}
+            </h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {tp.hubCards.sectionSubtitle}
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {hubCardConfig.map((card) => {
+              const data = tp[card.key]
+              const servicio = getServicioPorSku(card.sku)
+              const Icon = card.icon
+
+              return (
+                <Link
+                  key={card.key}
+                  href={card.href}
+                  className={`group flex flex-col rounded-2xl border ${card.border} bg-white p-6 shadow-sm hover:shadow-lg transition-shadow`}
+                >
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`w-12 h-12 ${card.iconBg} rounded-xl flex items-center justify-center`}>
+                      <Icon className={`w-6 h-6 ${card.iconColor}`} />
+                    </div>
+                    {servicio && (
+                      <span className={`text-sm font-bold px-3 py-1 rounded-full ${card.badge}`}>
+                        {servicio.precioAncla}
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="font-bold text-lg text-gray-900 mb-2">
+                    {data.title}
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed flex-grow">
+                    {servicio?.descripcionCorta ?? data.description}
+                  </p>
+                  <span className={`mt-5 inline-flex items-center gap-1.5 font-semibold ${card.accent} group-hover:gap-2.5 transition-all`}>
+                    {data.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </span>
+                </Link>
+              )
+            })}
           </div>
         </div>
       </section>

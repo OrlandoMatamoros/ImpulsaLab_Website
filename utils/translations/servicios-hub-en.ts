@@ -58,6 +58,23 @@ export const serviciosHubEN = {
       ],
       cta: 'View Marketing Services',
     },
+    consultoriaIA: {
+      badge: 'AI Pillar',
+      title: 'AI Consulting for SMBs',
+      description: 'We implement real artificial intelligence into your operation: agents, chatbots and automations with measurable results, not theory.',
+      cta: 'View AI Consulting',
+    },
+    capacitacion: {
+      badge: 'Academy',
+      title: 'AI Training',
+      description: 'Workshops and mentoring so your team masters artificial intelligence applied to your business.',
+      cta: 'View Academy',
+    },
+    hubCards: {
+      sectionTitle: 'Our services',
+      sectionSubtitle: 'Choose the pillar where your business needs to move forward first.',
+      ctaLabel: 'View details',
+    },
     whySection: {
       title: 'Why choose the Impulsa Method?',
       description: 'Unlike traditional consultancies, at Impulsa Lab we use the Coordinate Navigation System. We don\'t apply the same medicine to everyone; first we diagnose your exact maturity coordinate and then prescribe the solution that maximizes your ROI.',
