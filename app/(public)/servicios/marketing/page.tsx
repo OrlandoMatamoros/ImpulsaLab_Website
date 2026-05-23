@@ -5,7 +5,6 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { LINKS } from '@/lib/constants'
 import { ArrowRight, Target, Megaphone, PenTool, TrendingUp, CheckCircle2, Package, Rocket, Play, X, ChevronLeft, ChevronRight } from 'lucide-react'
-import ProtectedSection from '@/components/ProtectedSection'
 import ContentStrategistChat from '@/components/services/marketing/ContentStrategistChat'
 import AIToolsShowcase from '@/components/services/marketing/AIToolsShowcase'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
@@ -245,78 +244,6 @@ export default function MarketingPage() {
        </div>
      </section>
 
-     {/* Servicios por Etapa de Negocio */}
-     <section className="py-20 bg-gradient-to-b from-white to-purple-50">
-       <div className="container mx-auto px-4">
-         <div className="max-w-6xl mx-auto">
-           <div className="text-center mb-6">
-             <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-               Soluciones de Marketing para Cada Etapa de tu Negocio
-             </h2>
-             <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-               Desde tu primera landing page hasta una app web completa — escalamos contigo.
-             </p>
-           </div>
-           <div className="grid md:grid-cols-3 gap-8 mt-12">
-             {/* Supervivencia */}
-             <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-purple-400 hover:shadow-2xl transition-all duration-300">
-               <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
-               <p className="text-gray-600 text-sm mb-4">Negocio nuevo que necesita presencia digital</p>
-               <div className="text-3xl font-bold text-gray-900 mb-1">desde $697</div>
-               <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
-               <h4 className="font-semibold text-gray-800 mb-3">Landing Page + Social Media Setup</h4>
-               <div className="space-y-2 mb-8">
-                 {['Landing page profesional optimizada para conversión', 'Setup de redes sociales (Instagram, Facebook, Google Business)', 'Identidad visual básica (logo, colores, tipografía)', 'Social Media Setup: $647 adicional'].map((item, i) => (
-                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
-                 ))}
-               </div>
-               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Empezar con lo Básico</Link>
-             </div>
-             {/* Crecimiento */}
-             <div className="bg-gradient-to-br from-purple-50 to-indigo-50 rounded-2xl shadow-xl border-2 border-purple-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
-               <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
-               <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
-               <p className="text-gray-600 text-sm mb-4">Negocio listo para escalar su presencia digital</p>
-               <div className="text-3xl font-bold text-gray-900 mb-1">desde $2,497</div>
-               <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
-               <h4 className="font-semibold text-gray-800 mb-3">Website Profesional + Add-ons</h4>
-               <div className="space-y-2 mb-8">
-                 {['Sitio web multi-página con diseño premium', 'SEO técnico y optimización de velocidad', 'Blog integrado con estrategia de contenido AI', 'Integración con CRM y herramientas de marketing', 'Add-ons: Email marketing, Google Ads, Social Ads'].map((item, i) => (
-                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
-                 ))}
-               </div>
-               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Agenda tu Diagnóstico</Link>
-             </div>
-             {/* Expansión */}
-             <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-purple-400 hover:shadow-2xl transition-all duration-300">
-               <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
-               <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
-               <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ listo para dominar su mercado</p>
-               <div className="text-3xl font-bold text-gray-900 mb-1">desde $4,997</div>
-               <div className="text-sm text-gray-500 mb-6">Setup + mantenimiento desde $147/mes</div>
-               <h4 className="font-semibold text-gray-800 mb-3">App Web Custom</h4>
-               <div className="space-y-2 mb-8">
-                 {['App web a medida (portal de clientes, e-commerce, SaaS)', 'Automatización de marketing end-to-end', 'Dashboard de métricas y analytics en tiempo real', 'Integraciones API con todas tus herramientas', 'Soporte prioritario y mantenimiento continuo'].map((item, i) => (
-                   <div key={i} className="flex items-start gap-2"><CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" /><span className="text-gray-700 text-sm">{item}</span></div>
-                 ))}
-               </div>
-               <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition font-semibold">Solicitar Propuesta</Link>
-             </div>
-           </div>
-           <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
-             <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
-             <div className="grid md:grid-cols-3 gap-6 text-center">
-               <div><div className="text-sm text-gray-500 mb-1">Landing Page</div><div className="text-gray-400 line-through text-sm">NYC: $3,000-$8,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: desde $697</div></div>
-               <div><div className="text-sm text-gray-500 mb-1">Website Profesional</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$25,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: desde $2,497</div></div>
-               <div><div className="text-sm text-gray-500 mb-1">App Web Custom</div><div className="text-gray-400 line-through text-sm">NYC: $20,000-$150,000</div><div className="text-xl font-bold text-purple-600">Impulsa Lab: desde $4,997</div></div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </section>
-
      {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
      <AutomationVsEmployee
        vertical="marketing"
@@ -439,13 +366,7 @@ export default function MarketingPage() {
        </div>
      </section>
 
-     {/* CONTENIDO PROTEGIDO - MANTENIDO TAL CUAL */}
-     <ProtectedSection
-       message={t.marketingPage.protectedMessage}
-       showPreview={true}
-       previewBlur={false}
-     >
-       {/* Metodología Section */}
+     {/* Metodología Section */}
        <section className="py-16 bg-gray-50">
          <div className="container mx-auto px-4">
            <div className="max-w-4xl mx-auto">
@@ -501,84 +422,6 @@ export default function MarketingPage() {
          </div>
        </section>
 
-       {/* Planes Section - MANTENIDO */}
-       <section id="precios" className="py-16 bg-white scroll-mt-24">
-         <div className="container mx-auto px-4">
-           <div className="max-w-4xl mx-auto">
-             <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">
-               {t.marketingPage.plansTitle}
-             </h2>
-
-             <div className="grid md:grid-cols-2 gap-8">
-               {/* Plan Identidad */}
-               <div className="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-purple-500 transition-all duration-300 hover:shadow-xl">
-                 <div className="mb-4">
-                   <Package className="w-12 h-12 text-purple-600" />
-                 </div>
-                 <h3 className="text-2xl font-bold mb-4">{t.marketingPage.planIdentidad.name}</h3>
-                 <p className="text-gray-600 mb-6">
-                   {t.marketingPage.planIdentidad.description}
-                 </p>
-                 <div className="text-3xl font-bold mb-6">
-                   <span className="text-purple-600">{t.marketingPage.planIdentidad.priceFrom}</span>
-                   <div className="text-sm font-normal text-gray-500 mt-1">{t.marketingPage.planIdentidad.priceNote}</div>
-                 </div>
-                 <ul className="space-y-3 mb-8">
-                   {t.marketingPage.planIdentidad.features.map((feature, index) => (
-                     <li key={index} className="flex items-start gap-2">
-                       <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                       <span className="text-gray-700">{feature}</span>
-                     </li>
-                   ))}
-                 </ul>
-                 <Link
-                   href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-                 >
-                   {t.marketingPage.planIdentidad.cta}
-                 </Link>
-               </div>
-
-               {/* Plan Crecimiento */}
-               <div className="bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-500 rounded-lg p-8 relative hover:shadow-2xl transition-all duration-300">
-                 <div className="absolute -top-4 right-4 bg-purple-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                   {t.marketingPage.planCrecimiento.badge}
-                 </div>
-                 <div className="mb-4">
-                   <Rocket className="w-12 h-12 text-purple-600" />
-                 </div>
-                 <h3 className="text-2xl font-bold mb-4">{t.marketingPage.planCrecimiento.name}</h3>
-                 <p className="text-gray-600 mb-6">
-                   {t.marketingPage.planCrecimiento.description}
-                 </p>
-                 <div className="text-3xl font-bold mb-6">
-                   <span className="text-purple-600">{t.marketingPage.planCrecimiento.priceFrom}</span>
-                   <div className="text-sm font-normal text-gray-600 mt-1">{t.marketingPage.planCrecimiento.priceNote}</div>
-                 </div>
-                 <ul className="space-y-3 mb-8">
-                   {t.marketingPage.planCrecimiento.features.map((feature, index) => (
-                     <li key={index} className="flex items-start gap-2">
-                       <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5" />
-                       <span className="text-gray-700">{feature}</span>
-                     </li>
-                   ))}
-                 </ul>
-                 <Link
-                   href={`https://wa.me/13479043169?text=${encodeURIComponent('Hola Impulsa Lab, me interesa el paquete de Landing Express para mi negocio.')}`}
-                   target="_blank"
-                   rel="noopener noreferrer"
-                   className="block w-full text-center bg-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-purple-700 transition-colors"
-                 >
-                   {t.marketingPage.planCrecimiento.cta}
-                 </Link>
-               </div>
-             </div>
-           </div>
-         </div>
-       </section>
-     </ProtectedSection>
 
      {/* CTA Final MEJORADO */}
      <section className="py-20 bg-gradient-to-br from-purple-900 to-purple-700 text-white">

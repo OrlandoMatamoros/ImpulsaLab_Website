@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
+import AcademyToolsTicker from '@/components/services/AcademyToolsTicker'
 import {
   GraduationCap,
   CheckCircle2,
@@ -86,6 +87,9 @@ export default function ImpulsaAcademyPage() {
           </div>
         </div>
       </section>
+
+      {/* Academy Tools Ticker — logos reales de las herramientas que enseñamos */}
+      <AcademyToolsTicker />
 
       {/* Formato Presencial */}
       <section className="py-12 bg-blue-50">
