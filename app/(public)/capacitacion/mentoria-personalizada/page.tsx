@@ -12,30 +12,23 @@ import {
   Sparkles,
   Target,
   Brain,
-  Zap,
   Calendar,
   MessageSquare,
   MapPin,
   Award,
-  FileText,
-  Video,
-  Mail,
-  Settings,
-  Code,
-  TrendingUp,
-  Lightbulb,
-  Shield
+  Terminal,
 } from 'lucide-react'
+
+type TierKey = 'esencial' | 'intensivo'
 
 export default function MentoriaPersonalizadaPage() {
   const { t } = useLanguage()
   const mp = t.mentoriaPage
-  const [selectedTier, setSelectedTier] = useState<'basic' | 'standard' | 'premium'>('standard')
+  const [selectedTier, setSelectedTier] = useState<TierKey>('esencial')
 
-  const prices = {
-    basic: 297,
-    standard: 497,
-    premium: 997,
+  const prices: Record<TierKey, number> = {
+    esencial: 297,
+    intensivo: 497,
   }
 
   const currentTierData = mp.tiers[selectedTier]
@@ -53,7 +46,6 @@ export default function MentoriaPersonalizadaPage() {
 
         <div className="container mx-auto px-4 py-20 relative">
           <div className="max-w-4xl mx-auto">
-            {/* Back Link */}
             <Link
               href="/capacitacion"
               className="inline-flex items-center gap-2 text-emerald-200 hover:text-white mb-8 transition-colors group"
@@ -62,7 +54,6 @@ export default function MentoriaPersonalizadaPage() {
               {mp.volverAcademy}
             </Link>
 
-            {/* Badge */}
             <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-4 py-2 rounded-full text-sm font-semibold mb-6">
               <UserCheck className="w-4 h-4" />
               {mp.badgeText}
@@ -76,7 +67,6 @@ export default function MentoriaPersonalizadaPage() {
               {mp.heroSubtitle}
             </p>
 
-            {/* Stats Bar */}
             <div className="grid grid-cols-3 gap-4 bg-white/10 backdrop-blur rounded-2xl p-6 mb-8">
               <div>
                 <div className="flex items-center gap-2 text-emerald-200 mb-2">
@@ -101,7 +91,6 @@ export default function MentoriaPersonalizadaPage() {
               </div>
             </div>
 
-            {/* CTAs */}
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/#contacto"
@@ -138,18 +127,16 @@ export default function MentoriaPersonalizadaPage() {
             </div>
 
             {/* Tier Tabs */}
-            <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-4xl mx-auto">
-              {(['basic', 'standard', 'premium'] as const).map((tier) => (
+            <div className="flex flex-col md:flex-row gap-4 mb-12 max-w-3xl mx-auto">
+              {(['esencial', 'intensivo'] as const).map((tier) => (
                 <button
                   key={tier}
                   onClick={() => setSelectedTier(tier)}
                   className={`flex-1 p-6 rounded-2xl border-4 transition-all duration-300 ${
                     selectedTier === tier
-                      ? tier === 'basic'
+                      ? tier === 'esencial'
                         ? 'border-emerald-500 bg-emerald-50 scale-105 shadow-xl'
-                        : tier === 'standard'
-                        ? 'border-blue-500 bg-blue-50 scale-105 shadow-xl'
-                        : 'border-amber-500 bg-amber-50 scale-105 shadow-xl'
+                        : 'border-blue-500 bg-blue-50 scale-105 shadow-xl'
                       : 'border-gray-200 bg-white hover:border-gray-300'
                   }`}
                 >
@@ -173,15 +160,8 @@ export default function MentoriaPersonalizadaPage() {
 
             {/* Tier Content */}
             <div className={`bg-gradient-to-br ${
-              selectedTier === 'basic' ? 'from-emerald-50 to-teal-50' :
-              selectedTier === 'standard' ? 'from-blue-50 to-indigo-50' :
-              'from-amber-50 to-orange-50'
-            } rounded-3xl p-8 md:p-12 shadow-2xl border-4 ${
-              selectedTier === 'basic' ? 'border-emerald-200' :
-              selectedTier === 'standard' ? 'border-blue-200' :
-              'border-amber-200'
-            }`}>
-              {/* Header */}
+              selectedTier === 'esencial' ? 'from-emerald-50 to-teal-50 border-emerald-200' : 'from-blue-50 to-indigo-50 border-blue-200'
+            } rounded-3xl p-8 md:p-12 shadow-2xl border-4`}>
               <div className="text-center mb-12">
                 <h3 className="text-4xl font-bold text-slate-900 mb-4">
                   {currentTierData.name} - {currentTierData.subtitle}
@@ -206,9 +186,9 @@ export default function MentoriaPersonalizadaPage() {
                 <div className="space-y-6">
                   {currentTierData.modules.map((module, i) => (
                     <div key={i} className="bg-white rounded-2xl p-6 shadow-lg border-2 border-gray-100">
-                      <div className="flex items-start justify-between mb-4">
+                      <div className="flex items-start justify-between mb-4 gap-3">
                         <h5 className="text-xl font-bold text-slate-900">{module.title}</h5>
-                        <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold">
+                        <span className="px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-sm font-semibold whitespace-nowrap">
                           {module.time}
                         </span>
                       </div>
@@ -224,6 +204,18 @@ export default function MentoriaPersonalizadaPage() {
                   ))}
                 </div>
               </div>
+
+              {/* Terminal/MCP callout solo en intensivo */}
+              {selectedTier === 'intensivo' && (
+                <div className="mb-12 bg-slate-900 text-white rounded-2xl p-6 flex items-start gap-4 border border-slate-700">
+                  <div className="flex-shrink-0 p-3 bg-blue-600/20 rounded-xl">
+                    <Terminal className="w-6 h-6 text-blue-300" />
+                  </div>
+                  <p className="text-sm md:text-base text-slate-200 leading-relaxed">
+                    <span className="font-bold text-white">Premium opcional:</span> terminal con Claude Code + MCPs incluido para usuarios tecnicamente listos. No es requisito — el core del Intensivo te ensena automatizacion con las apps de IA.
+                  </p>
+                </div>
+              )}
 
               {/* Deliverables */}
               <div className="mb-12">
@@ -241,7 +233,7 @@ export default function MentoriaPersonalizadaPage() {
                 </div>
               </div>
 
-              {/* Pricing Comparison */}
+              {/* Pricing */}
               <div className="bg-white rounded-2xl p-8 shadow-xl border-2 border-gray-100">
                 <div className="text-center">
                   <div className="text-sm text-gray-600 mb-2">{mp.valorMercado}</div>
@@ -257,9 +249,7 @@ export default function MentoriaPersonalizadaPage() {
                   <Link
                     href="/#contacto"
                     className={`inline-block px-12 py-4 bg-gradient-to-r ${
-                      selectedTier === 'basic' ? 'from-emerald-600 to-teal-600' :
-                      selectedTier === 'standard' ? 'from-blue-600 to-indigo-600' :
-                      'from-amber-600 to-orange-600'
+                      selectedTier === 'esencial' ? 'from-emerald-600 to-teal-600' : 'from-blue-600 to-indigo-600'
                     } text-white rounded-xl font-semibold text-lg shadow-xl hover:shadow-2xl transform hover:scale-105 transition-all duration-300`}
                   >
                     {mp.agendar} {currentTierData.name}
@@ -274,7 +264,7 @@ export default function MentoriaPersonalizadaPage() {
       {/* Comparison Table */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
+          <div className="max-w-5xl mx-auto">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4">
                 {mp.comparacionCompleta}
@@ -289,18 +279,16 @@ export default function MentoriaPersonalizadaPage() {
                 <thead>
                   <tr className="bg-slate-900 text-white">
                     <th className="p-4 text-left font-bold">{mp.caracteristica}</th>
-                    <th className="p-4 text-center font-bold">BASIC<br/><span className="text-emerald-400">$297</span></th>
-                    <th className="p-4 text-center font-bold bg-blue-800">STANDARD<br/><span className="text-blue-200">$497</span></th>
-                    <th className="p-4 text-center font-bold">PREMIUM<br/><span className="text-amber-400">$997</span></th>
+                    <th className="p-4 text-center font-bold">ESENCIAL<br/><span className="text-emerald-400">$297</span></th>
+                    <th className="p-4 text-center font-bold bg-blue-800">INTENSIVO<br/><span className="text-blue-200">$497</span></th>
                   </tr>
                 </thead>
                 <tbody className="text-sm">
                   {mp.comparisonRows.map((row, i) => (
                     <tr key={i} className={i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
                       <td className="p-4 font-semibold text-gray-900 border">{row.feature}</td>
-                      <td className="p-4 text-center border">{row.basic}</td>
-                      <td className="p-4 text-center border bg-blue-50 font-semibold">{row.standard}</td>
-                      <td className="p-4 text-center border">{row.premium}</td>
+                      <td className="p-4 text-center border">{row.esencial}</td>
+                      <td className="p-4 text-center border bg-blue-50 font-semibold">{row.intensivo}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -331,7 +319,7 @@ export default function MentoriaPersonalizadaPage() {
                     <div className="font-bold text-lg text-slate-900">{testimonial.name}</div>
                     <div className="text-emerald-600 text-sm font-medium mb-2">{testimonial.business}</div>
                     <div className="inline-block px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-xs font-bold">
-                      Tier: {testimonial.tier}
+                      {testimonial.tier}
                     </div>
                   </div>
                   <p className="text-gray-700 mb-4 italic leading-relaxed">&ldquo;{testimonial.text}&rdquo;</p>
@@ -359,8 +347,8 @@ export default function MentoriaPersonalizadaPage() {
               {mp.transformacion}
             </h2>
             <p className="text-xl text-emerald-100 mb-8 max-w-2xl mx-auto leading-relaxed">
-              <span className="font-bold text-white text-3xl">$297</span> {mp.desdeFundamentos}
-              {' '}<span className="font-bold text-white text-3xl">$497</span> {mp.desdeImplementas}
+              Con <span className="font-bold text-white text-3xl">$297</span> {mp.desdeFundamentos}
+              {' '}Con <span className="font-bold text-white text-3xl">$497</span> {mp.desdeImplementas}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -371,7 +359,7 @@ export default function MentoriaPersonalizadaPage() {
                 {mp.agendarAhora}
               </Link>
               <Link
-                href="/capacitacion"
+                href="/capacitacion/equipos-empresariales"
                 className="px-10 py-5 bg-emerald-800/50 backdrop-blur text-white rounded-xl font-bold text-lg border-2 border-white/30 hover:bg-emerald-800 transition-all duration-300"
               >
                 {mp.verTeams}
