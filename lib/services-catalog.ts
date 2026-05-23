@@ -130,7 +130,7 @@ export const SERVICIOS: Servicio[] = [
     setup: 647,
     recurring: null,
     descripcionCorta:
-      'SOLO setup: Meta Business Suite + 3 plataformas (IG + FB + GBP) + bios + 5 posts iniciales, listo para que tú lo manejes. NO incluye gestión.',
+      'Te dejamos listas Instagram, Facebook y tu ficha de Google. Bios profesionales y 5 publicaciones iniciales para que arranques tú a manejarlas. (No incluye gestión continua.)',
   },
   {
     sku: 'MKT-002',
@@ -179,7 +179,7 @@ export const SERVICIOS: Servicio[] = [
     setup: 747,
     recurring: 137,
     descripcionCorta:
-      'Producto estrella: sistema agéntico scoped por diagnóstico (calificación de leads, cotizaciones, ops multi-sistema, documentos). Los flujos lineales son features, no producto. Retainer = operación.',
+      'Construimos un sistema con IA hecho a la medida de tu negocio que automatiza tareas como calificar leads, generar cotizaciones o reportes. El diagnóstico inicial define exactamente qué se automatiza.',
   },
   {
     sku: 'AUTO-010',
@@ -277,7 +277,7 @@ export const SERVICIOS: Servicio[] = [
     setup: 997,
     recurring: 147,
     descripcionCorta:
-      'Bundle done-for-you de 3 capas: integración de datos + dashboard IA + asesoría. Visibilidad financiera diaria (refresh diario). NO es SOMATT (self-serve, marca aparte) ni un sistema contable completo. $147/mes (1h) o $197/mes (90min).',
+      'Ves cómo va tu negocio cada día —ventas, gastos, rentabilidad— sin esperar a fin de mes para enterarte de problemas. Conectado a tus sistemas actuales.',
   },
 
   // ── 6.5 Consultoría ────────────────────────────────────────────────
@@ -368,7 +368,7 @@ export const SERVICIOS: Servicio[] = [
     setup: 1497,
     recurring: null,
     descripcionCorta:
-      'Taller de capacitación en IA para todo el equipo/staff, precio flat por taller.',
+      'Medio día de capacitación práctica para todo tu equipo. Salen sabiendo usar IA en su trabajo, no en teoría. Precio fijo por taller.',
   },
 
   // ── 6.7 SEO / Monitoreo ────────────────────────────────────────────

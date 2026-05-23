@@ -2,38 +2,8 @@
 
 import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
-import { DollarSign, Cog, Megaphone, BrainCircuit, GraduationCap, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react'
+import { DollarSign, Cog, Megaphone, GraduationCap, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getServicioPorSku } from '@/lib/services-catalog'
-
-const pillarConfig = [
-  {
-    key: 'finanzas' as const,
-    href: '/servicios/finanzas',
-    icon: DollarSign,
-    color: 'from-blue-900 to-blue-700',
-    accent: 'bg-blue-600',
-    badge: 'bg-blue-100 text-blue-800',
-    border: 'border-blue-200',
-  },
-  {
-    key: 'operaciones' as const,
-    href: '/servicios/operaciones',
-    icon: Cog,
-    color: 'from-green-900 to-green-700',
-    accent: 'bg-green-600',
-    badge: 'bg-green-100 text-green-800',
-    border: 'border-green-200',
-  },
-  {
-    key: 'marketing' as const,
-    href: '/servicios/marketing',
-    icon: Megaphone,
-    color: 'from-purple-900 to-purple-700',
-    accent: 'bg-purple-600',
-    badge: 'bg-purple-100 text-purple-800',
-    border: 'border-purple-200',
-  },
-]
 
 // Tarjetas-hub: una por servicio. Precio "desde $X" y descripción corta
 // se LEEN del catálogo canónico (lib/services-catalog.ts) — no se hardcodean.
@@ -70,17 +40,6 @@ const hubCardConfig = [
     badge: 'bg-purple-100 text-purple-800',
     border: 'border-purple-200',
     accent: 'text-purple-700',
-  },
-  {
-    key: 'consultoriaIA' as const,
-    href: '/servicios/consultoria-ia-para-pymes',
-    sku: 'CON-002',
-    icon: BrainCircuit,
-    iconBg: 'bg-cyan-100',
-    iconColor: 'text-cyan-700',
-    badge: 'bg-cyan-100 text-cyan-800',
-    border: 'border-cyan-200',
-    accent: 'text-cyan-700',
   },
   {
     key: 'capacitacion' as const,
@@ -135,7 +94,7 @@ export default function ServiciosPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {hubCardConfig.map((card) => {
               const data = tp[card.key]
               const servicio = getServicioPorSku(card.sku)
@@ -168,67 +127,6 @@ export default function ServiciosPage() {
                     <ArrowRight className="w-4 h-4" />
                   </span>
                 </Link>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* Pilares de Servicio */}
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4">
-          <div className="space-y-16 max-w-5xl mx-auto">
-            {pillarConfig.map((pillar, index) => {
-              const data = tp[pillar.key]
-              const Icon = pillar.icon
-
-              return (
-                <div key={pillar.key} className={`rounded-2xl border ${pillar.border} overflow-hidden shadow-sm hover:shadow-lg transition-shadow`}>
-                  {/* Pillar Header */}
-                  <div className={`bg-gradient-to-r ${pillar.color} text-white p-8`}>
-                    <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 bg-white/20 rounded-xl flex items-center justify-center">
-                        <Icon className="w-6 h-6" />
-                      </div>
-                      <span className="text-sm font-medium uppercase tracking-wider opacity-80">
-                        {data.badge}
-                      </span>
-                    </div>
-                    <h2 className="text-2xl md:text-3xl font-bold mb-3">
-                      {index + 1}. {data.title}
-                    </h2>
-                    <p className="text-gray-200 text-lg max-w-2xl">
-                      {data.description}
-                    </p>
-                  </div>
-
-                  {/* Plans */}
-                  <div className="p-8">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      {data.plans.map((plan: { name: string; price: string; description: string }, i: number) => (
-                        <div key={i} className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                          <div className="flex items-start justify-between mb-3">
-                            <h3 className="font-bold text-lg text-gray-900">{plan.name}</h3>
-                            <span className={`text-sm font-bold px-3 py-1 rounded-full ${pillar.badge}`}>
-                              {plan.price}
-                            </span>
-                          </div>
-                          <p className="text-gray-600 text-sm leading-relaxed">
-                            {plan.description}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-
-                    <Link
-                      href={pillar.href}
-                      className={`mt-6 inline-flex items-center gap-2 ${pillar.accent} text-white px-6 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity`}
-                    >
-                      {data.cta}
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </div>
-                </div>
               )
             })}
           </div>

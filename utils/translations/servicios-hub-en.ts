@@ -2,11 +2,11 @@
 // DO NOT edit directly; update servicios-hub.ts and re-run scripts/split-translations.mjs
 export const serviciosHubEN = {
   serviciosHubPage: {
-    heroTitle: 'Business Intelligence Solutions for SMBs in New York',
-    heroSubtitle: "We don't sell software. We implement growth systems based on data, AI and real strategy.",
+    heroTitle: 'AI Services for Latino SMBs in New York',
+    heroSubtitle: 'We help you take control of your numbers, automate the work that eats your time, and bring in more customers. Built around your business, in Spanish.',
     finanzas: {
       badge: 'Finance Pillar',
-      title: 'Total Cash Flow Control',
+      title: 'Full control of your numbers',
       description: 'We understand that lack of financial visibility is the main obstacle for Latino SMBs in Brooklyn and Queens.',
       plans: [
         {
@@ -24,7 +24,7 @@ export const serviciosHubEN = {
     },
     operaciones: {
       badge: 'Operations Pillar',
-      title: 'AI-Powered Efficiency',
+      title: 'Your business running on its own',
       description: 'Administrative overload kills founder creativity. We apply our 3D Diagnostic methodology to identify bottlenecks.',
       plans: [
         {
@@ -42,7 +42,7 @@ export const serviciosHubEN = {
     },
     marketing: {
       badge: 'Marketing Pillar',
-      title: 'Identity and Digital Conversion',
+      title: 'Get found and chosen',
       description: 'Your brand should be your most valuable asset in the New York market.',
       plans: [
         {
@@ -66,7 +66,7 @@ export const serviciosHubEN = {
     },
     capacitacion: {
       badge: 'Academy',
-      title: 'AI Training',
+      title: 'Your team learning AI',
       description: 'Workshops and mentoring so your team masters artificial intelligence applied to your business.',
       cta: 'View Academy',
     },

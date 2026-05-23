@@ -2,11 +2,11 @@
 // DO NOT edit directly; update servicios-hub.ts and re-run scripts/split-translations.mjs
 export const serviciosHubES = {
   serviciosHubPage: {
-    heroTitle: 'Soluciones de Inteligencia de Negocio para PYMES en Nueva York',
-    heroSubtitle: 'No vendemos software. Implementamos sistemas de crecimiento basados en datos, IA y estrategia real.',
+    heroTitle: 'Servicios de IA para PYMEs latinas en Nueva York',
+    heroSubtitle: 'Te ayudamos a controlar tus números, automatizar lo que te quita tiempo y conseguir más clientes. Hecho a la medida de tu negocio, en español.',
     finanzas: {
       badge: 'Eje Financiero',
-      title: 'Control Total del Flujo de Caja',
+      title: 'Control total de tus números',
       description: 'Entendemos que la falta de visibilidad financiera es el principal freno de las PYMES latinas en Brooklyn y Queens.',
       plans: [
         {
@@ -24,7 +24,7 @@ export const serviciosHubES = {
     },
     operaciones: {
       badge: 'Eje Operativo',
-      title: 'Eficiencia Potenciada por IA',
+      title: 'Tu negocio funcionando solo',
       description: 'La sobrecarga administrativa mata la creatividad del fundador. Aplicamos nuestra metodologia de Diagnostico 3D para identificar cuellos de botella.',
       plans: [
         {
@@ -42,7 +42,7 @@ export const serviciosHubES = {
     },
     marketing: {
       badge: 'Eje de Marketing',
-      title: 'Identidad y Conversion Digital',
+      title: 'Que te encuentren y te elijan',
       description: 'Tu marca debe ser tu activo mas valioso en el mercado de Nueva York.',
       plans: [
         {
@@ -66,7 +66,7 @@ export const serviciosHubES = {
     },
     capacitacion: {
       badge: 'Academy',
-      title: 'Capacitación en IA',
+      title: 'Tu equipo aprendiendo IA',
       description: 'Talleres y mentorías para que tu equipo domine la inteligencia artificial aplicada a tu negocio.',
       cta: 'Ver Academy',
     },

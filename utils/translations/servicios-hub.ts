@@ -1,10 +1,10 @@
 export const serviciosHubES = {
   serviciosHubPage: {
-    heroTitle: 'Soluciones de Inteligencia de Negocio para PYMES en Nueva York',
-    heroSubtitle: 'No vendemos software. Implementamos sistemas de crecimiento basados en datos, IA y estrategia real.',
+    heroTitle: 'Servicios de IA para PYMEs latinas en Nueva York',
+    heroSubtitle: 'Te ayudamos a controlar tus números, automatizar lo que te quita tiempo y conseguir más clientes. Hecho a la medida de tu negocio, en español.',
     finanzas: {
       badge: 'Eje Financiero',
-      title: 'Control Total del Flujo de Caja',
+      title: 'Control total de tus números',
       description: 'Entendemos que la falta de visibilidad financiera es el principal freno de las PYMES latinas en Brooklyn y Queens.',
       plans: [
         {
@@ -22,7 +22,7 @@ export const serviciosHubES = {
     },
     operaciones: {
       badge: 'Eje Operativo',
-      title: 'Eficiencia Potenciada por IA',
+      title: 'Tu negocio funcionando solo',
       description: 'La sobrecarga administrativa mata la creatividad del fundador. Aplicamos nuestra metodologia de Diagnostico 3D para identificar cuellos de botella.',
       plans: [
         {
@@ -40,7 +40,7 @@ export const serviciosHubES = {
     },
     marketing: {
       badge: 'Eje de Marketing',
-      title: 'Identidad y Conversion Digital',
+      title: 'Que te encuentren y te elijan',
       description: 'Tu marca debe ser tu activo mas valioso en el mercado de Nueva York.',
       plans: [
         {
@@ -64,7 +64,7 @@ export const serviciosHubES = {
     },
     capacitacion: {
       badge: 'Academy',
-      title: 'Capacitación en IA',
+      title: 'Tu equipo aprendiendo IA',
       description: 'Talleres y mentorías para que tu equipo domine la inteligencia artificial aplicada a tu negocio.',
       cta: 'Ver Academy',
     },
@@ -94,11 +94,11 @@ export const serviciosHubES = {
 
 export const serviciosHubEN = {
   serviciosHubPage: {
-    heroTitle: 'Business Intelligence Solutions for SMBs in New York',
-    heroSubtitle: "We don't sell software. We implement growth systems based on data, AI and real strategy.",
+    heroTitle: 'AI Services for Latino SMBs in New York',
+    heroSubtitle: 'We help you take control of your numbers, automate the work that eats your time, and bring in more customers. Built around your business, in Spanish.',
     finanzas: {
       badge: 'Finance Pillar',
-      title: 'Total Cash Flow Control',
+      title: 'Full control of your numbers',
       description: 'We understand that lack of financial visibility is the main obstacle for Latino SMBs in Brooklyn and Queens.',
       plans: [
         {
@@ -116,7 +116,7 @@ export const serviciosHubEN = {
     },
     operaciones: {
       badge: 'Operations Pillar',
-      title: 'AI-Powered Efficiency',
+      title: 'Your business running on its own',
       description: 'Administrative overload kills founder creativity. We apply our 3D Diagnostic methodology to identify bottlenecks.',
       plans: [
         {
@@ -134,7 +134,7 @@ export const serviciosHubEN = {
     },
     marketing: {
       badge: 'Marketing Pillar',
-      title: 'Identity and Digital Conversion',
+      title: 'Get found and chosen',
       description: 'Your brand should be your most valuable asset in the New York market.',
       plans: [
         {
@@ -158,7 +158,7 @@ export const serviciosHubEN = {
     },
     capacitacion: {
       badge: 'Academy',
-      title: 'AI Training',
+      title: 'Your team learning AI',
       description: 'Workshops and mentoring so your team masters artificial intelligence applied to your business.',
       cta: 'View Academy',
     },
