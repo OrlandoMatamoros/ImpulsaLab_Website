@@ -126,7 +126,7 @@ export default function OperacionesPage() {
         headline="Un agente de IA cuesta menos que una semana de nómina"
         subtitle="Lo que un customer service, recepcionista o back-office cobra en un mes en Nueva York, Impulsa Lab lo automatiza por menos de lo que gastas en café de oficina."
         ctaLabel="Cotizar mi automatización"
-        ctaHref="/servicios/operaciones/precios"
+        ctaHref="/servicios/operaciones#precios"
         rows={[
           { product: 'Bot de WhatsApp con IA',           productPrice: '$297-497/mes', humanRole: 'Customer Service Rep',    nycMonthly: 4870, hoursSaved: 160, roiNote: '10-16×' },
           { product: 'Agenda Automática de Citas',       productPrice: '$297-497/mes', humanRole: 'Recepcionista',            nycMonthly: 4314, hoursSaved: 80,  roiNote: '9-15×' },
@@ -200,7 +200,7 @@ export default function OperacionesPage() {
               </Link>
 
               {/* Precios */}
-              <Link href="/servicios/operaciones/precios"
+              <Link href="/servicios/operaciones#precios"
                     className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-emerald-100 rounded-xl group-hover:bg-emerald-200 transition">
@@ -297,7 +297,7 @@ export default function OperacionesPage() {
               'Soporte mensual incluido',
             ],
             ctaLabel: 'Cotizar mi automatización',
-            ctaHref: '/servicios/operaciones/precios',
+            ctaHref: '/servicios/operaciones#precios',
           },
           {
             sku: 'BOT-002',

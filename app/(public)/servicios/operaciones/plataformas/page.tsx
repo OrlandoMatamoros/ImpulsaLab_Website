@@ -170,7 +170,7 @@ export default function PlataformasPage() {
               <ArrowLeft className="w-5 h-5" />
               {tp.navBack}
             </Link>
-            <Link href="/servicios/operaciones/precios"
+            <Link href="/servicios/operaciones#precios"
                   className="text-orange-600 hover:text-orange-700 font-semibold">
               {tp.navNext} →
             </Link>

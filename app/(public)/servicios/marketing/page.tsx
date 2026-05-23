@@ -10,6 +10,7 @@ import ContentStrategistChat from '@/components/services/marketing/ContentStrate
 import AIToolsShowcase from '@/components/services/marketing/AIToolsShowcase'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import PricingColumns from '@/components/services/PricingColumns'
+import MarketingToolsTicker from '@/components/services/MarketingToolsTicker'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const WA = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
@@ -106,6 +107,9 @@ export default function MarketingPage() {
          </div>
        </div>
      </section>
+
+     {/* Marketing Tools Ticker — logos reales del stack de marketing */}
+     <MarketingToolsTicker />
 
      {/* Antes → Después */}
      <div className="bg-slate-100 border-b border-gray-200 py-4">

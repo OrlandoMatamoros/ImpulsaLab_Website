@@ -83,7 +83,7 @@ export default function PricingColumns({
   const a = ACCENTS[accent]
 
   return (
-    <section id="pricing" className="py-20 bg-white scroll-mt-24">
+    <section id="precios" className="py-20 bg-white scroll-mt-24">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">

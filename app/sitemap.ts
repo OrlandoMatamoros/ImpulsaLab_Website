@@ -33,7 +33,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/servicios/operaciones/agentes', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/proceso', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/plataformas', priority: 0.7, changeFrequency: 'monthly' as const },
-    { path: '/servicios/operaciones/precios', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/arsenal', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/marketing', priority: 0.9, changeFrequency: 'monthly' as const },
     // Capacitación
