@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { LINKS } from '@/lib/constants'
 import { useState, useEffect } from 'react'
-import ProtectedSection from '@/components/ProtectedSection'
 import { NovaFinanceShowcase } from './NovaFinanceShowcase';
 import IntegrationsShowcase from '@/components/services/IntegrationsShowcase'
 import IntegrationsTicker from '@/components/services/IntegrationsTicker'
@@ -178,78 +177,6 @@ export default function FinanzasPage() {
         </div>
       </section>
 
-      {/* Servicios por Etapa de Negocio */}
-      <section className="py-20 bg-gradient-to-b from-white to-blue-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Soluciones Financieras para Cada Etapa de tu Negocio
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                No importa en qué momento estés — tenemos la herramienta financiera que necesitas para crecer con datos reales.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              {/* Supervivencia */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-blue-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio nuevo o con ingresos menores a $500K/año</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $97/mes</div>
-                <div className="text-sm text-gray-500 mb-6">Captura de Facturas · sin setup</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Tracking Financiero Automatizado</h4>
-                <div className="space-y-2 mb-8">
-                  {['Escaneo automático de facturas y recibos por email', 'Extracción AI de montos, fechas y conceptos', 'Registro automático en Excel/Google Sheets', 'Resumen diario de gastos por email'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-[#002D62] text-white rounded-lg hover:bg-[#003d82] transition font-semibold">Empezar con lo Básico</Link>
-              </div>
-              {/* Crecimiento */}
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl shadow-xl border-2 border-blue-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio con $500K-$2M en ingresos anuales</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $997</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $147/mes</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Dashboard Financiero Profesional</h4>
-                <div className="space-y-2 mb-8">
-                  {['KPIs personalizados para tu industria', 'Análisis de rentabilidad por producto/servicio', 'Control de flujo de caja en tiempo real', 'Integración con QuickBooks, Xero o Excel', 'Proyecciones y análisis de escenarios'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition font-semibold">Agenda tu Diagnóstico</Link>
-              </div>
-              {/* Expansión */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-blue-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ en ingresos, listo para escalar</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $4,997</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + mantenimiento desde $147/mes</div>
-                <h4 className="font-semibold text-gray-800 mb-3">App Financiera Custom + AI</h4>
-                <div className="space-y-2 mb-8">
-                  {['Dashboard KPI con hasta 3 módulos integrados', 'Integración con POS, software contable y bancos', 'AI integrada para análisis predictivo', 'Autenticación con roles (dueño, contador, gerente)', 'Sincronización automática Excel/OneDrive'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href={LINKS.calendly} target="_blank" rel="noopener noreferrer" className="block w-full text-center py-3 bg-[#002D62] text-white rounded-lg hover:bg-[#003d82] transition font-semibold">Solicitar Propuesta</Link>
-              </div>
-            </div>
-            <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div><div className="text-sm text-gray-500 mb-1">Captura de Facturas</div><div className="text-gray-400 line-through text-sm">NYC: $4,000-$12,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $97/mes</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Dashboard Profesional</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$30,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $997 + $147/mes</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">App Financiera Custom</div><div className="text-gray-400 line-through text-sm">NYC: $15,000-$150,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $4,997</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
       <AutomationVsEmployee
         vertical="finanzas"
@@ -260,7 +187,7 @@ export default function FinanzasPage() {
         ctaHref={LINKS.whatsapp}
         ctaTarget="_blank"
         rows={[
-          { product: 'Smart Invoice Tracker',  productPrice: '$97-197/mes',  humanRole: 'Bookkeeping Clerk',          nycMonthly: 5331,  hoursSaved: 60,  roiNote: '27-55×' },
+          { product: 'Captura Automática de Facturas',  productPrice: '$97/mes',  humanRole: 'Bookkeeping Clerk',          nycMonthly: 5331,  hoursSaved: 60,  roiNote: '27-55×' },
           { product: 'AI Financial Dashboard', productPrice: '$997 setup + $147/mes', humanRole: 'Financial Analyst jr', nycMonthly: 12195, hoursSaved: 80,  roiNote: '12-17×' },
           { product: 'Medical Bill Auditor',   productPrice: 'custom',       humanRole: 'Medical Billing Specialist', nycMonthly: 5643,  hoursSaved: 100, roiNote: 'por volumen' },
         ]}
@@ -269,13 +196,7 @@ export default function FinanzasPage() {
       {/* INTEGRACIONES: POS + Contables (14 plataformas) */}
       <IntegrationsShowcase />
 
-      {/* SECCIÓN PROTEGIDA: Ve Tu Negocio en Acción + Planes */}
-      <ProtectedSection
-        message={t.finanzasPage.protectedMessage}
-        showPreview={true}
-        previewBlur={false}
-      >
-        {/* NUEVA SECCIÓN: Ve Tu Negocio en Acción */}
+      {/* Ve Tu Negocio en Acción */}
         <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
           <div className="container mx-auto px-4">
             <div className="max-w-7xl mx-auto">
@@ -525,83 +446,6 @@ export default function FinanzasPage() {
           </div>
         </section>
 
-        {/* Sección 5: Planes y Precios */}
-        <section id="precios" className="py-20 bg-white scroll-mt-24">
-          <div className="container mx-auto px-4">
-            <div className="max-w-5xl mx-auto">
-              <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900">
-                {t.finanzasPage.plansTitle}
-              </h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                {/* Plan Piloto Automático */}
-                <div className="bg-gray-50 rounded-lg p-8 border-2 border-gray-200">
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">{t.finanzasPage.planPilot.title}</h3>
-                  <p className="text-gray-600 mb-6">{t.finanzasPage.planPilot.idealFor}</p>
-
-                  <div className="mb-6">
-                    <p className="text-3xl font-bold text-blue-600">{t.finanzasPage.planPilot.price}</p>
-                    <p className="text-gray-500">{t.finanzasPage.planPilot.pricePeriod}</p>
-                  </div>
-
-                  <div className="mb-8">
-                    <p className="font-semibold mb-3 text-gray-900">{t.finanzasPage.planPilot.deliverablesTitle}</p>
-                    <ul className="space-y-2">
-                      {t.finanzasPage.planPilot.deliverables.map((item: string, idx: number) => (
-                        <li key={idx} className="flex items-start">
-                          <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Link href={whatsappUrl}
-                        target="_blank"
-                        className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    {t.finanzasPage.planPilot.cta}
-                  </Link>
-                </div>
-
-                {/* Plan Cohete */}
-                <div className="bg-blue-50 rounded-lg p-8 border-2 border-blue-200 relative">
-                  <div className="absolute -top-3 right-8 bg-blue-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                    {t.finanzasPage.planRocket.badge}
-                  </div>
-                  <h3 className="text-2xl font-bold mb-2 text-gray-900">{t.finanzasPage.planRocket.title}</h3>
-                  <p className="text-gray-600 mb-6">{t.finanzasPage.planRocket.idealFor}</p>
-
-                  <div className="mb-6">
-                    <p className="text-3xl font-bold text-blue-600">{t.finanzasPage.planRocket.price}</p>
-                    <p className="text-gray-500">{t.finanzasPage.planRocket.pricePeriod}</p>
-                  </div>
-
-                  <div className="mb-8">
-                    <p className="font-semibold mb-3 text-gray-900">{t.finanzasPage.planRocket.deliverablesTitle}</p>
-                    <ul className="space-y-2">
-                      {t.finanzasPage.planRocket.deliverables.map((item: string, idx: number) => (
-                        <li key={idx} className="flex items-start">
-                          <svg className="w-5 h-5 text-green-500 mr-2 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                          <span className="text-gray-700">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  <Link href={whatsappUrl}
-                        target="_blank"
-                        className="block w-full bg-blue-600 text-white text-center py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors">
-                    {t.finanzasPage.planRocket.cta}
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-      </ProtectedSection>
 
        <section className="py-20 bg-[#002D62] text-white">
         <div className="container mx-auto px-4">

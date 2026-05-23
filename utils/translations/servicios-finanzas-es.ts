@@ -5,7 +5,7 @@ export const serviciosFinanzasES = {
   finanzasPage: {
     // Hero
     heroTitle: 'CFO en tu Excel con IA',
-    heroSubtitle: 'Conectamos Claude Code a tu Excel o Google Sheets para que tengas análisis financiero profesional sin contratar un contador de tiempo completo. Perfecto para pizzerías, salones, panaderías y negocios locales.',
+    heroSubtitle: 'Conectamos un asistente de IA a tu Excel para que tengas análisis financiero profesional —ventas, gastos y rentabilidad al día— sin contratar un contador a tiempo completo. Para panaderías, salones, restaurantes y negocios locales.',
     heroPriceAnchor: 'Desde $997 setup + $147/mes',
     beforeAfter: {
       before: 'Apuntaba todo en un cuaderno y no sabia a donde se iba la plata',
@@ -27,7 +27,7 @@ export const serviciosFinanzasES = {
     solutionTitle: 'Tu Solución: Un CFO dentro de tu Excel',
     videoDemoTitle: 'Dashboard Demo - Impulsa Lab',
     features: [
-      { title: 'Dashboards Automáticos', description: 'Claude Code analiza tus datos y crea gráficos claros directo en tu Excel o Google Sheets' },
+      { title: 'Dashboards Automáticos', description: 'Un asistente de IA analiza tus datos y crea gráficos claros directo en tu Excel o Google Sheets' },
       { title: 'Análisis de Rentabilidad', description: 'Sabe exactamente cuánto ganas por cada producto o servicio que vendes' },
       { title: 'Control de Gastos', description: 'Ve a dónde se va cada dólar de tu negocio, sin fórmulas complicadas' },
       { title: 'Respuestas en Español', description: 'Pregúntale a tu dashboard lo que quieras en español y obtén respuestas claras' },
@@ -206,7 +206,7 @@ export const serviciosFinanzasES = {
     methodologyTitle: 'Así de Simple: 3 Pasos',
     steps: [
       { number: '1', title: 'Diagnóstico', description: 'Miramos tu Excel o Google Sheets actual y entendemos tu negocio en una llamada de 30 minutos.' },
-      { number: '2', title: 'Instalación + Dashboard', description: 'Conectamos Claude Code a tus hojas de cálculo y creamos tu primer dashboard personalizado.' },
+      { number: '2', title: 'Instalación + Dashboard', description: 'Conectamos un asistente de IA a tus hojas de cálculo y creamos tu primer dashboard personalizado.' },
       { number: '3', title: 'Capacitación', description: 'Te enseñamos a usarlo para que puedas sacarle provecho desde el día uno.' },
     ],
 
@@ -264,8 +264,8 @@ export const serviciosFinanzasES = {
     // Nova Finance section
     novaFinance: {
       badge: 'NUEVO: Ya Disponible en Beta',
-      title: 'Nova Finance: Tu CFO Virtual con IA',
-      subtitle: 'Dashboard financiero en tiempo real que analiza, predice y optimiza las finanzas de tu negocio automáticamente',
+      title: 'Nova Finance: la versión software de tu CFO',
+      subtitle: 'Si prefieres no trabajar en Excel, Nova te entrega la misma visibilidad financiera pero como software dedicado: interfaz limpia, sin fórmulas, todo en su lugar. Para quien quiere control directo, no hojas de cálculo.',
       demoStatus: 'Demo en vivo · Requiere cuenta',
       previewDescription: 'Dashboard financiero en tiempo real. Abre el CFO virtual de Impulsa Lab en una pestaña nueva para explorarlo.',
       previewCta: 'Abrir Nova Finance',

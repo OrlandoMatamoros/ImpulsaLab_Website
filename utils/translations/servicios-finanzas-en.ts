@@ -4,7 +4,7 @@ export const serviciosFinanzasEN = {
   finanzasPage: {
     // Hero
     heroTitle: 'CFO in Your Spreadsheet, Powered by AI',
-    heroSubtitle: 'We connect Claude Code to your Excel or Google Sheets so you get professional financial analysis without hiring a full-time accountant. Perfect for pizzerias, salons, bakeries, and local businesses.',
+    heroSubtitle: 'We connect an AI assistant to your Excel so you get professional financial analysis —sales, expenses, and profitability up to date— without hiring a full-time accountant. For bakeries, salons, restaurants, and local businesses.',
     heroPriceAnchor: 'From $997 setup + $147/mo',
     beforeAfter: {
       before: 'Wrote everything in a notebook and had no idea where the money went',
@@ -26,7 +26,7 @@ export const serviciosFinanzasEN = {
     solutionTitle: 'Your Solution: A CFO Inside Your Spreadsheet',
     videoDemoTitle: 'Dashboard Demo - Impulsa Lab',
     features: [
-      { title: 'Automatic Dashboards', description: 'Claude Code analyzes your data and creates clear charts right in your Excel or Google Sheets' },
+      { title: 'Automatic Dashboards', description: 'An AI assistant analyzes your data and creates clear charts right in your Excel or Google Sheets' },
       { title: 'Profitability Analysis', description: 'Know exactly how much you earn on every product or service you sell' },
       { title: 'Expense Control', description: 'See where every dollar of your business goes, no complicated formulas needed' },
       { title: 'Answers in Your Language', description: 'Ask your dashboard anything in plain English or Spanish and get clear answers' },
@@ -205,7 +205,7 @@ export const serviciosFinanzasEN = {
     methodologyTitle: 'Simple as 1-2-3',
     steps: [
       { number: '1', title: 'Diagnostic', description: 'We look at your current Excel or Google Sheets and understand your business in a 30-minute call.' },
-      { number: '2', title: 'Installation + Dashboard', description: 'We connect Claude Code to your spreadsheets and create your first custom dashboard.' },
+      { number: '2', title: 'Installation + Dashboard', description: 'We connect an AI assistant to your spreadsheets and create your first custom dashboard.' },
       { number: '3', title: 'Training', description: 'We teach you how to use it so you can get value from day one.' },
     ],
 
@@ -263,8 +263,8 @@ export const serviciosFinanzasEN = {
     // Nova Finance section
     novaFinance: {
       badge: 'NEW: Now Available in Beta',
-      title: 'Nova Finance: Your AI-Powered Virtual CFO',
-      subtitle: 'Real-time financial dashboard that analyzes, predicts, and optimizes your business finances automatically',
+      title: 'Nova Finance: the software version of your CFO',
+      subtitle: 'If you\'d rather not work in Excel, Nova gives you the same financial visibility as dedicated software: clean interface, no formulas, everything in its place. For those who want direct control instead of spreadsheets.',
       demoStatus: 'Live demo · Account required',
       previewDescription: "Real-time financial dashboard. Open Impulsa Lab's virtual CFO in a new tab to explore.",
       previewCta: 'Open Nova Finance',
