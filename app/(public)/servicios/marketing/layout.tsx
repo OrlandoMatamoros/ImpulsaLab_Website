@@ -11,13 +11,13 @@ export const metadata: Metadata = {
     description: 'Lanza tu presencia online en dias, no meses. Landing pages desde $697, websites desde $2,497 y campanas digitales con IA para PYMEs latinas en EE.UU. Hablamos español.',
     url: 'https://www.tuimpulsalab.com/servicios/marketing',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Landing Express y Marketing Digital' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Landing Express y Marketing Digital' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Landing Pages + Marketing Digital con IA — Impulsa Lab',
     description: 'Lanza tu presencia online en dias, no meses. Landing pages desde $697, websites desde $2,497 y campanas digitales con IA para PYMEs latinas en EE.UU. Hablamos español.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

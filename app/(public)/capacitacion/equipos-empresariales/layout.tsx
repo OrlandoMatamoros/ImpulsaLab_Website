@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Capacitacion corporativa en IA y automatizacion para equipos de trabajo. Taller flat $1,497.',
     url: 'https://www.tuimpulsalab.com/capacitacion/equipos-empresariales',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Capacitacion Empresarial' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Capacitacion Empresarial' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Capacitacion en IA para Equipos Empresariales',
     description: 'Capacitacion corporativa en IA y automatizacion para equipos de trabajo. Taller flat $1,497.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

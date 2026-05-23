@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Oportunidades de carrera en IA y transformacion digital. Unete al equipo de Impulsa Lab.',
     url: 'https://www.tuimpulsalab.com/carreras',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Carreras' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Carreras' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Carreras - Trabaja con Nosotros en Impulsa Lab',
     description: 'Oportunidades de carrera en IA y transformacion digital. Unete al equipo de Impulsa Lab.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

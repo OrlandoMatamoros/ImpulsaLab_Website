@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/opengraph-image.png?v=2',
         width: 1200,
         height: 630,
         alt: 'Impulsa Lab — Generador de Plan de Negocios con IA',
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     title: 'Generador de Plan de Negocios con IA Gratis | Impulsa Lab',
     description:
       'Crea un plan de negocios profesional en minutos con IA. 10 secciones + proyecciones financieras + PDF.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

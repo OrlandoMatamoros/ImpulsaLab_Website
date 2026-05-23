@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: 'Automatizacion de operaciones con agentes IA y n8n para PYMEs. Gestion de WhatsApp, facturacion automatica, plataformas inteligentes y flujos sin codigo. Automatizacion agentica desde $747 setup; chatbot desde $597.',
     url: 'https://www.tuimpulsalab.com/servicios/operaciones',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Automatizacion de Operaciones' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Automatizacion de Operaciones' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Automatizacion de Choque - Operaciones con IA para PYMEs',
     description: 'Automatizacion de operaciones con agentes IA y n8n para PYMEs. Gestion de WhatsApp, facturacion automatica, plataformas inteligentes y flujos sin codigo. Automatizacion agentica desde $747 setup; chatbot desde $597.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

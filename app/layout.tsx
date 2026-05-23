@@ -48,7 +48,7 @@ export const metadata: Metadata = {
     url: 'https://www.tuimpulsalab.com/',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/opengraph-image.png?v=2',
         width: 1200,
         height: 630,
         alt: 'Impulsa Lab — Consultoría en IA para PYMEs Latinas en NYC',
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Consultoría en IA para PYMEs Latinas en NYC | Impulsa Lab',
     description: 'Consultoría en IA y automatización para negocios latinos en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para PYMEs. Empieza con un Diagnóstico 3D gratis.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
   verification: {
     google: 'SiCheXqFkVDrLLuNSd9wx8zKZ3Pq8LYwTjz1uGeNitg',

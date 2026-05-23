@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Ultimas noticias curadas sobre inteligencia artificial, automatizacion y tecnologia aplicada a negocios latinos. Actualizado diariamente.',
     url: 'https://www.tuimpulsalab.com/herramientas/noticias',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Noticias de IA' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Noticias de IA' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Noticias de IA para PYMEs Latinas — Curadas con IA',
     description: 'Ultimas noticias curadas sobre inteligencia artificial, automatizacion y tecnologia aplicada a negocios latinos. Actualizado diariamente.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
     url: 'https://www.tuimpulsalab.com/herramientas/prompt-designer',
     type: 'website',
     images: [
-      { url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Prompt Designer' },
+      { url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Prompt Designer' },
     ],
   },
   twitter: {
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
     description:
       'Arma prompts con formato optimo para cada modelo. Templates y optimizador con IA.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

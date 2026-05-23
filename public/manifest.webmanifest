@@ -6,24 +6,18 @@
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "theme_color": "#002D62",
-  "background_color": "#ffffff",
+  "theme_color": "#0a0e1a",
+  "background_color": "#0a0e1a",
   "lang": "es",
   "icons": [
     {
-      "src": "/Favicon/icon0.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any"
-    },
-    {
-      "src": "/Favicon/icon1.png",
+      "src": "/icon.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
-      "src": "/Favicon/apple-icon.png",
+      "src": "/apple-icon.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "any"

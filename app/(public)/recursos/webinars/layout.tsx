@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: 'Webinars gratuitos sobre IA, automatizacion y transformacion digital para PYMEs latinas.',
     url: 'https://www.tuimpulsalab.com/recursos/webinars',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Webinars' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Webinars' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Webinars sobre IA y Automatizacion para Negocios',
     description: 'Webinars gratuitos sobre IA, automatizacion y transformacion digital para PYMEs latinas.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

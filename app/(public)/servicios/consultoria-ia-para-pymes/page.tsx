@@ -17,7 +17,7 @@ const articleSchema = {
   publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
   image: {
     '@type': 'ImageObject',
-    url: 'https://www.tuimpulsalab.com/images/og-image.jpg',
+    url: 'https://www.tuimpulsalab.com/opengraph-image.png?v=2',
   },
   mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
 }

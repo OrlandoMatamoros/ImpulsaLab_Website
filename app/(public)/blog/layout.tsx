@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana.',
     url: 'https://www.tuimpulsalab.com/blog',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Blog de IA y Automatización' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Blog de IA y Automatización' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Blog de IA y Automatización para Negocios Latinos | Impulsa Lab',
     description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

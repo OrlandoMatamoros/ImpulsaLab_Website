@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
     url: 'https://www.tuimpulsalab.com/contacto',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Contacto' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Contacto' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Contacto - Agenda tu Consulta Gratuita con Impulsa Lab',
     description: 'Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

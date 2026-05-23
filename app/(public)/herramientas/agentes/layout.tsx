@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Asistentes de IA especializados para finanzas, operaciones y marketing de tu negocio. Prueba gratis.',
     url: 'https://www.tuimpulsalab.com/herramientas/agentes',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Agentes de IA' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Agentes de IA' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Agentes de IA Gratuitos para tu Negocio',
     description: 'Asistentes de IA especializados para finanzas, operaciones y marketing de tu negocio. Prueba gratis.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

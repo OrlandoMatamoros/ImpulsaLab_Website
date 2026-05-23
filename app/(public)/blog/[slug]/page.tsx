@@ -32,7 +32,7 @@ export async function generateMetadata({
   if (!post) return {}
 
   const url = `https://www.tuimpulsalab.com/blog/${slug}`
-  const image = post.image || '/images/og-image.jpg'
+  const image = post.image || '/opengraph-image.png?v=2'
   const blogLabel = post.locale === 'en' ? 'Impulsa Lab Blog' : 'Blog Impulsa Lab'
 
   return {
@@ -70,7 +70,7 @@ export default async function BlogPostPage({
   if (!post) return notFound()
 
   const url = `https://www.tuimpulsalab.com/blog/${slug}`
-  const image = post.image || '/images/og-image.jpg'
+  const image = post.image || '/opengraph-image.png?v=2'
   const inLanguage = post.locale === 'en' ? 'en-US' : 'es-ES'
 
   const breadcrumbSchema = buildBreadcrumbLd([

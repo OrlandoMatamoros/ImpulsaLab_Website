@@ -14,14 +14,14 @@ export const metadata: Metadata = {
       'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
     url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Consultoría IA para PYMEs | Automatización Real desde $97/mes | Impulsa Lab NYC',
     description:
       'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
   robots: { index: true, follow: true },
 }

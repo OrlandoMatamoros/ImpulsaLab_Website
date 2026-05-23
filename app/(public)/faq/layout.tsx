@@ -10,13 +10,13 @@ export const metadata: Metadata = {
     description: 'Respuestas sobre servicios de Impulsa Lab, diagnostico 3D, precios y proceso de trabajo.',
     url: 'https://www.tuimpulsalab.com/faq',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - FAQ' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - FAQ' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Preguntas Frecuentes - Servicios, Precios y Proceso',
     description: 'Respuestas sobre servicios de Impulsa Lab, diagnostico 3D, precios y proceso de trabajo.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

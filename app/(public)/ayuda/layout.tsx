@@ -9,13 +9,13 @@ export const metadata: Metadata = {
     description: 'Respuestas, guias y recursos para aprovechar nuestras soluciones de IA para tu negocio.',
     url: 'https://www.tuimpulsalab.com/ayuda',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Centro de Ayuda' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Centro de Ayuda' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Centro de Ayuda - Soporte y Recursos | Impulsa Lab',
     description: 'Respuestas, guias y recursos para aprovechar nuestras soluciones de IA para tu negocio.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

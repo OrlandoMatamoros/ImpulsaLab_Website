@@ -12,14 +12,14 @@ export const metadata: Metadata = {
       'Evalúa tu empresa en Finanzas, Operaciones y Marketing con nuestro diagnóstico gratuito impulsado por IA. 15 minutos, resultados inmediatos.',
     url: 'https://www.tuimpulsalab.com/diagnostico',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Diagnóstico 3D' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Diagnóstico 3D' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Diagnóstico 3D Gratuito de Madurez Digital para PYMEs',
     description:
       'Evalúa tu empresa en Finanzas, Operaciones y Marketing con nuestro diagnóstico gratuito impulsado por IA. 15 minutos, resultados inmediatos.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

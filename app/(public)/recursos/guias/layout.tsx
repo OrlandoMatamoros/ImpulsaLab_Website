@@ -12,13 +12,13 @@ export const metadata: Metadata = {
     description: 'Guias paso a paso sobre IA, automatizacion y transformacion digital para PYMEs latinas.',
     url: 'https://www.tuimpulsalab.com/recursos/guias',
     type: 'website',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630, alt: 'Impulsa Lab - Guias' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Guias' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Guias Practicas de IA y Transformacion Digital',
     description: 'Guias paso a paso sobre IA, automatizacion y transformacion digital para PYMEs latinas.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
 }
 

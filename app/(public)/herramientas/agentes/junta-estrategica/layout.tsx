@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/images/og-image.jpg',
+        url: '/opengraph-image.png?v=2',
         width: 1200,
         height: 630,
         alt: 'Junta Estratégica AI - Impulsa Lab',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     title: 'Junta Estratégica AI — Impulsa Lab',
     description:
       'Convoca una junta directiva virtual con 3 directores AI + NOVA moderadora.',
-    images: ['/images/og-image.jpg'],
+    images: ['/opengraph-image.png?v=2'],
   },
   robots: { index: true, follow: true },
 }
