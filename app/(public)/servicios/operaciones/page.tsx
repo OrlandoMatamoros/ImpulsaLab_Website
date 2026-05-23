@@ -299,21 +299,6 @@ export default function OperacionesPage() {
             ctaLabel: 'Cotizar mi automatización',
             ctaHref: '/servicios/operaciones#precios',
           },
-          {
-            sku: 'BOT-002',
-            name: 'Agente IA a la Medida',
-            price: 'desde $1,497 + $437/mes',
-            subtitle: 'Tu asistente inteligente, a la medida',
-            features: [
-              'Asistente que sabe sobre tu negocio (productos, políticas, horarios)',
-              'Agenda citas en tu calendario en tiempo real',
-              'Conversa por voz, texto e imagen',
-              'Ideal para centros dentales, estéticos y salones',
-            ],
-            ctaLabel: 'Hablar con un experto',
-            ctaHref: WA_OPS('Hola Impulsa Lab, me interesa un Agente IA a la medida.'),
-            ctaTarget: '_blank',
-          },
         ]}
       />
 
