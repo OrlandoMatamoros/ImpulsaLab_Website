@@ -196,8 +196,8 @@ export default function FinanzasPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio nuevo o con ingresos menores a $500K/año</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$500 - $1,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $97/mes</div>
+                <div className="text-sm text-gray-500 mb-6">Captura de Facturas · sin setup</div>
                 <h4 className="font-semibold text-gray-800 mb-3">Tracking Financiero Automatizado</h4>
                 <div className="space-y-2 mb-8">
                   {['Escaneo automático de facturas y recibos por email', 'Extracción AI de montos, fechas y conceptos', 'Registro automático en Excel/Google Sheets', 'Resumen diario de gastos por email'].map((item, i) => (
@@ -212,8 +212,8 @@ export default function FinanzasPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio con $500K-$2M en ingresos anuales</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$3,000 - $5,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $197/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $997</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $147/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">Dashboard Financiero Profesional</h4>
                 <div className="space-y-2 mb-8">
                   {['KPIs personalizados para tu industria', 'Análisis de rentabilidad por producto/servicio', 'Control de flujo de caja en tiempo real', 'Integración con QuickBooks, Xero o Excel', 'Proyecciones y análisis de escenarios'].map((item, i) => (
@@ -227,8 +227,8 @@ export default function FinanzasPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ en ingresos, listo para escalar</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$5,000 - $15,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $497/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $4,997</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + mantenimiento desde $147/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">App Financiera Custom + AI</h4>
                 <div className="space-y-2 mb-8">
                   {['Dashboard KPI con hasta 3 módulos integrados', 'Integración con POS, software contable y bancos', 'AI integrada para análisis predictivo', 'Autenticación con roles (dueño, contador, gerente)', 'Sincronización automática Excel/OneDrive'].map((item, i) => (
@@ -241,9 +241,9 @@ export default function FinanzasPage() {
             <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
               <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
               <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div><div className="text-sm text-gray-500 mb-1">Dashboard Básico</div><div className="text-gray-400 line-through text-sm">NYC: $4,000-$12,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: $500-$1,000</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Dashboard Profesional</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$30,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: $3,000-$5,000</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">App Financiera Custom</div><div className="text-gray-400 line-through text-sm">NYC: $15,000-$150,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: $5,000-$15,000</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Captura de Facturas</div><div className="text-gray-400 line-through text-sm">NYC: $4,000-$12,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $97/mes</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Dashboard Profesional</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$30,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $997 + $147/mes</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">App Financiera Custom</div><div className="text-gray-400 line-through text-sm">NYC: $15,000-$150,000</div><div className="text-xl font-bold text-blue-600">Impulsa Lab: desde $4,997</div></div>
               </div>
             </div>
           </div>

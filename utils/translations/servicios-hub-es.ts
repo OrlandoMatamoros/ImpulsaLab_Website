@@ -11,12 +11,12 @@ export const serviciosHubES = {
       plans: [
         {
           name: 'Plan Piloto Automatico',
-          price: 'Desde $500 setup + $97/mes',
+          price: 'Desde $997 setup + $147/mes',
           description: 'Implementamos la integracion total de tu facturacion con sistemas de analisis predictivo para que sepas exactamente cuanto ganaras el proximo mes.',
         },
         {
           name: 'Plan Cohete (Suscripcion)',
-          price: '$500 + $97/mes',
+          price: 'Desde $97/mes',
           description: 'Vigilancia financiera continua. Transformamos tus reportes de QuickBooks en tableros de control estrategicos para decisiones en tiempo real.',
         },
       ],
@@ -29,12 +29,12 @@ export const serviciosHubES = {
       plans: [
         {
           name: 'Optimizacion de Procesos',
-          price: 'Desde $500 setup + $97/mes',
+          price: 'Desde $747 setup + $97/mes',
           description: 'Automatizamos tareas repetitivas usando agentes de IA personalizados que gestionan agendas, pedidos y atencion al cliente basica.',
         },
         {
           name: 'Estructura de Gobernanza',
-          price: '$2,000 - $4,000',
+          price: 'Desde $1,997',
           description: 'Definimos roles claros (Playbook Operativo) para que tu equipo funcione como una maquina de precision, incluso cuando tu no estes.',
         },
       ],
@@ -47,12 +47,12 @@ export const serviciosHubES = {
       plans: [
         {
           name: 'Plan Identidad',
-          price: 'Desde $800',
+          price: 'Desde $697',
           description: 'Desarrollamos una presencia digital profesional (Web, SEO y Manual de Marca) que resuene con la audiencia local y genere autoridad.',
         },
         {
           name: 'Estrategia de Crecimiento',
-          price: 'Desde $500',
+          price: 'Desde $497',
           description: 'No solo buscamos "likes", buscamos conversiones. Implementamos embudos de venta optimizados para el mercado hispano de NY.',
         },
       ],

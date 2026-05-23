@@ -185,7 +185,7 @@ export default function ConsultoriaIAPymesPage() {
 
           <h3 className="text-2xl font-bold text-gray-900 mb-4">El mito del costo prohibitivo ya no aplica</h3>
           <p className="text-lg text-gray-700 mb-4">
-            La narrativa de que la IA es solo para grandes corporaciones con presupuestos de millones quedó obsoleta. Los modelos de lenguaje como Claude de Anthropic y las plataformas de automatización como n8n democratizaron completamente el acceso. Un sistema que hace 3 años costaba $200,000 implementar en un banco, hoy se puede construir para una PYME por $500-$2,000 de setup y $97-$497 al mes.
+            La narrativa de que la IA es solo para grandes corporaciones con presupuestos de millones quedó obsoleta. Los modelos de lenguaje como Claude de Anthropic y las plataformas de automatización como n8n democratizaron completamente el acceso. Un sistema que hace 3 años costaba $200,000 implementar en un banco, hoy se puede construir para una PYME desde $747 de setup y $97-$497 al mes.
           </p>
           <p className="text-lg text-gray-700">
             El costo de NO implementar IA ya es mayor que el costo de implementarla.
@@ -717,30 +717,30 @@ export default function ConsultoriaIAPymesPage() {
               <tbody>
                 {[
                   {
-                    type: 'Workflow básico (facturación, leads)',
-                    setup: '$500–$1,000',
-                    monthly: '$97–$197',
+                    type: 'Workflow / automatización agéntica',
+                    setup: 'desde $747',
+                    monthly: '$97–$147',
                     time: '1–2 semanas',
-                    market: 'Agencias NYC: $3,000–$8,000 setup',
+                    market: 'Agencias NYC: $1,500–$5,000 setup',
                   },
                   {
                     type: 'Agente IA (WhatsApp, atención)',
-                    setup: '$1,000–$2,000',
-                    monthly: '$297–$497',
+                    setup: '$597–$1,497',
+                    monthly: '$297–$437',
                     time: '2–3 semanas',
                     market: 'Agencias NYC: $8,000–$20,000 setup',
                   },
                   {
                     type: 'Dashboard financiero custom',
-                    setup: '$3,000–$5,000',
-                    monthly: '$197–$497',
+                    setup: 'desde $997',
+                    monthly: '$147–$197',
                     time: '3–4 semanas',
                     market: 'Agencias NYC: $10,000–$30,000 setup',
                   },
                   {
                     type: 'Suite completa (múltiples agentes)',
-                    setup: '$5,000–$12,000',
-                    monthly: '$597–$997',
+                    setup: '$1,997–$4,997',
+                    monthly: '$357–$727',
                     time: '4–8 semanas',
                     market: 'Big 4: $50,000–$200,000+',
                   },
@@ -833,7 +833,7 @@ export default function ConsultoriaIAPymesPage() {
                 q: '¿Cuánto cuesta implementar IA en una PYME?',
                 a: (
                   <p className="text-gray-700">
-                    Los proyectos de IA para PYMEs en Impulsa Lab arrancan desde <strong>$97/mes</strong> para automatizaciones puntuales (tracking de facturas, respuestas automáticas). La implementación inicial (setup + configuración) cuesta entre <strong>$500 y $3,000</strong> dependiendo de la complejidad. Los agentes IA completos (atención al cliente 24/7, agendamiento inteligente) van de <strong>$297 a $497/mes</strong>. Para contexto: un empleado administrativo en NYC cuesta mínimo $3,500/mes — los agentes hacen el trabajo equivalente de 2-3 personas.
+                    Los proyectos de IA para PYMEs en Impulsa Lab arrancan desde <strong>$97/mes</strong> para automatizaciones puntuales (tracking de facturas, respuestas automáticas). La implementación inicial (setup + configuración) arranca <strong>desde $747</strong> y varía según la complejidad. Los agentes IA completos (atención al cliente 24/7, agendamiento inteligente) van de <strong>$297 a $497/mes</strong>. Para contexto: un empleado administrativo en NYC cuesta mínimo $3,500/mes — los agentes hacen el trabajo equivalente de 2-3 personas.
                   </p>
                 ),
               },

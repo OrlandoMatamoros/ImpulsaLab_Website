@@ -133,8 +133,8 @@ export default function OperacionesPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio nuevo o con procesos 100% manuales</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$500 - $1,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $97/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $747</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + $97-147/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">1 Workflow Automatizado</h4>
                 <div className="space-y-2 mb-8">
                   {['Lead Capture & Auto-Response desde tu sitio web', 'Invoice Processing automático por email', 'Daily Business Digest con resumen AI', 'Appointment Reminders automáticos'].map((item, i) => (
@@ -149,8 +149,8 @@ export default function OperacionesPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio listo para automatizar múltiples procesos</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$2,000 - $4,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $297/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $1,997</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $357/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">Suite 3-5 Workflows + AI Chatbot</h4>
                 <div className="space-y-2 mb-8">
                   {['Suite de 3-5 workflows integrados (desde $1,997 + $357/mes)', 'AI Chatbot WhatsApp/Web (desde $1,497 + $437/mes)', 'CRM automatizado con seguimiento de leads', 'Integraciones con Gmail, Sheets, Calendar, Slack', 'Soporte prioritario y optimización mensual'].map((item, i) => (
@@ -164,8 +164,8 @@ export default function OperacionesPage() {
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
                 <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ listo para automatización total</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">$4,000 - $8,000</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $497/mes</div>
+                <div className="text-3xl font-bold text-gray-900 mb-1">desde $3,997</div>
+                <div className="text-sm text-gray-500 mb-6">Setup + desde $717/mes</div>
                 <h4 className="font-semibold text-gray-800 mb-3">Suite Completa 6-10 Workflows</h4>
                 <div className="space-y-2 mb-8">
                   {['6-10 workflows cubriendo todos los procesos del negocio', 'AI Agents avanzados con base de conocimiento', 'Dashboard de operaciones en tiempo real', 'Integraciones API custom con tus sistemas', 'Mantenimiento proactivo y escalado continuo'].map((item, i) => (
@@ -178,9 +178,9 @@ export default function OperacionesPage() {
             <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
               <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
               <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $2,000-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $500-$1,000</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $8,000-$20,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $2,000-$4,000</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Suite Completa + AI</div><div className="text-gray-400 line-through text-sm">NYC: $15,000-$50,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $4,000-$8,000</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $1,500-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: desde $747</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$15,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: desde $1,997</div></div>
+                <div><div className="text-sm text-gray-500 mb-1">Suite Completa + AI</div><div className="text-gray-400 line-through text-sm">NYC: $40,000-$60,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $3,997-$8,997</div></div>
               </div>
             </div>
           </div>

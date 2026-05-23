@@ -11,12 +11,12 @@ export const serviciosHubEN = {
       plans: [
         {
           name: 'Autopilot Plan',
-          price: 'From $500 setup + $97/mo',
+          price: 'From $997 setup + $147/mo',
           description: 'We implement full integration of your invoicing with predictive analysis systems so you know exactly how much you will earn next month.',
         },
         {
           name: 'Rocket Plan (Subscription)',
-          price: '$500 + $97/mo',
+          price: 'From $97/mo',
           description: 'Continuous financial monitoring. We transform your QuickBooks reports into strategic dashboards for real-time decisions.',
         },
       ],
@@ -29,12 +29,12 @@ export const serviciosHubEN = {
       plans: [
         {
           name: 'Process Optimization',
-          price: 'From $500 setup + $97/mo',
+          price: 'From $747 setup + $97/mo',
           description: 'We automate repetitive tasks using custom AI agents that manage schedules, orders and basic customer service.',
         },
         {
           name: 'Governance Structure',
-          price: '$2,000 - $4,000',
+          price: 'From $1,997',
           description: 'We define clear roles (Operational Playbook) so your team runs like a precision machine, even when you are not there.',
         },
       ],
@@ -47,12 +47,12 @@ export const serviciosHubEN = {
       plans: [
         {
           name: 'Identity Plan',
-          price: 'From $800',
+          price: 'From $697',
           description: 'We develop a professional digital presence (Web, SEO and Brand Manual) that resonates with the local audience and builds authority.',
         },
         {
           name: 'Growth Strategy',
-          price: 'From $500',
+          price: 'From $497',
           description: 'We don\'t just chase "likes", we chase conversions. We implement sales funnels optimized for the Hispanic market in NY.',
         },
       ],

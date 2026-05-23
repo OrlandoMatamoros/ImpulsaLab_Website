@@ -6,7 +6,7 @@ export const serviciosOperacionesES = {
     // Hero
     heroTitle: 'Eliminamos las Tareas que te Roban Tiempo.',
     heroSubtitle: 'Conectamos tus apps para que trabajen solas. Tu te enfocas en atender a tus clientes y hacer crecer tu negocio.',
-    heroBadge: 'Desde $400 setup + $97/mes',
+    heroBadge: 'Desde $747 setup + $97/mes',
     beforeAfter: {
       before: 'Contestaba WhatsApps y correos uno por uno, perdia horas cada dia',
       after: 'Un chatbot atiende 24/7 y yo me enfoco en hacer crecer el negocio',
@@ -55,7 +55,7 @@ export const serviciosOperacionesES = {
     cardPlataformasDesc: 'Las herramientas que usamos: Claude Code, Make, Zapier y mas',
     cardPlataformasCta: 'Descubrir',
     cardPreciosTitle: 'Precios',
-    cardPreciosDesc: 'Desde $400 setup + $97/mes. Sin letra chica.',
+    cardPreciosDesc: 'Desde $747 setup + $97/mes. Sin letra chica.',
     cardPreciosCta: 'Ver precios',
     cardProcesoTitle: 'Nuestro Proceso',
     cardProcesoDesc: '3 pasos simples: diagnostico, implementacion y capacitacion',
@@ -119,7 +119,7 @@ export const serviciosOperacionesES = {
     breadcrumbArsenal: 'Automatizaciones',
     heroBadge: 'Procesos que puedes automatizar hoy',
     heroTitle: 'Automatizaciones para tu Negocio',
-    heroSubtitle: 'Estas son tareas que hacemos automaticas para que dejes de perder tiempo. Cada una desde $400 setup + $97/mes.',
+    heroSubtitle: 'Estas son tareas que hacemos automaticas para que dejes de perder tiempo. Cada una desde $747 setup + $97/mes.',
     sectionTitle: 'Que Puedes Automatizar?',
     categorias: [
       {
