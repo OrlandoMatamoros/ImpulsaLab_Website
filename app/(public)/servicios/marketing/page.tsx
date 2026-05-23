@@ -456,7 +456,7 @@ export default function MarketingPage() {
          {
            sku: 'WEB-001',
            name: 'Landing Express',
-           price: 'desde $197',
+           price: 'desde $297',
            subtitle: 'Tu puerta de entrada a internet',
            features: [
              '1 página',

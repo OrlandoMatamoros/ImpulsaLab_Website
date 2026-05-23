@@ -71,8 +71,8 @@ export const SERVICIOS: Servicio[] = [
     nombre: 'Landing Express (GBP)',
     categoria: 'web',
     segmento: 'micro',
-    precioAncla: 'desde $197',
-    setup: 197,
+    precioAncla: 'desde $297',
+    setup: 297,
     recurring: 15,
     descripcionCorta:
       'Presencia Web nivel 1. Landing de una página como destino para Google Business Profile. Puerta de entrada.',
