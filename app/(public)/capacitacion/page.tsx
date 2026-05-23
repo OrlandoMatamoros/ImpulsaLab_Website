@@ -7,8 +7,9 @@ import {
   GraduationCap,
   CheckCircle2,
   ArrowRight,
-  Sparkles,
-  Zap,
+  Megaphone,
+  Workflow,
+  Compass,
   TrendingUp,
   MapPin,
   Video,
@@ -306,14 +307,14 @@ export default function ImpulsaAcademyPage() {
                   title: cp.operacionesTitulo,
                   subtitle: cp.operacionesSubtitulo,
                   description: cp.operacionesDesc,
-                  icon: Zap,
+                  icon: Workflow,
                   bg: 'from-blue-500 to-blue-600',
                 },
                 {
                   title: cp.marketingTitulo,
                   subtitle: cp.marketingSubtitulo,
                   description: cp.marketingDesc,
-                  icon: Sparkles,
+                  icon: Megaphone,
                   bg: 'from-purple-500 to-purple-600',
                 }
               ].map((item, i) => (
@@ -347,7 +348,7 @@ export default function ImpulsaAcademyPage() {
                 href="/herramientas/auditoria-web"
                 className="px-8 py-4 bg-gradient-to-r from-emerald-500 to-teal-500 text-white rounded-xl font-semibold text-lg shadow-2xl hover:shadow-emerald-500/50 transform hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
               >
-                <Sparkles className="w-5 h-5" />
+                <Compass className="w-5 h-5" />
                 {cp.diagnostico3D}
               </Link>
               <Link

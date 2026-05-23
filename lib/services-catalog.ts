@@ -368,7 +368,7 @@ export const SERVICIOS: Servicio[] = [
     setup: 1497,
     recurring: null,
     descripcionCorta:
-      'Medio día de capacitación práctica para todo tu equipo. Salen sabiendo usar IA en su trabajo, no en teoría. Precio fijo por taller.',
+      'Un día de capacitación práctica para tu equipo (dos jornadas de 3h, hasta 15 personas). Salen sabiendo usar IA en su trabajo, no en teoría. Precio fijo por taller; persona adicional se cotiza en el diagnóstico.',
   },
 
   // ── 6.7 SEO / Monitoreo ────────────────────────────────────────────
