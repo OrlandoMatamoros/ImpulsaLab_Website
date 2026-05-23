@@ -44,6 +44,7 @@ export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [showMobileTools, setShowMobileTools] = useState(false)
   const [showMobileAcademy, setShowMobileAcademy] = useState(false)
+  const [showMobileServicios, setShowMobileServicios] = useState(false)
 
   const { language, setLanguage, t } = useLanguage()
 
@@ -324,10 +325,27 @@ export default function Header() {
                   </div>
                 </div>
 
-                {/* Servicios — link directo simple al hub /servicios (sin dropdown) */}
-                <Link href="/servicios" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
-                  {t.nav.servicios}
-                </Link>
+                {/* Servicios dropdown — Vista General + 3 ejes */}
+                <div className="nav-dropdown">
+                  <Link href="/servicios" className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
+                    {t.nav.servicios}
+                    <ChevronDown className="w-3 h-3 opacity-50" />
+                  </Link>
+                  <div className="nav-dropdown-menu">
+                    <Link href="/servicios" className="dropdown-item dropdown-item-all">
+                      Vista general
+                    </Link>
+                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-nova">
+                      Finanzas
+                    </Link>
+                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-agentes">
+                      Operaciones
+                    </Link>
+                    <Link href="/servicios/marketing" className="dropdown-item dropdown-item-prompt">
+                      Marketing
+                    </Link>
+                  </div>
+                </div>
 
                 <Link href="/blog" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   Blog
@@ -478,14 +496,52 @@ export default function Header() {
                 )}
               </div>
 
-              {/* Servicios — link directo simple al hub /servicios (sin dropdown) */}
-              <Link
-                href="/servicios"
-                className="block text-gray-700 font-medium hover:text-brand-navy py-3"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {t.nav.servicios}
-              </Link>
+              {/* Servicios móvil — expandible */}
+              <div>
+                <button
+                  className="flex items-center justify-between w-full text-gray-700 font-medium hover:text-brand-navy py-3"
+                  onClick={() => setShowMobileServicios(!showMobileServicios)}
+                  aria-label="Expandir sección Servicios"
+                  aria-expanded={showMobileServicios}
+                  aria-controls="mobile-panel-servicios"
+                >
+                  <span>{t.nav.servicios}</span>
+                  <ChevronDown className={`w-5 h-5 transition-transform duration-300 ${showMobileServicios ? 'rotate-180' : ''}`} />
+                </button>
+
+                {showMobileServicios && (
+                  <div id="mobile-panel-servicios" className="pl-4 space-y-1 mt-2">
+                    <Link
+                      href="/servicios"
+                      className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm border-b border-gray-100 pb-3 mb-2 font-medium"
+                      onClick={() => { setIsMenuOpen(false); setShowMobileServicios(false) }}
+                    >
+                      Vista general
+                    </Link>
+                    <Link
+                      href="/servicios/finanzas"
+                      className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm"
+                      onClick={() => { setIsMenuOpen(false); setShowMobileServicios(false) }}
+                    >
+                      Finanzas
+                    </Link>
+                    <Link
+                      href="/servicios/operaciones"
+                      className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm"
+                      onClick={() => { setIsMenuOpen(false); setShowMobileServicios(false) }}
+                    >
+                      Operaciones
+                    </Link>
+                    <Link
+                      href="/servicios/marketing"
+                      className="block text-gray-600 hover:text-brand-navy py-2 pl-4 text-sm"
+                      onClick={() => { setIsMenuOpen(false); setShowMobileServicios(false) }}
+                    >
+                      Marketing
+                    </Link>
+                  </div>
+                )}
+              </div>
 
               <Link
                 href="/blog"

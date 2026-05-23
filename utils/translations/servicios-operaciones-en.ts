@@ -51,7 +51,7 @@ export const serviciosOperacionesEN = {
     cardArsenalDesc: 'Explore processes you can automate today in your business',
     cardArsenalCta: 'See examples',
     cardPlataformasTitle: 'Platforms',
-    cardPlataformasDesc: 'The tools we use: Claude Code, Make, Zapier and more',
+    cardPlataformasDesc: 'The tools we connect: AI (Claude, ChatGPT, Gemini), n8n, Make, Zapier and more',
     cardPlataformasCta: 'Discover',
     cardPreciosTitle: 'Pricing',
     cardPreciosDesc: 'From $747 setup + $97/mo. No fine print.',

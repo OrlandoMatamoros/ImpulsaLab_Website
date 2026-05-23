@@ -5,6 +5,7 @@ import { LINKS } from '@/lib/constants'
 import { Bot, Search, Zap, DollarSign, Layers } from 'lucide-react'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import PricingColumns from '@/components/services/PricingColumns'
+import TechStackTicker from '@/components/services/TechStackTicker'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const WA_OPS = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
@@ -37,6 +38,9 @@ export default function OperacionesPage() {
           </div>
         </div>
       </section>
+
+      {/* Tech Stack Ticker — logos reales de nuestro stack */}
+      <TechStackTicker />
 
       {/* Antes → Después */}
       <div className="bg-slate-100 border-b border-gray-200 py-4">
@@ -115,78 +119,6 @@ export default function OperacionesPage() {
         </div>
       </section>
 
-      {/* Servicios por Etapa de Negocio */}
-      <section className="py-20 bg-gradient-to-b from-white to-green-50">
-        <div className="container mx-auto px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Automatización para Cada Etapa de tu Negocio
-              </h2>
-              <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-                Desde tu primer workflow hasta una suite completa — eliminamos trabajo manual para que te enfoques en crecer.
-              </p>
-            </div>
-            <div className="grid md:grid-cols-3 gap-8 mt-12">
-              {/* Supervivencia */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-green-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">Etapa 1</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Supervivencia</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio nuevo o con procesos 100% manuales</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $747</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + $97-147/mes</div>
-                <h4 className="font-semibold text-gray-800 mb-3">1 Workflow Automatizado</h4>
-                <div className="space-y-2 mb-8">
-                  {['Lead Capture & Auto-Response desde tu sitio web', 'Invoice Processing automático por email', 'Daily Business Digest con resumen AI', 'Appointment Reminders automáticos'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Empezar con lo Básico</Link>
-              </div>
-              {/* Crecimiento */}
-              <div className="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl shadow-xl border-2 border-green-500 p-8 relative hover:shadow-2xl transition-all duration-300 transform scale-105">
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2"><span className="bg-green-600 text-white px-4 py-1 rounded-full text-sm font-semibold">MÁS POPULAR</span></div>
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-100 text-green-700 rounded-full text-sm font-semibold mb-4">Etapa 2</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Crecimiento</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio listo para automatizar múltiples procesos</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $1,997</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $357/mes</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Suite 3-5 Workflows + AI Chatbot</h4>
-                <div className="space-y-2 mb-8">
-                  {['Suite de 3-5 workflows integrados (desde $1,997 + $357/mes)', 'AI Chatbot WhatsApp/Web (desde $1,497 + $437/mes)', 'CRM automatizado con seguimiento de leads', 'Integraciones con Gmail, Sheets, Calendar, Slack', 'Soporte prioritario y optimización mensual'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Agenda tu Diagnóstico</Link>
-              </div>
-              {/* Expansión */}
-              <div className="bg-white rounded-2xl shadow-lg border-2 border-gray-200 p-8 hover:border-green-400 hover:shadow-2xl transition-all duration-300">
-                <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-100 text-purple-700 rounded-full text-sm font-semibold mb-4">Etapa 3</div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">Expansión</h3>
-                <p className="text-gray-600 text-sm mb-4">Negocio con $1M+ listo para automatización total</p>
-                <div className="text-3xl font-bold text-gray-900 mb-1">desde $3,997</div>
-                <div className="text-sm text-gray-500 mb-6">Setup + desde $717/mes</div>
-                <h4 className="font-semibold text-gray-800 mb-3">Suite Completa 6-10 Workflows</h4>
-                <div className="space-y-2 mb-8">
-                  {['6-10 workflows cubriendo todos los procesos del negocio', 'AI Agents avanzados con base de conocimiento', 'Dashboard de operaciones en tiempo real', 'Integraciones API custom con tus sistemas', 'Mantenimiento proactivo y escalado continuo'].map((item, i) => (
-                    <div key={i} className="flex items-start gap-2"><svg className="w-5 h-5 text-green-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg><span className="text-gray-700 text-sm">{item}</span></div>
-                  ))}
-                </div>
-                <Link href="/servicios/operaciones/precios" className="block w-full text-center py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition font-semibold">Solicitar Propuesta</Link>
-              </div>
-            </div>
-            <div className="mt-12 bg-white rounded-xl p-8 shadow-lg border border-gray-200">
-              <h3 className="text-xl font-bold text-center mb-6 text-gray-900">40-70% más accesible que agencias en NYC</h3>
-              <div className="grid md:grid-cols-3 gap-6 text-center">
-                <div><div className="text-sm text-gray-500 mb-1">1 Workflow</div><div className="text-gray-400 line-through text-sm">NYC: $1,500-$5,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: desde $747</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Suite 3-5 Workflows</div><div className="text-gray-400 line-through text-sm">NYC: $10,000-$15,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: desde $1,997</div></div>
-                <div><div className="text-sm text-gray-500 mb-1">Suite Completa + AI</div><div className="text-gray-400 line-through text-sm">NYC: $40,000-$60,000</div><div className="text-xl font-bold text-green-600">Impulsa Lab: $3,997-$8,997</div></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* Automatización vs Empleado Humano (BLS NYC 2023) */}
       <AutomationVsEmployee
         vertical="operaciones"
@@ -196,11 +128,11 @@ export default function OperacionesPage() {
         ctaLabel="Cotizar mi automatización"
         ctaHref="/servicios/operaciones/precios"
         rows={[
-          { product: 'WhatsApp AI Bot',         productPrice: '$297-497/mes', humanRole: 'Customer Service Rep',    nycMonthly: 4870, hoursSaved: 160, roiNote: '10-16×' },
-          { product: 'Appointment Scheduler',   productPrice: '$297-497/mes', humanRole: 'Recepcionista',            nycMonthly: 4314, hoursSaved: 80,  roiNote: '9-15×' },
-          { product: 'Daily Digest Agent',      productPrice: '$297-497/mes', humanRole: 'Asistente administrativo', nycMonthly: 5735, hoursSaved: 40,  roiNote: '12-19×' },
-          { product: 'Lead Capture Auto-Reply', productPrice: '$97-197/mes',  humanRole: 'SDR junior',               nycMonthly: 7960, hoursSaved: 60,  roiNote: '40-82×' },
-          { product: 'Review Manager',          productPrice: '$297-497/mes', humanRole: 'Community/Reputation Mgr', nycMonthly: 6756, hoursSaved: 30,  roiNote: '14-23×' },
+          { product: 'Bot de WhatsApp con IA',           productPrice: '$297-497/mes', humanRole: 'Customer Service Rep',    nycMonthly: 4870, hoursSaved: 160, roiNote: '10-16×' },
+          { product: 'Agenda Automática de Citas',       productPrice: '$297-497/mes', humanRole: 'Recepcionista',            nycMonthly: 4314, hoursSaved: 80,  roiNote: '9-15×' },
+          { product: 'Resumen Diario Inteligente',       productPrice: '$297-497/mes', humanRole: 'Asistente administrativo', nycMonthly: 5735, hoursSaved: 40,  roiNote: '12-19×' },
+          { product: 'Captura y Respuesta de Leads',     productPrice: '$97-197/mes',  humanRole: 'SDR junior',               nycMonthly: 7960, hoursSaved: 60,  roiNote: '40-82×' },
+          { product: 'Gestor de Reseñas',                productPrice: '$297-497/mes', humanRole: 'Community/Reputation Mgr', nycMonthly: 6756, hoursSaved: 30,  roiNote: '14-23×' },
         ]}
       />
 
@@ -340,12 +272,12 @@ export default function OperacionesPage() {
             sku: 'BOT-001',
             name: 'Chatbot Express',
             price: '$597 + $297/mes',
-            subtitle: 'Atención por WhatsApp, lista rápido',
+            subtitle: 'Atención por WhatsApp, listo rápido',
             features: [
-              'Plantilla WhatsApp FAQ + captura de lead',
-              'Setup rápido',
-              'Integración con tus canales',
-              'Retainer de operación $297/mes',
+              'Bot para WhatsApp con preguntas frecuentes',
+              'Captura datos del cliente (nombre, teléfono, qué busca)',
+              'Lo dejamos listo en una semana',
+              'Soporte mensual incluido',
             ],
             ctaLabel: 'Cotizar Chatbot Express',
             ctaHref: WA_OPS('Hola Impulsa Lab, me interesa el Chatbot Express para mi negocio.'),
@@ -353,33 +285,33 @@ export default function OperacionesPage() {
           },
           {
             sku: 'AUTO-002',
-            name: 'Automatización Agéntica',
+            name: 'Automatización a la Medida',
             price: 'desde $747 + retainer',
-            subtitle: 'Tu proceso, en piloto automático',
+            subtitle: 'Tu proceso, funcionando solo',
             featured: true,
             badge: 'MÁS POPULAR',
             features: [
-              'Sistema agéntico scoped por diagnóstico',
-              'Calificación de leads, cotizaciones, documentos',
-              'Operación multi-sistema',
-              'Retainer desde $137/mes (operación)',
+              'Sistema con IA diseñado tras un diagnóstico de tu negocio',
+              'Califica leads, genera cotizaciones, procesa documentos',
+              'Conecta varias herramientas (correo, CRM, hojas de cálculo)',
+              'Soporte mensual incluido',
             ],
             ctaLabel: 'Cotizar mi automatización',
             ctaHref: '/servicios/operaciones/precios',
           },
           {
             sku: 'BOT-002',
-            name: 'Agente IA Custom',
+            name: 'Agente IA a la Medida',
             price: 'desde $1,497 + $437/mes',
-            subtitle: 'Agéntico, a tu medida',
+            subtitle: 'Tu asistente inteligente, a la medida',
             features: [
-              'RAG + agendamiento en vivo contra calendario',
-              'Multimodal + integraciones',
-              'Ideal dental / estético',
-              'Retainer $437/mes',
+              'Asistente que sabe sobre tu negocio (productos, políticas, horarios)',
+              'Agenda citas en tu calendario en tiempo real',
+              'Conversa por voz, texto e imagen',
+              'Ideal para centros dentales, estéticos y salones',
             ],
             ctaLabel: 'Hablar con un experto',
-            ctaHref: WA_OPS('Hola Impulsa Lab, me interesa un Agente IA Custom a medida.'),
+            ctaHref: WA_OPS('Hola Impulsa Lab, me interesa un Agente IA a la medida.'),
             ctaTarget: '_blank',
           },
         ]}
