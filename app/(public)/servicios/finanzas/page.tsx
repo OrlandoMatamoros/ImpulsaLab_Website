@@ -510,20 +510,6 @@ export default function FinanzasPage() {
             ctaHref: whatsappUrl,
             ctaTarget: '_blank',
           },
-          {
-            sku: 'PRD-007',
-            name: 'AI Financial Dashboard Updater',
-            price: 'desde $697/mes',
-            subtitle: 'Actualización automática continua',
-            features: [
-              'Mantiene tu dashboard financiero al día',
-              'Pensado para operación recurrente',
-              '[CONFIRMAR] alcance según volumen de datos',
-            ],
-            ctaLabel: 'Hablar con un experto',
-            ctaHref: whatsappUrl,
-            ctaTarget: '_blank',
-          },
         ]}
       />
 

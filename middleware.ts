@@ -73,8 +73,11 @@ export async function middleware(request: NextRequest) {
 
   // Solo interceptar rutas protegidas. Todo lo demás pasa directo
   // a Next.js routing (que devolverá 404 real si la ruta no existe).
-  const isProtectedPage = protectedRoutes.some(route => path.startsWith(route));
-  const isProtectedApi = protectedApiRoutes.some(route => path.startsWith(route));
+  // OJO: matching por boundary de slash, NO prefix de string — para evitar que
+  // /dashboards/* (assets estáticos plural) matchee la ruta protegida /dashboard.
+  const matchesRoute = (route: string) => path === route || path.startsWith(route + '/');
+  const isProtectedPage = protectedRoutes.some(matchesRoute);
+  const isProtectedApi = protectedApiRoutes.some(matchesRoute);
 
   if (!isProtectedPage && !isProtectedApi) {
     return NextResponse.next();
