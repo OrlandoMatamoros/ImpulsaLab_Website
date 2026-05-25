@@ -15,7 +15,10 @@ export const LINKS = {
   calendly: 'https://calendly.com/orlando-tuimpulsalab/30min',
   email: 'contacto@tuimpulsalab.com',
   linkedin: 'https://linkedin.com/in/orlando-matamoros',
-  whatsapp: 'https://wa.me/13474509281',
+  // Click-to-chat → chatbot IA Impulsa Lab (Twilio Sender 929-500-7815, ONLINE 2026-05-22).
+  // El 347-450-9281 es solo para llamadas/SMS (tel:/sms: links), NO WhatsApp.
+  whatsapp: 'https://wa.me/19295007815',
+  phone: '+13474509281',
 }
 
 export const COMPANY_INFO = {

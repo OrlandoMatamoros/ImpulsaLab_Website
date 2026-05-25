@@ -129,7 +129,7 @@ export default function IntegrationsShowcase() {
                 <p className="text-gray-600 text-sm">{s.footerDesc}</p>
               </div>
               <a
-                href="https://wa.me/13474509281"
+                href="https://wa.me/19295007815"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-[#002D62] hover:bg-[#003d82] text-white rounded-lg font-semibold transition-all whitespace-nowrap"

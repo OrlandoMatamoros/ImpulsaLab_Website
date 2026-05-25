@@ -136,14 +136,24 @@ const Footer = () => {
 
             {/* Contact Info */}
             <div className="space-y-2 text-sm text-gray-300">
-              <a 
+              <a
                 href="tel:+13474509281"
                 className="flex items-center gap-2 hover:text-white transition-colors"
+                aria-label="Llamar al +1 347 450 9281"
               >
                 <FaPhone /> +1 347 450 9281
               </a>
-              <a 
-                href="mailto:contacto@tuimpulsalab.com" 
+              <a
+                href="https://wa.me/19295007815"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-white transition-colors"
+                aria-label="WhatsApp con agente IA al +1 929 500 7815"
+              >
+                <FaWhatsapp className="text-green-400" /> +1 929 500 7815 <span className="text-xs text-gray-500">(WhatsApp · agente IA 24/7)</span>
+              </a>
+              <a
+                href="mailto:contacto@tuimpulsalab.com"
                 className="flex items-center gap-2 hover:text-white transition-colors"
               >
                 <FaEnvelope /> contacto@tuimpulsalab.com
