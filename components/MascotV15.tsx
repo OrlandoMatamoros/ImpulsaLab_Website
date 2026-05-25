@@ -2,7 +2,7 @@
 // Aprobada 2026-05-16 tras 4 rondas de diseño. Cuernos cefálicos + aletas
 // trianguladas + cola flagelo + 2 ojos cyan micro.
 
-type MascotVariant = 'default' | 'light' | 'dark' | 'mono'
+type MascotVariant = 'default' | 'light' | 'dark' | 'mono' | 'cyan'
 type MascotExpression = 'neutral' | 'feliz' | 'sorpresa' | 'parpadeo' | 'cool' | 'pensativo'
 
 interface MascotV15Props {
@@ -19,6 +19,10 @@ const COLORS: Record<MascotVariant, { body: string; eyes: string }> = {
   light: { body: '#0a0e1a', eyes: '#00BFFF' },
   dark: { body: '#FFFFFF', eyes: '#00BFFF' },
   mono: { body: '#0a0e1a', eyes: '#0a0e1a' },
+  // Cyan: representación canónica de la IA aplicada Impulsa Lab.
+  // Body en brand-cyan #00BCD4, ojos blancos para contraste sobre fondos
+  // oscuros (Hero, TeamSection Nova, dashboards).
+  cyan: { body: '#00BCD4', eyes: '#FFFFFF' },
 }
 
 export default function MascotV15({

@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { IMAGES } from '@/lib/constants'
 import { useLanguage } from '@/contexts/LanguageContext'
+import MascotV15 from '@/components/MascotV15'
 
 export default function TeamSection() {
   const { t } = useLanguage()
@@ -117,7 +118,16 @@ export default function TeamSection() {
                 <div className="text-center md:text-left">
                   <div className="w-48 h-48 mx-auto md:mx-0 rounded-full overflow-hidden border-4 border-purple-400/30 bg-gradient-to-br from-purple-500 to-blue-600 flex items-center justify-center relative">
                     <div className="absolute inset-0 bg-white/10 rounded-full animate-pulse"></div>
-                    <span className="text-5xl font-bold text-white relative z-10">4.0</span>
+                    {/* Mascota oficial de la IA aplicada Impulsa Lab (cyan)
+                        — representación canónica de Nova. Aprobado 2026-05-25. */}
+                    <MascotV15
+                      size={140}
+                      variant="cyan"
+                      expression="neutral"
+                      animate
+                      ariaLabel="Nova - IA aplicada Impulsa Lab"
+                      className="relative z-10 drop-shadow-[0_0_24px_rgba(0,191,255,0.55)]"
+                    />
                     <div className="absolute inset-0 rounded-full">
                       <div className="absolute top-0 left-0 w-full h-full rounded-full border-2 border-purple-300/30 animate-ping"></div>
                       <div
