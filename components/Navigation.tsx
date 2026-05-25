@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
 import { useAuth } from '@/contexts/FirebaseAuthContext'
 import { isAdminEmail } from '@/lib/admin-emails'
+import { LINKS } from '@/lib/constants'
 import { Button } from '@/components/ui/button'
 import {
   DropdownMenu,
@@ -227,7 +228,11 @@ export function Navigation() {
                           <div className="text-xs text-gray-500">Herramienta interna</div>
                         </div>
                       </DropdownMenuItem>
-                      <DropdownMenuItem onClick={() => router.push('/herramientas/facturacion')}>
+                      <DropdownMenuItem
+                        onClick={() =>
+                          window.open(LINKS.invoicingApp, '_blank', 'noopener,noreferrer')
+                        }
+                      >
                         <BookOpen className="h-4 w-4 mr-2" />
                         <div className="flex-1">
                           <div>Facturación</div>

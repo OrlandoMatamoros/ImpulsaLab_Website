@@ -32,6 +32,9 @@ interface ToolCard {
   icon: React.ComponentType<{ className?: string }>
   badge?: 'new' | 'free' | 'admin'
   featured?: boolean
+  /** Si true, el card abre el href en una pestaña externa (target=_blank) en
+   *  vez de navegar internamente con next/link. Útil para PWAs separadas. */
+  external?: boolean
 }
 
 const PUBLIC_TOOLS: ToolCard[] = [
@@ -44,7 +47,9 @@ const PUBLIC_TOOLS: ToolCard[] = [
 
 const INTERNAL_TOOLS: ToolCard[] = [
   { id: 'auditoriaWeb', href: '/herramientas/auditoria-web', icon: Search, badge: 'admin' },
-  { id: 'facturacion', href: '/herramientas/facturacion', icon: Receipt, badge: 'admin' },
+  // Invoicing es PWA separada; abrirla directo sin pasar por /herramientas/facturacion
+  // (la página intermedia auto-redirige si alguien la abre por bookmark).
+  { id: 'facturacion', href: 'https://impulsa-invoicing.vercel.app', icon: Receipt, badge: 'admin', external: true },
 ]
 
 export default function ToolsSection() {
@@ -91,12 +96,31 @@ export default function ToolsSection() {
 
     const isDarkCard = isFeatured || variant === 'internal'
 
+    const commonProps = {
+      key: card.id,
+      className: `${baseClasses} ${featuredClasses || variantClasses}`,
+    }
+
+    // External: <a target=_blank> para abrir PWA / app separada.
+    // Internal: <Link> de Next para navegación cliente.
+    const CardWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) =>
+      card.external ? (
+        <a
+          {...commonProps}
+          href={card.href}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {children}
+        </a>
+      ) : (
+        <Link {...commonProps} href={card.href}>
+          {children}
+        </Link>
+      )
+
     return (
-      <Link
-        key={card.id}
-        href={card.href}
-        className={`${baseClasses} ${featuredClasses || variantClasses}`}
-      >
+      <CardWrapper>
         <div className="flex items-start justify-between mb-6">
           <div
             className={`w-14 h-14 rounded-xl flex items-center justify-center transition-transform group-hover:scale-110 ${
@@ -140,7 +164,7 @@ export default function ToolsSection() {
           {ts.cta}
           <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
         </span>
-      </Link>
+      </CardWrapper>
     )
   }
 

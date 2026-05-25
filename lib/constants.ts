@@ -19,6 +19,9 @@ export const LINKS = {
   // El 347-450-9281 es solo para llamadas/SMS (tel:/sms: links), NO WhatsApp.
   whatsapp: 'https://wa.me/19295007815',
   phone: '+13474509281',
+  // Invoicing app (PWA). Admin-only desde el menú; los links del header/nav/tools la abren
+  // directo en una pestaña externa para que el browser elija la PWA instalada si existe.
+  invoicingApp: 'https://impulsa-invoicing.vercel.app',
 }
 
 export const COMPANY_INFO = {
