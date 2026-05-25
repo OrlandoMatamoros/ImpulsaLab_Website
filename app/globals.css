@@ -589,6 +589,10 @@
 /* ============================================================
    Mascot V15 — animación ondulación sutil (float).
    Simula mantarraya nadando. Respeta prefers-reduced-motion abajo.
+   Mobile (<640px): animación desactivada — el ojo percibe el movimiento
+   acelerado en pantalla pequeña (mismo patrón que conic-aurora /
+   breathing-orb tras commit daf06ee del 19-abr). La mascota queda
+   estática en mobile, animada en desktop ≥640px.
    ============================================================ */
 @keyframes mascot-float {
   0%, 100% { transform: translateY(0) rotate(0deg); }
@@ -598,6 +602,12 @@
   animation: mascot-float 5s ease-in-out infinite;
   transform-origin: center;
   will-change: transform;
+}
+@media (max-width: 640px) {
+  .mascot-float {
+    animation: none;
+    will-change: auto;
+  }
 }
 
 /* ============================================================
