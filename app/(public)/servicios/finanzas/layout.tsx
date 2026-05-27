@@ -2,22 +2,22 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
-  description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automáticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $997 setup + $147/mes.',
+  title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
+  description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/finanzas',
   },
   openGraph: {
-    title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
-    description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automáticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $997 setup + $147/mes.',
+    title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
+    description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
     url: 'https://www.tuimpulsalab.com/servicios/finanzas',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - CFO en tu Excel con IA' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
-    description: 'Tu PYME merece un CFO. Dashboards financieros en Excel/Sheets con IA, proyecciones automáticas y alertas de riesgo. Para restaurantes, tiendas y servicios latinos. Desde $997 setup + $147/mes.',
+    title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
+    description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
     images: ['/opengraph-image.png?v=2'],
   },
 }

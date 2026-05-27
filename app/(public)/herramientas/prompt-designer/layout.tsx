@@ -3,7 +3,7 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
   description:
-    'Crea prompts profesionales para Claude, GPT y Gemini con nuestra herramienta gratuita. Templates por industria, wizard guiado y optimizador con IA incluidos.',
+    'Diseña prompts profesionales para Claude, GPT y Gemini. Templates por industria, wizard guiado y optimizador con IA incluidos. Gratis, sin registro.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/herramientas/prompt-designer',
   },

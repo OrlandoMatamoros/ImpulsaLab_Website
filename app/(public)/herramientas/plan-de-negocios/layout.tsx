@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Generador de Plan de Negocios con IA Gratis | Impulsa Lab',
+  title: 'Plan de Negocios con IA Gratis para tu PYME | Impulsa Lab',
   description:
-    'Crea un plan de negocios profesional en minutos con inteligencia artificial. 10 secciones, proyecciones financieras a 3 años y exportación a PDF. Gratis y bilingüe.',
+    'Crea un plan de negocios profesional en minutos con IA. 10 secciones, proyecciones financieras a 3 años y exportación a PDF. Herramienta gratis.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
     languages: {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Generador de Plan de Negocios con IA Gratis | Impulsa Lab',
+    title: 'Plan de Negocios con IA Gratis para tu PYME | Impulsa Lab',
     description:
       'Crea un plan de negocios profesional en minutos con IA. 10 secciones, proyecciones financieras y PDF listo para inversores.',
     url: 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Generador de Plan de Negocios con IA Gratis | Impulsa Lab',
+    title: 'Plan de Negocios con IA Gratis para tu PYME | Impulsa Lab',
     description:
       'Crea un plan de negocios profesional en minutos con IA. 10 secciones + proyecciones financieras + PDF.',
     images: ['/opengraph-image.png?v=2'],

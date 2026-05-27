@@ -2,25 +2,25 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Consultoría IA para PYMEs | Automatización Real desde $97/mes | Impulsa Lab NYC',
+  title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
   description:
-    'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
+    'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
   },
   openGraph: {
-    title: 'Consultoría IA para PYMEs | Automatización Real desde $97/mes | Impulsa Lab NYC',
+    title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
     description:
-      'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
+      'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
     url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
     type: 'website',
-    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs: Implementación Real' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Consultoría IA para PYMEs | Automatización Real desde $97/mes | Impulsa Lab NYC',
+    title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
     description:
-      'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
+      'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
     images: ['/opengraph-image.png?v=2'],
   },
   robots: { index: true, follow: true },

@@ -21,10 +21,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.tuimpulsalab.com'),
   title: {
-    default: 'Consultoría en IA para PYMEs Latinas en NYC | Impulsa Lab',
+    default: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
     template: '%s | Impulsa Lab',
   },
-  description: 'Consultoría en IA y automatización para negocios latinos en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para PYMEs. Empieza con un Diagnóstico 3D gratis.',
+  description: 'Consultoría en Inteligencia Artificial para negocios latinos en NYC. Agentes IA, bots WhatsApp y flujos n8n. Empieza con tu Diagnóstico 3D gratis.',
   applicationName: 'Impulsa Lab',
   manifest: '/manifest.webmanifest',
   alternates: {
@@ -43,22 +43,22 @@ export const metadata: Metadata = {
     locale: 'es_ES',
     alternateLocale: ['en_US'],
     siteName: 'Impulsa Lab',
-    title: 'Consultoría en IA para PYMEs Latinas en NYC | Impulsa Lab',
-    description: 'Consultoría en IA y automatización para negocios latinos en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para PYMEs. Empieza con un Diagnóstico 3D gratis.',
+    title: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
+    description: 'Consultoría en Inteligencia Artificial para negocios latinos en NYC. Agentes IA, bots WhatsApp y flujos n8n. Empieza con tu Diagnóstico 3D gratis.',
     url: 'https://www.tuimpulsalab.com/',
     images: [
       {
         url: '/opengraph-image.png?v=2',
         width: 1200,
         height: 630,
-        alt: 'Impulsa Lab — Consultoría en IA para PYMEs Latinas en NYC',
+        alt: 'Impulsa Lab — Consultoría en IA para Negocios Latinos en NYC',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Consultoría en IA para PYMEs Latinas en NYC | Impulsa Lab',
-    description: 'Consultoría en IA y automatización para negocios latinos en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para PYMEs. Empieza con un Diagnóstico 3D gratis.',
+    title: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
+    description: 'Consultoría en Inteligencia Artificial para negocios latinos en NYC. Agentes IA, bots WhatsApp y flujos n8n. Empieza con tu Diagnóstico 3D gratis.',
     images: ['/opengraph-image.png?v=2'],
   },
   verification: {
