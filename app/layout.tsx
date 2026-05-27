@@ -156,29 +156,54 @@ export default function RootLayout({
           }}
         />
 
-        {/* JSON-LD LocalBusiness (Service Area Business) — no street address per SAB guidelines */}
+        {/* JSON-LD LocalBusiness (Service Area Business) — no street address per SAB guidelines.
+            areaServed: 5 boroughs NYC + Nassau County + Suffolk County + Westchester County.
+            Updated TASK-04: 8 explicit service areas for Local SEO. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
+              '@type': 'ProfessionalService',
               '@id': 'https://www.tuimpulsalab.com/#localbusiness',
               name: 'Impulsa Lab',
               url: 'https://www.tuimpulsalab.com',
               telephone: '+1-347-450-9281',
               email: 'contacto@tuimpulsalab.com',
+              image: 'https://www.tuimpulsalab.com/images/isotipo-color.png',
+              description:
+                'Consultoría en IA y automatización para PYMEs latinas en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para negocios en NYC y LATAM.',
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'New York',
                 addressRegion: 'NY',
+                postalCode: '12207',
+                streetAddress: '54 State Street, Ste 804',
                 addressCountry: 'US',
               },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: 40.7128,
+                longitude: -74.006,
+              },
               areaServed: [
-                { '@type': 'City', name: 'New York City' },
-                { '@type': 'Country', name: 'US' },
+                { '@type': 'City', name: 'Manhattan', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'City', name: 'Brooklyn', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'City', name: 'Queens', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'City', name: 'Bronx', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'City', name: 'Staten Island', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'AdministrativeArea', name: 'Nassau County', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'AdministrativeArea', name: 'Suffolk County', containedInPlace: { '@type': 'State', name: 'New York' } },
+                { '@type': 'AdministrativeArea', name: 'Westchester County', containedInPlace: { '@type': 'State', name: 'New York' } },
               ],
               priceRange: '$$',
+              openingHoursSpecification: {
+                '@type': 'OpeningHoursSpecification',
+                dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+                opens: '09:00',
+                closes: '18:00',
+              },
+              knowsLanguage: ['es', 'en'],
               sameAs: [
                 'https://www.linkedin.com/company/impulsa-lab',
                 'https://www.facebook.com/Tuimpulsalab',
