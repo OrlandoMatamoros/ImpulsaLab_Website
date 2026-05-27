@@ -172,7 +172,7 @@ export default function TeamSection() {
 
         {/* Stats */}
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto">
-          <h4 className="text-2xl font-bold text-center mb-8">{t.team.statsTitle}</h4>
+          <h3 className="text-2xl font-bold text-center mb-8">{t.team.statsTitle}</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             <div>
               <p className="text-3xl font-bold text-brand-cyan mb-2">50+</p>

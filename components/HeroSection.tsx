@@ -226,7 +226,7 @@ export default function HeroSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">{t.hero.diagEje1}</h4>
+                      <h3 className="font-bold text-brand-navy text-base">{t.hero.diagEje1}</h3>
                       <p className="text-sm text-gray-600">{t.hero.diagEje1Desc}</p>
                     </div>
                   </div>
@@ -240,7 +240,7 @@ export default function HeroSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">{t.hero.diagEje2}</h4>
+                      <h3 className="font-bold text-brand-navy text-base">{t.hero.diagEje2}</h3>
                       <p className="text-sm text-gray-600">{t.hero.diagEje2Desc}</p>
                     </div>
                   </div>
@@ -253,7 +253,7 @@ export default function HeroSection() {
                       </svg>
                     </div>
                     <div>
-                      <h4 className="font-bold text-brand-navy">{t.hero.diagEje3}</h4>
+                      <h3 className="font-bold text-brand-navy text-base">{t.hero.diagEje3}</h3>
                       <p className="text-sm text-gray-600">{t.hero.diagEje3Desc}</p>
                     </div>
                   </div>
