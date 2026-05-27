@@ -9,7 +9,21 @@ import { InitialLeadCapture } from './InitialLeadCapture';
 import { PreAssessment } from './PreAssessment';
 import { AdaptiveQuestions } from './AdaptiveQuestions';
 import { AutoProcessing } from './AutoProcessing';
-import { ResultsDashboard } from './ResultsDashboard';
+import dynamic from 'next/dynamic';
+
+// ResultsDashboard loads recharts (~200 KiB) + jsPDF (~300 KiB) — only needed at step 6.
+// Lazy-load to keep initial diagnostico bundle lean.
+const ResultsDashboard = dynamic(
+  () => import('./ResultsDashboard').then((mod) => ({ default: mod.ResultsDashboard })),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex items-center justify-center py-24">
+        <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#002D62]" />
+      </div>
+    ),
+  }
+);
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { ChevronLeft, ChevronRight, RotateCcw, Home } from 'lucide-react';
 
