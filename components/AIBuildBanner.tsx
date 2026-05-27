@@ -7,7 +7,7 @@ export default function AIBuildBanner() {
   const message = t.aiBanner.text
 
   return (
-    <div className="bg-brand-navy border-b border-white/10 overflow-hidden">
+    <div className="bg-brand-navy border-b border-white/10 overflow-hidden min-h-[32px]">
       <div className="ai-banner-marquee relative flex whitespace-nowrap">
         {[...Array(6)].map((_, i) => (
           <span key={i} className="flex items-center gap-3 px-8 py-1.5 text-xs text-gray-300 font-mono tracking-wide">
