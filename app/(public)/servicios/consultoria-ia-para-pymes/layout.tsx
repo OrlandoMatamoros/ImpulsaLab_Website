@@ -84,9 +84,56 @@ const breadcrumbSchema = buildBreadcrumbLd([
   { name: 'Consultoría IA para PYMEs', path: '/servicios/consultoria-ia-para-pymes' },
 ])
 
+// Service schema — Consultoría IA para PYMEs (página canónica de la keyword principal)
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes#service',
+  name: 'Consultoría IA para PYMEs — Automatización Real desde $97/mes',
+  description:
+    'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Agentes IA, chatbots WhatsApp, facturación automática y flujos n8n con Claude. Diagnóstico gratuito de 30 minutos.',
+  url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
+  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  areaServed: [
+    { '@type': 'City', name: 'New York City' },
+    { '@type': 'AdministrativeArea', name: 'Nassau County' },
+    { '@type': 'AdministrativeArea', name: 'Suffolk County' },
+    { '@type': 'AdministrativeArea', name: 'Westchester County' },
+    { '@type': 'Country', name: 'CO' },
+    { '@type': 'Country', name: 'MX' },
+  ],
+  offers: {
+    '@type': 'Offer',
+    price: '97',
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '97',
+      priceCurrency: 'USD',
+      unitText: 'monthly',
+    },
+    url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
+  },
+  serviceType: 'AI Consulting',
+  category: 'Artificial Intelligence Consulting',
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Productos de Automatización con IA',
+    itemListElement: [
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Workflows de Automatización Nivel 1', description: 'Desde $97/mes' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Agentes IA Nivel 2', description: 'Desde $297/mes' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Soluciones Premium', description: 'Desde $697/mes' } },
+    ],
+  },
+}
+
 export default function ConsultoriaIAPymesLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}

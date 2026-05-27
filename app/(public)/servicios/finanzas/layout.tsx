@@ -1,4 +1,5 @@
 import { Metadata } from 'next'
+import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
   title: 'Automatiza tus Finanzas con IA — Dashboard + CFO Virtual',
@@ -21,6 +22,56 @@ export const metadata: Metadata = {
   },
 }
 
+// Service schema — Finanzas
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  '@id': 'https://www.tuimpulsalab.com/servicios/finanzas#service',
+  name: 'CFO Virtual con IA — Automatización Financiera para PYMEs',
+  description:
+    'Dashboards financieros automatizados, proyecciones con IA, alertas de riesgo y seguimiento de KPIs para restaurantes, tiendas y servicios latinos.',
+  url: 'https://www.tuimpulsalab.com/servicios/finanzas',
+  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  areaServed: [
+    { '@type': 'City', name: 'New York City' },
+    { '@type': 'Country', name: 'US' },
+    { '@type': 'Country', name: 'CO' },
+    { '@type': 'Country', name: 'MX' },
+  ],
+  offers: {
+    '@type': 'Offer',
+    price: '147',
+    priceCurrency: 'USD',
+    priceSpecification: {
+      '@type': 'UnitPriceSpecification',
+      price: '147',
+      priceCurrency: 'USD',
+      unitText: 'monthly',
+    },
+    url: 'https://www.tuimpulsalab.com/servicios/finanzas',
+  },
+  serviceType: 'Financial Automation Consulting',
+  category: 'Artificial Intelligence Consulting',
+}
+
+const breadcrumbSchema = buildBreadcrumbLd([
+  { name: 'Inicio', path: '/' },
+  { name: 'Servicios', path: '/servicios' },
+  { name: 'Finanzas con IA', path: '/servicios/finanzas' },
+])
+
 export default function FinanzasLayout({ children }: { children: React.ReactNode }) {
-  return <>{children}</>
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      {children}
+    </>
+  )
 }
