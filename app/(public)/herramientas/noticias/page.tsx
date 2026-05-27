@@ -1,5 +1,12 @@
+import type { Metadata } from 'next'
 import { RssNewsService } from '@/lib/rss-news-service'
 import NoticiasInteractive, { type NewsItem } from './NoticiasInteractive'
+
+// noindex: CTR is 0% on irrelevant queries (tech news, not our services).
+// follow:true preserves crawl budget for outbound links inside the page.
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+}
 
 // ISR: regenerate at most every hour. Combined with the client-side
 // refresh inside NoticiasInteractive (every 60 min while tab is open), this

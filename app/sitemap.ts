@@ -44,7 +44,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/herramientas/arsenal', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/herramientas/agentes', priority: 0.6, changeFrequency: 'weekly' as const },
     { path: '/herramientas/agentes/junta-estrategica', priority: 0.8, changeFrequency: 'monthly' as const },
-    { path: '/herramientas/noticias', priority: 0.7, changeFrequency: 'monthly' as const },
+    // /herramientas/noticias excluida del sitemap (noindex — CTR 0% en queries irrelevantes)
     { path: '/herramientas/prompt-designer', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/herramientas/plan-de-negocios', priority: 0.7, changeFrequency: 'monthly' as const },
     // Legal (baja prioridad pero necesarias)
