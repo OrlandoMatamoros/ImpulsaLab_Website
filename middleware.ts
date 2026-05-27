@@ -36,6 +36,16 @@ const roleBasedRoutes: Record<string, string[]> = {
 
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
+  const host = request.headers.get('host') || '';
+
+  // TASK-01: Canonicalizar non-www → www con 301 permanente.
+  // https://tuimpulsalab.com/* → https://www.tuimpulsalab.com/*
+  // Se excluye localhost para no romper desarrollo local.
+  if (host === 'tuimpulsalab.com') {
+    const wwwUrl = new URL(request.url);
+    wwwUrl.host = 'www.tuimpulsalab.com';
+    return NextResponse.redirect(wwwUrl, { status: 301 });
+  }
 
   // Redirects 301 explícitos.
   // next.config.js redirects() genera 308 (permanent:true en Next.js 13+),
