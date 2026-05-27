@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Generador de Plan de Negocios con IA Gratis | Impulsa Lab',
   description:
-    'Crea un plan de negocios profesional en minutos con inteligencia artificial. 10 secciones, proyecciones financieras a 3 anos y exportacion a PDF. Gratis y bilingue.',
+    'Crea un plan de negocios profesional en minutos con inteligencia artificial. 10 secciones, proyecciones financieras a 3 años y exportación a PDF. Gratis y bilingüe.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
     languages: {

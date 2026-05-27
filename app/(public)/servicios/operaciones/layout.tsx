@@ -2,22 +2,22 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Automatizacion de Choque - Operaciones con IA para PYMEs',
-  description: 'Automatizacion de operaciones con agentes IA y n8n para PYMEs. Gestion de WhatsApp, facturacion automatica, plataformas inteligentes y flujos sin codigo. Automatizacion agentica desde $747 setup; chatbot desde $597.',
+  title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
+  description: 'Automatización de operaciones con agentes IA y n8n para PYMEs. Gestión de WhatsApp, facturación automática, plataformas inteligentes y flujos sin código. Agentes desde $597 setup.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/operaciones',
   },
   openGraph: {
-    title: 'Automatizacion de Choque - Operaciones con IA para PYMEs',
-    description: 'Automatizacion de operaciones con agentes IA y n8n para PYMEs. Gestion de WhatsApp, facturacion automatica, plataformas inteligentes y flujos sin codigo. Automatizacion agentica desde $747 setup; chatbot desde $597.',
+    title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
+    description: 'Automatización de operaciones con agentes IA y n8n para PYMEs. Gestión de WhatsApp, facturación automática, plataformas inteligentes y flujos sin código. Agentes desde $597 setup.',
     url: 'https://www.tuimpulsalab.com/servicios/operaciones',
     type: 'website',
-    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Automatizacion de Operaciones' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Automatización de Operaciones con IA' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatizacion de Choque - Operaciones con IA para PYMEs',
-    description: 'Automatizacion de operaciones con agentes IA y n8n para PYMEs. Gestion de WhatsApp, facturacion automatica, plataformas inteligentes y flujos sin codigo. Automatizacion agentica desde $747 setup; chatbot desde $597.',
+    title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
+    description: 'Automatización de operaciones con agentes IA y n8n para PYMEs. Gestión de WhatsApp, facturación automática, plataformas inteligentes y flujos sin código. Agentes desde $597 setup.',
     images: ['/opengraph-image.png?v=2'],
   },
 }
