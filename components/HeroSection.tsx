@@ -1,12 +1,15 @@
 'use client'
 
 import Link from 'next/link'
+import dynamic from 'next/dynamic'
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView, useReducedMotion } from 'framer-motion'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { useMagnetic } from '@/lib/hooks/useMagnetic'
-import HeroSpotlightGrid from '@/components/HeroSpotlightGrid'
-import MascotV15 from '@/components/MascotV15'
+// HeroSpotlightGrid y MascotV15 se code-split: son decorativos below-the-fold
+// y usan useMotionValue/useSpring (framer-motion costoso). No bloquean LCP.
+const HeroSpotlightGrid = dynamic(() => import('@/components/HeroSpotlightGrid'), { ssr: false })
+const MascotV15 = dynamic(() => import('@/components/MascotV15'), { ssr: false })
 
 function getMonthlySlots(): number {
   const now = new Date()
