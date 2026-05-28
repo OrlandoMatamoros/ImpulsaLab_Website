@@ -11,9 +11,9 @@ type Stat = {
 
 const STATS: Stat[] = [
   { value: 89, suffix: '+', label: 'Herramientas en el Arsenal' },
-  { value: 20, suffix: '+', label: 'Automatizaciones en producción' },
-  { value: 3, suffix: '', label: 'WhatsApp AI Bots activos' },
-  { value: 8, suffix: '', label: 'Productos vendibles' },
+  { value: 25, suffix: '+', label: 'Automatizaciones en producción' },
+  { value: 13, suffix: '+', label: 'Workflows AI en producción' },
+  { value: 49, suffix: '', label: 'Servicios en catálogo' },
 ]
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
