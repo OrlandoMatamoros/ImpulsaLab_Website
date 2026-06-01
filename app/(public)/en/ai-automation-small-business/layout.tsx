@@ -11,8 +11,8 @@ export const metadata: Metadata = {
     canonical: CANONICAL,
     languages: {
       'en-US': CANONICAL,
+      'es': 'https://www.tuimpulsalab.com/es/automatizacion-ia-pequenos-negocios',
       'x-default': CANONICAL,
-      // 'es' mirror added in Phase 2 once /es/automatizacion-ia-pequenos-negocios exists.
     },
   },
   openGraph: {

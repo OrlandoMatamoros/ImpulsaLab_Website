@@ -35,8 +35,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/servicios/operaciones/plataformas', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones/arsenal', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/servicios/marketing', priority: 0.9, changeFrequency: 'monthly' as const },
-    // Landings en inglés (Google Ads + SEO EN)
+    // Landings de campaña (Google Ads + SEO) — EN + espejo ES
     { path: '/en/ai-automation-small-business', priority: 0.8, changeFrequency: 'monthly' as const },
+    { path: '/es/automatizacion-ia-pequenos-negocios', priority: 0.8, changeFrequency: 'monthly' as const },
     // Capacitación
     { path: '/capacitacion', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/capacitacion/mentoria-personalizada', priority: 0.6, changeFrequency: 'monthly' as const },
