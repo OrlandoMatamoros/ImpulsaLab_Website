@@ -43,9 +43,9 @@ export const homeES = {
   },
   hero: {
     badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
-    titulo: "\u00BFSabes donde esta parado tu negocio",
-    tituloAccent: " ahora mismo?",
-    subtitulo: "La mayoria de los duenos de PYMEs toman decisiones a ciegas. Nuestro Diagnostico 3D analiza tus Finanzas, Operaciones y Marketing en 5 minutos — y te dice exactamente donde actuar primero.",
+    titulo: "Consultoría en IA y automatización",
+    tituloAccent: " para negocios latinos en NYC",
+    subtitulo: "¿Sabes dónde está parado tu negocio? La mayoría de los dueños de PYMEs toman decisiones a ciegas. Nuestro Diagnóstico 3D analiza tus Finanzas, Operaciones y Marketing en 5 minutos — y te dice exactamente dónde actuar primero.",
     cta: "Diagnostica tu Negocio Gratis",
     ctaSecundario: "Ver Servicios",
     metricaEmpresas: "Empresarios asesorados",

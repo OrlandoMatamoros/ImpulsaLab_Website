@@ -130,7 +130,7 @@ Para cada directorio:
 
 | Directorio | Fecha alta | Perfil URL | Dofollow | Estado |
 |---|---|---|---|---|
-| Google Business Profile | 2026-06-01 | maps (SAB Queens) | N/A | ✅ CREADO y verificado — 6 reseñas 5.0, categoría "Business development service" (decisión: mantener + compensar con keywords). Pendiente: completar productos/servicios, crear oferta Diagnóstico 3D |
+| Google Business Profile | 2026-06-01 | maps (SAB Queens) | N/A | ✅ COMPLETO — verificado, 6 reseñas 5.0, categoría "Business development service" (mantener + compensar con keywords), 5 servicios cargados (Diagnóstico 3D gratis · Consultoría IA $97+ · Bot WhatsApp $297+ · Facturación $97+ · Dashboard Financiero $697+). Opcional: post/oferta del Diagnóstico 3D |
 | Bing Places | PENDIENTE | - | - | Por crear |
 | Yelp | PENDIENTE | - | No | Por crear |
 | Clutch.co | PENDIENTE | - | No | Por crear |

@@ -42,9 +42,9 @@ export const homeEN = {
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",
-    titulo: "Do you know where your business stands",
-    tituloAccent: " right now?",
-    subtitulo: "Most SMB owners make decisions blindly. Our 3D Diagnostic analyzes your Finance, Operations & Marketing in 5 minutes — and tells you exactly where to act first.",
+    titulo: "AI consulting & automation",
+    tituloAccent: " for Latino businesses in NYC",
+    subtitulo: "Do you know where your business stands? Most SMB owners make decisions blindly. Our 3D Diagnostic analyzes your Finance, Operations & Marketing in 5 minutes — and tells you exactly where to act first.",
     cta: "Diagnose Your Business Free",
     ctaSecundario: "View Services",
     metricaEmpresas: "Business owners advised",
