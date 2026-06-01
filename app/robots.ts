@@ -20,7 +20,10 @@ export default function robots(): MetadataRoute.Robots {
           '/unauthorized/',
           '/test-whatsapp/',
           '/status/',
-          '/_next/',
+          // Solo bloqueamos data routes; /_next/static/ (CSS/JS/fonts) debe ser
+          // rastreable para que Googlebot renderice y evalúe mobile-friendliness.
+          // Antes era '/_next/' completo → GSC marcaba los CSS como "Bloqueada por robots.txt".
+          '/_next/data/',
           '/__/',
         ],
       },
