@@ -70,6 +70,21 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
+  // /servicios/operaciones/precios → /servicios/operaciones#precios (sub-ruta nunca existió, fix GSC 404)
+  if (path === '/servicios/operaciones/precios') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/servicios/operaciones';
+    url.hash = '#precios';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // /recursos → /blog (sección renombrada, fix GSC 404)
+  if (path === '/recursos') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/blog';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // Slugs de blog eliminados: responder 410 Gone para que Google los desindexe.
   if (DELETED_BLOG_SLUGS.has(path)) {
     return new NextResponse(
