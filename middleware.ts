@@ -3,10 +3,13 @@ import type { NextRequest } from 'next/server';
 
 // Blog slugs eliminados permanentemente — devuelven 410 Gone para limpiar GSC.
 // 410 es preferible a 404 porque Google lo desindexará más rápido.
-// Actualizado: 2026-04-28 (sesión SEO fix — slugs eran soft-404 en GSC)
+// Actualizado: 2026-06-01 (+2 slugs del lanzamiento inicial del blog que GSC
+//   seguía marcando como 404 — la validación del 30-may falló por estos dos).
 const DELETED_BLOG_SLUGS = new Set([
   '/blog/marketing-digital-presupuesto-limitado',
   '/blog/automatizacion-procesos-restaurantes',
+  '/blog/transformacion-digital-paso-a-paso',
+  '/blog/ia-transformacion-pymes-2025',
 ]);
 
 // Rutas protegidas que requieren autenticación
