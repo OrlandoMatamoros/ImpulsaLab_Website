@@ -211,6 +211,31 @@ const Footer = () => {
                   <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
                 </Link>
               </li>
+              {/* Landings de soluciones (campaña + SEO) */}
+              <li className="pt-2">
+                <Link href="/es/automatizacion-ia-pequenos-negocios" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  Automatización con IA para pequeños negocios
+                  <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/en/ai-automation-small-business" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  AI Automation for Small Business (EN)
+                  <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/en/whatsapp-ai-chatbot" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  WhatsApp AI Chatbot (EN)
+                  <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
+              <li>
+                <Link href="/en/ai-consulting-small-business" className="text-gray-300 hover:text-white transition-colors inline-flex items-center gap-1 group">
+                  AI Consulting for Small Business (EN)
+                  <FaArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-opacity" />
+                </Link>
+              </li>
             </ul>
           </div>
 

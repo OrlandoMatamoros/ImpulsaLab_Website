@@ -138,7 +138,7 @@ export function Navigation() {
                     <DropdownMenuLabel className="text-xs text-gray-500 font-normal uppercase tracking-wider">
                       Automatización
                     </DropdownMenuLabel>
-                    <DropdownMenuItem 
+                    <DropdownMenuItem
                       onClick={() => router.push('/servicios/operaciones')}
                       className="py-3"
                     >
@@ -146,6 +146,43 @@ export function Navigation() {
                       <div className="flex-1">
                         <div className="font-medium">Agentes de IA</div>
                         <div className="text-xs text-gray-500">Automatiza procesos complejos</div>
+                      </div>
+                    </DropdownMenuItem>
+                  </div>
+
+                  <DropdownMenuSeparator />
+
+                  {/* Soluciones para pequeños negocios — landings (campaña + SEO) */}
+                  <div className="py-2">
+                    <DropdownMenuLabel className="text-xs text-gray-500 font-normal uppercase tracking-wider">
+                      Soluciones para pequeños negocios
+                    </DropdownMenuLabel>
+                    <DropdownMenuItem onClick={() => router.push('/es/automatizacion-ia-pequenos-negocios')} className="py-3">
+                      <Wrench className="h-5 w-5 mr-3 text-cyan-700" />
+                      <div className="flex-1">
+                        <div className="font-medium">Automatización con IA</div>
+                        <div className="text-xs text-gray-500">Para pequeños negocios · desde $97/mes</div>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/en/whatsapp-ai-chatbot')} className="py-3">
+                      <Bot className="h-5 w-5 mr-3 text-green-600" />
+                      <div className="flex-1">
+                        <div className="font-medium">WhatsApp AI Chatbot (EN)</div>
+                        <div className="text-xs text-gray-500">24/7 customer service · from $297/mo</div>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/en/ai-automation-small-business')} className="py-3">
+                      <Brain className="h-5 w-5 mr-3 text-orange-600" />
+                      <div className="flex-1">
+                        <div className="font-medium">AI Automation (EN)</div>
+                        <div className="text-xs text-gray-500">Small business automation · from $97/mo</div>
+                      </div>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => router.push('/en/ai-consulting-small-business')} className="py-3">
+                      <Target className="h-5 w-5 mr-3 text-cyan-700" />
+                      <div className="flex-1">
+                        <div className="font-medium">AI Consulting (EN)</div>
+                        <div className="text-xs text-gray-500">Real tools, not advice · from $97/mo</div>
                       </div>
                     </DropdownMenuItem>
                   </div>
