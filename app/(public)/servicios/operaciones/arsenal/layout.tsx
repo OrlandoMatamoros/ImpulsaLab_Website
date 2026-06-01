@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Arsenal de Automatización — Herramientas y Plataformas IA | Impulsa Lab',
+  title: 'Arsenal de Automatización — Herramientas y Plataformas IA',
   description: 'Conoce las herramientas de automatización que usamos: desde email marketing hasta CRM inteligente. Soluciones probadas para PYMEs latinoamericanas.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/operaciones/arsenal',

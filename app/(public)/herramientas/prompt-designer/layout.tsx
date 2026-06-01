@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Prompt Designer para Claude, GPT y Gemini | Impulsa Lab',
+  title: 'Prompt Designer para Claude, GPT y Gemini',
   description:
     'Diseña prompts profesionales para Claude, GPT y Gemini. Templates por industria, wizard guiado y optimizador con IA incluidos. Gratis, sin registro.',
   alternates: {

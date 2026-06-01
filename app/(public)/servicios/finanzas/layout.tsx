@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
+  title: 'Finanzas con IA: Dashboard + CFO Virtual',
   description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/finanzas',

@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Agentes de IA para Negocios — Automatización Inteligente | Impulsa Lab',
+  title: 'Agentes de IA para Negocios — Automatización Inteligente',
   description: 'Implementa agentes de inteligencia artificial que automatizan tareas repetitivas, atienden clientes y optimizan operaciones de tu PYME 24/7.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/operaciones/agentes',

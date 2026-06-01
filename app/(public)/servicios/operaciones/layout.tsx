@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
+  title: 'Automatización de Operaciones con IA para PYMEs',
   description: 'Automatiza operaciones con agentes IA y n8n: WhatsApp 24/7, facturación automática y flujos sin código para PYMEs latinas en NYC. Desde $597 setup.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/operaciones',

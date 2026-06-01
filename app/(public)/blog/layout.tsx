@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Blog de IA y Automatización para Negocios Latinos | Impulsa Lab',
+  title: 'Blog de IA y Automatización para Negocios Latinos',
   description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana en Impulsa Lab.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/blog' },
   openGraph: {

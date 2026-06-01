@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Consultoría en IA y Automatización para PYMEs | Impulsa Lab',
+  title: 'Consultoría en IA y Automatización para PYMEs',
   description: 'Agentes IA, automatización con n8n y bots WhatsApp para PYMEs latinas en Nueva York. Consultoría en Finanzas, Operaciones y Marketing. Desde $97/mes.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios',

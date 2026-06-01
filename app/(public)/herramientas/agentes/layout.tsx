@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Agentes de IA Gratuitos para tu Negocio | Impulsa Lab',
+  title: 'Agentes de IA Gratuitos para tu Negocio',
   description: 'Asistentes de inteligencia artificial especializados para cada area de tu negocio: finanzas, operaciones, marketing y mas. Prueba gratis.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/herramientas/agentes' },
   openGraph: {

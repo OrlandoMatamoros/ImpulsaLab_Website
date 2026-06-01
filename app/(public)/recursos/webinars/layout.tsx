@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Webinars sobre IA y Automatizacion para Negocios | Impulsa Lab',
+  title: 'Webinars sobre IA y Automatizacion para Negocios',
   description: 'Webinars gratuitos sobre inteligencia artificial, automatizacion y transformacion digital para PYMEs latinas en Estados Unidos.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/recursos/webinars' },
   // Placeholder "En desarrollo" — excluded from indexing until real content exists.

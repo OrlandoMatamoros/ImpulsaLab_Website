@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
+  title: 'Marketing Digital con IA para Negocios Latinos',
   description: 'Lanza tu presencia online en días, no meses. Landing pages desde $697, websites desde $2,497 y marketing digital con IA para PYMEs latinas en EE.UU.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/marketing',

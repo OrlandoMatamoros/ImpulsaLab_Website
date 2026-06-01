@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Carreras - Trabaja con Nosotros en Impulsa Lab',
+  title: 'Carreras - Trabaja con Nosotros',
   description: 'Explora oportunidades de carrera en Impulsa Lab. Buscamos talento apasionado por la IA y transformacion digital para PYMEs latinas.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/carreras' },
   openGraph: {

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Centro de Ayuda - Soporte y Recursos | Impulsa Lab',
+  title: 'Centro de Ayuda - Soporte y Recursos',
   description: 'Encuentra respuestas, guias y recursos para aprovechar al maximo nuestras soluciones de IA y automatizacion para tu negocio.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/ayuda' },
   openGraph: {

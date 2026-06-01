@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Auditoria Web | Impulsa Lab',
+  title: 'Auditoria Web',
   description: 'Herramienta interna - Auditoria web inteligente con IA',
   robots: {
     index: false,

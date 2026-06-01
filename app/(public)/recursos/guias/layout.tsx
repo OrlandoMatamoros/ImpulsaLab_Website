@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Guias Practicas de IA y Transformacion Digital | Impulsa Lab',
+  title: 'Guias Practicas de IA y Transformacion Digital',
   description: 'Guias paso a paso sobre inteligencia artificial, automatizacion y transformacion digital para PYMEs latinas. Descarga gratis.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/recursos/guias' },
   // Placeholder "En desarrollo" — excluded from indexing until real content exists.

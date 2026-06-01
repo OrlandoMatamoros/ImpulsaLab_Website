@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Noticias de IA para PYMEs Latinas — Curadas con IA | Impulsa Lab',
+  title: 'Noticias de IA para PYMEs Latinas — Curadas con IA',
   description: 'Últimas noticias curadas sobre inteligencia artificial, automatización y tecnología aplicada a negocios latinos. Actualizado diariamente.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/herramientas/noticias' },
   openGraph: {

@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Plan de Negocios con IA Gratis para tu PYME | Impulsa Lab',
+  title: 'Plan de Negocios con IA Gratis para tu PYME',
   description:
     'Crea un plan de negocios profesional en minutos con IA. 10 secciones, proyecciones financieras a 3 años y exportación a PDF. Herramienta gratis.',
   alternates: {

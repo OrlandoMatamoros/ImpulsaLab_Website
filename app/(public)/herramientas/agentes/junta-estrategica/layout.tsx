@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Junta Estratégica AI | 4 cerebros, 1 decisión | Impulsa Lab',
+  title: 'Junta Estratégica AI | 4 cerebros, 1 decisión',
   description:
     'Convoca una junta directiva virtual con Claude, Gemini y GPT. Decisiones estratégicas con consenso multi-AI. Disponible para clientes Enterprise.',
   alternates: {
