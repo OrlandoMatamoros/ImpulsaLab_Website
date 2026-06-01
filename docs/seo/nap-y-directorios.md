@@ -1,17 +1,19 @@
 # NAP Canónico — Impulsa Lab
-> Última actualización: 2026-05-27
+> Última actualización: 2026-06-01 (migrado de domicilio legal Albany → Service Area Business en Queens, NYC)
 > Usar este texto EXACTO en todos los directorios para consistencia de señales locales.
 
 ## NAP (Name · Address · Phone)
 
 ```
-Nombre:   Impulsa Lab
-Dirección: 54 State Street, Suite 804, Albany, NY 12207
+Nombre:    Impulsa Lab
+Ubicación: Ozone Park, Queens, NY 11417  (Service Area Business — dirección oculta, atención a domicilio)
 Teléfono:  +1 (347) 450-9281
 WhatsApp:  +1 (929) 500-7815
 Email:     contacto@tuimpulsalab.com
 Sitio web: https://www.tuimpulsalab.com
 ```
+
+> **Service Area Business:** el público NUNCA ve la calle. Para directorios que EXIGEN dirección de calle (Yelp, BBB), Orlando ingresa la dirección física real y marca "ocultar dirección / atiendo a domicilio". La calle NO se versiona en este repo (privacidad). El NAP público en sitio + schema + GBP es solo "Ozone Park, Queens, NY 11417".
 
 ## Área de Servicio (para directorios que lo pidan)
 
@@ -49,7 +51,7 @@ Ofrecemos un Diagnóstico 3D gratuito de 30 minutos para identificar exactamente
 
 | Red | URL |
 |-----|-----|
-| LinkedIn (empresa) | https://www.linkedin.com/company/impulsa-lab |
+| LinkedIn (empresa) | https://www.linkedin.com/company/tuimpulsalab/ |
 | Facebook | https://www.facebook.com/Tuimpulsalab |
 | Instagram | https://www.instagram.com/tuimpulsalabny/ |
 | YouTube | https://www.youtube.com/@TuImpulsaLab |
@@ -104,8 +106,8 @@ Ofrecemos un Diagnóstico 3D gratuito de 30 minutos para identificar exactamente
 ## Instrucciones para alta en Google Business Profile (GBP)
 
 1. Ir a https://business.google.com
-2. "Agregar negocio" → categoría primaria: "IT Consulting" o "Business Consultant"
-3. Área de servicio: agregar los 8 condados/ciudades listados arriba (NO publicar dirección si es domicilio privado)
+2. Categoría primaria: "Business development service" (decisión 2026-06-01 — se mantiene aunque es genérica; se compensa con keywords en descripción, servicios y posts). Secundarias: Software company, Website designer, IT consultant, Marketing consultant.
+3. Área de servicio: agregar los 8 condados/ciudades listados arriba (configurar como Service Area Business — NO publicar dirección)
 4. NAP idéntico al canónico de este documento
 5. Fotos: al menos logo (400x400), cover (1200x628), 5+ fotos del equipo/trabajo
 6. Posts: mínimo 1 post/semana con CTA hacia /diagnostico
@@ -128,7 +130,7 @@ Para cada directorio:
 
 | Directorio | Fecha alta | Perfil URL | Dofollow | Estado |
 |---|---|---|---|---|
-| Google Business Profile | PENDIENTE | - | N/A | Por crear |
+| Google Business Profile | 2026-06-01 | maps (SAB Queens) | N/A | ✅ CREADO y verificado — 6 reseñas 5.0, categoría "Business development service" (decisión: mantener + compensar con keywords). Pendiente: completar productos/servicios, crear oferta Diagnóstico 3D |
 | Bing Places | PENDIENTE | - | - | Por crear |
 | Yelp | PENDIENTE | - | No | Por crear |
 | Clutch.co | PENDIENTE | - | No | Por crear |

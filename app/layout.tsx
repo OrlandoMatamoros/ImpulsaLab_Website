@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    locale: 'es_ES',
+    locale: 'es_US',
     alternateLocale: ['en_US'],
     siteName: 'Impulsa Lab',
     title: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
@@ -77,6 +77,10 @@ export const metadata: Metadata = {
   },
   other: {
     copyright: '© 2026 Impulsa Lab LLC',
+    'geo.region': 'US-NY',
+    'geo.placename': 'Queens, New York',
+    'geo.position': '40.6795;-73.8435',
+    'ICBM': '40.6795, -73.8435',
   },
 }
 
@@ -114,8 +118,9 @@ export default function RootLayout({
               },
               address: {
                 '@type': 'PostalAddress',
-                addressLocality: 'New York',
+                addressLocality: 'Queens',
                 addressRegion: 'NY',
+                postalCode: '11417',
                 addressCountry: 'US',
               },
               areaServed: [
@@ -132,9 +137,10 @@ export default function RootLayout({
                 availableLanguage: ['Spanish', 'English'],
               },
               sameAs: [
-                'https://www.linkedin.com/company/impulsa-lab',
+                'https://www.linkedin.com/company/tuimpulsalab/',
                 'https://www.facebook.com/Tuimpulsalab',
                 'https://www.instagram.com/tuimpulsalabny/',
+                'https://www.youtube.com/@TuImpulsaLab',
               ],
             }),
           }}
@@ -151,7 +157,7 @@ export default function RootLayout({
               description:
                 'Transformación digital empresarial con IA para PYMEs',
               publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
-              inLanguage: 'es-ES',
+              inLanguage: 'es-US',
             }),
           }}
         />
@@ -175,16 +181,15 @@ export default function RootLayout({
                 'Consultoría en IA y automatización para PYMEs latinas en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para negocios en NYC y LATAM.',
               address: {
                 '@type': 'PostalAddress',
-                addressLocality: 'New York',
+                addressLocality: 'Queens',
                 addressRegion: 'NY',
-                postalCode: '12207',
-                streetAddress: '54 State Street, Ste 804',
+                postalCode: '11417',
                 addressCountry: 'US',
               },
               geo: {
                 '@type': 'GeoCoordinates',
-                latitude: 40.7128,
-                longitude: -74.006,
+                latitude: 40.6795,
+                longitude: -73.8435,
               },
               areaServed: [
                 { '@type': 'City', name: 'Manhattan', containedInPlace: { '@type': 'State', name: 'New York' } },
@@ -205,9 +210,10 @@ export default function RootLayout({
               },
               knowsLanguage: ['es', 'en'],
               sameAs: [
-                'https://www.linkedin.com/company/impulsa-lab',
+                'https://www.linkedin.com/company/tuimpulsalab/',
                 'https://www.facebook.com/Tuimpulsalab',
                 'https://www.instagram.com/tuimpulsalabny/',
+                'https://www.youtube.com/@TuImpulsaLab',
               ],
             }),
           }}

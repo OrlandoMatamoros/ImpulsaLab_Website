@@ -163,8 +163,8 @@ const Footer = () => {
                 <div>
                   <span className="text-gray-200">{t.footer.areaServicio}</span>
                   <p className="text-xs text-gray-500 mt-1 leading-snug">
-                    {t.footer.domicilioLegal}<br />
-                    54 State Street, Ste 804, Albany, NY 12207
+                    Ozone Park, Queens, NY 11417<br />
+                    Atención a domicilio en los 5 boroughs y área metropolitana de NYC
                   </p>
                 </div>
               </div>

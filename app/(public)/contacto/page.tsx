@@ -601,8 +601,8 @@ export default function Contacto() {
                     <div>
                       <p className="font-medium">Área de servicio: Nueva York (NYC y alrededores)</p>
                       <p className="text-xs text-gray-500 mt-1 leading-snug">
-                        Domicilio legal y de correspondencia:<br />
-                        54 State Street, Ste 804, Albany, NY 12207
+                        Ozone Park, Queens, NY 11417<br />
+                        Servicio a domicilio en los 5 boroughs y área metropolitana de NYC
                       </p>
                     </div>
                   </div>
