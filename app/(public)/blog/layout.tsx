@@ -4,7 +4,10 @@ import { buildBreadcrumbLd } from '@/lib/schema'
 export const metadata: Metadata = {
   title: 'Blog de IA y Automatización para Negocios Latinos',
   description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana en Impulsa Lab.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/blog' },
+  alternates: {
+    canonical: 'https://www.tuimpulsalab.com/blog',
+    types: { 'application/rss+xml': 'https://www.tuimpulsalab.com/feed.xml' },
+  },
   openGraph: {
     title: 'Blog de IA y Automatización para Negocios Latinos | Impulsa Lab',
     description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana.',
