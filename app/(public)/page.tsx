@@ -1,10 +1,12 @@
 import dynamic from 'next/dynamic'
 import AIBuildBanner from '@/components/AIBuildBanner'
-import HeroSection from '@/components/HeroSection'
 
 // Below-the-fold components — lazy-loaded to reduce initial JS bundle.
 // SSR stays enabled (default) so server renders HTML for SEO indexing;
 // only the client-side JS is code-split and parsed on demand.
+// HeroSection also code-split: its framer-motion dependency stays out of
+// the critical chunk while the hero HTML still server-renders for LCP.
+const HeroSection = dynamic(() => import('@/components/HeroSection'))
 const StatsBar = dynamic(() => import('@/components/StatsBar'))
 const ToolLogosMarquee = dynamic(() => import('@/components/ToolLogosMarquee'))
 const TestimonialsBar = dynamic(() => import('@/components/TestimonialsBar'))

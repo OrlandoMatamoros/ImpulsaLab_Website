@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react'
-import { motion, useInView, useReducedMotion, animate } from 'framer-motion'
+import { motion, useInView, useReducedMotion } from 'framer-motion'
 
 type Stat = {
   value: number
@@ -28,12 +28,19 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
       setDisplay(target)
       return
     }
-    const controls = animate(0, target, {
-      duration: 2,
-      ease: 'easeOut',
-      onUpdate: (v) => setDisplay(Math.round(v)),
-    })
-    return () => controls.stop()
+    // RAF nativo en vez de animate() de framer-motion: evita arrastrar el
+    // módulo de animación JS (el más pesado de la librería) a este chunk
+    const duration = 2000
+    const start = performance.now()
+    let raf = 0
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / duration, 1)
+      const eased = 1 - Math.pow(1 - t, 3)
+      setDisplay(Math.round(eased * target))
+      if (t < 1) raf = requestAnimationFrame(tick)
+    }
+    raf = requestAnimationFrame(tick)
+    return () => cancelAnimationFrame(raf)
   }, [inView, target, prefersReduced])
 
   return (
