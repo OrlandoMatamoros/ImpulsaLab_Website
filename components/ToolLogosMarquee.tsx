@@ -29,7 +29,7 @@ export default function ToolLogosMarquee() {
       aria-label={t.toolsMarquee.ariaLabel}
       className="bg-gray-50 border-y border-gray-200 py-10 overflow-hidden"
     >
-      <p className="text-center text-sm uppercase tracking-wider text-gray-500 font-semibold mb-6">
+      <p className="text-center text-sm uppercase tracking-wider text-gray-600 font-semibold mb-6">
         {t.toolsMarquee.heading}
       </p>
       <div className="tool-marquee group relative">
