@@ -12,7 +12,7 @@ type Stat = {
 const STATS: Stat[] = [
   { value: 89, suffix: '+', label: 'Herramientas en el Arsenal' },
   { value: 25, suffix: '+', label: 'Automatizaciones en producción' },
-  { value: 13, suffix: '+', label: 'Workflows AI en producción' },
+  { value: 20, suffix: '+', label: 'Workflows AI en producción' },
   { value: 49, suffix: '', label: 'Servicios en catálogo' },
 ]
 
