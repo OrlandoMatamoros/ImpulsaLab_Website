@@ -4,14 +4,14 @@ import { buildBreadcrumbLd } from '@/lib/schema'
 export const metadata: Metadata = {
   title: 'Consultoría IA para PYMEs: Implementación Real',
   description:
-    'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
+    'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
   },
   openGraph: {
     title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
     description:
-      'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
+      'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
     url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs: Implementación Real' }],
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
     description:
-      'Agentes IA, bots WhatsApp y flujos n8n para PYMEs latinas en NYC. Implementación real en 3-5 días, no consultoría teórica. Diagnóstico gratuito disponible.',
+      'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
     images: ['/opengraph-image.png?v=2'],
   },
   robots: { index: true, follow: true },

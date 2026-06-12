@@ -205,7 +205,7 @@ const nextConfig = {
   // Configuración de imágenes
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['firebasestorage.googleapis.com', 'lh3.googleusercontent.com'],
+    domains: ['firebasestorage.googleapis.com', 'lh3.googleusercontent.com', 'images.pexels.com'],
   },
   
   // Variables de entorno que se exponen al cliente

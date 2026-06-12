@@ -3,23 +3,17 @@ import { LINKS } from '@/lib/constants'
 
 const CANONICAL = 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes'
 
-const articleSchema = {
+// WebPage (no Article): esta URL es una landing de servicio — el layout ya
+// emite Service + FAQPage + BreadcrumbList; un Article aquí confunde el rich result.
+const pageSchema = {
   '@context': 'https://schema.org',
-  '@type': 'Article',
-  headline: 'Consultoría IA para PYMEs: Implementación Real, No Teoría',
+  '@type': 'WebPage',
+  name: 'Consultoría IA para PYMEs: Implementación Real, No Teoría',
   description:
     'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
   url: CANONICAL,
-  datePublished: '2026-05-08',
-  dateModified: '2026-05-08',
   inLanguage: 'es-ES',
-  author: { '@type': 'Person', name: 'Orlando Matamoros' },
-  publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
-  image: {
-    '@type': 'ImageObject',
-    url: 'https://www.tuimpulsalab.com/opengraph-image.png?v=2',
-  },
-  mainEntityOfPage: { '@type': 'WebPage', '@id': CANONICAL },
+  isPartOf: { '@id': 'https://www.tuimpulsalab.com/#website' },
 }
 
 // Reusable check icon
@@ -75,10 +69,10 @@ function SecondaryButton({ href, children }: { href: string; children: React.Rea
 export default function ConsultoriaIAPymesPage() {
   return (
     <div className="min-h-screen bg-white">
-      {/* Article JSON-LD */}
+      {/* WebPage JSON-LD */}
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(pageSchema) }}
       />
 
       {/* Breadcrumb navigation */}

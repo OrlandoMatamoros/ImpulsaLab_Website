@@ -1,20 +1,20 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Automatizacion IA para PYMEs Latinas NYC',
-  description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
+  title: 'Automatización IA para PYMEs Latinas en NYC',
+  description: 'Somos el equipo técnico de tu PYME. Automatizamos operaciones, WhatsApp, facturación y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conócenos.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/nosotros' },
   openGraph: {
-    title: 'Automatizacion IA para PYMEs Latinas NYC',
-    description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
+    title: 'Automatización IA para PYMEs Latinas en NYC',
+    description: 'Somos el equipo técnico de tu PYME. Automatizamos operaciones, WhatsApp, facturación y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conócenos.',
     url: 'https://www.tuimpulsalab.com/nosotros',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Nuestro Equipo' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatizacion IA para PYMEs Latinas NYC',
-    description: 'Somos el equipo tecnico de tu PYME. Automatizamos operaciones, WhatsApp, facturacion y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conocenos.',
+    title: 'Automatización IA para PYMEs Latinas en NYC',
+    description: 'Somos el equipo técnico de tu PYME. Automatizamos operaciones, WhatsApp, facturación y marketing con IA. Basados en Brooklyn, NY — 100% en español. Conócenos.',
     images: ['/opengraph-image.png?v=2'],
   },
 }

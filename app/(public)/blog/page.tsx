@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { cookies } from 'next/headers'
 import type { Metadata } from 'next'
 import { FaArrowRight, FaClock, FaUser } from 'react-icons/fa'
@@ -18,9 +19,9 @@ async function resolveLocale(): Promise<Locale> {
 
 const metaByLocale = {
   es: {
-    title: 'Blog — Agentes AI y Automatizacion para PYMEs',
+    title: 'Blog de Automatización con IA para PYMEs',
     description:
-      'Articulos sobre agentes AI, automatizacion de procesos y arquitectura de negocio para PYMEs que van en serio. Escrito por el equipo de Impulsa Lab.',
+      'Artículos sobre agentes AI, automatización de procesos y arquitectura de negocio para PYMEs que van en serio. Escrito por el equipo de Impulsa Lab.',
   },
   en: {
     title: 'Blog — AI Agents and Automation for SMBs',
@@ -57,7 +58,7 @@ const ui = {
     breadcrumbHome: 'Inicio',
     breadcrumbBlog: 'Blog',
     heroTitle: 'Blog Impulsa Lab',
-    heroSubtitle: 'Agentes AI, automatizacion y arquitectura para PYMEs que van en serio.',
+    heroSubtitle: 'Agentes AI, automatización y arquitectura para PYMEs que van en serio.',
     featuredLabel: 'Articulo destacado',
     readMore: 'Leer mas',
     empty: 'Aun no hay articulos publicados.',
@@ -126,10 +127,12 @@ export default async function BlogPage() {
               <div className="grid md:grid-cols-2 gap-0">
                 <div className="relative h-64 md:h-full min-h-[300px]">
                   {featured.image ? (
-                    <img
+                    <Image
                       src={featured.image}
                       alt={featured.title}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                      className="object-cover"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600" />
@@ -179,10 +182,12 @@ export default async function BlogPage() {
                 >
                   <div className="relative h-48 overflow-hidden">
                     {post.image ? (
-                      <img
+                      <Image
                         src={post.image}
                         alt={post.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover group-hover:scale-110 transition-transform duration-300"
                       />
                     ) : (
                       <div className="w-full h-full bg-gradient-to-br from-blue-500 to-purple-600" />
