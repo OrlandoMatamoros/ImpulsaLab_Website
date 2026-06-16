@@ -20,7 +20,16 @@ updates:
       prefix: "deps"
       include: "scope"
     ignore:
+      # Majors que requieren migración dedicada (no auto-bump):
       - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "tailwindcss"        # v4 = PostCSS plugin separado + config CSS-first; toca tokens de marca
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "next-sanity"        # v11+ exige Next 16; atado al major de next (ya bloqueado)
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "typescript"         # TS 6 puede romper tipos; revisar aparte
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "@types/node"        # debe seguir el runtime de Node (20), no saltar a 25
         update-types: ["version-update:semver-major"]
 
   - package-ecosystem: "github-actions"
