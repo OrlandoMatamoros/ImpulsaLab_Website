@@ -35,13 +35,18 @@ function HeroTitle({ base, accent }: { base: string; accent: string }) {
 }
 
 function CountUp({ end, suffix = '', duration = 1500 }: { end: number; suffix?: string; duration?: number }) {
-  const [val, setVal] = useState(0)
+  // SSR initial value = end so crawlers and noscript users see real numbers.
+  const [val, setVal] = useState(end)
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
   const prefersReduced = useReducedMotion()
 
   useEffect(() => {
-    if (!inView) return
+    // Client-side: reset to 0 before animating (invisible to bots/noscript).
+    if (!inView) {
+      if (!prefersReduced) setVal(0)
+      return
+    }
     if (prefersReduced) { setVal(end); return }
     const start = performance.now()
     let raf = 0

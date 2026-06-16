@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import Link from 'next/link'
 import AIBuildBanner from '@/components/AIBuildBanner'
 
 // Below-the-fold components — lazy-loaded to reduce initial JS bundle.
@@ -59,6 +60,23 @@ export default function Home() {
       />
       <AIBuildBanner />
       <HeroSection />
+      {/* Novedades strip — server-rendered, no JS needed, signals momentum to investors */}
+      <div className="bg-brand-navy/95 border-b border-white/10 py-2 px-4">
+        <div className="container mx-auto flex items-center justify-center gap-3 text-sm">
+          <span className="inline-flex items-center gap-1.5 bg-brand-cyan/15 text-brand-cyan border border-brand-cyan/30 px-2.5 py-0.5 rounded-full text-xs font-semibold uppercase tracking-wide">
+            Nuevo
+          </span>
+          <span className="text-gray-300">
+            4 auditores de IA monitoreando nuestros sistemas en tiempo real —
+          </span>
+          <Link
+            href="/blog"
+            className="text-brand-cyan hover:text-cyan-300 font-medium underline underline-offset-2 transition-colors"
+          >
+            Ver novedades
+          </Link>
+        </div>
+      </div>
       <StatsBar />
       <ToolLogosMarquee />
       <TestimonialsBar />

@@ -20,10 +20,18 @@ function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {
   const ref = useRef<HTMLSpanElement>(null)
   const inView = useInView(ref, { once: true, margin: '-50px' })
   const prefersReduced = useReducedMotion()
-  const [display, setDisplay] = useState(prefersReduced ? target : 0)
+  // SSR initial value = target so crawlers and noscript see real numbers.
+  // On the client the animation resets to 0 and counts up on inView.
+  const [display, setDisplay] = useState(target)
 
   useEffect(() => {
-    if (!inView) return
+    // Client-side only: reset to 0 before animating so the count-up feels
+    // intentional. The SSR initial value (target) already gave crawlers the
+    // real number — this reset is invisible to bots and noscript users.
+    if (!inView) {
+      if (!prefersReduced) setDisplay(0)
+      return
+    }
     if (prefersReduced) {
       setDisplay(target)
       return

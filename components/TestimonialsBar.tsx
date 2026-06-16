@@ -21,7 +21,7 @@ export default function TestimonialsBar() {
         <div className="max-w-3xl mx-auto text-center">
           {/* Quote */}
           <div className="relative min-h-[80px] flex items-center justify-center">
-            {testimonials.map((item: { quote: string; name: string; business: string; location: string }, index: number) => (
+            {testimonials.map((item: { quote: string; name: string; business: string; location: string; date?: string }, index: number) => (
               <div
                 key={index}
                 className={`absolute inset-0 flex flex-col items-center justify-center transition-all duration-500 ${
@@ -35,6 +35,12 @@ export default function TestimonialsBar() {
                   <span className="font-semibold text-gray-700">{item.name}</span>
                   <span>&mdash;</span>
                   <span>{item.business}, {item.location}</span>
+                  {item.date && (
+                    <>
+                      <span className="text-gray-400">&bull;</span>
+                      <span className="text-gray-500">{item.date}</span>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
