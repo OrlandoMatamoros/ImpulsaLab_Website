@@ -1,6 +1,7 @@
 import dynamic from 'next/dynamic'
 import Link from 'next/link'
 import AIBuildBanner from '@/components/AIBuildBanner'
+import PriscilaPopup from '@/components/PriscilaPopup' // TEMPORAL: demo en vivo, remover tras la demo
 
 // Below-the-fold components — lazy-loaded to reduce initial JS bundle.
 // SSR stays enabled (default) so server renders HTML for SEO indexing;
@@ -58,6 +59,7 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      <PriscilaPopup />
       <AIBuildBanner />
       <HeroSection />
       {/* Novedades strip — server-rendered, no JS needed, signals momentum to investors */}
