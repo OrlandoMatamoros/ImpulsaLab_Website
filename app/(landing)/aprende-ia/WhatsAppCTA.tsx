@@ -3,9 +3,8 @@
 // `window.gtag` ya está declarado globalmente en el repo (app/(public)/gracias/page.tsx),
 // así que aquí no se redeclara — se reutiliza esa declaración global.
 
-// Etiqueta de conversión de Google Ads para "Clic WhatsApp — Academy".
-// Reemplazar PENDIENTE_A2 con el label real de la Tarea A2 (formato: AW-17854811161/XXXX...).
-const CONVERSION_SEND_TO = 'AW-17854811161/PENDIENTE_A2'
+// Etiqueta de conversión de Google Ads para "Clic WhatsApp — Academy" (Tarea A2, creada 2026-06-30).
+const CONVERSION_SEND_TO = 'AW-17854811161/Bn_ECJiHjcgcEJmY68FC'
 
 // Número de WhatsApp de ENTRADA DEL BOT (Atlas) — confirmado por Orlando 2026-06-29.
 // El 347... es atención humana (mensajes/llamadas), NO va en la campaña.
@@ -17,7 +16,7 @@ export default function WhatsAppCTA() {
 
   function handleClick() {
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
-      window.gtag('event', 'conversion', { send_to: CONVERSION_SEND_TO })
+      window.gtag('event', 'conversion', { send_to: CONVERSION_SEND_TO, value: 1.0, currency: 'USD' })
     }
   }
 
