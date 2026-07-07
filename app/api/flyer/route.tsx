@@ -1,9 +1,13 @@
 import { ImageResponse } from 'next/og'
 
 // Flyer composer para el LinkedIn Content Publisher (n8n XJUCPujPhFcZvZwy).
-// Recibe la imagen AI (Mystic) + layout decidido por Claude y compone el
-// flyer final con gradiente continuo + tipografía Manrope del brand.
-// GET /api/flyer?img=<url>&headline=...&subhead=...&credit=...&pos=top|bottom&hc=%23FFFFFF&ac=%23BFE3FF
+// Recibe la imagen AI (Mystic / gpt-image-1 / Higgsfield) + layout decidido por
+// Claude y compone el flyer final con gradiente continuo + tipografia Manrope del brand.
+//
+// GET  /api/flyer?img=<url allowlisted>&headline=...&subhead=...&credit=...&pos=top|bottom&hc=%23FFFFFF&ac=%23BFE3FF
+// POST /api/flyer   body JSON { img_b64, headline, subhead, credit, pos, hc, ac }
+//   -> mismo flyer que el GET, pero la imagen base viaja como base64 (para generadores
+//      que devuelven b64 y no una URL publica, p.ej. OpenAI gpt-image-1). Diseno identico.
 
 export const runtime = 'edge'
 
@@ -16,6 +20,8 @@ const ALLOWED_IMG_HOSTS = [
 ]
 
 const HEX = /^#[0-9a-fA-F]{6}$/
+// Limite ~6MB de imagen -> ~8MB en base64. Damos margen (9M chars ~= 6.75MB binario).
+const MAX_B64_CHARS = 9_000_000
 
 let fontsPromise: Promise<{ extraBold: ArrayBuffer; medium: ArrayBuffer }> | null = null
 function loadFonts(origin: string) {
@@ -28,33 +34,19 @@ function loadFonts(origin: string) {
   return fontsPromise
 }
 
-export async function GET(req: Request) {
-  const url = new URL(req.url)
-  const p = url.searchParams
+type FlyerParams = {
+  imgSrc: string
+  headline: string
+  subhead: string
+  credit: string
+  pos: 'top' | 'bottom'
+  hc: string
+  ac: string
+}
 
-  const img = p.get('img') || ''
-  let imgHost = ''
-  try {
-    imgHost = new URL(img).hostname
-  } catch {
-    return new Response('img param must be a valid URL', { status: 400 })
-  }
-  if (!ALLOWED_IMG_HOSTS.includes(imgHost)) {
-    return new Response('img host not allowed', { status: 403 })
-  }
-
-  const headline = (p.get('headline') || '').slice(0, 90).trim()
-  const subhead = (p.get('subhead') || '').slice(0, 110).trim()
-  const credit = (p.get('credit') || 'tuimpulsalab.com').slice(0, 90).trim()
-  const pos = p.get('pos') === 'top' ? 'top' : 'bottom'
-  const hcRaw = p.get('hc') || ''
-  const acRaw = p.get('ac') || ''
-  const hc = HEX.test(hcRaw) ? hcRaw : '#FFFFFF'
-  const ac = HEX.test(acRaw) ? acRaw : '#BFE3FF'
-
-  if (!headline) return new Response('headline required', { status: 400 })
-
-  const { extraBold, medium } = await loadFonts(url.origin)
+async function renderFlyer(params: FlyerParams, origin: string) {
+  const { imgSrc, headline, subhead, credit, pos, hc, ac } = params
+  const { extraBold, medium } = await loadFonts(origin)
 
   const headlineSize = headline.length > 58 ? 48 : 58
   const gradient =
@@ -67,7 +59,7 @@ export async function GET(req: Request) {
       <div style={{ width: 1024, height: 1024, display: 'flex', position: 'relative' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={img}
+          src={imgSrc}
           alt=""
           width={1024}
           height={1024}
@@ -147,4 +139,79 @@ export async function GET(req: Request) {
       },
     }
   )
+}
+
+function readText(raw: unknown, max: number, fallback = '') {
+  const s = (typeof raw === 'string' ? raw : '').slice(0, max).trim()
+  return s || fallback
+}
+
+export async function GET(req: Request) {
+  const url = new URL(req.url)
+  const p = url.searchParams
+
+  const img = p.get('img') || ''
+  let imgHost = ''
+  try {
+    imgHost = new URL(img).hostname
+  } catch {
+    return new Response('img param must be a valid URL', { status: 400 })
+  }
+  if (!ALLOWED_IMG_HOSTS.includes(imgHost)) {
+    return new Response('img host not allowed', { status: 403 })
+  }
+
+  const headline = (p.get('headline') || '').slice(0, 90).trim()
+  const subhead = (p.get('subhead') || '').slice(0, 110).trim()
+  const credit = (p.get('credit') || 'tuimpulsalab.com').slice(0, 90).trim()
+  const pos = p.get('pos') === 'top' ? 'top' : 'bottom'
+  const hcRaw = p.get('hc') || ''
+  const acRaw = p.get('ac') || ''
+  const hc = HEX.test(hcRaw) ? hcRaw : '#FFFFFF'
+  const ac = HEX.test(acRaw) ? acRaw : '#BFE3FF'
+
+  if (!headline) return new Response('headline required', { status: 400 })
+
+  return renderFlyer({ imgSrc: img, headline, subhead, credit, pos, hc, ac }, url.origin)
+}
+
+export async function POST(req: Request) {
+  const url = new URL(req.url)
+
+  const ct = req.headers.get('content-type') || ''
+  if (!ct.includes('application/json')) {
+    return new Response('content-type must be application/json', { status: 415 })
+  }
+
+  let body: Record<string, unknown>
+  try {
+    body = (await req.json()) as Record<string, unknown>
+  } catch {
+    return new Response('invalid JSON body', { status: 400 })
+  }
+
+  let b64 = typeof body.img_b64 === 'string' ? body.img_b64.trim() : ''
+  // Acepta tanto b64 crudo como data URI (data:image/png;base64,....)
+  const comma = b64.indexOf(',')
+  if (b64.startsWith('data:') && comma !== -1) {
+    b64 = b64.slice(comma + 1)
+  }
+  if (!b64) return new Response('img_b64 required', { status: 400 })
+  if (b64.length > MAX_B64_CHARS) {
+    return new Response('img_b64 too large', { status: 413 })
+  }
+
+  const headline = readText(body.headline, 90)
+  const subhead = readText(body.subhead, 110)
+  const credit = readText(body.credit, 90, 'tuimpulsalab.com')
+  const pos = body.pos === 'top' ? 'top' : 'bottom'
+  const hcRaw = typeof body.hc === 'string' ? body.hc : ''
+  const acRaw = typeof body.ac === 'string' ? body.ac : ''
+  const hc = HEX.test(hcRaw) ? hcRaw : '#FFFFFF'
+  const ac = HEX.test(acRaw) ? acRaw : '#BFE3FF'
+
+  if (!headline) return new Response('headline required', { status: 400 })
+
+  const imgSrc = `data:image/png;base64,${b64}`
+  return renderFlyer({ imgSrc, headline, subhead, credit, pos, hc, ac }, url.origin)
 }
