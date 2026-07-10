@@ -125,10 +125,13 @@ export default function HeroSection() {
               <HeroTitle base={t.hero.titulo} accent={t.hero.tituloAccent} />
             </h1>
 
-            {/* Subtítulo */}
-            <motion.p variants={heroItem} className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
+            {/* Subtítulo — sin animación de entrada (opacity 0→1). PSI identificó
+                este <p> como el elemento LCP en mobile (AUDIT-SEO 2026-07-07);
+                el fade-in con framer-motion retrasaba su pintado ~3s bajo
+                CPU throttle. Mismo criterio ya aplicado al H1 arriba. */}
+            <p className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-300 leading-relaxed">
               {t.hero.subtitulo}
-            </motion.p>
+            </p>
 
             {/* CTAs */}
             <motion.div variants={heroItem} className="flex flex-col sm:flex-row gap-4 mb-8">
