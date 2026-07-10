@@ -276,7 +276,7 @@ export default function Header() {
         <div className="container mx-auto px-4 2xl:px-6 py-3 max-w-[1600px]">
           <div className="flex justify-between items-center gap-2">
             {/* Logo: mascota V15 + isotipo + wordmark */}
-            <Link href="/" className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0" aria-label={COMPANY_INFO.name}>
+            <Link href="/" prefetch={false} className="flex items-center hover:opacity-80 transition-opacity flex-shrink-0" aria-label={COMPANY_INFO.name}>
               <MascotV15
                 size={32}
                 variant="default"
@@ -289,6 +289,7 @@ export default function Header() {
                 alt=""
                 width={40}
                 height={40}
+                priority
                 className="w-9 h-9 md:w-10 md:h-10 2xl:w-11 2xl:h-11 mr-2"
                 aria-hidden="true"
               />
@@ -305,19 +306,19 @@ export default function Header() {
             {/* Desktop Navigation */}
             <div className="hidden xl:flex items-center gap-1 2xl:gap-4 min-w-0">
               <nav className="flex items-center gap-0.5 2xl:gap-2 min-w-0">
-                <Link href="/diagnostico" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
+                <Link href="/diagnostico" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   {t.nav.diagnostico}
                 </Link>
 
                 {/* Herramientas dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/herramientas" className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
+                  <Link href="/herramientas" prefetch={false} className="nav-link text-sm 2xl:text-base flex items-center gap-1 whitespace-nowrap">
                     {t.nav.herramientas}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
                     {toolsItems.map((item) => (
-                      <Link key={item.href} href={item.href} className={`dropdown-item ${item.className}`}>
+                      <Link key={item.href} href={item.href} prefetch={false} className={`dropdown-item ${item.className}`}>
                         {item.name}
                       </Link>
                     ))}
@@ -327,49 +328,49 @@ export default function Header() {
 
                 {/* Servicios dropdown — Vista General + 3 ejes */}
                 <div className="nav-dropdown">
-                  <Link href="/servicios" className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
+                  <Link href="/servicios" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
                     {t.nav.servicios}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
-                    <Link href="/servicios" className="dropdown-item dropdown-item-all">
+                    <Link href="/servicios" prefetch={false} className="dropdown-item dropdown-item-all">
                       Vista general
                     </Link>
-                    <Link href="/servicios/finanzas" className="dropdown-item dropdown-item-nova">
+                    <Link href="/servicios/finanzas" prefetch={false} className="dropdown-item dropdown-item-nova">
                       Finanzas
                     </Link>
-                    <Link href="/servicios/operaciones" className="dropdown-item dropdown-item-agentes">
+                    <Link href="/servicios/operaciones" prefetch={false} className="dropdown-item dropdown-item-agentes">
                       Operaciones
                     </Link>
-                    <Link href="/servicios/marketing" className="dropdown-item dropdown-item-prompt">
+                    <Link href="/servicios/marketing" prefetch={false} className="dropdown-item dropdown-item-prompt">
                       Marketing
                     </Link>
                   </div>
                 </div>
 
-                <Link href="/blog" className="nav-link text-sm 2xl:text-base whitespace-nowrap">
+                <Link href="/blog" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap">
                   Blog
                 </Link>
 
                 {/* Academy dropdown */}
                 <div className="nav-dropdown">
-                  <Link href="/capacitacion" className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
+                  <Link href="/capacitacion" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap flex items-center gap-1">
                     {t.nav.academy}
                     <ChevronDown className="w-3 h-3 opacity-50" />
                   </Link>
                   <div className="nav-dropdown-menu">
                     {academyItems.map((item) => (
-                      <Link key={item.href} href={item.href} className={`dropdown-item ${item.className}`}>
+                      <Link key={item.href} href={item.href} prefetch={false} className={`dropdown-item ${item.className}`}>
                         {item.name}
                       </Link>
                     ))}
                   </div>
                 </div>
 
-                <Link href="/#equipo" className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
+                <Link href="/#equipo" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
                   {t.nav.nosotros}
                 </Link>
-                <Link href="/#contacto" className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
+                <Link href="/#contacto" prefetch={false} className="nav-link text-sm 2xl:text-base whitespace-nowrap hidden 2xl:inline-block">
                   {t.nav.contacto}
                 </Link>
               </nav>
