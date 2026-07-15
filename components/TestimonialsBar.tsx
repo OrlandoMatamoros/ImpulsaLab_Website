@@ -37,7 +37,7 @@ export default function TestimonialsBar() {
                   <span>{item.business}, {item.location}</span>
                   {item.date && (
                     <>
-                      <span className="text-gray-400">&bull;</span>
+                      <span className="text-gray-600">&bull;</span>
                       <span className="text-gray-500">{item.date}</span>
                     </>
                   )}
