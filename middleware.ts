@@ -1,5 +1,7 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { verifyFirebaseIdToken } from './lib/firebase-jwt-verify';
+import { isAdminEmail } from './lib/admin-emails';
 
 // Blog slugs eliminados permanentemente — devuelven 410 Gone para limpiar GSC.
 // 410 es preferible a 404 porque Google lo desindexará más rápido.
@@ -111,49 +113,44 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Verificar autenticación para rutas protegidas
+  // Verificar autenticación para rutas protegidas.
+  // La cookie contiene el ID token de Firebase CRUDO (JWT firmado por Google).
+  // Se verifica su firma/expiración/issuer/audience — un valor arbitrario o
+  // falsificado NO pasa (antes bastaba con que la cookie existiera).
   const token = request.cookies.get('auth-token');
+  const denyAuth = () =>
+    isProtectedApi
+      ? NextResponse.json({ error: 'No autorizado' }, { status: 401 })
+      : NextResponse.redirect(new URL('/login', request.url));
 
   if (!token) {
-    if (isProtectedApi) {
-      return NextResponse.json({ error: 'No autorizado' }, { status: 401 });
-    }
-    return NextResponse.redirect(new URL('/login', request.url));
+    return denyAuth();
   }
+
+  const claims = await verifyFirebaseIdToken(token.value);
+  if (!claims) {
+    // Token inválido, expirado o de otro proyecto → tratar como no autenticado.
+    return denyAuth();
+  }
+
+  // El rol SIEMPRE se deriva del token ya verificado, NUNCA de la cookie:
+  // custom claim `role` si el proyecto lo emite; si no, admin por email de la
+  // allowlist server-side; en cualquier otro caso, 'registered'.
+  const userRole = claims.role ?? (isAdminEmail(claims.email) ? 'admin' : 'registered');
 
   // Verificar roles para rutas específicas
   for (const [route, allowedRoles] of Object.entries(roleBasedRoutes)) {
     if (path.startsWith(route)) {
-      try {
-        const userRole = await getUserRoleFromToken(token.value);
-
-        if (!allowedRoles.includes(userRole)) {
-          if (isProtectedApi) {
-            return NextResponse.json({ error: 'Sin permisos suficientes' }, { status: 403 });
-          }
-          return NextResponse.redirect(new URL('/unauthorized', request.url));
+      if (!allowedRoles.includes(userRole)) {
+        if (isProtectedApi) {
+          return NextResponse.json({ error: 'Sin permisos suficientes' }, { status: 403 });
         }
-      } catch (error) {
-        console.error('Error verificando rol:', error);
-        return NextResponse.redirect(new URL('/login', request.url));
+        return NextResponse.redirect(new URL('/unauthorized', request.url));
       }
     }
   }
 
   return NextResponse.next();
-}
-
-// Función auxiliar para obtener el rol del token
-async function getUserRoleFromToken(_token: string): Promise<string> {
-  try {
-    // TODO: Decodificar JWT o verificar con Firebase Admin SDK
-    // const decodedToken = await admin.auth().verifyIdToken(_token);
-    // return decodedToken.role || 'registered';
-    return 'registered';
-  } catch (error) {
-    console.error('Error decodificando token:', error);
-    return 'registered';
-  }
 }
 
 export const config = {

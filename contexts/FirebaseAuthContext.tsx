@@ -1,9 +1,9 @@
 'use client'
 
 import { createContext, useContext, useEffect, useState } from 'react'
-import { 
+import {
   User as FirebaseUser,
-  onAuthStateChanged
+  onIdTokenChanged
 } from 'firebase/auth'
 import { doc, getDoc } from 'firebase/firestore'
 import { auth, db } from '@/lib/firebase'
@@ -61,8 +61,11 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   const router = useRouter()
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      console.log('Auth state changed:', firebaseUser?.email)
+    // onIdTokenChanged se dispara en login, logout Y cada refresh del ID token
+    // (Firebase lo rota ~cada hora). Así la cookie se mantiene con un token
+    // vigente y firmado, en vez de expirar a la hora.
+    const unsubscribe = onIdTokenChanged(auth, async (firebaseUser) => {
+      console.log('Auth/token changed:', firebaseUser?.email)
       setUser(firebaseUser)
       
       if (firebaseUser) {
@@ -77,15 +80,14 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
               ...data
             } as UserData)
             
-            // Guardar token en cookie
+            // Guardar el ID token de Firebase CRUDO (JWT firmado por Google) en
+            // la cookie. El middleware verifica su firma server-side. NUNCA se
+            // guarda el rol aquí: iría sin firmar y sería falsificable (un
+            // atacante lo cambiaría a 'admin'). El rol se resuelve en el
+            // servidor desde el token verificado.
             const token = await firebaseUser.getIdToken()
-            document.cookie = `auth-token=${encodeURIComponent(
-              btoa(JSON.stringify({
-                uid: firebaseUser.uid,
-                email: firebaseUser.email,
-                role: data.role || UserRole.REGISTERED
-              }))
-            )}.${token.substring(0, 20)}; path=/; max-age=3600; SameSite=Strict`
+            const secure = typeof window !== 'undefined' && window.location.protocol === 'https:' ? ' Secure;' : ''
+            document.cookie = `auth-token=${token}; path=/; max-age=3600; SameSite=Strict;${secure}`
           } else {
             console.log('No user document found')
           }
