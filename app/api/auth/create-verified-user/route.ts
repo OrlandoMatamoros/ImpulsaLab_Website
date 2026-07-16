@@ -35,31 +35,38 @@ export async function POST(request: NextRequest) {
       }
     };
 
+    // SEGURIDAD (fix account-takeover): este endpoint es público. Si el email ya
+    // pertenece a una cuenta, NO la tocamos. Antes se llamaba updateUser({password})
+    // sobre la cuenta existente → cualquiera podía cambiar la contraseña de otro
+    // usuario (incluido un admin) sin autenticarse y recibir un customToken de su
+    // sesión. Ahora un email existente se rechaza; solo se crean cuentas nuevas.
     let userRecord;
-    
     try {
-      userRecord = await adminAuth.getUserByEmail(email);
-      console.log('User exists, updating:', userRecord.uid);
-      
-      await adminAuth.updateUser(userRecord.uid, {
-        password,
-        displayName: `${userData.firstName} ${userData.lastName}`.trim() || email,
-        emailVerified: true
-      });
-      
-    } catch (error: any) {
-      if (error.code === 'auth/user-not-found') {
-        userRecord = await adminAuth.createUser({
-          email,
-          password,
-          displayName: `${userData.firstName} ${userData.lastName}`.trim() || email,
-          emailVerified: true
-        });
-        console.log('New user created:', userRecord.uid);
-      } else {
-        throw error;
+      const existing = await adminAuth.getUserByEmail(email);
+      if (existing) {
+        return NextResponse.json(
+          {
+            error:
+              'Ya existe una cuenta con este correo. Inicia sesión o recupera tu contraseña.',
+            code: 'email-already-in-use',
+          },
+          { status: 409 }
+        );
       }
+    } catch (error: any) {
+      if (error.code !== 'auth/user-not-found') {
+        throw error; // error real de Firebase (no "no existe") → propagar
+      }
+      // 'auth/user-not-found' = email libre → seguimos a crear la cuenta.
     }
+
+    userRecord = await adminAuth.createUser({
+      email,
+      password,
+      displayName: `${userData.firstName} ${userData.lastName}`.trim() || email,
+      emailVerified: true,
+    });
+    console.log('New user created:', userRecord.uid);
 
     await adminAuth.setCustomUserClaims(userRecord.uid, { role: userData.role });
 
