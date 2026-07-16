@@ -1,11 +1,39 @@
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { rateLimit } from '@/lib/rate-limit';
 
 // Inicializar Gemini
 const genAI = new GoogleGenerativeAI(process.env.GOOGLE_GEMINI_API_KEY || '');
 
+// Public endpoint hitting the paid Gemini API — previously had NO rate limit.
+// Shared atomic limiter (Upstash Redis) caps anonymous quota abuse. 10/IP/hour
+// leaves room for legitimate diagnostic re-runs while blocking floods.
+const RATE_LIMIT_WINDOW_SEC = 60 * 60;
+const RATE_LIMIT_MAX = 10;
+
 export async function POST(request: Request) {
   try {
+    const clientIp =
+      request.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+      request.headers.get('x-real-ip') ||
+      'unknown';
+
+    const rl = await rateLimit({
+      prefix: 'gr',
+      identifier: clientIp,
+      limit: RATE_LIMIT_MAX,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    });
+    if (!rl.success) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Has alcanzado el limite de recomendaciones por hora. Intenta de nuevo mas tarde.',
+        },
+        { status: 429 }
+      );
+    }
+
     const { scores, clientInfo, responses } = await request.json();
 
     // Verificar que tenemos la API key
