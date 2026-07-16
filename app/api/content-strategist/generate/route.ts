@@ -1,4 +1,5 @@
 import { AI_MODELS } from '@/lib/ai-models'
+import { rateLimit } from '@/lib/rate-limit'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminDb } from '@/lib/firebase-admin'
@@ -7,22 +8,11 @@ export const maxDuration = 60
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+// Shared atomic rate limit (Upstash Redis). Replaces the old in-memory Map,
+// which was per-serverless-instance and therefore bypassable under concurrency
+// (single-packet / parallel requests hit fresh Maps on cold instances).
+const RATE_LIMIT_WINDOW_SEC = 60 * 60
 const RATE_LIMIT_MAX = 5
-const ipHits = new Map<string, number[]>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const hits = ipHits.get(ip) || []
-  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX) {
-    ipHits.set(ip, recent)
-    return false
-  }
-  recent.push(now)
-  ipHits.set(ip, recent)
-  return true
-}
 
 const ERRORS = {
   ES: {
@@ -57,7 +47,13 @@ export async function POST(req: NextRequest) {
     lang = locale?.toUpperCase() === 'EN' ? 'EN' : 'ES'
     const errors = ERRORS[lang]
 
-    if (!checkRateLimit(clientIp)) {
+    const rl = await rateLimit({
+      prefix: 'cs',
+      identifier: clientIp,
+      limit: RATE_LIMIT_MAX,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    })
+    if (!rl.success) {
       return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
     }
 

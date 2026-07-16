@@ -5,27 +5,16 @@ import { NextRequest } from 'next/server'
 import { adminAuth } from '@/lib/firebase-admin'
 import { isAdminEmail } from '@/lib/admin-emails'
 import { AI_MODELS } from '@/lib/ai-models'
+import { rateLimit } from '@/lib/rate-limit'
 
 export const maxDuration = 120
 
 // Rate limit: 20 debates / IP / hour. Internal tool — generous but capped
 // because each debate fires 4 LLM calls serially (~$0.05-0.10 each).
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+// Shared atomic limiter (Upstash Redis); replaces the old per-instance in-memory
+// Map that concurrency across serverless instances could bypass.
+const RATE_LIMIT_WINDOW_SEC = 60 * 60
 const RATE_LIMIT_MAX = 20
-const ipHits = new Map<string, number[]>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const hits = ipHits.get(ip) || []
-  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX) {
-    ipHits.set(ip, recent)
-    return false
-  }
-  recent.push(now)
-  ipHits.set(ip, recent)
-  return true
-}
 
 /* ------------------------------------------------------------------ */
 /*  System prompts                                                     */
@@ -267,7 +256,13 @@ export async function POST(request: NextRequest) {
     }
 
     // ===== 2. Rate limit =====
-    if (!checkRateLimit(clientIp)) {
+    const rl = await rateLimit({
+      prefix: 'sb',
+      identifier: clientIp,
+      limit: RATE_LIMIT_MAX,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    })
+    if (!rl.success) {
       return Response.json(
         { error: 'Has alcanzado el limite de debates por hora. Intenta mas tarde.' },
         { status: 429 }

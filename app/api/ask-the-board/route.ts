@@ -4,6 +4,7 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 import { adminAuth, adminDb } from '@/lib/firebase-admin'
+import { rateLimit } from '@/lib/rate-limit'
 
 export const maxDuration = 60
 
@@ -11,22 +12,10 @@ const LIFETIME_LIMIT = 3
 
 // Defense-in-depth: cap per-IP hourly throughput so a single IP cannot
 // burn compute even if multiple accounts share it (e.g., coffee shop bots).
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+// Shared atomic limiter (Upstash Redis); replaces the old per-instance in-memory
+// Map that concurrency across serverless instances could bypass.
+const RATE_LIMIT_WINDOW_SEC = 60 * 60
 const RATE_LIMIT_MAX_IP = 10
-const ipHits = new Map<string, number[]>()
-
-function checkIpRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const hits = ipHits.get(ip) || []
-  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX_IP) {
-    ipHits.set(ip, recent)
-    return false
-  }
-  recent.push(now)
-  ipHits.set(ip, recent)
-  return true
-}
 
 const ERRORS = {
   ES: {
@@ -110,7 +99,13 @@ export async function POST(req: NextRequest) {
     }
 
     // 2. IP rate limit
-    if (!checkIpRateLimit(clientIp)) {
+    const rl = await rateLimit({
+      prefix: 'atb',
+      identifier: clientIp,
+      limit: RATE_LIMIT_MAX_IP,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    })
+    if (!rl.success) {
       return NextResponse.json({ error: ERRORS.ES.rateLimit }, { status: 429 })
     }
 

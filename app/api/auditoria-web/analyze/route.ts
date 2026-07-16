@@ -1,4 +1,5 @@
 import { AI_MODELS } from '@/lib/ai-models'
+import { rateLimit } from '@/lib/rate-limit'
 import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminAuth } from '@/lib/firebase-admin'
@@ -8,22 +9,10 @@ export const maxDuration = 60
 export const runtime = 'nodejs'
 
 // Rate limit: 20 req / IP / hour. Internal tool — generous but still capped.
-const RATE_LIMIT_WINDOW_MS = 60 * 60 * 1000
+// Shared atomic limiter (Upstash Redis); replaces the old per-instance in-memory
+// Map that concurrency across serverless instances could bypass.
+const RATE_LIMIT_WINDOW_SEC = 60 * 60
 const RATE_LIMIT_MAX = 20
-const ipHits = new Map<string, number[]>()
-
-function checkRateLimit(ip: string): boolean {
-  const now = Date.now()
-  const hits = ipHits.get(ip) || []
-  const recent = hits.filter((t) => now - t < RATE_LIMIT_WINDOW_MS)
-  if (recent.length >= RATE_LIMIT_MAX) {
-    ipHits.set(ip, recent)
-    return false
-  }
-  recent.push(now)
-  ipHits.set(ip, recent)
-  return true
-}
 
 const ERRORS = {
   ES: {
@@ -118,7 +107,13 @@ export async function POST(req: NextRequest) {
     }
 
     // ===== 2. Rate limit =====
-    if (!checkRateLimit(clientIp)) {
+    const rl = await rateLimit({
+      prefix: 'aw',
+      identifier: clientIp,
+      limit: RATE_LIMIT_MAX,
+      windowSec: RATE_LIMIT_WINDOW_SEC,
+    })
+    if (!rl.success) {
       return NextResponse.json({ error: ERRORS.ES.rateLimit }, { status: 429 })
     }
 
