@@ -69,25 +69,31 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
       setUser(firebaseUser)
       
       if (firebaseUser) {
+        // 1) Emitir/renovar la cookie de sesión HttpOnly desde el SERVIDOR
+        // (POST /api/session con el ID token). El navegador ya no la escribe con
+        // document.cookie: así la cookie lleva HttpOnly y el JS de la página
+        // (un XSS/infostealer) no puede leerla. El middleware verifica su firma.
+        // Se hace siempre que hay sesión, independiente del doc de Firestore.
+        try {
+          const token = await firebaseUser.getIdToken()
+          await fetch('/api/session', {
+            method: 'POST',
+            headers: { Authorization: `Bearer ${token}` },
+          })
+        } catch (e) {
+          console.error('No se pudo establecer la cookie de sesión:', e)
+        }
+
+        // 2) Cargar datos del usuario (rol, perfil) para el estado del cliente.
         try {
           const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
           if (userDoc.exists()) {
             const data = userDoc.data()
-            console.log('User data found:', data)
             setUserData({
               uid: firebaseUser.uid,
               email: firebaseUser.email!,
               ...data
             } as UserData)
-            
-            // Guardar el ID token de Firebase CRUDO (JWT firmado por Google) en
-            // la cookie. El middleware verifica su firma server-side. NUNCA se
-            // guarda el rol aquí: iría sin firmar y sería falsificable (un
-            // atacante lo cambiaría a 'admin'). El rol se resuelve en el
-            // servidor desde el token verificado.
-            const token = await firebaseUser.getIdToken()
-            const secure = typeof window !== 'undefined' && window.location.protocol === 'https:' ? ' Secure;' : ''
-            document.cookie = `auth-token=${token}; path=/; max-age=3600; SameSite=Strict;${secure}`
           } else {
             console.log('No user document found')
           }
@@ -96,7 +102,12 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
         }
       } else {
         setUserData(null)
-        document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+        // Logout: borrar la cookie HttpOnly server-side (JS no puede borrarla).
+        try {
+          await fetch('/api/session', { method: 'DELETE' })
+        } catch (e) {
+          console.error('No se pudo cerrar la sesión server-side:', e)
+        }
       }
       
       setLoading(false)
@@ -215,7 +226,10 @@ export function FirebaseAuthProvider({ children }: { children: React.ReactNode }
   const signOut = async () => {
     try {
       await signOutUser()
-      document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;'
+      // Borrar la cookie HttpOnly server-side (JS no puede borrarla). El
+      // listener onIdTokenChanged(null) también la borra; este await garantiza
+      // que quede eliminada antes de navegar.
+      try { await fetch('/api/session', { method: 'DELETE' }) } catch {}
       router.push('/')
     } catch (error) {
       console.error('Error signing out:', error)
