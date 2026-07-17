@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { adminAuth, adminDb } from '@/lib/firebase-admin';
+import { consumeVerification } from '@/lib/verification-helper';
 
 export async function POST(request: NextRequest) {
   try {
@@ -58,6 +59,19 @@ export async function POST(request: NextRequest) {
         throw error; // error real de Firebase (no "no existe") → propagar
       }
       // 'auth/user-not-found' = email libre → seguimos a crear la cuenta.
+    }
+
+    // SEGURIDAD (endurecimiento OTP): NO confiar en phoneVerified/emailVerified
+    // del body. Confirmar server-side que el canal (teléfono WhatsApp, o email)
+    // completó una verificación OTP real y reciente, y consumirla (un solo
+    // registro por verificación). Sin esto, cualquiera podía crear cuentas
+    // "verificadas" sin poseer el teléfono/correo.
+    const verified = await consumeVerification(phone || email);
+    if (!verified.ok) {
+      return NextResponse.json(
+        { error: verified.error || 'Verificación requerida', code: 'verification-required' },
+        { status: 403 }
+      );
     }
 
     userRecord = await adminAuth.createUser({

@@ -161,3 +161,48 @@ export async function verifyCode(identifier: string, code: string): Promise<Veri
     return { ok: false, error: 'Error verificando código' };
   }
 }
+
+export interface ConsumeResult {
+  ok: boolean;
+  error?: string;
+}
+
+/**
+ * Confirma server-side que `identifier` (teléfono WhatsApp o email) completó una
+ * verificación OTP REAL y reciente (verifyCode marcó `verifiedAt`), y la CONSUME
+ * para un único registro (previene reusar una verificación para crear varias
+ * cuentas). El endpoint de creación de cuenta debe llamar esto en vez de confiar
+ * en flags `phoneVerified`/`emailVerified` enviados por el cliente.
+ */
+export async function consumeVerification(
+  identifier: string | undefined | null,
+  maxAgeMinutes = 20,
+): Promise<ConsumeResult> {
+  if (!identifier) return { ok: false, error: 'Verificación requerida' };
+
+  try {
+    const docId = identifier.toLowerCase().replace(/[^a-z0-9]/g, '_');
+    const docRef = adminDb.collection('verification_codes').doc(docId);
+    const snap = await docRef.get();
+
+    if (!snap.exists) return { ok: false, error: 'Verificación requerida' };
+    const data = snap.data()!;
+
+    if (!data.verifiedAt) return { ok: false, error: 'Verificación no completada' };
+    if (data.consumedForSignup) return { ok: false, error: 'Verificación ya utilizada' };
+
+    const verifiedMs = data.verifiedAt.toMillis
+      ? data.verifiedAt.toMillis()
+      : new Date(data.verifiedAt).getTime();
+    if (Date.now() - verifiedMs > maxAgeMinutes * 60 * 1000) {
+      return { ok: false, error: 'Verificación expirada, vuelve a verificar' };
+    }
+
+    // Consumir: un solo registro por verificación.
+    await docRef.update({ consumedForSignup: true, consumedAt: new Date() });
+    return { ok: true };
+  } catch (err) {
+    console.error('[verification] consumeVerification error:', err);
+    return { ok: false, error: 'Error validando la verificación' };
+  }
+}
