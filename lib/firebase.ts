@@ -3,7 +3,7 @@ import { initializeApp, getApps, getApp, FirebaseApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { getAnalytics, isSupported } from 'firebase/analytics';
-import { initializeAppCheck, ReCaptchaEnterpriseProvider, AppCheck } from 'firebase/app-check';
+import { initializeAppCheck, ReCaptchaV3Provider, AppCheck } from 'firebase/app-check';
 
 // Configuración segura con variables de entorno
 const firebaseConfig = {
@@ -68,10 +68,10 @@ if (typeof window !== 'undefined') {
   if (siteKey) {
     try {
       appCheck = initializeAppCheck(app, {
-        provider: new ReCaptchaEnterpriseProvider(siteKey),
+        provider: new ReCaptchaV3Provider(siteKey),
         isTokenAutoRefreshEnabled: true,
       });
-      console.warn('[App Check] Firebase App Check initialized with Enterprise provider');
+      console.warn('[App Check] Firebase App Check initialized with reCAPTCHA v3 provider');
     } catch (err) {
       console.warn('⚠️ App Check initialization failed (non-blocking):', err);
     }
