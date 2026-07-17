@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import Anthropic from '@anthropic-ai/sdk'
 import { adminAuth } from '@/lib/firebase-admin'
 import { isAdminEmail } from '@/lib/admin-emails'
+import { safeFetch } from '@/lib/ssrf-guard'
 
 export const maxDuration = 60
 export const runtime = 'nodejs'
@@ -142,14 +143,12 @@ export async function POST(req: NextRequest) {
       isHttps = normalizedUrl.startsWith('https://')
 
       try {
-        const res = await fetch(normalizedUrl, {
-          headers: {
-            'User-Agent':
-              'Mozilla/5.0 (compatible; ImpulsaLab-Audit/1.0; +https://tuimpulsalab.com)',
-            Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-          },
-          signal: AbortSignal.timeout(15000),
-          redirect: 'follow',
+        // safeFetch bloquea destinos internos (localhost, IP privadas, metadata
+        // cloud 169.254.169.254) validando la URL y cada redirect — defensa SSRF.
+        const res = await safeFetch(normalizedUrl, {
+          'User-Agent':
+            'Mozilla/5.0 (compatible; ImpulsaLab-Audit/1.0; +https://tuimpulsalab.com)',
+          Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         })
         html = await res.text()
       } catch (e: unknown) {
