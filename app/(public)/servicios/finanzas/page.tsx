@@ -523,7 +523,7 @@ export default function FinanzasPage() {
       <section className="py-10 bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-600 mb-3">
-            ¿Buscás una visión general de cómo implementar IA en tu PYME?
+            ¿Buscas una visión general de cómo implementar IA en tu PYME?
           </p>
           <Link
             href="/servicios/consultoria-ia-para-pymes"

@@ -6,6 +6,11 @@ import { Bot, Search, Zap, DollarSign, Layers } from 'lucide-react'
 import AutomationVsEmployee from '@/components/services/AutomationVsEmployee'
 import PricingColumns from '@/components/services/PricingColumns'
 import TechStackTicker from '@/components/services/TechStackTicker'
+import LiteYouTube from '@/components/services/LiteYouTube'
+import AgentesSection from '@/components/services/operaciones/AgentesSection'
+import ArsenalSection from '@/components/services/operaciones/ArsenalSection'
+import PlataformasSection from '@/components/services/operaciones/PlataformasSection'
+import ProcesoSection from '@/components/services/operaciones/ProcesoSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 const WA_OPS = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
@@ -90,14 +95,7 @@ export default function OperacionesPage() {
             </h2>
 
             <div className="relative bg-gray-900 rounded-lg overflow-hidden mb-12 aspect-video">
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/lMFV5mq_IXo"
-                title={tp.videoIframeTitle}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowFullScreen
-              />
+              <LiteYouTube videoId="lMFV5mq_IXo" title={tp.videoIframeTitle} />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -149,7 +147,7 @@ export default function OperacionesPage() {
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {/* Agente 4IA */}
-              <Link href="/servicios/operaciones/agentes"
+              <Link href="/servicios/operaciones#agentes"
                     className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-purple-100 rounded-xl group-hover:bg-purple-200 transition">
@@ -166,7 +164,7 @@ export default function OperacionesPage() {
               </Link>
 
               {/* Arsenal */}
-              <Link href="/servicios/operaciones/arsenal"
+              <Link href="/servicios/operaciones#arsenal"
                     className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-blue-100 rounded-xl group-hover:bg-blue-200 transition">
@@ -183,7 +181,7 @@ export default function OperacionesPage() {
               </Link>
 
               {/* Plataformas */}
-              <Link href="/servicios/operaciones/plataformas"
+              <Link href="/servicios/operaciones#plataformas"
                     className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-orange-100 rounded-xl group-hover:bg-orange-200 transition">
@@ -217,7 +215,7 @@ export default function OperacionesPage() {
               </Link>
 
               {/* Proceso */}
-              <Link href="/servicios/operaciones/proceso"
+              <Link href="/servicios/operaciones#proceso"
                     className="group bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                 <div className="flex justify-center mb-6">
                   <div className="p-4 bg-indigo-100 rounded-xl group-hover:bg-indigo-200 transition">
@@ -236,6 +234,16 @@ export default function OperacionesPage() {
           </div>
         </div>
       </section>
+
+      {/* Secciones consolidadas (2026-07-29).
+          Antes eran 4 subpaginas propias (/agentes, /arsenal, /plataformas, /proceso).
+          Google las reportaba como "rastreada, actualmente sin indexar": todas por
+          debajo de 310 palabras, mismo template y temas vecinos. Ahora son anclas de
+          esta pagina y las URLs viejas redirigen con 301 desde middleware.ts. */}
+      <AgentesSection />
+      <ArsenalSection />
+      <PlataformasSection />
+      <ProcesoSection />
 
       {/* CTA Final - WhatsApp */}
       <section className="py-20 bg-green-900 text-white">
@@ -306,7 +314,7 @@ export default function OperacionesPage() {
       <section className="py-10 bg-gray-50 border-t border-gray-200">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-600 mb-3">
-            ¿Buscás una visión general de cómo implementar IA en tu PYME?
+            ¿Buscas una visión general de cómo implementar IA en tu PYME?
           </p>
           <Link
             href="/servicios/consultoria-ia-para-pymes"

@@ -30,10 +30,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/servicios/consultoria-ia-para-pymes', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/finanzas', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones', priority: 0.9, changeFrequency: 'monthly' as const },
-    { path: '/servicios/operaciones/agentes', priority: 0.7, changeFrequency: 'monthly' as const },
-    { path: '/servicios/operaciones/proceso', priority: 0.7, changeFrequency: 'monthly' as const },
-    { path: '/servicios/operaciones/plataformas', priority: 0.7, changeFrequency: 'monthly' as const },
-    { path: '/servicios/operaciones/arsenal', priority: 0.7, changeFrequency: 'monthly' as const },
+    // /servicios/operaciones/{agentes,proceso,plataformas,arsenal} consolidadas en anclas de la
+    // página padre (2026-07-29): las 4 estaban bajo 310 palabras y GSC las reportaba como
+    // "rastreada, actualmente sin indexar". Redirigen con 301 desde middleware.ts.
     { path: '/servicios/marketing', priority: 0.9, changeFrequency: 'monthly' as const },
     // Landings de campaña (Google Ads + SEO) — EN + espejo ES
     { path: '/en/ai-automation-small-business', priority: 0.8, changeFrequency: 'monthly' as const },

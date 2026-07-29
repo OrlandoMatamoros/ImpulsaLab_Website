@@ -83,6 +83,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
+  // Subpáginas de /servicios/operaciones consolidadas en anclas de la página padre (2026-07-29).
+  // Motivo: las 4 estaban bajo 310 palabras con el mismo template y GSC las reportaba como
+  // "rastreada, actualmente sin indexar". El contenido vive ahora en la pillar page.
+  const OPERACIONES_ANCLAS: Record<string, string> = {
+    '/servicios/operaciones/agentes': 'agentes',
+    '/servicios/operaciones/arsenal': 'arsenal',
+    '/servicios/operaciones/plataformas': 'plataformas',
+    '/servicios/operaciones/proceso': 'proceso',
+  };
+  if (OPERACIONES_ANCLAS[path]) {
+    const url = request.nextUrl.clone();
+    url.pathname = '/servicios/operaciones';
+    url.hash = `#${OPERACIONES_ANCLAS[path]}`;
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // /servicios/operaciones/casos → /casos-de-exito (subpágina eliminada en 7428f0e, mar-2026, fix GSC 404)
   if (path === '/servicios/operaciones/casos') {
     const url = request.nextUrl.clone();
