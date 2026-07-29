@@ -83,6 +83,20 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
+  // /servicios/operaciones/casos → /casos-de-exito (subpágina eliminada en 7428f0e, mar-2026, fix GSC 404)
+  if (path === '/servicios/operaciones/casos') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/casos-de-exito';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
+  // /arsenal-tecnologico → /herramientas/arsenal (ruta migrada en 22a445d, jul-2025, quedó sin redirect)
+  if (path === '/arsenal-tecnologico') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/herramientas/arsenal';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // /recursos → /blog (sección renombrada, fix GSC 404)
   if (path === '/recursos') {
     const url = request.nextUrl.clone();
