@@ -15,6 +15,12 @@ const ALLOWED_IMG_HOSTS = [
   'cdn-magnific.freepik.com',
   'api.freepik.com',
   'ai-statics.freepik.com',
+  // Higgsfield (generador actual del LinkedIn Publisher desde 2026-07-23). Se usa la via GET
+  // ?img=<url> porque el POST con la imagen en base64 revienta el limite de 4.5 MB de body de
+  // Vercel cuando la generacion sale pesada -> 413 y el flujo perdia el post del dia (30-jul).
+  'd8j0ntlcm91z4.cloudfront.net',
+  'cdn.higgsfield.ai',
+  'platform.higgsfield.ai',
   'www.tuimpulsalab.com',
   'tuimpulsalab.com',
 ]
