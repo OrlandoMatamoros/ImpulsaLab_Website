@@ -15,15 +15,23 @@ const ALLOWED_IMG_HOSTS = [
   'cdn-magnific.freepik.com',
   'api.freepik.com',
   'ai-statics.freepik.com',
-  // Higgsfield (generador actual del LinkedIn Publisher desde 2026-07-23). Se usa la via GET
-  // ?img=<url> porque el POST con la imagen en base64 revienta el limite de 4.5 MB de body de
-  // Vercel cuando la generacion sale pesada -> 413 y el flujo perdia el post del dia (30-jul).
-  'd8j0ntlcm91z4.cloudfront.net',
   'cdn.higgsfield.ai',
   'platform.higgsfield.ai',
   'www.tuimpulsalab.com',
   'tuimpulsalab.com',
 ]
+
+// Higgsfield (generador del LinkedIn Publisher desde 2026-07-23) sirve cada generacion desde una
+// distribucion de CloudFront cuyo subdominio CAMBIA: la API devuelve d3u0tzju9qaucj..., la cuenta
+// web d8j0ntlcm91z4... Fijar el subdominio exacto ya fallo una vez (403 "img host not allowed" el
+// 31-jul), asi que se admite el dominio por sufijo. CloudFront es siempre publico: no abre acceso
+// a red interna ni a metadata de la nube, y la imagen solo se usa como fondo del flyer.
+const ALLOWED_IMG_HOST_SUFFIXES = ['.cloudfront.net', '.higgsfield.ai']
+
+function isAllowedImgHost(hostname: string) {
+  const h = hostname.toLowerCase()
+  return ALLOWED_IMG_HOSTS.includes(h) || ALLOWED_IMG_HOST_SUFFIXES.some((s) => h.endsWith(s))
+}
 
 const HEX = /^#[0-9a-fA-F]{6}$/
 // Limite ~6MB de imagen -> ~8MB en base64. Damos margen (9M chars ~= 6.75MB binario).
@@ -163,8 +171,8 @@ export async function GET(req: Request) {
   } catch {
     return new Response('img param must be a valid URL', { status: 400 })
   }
-  if (!ALLOWED_IMG_HOSTS.includes(imgHost)) {
-    return new Response('img host not allowed', { status: 403 })
+  if (!isAllowedImgHost(imgHost)) {
+    return new Response(`img host not allowed: ${imgHost}`, { status: 403 })
   }
 
   const headline = (p.get('headline') || '').slice(0, 90).trim()
