@@ -196,7 +196,7 @@ export const carrerasCasosEN = {
     heroTitle: 'Verifiable',
     heroTitleHighlight: 'transformation',
     heroTitleEnd: 'stories',
-    heroSubtitle: 'Three clients in production: COERVER Colombia, Cruzeiro Academy in Brazil, and Golden Touch in Singapore. Real stack, real deploy, zero inflated metrics.',
+    heroSubtitle: 'Three clients in production: COERVER Colombia, Cruzeiro Academy Colombia, and Golden Touch in Singapore. Real stack, real deploy, zero inflated metrics.',
     // Hero stats — descriptive, no inflated numbers
     roiPromedio: 'Countries served',
     aumentoVentas: 'Active implementations',
@@ -249,9 +249,9 @@ export const carrerasCasosEN = {
       {
         empresa: 'Cruzeiro Academy',
         industria: 'Sports academy',
-        ubicacion: 'Brazil',
+        ubicacion: 'Colombia',
         duracion: '3 weeks',
-        resumen: 'AI WhatsApp agent serving families 24/7 — bilingual ES/PT communication with the academy, automated yet with human tone.',
+        resumen: 'AI WhatsApp agent serving families 24/7 — Spanish-language communication with the academy, automated yet with human tone.',
         problema: {
           titulo: 'The challenge',
           descripcion: 'Cruzeiro Academy team manually handled every WhatsApp message from families asking about schedules, registrations, and payments. Team saturation + long response times + limited hours.',
@@ -259,16 +259,16 @@ export const carrerasCasosEN = {
             'Manual WhatsApp handling saturating the team',
             'Long response times during peak hours',
             'No service outside business hours',
-            'Manual bilingual ES/PT communication',
+            'Every message handled manually',
           ],
         },
         solucion: {
           titulo: 'What we built',
-          descripcion: 'AI agent on WhatsApp Business with Claude API + n8n. Conversational memory to keep context across messages. Bilingual ES/PT.',
+          descripcion: 'AI agent on WhatsApp Business with Claude API + n8n. Conversational memory to keep context across messages.',
           implementaciones: [
             { area: 'AI', accion: 'Conversational agent with Claude API responding about registrations, schedules, and payments with natural tone' },
             { area: 'Operations', accion: 'WhatsApp Business API + n8n orchestrating the conversation and persistent memory' },
-            { area: 'Languages', accion: 'Automatic ES/PT detection and reply in user\'s language' },
+            { area: 'Memory', accion: 'Persistent context per phone number, families never repeat themselves' },
           ],
         },
         resultados: {
@@ -284,7 +284,7 @@ export const carrerasCasosEN = {
         testimonio: {
           texto: 'They deployed an AI WhatsApp agent that responds to families around the clock. Communication with the academy became smooth and automatic.',
           autor: 'Cruzeiro Team',
-          cargo: 'Soccer Academy — Brazil',
+          cargo: 'Soccer Academy — Colombia',
         },
       },
       {

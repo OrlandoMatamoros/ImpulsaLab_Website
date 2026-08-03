@@ -195,7 +195,7 @@ export const carrerasCasosES = {
     heroTitle: 'Historias',
     heroTitleHighlight: 'verificables',
     heroTitleEnd: 'de transformación',
-    heroSubtitle: 'Tres clientes en producción: COERVER Colombia, Cruzeiro Academy en Brasil y Golden Touch en Singapore. Stack real, deploy real, cero métricas infladas.',
+    heroSubtitle: 'Tres clientes en producción: COERVER Colombia, Cruzeiro Academy Colombia y Golden Touch en Singapore. Stack real, deploy real, cero métricas infladas.',
     // Hero stats — descriptivos, sin cifras inventadas
     roiPromedio: 'Países servidos',
     aumentoVentas: 'Implementaciones activas',
@@ -248,9 +248,9 @@ export const carrerasCasosES = {
       {
         empresa: 'Cruzeiro Academy',
         industria: 'Academia deportiva',
-        ubicacion: 'Brasil',
+        ubicacion: 'Colombia',
         duracion: '3 semanas',
-        resumen: 'Agente IA en WhatsApp atendiendo familias 24/7 — comunicación bilingüe ES/PT con la academia, automatizado pero con tono humano.',
+        resumen: 'Agente IA en WhatsApp atendiendo familias 24/7 — comunicación en español con la academia, automatizado pero con tono humano.',
         problema: {
           titulo: 'El desafío',
           descripcion: 'El equipo de Cruzeiro Academy atendía manualmente cada mensaje de WhatsApp de familias preguntando por horarios, inscripciones y pagos. Saturación del equipo + tiempos de respuesta largos + horario limitado.',
@@ -258,16 +258,16 @@ export const carrerasCasosES = {
             'Atención manual de WhatsApp saturando al equipo',
             'Tiempos de respuesta largos en horas pico',
             'Sin atención fuera de horario laboral',
-            'Comunicación bilingüe ES/PT manual',
+            'Atención manual de cada mensaje',
           ],
         },
         solucion: {
           titulo: 'Lo que construimos',
-          descripcion: 'Agente IA en WhatsApp Business con Claude API + n8n. Memoria conversacional para mantener contexto entre mensajes. Bilingüe ES/PT.',
+          descripcion: 'Agente IA en WhatsApp Business con Claude API + n8n. Memoria conversacional para mantener contexto entre mensajes.',
           implementaciones: [
             { area: 'IA', accion: 'Agente conversacional con Claude API que responde inscripciones, horarios y pagos con tono natural' },
             { area: 'Operaciones', accion: 'WhatsApp Business API + n8n orquestando la conversación y memoria persistente' },
-            { area: 'Idiomas', accion: 'Detección automática ES/PT y respuesta en el idioma del usuario' },
+            { area: 'Memoria', accion: 'Contexto persistente por número, la familia no repite datos' },
           ],
         },
         resultados: {
@@ -283,7 +283,7 @@ export const carrerasCasosES = {
         testimonio: {
           texto: 'Implementaron un agente de IA en WhatsApp que atiende a las familias todo el día. La comunicación con la academia se volvió fluida y automática.',
           autor: 'Equipo Cruzeiro',
-          cargo: 'Academia de Fútbol — Brasil',
+          cargo: 'Academia de Fútbol — Colombia',
         },
       },
       {
@@ -561,7 +561,7 @@ export const carrerasCasosEN = {
     heroTitle: 'Verifiable',
     heroTitleHighlight: 'transformation',
     heroTitleEnd: 'stories',
-    heroSubtitle: 'Three clients in production: COERVER Colombia, Cruzeiro Academy in Brazil, and Golden Touch in Singapore. Real stack, real deploy, zero inflated metrics.',
+    heroSubtitle: 'Three clients in production: COERVER Colombia, Cruzeiro Academy Colombia, and Golden Touch in Singapore. Real stack, real deploy, zero inflated metrics.',
     // Hero stats — descriptive, no inflated numbers
     roiPromedio: 'Countries served',
     aumentoVentas: 'Active implementations',
@@ -614,9 +614,9 @@ export const carrerasCasosEN = {
       {
         empresa: 'Cruzeiro Academy',
         industria: 'Sports academy',
-        ubicacion: 'Brazil',
+        ubicacion: 'Colombia',
         duracion: '3 weeks',
-        resumen: 'AI WhatsApp agent serving families 24/7 — bilingual ES/PT communication with the academy, automated yet with human tone.',
+        resumen: 'AI WhatsApp agent serving families 24/7 — Spanish-language communication with the academy, automated yet with human tone.',
         problema: {
           titulo: 'The challenge',
           descripcion: 'Cruzeiro Academy team manually handled every WhatsApp message from families asking about schedules, registrations, and payments. Team saturation + long response times + limited hours.',
@@ -624,16 +624,16 @@ export const carrerasCasosEN = {
             'Manual WhatsApp handling saturating the team',
             'Long response times during peak hours',
             'No service outside business hours',
-            'Manual bilingual ES/PT communication',
+            'Every message handled manually',
           ],
         },
         solucion: {
           titulo: 'What we built',
-          descripcion: 'AI agent on WhatsApp Business with Claude API + n8n. Conversational memory to keep context across messages. Bilingual ES/PT.',
+          descripcion: 'AI agent on WhatsApp Business with Claude API + n8n. Conversational memory to keep context across messages.',
           implementaciones: [
             { area: 'AI', accion: 'Conversational agent with Claude API responding about registrations, schedules, and payments with natural tone' },
             { area: 'Operations', accion: 'WhatsApp Business API + n8n orchestrating the conversation and persistent memory' },
-            { area: 'Languages', accion: 'Automatic ES/PT detection and reply in user\'s language' },
+            { area: 'Memory', accion: 'Persistent context per phone number, families never repeat themselves' },
           ],
         },
         resultados: {
@@ -649,7 +649,7 @@ export const carrerasCasosEN = {
         testimonio: {
           texto: 'They deployed an AI WhatsApp agent that responds to families around the clock. Communication with the academy became smooth and automatic.',
           autor: 'Cruzeiro Team',
-          cargo: 'Soccer Academy — Brazil',
+          cargo: 'Soccer Academy — Colombia',
         },
       },
       {

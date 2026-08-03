@@ -42,9 +42,9 @@ export const homeEN = {
   },
   hero: {
     badge: "+50 businesses advised \u2022 Brooklyn, NY",
-    titulo: "AI consulting & automation",
-    tituloAccent: " for Latino businesses in NYC",
-    subtitulo: "Do you know where your business stands? Most SMB owners make decisions blindly. Our 3D Diagnostic analyzes your Finance, Operations & Marketing in 5 minutes — and tells you exactly where to act first.",
+    titulo: "Do you know where your business stands",
+    tituloAccent: " right now?",
+    subtitulo: "Most SMB owners make decisions blindly. Our 3D Diagnostic analyzes your Finance, Operations & Marketing in 5 minutes — and tells you exactly where to act first.",
     cta: "Diagnose Your Business Free",
     ctaSecundario: "View Services",
     metricaEmpresas: "Business owners advised",
@@ -61,9 +61,7 @@ export const homeEN = {
     diagEje3Desc: "Do customers find you, or do you chase them?",
     diagCta: "Start Free Diagnostic",
     diagTiempo: "5 min \u2022 No commitment \u2022 Includes personal consultation",
-    urgenciaBadge: "Limited spots",
     ofertaMes: "Diagnostic + 30 min Consultation FREE",
-    escasez: "Only {slots} consultations available this month",
     // Tools hub (moved to own section)
     hubTitulo: "AI Tools Hub",
     hubSubtitulo: "Your complete arsenal to master AI in your business",

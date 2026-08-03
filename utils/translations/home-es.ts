@@ -43,9 +43,9 @@ export const homeES = {
   },
   hero: {
     badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
-    titulo: "Consultoría en IA y automatización",
-    tituloAccent: " para negocios latinos en NYC",
-    subtitulo: "¿Sabes dónde está parado tu negocio? La mayoría de los dueños de PYMEs toman decisiones a ciegas. Nuestro Diagnóstico 3D analiza tus Finanzas, Operaciones y Marketing en 5 minutos — y te dice exactamente dónde actuar primero.",
+    titulo: "\u00BFSabes donde esta parado tu negocio",
+    tituloAccent: " ahora mismo?",
+    subtitulo: "La mayoria de los duenos de PYMEs toman decisiones a ciegas. Nuestro Diagnostico 3D analiza tus Finanzas, Operaciones y Marketing en 5 minutos — y te dice exactamente donde actuar primero.",
     cta: "Diagnostica tu Negocio Gratis",
     ctaSecundario: "Ver Servicios",
     metricaEmpresas: "Empresarios asesorados",
@@ -62,9 +62,7 @@ export const homeES = {
     diagEje3Desc: "\u00BFTus clientes te encuentran o tu los buscas?",
     diagCta: "Iniciar Diagnostico Gratis",
     diagTiempo: "5 min \u2022 Sin compromiso \u2022 Incluye consulta personalizada",
-    urgenciaBadge: "Cupos limitados",
     ofertaMes: "Diagnostico + Consulta de 30 min GRATIS",
-    escasez: "Solo {slots} consultas disponibles este mes",
     // Hub de herramientas (movido a seccion propia)
     hubTitulo: "Hub de Herramientas IA",
     hubSubtitulo: "Tu arsenal completo para dominar la IA en tu negocio",

@@ -197,7 +197,7 @@ export const carrerasCasosES = {
     heroTitle: 'Historias',
     heroTitleHighlight: 'verificables',
     heroTitleEnd: 'de transformación',
-    heroSubtitle: 'Tres clientes en producción: COERVER Colombia, Cruzeiro Academy en Brasil y Golden Touch en Singapore. Stack real, deploy real, cero métricas infladas.',
+    heroSubtitle: 'Tres clientes en producción: COERVER Colombia, Cruzeiro Academy Colombia y Golden Touch en Singapore. Stack real, deploy real, cero métricas infladas.',
     // Hero stats — descriptivos, sin cifras inventadas
     roiPromedio: 'Países servidos',
     aumentoVentas: 'Implementaciones activas',
@@ -250,9 +250,9 @@ export const carrerasCasosES = {
       {
         empresa: 'Cruzeiro Academy',
         industria: 'Academia deportiva',
-        ubicacion: 'Brasil',
+        ubicacion: 'Colombia',
         duracion: '3 semanas',
-        resumen: 'Agente IA en WhatsApp atendiendo familias 24/7 — comunicación bilingüe ES/PT con la academia, automatizado pero con tono humano.',
+        resumen: 'Agente IA en WhatsApp atendiendo familias 24/7 — comunicación en español con la academia, automatizado pero con tono humano.',
         problema: {
           titulo: 'El desafío',
           descripcion: 'El equipo de Cruzeiro Academy atendía manualmente cada mensaje de WhatsApp de familias preguntando por horarios, inscripciones y pagos. Saturación del equipo + tiempos de respuesta largos + horario limitado.',
@@ -260,16 +260,16 @@ export const carrerasCasosES = {
             'Atención manual de WhatsApp saturando al equipo',
             'Tiempos de respuesta largos en horas pico',
             'Sin atención fuera de horario laboral',
-            'Comunicación bilingüe ES/PT manual',
+            'Atención manual de cada mensaje',
           ],
         },
         solucion: {
           titulo: 'Lo que construimos',
-          descripcion: 'Agente IA en WhatsApp Business con Claude API + n8n. Memoria conversacional para mantener contexto entre mensajes. Bilingüe ES/PT.',
+          descripcion: 'Agente IA en WhatsApp Business con Claude API + n8n. Memoria conversacional para mantener contexto entre mensajes.',
           implementaciones: [
             { area: 'IA', accion: 'Agente conversacional con Claude API que responde inscripciones, horarios y pagos con tono natural' },
             { area: 'Operaciones', accion: 'WhatsApp Business API + n8n orquestando la conversación y memoria persistente' },
-            { area: 'Idiomas', accion: 'Detección automática ES/PT y respuesta en el idioma del usuario' },
+            { area: 'Memoria', accion: 'Contexto persistente por número, la familia no repite datos' },
           ],
         },
         resultados: {
@@ -285,7 +285,7 @@ export const carrerasCasosES = {
         testimonio: {
           texto: 'Implementaron un agente de IA en WhatsApp que atiende a las familias todo el día. La comunicación con la academia se volvió fluida y automática.',
           autor: 'Equipo Cruzeiro',
-          cargo: 'Academia de Fútbol — Brasil',
+          cargo: 'Academia de Fútbol — Colombia',
         },
       },
       {

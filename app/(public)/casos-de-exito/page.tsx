@@ -95,8 +95,12 @@ export default function CasosDeExito() {
             {tp.heroSubtitle}
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
+            {/* 2 paises: Colombia (COERVER + Cruzeiro Academy) y Singapur (Golden
+                Touch). Era 3 cuando Cruzeiro figuraba como Brasil por error; el
+                cliente esta en Colombia (verificado 2026-08-03 contra el workflow
+                n8n del bot, el cliente en invoicing y el investor narrative). */}
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
-              <span className="font-bold text-2xl">3</span>
+              <span className="font-bold text-2xl">2</span>
               <p>{tp.roiPromedio}</p>
             </div>
             <div className="bg-white/20 backdrop-blur-sm px-4 py-2 rounded-lg">
