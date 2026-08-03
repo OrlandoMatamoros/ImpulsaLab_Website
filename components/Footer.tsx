@@ -245,6 +245,8 @@ const Footer = () => {
             <ul className="space-y-3 text-sm">
               <li><Link href="/blog" className="text-gray-300 hover:text-white transition-colors">{t.footer.blog}</Link></li>
               <li><Link href="/casos-de-exito" className="text-gray-300 hover:text-white transition-colors">{t.footer.casosExito}</Link></li>
+              {/* Changelog publico — senal de momentum para inversionistas (audit IR). */}
+              <li><Link href="/novedades" className="text-gray-300 hover:text-white transition-colors">{t.novedadesPage.navLabel}</Link></li>
               <li><Link href="/herramientas" className="text-gray-300 hover:text-white transition-colors">{t.footer.todasHerramientas}</Link></li>
               <li><Link href="/herramientas/noticias" className="text-gray-300 hover:text-white transition-colors">{t.footer.noticiasIA}</Link></li>
               <li><Link href="/diagnostico" className="text-cyan-500 font-semibold hover:text-blue-300 transition-colors inline-flex items-center gap-1">{t.nav.diagnostico} ⭐</Link></li>

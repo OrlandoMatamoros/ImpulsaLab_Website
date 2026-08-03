@@ -19,6 +19,7 @@ import legalPartnersEN from './legal-partners-en'
 import internalEN from './internal-en'
 import diagnosticoUiEN from './diagnostico-ui-en'
 import toolsInternalEN from './tools-internal-en'
+import novedadesEN from './novedades-en'
 
 const translationsEN = {
   ...homeEN,
@@ -37,6 +38,7 @@ const translationsEN = {
   ...internalEN,
   ...diagnosticoUiEN,
   ...toolsInternalEN,
+  ...novedadesEN,
 }
 
 export default translationsEN

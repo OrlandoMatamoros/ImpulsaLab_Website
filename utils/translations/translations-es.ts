@@ -19,6 +19,7 @@ import legalPartnersES from './legal-partners-es'
 import internalES from './internal-es'
 import diagnosticoUiES from './diagnostico-ui-es'
 import toolsInternalES from './tools-internal-es'
+import novedadesES from './novedades-es'
 
 export const translationsES = {
   ...homeES,
@@ -37,4 +38,5 @@ export const translationsES = {
   ...internalES,
   ...diagnosticoUiES,
   ...toolsInternalES,
+  ...novedadesES,
 }
