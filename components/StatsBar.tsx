@@ -9,11 +9,16 @@ type Stat = {
   label: string
 }
 
+// Cifras verificadas el 2026-08-03 contra su fuente. No editar sin re-verificar:
+//   89 → lib/tools-data.tsx (89 entradas)
+//   24 → API de n8n, workflows activos en orlandom88.app.n8n.cloud
+//   14 → catálogo de productos empaquetados (~/CLAUDE.md, Catalogo_8_Productos/INDEX.md)
+//   47 → lib/services-catalog.ts, catálogo canónico v1.2 derivado de la biblia
 const STATS: Stat[] = [
   { value: 89, suffix: '+', label: 'Herramientas en el Arsenal' },
-  { value: 25, suffix: '+', label: 'Automatizaciones en producción' },
-  { value: 20, suffix: '+', label: 'Workflows AI en producción' },
-  { value: 42, suffix: '', label: 'Servicios en catálogo' },
+  { value: 24, suffix: '', label: 'Workflows en producción' },
+  { value: 14, suffix: '', label: 'Productos empaquetados' },
+  { value: 47, suffix: '', label: 'Servicios en catálogo maestro' },
 ]
 
 function Counter({ target, suffix = '' }: { target: number; suffix?: string }) {

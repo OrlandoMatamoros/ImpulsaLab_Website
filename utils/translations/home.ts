@@ -245,6 +245,27 @@ export const homeES = {
   testimonials: {
     items: [
       {
+        quote: "Dise\u00f1aron una p\u00e1gina web internacional multi-idioma para abrir mercados en varios pa\u00edses. Resultado profesional y alineado a la identidad de la marca.",
+        name: "Equipo Golden Touch",
+        business: "Servicios Premium",
+        location: "Singapore",
+        date: "Mayo 2026",
+      },
+      {
+        quote: "Implementaron un agente de IA en WhatsApp que atiende a las familias todo el d\u00eda. La comunicaci\u00f3n con la academia se volvi\u00f3 fluida y autom\u00e1tica.",
+        name: "Equipo Cruzeiro",
+        business: "Academia de F\u00fatbol",
+        location: "Colombia",
+        date: "Abril 2026",
+      },
+      {
+        quote: "Nos construyeron la aplicaci\u00f3n web completa con marketplace de servicios y pagos por Stripe. Inscripciones internacionales y red de directores en un solo lugar.",
+        name: "Equipo COERVER",
+        business: "Coaching de F\u00fatbol",
+        location: "Colombia",
+        date: "Febrero 2026",
+      },
+      {
         quote: "Me ense\u00f1aron a usar IA para manejar mi inventario y mis n\u00fameros. Ahora tomo decisiones con datos, no con intuici\u00f3n.",
         name: "Mirian",
         business: "Mini Market",
@@ -264,27 +285,6 @@ export const homeES = {
         business: "Chocolater\u00eda",
         location: "Brooklyn, NY",
         date: "Diciembre 2025",
-      },
-      {
-        quote: "Nos construyeron la aplicaci\u00f3n web completa con marketplace de servicios y pagos por Stripe. Inscripciones internacionales y red de directores en un solo lugar.",
-        name: "Equipo COERVER",
-        business: "Coaching de F\u00fatbol",
-        location: "Colombia",
-        date: "Febrero 2026",
-      },
-      {
-        quote: "Implementaron un agente de IA en WhatsApp que atiende a las familias todo el d\u00eda. La comunicaci\u00f3n con la academia se volvi\u00f3 fluida y autom\u00e1tica.",
-        name: "Equipo Cruzeiro",
-        business: "Academia de F\u00fatbol",
-        location: "Brasil",
-        date: "Abril 2026",
-      },
-      {
-        quote: "Dise\u00f1aron una p\u00e1gina web internacional multi-idioma para abrir mercados en varios pa\u00edses. Resultado profesional y alineado a la identidad de la marca.",
-        name: "Equipo Golden Touch",
-        business: "Servicios Premium",
-        location: "Singapore",
-        date: "Mayo 2026",
       },
     ],
   },
@@ -541,6 +541,27 @@ export const homeEN = {
   testimonials: {
     items: [
       {
+        quote: "They designed a multi-language international landing page to enter several markets. Polished result, fully aligned with the brand identity.",
+        name: "Golden Touch Team",
+        business: "Premium Services",
+        location: "Singapore",
+        date: "May 2026",
+      },
+      {
+        quote: "They deployed an AI WhatsApp agent that responds to families around the clock. Communication with the academy became smooth and automatic.",
+        name: "Cruzeiro Team",
+        business: "Soccer Academy",
+        location: "Colombia",
+        date: "April 2026",
+      },
+      {
+        quote: "They built our complete web application with a services marketplace and Stripe payments. International registrations and director network all in one place.",
+        name: "COERVER Team",
+        business: "Soccer Coaching",
+        location: "Colombia",
+        date: "February 2026",
+      },
+      {
         quote: "They taught me to use AI to manage my inventory and numbers. Now I make decisions with data, not intuition.",
         name: "Mirian",
         business: "Mini Market",
@@ -560,27 +581,6 @@ export const homeEN = {
         business: "Chocolate Shop",
         location: "Brooklyn, NY",
         date: "December 2025",
-      },
-      {
-        quote: "They built our complete web application with a services marketplace and Stripe payments. International registrations and director network all in one place.",
-        name: "COERVER Team",
-        business: "Soccer Coaching",
-        location: "Colombia",
-        date: "February 2026",
-      },
-      {
-        quote: "They deployed an AI WhatsApp agent that responds to families around the clock. Communication with the academy became smooth and automatic.",
-        name: "Cruzeiro Team",
-        business: "Soccer Academy",
-        location: "Brazil",
-        date: "April 2026",
-      },
-      {
-        quote: "They designed a multi-language international landing page to enter several markets. Polished result, fully aligned with the brand identity.",
-        name: "Golden Touch Team",
-        business: "Premium Services",
-        location: "Singapore",
-        date: "May 2026",
       },
     ],
   },
