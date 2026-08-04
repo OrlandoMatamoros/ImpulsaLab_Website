@@ -10,8 +10,6 @@ slug: "como-conectar-claude-con-tus-flujos-de-n8n-usando-mcp-sin-codigo"
 featured: false
 ---
 
-I'll search for more specific information about the MCP server count mentioned in the brief and n8n pricing.Now I have sufficient information. Let me write the article following the brand voice guidelines.
-
 ## Cómo conectar Claude con tus flujos de n8n usando MCP (sin código)
 
 Pasas 3 horas construyendo un workflow de n8n. Arrastrar nodos, configurar parámetros, leer documentación, nombre de campo equivocado... empezar de nuevo. Ahora Claude puede hacerlo en 10 minutos. Más de 950 conectores MCP están en uso diario dentro de Claude, y n8n acaba de sumarse a ese ecosistema. El 28 de julio, Anthropic lanzó MCP 2026-07-28, la actualización más grande del protocolo hasta la fecha, y n8n ya tiene nodos nativos para aprovecharla.
@@ -30,11 +28,11 @@ El Model Context Protocol dejó de ser un experimento de laptop. El SDK de MCP s
 
 ## La diferencia práctica: antes y después
 
-**Antes** (marzo 2026): Un taller mecánico de Queens con 12 empleados necesita que cada cotización nueva en Google Sheets genere un ticket en su CRM, envíe mensaje de WhatsApp al cliente, y agregue tarea al calendario del mecánico asignado. Opción A: Zapier (89 USD/mes plan Professional para 750 tareas/mes, cada paso cuenta como tarea). Opción B: n8n Cloud Pro (60 USD/mes para 10,000 ejecuciones, una ejecución = un workflow completo sin importar cuántos pasos). Eligieron n8n. Les tomó 4 horas construir el workflow porque ninguno sabía cómo parsear la respuesta de la API de WhatsApp Business.
+**Antes.** Pongamos un caso corriente, del tipo que vemos seguido: un taller mecánico con una docena de empleados necesita que cada cotización nueva en Google Sheets genere un ticket en su CRM, envíe mensaje de WhatsApp al cliente, y agregue tarea al calendario del mecánico asignado. Opción A: Zapier (89 USD/mes plan Professional para 750 tareas/mes, cada paso cuenta como tarea). Opción B: n8n Cloud Pro (60 USD/mes para 10,000 ejecuciones, una ejecución = un workflow completo sin importar cuántos pasos). n8n sale más barato, pero construir ese workflow toma varias horas si nadie en el equipo sabe parsear la respuesta de la API de WhatsApp Business.
 
-**Después** (agosto 2026): Mismo taller. Ahora tienen Claude Desktop conectado a su instancia de n8n vía MCP Server Trigger. Le dicen a Claude en español: "Cuando llegue nueva fila en Cotizaciones (Sheet), crear ticket CRM con datos del cliente, enviar WhatsApp con plantilla aprobada y agregar tarea calendario mecánico según columna asignado_a". Claude arquitecta el workflow completo de n8n, incluyendo nodos, triggers y transformaciones de datos, y tiene acceso de lectura/escritura en vivo a la instancia. Workflow funcional en 12 minutos. Total costo mensual: 7 USD (n8n Community autohospedado en Hetzner CX23, ~6 USD/mes desde que Hetzner subió precios 38% el 15 de junio de 2026) + 20 USD plan Claude Pro.
+**Después.** El mismo taller, con Claude conectado a su instancia de n8n vía MCP Server Trigger. Le dicen a Claude en español: "Cuando llegue nueva fila en Cotizaciones (Sheet), crear ticket CRM con datos del cliente, enviar WhatsApp con plantilla aprobada y agregar tarea calendario mecánico según columna asignado_a". Claude arquitecta el workflow completo de n8n, incluyendo nodos, triggers y transformaciones de datos, y tiene acceso de lectura/escritura en vivo a la instancia. El workflow queda armado en minutos, no en horas. Y el costo mensual del stack se cuenta en decenas de dólares, no en cientos: la suscripción de n8n más lo que consumas de API.
 
-La diferencia no es solo velocidad. Es acceso. El dueño del taller no sabe qué es un webhook. Ahora no necesita saberlo.
+La diferencia no es solo velocidad. Es acceso. El dueño del taller no sabe qué es un webhook, y ya no necesita saberlo.
 
 ## Cuándo NO usar MCP con n8n
 
@@ -48,11 +46,11 @@ Tres escenarios donde esta stack no es la respuesta:
 
 ## El stack que usamos en Impulsa Lab
 
-Corremos esta configuración desde mayo 2026 con 8 clientes activos (rango 7-32 empleados, principalmente servicios profesionales y retail hispano en NY/NJ):
+Así está armada nuestra propia instancia, que es de donde sale todo lo anterior. Tenemos 24 workflows activos: tres bots de WhatsApp atendiendo familias de academias deportivas en Colombia, cuatro auditores que revisan nuestros sitios sin que nadie los dispare, y el resto entre facturación, contenido y prospección. No es una operación gigante, y ese es el punto: es del tamaño de la PYME que está leyendo esto.
 
-**Capa AI**: Claude Sonnet 4 vía API (3.00 USD/millón tokens input, 15.00 USD/millón tokens output según pricing Anthropic vigente agosto 2026). 400M descargas mensuales del SDK confirman adopción masiva, pero para PYMEs el costo real está en los tokens. Un workflow típico consume ~2,500 tokens (construcción + depuración). Presupuesta 50-100 USD/mes en créditos API si construyes/modificas 15-20 workflows mensuales.
+**Capa AI**: Claude Sonnet 4.6 vía API (3.00 USD/millón tokens input, 15.00 USD/millón tokens output según pricing Anthropic vigente agosto 2026). 400M descargas mensuales del SDK confirman adopción masiva, pero para PYMEs el costo real está en los tokens. Un workflow típico consume ~2,500 tokens (construcción + depuración). Presupuesta 50-100 USD/mes en créditos API si construyes/modificas 15-20 workflows mensuales.
 
-**Capa workflow**: n8n Community Edition autohospedado. Es descargable y ejecutable en tu propio servidor sin tarifas de licencia, sin límites de ejecución y sin restricciones de funcionalidad core. Para clientes sin equipo técnico, desplegamos en Hetzner CX23 (6 USD/mes) con Docker Compose. Para quienes quieren gestionado sin ser técnicos, Sliplane desde 9 EUR/mes por servidor incluye HTTPS, backups, almacenamiento persistente.
+**Capa workflow**: nosotros usamos n8n Cloud en el plan Starter, el de entrada. Lo decimos con nombre y precio porque el mito de que automatizar cuesta miles de dólares al mes es lo que frena a la mayoría de las PYMEs. Una advertencia concreta que aprendimos chocando contra ella: ese plan corta cualquier ejecución a los cinco minutos, así que los flujos largos hay que partirlos en dos. Si prefieres autohospedar, la Community Edition es gratis en licencia y corre en cualquier VPS, pero necesitas a alguien que sepa mantener un servidor.
 
 **Capa MCP**: Dos nodos n8n nativos desde versión que incluyó soporte (finales Q1 2026). MCP Server Trigger y MCP Client Tool permiten exponer workflows n8n como herramientas que agentes AI pueden llamar, o configurar agentes n8n para usar herramientas de servidores MCP externos. Los nodos MCP son parte de n8n y no requieren instalación separada. Actualiza tu instancia n8n si los nodos no aparecen en tu paleta.
 
@@ -64,10 +62,7 @@ Corremos esta configuración desde mayo 2026 con 8 clientes activos (rango 7-32 
 5. En Claude Desktop, agregar servidor MCP apuntando a esa URL (autenticación Bearer o Header si la configuraste)
 6. Claude ahora ve tus workflows n8n como herramientas ejecutables
 
-Costo mensual stack completo cliente típico (25 empleados, 40-60 workflows activos, ~15K ejecuciones/mes):
-- Hosting n8n: 6-9 USD (Hetzner o Sliplane)
-- Claude API: 60-90 USD (depende cuánto usen asistente para construir/modificar)
-- **Total: 66-99 USD/mes** vs. 250-400 USD/mes equivalente Zapier Professional (contando que cada paso = tarea)
+Sobre el retorno, con honestidad: no te vamos a inventar un número. El ahorro depende de cuántas veces por semana disparas el flujo a mano y de cuánto vale la hora de quien lo hace. Haz la cuenta con tus datos: minutos por ejecución × ejecuciones semanales × tu costo por hora. Si el resultado no supera holgadamente lo que pagas de suscripción, no lo automatices todavía. Preferimos que hagas esa resta antes de contratar a nadie, incluidos nosotros.
 
 ## El error más común: credenciales
 

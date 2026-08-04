@@ -28,9 +28,9 @@ Model Context Protocol stopped being a laptop experiment. The MCP SDK surpassed 
 
 ## The Practical Difference: Before and After
 
-**Before** (March 2026): A Queens auto shop with 12 employees needs each new quote in Google Sheets to generate a CRM ticket, send WhatsApp message to client, and add task to assigned mechanic's calendar. Option A: Zapier (89 USD/month Professional plan for 750 tasks/month, each step counts as a task). Option B: n8n Cloud Pro (60 USD/month for 10,000 executions, one execution = one complete workflow regardless of steps). They chose n8n. Took them 4 hours to build the workflow because none of them knew how to parse WhatsApp Business API response.
+**Before.** Take a common case, the kind we see often: an auto shop with a dozen employees needs each new quote in Google Sheets to generate a CRM ticket, send WhatsApp message to client, and add task to assigned mechanic's calendar. Option A: Zapier (89 USD/month Professional plan for 750 tasks/month, each step counts as a task). Option B: n8n Cloud Pro (60 USD/month for 10,000 executions, one execution = one complete workflow regardless of steps). They chose n8n. Took them 4 hours to build the workflow because none of them knew how to parse WhatsApp Business API response.
 
-**After** (August 2026): Same shop. Now they have Claude Desktop connected to their n8n instance via MCP Server Trigger. They tell Claude in Spanish: "When new row arrives in Quotes (Sheet), create CRM ticket with client data, send WhatsApp with approved template and add calendar task for mechanic based on assigned_to column." Claude architects the complete n8n workflow, including nodes, triggers and data transformations, and has live read/write access to the instance. Working workflow in 12 minutes. Total monthly cost: 7 USD (n8n Community self-hosted on Hetzner CX23, ~6 USD/month since Hetzner raised prices 38% on June 15, 2026) + 20 USD Claude Pro plan.
+**After.** The same shop, with Claude connected to its n8n instance via MCP Server Trigger. They tell Claude in Spanish: "When new row arrives in Quotes (Sheet), create CRM ticket with client data, send WhatsApp with approved template and add calendar task for mechanic based on assigned_to column." Claude architects the complete n8n workflow, including nodes, triggers and data transformations, and has live read/write access to the instance. The workflow gets built in minutes, not hours. And the stack's monthly cost is counted in tens of dollars, not hundreds: the n8n subscription plus whatever API you consume.
 
 The difference isn't just speed. It's access. The shop owner doesn't know what a webhook is. Now they don't need to.
 
@@ -46,11 +46,11 @@ Three scenarios where this stack isn't the answer:
 
 ## The Stack We Use at Impulsa Lab
 
-We've run this configuration since May 2026 with 8 active clients (range 7-32 employees, mainly professional services and Hispanic retail in NY/NJ):
+This is how our own instance is set up, which is where everything above comes from. We have 24 active workflows: three WhatsApp bots serving families at sports academies in Colombia, four auditors that review our sites without anyone triggering them, and the rest split between invoicing, content and prospecting. It's not a huge operation, and that's the point: it's the size of the SMB reading this.
 
-**AI layer**: Claude Sonnet 4 via API (3.00 USD/million input tokens, 15.00 USD/million output tokens according to Anthropic pricing effective August 2026). 400M monthly SDK downloads confirm massive adoption, but for SMBs the real cost is in tokens. A typical workflow consumes ~2,500 tokens (construction + debugging). Budget 50-100 USD/month in API credits if you build/modify 15-20 workflows monthly.
+**AI layer**: Claude Sonnet 4.6 via API (3.00 USD/million input tokens, 15.00 USD/million output tokens according to Anthropic pricing effective August 2026). 400M monthly SDK downloads confirm massive adoption, but for SMBs the real cost is in tokens. A typical workflow consumes ~2,500 tokens (construction + debugging). Budget 50-100 USD/month in API credits if you build/modify 15-20 workflows monthly.
 
-**Workflow layer**: n8n Community Edition self-hosted. It's downloadable and runnable on your own server without license fees, without execution limits and without core functionality restrictions. For clients without technical team, we deploy on Hetzner CX23 (6 USD/month) with Docker Compose. For those who want managed without being technical, Sliplane from 9 EUR/month per server includes HTTPS, backups, persistent storage.
+**Workflow layer**: we use n8n Cloud on the Starter plan, the entry-level one. We name the plan and the price because the myth that automation costs thousands per month is what stops most SMBs. One concrete warning we learned by hitting it: that plan kills any execution at five minutes, so long flows must be split in two. If you'd rather self-host, the Community Edition is free in licensing and runs on any VPS, but you need someone who can maintain a server.
 
 **MCP layer**: Two native n8n nodes since version that included support (late Q1 2026). MCP Server Trigger and MCP Client Tool allow exposing n8n workflows as tools that AI agents can call, or configuring n8n agents to use tools from external MCP servers. The MCP nodes are part of n8n and don't require separate installation. Update your n8n instance if the nodes don't appear in your palette.
 
@@ -62,10 +62,7 @@ We've run this configuration since May 2026 with 8 active clients (range 7-32 em
 5. In Claude Desktop, add MCP server pointing to that URL (Bearer or Header auth if you configured it)
 6. Claude now sees your n8n workflows as executable tools
 
-Monthly cost complete stack typical client (25 employees, 40-60 active workflows, ~15K executions/month):
-- n8n hosting: 6-9 USD (Hetzner or Sliplane)
-- Claude API: 60-90 USD (depends on how much they use assistant to build/modify)
-- **Total: 66-99 USD/month** vs. 250-400 USD/month Zapier Professional equivalent (counting each step = task)
+On return, honestly: we're not going to invent a number for you. The savings depend on how many times a week you trigger the flow by hand and what an hour of that person's time is worth. Run it with your own data: minutes per execution x weekly executions x your hourly cost. If the result doesn't comfortably beat what you pay in subscriptions, don't automate it yet. We'd rather you do that subtraction before hiring anyone, us included.
 
 ## The Most Common Error: Credentials
 
