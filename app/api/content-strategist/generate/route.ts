@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
       windowSec: RATE_LIMIT_WINDOW_SEC,
     })
     if (!rl.success) {
-      return NextResponse.json({ error: errors.rateLimit }, { status: 429 })
+      return NextResponse.json({ error: errors.rateLimit }, { status: rl.httpStatus ?? 429 })
     }
 
     if (!industry || !idealClient || !objective) {

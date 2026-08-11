@@ -30,7 +30,7 @@ export async function POST(request: Request) {
           success: false,
           error: 'Has alcanzado el limite de recomendaciones por hora. Intenta de nuevo mas tarde.',
         },
-        { status: 429 }
+        { status: rl.httpStatus ?? 429 }
       );
     }
 

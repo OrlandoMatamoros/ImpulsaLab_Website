@@ -265,7 +265,7 @@ export async function POST(request: NextRequest) {
     if (!rl.success) {
       return Response.json(
         { error: 'Has alcanzado el limite de debates por hora. Intenta mas tarde.' },
-        { status: 429 }
+        { status: rl.httpStatus ?? 429 }
       )
     }
 
