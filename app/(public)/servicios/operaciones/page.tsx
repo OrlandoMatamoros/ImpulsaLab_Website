@@ -13,7 +13,7 @@ import PlataformasSection from '@/components/services/operaciones/PlataformasSec
 import ProcesoSection from '@/components/services/operaciones/ProcesoSection'
 import { useLanguage } from '@/contexts/LanguageContext'
 
-const WA_OPS = (msg: string) => `https://wa.me/13479043169?text=${encodeURIComponent(msg)}`
+const WA_OPS = (msg: string) => `${LINKS.whatsapp}?text=${encodeURIComponent(msg)}`
 
 export default function OperacionesPage() {
   const { t } = useLanguage()
@@ -255,7 +255,7 @@ export default function OperacionesPage() {
             <p className="text-xl mb-8 text-gray-200">
               {tp.ctaSubtitle}
             </p>
-            <Link href={`https://wa.me/13479043169?text=${encodeURIComponent(tp.ctaWhatsappMessage || '')}`}
+            <Link href={`${LINKS.whatsapp}?text=${encodeURIComponent(tp.ctaWhatsappMessage || '')}`}
                   target="_blank"
                   className="inline-flex items-center gap-2 bg-white text-green-900 px-8 py-4 rounded-lg
                            font-semibold text-lg transition-all duration-300

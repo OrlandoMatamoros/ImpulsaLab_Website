@@ -68,7 +68,7 @@ export default function FinanzasPage() {
     : dashboards.filter(d => d.category === activeCategory)
 
   // WhatsApp URL with translated message
-  const whatsappUrl = `https://wa.me/13479043169?text=${encodeURIComponent(t.finanzasPage.whatsappMessage)}`
+  const whatsappUrl = `${LINKS.whatsapp}?text=${encodeURIComponent(t.finanzasPage.whatsappMessage)}`
 
   return (
     <>

@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useLanguage } from '@/contexts/LanguageContext'
 import { DollarSign, Cog, Megaphone, GraduationCap, ArrowRight, CheckCircle2, MessageCircle } from 'lucide-react'
 import { getServicioPorSku } from '@/lib/services-catalog'
+import { LINKS } from '@/lib/constants'
 
 // Tarjetas-hub: una por servicio. Precio "desde $X" y descripción corta
 // se LEEN del catálogo canónico (lib/services-catalog.ts) — no se hardcodean.
@@ -58,7 +59,7 @@ export default function ServiciosPage() {
   const { t } = useLanguage()
   const tp = t.serviciosHubPage
 
-  const whatsappUrl = `https://wa.me/13479043169?text=${encodeURIComponent(tp.whatsappMessage)}`
+  const whatsappUrl = `${LINKS.whatsapp}?text=${encodeURIComponent(tp.whatsappMessage)}`
 
   return (
     <>
