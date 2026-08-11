@@ -42,7 +42,7 @@ export const homeES = {
     planDeNegocios: "Plan de Negocios AI",
   },
   hero: {
-    badge: "+50 empresas asesoradas \u2022 Brooklyn, NY",
+    badge: "+50 empresas asesoradas \u2022 Queens, NY",
     titulo: "\u00BFSabes donde esta parado tu negocio",
     tituloAccent: " ahora mismo?",
     subtitulo: "La mayoria de los duenos de PYMEs toman decisiones a ciegas. Nuestro Diagnostico 3D analiza tus Finanzas, Operaciones y Marketing en 5 minutos — y te dice exactamente donde actuar primero.",

@@ -85,7 +85,7 @@ export const pagesEN = {
     heroTitulo: "We Transform the Future of Business with AI",
     heroSubtitulo: "We are the bridge between entrepreneurial ambition and operational excellence, combining human experience with cutting-edge artificial intelligence.",
     fundada: "Founded in 2024",
-    ubicacion: "Brooklyn, NY",
+    ubicacion: "Queens, NY",
     bilingue: "100% Bilingual",
     nuestraHistoria: "Our Story",
     historiaSubtitulo: "From frustration to innovation: How Impulsa Lab was born",

@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contacto - Agenda tu Consulta Gratuita',
-  description: 'Contacta a Impulsa Lab en Brooklyn, NY. Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
+  description: 'Contacta a Impulsa Lab en Queens, NY. Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
   alternates: { canonical: 'https://www.tuimpulsalab.com/contacto' },
   openGraph: {
     title: 'Contacto - Agenda tu Consulta Gratuita con Impulsa Lab',

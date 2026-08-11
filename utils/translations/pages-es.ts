@@ -86,7 +86,7 @@ export const pagesES = {
     heroTitulo: "Transformamos el Futuro de los Negocios con IA",
     heroSubtitulo: "Somos el puente entre la ambicion emprendedora y la excelencia operativa, combinando experiencia humana con inteligencia artificial de vanguardia.",
     fundada: "Fundada en 2024",
-    ubicacion: "Brooklyn, NY",
+    ubicacion: "Queens, NY",
     bilingue: "100% Bilingue",
     nuestraHistoria: "Nuestra Historia",
     historiaSubtitulo: "De la frustracion a la innovacion: Como nacio Impulsa Lab",

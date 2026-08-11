@@ -68,7 +68,7 @@ export const legalPartnersES = {
     contactoTelefonoLabel: 'Telefono:',
     contactoTelefono: '+1 347 450 9281',
     contactoDireccionLabel: 'Direccion:',
-    contactoDireccion: 'Brooklyn, NY, Estados Unidos',
+    contactoDireccion: 'Queens, NY, Estados Unidos',
   },
 
   terminosPage: {
@@ -326,7 +326,7 @@ export const legalPartnersES = {
     directEmail: 'Email Directo',
     phone: 'Telefono',
     mailingAddress: 'Direccion Postal',
-    mailingAddressText: 'Impulsa Lab LLC\nAtn: Oficial de Proteccion de Datos\nBrooklyn, NY\nEstados Unidos',
+    mailingAddressText: 'Impulsa Lab LLC\nAtn: Oficial de Proteccion de Datos\nQueens, NY\nEstados Unidos',
     whenContactTitle: '\u00BFCuando Contactar al DPO?',
     whenContactText: 'Puedes contactar a nuestro Oficial de Proteccion de Datos para:',
     whenContactItems: [
@@ -505,7 +505,7 @@ export const legalPartnersES = {
     telefonoDirecto: 'Telefono Directo',
     telefono: '+1 347 450 9281',
     oficinaPrincipal: 'Oficina Principal',
-    oficinaCiudad: 'Brooklyn, NY',
+    oficinaCiudad: 'Queens, NY',
     oficinaPais: 'Estados Unidos',
     horarioAtencion: 'Horario de Atencion',
     horarioDias: 'Lunes a Viernes',
