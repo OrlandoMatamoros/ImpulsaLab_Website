@@ -5,9 +5,9 @@ const CANONICAL = 'https://www.tuimpulsalab.com/es/automatizacion-ia-pequenos-ne
 const EN_MIRROR = 'https://www.tuimpulsalab.com/en/ai-automation-small-business'
 
 export const metadata: Metadata = {
-  title: 'Automatización con IA para Pequeños Negocios en NYC | desde $97/mes',
+  title: 'WhatsApp, Facturas y Prospectos con IA | Impulsa Lab',
   description:
-    'Automatización con IA y n8n para pequeños negocios en Nueva York. Bots de WhatsApp, control de facturas y captura de prospectos 24/7. Diagnóstico 3D gratis. Desde $97/mes.',
+    'Automatiza WhatsApp, facturas y prospectos con IA. Sin saber de tecnología. Equipo bilingüe en Queens, NYC. Diagnóstico 3D gratis. Desde $97/mes.',
   alternates: {
     canonical: CANONICAL,
     languages: {
@@ -17,19 +17,19 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: 'Automatización con IA para Pequeños Negocios en NYC | Impulsa Lab',
+    title: 'WhatsApp, Facturas y Prospectos con IA | Impulsa Lab',
     description:
-      'Construimos la IA que atiende a tus clientes por WhatsApp, controla tus facturas y captura prospectos 24/7. Equipo bilingüe en NYC. Diagnóstico 3D gratis. Desde $97/mes.',
+      'La IA que responde tu WhatsApp, controla tus facturas y captura tus prospectos, 24/7 y sin que necesites saber de tecnología. Equipo bilingüe en NYC. Diagnóstico 3D gratis. Desde $97/mes.',
     url: CANONICAL,
     type: 'website',
     locale: 'es_US',
-    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab — Automatización con IA para pequeños negocios en NYC' }],
+    images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab — Automatización de WhatsApp, facturas y prospectos con IA en NYC' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Automatización con IA para Pequeños Negocios en NYC | Impulsa Lab',
+    title: 'WhatsApp, Facturas y Prospectos con IA | Impulsa Lab',
     description:
-      'La IA que atiende a tus clientes por WhatsApp, controla facturas y captura prospectos 24/7. Diagnóstico 3D gratis. Desde $97/mes.',
+      'La IA que responde tu WhatsApp, controla facturas y captura prospectos 24/7, sin que necesites saber de tecnología. Diagnóstico 3D gratis. Desde $97/mes.',
     images: ['/opengraph-image.png?v=2'],
   },
   robots: { index: true, follow: true },

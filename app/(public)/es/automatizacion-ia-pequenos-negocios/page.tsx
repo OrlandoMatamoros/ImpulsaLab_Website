@@ -76,7 +76,7 @@ export default function AutomatizacionIAPequenosNegociosPage() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-              Automatización con IA para pequeños negocios en Nueva York
+              Automatiza WhatsApp, facturas y prospectos con IA — sin saber de tecnología
             </h1>
             <p className="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
               Construimos la inteligencia artificial que atiende a tus clientes por WhatsApp, controla tus facturas y captura tus prospectos — funcionando 24/7 para que tú no tengas que hacerlo. Equipo bilingüe en Queens, NYC. Implementación real con resultados medibles, desde $97/mes.
