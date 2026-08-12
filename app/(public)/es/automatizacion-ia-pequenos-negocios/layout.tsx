@@ -5,7 +5,7 @@ const CANONICAL = 'https://www.tuimpulsalab.com/es/automatizacion-ia-pequenos-ne
 const EN_MIRROR = 'https://www.tuimpulsalab.com/en/ai-automation-small-business'
 
 export const metadata: Metadata = {
-  title: 'WhatsApp, Facturas y Prospectos con IA | Impulsa Lab',
+  title: 'WhatsApp, Facturas y Prospectos con IA',
   description:
     'Automatiza WhatsApp, facturas y prospectos con IA. Sin saber de tecnología. Equipo bilingüe en Queens, NYC. Diagnóstico 3D gratis. Desde $97/mes.',
   alternates: {
