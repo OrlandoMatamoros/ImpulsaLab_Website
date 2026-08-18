@@ -2,14 +2,14 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Marketing Digital con IA para Negocios Latinos',
-  description: 'Lanza tu presencia online en días, no meses. Landing pages desde $697, websites desde $2,497 y marketing digital con IA para PYMEs latinas en EE.UU.',
+  title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
+  description: '¿Cuánto cuesta una web profesional? Landing pages desde $697, sitios desde $2,497. Entrega en días, no meses. Marketing digital con IA para PYMEs latinas.',
   alternates: {
     canonical: 'https://www.tuimpulsalab.com/servicios/marketing',
   },
   openGraph: {
     title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
-    description: 'Lanza tu presencia online en días, no meses. Landing pages desde $697, websites desde $2,497 y marketing digital con IA para PYMEs latinas en EE.UU.',
+    description: '¿Cuánto cuesta una web profesional? Landing pages desde $697, sitios desde $2,497. Entrega en días, no meses. Marketing digital con IA para PYMEs latinas.',
     url: 'https://www.tuimpulsalab.com/servicios/marketing',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Marketing Digital con IA para Negocios Latinos' }],
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
-    description: 'Lanza tu presencia online en días, no meses. Landing pages desde $697, websites desde $2,497 y marketing digital con IA para PYMEs latinas en EE.UU.',
+    description: '¿Cuánto cuesta una web profesional? Landing pages desde $697, sitios desde $2,497. Entrega en días, no meses. Marketing digital con IA para PYMEs latinas.',
     images: ['/opengraph-image.png?v=2'],
   },
 }

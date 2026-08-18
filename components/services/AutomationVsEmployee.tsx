@@ -126,7 +126,7 @@ export default function AutomationVsEmployee({
 
           <p className="mt-8 text-xs text-gray-500 max-w-4xl mx-auto leading-relaxed text-center">
             <strong>Fuente:</strong> U.S. Bureau of Labor Statistics. (2024). <em>Occupational Employment and Wage Statistics: New York-Newark-Jersey City, NY-NJ-PA</em> (May 2023 estimates) [Data set].{' '}
-            <a href="https://www.bls.gov/oes/2023/may/oes_35620.htm" className="underline">bls.gov/oes/2023/may/oes_35620.htm</a>. Consultado 2026-04-19. Load-in +30% benefits (BLS ECEC, marzo 2024).
+            <a href="https://www.bls.gov/oes/2023/may/oes_35620.htm" className="underline">Ver fuente en bls.gov</a>. Consultado 2026-04-19. Load-in +30% benefits (BLS ECEC, marzo 2024).
           </p>
 
         </div>

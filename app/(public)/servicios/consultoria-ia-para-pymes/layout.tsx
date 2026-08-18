@@ -2,7 +2,7 @@ import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
 export const metadata: Metadata = {
-  title: 'Consultoría IA para PYMEs: Implementación Real',
+  title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
   description:
     'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
   alternates: {
