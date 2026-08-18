@@ -103,6 +103,7 @@ export default function RootLayout({
               '@id': 'https://www.tuimpulsalab.com/#organization',
               name: 'Impulsa Lab',
               legalName: 'Impulsa Lab LLC',
+              alternateName: ['Impulsa Lab NYC', 'Impulsa Lab LLC'],
               url: 'https://www.tuimpulsalab.com',
               logo: {
                 '@type': 'ImageObject',
@@ -110,6 +111,23 @@ export default function RootLayout({
               },
               description:
                 'Consultoría en transformación digital con IA para PYMEs. Servicios de finanzas, operaciones y marketing potenciados por inteligencia artificial.',
+              // Search Console (18-ago-2026) mostró que aparecemos en búsquedas de
+              // "laboratory information system companies" y "laboratory software provider":
+              // el "Lab" del nombre nos hace pasar por laboratorio clínico. Estos tres
+              // campos existen justamente para desambiguar la entidad ante el buscador.
+              disambiguatingDescription:
+                'Empresa de consultoría en inteligencia artificial y automatización de procesos para pequeños negocios. No es un laboratorio clínico, de análisis ni de investigación científica: el término "Lab" alude al taller de innovación tecnológica.',
+              isicV4: '6202',
+              knowsAbout: [
+                'Inteligencia artificial aplicada a pequeños negocios',
+                'Automatización de WhatsApp para negocios',
+                'Chatbots y asistentes conversacionales',
+                'Automatización de procesos con n8n',
+                'Consultoría en transformación digital para PYMEs',
+                'Agentes de inteligencia artificial',
+                'Automatización de citas y reservas',
+                'Marketing digital para negocios latinos',
+              ],
               foundingDate: '2024',
               founder: {
                 '@type': 'Person',
@@ -173,12 +191,56 @@ export default function RootLayout({
               '@type': 'ProfessionalService',
               '@id': 'https://www.tuimpulsalab.com/#localbusiness',
               name: 'Impulsa Lab',
+              alternateName: ['Impulsa Lab NYC'],
               url: 'https://www.tuimpulsalab.com',
               telephone: '+1-347-450-9281',
               email: 'contacto@tuimpulsalab.com',
               image: 'https://www.tuimpulsalab.com/images/isotipo-color.png',
               description:
                 'Consultoría en IA y automatización para PYMEs latinas en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para negocios en NYC y LATAM.',
+              // Mismo motivo que en Organization: separar la marca de los laboratorios.
+              disambiguatingDescription:
+                'Consultoría de inteligencia artificial y automatización para pequeños negocios. No es un laboratorio clínico ni un proveedor de software de laboratorio.',
+              isicV4: '6202',
+              serviceType: [
+                'Consultoría en inteligencia artificial',
+                'Automatización de procesos de negocio',
+                'Desarrollo de chatbots de WhatsApp',
+                'Consultoría de marketing digital',
+              ],
+              hasOfferCatalog: {
+                '@type': 'OfferCatalog',
+                name: 'Servicios de automatización con IA',
+                itemListElement: [
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Asistente de WhatsApp con IA',
+                      description:
+                        'Responde consultas, toma pedidos y agenda citas por WhatsApp de forma automática.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Automatización de citas y recordatorios',
+                      description:
+                        'Recordatorios automáticos y agendamiento para salones, barberías y negocios de cita.',
+                    },
+                  },
+                  {
+                    '@type': 'Offer',
+                    itemOffered: {
+                      '@type': 'Service',
+                      name: 'Diagnóstico 3D gratuito',
+                      description:
+                        'Diagnóstico gratuito que identifica qué proceso conviene automatizar primero.',
+                    },
+                  },
+                ],
+              },
               address: {
                 '@type': 'PostalAddress',
                 addressLocality: 'Queens',
