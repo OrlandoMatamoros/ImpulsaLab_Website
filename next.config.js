@@ -19,6 +19,13 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        // El post se publico el 24-ago con el titulo del post del 17-ago: los dos
+        // competian por la misma busqueda. Se reposiciono como tutorial paso a paso.
+        source: '/blog/perdiste-un-cliente-por-no-contestar-el-whatsapp-a-tiempo-3-cosas-grat',
+        destination: '/blog/respuestas-automaticas-whatsapp-business-gratis-paso-a-paso',
+        permanent: true,
+      },
+      {
         source: '/services',
         destination: '/servicios',
         permanent: true,
