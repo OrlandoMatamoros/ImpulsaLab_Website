@@ -1,0 +1,96 @@
+---
+title: "What to do when a customer leaves you a bad Google review"
+excerpt: "No es sobre aparecer en el mapa, es sobre qué pasa después de que ya te encontraron y no les gustó algo. Empieza gratis respondiendo desde tu propio perfil de negocio, sin pagar a nadie para 'gestionar reputación'."
+author: "Orlando Matamoros"
+date: "2026-09-01"
+image: "/blog/que-hacer-cuando-un-cliente-te-deja-una-mala-resena-en-google-antes-de.jpg"
+category: "AI & Automation"
+readTime: "9 min"
+slug: "que-hacer-cuando-un-cliente-te-deja-una-mala-resena-en-google-antes-de"
+featured: false
+---
+
+## What to do when a client leaves you a bad Google review (before responding angry)
+
+You already invested in getting your shop on the map. You already have photos. You already claimed your profile. Now comes the part that keeps you up at night: you open Google Maps on a Saturday at 8 AM and see the one-star review. The client says they waited half an hour and nobody helped them. You know that day you were at a funeral. The anger rises, you open the keyboard, you write the defense.
+
+Wait.
+
+What you do in the next ten minutes is going to stay on your profile forever, and responding well to negative reviews usually converts better than five stars without a response ([wiserreview.com](https://wiserreview.com/blog/how-to-respond-to-google-reviews/)). Not because the client comes back—sometimes they do, sometimes they don't—but because the other two hundred who read that review before calling you see how you solve things when something goes wrong.
+
+## What changed in 2026
+
+- Google started testing a "Reply to reviews with AI" feature inside the business profile. The tool suggests responses, but users must manually edit and approve before publishing ([searchengineland.com](https://searchengineland.com/google-business-profile-test-reply-to-reviews-with-ai-472167)). Doesn't change what matters: the final response still carries your name.
+- Google doesn't get involved in disputes between businesses and clients ([support.google.com](https://support.google.com/business/answer/4596773?hl=en)). You can report a fake review, but the typical evaluation takes several days ([support.google.com](https://support.google.com/business/answer/4596773?hl=en)). The negative review stays visible meanwhile.
+- In April 2026, Google explicitly banned asking employees to request reviews with quotas, asking them to mention their name, or offering incentives to modify or delete negative reviews ([launchcodex.com](https://launchcodex.com/blog/seo-geo-ai/google-business-profile-review-policy-update/)). The rules are enforced harder than before.
+- On December 31, 2025, Google published official documentation for generating review request links and QR codes from the business profile. This formalized a feature that existed since March 2025 without official guidance, and now businesses can create shareable links with explicit Google backing ([wiserreview.com](https://wiserreview.com/blog/google-review-policy/)).
+
+## How this looks in practice
+
+You receive the negative review. Before touching the keyboard, open an incognito tab and search for your business on Google Maps. Your response is going to sit right below that one-star review. Anyone who reads it is going to read your response immediately after. Now write thinking about that anonymous reader who still hasn't decided whether to call you, not the angry client who already left.
+
+The structure that works has four lines:
+
+1. Acknowledge the problem without excuses. "I'm sorry you waited half an hour without service" is more powerful than "that day we had a family emergency". The next client isn't going to verify your excuse: they're going to wonder if it can happen to them too.
+2. Offer a concrete solution. "Call me directly at [number] to resolve it" or "write me at [email] with the order number" gives the reader a visible exit.
+3. Show what changed. "We added a sign on the door with emergency hours" or "now we confirm appointments by text the day before". This tells the reader the problem is less likely to repeat.
+4. End without defending. Don't explain why the client is wrong, even if they are. The public fight always makes you lose.
+
+Now, timing. Aim to respond to negative reviews within 24 hours, and positive ones within 48 hours ([wiserreview.com](https://wiserreview.com/blog/how-to-respond-to-google-reviews/)). A negative review without a response for several days becomes the dominant impression for anyone visiting your profile during that time ([wiserreview.com](https://wiserreview.com/blog/how-to-respond-to-google-reviews/)).
+
+If you receive ten reviews per week, this becomes a job. If you receive thirty, it's impossible without help.
+
+## When NOT to automate responses to negative reviews
+
+The temptation to use AI to respond to everything is strong. There are dozens of tools that promise to "automatically respond to your reviews in your brand voice". Some work well for generic five-star reviews ("Excellent service!"). Almost all fail on one-star ones.
+
+Don't automate a negative response if you meet any of these three conditions:
+
+1. The client mentions a proper name (yours, an employee's, a specific product). The generic response looks fake when the complaint is specific.
+2. The review suggests a serious operational failure (spoiled food, duplicate charge, accident). These situations require investigation before responding, not speed.
+3. Your business has fewer than twenty total reviews. Each response counts double when the average still moves easily. Worth writing them by hand.
+
+Generic AI responses can erode trust, especially in negative reviews where authenticity matters most ([searchengineland.com](https://searchengineland.com/google-business-profile-test-reply-to-reviews-with-ai-472167)). The problem isn't that AI writes badly: it's that it writes the same for everyone, and the reader notices.
+
+## The stack we use at Impulsa Lab for clients with more than 50 reviews per month
+
+When volume justifies automation, we run this:
+
+- **Claude Sonnet 4.6** via Anthropic API. Costs 3 USD per million input tokens and 15 USD per million output ([openrouter.ai](https://openrouter.ai/anthropic/claude-sonnet-4.6)). A typical review with business context takes about 500 input tokens; the response, 150 tokens. That gives approximately 0.002 USD per response. For a business with one hundred reviews per month, that's 20 cents in model cost.
+- **n8n** (self-hosted or cloud starting at 20 USD/month) for the workflow. Connects the Google My Business API, detects new reviews every four hours, classifies by sentiment, and routes negative ones to a Slack channel for human review before publishing. Positive ones can be sent directly if the prompt includes enough business context.
+- **Google Sheets** as temporary cache. Each review enters with timestamp, text, rating, Claude-suggested response, and a manual approval field. This allows auditing: if a response went wrong, you see what prompt generated it.
+
+The total stack cost is between 25-45 USD/month for a single-location business with medium volume. If you have three locations, you add one workflow per location in n8n (no additional cost if you host the instance) and pay Claude tokens for the combined volume.
+
+The commercial alternative—platforms like Podium, Birdeye, or specific review tools—usually starts at 300-500 USD/month per location. They work well if you don't have internal technical capacity. But for an SMB that already has someone who can follow an n8n recipe, the annual savings are real.
+
+## The most common mistake: activating auto-response without context
+
+The prompt we see most in failed implementations is this: "Respond to the following Google review in a professional and friendly manner."
+
+Everything is missing. The model doesn't know if you're a restaurant, a shop, or a dentist. It doesn't know if the review mentions something you already fixed. It doesn't know what your return policy is. So it produces a generic response that could apply to any business, and the client reading that response feels like nobody actually read it.
+
+A useful prompt includes:
+
+1. **Business type and location**. "You are the owner of a hardware store in Queens, New York, open since 2018."
+2. **Relevant operating policies**. "You accept returns within 30 days with receipt. You don't sell electrical material, only plumbing and hand tools."
+3. **Specific tone**. "Respond in Spanish, direct but friendly tone, no emojis, maximum three lines."
+4. **Review text and rating**. Here goes the client's input.
+5. **Output instruction**. "Generate only the response text. Don't include formal greeting or signature."
+
+With that, Claude produces responses that sound like the owner wrote them, because it has enough context to personalize. Even so, one and two-star reviews must go through human approval before publishing. Setting up that validation in n8n literally takes one node: you send the suggested response to Slack or email, wait for confirmation (yes/no), and only then publish.
+
+If you can't guarantee that review in less than 24 hours, better respond manually. Speed signals attention ([wiserreview.com](https://wiserreview.com/blog/how-to-respond-to-google-reviews/)), but a bad fast response is worse than a good slow response.
+
+Respond to the negative review today, before ten new clients arrive who read it without your version.
+
+## Sources
+
+- wiserreview.com — How to respond to Google reviews: templates for every type (2026): https://wiserreview.com/blog/how-to-respond-to-google-reviews/
+- searchengineland.com — Google Business Profile tests AI-generated replies to reviews: https://searchengineland.com/google-business-profile-test-reply-to-reviews-with-ai-472167
+- support.google.com — Report inappropriate reviews on your Business Profile - Google Business Profile Help: https://support.google.com/business/answer/4596773?hl=en
+- launchcodex.com — Google Business Profile review policy update (April 2026): What's now banned | Launchcodex: https://launchcodex.com/blog/seo-geo-ai/google-business-profile-review-policy-update/
+- wiserreview.com — Google review policy: What every business must know in 2026: https://wiserreview.com/blog/google-review-policy/
+- openrouter.ai — Claude Sonnet 4.6 - API Pricing & Benchmarks | OpenRouter: https://openrouter.ai/anthropic/claude-sonnet-4.6
+
+Data consulted 2026-09-01. Some of these sources are publications from companies that sell software in the sector: the data can be correct and the commercial interest also exists, that's why the origin is visible in each statement. Third-party figures may have changed since that date.
