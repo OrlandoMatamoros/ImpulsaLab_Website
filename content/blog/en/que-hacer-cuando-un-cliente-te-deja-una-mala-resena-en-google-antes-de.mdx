@@ -1,0 +1,83 @@
+---
+title: "What to do when a customer leaves you a bad Google review"
+excerpt: "No es sobre aparecer en el mapa, es sobre qué pasa después de que ya te encontraron y no les gustó algo. Empieza gratis respondiendo desde tu propio perfil de negocio, sin pagar a nadie para 'gestionar reputación'."
+author: "Orlando Matamoros"
+date: "2026-09-01"
+image: "/blog/que-hacer-cuando-un-cliente-te-deja-una-mala-resena-en-google-antes-de.jpg"
+category: "AI & Automation"
+readTime: "9 min"
+slug: "que-hacer-cuando-un-cliente-te-deja-una-mala-resena-en-google-antes-de"
+featured: false
+---
+
+## What to do when a customer leaves you a bad Google review (before you respond angry)
+
+Saturday at 11 PM the notification arrives. One star. "Terrible service". And the first thing you want to do is write that the customer is wrong, that they don't understand how things work, that they should never have come to your business. Don't do it.
+
+88% of consumers in the United States have decided not to buy from a local business after reading negative reviews ([chainstoreage.com](https://chainstoreage.com/negative-online-reviews-can-hurt-local-businesses-heres-how)). That review you just received doesn't just affect your rating: it affects whether someone even considers calling you next week. The good news is that the problem isn't the review. It's what you do after.
+
+## What changed in 2026
+
+- Google Business Profile now offers a feature that automatically generates AI-suggested responses for each customer review ([searchengineland.com](https://searchengineland.com/google-business-profile-test-reply-to-reviews-with-ai-472167), [almcorp.com](https://almcorp.com/blog/google-business-profile-ai-review-replies/)), though it still requires manual review in most implementations.
+- 70% of consumers expect a business to respond to a negative review within one to three days ([chainstoreage.com](https://chainstoreage.com/negative-online-reviews-can-hurt-local-businesses-heres-how)).
+- n8n added native support for Google Business Profile that includes creating, updating, and deleting review responses programmatically ([docs.n8n.io](https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.googlebusinessprofile)).
+- 78% of consumers trust a business more when they see a thoughtful response to a negative review ([chainstoreage.com](https://chainstoreage.com/negative-online-reviews-can-hurt-local-businesses-heres-how)).
+
+## What this looks like in practice
+
+The complete mechanism has four steps. First, detection. A service constantly monitors the Google Business Profile API and detects when a new review arrives ([respondyr.com](https://respondyr.com/blog/2026-05-24-how-automated-google-review-responses-work/)), even at night or on Sundays when you're not checking your phone.
+
+Second, analysis. The system reads the review content, the star rating, whether they mentioned a specific employee, whether they named a particular service, and what exactly upset or pleased the customer ([respondyr.com](https://respondyr.com/blog/2026-05-24-how-automated-google-review-responses-work/)). This matters because a review that says "the technician arrived late" needs a different response than one that says "the work was done poorly".
+
+Third, generation. This is where Claude Sonnet 4 or Gemini 2.5 Flash comes in. The model reads the complete context and writes a draft that matches the tone you defined. If your restaurant speaks casually, the response comes out casual. If your medical office needs a formal tone, the model adjusts it. A good system uses a large language model to generate a response that matches the specific content of the review ([respondyr.com](https://respondyr.com/blog/2026-05-24-how-automated-google-review-responses-work/)).
+
+Fourth, publishing. Through the Google My Business API you can manage reviews from individual or multiple locations, and publish responses programmatically ([developers.google.com](https://developers.google.com/my-business/content/review-data)). You connect the workflow in n8n, define whether you want to review each response before publishing it or if you allow certain categories (like five-star reviews that only say "excellent") to publish automatically, and the system handles the rest.
+
+Say a mechanic shop that closes on Sundays. A review arrives Sunday at 9 PM saying the brake repair wasn't done well. Without automated workflow, the owner sees it Monday at noon. By that time, that review has already been at the top of the profile for 15 hours, visible to every person searching for "mechanic shop near me" in that area. With automated workflow, the notification reaches the system at 9:01 PM, the model reads that "brakes" is specifically mentioned, generates a response asking for details to review the work, and sends a draft to the owner via email or Slack. Monday morning, the owner reviews, adjusts if necessary, and publishes. The window between review and response shrinks from 15 hours to 12, and the person searching for a shop Monday morning sees that the business responds quickly.
+
+## When NOT to use automatic responses
+
+If you receive fewer than five reviews per month, this workflow doesn't make sense. The time you save doesn't justify configuring the API, training the model with your tone, and keeping the monitoring active. Go manually into Google Business Profile, respond from there, and done.
+
+If 80% of your negative reviews involve legal, medical, or financial situations where a poorly chosen word can expose you to liability, don't automate. A response that says "we're sorry for the error in your payment" can be interpreted as admission of guilt. In those cases, every response needs to go through someone who understands the implications.
+
+If your business still doesn't have a clear process for resolving actual complaints, automating responses only makes you look faster at saying empty things. First fix the internal operation. Then automate the communication.
+
+## The stack we use at Impulsa Lab
+
+**n8n** (self-hosted or cloud): orchestrates the complete workflow. Monitors new reviews via Google Business Profile API, passes the text to the model, receives the generated response, and publishes or sends for review. Price: self-hosted is free; n8n Cloud starts at 20 USD/month.
+
+**Claude Sonnet 4**: generates responses that read like they were written by humans. It's particularly good when the review has multiple mixed complaints and you need to prioritize what to address first. Price via Anthropic API: ~3 USD per million input tokens, ~15 USD per million output. For a business processing 50 reviews per month, we're talking about less than 5 USD monthly in model costs.
+
+**Gemini 2.5 Flash** (alternative): faster and cheaper than Claude, useful for responses where the tone is highly standardized and you don't need deep reasoning. Price via Google API: half the cost of Claude in most cases.
+
+**Google Business Profile API**: free. You only need OAuth 2.0 credentials from Google Cloud Console.
+
+**Slack or Gmail**: to notify you when a review requires human review before publishing. Both have native integrations in n8n at no additional cost.
+
+## The most common mistake
+
+Believing that automating responses means you never have to think about reviews again. The automated workflow is useful if you meet these three conditions:
+
+One: you already defined what type of reviews go straight to automatic publishing (example: five stars, no specific complaints, fewer than 50 words) and which need human review (any mention of operational, legal, or safety issues).
+
+Two: you have a library of at least ten real responses that you wrote manually and that reflect your business's tone. The model needs examples to understand how you speak. If you give it zero context, it's going to sound generic.
+
+Three: someone reviews the published responses every week. Not to correct every word, but to detect if the model started generating phrases that don't represent your business or if there's a pattern in the complaints that you need to resolve in the operation, not in the responses.
+
+If you don't have those three things working, the workflow isn't going to save you time: it's going to create a second problem.
+
+## What you do today
+
+Open Google Business Profile. Look at your unanswered reviews from the last 30 days. If there are more than three that went unanswered, that's the problem this workflow solves. If there are zero, keep doing what you're doing manually.
+
+## Sources
+
+- chainstoreage.com — Negative online reviews can hurt local businesses – here's how | Chain Store Age: https://chainstoreage.com/negative-online-reviews-can-hurt-local-businesses-heres-how
+- searchengineland.com — Google Business Profile tests AI-generated replies to reviews: https://searchengineland.com/google-business-profile-test-reply-to-reviews-with-ai-472167
+- almcorp.com — Google Business Profile AI Review Replies: How It Works & What to Know (2026): https://almcorp.com/blog/google-business-profile-ai-review-replies/
+- docs.n8n.io — Google Business Profile | Nodes | n8n Docs: https://docs.n8n.io/integrations/builtin/app-nodes/n8n-nodes-base.googlebusinessprofile
+- respondyr.com — How Automated Google Review Responses Actually Work | Respondyr Blog: https://respondyr.com/blog/2026-05-24-how-automated-google-review-responses-work/
+- developers.google.com — Work with review data | Google Business Profile APIs | Google for Developers: https://developers.google.com/my-business/content/review-data
+
+Data consulted on 2026-09-01. Some of these sources are publications from companies that sell software in the sector: the data may be correct and the commercial interest also exists, which is why the source is visible in each claim. Third-party figures may have changed since that date.
