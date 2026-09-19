@@ -55,17 +55,25 @@ export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const host = request.headers.get('host') || '';
 
+  // Rutas de máquina: nunca se redirigen (ver RUTAS_MAQUINA arriba).
   if (RUTAS_MAQUINA.has(path)) {
     return NextResponse.next();
   }
 
-  // TASK-01: Canonicalizar non-www → www con 301 permanente.
-  // https://tuimpulsalab.com/* → https://www.tuimpulsalab.com/*
-  // Se excluye localhost para no romper desarrollo local.
-  if (host === 'tuimpulsalab.com') {
-    const wwwUrl = new URL(request.url);
-    wwwUrl.host = 'www.tuimpulsalab.com';
-    return NextResponse.redirect(wwwUrl, { status: 301 });
+  // Canonicalización de host. Desde el 19-sep-2026 el dominio canónico es
+  // goimpulsalab.com (sin www). Los 301 del dominio viejo los hace Vercel a nivel
+  // de dominio — es decir, ANTES de que la petición llegue a este middleware —, así
+  // que esto es solo la red de seguridad por si esa configuración se pierde.
+  // Se excluyen localhost y los *.vercel.app para no romper dev ni los previews.
+  const HOSTS_NO_CANONICOS = new Set([
+    'tuimpulsalab.com',
+    'www.tuimpulsalab.com',
+    'www.goimpulsalab.com',
+  ]);
+  if (HOSTS_NO_CANONICOS.has(host)) {
+    const canonicalUrl = new URL(request.url);
+    canonicalUrl.host = 'goimpulsalab.com';
+    return NextResponse.redirect(canonicalUrl, { status: 301 });
   }
 
   // Redirects 301 explícitos.
