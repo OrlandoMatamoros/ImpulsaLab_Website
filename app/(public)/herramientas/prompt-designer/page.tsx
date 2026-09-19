@@ -10,11 +10,11 @@ const jsonLd = {
   offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
   description:
     'Herramienta gratuita para construir prompts profesionales para Claude, GPT-4 y Gemini. Templates por industria y optimizador con IA.',
-  url: 'https://www.tuimpulsalab.com/herramientas/prompt-designer',
+  url: 'https://goimpulsalab.com/herramientas/prompt-designer',
   provider: {
     '@type': 'Organization',
     name: 'Impulsa Lab',
-    url: 'https://www.tuimpulsalab.com',
+    url: 'https://goimpulsalab.com',
   },
 }
 

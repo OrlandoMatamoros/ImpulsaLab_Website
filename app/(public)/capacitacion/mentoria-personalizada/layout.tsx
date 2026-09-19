@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Mentoria Personalizada 1-a-1 en IA y Tecnologia',
   description: 'Mentoria personalizada 1-a-1 en inteligencia artificial, automatizacion y transformacion digital para tu negocio latino. Desde $297 USD.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/capacitacion/mentoria-personalizada' },
+  alternates: { canonical: 'https://goimpulsalab.com/capacitacion/mentoria-personalizada' },
   openGraph: {
     title: 'Mentoria Personalizada 1-a-1 en IA y Tecnologia',
     description: 'Mentoria 1-a-1 en IA y transformacion digital para tu negocio. Desde $297 USD.',
-    url: 'https://www.tuimpulsalab.com/capacitacion/mentoria-personalizada',
+    url: 'https://goimpulsalab.com/capacitacion/mentoria-personalizada',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Mentoria Personalizada' }],
   },

@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Contacto - Agenda tu Consulta Gratuita',
   description: 'Contacta a Impulsa Lab en Queens, NY. Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/contacto' },
+  alternates: { canonical: 'https://goimpulsalab.com/contacto' },
   openGraph: {
     title: 'Contacto - Agenda tu Consulta Gratuita con Impulsa Lab',
     description: 'Agenda una consulta gratuita sobre transformacion digital, IA y automatizacion para tu negocio.',
-    url: 'https://www.tuimpulsalab.com/contacto',
+    url: 'https://goimpulsalab.com/contacto',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Contacto' }],
   },

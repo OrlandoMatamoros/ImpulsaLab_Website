@@ -147,7 +147,7 @@ export async function POST(req: NextRequest) {
         // cloud 169.254.169.254) validando la URL y cada redirect — defensa SSRF.
         const res = await safeFetch(normalizedUrl, {
           'User-Agent':
-            'Mozilla/5.0 (compatible; ImpulsaLab-Audit/1.0; +https://tuimpulsalab.com)',
+            'Mozilla/5.0 (compatible; ImpulsaLab-Audit/1.0; +https://goimpulsalab.com)',
           Accept: 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
         })
         html = await res.text()

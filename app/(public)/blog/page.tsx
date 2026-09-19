@@ -36,11 +36,11 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: m.title,
     description: m.description,
-    alternates: { canonical: 'https://www.tuimpulsalab.com/blog' },
+    alternates: { canonical: 'https://goimpulsalab.com/blog' },
     openGraph: {
       title: m.title,
       description: m.description,
-      url: 'https://www.tuimpulsalab.com/blog',
+      url: 'https://goimpulsalab.com/blog',
       siteName: 'Impulsa Lab',
       locale: locale === 'en' ? 'en_US' : 'es_ES',
       type: 'website',

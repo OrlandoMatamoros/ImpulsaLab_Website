@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
-const CANONICAL = 'https://www.tuimpulsalab.com/en/ai-consulting-small-business'
+const CANONICAL = 'https://goimpulsalab.com/en/ai-consulting-small-business'
 
 export const metadata: Metadata = {
   title: 'AI Consultant for Small Business NYC | from $97/mo',
@@ -66,7 +66,7 @@ const serviceSchema = {
     'AI implementation consulting for small businesses in NYC. We build automations, WhatsApp AI bots and workflows — real tools, not slideshows. Bilingual. Free 3D Diagnostic.',
   url: CANONICAL,
   inLanguage: 'en-US',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   serviceType: 'AI Consulting',
   category: 'Artificial Intelligence',
   areaServed: [

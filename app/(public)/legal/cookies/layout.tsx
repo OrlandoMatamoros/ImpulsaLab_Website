@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Politica de Cookies',
   description: 'Politica de cookies de Impulsa Lab. Como usamos cookies y tecnologias de seguimiento en nuestro sitio web.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/legal/cookies' },
+  alternates: { canonical: 'https://goimpulsalab.com/legal/cookies' },
   openGraph: {
     title: 'Politica de Cookies | Impulsa Lab',
     description: 'Como usamos cookies y tecnologias de seguimiento en nuestro sitio web.',
-    url: 'https://www.tuimpulsalab.com/legal/cookies',
+    url: 'https://goimpulsalab.com/legal/cookies',
     type: 'website',
   },
 }

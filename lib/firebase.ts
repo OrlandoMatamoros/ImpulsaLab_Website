@@ -42,7 +42,7 @@ try {
 //
 // Manual setup required (one-time):
 //   1. Google reCAPTCHA Admin (https://www.google.com/recaptcha/admin):
-//      - Register site, type=reCAPTCHA v3, domains: tuimpulsalab.com, www.tuimpulsalab.com, localhost
+//      - Register site, type=reCAPTCHA v3, domains: goimpulsalab.com, www.goimpulsalab.com, tuimpulsalab.com, www.tuimpulsalab.com, localhost
 //      - Copy Site Key (public — exposes in NEXT_PUBLIC_*)
 //   2. Vercel env vars (impulsa-lab-v-claude):
 //      - NEXT_PUBLIC_RECAPTCHA_SITE_KEY = <site key>

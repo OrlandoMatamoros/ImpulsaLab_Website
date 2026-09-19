@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
   description: 'Automatiza operaciones con agentes IA y n8n: WhatsApp 24/7, facturación automática y flujos sin código para PYMEs latinas en NYC. Desde $597 setup.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/servicios/operaciones',
+    canonical: 'https://goimpulsalab.com/servicios/operaciones',
   },
   openGraph: {
     title: 'Automatización de Operaciones con IA para PYMEs | Impulsa Lab',
     description: 'Automatiza operaciones con agentes IA y n8n: WhatsApp 24/7, facturación automática y flujos sin código para PYMEs latinas en NYC. Desde $597 setup.',
-    url: 'https://www.tuimpulsalab.com/servicios/operaciones',
+    url: 'https://goimpulsalab.com/servicios/operaciones',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Automatización de Operaciones con IA' }],
   },
@@ -32,12 +32,12 @@ const breadcrumbSchema = buildBreadcrumbLd([
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://www.tuimpulsalab.com/servicios/operaciones#service',
+  '@id': 'https://goimpulsalab.com/servicios/operaciones#service',
   name: 'Automatización de Operaciones con IA — Agentes n8n para PYMEs',
   description:
     'Automatización de procesos operativos con agentes IA y n8n: gestión WhatsApp 24/7, facturación automática, plataformas inteligentes y flujos sin código para PYMEs latinas.',
-  url: 'https://www.tuimpulsalab.com/servicios/operaciones',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  url: 'https://goimpulsalab.com/servicios/operaciones',
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   areaServed: [
     { '@type': 'City', name: 'New York City' },
     { '@type': 'Country', name: 'US' },
@@ -48,7 +48,7 @@ const serviceSchema = {
     '@type': 'Offer',
     price: '597',
     priceCurrency: 'USD',
-    url: 'https://www.tuimpulsalab.com/servicios/operaciones',
+    url: 'https://goimpulsalab.com/servicios/operaciones',
   },
   serviceType: 'Business Process Automation',
   category: 'Artificial Intelligence Consulting',

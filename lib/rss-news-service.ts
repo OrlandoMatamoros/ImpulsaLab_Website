@@ -37,7 +37,7 @@ interface FeedConfig {
 }
 
 const DEFAULT_UA =
-  'Mozilla/5.0 (compatible; ImpulsaLabNewsBot/1.0; +https://www.tuimpulsalab.com)'
+  'Mozilla/5.0 (compatible; ImpulsaLabNewsBot/1.0; +https://goimpulsalab.com)'
 const GOOGLEBOT_UA = 'Googlebot/2.1 (+http://www.google.com/bot.html)'
 
 // Curated tier-1 AI/tech feeds. Keep the list short — quality over quantity.

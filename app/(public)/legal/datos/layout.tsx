@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Proteccion de Datos Personales',
   description: 'Conoce como Impulsa Lab protege tus datos personales. Derechos ARCO, politicas de seguridad y tratamiento de informacion.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/legal/datos' },
+  alternates: { canonical: 'https://goimpulsalab.com/legal/datos' },
   openGraph: {
     title: 'Proteccion de Datos Personales | Impulsa Lab',
     description: 'Como protegemos tus datos personales. Derechos ARCO y politicas de seguridad.',
-    url: 'https://www.tuimpulsalab.com/legal/datos',
+    url: 'https://goimpulsalab.com/legal/datos',
     type: 'website',
   },
 }

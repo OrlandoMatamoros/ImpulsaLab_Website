@@ -28,6 +28,6 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
     ],
-    sitemap: 'https://www.tuimpulsalab.com/sitemap.xml',
+    sitemap: 'https://goimpulsalab.com/sitemap.xml',
   }
 }

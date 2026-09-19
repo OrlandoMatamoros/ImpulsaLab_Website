@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Recursos - Guias y Webinars sobre IA y Automatizacion',
     description: 'Guias practicas y webinars sobre transformacion digital, IA y automatizacion para tu negocio.',
-    url: 'https://www.tuimpulsalab.com/recursos',
+    url: 'https://goimpulsalab.com/recursos',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Recursos' }],
   },

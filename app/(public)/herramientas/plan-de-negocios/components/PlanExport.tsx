@@ -334,7 +334,7 @@ export default function PlanExport({
     doc.setFont('helvetica', 'bold')
     doc.setFontSize(10)
     doc.setTextColor(...CYAN)
-    doc.text('www.tuimpulsalab.com', pageW / 2, y + 42, { align: 'center' })
+    doc.text('goimpulsalab.com', pageW / 2, y + 42, { align: 'center' })
 
     addFooter(pageNum)
 

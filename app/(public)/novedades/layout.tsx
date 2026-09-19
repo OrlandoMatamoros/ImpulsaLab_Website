@@ -4,11 +4,11 @@ import { buildBreadcrumbLd } from '@/lib/schema'
 export const metadata: Metadata = {
   title: 'Novedades - Registro de Cambios de Impulsa Lab',
   description: 'Todo lo que publicamos en el sitio y en SOMATT, con su fecha. Cada entrada corresponde a un cambio realmente publicado, sin adjetivos.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/novedades' },
+  alternates: { canonical: 'https://goimpulsalab.com/novedades' },
   openGraph: {
     title: 'Novedades - Registro de Cambios de Impulsa Lab',
     description: 'Cada cambio que publicamos en el sitio y en SOMATT, con su fecha. Qué cambió y para qué sirve.',
-    url: 'https://www.tuimpulsalab.com/novedades',
+    url: 'https://goimpulsalab.com/novedades',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Novedades' }],
   },

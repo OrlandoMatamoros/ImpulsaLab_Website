@@ -5,17 +5,17 @@ export const metadata: Metadata = {
   description:
     'Crea un plan de negocios profesional en minutos con IA. 10 secciones, proyecciones financieras a 3 años y exportación a PDF. Herramienta gratis.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
+    canonical: 'https://goimpulsalab.com/herramientas/plan-de-negocios',
     languages: {
-      'es-US': 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
-      'en-US': 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
+      'es-US': 'https://goimpulsalab.com/herramientas/plan-de-negocios',
+      'en-US': 'https://goimpulsalab.com/herramientas/plan-de-negocios',
     },
   },
   openGraph: {
     title: 'Plan de Negocios con IA Gratis para tu PYME | Impulsa Lab',
     description:
       'Crea un plan de negocios profesional en minutos con IA. 10 secciones, proyecciones financieras y PDF listo para inversores.',
-    url: 'https://www.tuimpulsalab.com/herramientas/plan-de-negocios',
+    url: 'https://goimpulsalab.com/herramientas/plan-de-negocios',
     siteName: 'Impulsa Lab',
     locale: 'es_US',
     type: 'website',

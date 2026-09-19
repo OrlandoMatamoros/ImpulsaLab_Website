@@ -33,7 +33,7 @@ export const PDFStyles = {
     email: 'contacto@tuimpulsalab.com',
     phoneWhatsApp: '+1 347 904 3169',     // WhatsApp Business
     phoneCalls: '+1 347 450-9281',        // Para llamadas y SMS
-    website: 'www.tuimpulsalab.com',
+    website: 'goimpulsalab.com',
     calendly: 'https://calendly.com/orlando-tuimpulsalab/30min'
   },
   

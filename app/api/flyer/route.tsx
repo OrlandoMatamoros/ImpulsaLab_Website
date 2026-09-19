@@ -17,6 +17,9 @@ const ALLOWED_IMG_HOSTS = [
   'ai-statics.freepik.com',
   'cdn.higgsfield.ai',
   'platform.higgsfield.ai',
+  'goimpulsalab.com',
+  'www.goimpulsalab.com',
+  // dominio anterior: sigue sirviendo imagenes viejas por 301, se mantiene permitido
   'www.tuimpulsalab.com',
   'tuimpulsalab.com',
 ]
@@ -177,7 +180,7 @@ export async function GET(req: Request) {
 
   const headline = (p.get('headline') || '').slice(0, 90).trim()
   const subhead = (p.get('subhead') || '').slice(0, 110).trim()
-  const credit = (p.get('credit') || 'tuimpulsalab.com').slice(0, 90).trim()
+  const credit = (p.get('credit') || 'goimpulsalab.com').slice(0, 90).trim()
   const pos = p.get('pos') === 'top' ? 'top' : 'bottom'
   const hcRaw = p.get('hc') || ''
   const acRaw = p.get('ac') || ''
@@ -217,7 +220,7 @@ export async function POST(req: Request) {
 
   const headline = readText(body.headline, 90)
   const subhead = readText(body.subhead, 110)
-  const credit = readText(body.credit, 90, 'tuimpulsalab.com')
+  const credit = readText(body.credit, 90, 'goimpulsalab.com')
   const pos = body.pos === 'top' ? 'top' : 'bottom'
   const hcRaw = typeof body.hc === 'string' ? body.hc : ''
   const acRaw = typeof body.ac === 'string' ? body.ac : ''

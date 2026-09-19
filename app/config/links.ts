@@ -3,5 +3,5 @@ export const LINKS = {
   email: 'contacto@tuimpulsalab.com',
   whatsapp: 'https://wa.me/19295007815', // Actualiza con tu número
   linkedin: 'https://linkedin.com/company/impulsa-lab',
-  website: 'https://tuimpulsalab.com'
+  website: 'https://goimpulsalab.com'
 };

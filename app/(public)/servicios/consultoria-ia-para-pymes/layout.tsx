@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
+    canonical: 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes',
   },
   openGraph: {
     title: 'Consultoría IA para PYMEs: Implementación Real | Impulsa Lab',
     description:
       'Consultoría de IA para PYMEs latinas en NYC y LATAM. Agentes IA, bots WhatsApp y flujos n8n con Claude. Desde $97/mes. Diagnóstico gratuito de 30 minutos.',
-    url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
+    url: 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Consultoría IA para PYMEs: Implementación Real' }],
   },
@@ -88,12 +88,12 @@ const breadcrumbSchema = buildBreadcrumbLd([
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes#service',
+  '@id': 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes#service',
   name: 'Consultoría IA para PYMEs — Automatización Real desde $97/mes',
   description:
     'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Agentes IA, chatbots WhatsApp, facturación automática y flujos n8n con Claude. Diagnóstico gratuito de 30 minutos.',
-  url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  url: 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes',
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   areaServed: [
     { '@type': 'City', name: 'New York City' },
     { '@type': 'AdministrativeArea', name: 'Nassau County' },
@@ -112,7 +112,7 @@ const serviceSchema = {
       priceCurrency: 'USD',
       unitText: 'monthly',
     },
-    url: 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes',
+    url: 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes',
   },
   serviceType: 'AI Consulting',
   category: 'Artificial Intelligence Consulting',

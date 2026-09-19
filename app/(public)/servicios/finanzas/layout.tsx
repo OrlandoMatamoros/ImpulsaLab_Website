@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
   description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/servicios/finanzas',
+    canonical: 'https://goimpulsalab.com/servicios/finanzas',
   },
   openGraph: {
     title: 'Finanzas con IA: Dashboard + CFO Virtual | Impulsa Lab',
     description: 'Tu PYME merece un CFO. Dashboards financieros con IA, proyecciones automáticas y alertas de riesgo para negocios latinos. Desde $997 + $147/mes.',
-    url: 'https://www.tuimpulsalab.com/servicios/finanzas',
+    url: 'https://goimpulsalab.com/servicios/finanzas',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - CFO en tu Excel con IA' }],
   },
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://www.tuimpulsalab.com/servicios/finanzas#service',
+  '@id': 'https://goimpulsalab.com/servicios/finanzas#service',
   name: 'CFO Virtual con IA — Automatización Financiera para PYMEs',
   description:
     'Dashboards financieros automatizados, proyecciones con IA, alertas de riesgo y seguimiento de KPIs para restaurantes, tiendas y servicios latinos.',
-  url: 'https://www.tuimpulsalab.com/servicios/finanzas',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  url: 'https://goimpulsalab.com/servicios/finanzas',
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   areaServed: [
     { '@type': 'City', name: 'New York City' },
     { '@type': 'Country', name: 'US' },
@@ -48,7 +48,7 @@ const serviceSchema = {
       priceCurrency: 'USD',
       unitText: 'monthly',
     },
-    url: 'https://www.tuimpulsalab.com/servicios/finanzas',
+    url: 'https://goimpulsalab.com/servicios/finanzas',
   },
   serviceType: 'Financial Automation Consulting',
   category: 'Artificial Intelligence Consulting',

@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
   description: '¿Cuánto cuesta una web profesional? Landing pages desde $697, sitios desde $2,497. Entrega en días, no meses. Marketing digital con IA para PYMEs latinas.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/servicios/marketing',
+    canonical: 'https://goimpulsalab.com/servicios/marketing',
   },
   openGraph: {
     title: 'Marketing Digital con IA para Negocios Latinos | Impulsa Lab',
     description: '¿Cuánto cuesta una web profesional? Landing pages desde $697, sitios desde $2,497. Entrega en días, no meses. Marketing digital con IA para PYMEs latinas.',
-    url: 'https://www.tuimpulsalab.com/servicios/marketing',
+    url: 'https://goimpulsalab.com/servicios/marketing',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Marketing Digital con IA para Negocios Latinos' }],
   },
@@ -26,12 +26,12 @@ export const metadata: Metadata = {
 const serviceSchema = {
   '@context': 'https://schema.org',
   '@type': 'Service',
-  '@id': 'https://www.tuimpulsalab.com/servicios/marketing#service',
+  '@id': 'https://goimpulsalab.com/servicios/marketing#service',
   name: 'Marketing Digital con IA — Landing Pages y Campañas para PYMEs',
   description:
     'Landing pages profesionales desde $697, sitios web desde $2,497 y campañas de marketing digital con IA para PYMEs latinas en EE.UU. Entrega en días, no meses.',
-  url: 'https://www.tuimpulsalab.com/servicios/marketing',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  url: 'https://goimpulsalab.com/servicios/marketing',
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   areaServed: [
     { '@type': 'City', name: 'New York City' },
     { '@type': 'Country', name: 'US' },
@@ -42,7 +42,7 @@ const serviceSchema = {
     '@type': 'Offer',
     price: '697',
     priceCurrency: 'USD',
-    url: 'https://www.tuimpulsalab.com/servicios/marketing',
+    url: 'https://goimpulsalab.com/servicios/marketing',
   },
   serviceType: 'Digital Marketing Consulting',
   category: 'Artificial Intelligence Consulting',

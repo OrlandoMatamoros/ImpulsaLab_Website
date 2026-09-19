@@ -4,11 +4,11 @@ export const metadata: Metadata = {
   title: 'Cursos de IA y Capacitación para Equipos NYC',
   description: 'Cursos de inteligencia artificial y talleres presenciales en NYC para equipos y mentoría 1-a-1. Aprende IA aplicada a tu negocio con resultados inmediatos. Consulta gratuita. Desde $297.',
   keywords: 'cursos de IA, cursos de inteligencia artificial, capacitación en IA, mentoría tecnológica, formación digital, automatización empresarial, NYC',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/capacitacion' },
+  alternates: { canonical: 'https://goimpulsalab.com/capacitacion' },
   openGraph: {
     title: 'Cursos de IA y Capacitación para Equipos NYC — Impulsa Lab',
     description: 'Cursos de inteligencia artificial y talleres presenciales en NYC para equipos y mentoría 1-a-1. Aprende IA aplicada a tu negocio con resultados inmediatos. Consulta gratuita. Desde $297.',
-    url: 'https://www.tuimpulsalab.com/capacitacion',
+    url: 'https://goimpulsalab.com/capacitacion',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Academy - Cursos de IA NYC' }],
   },

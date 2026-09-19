@@ -6,13 +6,13 @@ export const metadata: Metadata = {
   description:
     'Convoca una junta directiva virtual con Claude, Gemini y GPT. Decisiones estratégicas con consenso multi-AI. Disponible para clientes Enterprise.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/herramientas/agentes/junta-estrategica',
+    canonical: 'https://goimpulsalab.com/herramientas/agentes/junta-estrategica',
   },
   openGraph: {
     title: 'Junta Estratégica AI — Impulsa Lab',
     description:
       'Convoca una junta directiva virtual con 3 directores AI + NOVA moderadora. 4 cerebros, 1 decisión, cero sesgo.',
-    url: 'https://www.tuimpulsalab.com/herramientas/agentes/junta-estrategica',
+    url: 'https://goimpulsalab.com/herramientas/agentes/junta-estrategica',
     type: 'website',
     images: [
       {

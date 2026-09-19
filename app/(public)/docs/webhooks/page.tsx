@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Documentación de webhooks de Impulsa Lab. Próximamente disponible.',
   robots: { index: false, follow: false },
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/docs/webhooks',
+    canonical: 'https://goimpulsalab.com/docs/webhooks',
   },
 }
 

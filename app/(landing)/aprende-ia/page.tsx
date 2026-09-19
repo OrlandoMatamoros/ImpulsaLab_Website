@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description:
     'Capacitación práctica en IA para dueños de PYME, en español. Sesión 1-a-1 de 3 horas con plan de acción de 30 días. Escríbenos por WhatsApp.',
   robots: { index: false, follow: true }, // landing de campaña: no competir en orgánico con /capacitacion
-  alternates: { canonical: 'https://www.tuimpulsalab.com/aprende-ia' },
+  alternates: { canonical: 'https://goimpulsalab.com/aprende-ia' },
 }
 
 export default function AprendeIaPage() {

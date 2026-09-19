@@ -1,8 +1,8 @@
 import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
-const CANONICAL = 'https://www.tuimpulsalab.com/es/automatizacion-ia-pequenos-negocios'
-const EN_MIRROR = 'https://www.tuimpulsalab.com/en/ai-automation-small-business'
+const CANONICAL = 'https://goimpulsalab.com/es/automatizacion-ia-pequenos-negocios'
+const EN_MIRROR = 'https://goimpulsalab.com/en/ai-automation-small-business'
 
 export const metadata: Metadata = {
   title: 'WhatsApp, Facturas y Prospectos con IA',
@@ -92,7 +92,7 @@ const serviceSchema = {
     'Automatización con IA y flujos n8n para pequeños negocios en NYC: bots de WhatsApp, captura de prospectos, control de facturas y atención al cliente 24/7. Equipo bilingüe. Diagnóstico 3D gratis.',
   url: CANONICAL,
   inLanguage: 'es-US',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   serviceType: 'Business Process Automation',
   category: 'Artificial Intelligence',
   areaServed: [

@@ -1,7 +1,7 @@
 import { Metadata } from 'next'
 import { buildBreadcrumbLd } from '@/lib/schema'
 
-const CANONICAL = 'https://www.tuimpulsalab.com/en/whatsapp-ai-chatbot'
+const CANONICAL = 'https://goimpulsalab.com/en/whatsapp-ai-chatbot'
 
 export const metadata: Metadata = {
   title: 'WhatsApp AI Chatbot for Business | Done-For-You Setup',
@@ -66,7 +66,7 @@ const serviceSchema = {
     'Done-for-you bilingual WhatsApp AI chatbot for small businesses in NYC: answers customers, books appointments and captures leads 24/7. Free 3D Diagnostic.',
   url: CANONICAL,
   inLanguage: 'en-US',
-  provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+  provider: { '@id': 'https://goimpulsalab.com/#organization' },
   serviceType: 'AI Customer Service Chatbot',
   category: 'Artificial Intelligence',
   areaServed: [

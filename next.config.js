@@ -217,8 +217,15 @@ const nextConfig = {
   
   // Variables de entorno que se exponen al cliente
   env: {
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL || 
-      (process.env.CODESPACES ? `https://${process.env.CODESPACE_NAME}-3000.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}` : 'http://localhost:3000'),
+    // En producción el dominio canónico es goimpulsalab.com (migración 19-sep-2026).
+    // Antes caía a http://localhost:3000 también en producción, lo que dejaba los
+    // enlaces de verificación de correo de Firebase apuntando a localhost.
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL ||
+      (process.env.CODESPACES
+        ? `https://${process.env.CODESPACE_NAME}-3000.${process.env.GITHUB_CODESPACES_PORT_FORWARDING_DOMAIN}`
+        : process.env.NODE_ENV === 'production'
+          ? 'https://goimpulsalab.com'
+          : 'http://localhost:3000'),
   },
   
   // Configuración de Webpack para mejor debugging

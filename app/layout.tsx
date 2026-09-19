@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://www.tuimpulsalab.com'),
+  metadataBase: new URL('https://goimpulsalab.com'),
   title: {
     default: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
     template: '%s | Impulsa Lab',
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   applicationName: 'Impulsa Lab',
   manifest: '/manifest.webmanifest',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/',
+    canonical: 'https://goimpulsalab.com/',
   },
   icons: {
     icon: [
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     siteName: 'Impulsa Lab',
     title: 'Consultoría en IA para Negocios Latinos en NYC | Impulsa Lab',
     description: 'Consultoría en Inteligencia Artificial para negocios latinos en NYC. Agentes IA, bots WhatsApp y flujos n8n. Empieza con tu Diagnóstico 3D gratis.',
-    url: 'https://www.tuimpulsalab.com/',
+    url: 'https://goimpulsalab.com/',
     images: [
       {
         url: '/opengraph-image.png?v=2',
@@ -100,14 +100,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'Organization',
-              '@id': 'https://www.tuimpulsalab.com/#organization',
+              '@id': 'https://goimpulsalab.com/#organization',
               name: 'Impulsa Lab',
               legalName: 'Impulsa Lab LLC',
               alternateName: ['Impulsa Lab NYC', 'Impulsa Lab LLC'],
-              url: 'https://www.tuimpulsalab.com',
+              url: 'https://goimpulsalab.com',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://www.tuimpulsalab.com/images/isotipo-color.png',
+                url: 'https://goimpulsalab.com/images/isotipo-color.png',
               },
               description:
                 'Consultoría en transformación digital con IA para PYMEs. Servicios de finanzas, operaciones y marketing potenciados por inteligencia artificial.',
@@ -169,12 +169,12 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'WebSite',
-              '@id': 'https://www.tuimpulsalab.com/#website',
-              url: 'https://www.tuimpulsalab.com',
+              '@id': 'https://goimpulsalab.com/#website',
+              url: 'https://goimpulsalab.com',
               name: 'Impulsa Lab',
               description:
                 'Transformación digital empresarial con IA para PYMEs',
-              publisher: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+              publisher: { '@id': 'https://goimpulsalab.com/#organization' },
               inLanguage: 'es-US',
             }),
           }}
@@ -189,13 +189,13 @@ export default function RootLayout({
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'ProfessionalService',
-              '@id': 'https://www.tuimpulsalab.com/#localbusiness',
+              '@id': 'https://goimpulsalab.com/#localbusiness',
               name: 'Impulsa Lab',
               alternateName: ['Impulsa Lab NYC'],
-              url: 'https://www.tuimpulsalab.com',
+              url: 'https://goimpulsalab.com',
               telephone: '+1-347-450-9281',
               email: 'contacto@tuimpulsalab.com',
-              image: 'https://www.tuimpulsalab.com/images/isotipo-color.png',
+              image: 'https://goimpulsalab.com/images/isotipo-color.png',
               description:
                 'Consultoría en IA y automatización para PYMEs latinas en Nueva York. Agentes IA, bots WhatsApp y flujos n8n para negocios en NYC y LATAM.',
               // Mismo motivo que en Organization: separar la marca de los laboratorios.

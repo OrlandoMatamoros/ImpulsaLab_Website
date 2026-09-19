@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 import { listSlugs, getPostBySlug } from '@/lib/blog'
 
-const BASE_URL = 'https://www.tuimpulsalab.com'
+const BASE_URL = 'https://goimpulsalab.com'
 
 // NOTE: /recursos/guias, /recursos/webinars are placeholder pages and are
 // INTENTIONALLY excluded until real content exists. Blog posts are now

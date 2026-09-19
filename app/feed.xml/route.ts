@@ -9,7 +9,7 @@ import { getAllPosts } from '@/lib/blog'
 
 export const dynamic = 'force-static'
 
-const SITE = 'https://www.tuimpulsalab.com'
+const SITE = 'https://goimpulsalab.com'
 
 function esc(s: string): string {
   return String(s ?? '')

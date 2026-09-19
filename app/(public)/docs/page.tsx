@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   description: 'Documentaci\u00f3n de Impulsa Lab. Pr\u00f3ximamente disponible.',
   robots: { index: false, follow: false },
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/docs',
+    canonical: 'https://goimpulsalab.com/docs',
   },
 }
 

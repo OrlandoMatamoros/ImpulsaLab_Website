@@ -5,13 +5,13 @@ export const metadata: Metadata = {
   title: 'Blog de IA y Automatización para Negocios Latinos',
   description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana en Impulsa Lab.',
   alternates: {
-    canonical: 'https://www.tuimpulsalab.com/blog',
-    types: { 'application/rss+xml': 'https://www.tuimpulsalab.com/feed.xml' },
+    canonical: 'https://goimpulsalab.com/blog',
+    types: { 'application/rss+xml': 'https://goimpulsalab.com/feed.xml' },
   },
   openGraph: {
     title: 'Blog de IA y Automatización para Negocios Latinos | Impulsa Lab',
     description: 'Artículos y guías prácticas sobre IA, automatización y transformación digital para PYMEs latinas en EE.UU. Nuevos contenidos cada semana.',
-    url: 'https://www.tuimpulsalab.com/blog',
+    url: 'https://goimpulsalab.com/blog',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Blog de IA y Automatización' }],
   },

@@ -128,7 +128,7 @@ export async function generateCoverPage(
 
   pdf.setFontSize(9);
   pdf.setTextColor(255, 255, 255);
-  pdf.text('www.tuimpulsalab.com | contacto@tuimpulsalab.com', pageWidth/2, 282, { align: 'center' });
+  pdf.text('goimpulsalab.com | contacto@tuimpulsalab.com', pageWidth/2, 282, { align: 'center' });
 
   pdf.setFontSize(10);
   pdf.setFont('helvetica', 'bold');

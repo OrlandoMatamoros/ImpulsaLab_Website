@@ -5,12 +5,12 @@ export const metadata: Metadata = {
   title: 'Diagnóstico 3D Gratuito de Madurez Digital para PYMEs',
   description:
     'Evalúa el nivel de madurez digital de tu empresa en Finanzas, Operaciones y Marketing con nuestro diagnóstico gratuito impulsado por IA. 15 minutos, resultados inmediatos.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/diagnostico' },
+  alternates: { canonical: 'https://goimpulsalab.com/diagnostico' },
   openGraph: {
     title: 'Diagnóstico 3D Gratuito de Madurez Digital para PYMEs',
     description:
       'Evalúa tu empresa en Finanzas, Operaciones y Marketing con nuestro diagnóstico gratuito impulsado por IA. 15 minutos, resultados inmediatos.',
-    url: 'https://www.tuimpulsalab.com/diagnostico',
+    url: 'https://goimpulsalab.com/diagnostico',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Diagnóstico 3D' }],
   },
@@ -45,7 +45,7 @@ export default function DiagnosticoLayout({
             '@type': 'Service',
             serviceType: 'Business Diagnostic Assessment',
             name: 'Diagnóstico 3D de Madurez Digital',
-            provider: { '@id': 'https://www.tuimpulsalab.com/#organization' },
+            provider: { '@id': 'https://goimpulsalab.com/#organization' },
             areaServed: ['US', 'LATAM'],
             description:
               'Evaluación gratuita de 15 minutos que analiza la madurez digital de tu PYME en Finanzas, Operaciones y Marketing, con plan de acción personalizado generado por IA.',
@@ -55,7 +55,7 @@ export default function DiagnosticoLayout({
               priceCurrency: 'USD',
               availability: 'https://schema.org/InStock',
             },
-            url: 'https://www.tuimpulsalab.com/diagnostico',
+            url: 'https://goimpulsalab.com/diagnostico',
           }),
         }}
       />

@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { LINKS } from '@/lib/constants'
 
-const CANONICAL = 'https://www.tuimpulsalab.com/servicios/consultoria-ia-para-pymes'
+const CANONICAL = 'https://goimpulsalab.com/servicios/consultoria-ia-para-pymes'
 
 // WebPage (no Article): esta URL es una landing de servicio — el layout ya
 // emite Service + FAQPage + BreadcrumbList; un Article aquí confunde el rich result.
@@ -13,7 +13,7 @@ const pageSchema = {
     'Consultoría de inteligencia artificial para PYMEs latinas en NYC y LATAM. Implementamos agentes IA con n8n + Claude: chatbots, facturación automática, atención al cliente. Diagnóstico gratis en 30 min.',
   url: CANONICAL,
   inLanguage: 'es-ES',
-  isPartOf: { '@id': 'https://www.tuimpulsalab.com/#website' },
+  isPartOf: { '@id': 'https://goimpulsalab.com/#website' },
 }
 
 // Reusable check icon

@@ -28,7 +28,7 @@ export interface SignUpData {
 
 // Configuración de verificación de email
 const actionCodeSettings = {
-  url: process.env.NEXT_PUBLIC_APP_URL || 'https://tuimpulsalab.com',
+  url: process.env.NEXT_PUBLIC_APP_URL || 'https://goimpulsalab.com',
   handleCodeInApp: true,
 };
 

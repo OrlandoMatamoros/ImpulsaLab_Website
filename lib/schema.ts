@@ -6,7 +6,7 @@
  * Do NOT import in 'use client' components.
  */
 
-const BASE_URL = 'https://www.tuimpulsalab.com'
+const BASE_URL = 'https://goimpulsalab.com'
 
 export interface BreadcrumbItem {
   name: string

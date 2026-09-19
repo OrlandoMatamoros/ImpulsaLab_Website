@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
                 <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
                   Continúa donde lo dejaste:
                 </p>
-                <a href="https://tuimpulsalab.com/diagnostico"
+                <a href="https://goimpulsalab.com/diagnostico"
                    style="display: inline-block; background: #002D62; color: white; text-decoration: none;
                           padding: 16px 40px; border-radius: 8px; font-weight: 600; font-size: 16px;">
                   ▶ Continuar Diagnóstico

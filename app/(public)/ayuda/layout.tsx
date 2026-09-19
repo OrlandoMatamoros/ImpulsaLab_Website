@@ -3,11 +3,11 @@ import { Metadata } from 'next'
 export const metadata: Metadata = {
   title: 'Centro de Ayuda - Soporte y Recursos',
   description: 'Encuentra respuestas, guias y recursos para aprovechar al maximo nuestras soluciones de IA y automatizacion para tu negocio.',
-  alternates: { canonical: 'https://www.tuimpulsalab.com/ayuda' },
+  alternates: { canonical: 'https://goimpulsalab.com/ayuda' },
   openGraph: {
     title: 'Centro de Ayuda - Soporte y Recursos | Impulsa Lab',
     description: 'Respuestas, guias y recursos para aprovechar nuestras soluciones de IA para tu negocio.',
-    url: 'https://www.tuimpulsalab.com/ayuda',
+    url: 'https://goimpulsalab.com/ayuda',
     type: 'website',
     images: [{ url: '/opengraph-image.png?v=2', width: 1200, height: 630, alt: 'Impulsa Lab - Centro de Ayuda' }],
   },
