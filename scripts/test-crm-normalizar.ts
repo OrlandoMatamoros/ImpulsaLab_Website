@@ -118,16 +118,21 @@ prueba('el telefono se muestra sin el prefijo de Twilio', () => {
 })
 
 prueba('el mensaje de WhatsApp saluda por el nombre y nombra el interes', () => {
-  const m = mensajeWhatsApp({ nombre: 'Olga Gpe. Olmedo B.', interes: 'Implementar IA y capacitar al equipo' })
+  const m = mensajeWhatsApp({ nombre: 'Olga Gpe. Olmedo B.', tema: 'implementar IA en tu empresa y capacitar a tu equipo' })
   assert.ok(m.startsWith('Hola Olga,'))
-  assert.ok(m.includes('implementar IA y capacitar al equipo'))
-  assert.ok(!mensajeWhatsApp({ nombre: '', interes: '' }).includes('undefined'))
+  assert.ok(m.includes('sobre implementar IA en tu empresa y capacitar a tu equipo y la conversación'))
+  // La nota interna (tercera persona) NUNCA debe entrar al mensaje.
+  assert.ok(!m.includes('su empresa'))
+  assert.ok(!m.includes('Recibió'))
+  const sinTema = mensajeWhatsApp({ nombre: '', tema: '' })
+  assert.ok(sinTema.startsWith('Hola, soy Orlando'))
+  assert.ok(!sinTema.includes('undefined') && !sinTema.includes('sobre '))
 })
 
 prueba('el enlace de WhatsApp lleva digitos y el texto codificado', () => {
-  const e = enlaceWhatsApp({ nombre: 'Ken', interes: 'alianza', telefono: 'whatsapp:+817076391334', telefono_norm: '817076391334' })
+  const e = enlaceWhatsApp({ nombre: 'Ken', tema: 'una alianza', telefono: 'whatsapp:+817076391334', telefono_norm: '817076391334' })
   assert.ok(e.startsWith('https://wa.me/817076391334?text=Hola%20Ken'))
-  assert.equal(enlaceWhatsApp({ nombre: 'X', interes: '', telefono: '', telefono_norm: '' }), '')
+  assert.equal(enlaceWhatsApp({ nombre: 'X', tema: '', telefono: '', telefono_norm: '' }), '')
 })
 
 console.log('\n' + ok + ' pruebas OK')

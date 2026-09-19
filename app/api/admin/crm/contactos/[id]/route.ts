@@ -66,6 +66,8 @@ export async function PATCH(req: NextRequest, { params }: Ctx) {
     cambios.proximo_paso_fecha = f
   }
   if (typeof body.interes === 'string') cambios.interes = texto(body.interes, 200)
+  // `tema` alimenta el mensaje de WhatsApp: va en segunda persona y corto.
+  if (typeof body.tema === 'string') cambios.tema = texto(body.tema, 120)
   if (typeof body.nombre === 'string') cambios.nombre = texto(body.nombre, 120)
 
   try {

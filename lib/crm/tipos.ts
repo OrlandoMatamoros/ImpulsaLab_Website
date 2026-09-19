@@ -72,6 +72,11 @@ export interface ContactoCRM {
   etapa: Etapa
   temperatura: Temperatura | ''
   interes: string
+  /** Una línea CORTA y en segunda persona para el mensaje de WhatsApp
+   *  («implementar IA en tu empresa y capacitar a tu equipo»). NO es `interes`:
+   *  ese es la nota interna, escrita en tercera persona, y pegarla en el mensaje
+   *  lo dejaba mezclando tú y usted. Vacío = el mensaje va sin tema. */
+  tema?: string
   primer_contacto: string // ISO
   ultimo_contacto: string // ISO — último mensaje ENTRANTE (lo que escribió la persona)
   ultimo_mensaje: string
@@ -134,24 +139,26 @@ export function telefonoLegible(telefono: string): string {
 }
 
 /** Mensaje que se abre ya escrito al pulsar «Escribir por WhatsApp».
- *  Lo envía Orlando desde SU número, no desde el del bot (ese es de Twilio). */
+ *  Lo envía Orlando desde SU WhatsApp Business (+1 347 904-3169), no desde el
+ *  número del bot (929 500-7815), que vive en Twilio y no se puede usar en la app.
+ *  Todo en tuteo: el `tema` debe venir en segunda persona (ver ContactoCRM.tema). */
 export function mensajeWhatsApp(
-  c: Pick<ContactoCRM, 'nombre' | 'interes'>,
+  c: Pick<ContactoCRM, 'nombre' | 'tema'>,
 ): string {
   const nombre = (c.nombre || '').trim().split(/\s+/)[0]
   const saludo = nombre && nombre.toLowerCase() !== 'sin' ? `Hola ${nombre}` : 'Hola'
-  const tema = (c.interes || '').trim()
-  const sobre = tema ? ` sobre ${tema.charAt(0).toLowerCase() + tema.slice(1)}` : ''
+  const tema = (c.tema || '').trim().replace(/\.$/, '')
+  const sobre = tema ? ` sobre ${tema}` : ''
   return (
     `${saludo}, soy Orlando Matamoros, de Impulsa Lab. ` +
-    `Escribiste a nuestro asistente por WhatsApp${sobre} y te escribo yo directamente para retomarlo. ` +
-    `Cuéntame en qué punto estás y te digo con franqueza si podemos ayudarte.`
+    `Escribiste a nuestro asistente de WhatsApp${sobre} y la conversación quedó a medias. ` +
+    `Te escribo yo, en persona, para retomarla: cuéntame en qué punto estás y te digo con franqueza si podemos ayudarte.`
   )
 }
 
 /** Enlace de WhatsApp con el mensaje ya escrito. Devuelve '' si no hay teléfono. */
 export function enlaceWhatsApp(
-  c: Pick<ContactoCRM, 'nombre' | 'interes' | 'telefono' | 'telefono_norm'>,
+  c: Pick<ContactoCRM, 'nombre' | 'tema' | 'telefono' | 'telefono_norm'>,
 ): string {
   const digitos = (c.telefono_norm || '').replace(/\D/g, '') || telefonoLegible(c.telefono).replace(/\D/g, '')
   if (!digitos) return ''

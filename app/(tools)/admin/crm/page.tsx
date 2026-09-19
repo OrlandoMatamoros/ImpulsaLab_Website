@@ -312,6 +312,7 @@ function DetalleContacto({
   const [error, setError] = useState('')
   const [guardando, setGuardando] = useState(false)
   const [paso, setPaso] = useState(contacto.proximo_paso || '')
+  const [tema, setTema] = useState(contacto.tema || '')
   const [pasoFecha, setPasoFecha] = useState(contacto.proximo_paso_fecha || '')
   const [confirmarBorrado, setConfirmarBorrado] = useState(false)
 
@@ -444,6 +445,31 @@ function DetalleContacto({
           <div className="sm:col-span-2">
             <p className="text-xs uppercase tracking-wide text-slate-500">Qué le interesa</p>
             <p className="text-slate-200">{contacto.interes || '—'}</p>
+          </div>
+        </section>
+
+        <section className="mb-5">
+          <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">
+            Tema del mensaje de WhatsApp
+          </p>
+          <p className="text-xs text-slate-500 mb-2">
+            Corto y hablándole a la persona. Va dentro de «escribiste a nuestro asistente de
+            WhatsApp sobre…». Déjalo vacío y el mensaje sale sin tema.
+          </p>
+          <div className="flex flex-wrap items-center gap-2">
+            <input
+              value={tema}
+              onChange={(e) => setTema(e.target.value)}
+              placeholder="Ej: implementar IA en tu empresa y capacitar a tu equipo"
+              className="flex-1 min-w-[220px] rounded-xl bg-slate-900 border border-slate-700 px-3 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-[#00BCD4] focus:border-transparent"
+            />
+            <button
+              disabled={guardando}
+              onClick={() => parchear({ tema })}
+              className="px-4 py-2 rounded-xl text-sm font-semibold btn-metalico-cyan cursor-pointer"
+            >
+              Guardar
+            </button>
           </div>
         </section>
 
