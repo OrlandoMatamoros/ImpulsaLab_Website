@@ -624,3 +624,60 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* ============================================================
+   CTA metálico — regla 34 (páginas de herramientas y panel admin).
+   Gradiente navy→cyan de marca + un reflejo que cruza el botón cada
+   ~4s. El catch-all de prefers-reduced-motion de arriba ya apaga la
+   animación de quien la tenga desactivada.
+   ============================================================ */
+.btn-metalico-navy,
+.btn-metalico-cyan {
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  border: 1px solid rgba(0, 188, 212, 0.35);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.18) inset, 0 6px 18px -8px rgba(0, 45, 98, 0.9);
+  transition: filter 0.2s ease, transform 0.2s ease;
+}
+.btn-metalico-navy {
+  background-image: linear-gradient(135deg, #001e42 0%, #002D62 45%, #014a91 100%);
+}
+.btn-metalico-cyan {
+  background-image: linear-gradient(135deg, #002D62 0%, #0090a8 55%, #00BCD4 100%);
+}
+.btn-metalico-navy:hover,
+.btn-metalico-cyan:hover {
+  filter: brightness(1.12);
+}
+.btn-metalico-navy:active,
+.btn-metalico-cyan:active {
+  transform: translateY(1px);
+}
+.btn-metalico-navy:disabled,
+.btn-metalico-cyan:disabled {
+  filter: grayscale(0.4) brightness(0.8);
+  cursor: not-allowed;
+}
+.btn-metalico-navy::after,
+.btn-metalico-cyan::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 55%;
+  background-image: linear-gradient(
+    100deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skewX(-18deg);
+  animation: brillo-metalico 4.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes brillo-metalico {
+  0%, 72% { left: -60%; }
+  100% { left: 120%; }
+}

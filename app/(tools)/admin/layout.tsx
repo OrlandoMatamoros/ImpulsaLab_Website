@@ -6,34 +6,53 @@ import Link from 'next/link';
 import { auth } from '@/lib/firebase';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import {
-  LayoutDashboard,
   Users,
   Menu,
   X,
   LogOut,
   Shield,
   MessageSquare,
-  UserCog
+  UserCog,
+  FolderKanban,
+  Contact
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Toaster } from 'react-hot-toast';
 import toast from 'react-hot-toast';
+import { isAdminEmail } from '@/lib/admin-emails';
 
+// `soloAdmin`: secciones con datos de clientes y de la operación. Solo las ve la
+// cuenta de administración (ADMIN_EMAILS), nunca un rol 'consultant'.
 const menuItems = [
   {
     title: 'Dashboard Chatbot',
     href: '/admin',
     icon: MessageSquare,
+    soloAdmin: false,
+  },
+  {
+    title: 'Proyectos',
+    href: '/admin/proyectos',
+    icon: FolderKanban,
+    soloAdmin: true,
+  },
+  {
+    title: 'CRM',
+    href: '/admin/crm',
+    icon: Contact,
+    soloAdmin: true,
   },
   {
     title: 'Gestión de Usuarios',
     href: '/admin/users',
     icon: UserCog,
+    soloAdmin: true,
   },
   {
     title: 'Lista Simple',
     href: '/admin/usuarios',
     icon: Users,
+    soloAdmin: true,
   }
 ];
 
@@ -48,6 +67,14 @@ export default function AdminLayout({
   const router = useRouter();
   const pathname = usePathname();
 
+  // En celular el menú arranca plegado (solo íconos): con 256px de barra lateral
+  // no queda pantalla para la tabla del CRM.
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      setSidebarOpen(false);
+    }
+  }, []);
+
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
       if (!firebaseUser) {
@@ -55,9 +82,13 @@ export default function AdminLayout({
         return;
       }
 
-      // CAMBIO CRÍTICO: Permitir admin Y consultant
+      // Permitir admin Y consultant. El correo de la allowlist server-side
+      // también vale como admin: el middleware deriva el rol igual (un usuario
+      // sin custom claim quedaría fuera de su propio panel).
       const token = await firebaseUser.getIdTokenResult();
-      if (token.claims.role !== 'admin' && token.claims.role !== 'consultant') {
+      const esAdminPorCorreo = isAdminEmail(firebaseUser.email);
+      const rol = (token.claims.role as string) || (esAdminPorCorreo ? 'admin' : 'registered');
+      if (rol !== 'admin' && rol !== 'consultant') {
         toast.error('No tienes permisos para acceder a esta sección');
         router.push('/dashboard');
         return;
@@ -67,7 +98,8 @@ export default function AdminLayout({
         uid: firebaseUser.uid,
         email: firebaseUser.email,
         displayName: firebaseUser.displayName,
-        role: token.claims.role
+        role: rol,
+        esAdmin: rol === 'admin' && esAdminPorCorreo
       });
       setLoading(false);
     });
@@ -112,7 +144,7 @@ export default function AdminLayout({
           <div className="flex items-center justify-between h-16 px-4 border-b border-gray-200">
             {sidebarOpen && (
               <Link href="/admin" className="flex items-center space-x-2">
-                <Shield className="h-8 w-8 text-blue-600" />
+                <Shield className="h-8 w-8 text-[#00BCD4]" />
                 <span className="text-xl font-bold text-gray-900">
                   {getRoleTitle()}
                 </span>
@@ -131,12 +163,12 @@ export default function AdminLayout({
           {/* Navigation - Filtrar items según el rol */}
           <nav className="flex-1 px-2 py-4 space-y-1">
             {menuItems.map((item) => {
-              // Si es consultor, no mostrar Gestión de Usuarios ni Lista Simple
-              if (user?.role === 'consultant' && 
-                  (item.href === '/admin/users' || item.href === '/admin/usuarios')) {
+              // Las secciones con datos de clientes y de la operación son solo
+              // para la cuenta de administración (un consultor no las ve).
+              if (item.soloAdmin && !user?.esAdmin) {
                 return null;
               }
-              
+
               const isActive = pathname === item.href;
               
               return (
@@ -145,7 +177,7 @@ export default function AdminLayout({
                   href={item.href}
                   className={`flex items-center px-3 py-2 rounded-lg transition-colors ${
                     isActive
-                      ? 'bg-blue-50 text-blue-600'
+                      ? 'bg-[#00BCD4]/10 text-[#002D62] font-semibold'
                       : 'text-gray-700 hover:bg-gray-100'
                   }`}
                 >

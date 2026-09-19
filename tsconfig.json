@@ -36,6 +36,7 @@
   ],
   "exclude": [
     "node_modules",
-    "impulsa-lab-mobile"
+    "impulsa-lab-mobile",
+    "scripts/test-crm-normalizar.ts"
   ]
 }

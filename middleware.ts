@@ -39,9 +39,25 @@ const roleBasedRoutes: Record<string, string[]> = {
   '/api/consultant': ['consultant', 'admin'],
 };
 
+// Rutas que llaman MÁQUINAS (n8n, el build.py del tablero), no el navegador.
+// Se autentican con su propio secreto (`Authorization: Bearer …`, ver
+// lib/admin/guardia.ts), así que no pasan por el portero de la cookie de sesión.
+// Y NUNCA se redirigen por dominio: un 301 convierte un POST en GET y el dato se
+// pierde en silencio. Si algún día cambia el dominio canónico, estas dos rutas
+// deben seguir respondiendo en el dominio viejo hasta que se actualicen los 3
+// nodos HTTP de n8n y la constante de build.py.
+const RUTAS_MAQUINA = new Set([
+  '/api/crm/ingest',
+  '/api/admin/proyectos/sync',
+]);
+
 export async function middleware(request: NextRequest) {
   const path = request.nextUrl.pathname;
   const host = request.headers.get('host') || '';
+
+  if (RUTAS_MAQUINA.has(path)) {
+    return NextResponse.next();
+  }
 
   // TASK-01: Canonicalizar non-www → www con 301 permanente.
   // https://tuimpulsalab.com/* → https://www.tuimpulsalab.com/*

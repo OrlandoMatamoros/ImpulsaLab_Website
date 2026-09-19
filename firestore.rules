@@ -94,6 +94,26 @@ service cloud.firestore {
       allow delete: if isOwner(resource.data.userId) || isAdmin();
     }
 
+    // ============== CRM INTERNO + ESPEJO DE PROYECTOS ==============
+    // 100% cerradas al cliente, A PROPÓSITO. Son datos personales de prospectos
+    // y el estado interno del negocio: solo se leen y escriben desde rutas de
+    // servidor con el Admin SDK (app/api/crm/ingest, app/api/admin/*), que
+    // verifican el ID token + ADMIN_EMAILS o un secreto de máquina.
+    // El catch-all de abajo ya lo negaría; esto lo deja explícito para que un
+    // cambio futuro en las reglas no las abra por descuido.
+    match /crm_contactos/{contactoId} {
+      allow read, write: if false;
+    }
+    match /crm_mensajes/{mensajeId} {
+      allow read, write: if false;
+    }
+    match /admin_proyectos/{proyectoId} {
+      allow read, write: if false;
+    }
+    match /admin_proyecto_notas/{notaId} {
+      allow read, write: if false;
+    }
+
     // ============== DENY ALL (catch-all) ==============
     match /{document=**} {
       allow read, write: if false;
