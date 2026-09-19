@@ -14,7 +14,7 @@ import {
   normalizarTemperatura,
   fechaISO,
 } from '../lib/crm/normalizar.ts'
-import { diasSinRespuesta, sinRespuesta } from '../lib/crm/tipos.ts'
+import { diasSinRespuesta, sinRespuesta, telefonoLegible, mensajeWhatsApp, enlaceWhatsApp } from '../lib/crm/tipos.ts'
 
 let ok = 0
 function prueba(nombre: string, fn: () => void) {
@@ -108,6 +108,26 @@ prueba('sin respuesta: solo cuenta si el contacto habló último', () => {
   assert.equal(sinRespuesta({ ...base, etapa: 'perdido' }, ahora), false)
   // Menos de 3 días no alerta.
   assert.equal(sinRespuesta({ ...base, ultimo_contacto: '2026-09-18T10:00:00Z' }, ahora), false)
+})
+
+
+prueba('el telefono se muestra sin el prefijo de Twilio', () => {
+  assert.equal(telefonoLegible('whatsapp:+5215533031499'), '+5215533031499')
+  assert.equal(telefonoLegible('+1 (929) 500-7815'), '+19295007815')
+  assert.equal(telefonoLegible(''), '')
+})
+
+prueba('el mensaje de WhatsApp saluda por el nombre y nombra el interes', () => {
+  const m = mensajeWhatsApp({ nombre: 'Olga Gpe. Olmedo B.', interes: 'Implementar IA y capacitar al equipo' })
+  assert.ok(m.startsWith('Hola Olga,'))
+  assert.ok(m.includes('implementar IA y capacitar al equipo'))
+  assert.ok(!mensajeWhatsApp({ nombre: '', interes: '' }).includes('undefined'))
+})
+
+prueba('el enlace de WhatsApp lleva digitos y el texto codificado', () => {
+  const e = enlaceWhatsApp({ nombre: 'Ken', interes: 'alianza', telefono: 'whatsapp:+817076391334', telefono_norm: '817076391334' })
+  assert.ok(e.startsWith('https://wa.me/817076391334?text=Hola%20Ken'))
+  assert.equal(enlaceWhatsApp({ nombre: 'X', interes: '', telefono: '', telefono_norm: '' }), '')
 })
 
 console.log('\n' + ok + ' pruebas OK')

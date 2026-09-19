@@ -13,6 +13,8 @@ import {
   ORIGEN_LABEL,
   TEMPERATURA_LABEL,
   diasSinRespuesta,
+  enlaceWhatsApp,
+  telefonoLegible,
   type ContactoCRM,
   type Etapa,
   type MensajeCRM,
@@ -192,7 +194,7 @@ export default function CrmPage() {
                         )}
                       </p>
                       <p className="text-xs text-slate-500">
-                        {c.telefono || c.correo || '—'}
+                        {telefonoLegible(c.telefono) || c.correo || '—'}
                         {c.temperatura && (
                           <span className={'ml-2 ' + (TEMP_CLASE[c.temperatura] || '')}>
                             ● {TEMPERATURA_LABEL[c.temperatura as keyof typeof TEMPERATURA_LABEL]}
@@ -248,6 +250,48 @@ export default function CrmPage() {
         />
       )}
     </PantallaAdmin>
+  )
+}
+
+/** Escribirle a la persona por WhatsApp desde el número de Orlando, con el mensaje
+ *  ya redactado, y copiar el número para pegarlo donde haga falta. El número del
+ *  bot (929 500 7815) vive en Twilio y NO se puede usar desde la app de WhatsApp. */
+function AccionesContacto({ contacto }: { contacto: ContactoCRM }) {
+  const [copiado, setCopiado] = useState(false)
+  const numero = telefonoLegible(contacto.telefono)
+  const enlace = enlaceWhatsApp(contacto)
+  if (!numero) return null
+
+  async function copiar() {
+    try {
+      await navigator.clipboard.writeText(numero)
+      setCopiado(true)
+      setTimeout(() => setCopiado(false), 2000)
+    } catch {
+      setCopiado(false)
+    }
+  }
+
+  return (
+    <div className="flex flex-wrap items-center gap-2 mt-3">
+      {enlace && (
+        <a
+          href={enlace}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-metalico-cyan text-sm px-4 py-2"
+        >
+          Escribir por WhatsApp
+        </a>
+      )}
+      <button
+        type="button"
+        onClick={copiar}
+        className="text-xs px-3 py-2 rounded-lg border border-slate-700 text-slate-300 hover:text-white hover:border-slate-500 cursor-pointer"
+      >
+        {copiado ? 'Número copiado' : 'Copiar número'}
+      </button>
+    </div>
   )
 }
 
@@ -332,9 +376,10 @@ function DetalleContacto({
           <div>
             <h2 className="text-xl font-bold text-white">{contacto.nombre || 'Sin nombre'}</h2>
             <p className="text-sm text-slate-400">
-              {contacto.telefono || '—'}
+              {telefonoLegible(contacto.telefono) || '—'}
               {contacto.correo && <span className="block">{contacto.correo}</span>}
             </p>
+            <AccionesContacto contacto={contacto} />
           </div>
           <button
             onClick={onCerrar}

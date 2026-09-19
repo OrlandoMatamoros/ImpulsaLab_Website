@@ -123,3 +123,37 @@ export function sinRespuesta(
   const d = diasSinRespuesta(c, ahora)
   return d !== null && d > DIAS_ALERTA_SIN_RESPUESTA
 }
+
+/** El teléfono como se marca, sin el prefijo `whatsapp:` que trae Twilio.
+ *  `whatsapp:+5215533031499` → `+5215533031499`. */
+export function telefonoLegible(telefono: string): string {
+  const limpio = (telefono || '').replace(/^whatsapp:\s*/i, '').trim()
+  if (!limpio) return ''
+  const digitos = limpio.replace(/\D/g, '')
+  return digitos ? '+' + digitos : ''
+}
+
+/** Mensaje que se abre ya escrito al pulsar «Escribir por WhatsApp».
+ *  Lo envía Orlando desde SU número, no desde el del bot (ese es de Twilio). */
+export function mensajeWhatsApp(
+  c: Pick<ContactoCRM, 'nombre' | 'interes'>,
+): string {
+  const nombre = (c.nombre || '').trim().split(/\s+/)[0]
+  const saludo = nombre && nombre.toLowerCase() !== 'sin' ? `Hola ${nombre}` : 'Hola'
+  const tema = (c.interes || '').trim()
+  const sobre = tema ? ` sobre ${tema.charAt(0).toLowerCase() + tema.slice(1)}` : ''
+  return (
+    `${saludo}, soy Orlando Matamoros, de Impulsa Lab. ` +
+    `Escribiste a nuestro asistente por WhatsApp${sobre} y te escribo yo directamente para retomarlo. ` +
+    `Cuéntame en qué punto estás y te digo con franqueza si podemos ayudarte.`
+  )
+}
+
+/** Enlace de WhatsApp con el mensaje ya escrito. Devuelve '' si no hay teléfono. */
+export function enlaceWhatsApp(
+  c: Pick<ContactoCRM, 'nombre' | 'interes' | 'telefono' | 'telefono_norm'>,
+): string {
+  const digitos = (c.telefono_norm || '').replace(/\D/g, '') || telefonoLegible(c.telefono).replace(/\D/g, '')
+  if (!digitos) return ''
+  return `https://wa.me/${digitos}?text=${encodeURIComponent(mensajeWhatsApp(c))}`
+}
