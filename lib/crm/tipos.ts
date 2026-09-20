@@ -87,6 +87,14 @@ export interface ContactoCRM {
   notas: NotaCRM[]
   historial_etapas: CambioEtapa[]
   n_mensajes: number
+  /** Lo que dijo el vigilante de conversaciones cortadas la última vez que avisó. */
+  evaluacion?: {
+    fecha: string
+    veredicto: string
+    motivo: string
+    urgencia: 'alta' | 'media' | 'baja' | string
+    mensaje_sugerido: string
+  }
   es_prueba: boolean
   creado: string
   actualizado: string

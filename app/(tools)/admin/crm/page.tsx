@@ -448,6 +448,22 @@ function DetalleContacto({
           </div>
         </section>
 
+        {contacto.evaluacion?.motivo && (
+          <section className="mb-5 rounded-xl border border-[#00BCD4]/30 bg-[#00BCD4]/5 p-3">
+            <p className="text-xs uppercase tracking-wide text-[#7ae7f5] mb-1">
+              Diagnóstico del asistente · {fechaCorta(contacto.evaluacion.fecha)}
+              {contacto.evaluacion.urgencia && ` · urgencia ${contacto.evaluacion.urgencia}`}
+            </p>
+            <p className="text-sm text-slate-200">{contacto.evaluacion.motivo}</p>
+            {contacto.evaluacion.mensaje_sugerido && (
+              <p className="text-sm text-slate-400 mt-2">
+                <span className="text-slate-500">Sugerido: </span>
+                {contacto.evaluacion.mensaje_sugerido}
+              </p>
+            )}
+          </section>
+        )}
+
         <section className="mb-5">
           <p className="text-xs uppercase tracking-wide text-slate-500 mb-1">
             Tema del mensaje de WhatsApp

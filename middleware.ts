@@ -48,6 +48,8 @@ const roleBasedRoutes: Record<string, string[]> = {
 // nodos HTTP de n8n y la constante de build.py.
 const RUTAS_MAQUINA = new Set([
   '/api/crm/ingest',
+  '/api/crm/pendientes',
+  '/api/crm/alertado',
   '/api/admin/proyectos/sync',
 ]);
 
