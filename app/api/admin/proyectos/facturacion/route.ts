@@ -28,9 +28,9 @@ export async function POST(req: NextRequest) {
   const guardia = exigirSecreto(req, 'FACTURACION_SYNC_SECRET')
   if (!guardia.ok) return guardia.respuesta
 
-  let body: { proyectos?: unknown }
+  let body: { proyectos?: unknown; completo?: unknown }
   try {
-    body = (await req.json()) as { proyectos?: unknown }
+    body = (await req.json()) as { proyectos?: unknown; completo?: unknown }
   } catch {
     return NextResponse.json({ error: 'json_invalido' }, { status: 400 })
   }
@@ -47,22 +47,38 @@ export async function POST(req: NextRequest) {
     .filter((r): r is NonNullable<ReturnType<typeof normalizarResumen>> => r !== null)
   const descartados = body.proyectos.length - validos.length
 
+  // `completo: true` significa que el emisor mandó la lista ENTERA de proyectos
+  // que facturan ahora mismo. Solo entonces se puede borrar lo que no venga.
+  //
+  // Hace falta: reasignar un cliente de un proyecto a otro dejaba el documento
+  // viejo huérfano, y la ficha equivocada seguía mostrando plata que ya no era
+  // suya. Pasó el 22-sep con El Conuco Market, puesto por error en el proyecto
+  // 2 («Taller de IA») cuando es el 1.
+  const completo = body.completo === true
+
   try {
-    // Se escribe sin borrar lo que no venga: a diferencia del espejo del
-    // tablero, aquí un proyecto ausente significa «el invoicing no tiene nada
-    // suyo ahora mismo», no «ya no existe». Borrarlo perdería el histórico.
     const lote = adminDb.batch()
     const col = adminDb.collection(COL_PROYECTO_FACTURACION)
     const recibido = new Date().toISOString()
     for (const r of validos) {
       lote.set(col.doc(String(r.n)), { ...r, recibido }, { merge: true })
     }
+
+    let borrados: string[] = []
+    if (completo) {
+      const vigentes = new Set(validos.map((r) => String(r.n)))
+      const existentes = await col.get()
+      borrados = existentes.docs.filter((d) => !vigentes.has(d.id)).map((d) => d.id)
+      borrados.forEach((id) => lote.delete(col.doc(id)))
+    }
+
     await lote.commit()
 
     return NextResponse.json({
       ok: true,
       guardados: validos.length,
       descartados,
+      borrados,
       recibido,
     })
   } catch (error) {
