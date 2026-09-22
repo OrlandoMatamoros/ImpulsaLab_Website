@@ -13,6 +13,18 @@ interface NotaPanel {
   fecha: string
 }
 
+/** Lo que empuja la app de invoicing. Null si ese proyecto no factura todavía. */
+interface Facturacion {
+  cliente: string
+  estimados: { enviados: number; aceptados: number; monto_aceptado: number }
+  facturado: number
+  cobrado: number
+  por_cobrar: number
+  vencido: number
+  ultima_factura: { numero: number; fecha: string; estado: string; total: number } | null
+  actualizado: string
+}
+
 interface Proyecto {
   n: number
   nombre: string
@@ -33,7 +45,11 @@ interface Proyecto {
   notas: string
   sincronizado?: string
   notas_panel: NotaPanel[]
+  facturacion?: Facturacion | null
 }
+
+const dinero = (n: number) =>
+  n.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
 
 const ESTADO_INFO: Record<string, { label: string; clase: string }> = {
   curso: { label: 'En curso', clase: 'bg-emerald-500/15 text-emerald-300 border-emerald-500/30' },
@@ -211,6 +227,58 @@ export default function ProyectosPage() {
                           </li>
                         ))}
                       </ul>
+                    </div>
+                  )}
+
+                  {p.facturacion && (
+                    <div>
+                      <p className="text-slate-500 text-xs uppercase tracking-wide mb-1">
+                        Facturación
+                        {p.facturacion.cliente ? ` · ${p.facturacion.cliente}` : ''}
+                      </p>
+                      <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+                        {[
+                          { k: 'Facturado', v: p.facturacion.facturado, clase: 'text-slate-200' },
+                          { k: 'Cobrado', v: p.facturacion.cobrado, clase: 'text-emerald-300' },
+                          { k: 'Por cobrar', v: p.facturacion.por_cobrar, clase: 'text-amber-300' },
+                          { k: 'Vencido', v: p.facturacion.vencido, clase: 'text-red-300' },
+                        ].map((c) => (
+                          <div
+                            key={c.k}
+                            className="rounded-lg bg-slate-950/60 border border-slate-800 px-3 py-2"
+                          >
+                            <p className="text-[11px] text-slate-500">{c.k}</p>
+                            <p className={`text-sm font-semibold ${c.clase}`}>{dinero(c.v)}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      <ul className="mt-2 space-y-1 text-sm text-slate-300">
+                        {p.facturacion.estimados.enviados > 0 && (
+                          <li>
+                            <span className="text-slate-500">Estimados: </span>
+                            {p.facturacion.estimados.enviados} enviado
+                            {p.facturacion.estimados.enviados === 1 ? '' : 's'}
+                            {p.facturacion.estimados.aceptados > 0 &&
+                              ` · ${p.facturacion.estimados.aceptados} aceptado${
+                                p.facturacion.estimados.aceptados === 1 ? '' : 's'
+                              } (${dinero(p.facturacion.estimados.monto_aceptado)})`}
+                          </li>
+                        )}
+                        {p.facturacion.ultima_factura && (
+                          <li>
+                            <span className="text-slate-500">Última factura: </span>
+                            #{p.facturacion.ultima_factura.numero} ·{' '}
+                            {dinero(p.facturacion.ultima_factura.total)} ·{' '}
+                            {p.facturacion.ultima_factura.estado} ·{' '}
+                            {p.facturacion.ultima_factura.fecha}
+                          </li>
+                        )}
+                      </ul>
+
+                      <p className="text-[11px] text-slate-600 mt-1">
+                        Según el invoicing, {fechaCorta(p.facturacion.actualizado)}
+                      </p>
                     </div>
                   )}
 

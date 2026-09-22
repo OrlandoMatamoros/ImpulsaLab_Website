@@ -6,6 +6,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { exigirAdmin } from '@/lib/admin/guardia'
 import { adminDb } from '@/lib/firebase-admin'
 import { COL_PROYECTOS, COL_PROYECTO_NOTAS } from '@/lib/admin/proyectos'
+import { COL_PROYECTO_FACTURACION } from '@/lib/admin/facturacion'
 
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
@@ -15,10 +16,18 @@ export async function GET(req: NextRequest) {
   if (!guardia.ok) return guardia.respuesta
 
   try {
-    const [snapProyectos, snapNotas] = await Promise.all([
+    const [snapProyectos, snapNotas, snapFacturacion] = await Promise.all([
       adminDb.collection(COL_PROYECTOS).limit(200).get(),
       adminDb.collection(COL_PROYECTO_NOTAS).limit(1000).get(),
+      adminDb.collection(COL_PROYECTO_FACTURACION).limit(200).get(),
     ])
+
+    // Lo que empuja la app de invoicing. Colección aparte: el espejo del
+    // tablero se sobrescribe entero y la borraría.
+    const facturacionPorProyecto: Record<string, Record<string, unknown>> = {}
+    snapFacturacion.docs.forEach((d) => {
+      facturacionPorProyecto[d.id] = d.data() as Record<string, unknown>
+    })
 
     const notasPorProyecto: Record<string, Array<Record<string, unknown>>> = {}
     snapNotas.docs.forEach((d) => {
@@ -32,7 +41,14 @@ export async function GET(req: NextRequest) {
     )
 
     const proyectos: Record<string, unknown>[] = snapProyectos.docs
-      .map((d) => ({ ...d.data(), notas_panel: notasPorProyecto[d.id] || [] }) as Record<string, unknown>)
+      .map(
+        (d) =>
+          ({
+            ...d.data(),
+            notas_panel: notasPorProyecto[d.id] || [],
+            facturacion: facturacionPorProyecto[d.id] || null,
+          }) as Record<string, unknown>,
+      )
       .sort((a, b) => Number(a.n) - Number(b.n))
 
     return NextResponse.json({ proyectos, total: proyectos.length })

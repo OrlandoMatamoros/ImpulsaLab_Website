@@ -51,6 +51,9 @@ const RUTAS_MAQUINA = new Set([
   '/api/crm/pendientes',
   '/api/crm/alertado',
   '/api/admin/proyectos/sync',
+  // La llama el invoicing con su secreto. Si se redirige, el POST se convierte
+  // en GET y el resumen de facturación se pierde sin error (regla 74).
+  '/api/admin/proyectos/facturacion',
 ]);
 
 export async function middleware(request: NextRequest) {
