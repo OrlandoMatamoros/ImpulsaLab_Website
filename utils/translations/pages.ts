@@ -94,6 +94,7 @@ export const pagesES = {
     historiaCita: "\"Vi demasiados emprendedores brillantes fracasar no por falta de pasion o trabajo duro, sino por no tener acceso a las herramientas y el conocimiento que las grandes empresas dan por sentado. Decidi que era hora de cambiar eso.\"",
     historiaCitaAutor: "Orlando Matamoros, Fundador",
     historiaP3: "Asi comenzo el viaje para crear algo diferente: una consultora que combina la experiencia humana irreemplazable con el poder de la inteligencia artificial, pero siempre con los pies en la tierra y las manos en la masa. No vendemos tecnologia por tecnologia; implementamos soluciones que funcionan en el mundo real.",
+    fundadorTitulo: "Quien esta detras",
     nuestroCamino: "Nuestro Camino",
     timeline: [
       { year: "2020", title: "La Chispa Inicial", description: "Orlando identifica la brecha entre la consultoria tradicional y las necesidades reales de las PYMEs latinas en NY." },
@@ -283,6 +284,7 @@ export const pagesEN = {
     historiaCita: "\"I saw too many brilliant entrepreneurs fail not for lack of passion or hard work, but for not having access to the tools and knowledge that large companies take for granted. I decided it was time to change that.\"",
     historiaCitaAutor: "Orlando Matamoros, Founder",
     historiaP3: "That's how the journey began to create something different: a consultancy that combines irreplaceable human experience with the power of artificial intelligence, but always with feet on the ground and hands in the work. We don't sell technology for technology's sake; we implement solutions that work in the real world.",
+    fundadorTitulo: "Who Is Behind It",
     nuestroCamino: "Our Journey",
     timeline: [
       { year: "2020", title: "The Initial Spark", description: "Orlando identifies the gap between traditional consulting and the real needs of Latino SMBs in NY." },

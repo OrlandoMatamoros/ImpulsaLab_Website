@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { FaArrowRight, FaCheckCircle, FaLightbulb, FaRocket, FaHandshake, FaChartLine, FaBrain, FaUsers, FaGlobeAmericas, FaAward } from 'react-icons/fa';
 import { useLanguage } from '@/contexts/LanguageContext';
+import { IMAGES } from '@/lib/constants';
 
 export default function NosotrosPage() {
   const { t } = useLanguage();
@@ -92,6 +93,31 @@ export default function NosotrosPage() {
               <p className="mb-6">
                 {t.nosotrosPage.historiaP3}
               </p>
+            </div>
+
+            {/* Fundador — bloque sobrio, no una biografia (22-sep-2026) */}
+            <div className="mt-12 bg-gray-50 border border-gray-200 rounded-2xl p-8">
+              <h3 className="text-xl font-bold mb-6 text-center md:text-left">
+                {t.nosotrosPage.fundadorTitulo}
+              </h3>
+              <div className="flex flex-col md:flex-row items-center md:items-start gap-6">
+                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-lg relative flex-shrink-0">
+                  <Image
+                    src={IMAGES.orlandoPhoto}
+                    alt={`Orlando Matamoros — ${t.team.roles.fundador}`}
+                    fill
+                    sizes="128px"
+                    className="object-cover"
+                  />
+                </div>
+                <div className="text-center md:text-left">
+                  <p className="text-2xl font-bold text-gray-900">Orlando Matamoros</p>
+                  <p className="text-blue-600 font-semibold mb-3">{t.team.roles.fundador}</p>
+                  <p className="text-gray-700 leading-relaxed">
+                    {t.team.memberDescs.orlando}
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

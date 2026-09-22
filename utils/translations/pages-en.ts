@@ -95,6 +95,7 @@ export const pagesEN = {
     historiaCita: "\"I saw too many brilliant entrepreneurs fail not for lack of passion or hard work, but for not having access to the tools and knowledge that large companies take for granted. I decided it was time to change that.\"",
     historiaCitaAutor: "Orlando Matamoros, Founder",
     historiaP3: "That's how the journey began to create something different: a consultancy that combines irreplaceable human experience with the power of artificial intelligence, but always with feet on the ground and hands in the work. We don't sell technology for technology's sake; we implement solutions that work in the real world.",
+    fundadorTitulo: "Who Is Behind It",
     nuestroCamino: "Our Journey",
     timeline: [
       { year: "2020", title: "The Initial Spark", description: "Orlando identifies the gap between traditional consulting and the real needs of Latino SMBs in NY." },

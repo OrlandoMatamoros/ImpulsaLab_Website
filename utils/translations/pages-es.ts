@@ -96,6 +96,7 @@ export const pagesES = {
     historiaCita: "\"Vi demasiados emprendedores brillantes fracasar no por falta de pasion o trabajo duro, sino por no tener acceso a las herramientas y el conocimiento que las grandes empresas dan por sentado. Decidi que era hora de cambiar eso.\"",
     historiaCitaAutor: "Orlando Matamoros, Fundador",
     historiaP3: "Asi comenzo el viaje para crear algo diferente: una consultora que combina la experiencia humana irreemplazable con el poder de la inteligencia artificial, pero siempre con los pies en la tierra y las manos en la masa. No vendemos tecnologia por tecnologia; implementamos soluciones que funcionan en el mundo real.",
+    fundadorTitulo: "Quien esta detras",
     nuestroCamino: "Nuestro Camino",
     timeline: [
       { year: "2020", title: "La Chispa Inicial", description: "Orlando identifica la brecha entre la consultoria tradicional y las necesidades reales de las PYMEs latinas en NY." },
