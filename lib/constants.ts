@@ -21,7 +21,15 @@ export const LINKS = {
   phone: '+13474509281',
   // Invoicing app (PWA). Admin-only desde el menú; los links del header/nav/tools la abren
   // directo en una pestaña externa para que el browser elija la PWA instalada si existe.
-  invoicingApp: 'https://impulsa-invoicing.vercel.app',
+  //
+  // 2026-09-22: era 'https://impulsa-invoicing.vercel.app'. Se unifica en el dominio
+  // propio. El 22-sep Orlando quedó fuera del invoicing por esto: al pasar la app a
+  // entrar con Google, se autorizó en Firebase Auth el dominio propio pero no el alias
+  // de Vercel, que es el que este link abría — así que el popup moría con
+  // `auth/unauthorized-domain`. Ambos dominios están autorizados ahora, pero tener DOS
+  // puertas a la misma app significa configurar dos veces todo lo que va por dominio,
+  // o fallar a medias. Una sola puerta, y que sea la nuestra.
+  invoicingApp: 'https://invoicing.tuimpulsalab.com',
 }
 
 export const COMPANY_INFO = {

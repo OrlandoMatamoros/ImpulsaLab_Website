@@ -15,6 +15,7 @@ import {
   Wand2,
 } from 'lucide-react'
 import { tools } from '@/lib/tools-data'
+import { LINKS } from '@/lib/constants'
 import { useLanguage } from '@/contexts/LanguageContext'
 
 type ToolId =
@@ -49,7 +50,9 @@ const INTERNAL_TOOLS: ToolCard[] = [
   { id: 'auditoriaWeb', href: '/herramientas/auditoria-web', icon: Search, badge: 'admin' },
   // Invoicing es PWA separada; abrirla directo sin pasar por /herramientas/facturacion
   // (la página intermedia auto-redirige si alguien la abre por bookmark).
-  { id: 'facturacion', href: 'https://impulsa-invoicing.vercel.app', icon: Receipt, badge: 'admin', external: true },
+  // La URL sale de LINKS y no se escribe aquí: escrita a mano se quedó atrás cuando se
+  // cambió la de LINKS, y una URL distinta a la autorizada en Firebase rompe el login.
+  { id: 'facturacion', href: LINKS.invoicingApp, icon: Receipt, badge: 'admin', external: true },
 ]
 
 export default function ToolsSection() {

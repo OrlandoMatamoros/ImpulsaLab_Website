@@ -10,7 +10,7 @@ import { LINKS } from '@/lib/constants'
  * Página intermedia /herramientas/facturacion — legacy.
  *
  * 2026-05-25: Orlando pidió que el menú admin "Invoicing" abra DIRECTO la
- * PWA (impulsa-invoicing.vercel.app) sin pasar por esta página intermedia.
+ * PWA (invoicing.tuimpulsalab.com) sin pasar por esta página intermedia.
  * Los links en HeaderAdminTools, Navigation y ToolsSection ya apuntan al
  * URL externo con target="_blank". Esta página queda solo como fallback
  * por si alguien tiene un bookmark del URL antiguo: valida admin y
