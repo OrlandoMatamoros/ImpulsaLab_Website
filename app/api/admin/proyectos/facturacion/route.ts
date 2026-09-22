@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
   // que facturan ahora mismo. Solo entonces se puede borrar lo que no venga.
   //
   // Hace falta: reasignar un cliente de un proyecto a otro dejaba el documento
-  // viejo huérfano, y la ficha equivocada seguía mostrando plata que ya no era
+  // viejo huérfano, y la ficha equivocada seguía mostrando dinero que ya no era
   // suya. Pasó el 22-sep con El Conuco Market, puesto por error en el proyecto
   // 2 («Taller de IA») cuando es el 1.
   const completo = body.completo === true
