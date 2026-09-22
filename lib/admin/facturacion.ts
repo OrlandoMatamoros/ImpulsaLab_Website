@@ -32,6 +32,14 @@ export interface ResumenFacturacion {
     estado: string
     total: number
   } | null
+  /**
+   * Horas de Orlando imputadas al proyecto y lo que cuestan. Es el costo
+   * directo del trabajo: sin esto el margen que se ve es falso, porque todos
+   * los proyectos aparentan 100%.
+   */
+  mano_de_obra: { horas: number; costo: number }
+  margen: number
+  margen_porcentaje: number | null
   /** Cuándo lo calculó el invoicing. Si se queda viejo, algo dejó de empujar. */
   actualizado: string
 }
@@ -77,6 +85,15 @@ export function normalizarResumen(crudo: unknown): ResumenFacturacion | null {
             estado: texto(u.estado, 30),
             total: num(u.total),
           }
+        : null,
+    mano_de_obra: {
+      horas: num((r.mano_de_obra as Record<string, unknown> | undefined)?.horas),
+      costo: num((r.mano_de_obra as Record<string, unknown> | undefined)?.costo),
+    },
+    margen: num(r.margen),
+    margen_porcentaje:
+      typeof r.margen_porcentaje === 'number' && Number.isFinite(r.margen_porcentaje)
+        ? Math.round(r.margen_porcentaje * 1000) / 1000
         : null,
     actualizado: texto(r.actualizado, 40) || new Date().toISOString(),
   }

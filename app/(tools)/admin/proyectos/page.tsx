@@ -22,6 +22,9 @@ interface Facturacion {
   por_cobrar: number
   vencido: number
   ultima_factura: { numero: number; fecha: string; estado: string; total: number } | null
+  mano_de_obra: { horas: number; costo: number }
+  margen: number
+  margen_porcentaje: number | null
   actualizado: string
 }
 
@@ -252,6 +255,32 @@ export default function ProyectosPage() {
                           </div>
                         ))}
                       </div>
+
+                      {p.facturacion.mano_de_obra?.horas > 0 && (
+                        <div className="mt-2 rounded-lg bg-slate-950/60 border border-slate-800 px-3 py-2">
+                          <p className="text-[11px] text-slate-500">
+                            Mano de obra · {p.facturacion.mano_de_obra.horas} h
+                          </p>
+                          <p className="text-sm text-slate-300">
+                            Cuesta {dinero(p.facturacion.mano_de_obra.costo)} · a Impulsa le
+                            queda{' '}
+                            <span
+                              className={
+                                p.facturacion.margen < 0 ? 'text-red-300' : 'text-emerald-300'
+                              }
+                            >
+                              {dinero(p.facturacion.margen)}
+                            </span>
+                            {p.facturacion.margen_porcentaje !== null &&
+                              ` (${Math.round(p.facturacion.margen_porcentaje * 100)}%)`}
+                          </p>
+                          {p.facturacion.margen < 0 && (
+                            <p className="text-xs text-red-300 mt-1">
+                              El trabajo cuesta más de lo que se cobró.
+                            </p>
+                          )}
+                        </div>
+                      )}
 
                       <ul className="mt-2 space-y-1 text-sm text-slate-300">
                         {p.facturacion.estimados.enviados > 0 && (
