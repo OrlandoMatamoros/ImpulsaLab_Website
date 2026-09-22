@@ -45,26 +45,10 @@ export default function TeamSection() {
       hasPhoto: true,
       photoSrc: "/images/team/diego-flores.jpg"
     },
-    {
-      name: "Katty Garces",
-      role: "COO",
-      title: t.team.roles.coo,
-      description: t.team.memberDescs.katty,
-      linkedin: "https://www.linkedin.com/in/katty-garces-b0574555/",
-      email: "katty@tuimpulsalab.com",
-      hasPhoto: true,
-      photoSrc: "/images/team/katty-garces.jpg"
-    },
-    {
-      name: "Alex Cruces",
-      role: "CSO",
-      title: t.team.roles.cso,
-      description: t.team.memberDescs.alex,
-      linkedin: "https://www.linkedin.com/in/alex-cw/",
-      email: "alex@tuimpulsalab.com",
-      hasPhoto: true,
-      photoSrc: "/images/team/alex-cruces.jpg"
-    }
+    // Katty Garces (COO) y Alex Cruces (CSO) retirados el 22-sep-2026: ya no forman
+    // parte de Impulsa Lab. El reparto vigente de la LLC es Orlando 90 %, David Porras 5 %
+    // y Diego Flores 5 %. Se publicaban con correos @tuimpulsalab.com que nadie atiende.
+    // Sus descripciones siguen en utils/translations/* sin usarse; se limpian aparte.
   ]
 
   return (
