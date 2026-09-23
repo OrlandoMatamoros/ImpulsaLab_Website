@@ -142,6 +142,14 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(url, { status: 301 });
   }
 
+  // /servicios/consultoria-ia-pymes → slug correcto con «-para-» (tenía impresiones en Google
+  // y respondía 404; alerta GSC del 23-sep-2026 sobre www.tuimpulsalab.com)
+  if (path === '/servicios/consultoria-ia-pymes') {
+    const url = request.nextUrl.clone();
+    url.pathname = '/servicios/consultoria-ia-para-pymes';
+    return NextResponse.redirect(url, { status: 301 });
+  }
+
   // /recursos → /blog (sección renombrada, fix GSC 404)
   if (path === '/recursos') {
     const url = request.nextUrl.clone();

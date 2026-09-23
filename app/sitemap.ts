@@ -27,7 +27,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/ayuda', priority: 0.6, changeFrequency: 'monthly' as const },
     { path: '/carreras', priority: 0.5, changeFrequency: 'monthly' as const },
     // Servicios
-    { path: '/servicios', priority: 0.9, changeFrequency: 'monthly' as const },
+    // /servicios NO va: su canonical apunta a /servicios/consultoria-ia-para-pymes (ver
+    // app/(public)/servicios/layout.tsx) y el sitemap solo debe listar URLs canónicas.
+    // Tenerla aquí disparaba en GSC «Página alternativa con etiqueta canónica adecuada».
     { path: '/servicios/consultoria-ia-para-pymes', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/finanzas', priority: 0.9, changeFrequency: 'monthly' as const },
     { path: '/servicios/operaciones', priority: 0.9, changeFrequency: 'monthly' as const },
