@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { listSlugs, getPostBySlug } from '@/lib/blog'
+import { TALLER } from '@/lib/taller/config'
 
 const BASE_URL = 'https://goimpulsalab.com'
 
@@ -42,6 +43,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { path: '/es/automatizacion-ia-pequenos-negocios', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/en/whatsapp-ai-chatbot', priority: 0.8, changeFrequency: 'monthly' as const },
     { path: '/en/ai-consulting-small-business', priority: 0.8, changeFrequency: 'monthly' as const },
+    // Taller presencial: entra solo cuando se lanza (TALLER.lanzado en lib/taller/config.ts).
+    ...(TALLER.lanzado ? [{ path: '/taller', priority: 0.9, changeFrequency: 'weekly' as const }] : []),
     // Capacitación
     { path: '/capacitacion', priority: 0.7, changeFrequency: 'monthly' as const },
     { path: '/capacitacion/mentoria-personalizada', priority: 0.6, changeFrequency: 'monthly' as const },
