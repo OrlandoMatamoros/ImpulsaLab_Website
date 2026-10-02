@@ -59,8 +59,10 @@ export const TALLER = {
     mapa: 'https://www.google.com/maps/search/?api=1&query=234+Chestnut+St,+Brooklyn,+NY+11208',
   },
 
-  /** Puestos del salón. Al venderse todos, el botón de pago se cierra solo. */
+  /** Puestos del salón (tope físico que dio Orlando). Es lo que se anuncia: «Cupo limitado: 100 puestos». */
   cupoMaximo: 100,
+  /** La venta se cierra estos puestos antes del tope, por la demora del conteo de Stripe (ver cupos.ts). */
+  margenSobrecupo: 3,
   /** «Quedan N puestos» se muestra solo cuando quedan esta cantidad o menos (escasez real, no inventada). */
   avisarQuedanDesde: 25,
 

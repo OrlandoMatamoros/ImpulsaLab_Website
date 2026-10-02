@@ -64,7 +64,13 @@ export class ErrorStripe extends Error {
   }
 }
 
-async function llamar<T>(llave: LlaveTaller, metodo: 'GET' | 'POST', ruta: string, cuerpo?: URLSearchParams): Promise<T> {
+async function llamar<T>(
+  llave: LlaveTaller,
+  metodo: 'GET' | 'POST',
+  ruta: string,
+  cuerpo?: URLSearchParams,
+  limiteMs = 15_000,
+): Promise<T> {
   const res = await fetch(`${API}${ruta}`, {
     method: metodo,
     headers: {
@@ -74,7 +80,7 @@ async function llamar<T>(llave: LlaveTaller, metodo: 'GET' | 'POST', ruta: strin
     },
     body: cuerpo,
     cache: 'no-store',
-    signal: AbortSignal.timeout(15_000),
+    signal: AbortSignal.timeout(limiteMs),
   })
   const datos = (await res.json().catch(() => ({}))) as { error?: { message?: string; code?: string } }
   if (!res.ok) {
@@ -103,10 +109,11 @@ export function crearSesion(llave: LlaveTaller, params: Record<string, Valor>): 
  * Cuántos pagos cumplen una consulta de la búsqueda de Stripe (p. ej. los pagos exitosos de
  * este evento). Ojo: la búsqueda de Stripe tarda hasta ~1 minuto en ver un pago nuevo.
  */
-export async function contarPagos(llave: LlaveTaller, consulta: string): Promise<number> {
+export async function contarPagos(llave: LlaveTaller, consulta: string, limiteMs = 3_000): Promise<number> {
   const q = new URLSearchParams({ query: consulta, limit: '1' })
   q.append('expand[]', 'total_count')
-  const r = await llamar<{ total_count?: number }>(llave, 'GET', `/payment_intents/search?${q.toString()}`)
+  // Tiempo límite corto: la landing espera este conteo en cada visita y no puede quedarse 15 s.
+  const r = await llamar<{ total_count?: number }>(llave, 'GET', `/payment_intents/search?${q.toString()}`, undefined, limiteMs)
   if (typeof r.total_count !== 'number') throw new ErrorStripe('Stripe no devolvió total_count', 502)
   return r.total_count
 }

@@ -67,6 +67,7 @@ test('el evento dura 4 horas y la agenda las llena exactas', () => {
 test('cupo: número entero positivo y aviso menor que el cupo', () => {
   assert.ok(Number.isInteger(TALLER.cupoMaximo) && TALLER.cupoMaximo > 0)
   assert.ok(TALLER.avisarQuedanDesde < TALLER.cupoMaximo)
+  assert.ok(TALLER.margenSobrecupo >= 0 && TALLER.margenSobrecupo < 10, 'margen razonable bajo el tope del salón')
 })
 
 test('enlace de vendedor: solo pasan los de la lista', () => {

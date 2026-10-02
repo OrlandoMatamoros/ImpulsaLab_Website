@@ -13,33 +13,33 @@ export interface Caso {
 /** Del más difícil al más sencillo (pedido de Orlando, 2-oct). */
 export const CASOS: Caso[] = [
   {
-    titulo: 'Analizar las ventas que sacas de tu caja',
+    titulo: 'Cómo analizar las ventas que sacas de tu caja',
     detalle:
       'Bajamos el reporte de ventas de una caja registradora (el POS), la IA lo lee y te dice qué se vende, qué no y a qué hora. Con eso arma un tablero de control.',
   },
   {
-    titulo: 'Crear tu asistente administrativo',
+    titulo: 'Cómo crear tu asistente administrativo',
     detalle:
-      'Abrimos un proyecto en Claude, un espacio de trabajo con la información de tu negocio, y lo convertimos en un asistente que responde y redacta por ti.',
+      'Abrimos un proyecto en Claude, un espacio de trabajo con la información de un negocio, y lo convertimos en un asistente que responde y redacta. Sales sabiendo hacerlo con el tuyo.',
   },
   {
-    titulo: 'Diseñar la carta digital de tu restaurante',
+    titulo: 'Cómo diseñar la carta digital de un restaurante',
     detalle: 'De una lista de platos y precios a una carta lista para compartir por WhatsApp o imprimir.',
   },
   {
-    titulo: 'Diseñar un post para vender un producto o servicio',
+    titulo: 'Cómo diseñar un post para vender un producto o servicio',
     detalle: 'De la foto de un producto a la publicación lista: imagen, texto y la invitación a comprar.',
   },
   {
-    titulo: 'Conectar la IA con tus aplicaciones',
+    titulo: 'Cómo conectar la IA con tus aplicaciones',
     detalle: 'Qué es un conector, con un ejemplo en vivo: la IA busca y compara pasajes en una app de viajes.',
   },
   {
-    titulo: 'Hacer un Excel, un Word o una presentación',
+    titulo: 'Cómo hacer un Excel, un Word o una presentación',
     detalle: 'Escribes en español lo que necesitas y sale el archivo listo para usar.',
   },
   {
-    titulo: 'Contestar correos y reseñas de Google',
+    titulo: 'Cómo contestar correos y reseñas de Google',
     detalle: 'El más sencillo de todos, y el que más tiempo ahorra cada semana.',
   },
 ]
@@ -60,24 +60,24 @@ export const AGENDA: Bloque[] = [
   },
   {
     min: 20,
-    titulo: 'Tu cuenta y tu primera conexión',
+    titulo: 'Qué IA usar y cómo conectarla',
     texto:
       'Cuál IA conviene para cada tarea y qué es un conector: la forma de unir la IA con las aplicaciones que ya usas. En vivo, la IA busca pasajes en una app de viajes.',
   },
   {
     min: 45,
-    titulo: 'Caso 1: tus ventas, analizadas',
+    titulo: 'Caso 1: las ventas de un negocio, analizadas',
     texto: 'El reporte de una caja registradora convertido en respuestas y en un tablero de control.',
   },
   { min: 15, titulo: 'Pausa', texto: 'Café y snacks.', tipo: 'pausa' },
   {
     min: 45,
-    titulo: 'Caso 2: tu asistente administrativo',
-    texto: 'Un proyecto en Claude con la información de tu negocio, que responde y redacta por ti.',
+    titulo: 'Caso 2: un asistente administrativo',
+    texto: 'Un proyecto en Claude con la información de un negocio, que responde y redacta. Paso a paso, para que lo repitas con el tuyo.',
   },
   {
     min: 40,
-    titulo: 'Casos 3 y 4: tu carta y tu publicidad',
+    titulo: 'Casos 3 y 4: la carta y la publicidad',
     texto: 'La carta digital de un restaurante y un post para vender un producto, de principio a fin.',
   },
   {

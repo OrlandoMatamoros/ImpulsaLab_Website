@@ -11,7 +11,7 @@ import RegistrarCompra from './RegistrarCompra'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Tu cupo en el taller',
+  title: `Tu cupo en ${TALLER.evento.la}`,
   robots: { index: false, follow: false },
 }
 
@@ -33,7 +33,7 @@ async function buscarPago(id: string | undefined): Promise<Resultado> {
   if (!llave) return { estado: 'no-encontrado' }
   try {
     const s = await leerSesion(llave, id)
-    // Solo cuenta si es un pago de ESTE taller (la cuenta de Stripe también cobra otras cosas).
+    // Solo cuenta si es un pago de ESTE evento (la cuenta de Stripe también cobra otras cosas).
     if (s.metadata?.evento !== TALLER.id) return { estado: 'no-encontrado' }
     if (s.payment_status === 'paid' || s.payment_status === 'no_payment_required') return { estado: 'pagado', sesion: s }
     if (s.status === 'complete') return { estado: 'en-proceso', sesion: s }
@@ -51,7 +51,7 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
   const cliente = pago?.customer_details
   const nombre = (cliente?.individual_name || cliente?.name)?.trim().split(/\s+/)[0] ?? null
   const whatsapp = `https://wa.me/${TALLER.whatsapp}?text=${encodeURIComponent(
-    `Hola, tengo una pregunta sobre el Taller de IA del ${fechaCorta(TALLER.inicio)}.`,
+    `Hola, tengo una pregunta sobre ${TALLER.evento.la} de IA del ${fechaCorta(TALLER.inicio)}.`,
   )}`
   const invitar = `https://wa.me/?text=${encodeURIComponent(
     `Me inscribí ${TALLER.evento.ala} de IA de Impulsa Lab: presencial y en español, el ${fechaLarga(TALLER.inicio)} en Brooklyn. ¿Vamos? https://goimpulsalab.com/masterclass`,
@@ -149,11 +149,11 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
             <h1 className="mt-8 text-[30px] font-extrabold leading-tight tracking-[-0.02em] sm:text-4xl">No encontramos un pago con este enlace</h1>
             <p className="mt-4 text-[18px] leading-relaxed text-white/85">
               Si acabas de pagar y llegaste aquí, escríbenos por WhatsApp con el correo que usaste y lo revisamos. Si todavía no has
-              reservado, puedes hacerlo desde la página del taller.
+              reservado, puedes hacerlo desde la página {TALLER.evento.dela}.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="/masterclass" className="rounded-xl bg-[#00BCD4] px-5 py-3.5 text-center text-[16px] font-extrabold text-[#002D62] hover:bg-[#33CADD]">
-                Ir a la página del taller
+                Ir a la página {TALLER.evento.dela}
               </a>
               <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-xl px-5 py-3.5 text-center text-[16px] font-extrabold text-white ring-2 ring-white/40 hover:ring-white">
                 Escribir por WhatsApp
