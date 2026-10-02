@@ -140,6 +140,9 @@ export async function POST(req: Request) {
       // (débito bancario) dejarían al comprador viendo «pago no encontrado».
       // OJO: desde la versión 2026-09-30.endive `payment_method_types` ya no existe y da 400.
       allowed_payment_method_types: ['card'],
+      // Sin Link: en la prueba del 2-oct Link colaba «Banco» y «Klarna» (5,99 % + 30 ¢) aunque la
+      // sesión fuera solo tarjeta. La página promete tarjeta, Apple Pay y Google Pay.
+      wallet_options: { link: { display: 'never' } },
       // Sin cupones: la cuenta de Stripe es compartida y un cupón de otro producto valdría aquí.
       custom_text: {
         submit: {
