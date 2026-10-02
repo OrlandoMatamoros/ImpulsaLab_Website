@@ -61,8 +61,10 @@ export const TALLER = {
 
   /** Puestos del salón (tope físico que dio Orlando). Es lo que se anuncia: «Cupo limitado: 100 puestos». */
   cupoMaximo: 100,
-  /** La venta se cierra estos puestos antes del tope, por la demora del conteo de Stripe (ver cupos.ts). */
-  margenSobrecupo: 3,
+  /** La venta se cierra estos puestos antes del tope, por la demora del conteo de Stripe (ver cupos.ts).
+   *  En 0 por decisión de Orlando (2-oct): el salón aguanta los 100 justos. Con 0, en una ráfaga
+   *  final podrían pagar 1-2 personas más de 100 (el conteo tarda hasta ~1 min en ver un pago). */
+  margenSobrecupo: 0,
   /** «Quedan N puestos» se muestra solo cuando quedan esta cantidad o menos (escasez real, no inventada). */
   avisarQuedanDesde: 25,
 
