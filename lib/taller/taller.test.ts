@@ -9,6 +9,7 @@ import { TALLER } from './config'
 import { estadoVenta, vendedorPorRef } from './precio'
 import { fechaLarga, hora, partesNY, ultimoMinuto } from './fechas'
 import { archivoIcs, enlaceGoogleCalendar } from './calendario'
+import { AGENDA, CASOS } from './contenido'
 
 const precioEn = (iso: string) => {
   const e = estadoVenta(new Date(iso))
@@ -52,12 +53,20 @@ test('textos de fecha y hora en español', () => {
   assert.equal(fechaLarga(fin1), 'martes 20 de octubre')
   assert.equal(hora(fin1), '11:59 p. m.')
   assert.equal(fechaLarga(ultimoMinuto(TALLER.franjas[1].corte)), 'jueves 5 de noviembre')
-  assert.equal(fechaLarga(TALLER.decision), 'viernes 13 de noviembre')
+  assert.equal(fechaLarga(TALLER.limiteDevolucion), 'viernes 13 de noviembre')
 })
 
-test('el taller dura 4 horas', () => {
-  const horas = (new Date(TALLER.fin).getTime() - new Date(TALLER.inicio).getTime()) / 3_600_000
-  assert.equal(horas, 4)
+test('el evento dura 4 horas y la agenda las llena exactas', () => {
+  const minutos = (new Date(TALLER.fin).getTime() - new Date(TALLER.inicio).getTime()) / 60_000
+  assert.equal(minutos, 240)
+  assert.equal(AGENDA.reduce((s, b) => s + b.min, 0), minutos, 'la agenda no suma la duración del evento')
+  assert.equal(AGENDA[AGENDA.length - 1].tipo, 'preguntas', 'cierra con preguntas y respuestas')
+  assert.ok(CASOS.length >= 4)
+})
+
+test('cupo: número entero positivo y aviso menor que el cupo', () => {
+  assert.ok(Number.isInteger(TALLER.cupoMaximo) && TALLER.cupoMaximo > 0)
+  assert.ok(TALLER.avisarQuedanDesde < TALLER.cupoMaximo)
 })
 
 test('enlace de vendedor: solo pasan los de la lista', () => {

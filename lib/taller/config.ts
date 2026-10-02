@@ -1,9 +1,12 @@
 /**
- * Taller + mentoría de IA — ÚNICO lugar donde viven la fecha, el horario, el lugar,
- * los precios por franja y los vendedores. La landing (/taller), el cobro de Stripe,
- * la página de gracias, el calendario (.ics) y la imagen para compartir leen de aquí.
+ * Evento de IA de Impulsa (Masterclass) — ÚNICO lugar donde viven el nombre, la fecha, el
+ * horario, el lugar, el cupo, los precios por franja y los vendedores. La landing (/masterclass),
+ * el cobro de Stripe, la página de gracias, el calendario (.ics) y la imagen para compartir
+ * leen de aquí.
  *
  * Para cambiar algo, se cambia SOLO este archivo:
+ * - El NOMBRE del evento y cómo se nombra dentro de las frases están en `evento`. Si Orlando
+ *   decide «Taller» o «Mentoría» en vez de «Masterclass», se cambian esas 5 líneas y nada más.
  * - Las horas van con el desfase de Nueva York de ESA fecha: en 2026 el horario de verano
  *   (EDT, -04:00) termina el domingo 1-nov; desde ahí es EST (-05:00). Un desfase mal puesto
  *   corre el corte una hora — las pruebas de lib/taller/taller.test.ts lo atrapan.
@@ -24,7 +27,7 @@ export interface Franja {
 }
 
 export interface Vendedor {
-  /** Va en el enlace (`/taller?ref=yorkis`) y al metadato de Stripe. Solo minúsculas y números. */
+  /** Va en el enlace (`/masterclass?ref=yorkis`) y al metadato de Stripe. Solo minúsculas y números. */
   slug: string
   /** Lo ve el comprador en «¿Quién te recomendó?» del pago. */
   nombre: string
@@ -33,8 +36,15 @@ export interface Vendedor {
 export const TALLER = {
   /** Identificador interno: va al metadato de cada pago. No cambiarlo después de vender. */
   id: 'taller-ia-2026-11-20',
-  nombre: 'Taller + mentoría de IA',
-  nombreLargo: 'Taller + mentoría de IA para tu negocio',
+
+  /** Cómo se llama el evento y cómo se nombra dentro de una frase («te esperamos en la masterclass»). */
+  evento: {
+    nombre: 'Masterclass de IA',
+    nombreLargo: 'Masterclass de IA para dueños de negocio',
+    la: 'la masterclass', // «Te esperamos en la masterclass»
+    dela: 'de la masterclass', // «Después de la masterclass»
+    ala: 'a la masterclass', // «Llega a la masterclass»
+  },
 
   /** Página indexable y en el sitemap. En false mientras se confirma con Yorkis y el salón. */
   lanzado: false,
@@ -49,15 +59,18 @@ export const TALLER = {
     mapa: 'https://www.google.com/maps/search/?api=1&query=234+Chestnut+St,+Brooklyn,+NY+11208',
   },
 
-  /** Si a la fecha de decisión no se llega a este número, se cancela y se devuelve todo. */
-  minimoPersonas: 25,
-  /** Día en que se decide si el taller va (y último día para pedir devolución por no poder ir). */
-  decision: '2026-11-13T23:59:00-05:00',
+  /** Puestos del salón. Al venderse todos, el botón de pago se cierra solo. */
+  cupoMaximo: 100,
+  /** «Quedan N puestos» se muestra solo cuando quedan esta cantidad o menos (escasez real, no inventada). */
+  avisarQuedanDesde: 25,
+
+  /** Último día para pedir la devolución si alguien pagó y no puede ir (después se cede el cupo). */
+  limiteDevolucion: '2026-11-13T23:59:00-05:00',
 
   franjas: [
     { id: 'preventa-1', nombre: 'Preventa', precio: 129, corte: '2026-10-21T00:00:00-04:00' },
     { id: 'preventa-2', nombre: 'Segunda preventa', precio: 159, corte: '2026-11-06T00:00:00-05:00' },
-    // La última franja vale hasta que empieza el taller: ahí se cierra la venta.
+    // La última franja vale hasta que empieza el evento: ahí se cierra la venta.
     { id: 'completo', nombre: 'Precio completo', precio: 169, corte: '2026-11-20T15:00:00-05:00' },
   ] satisfies Franja[],
 
@@ -67,8 +80,13 @@ export const TALLER = {
     { slug: 'diego', nombre: 'Diego' },
   ] satisfies Vendedor[],
 
-  /** WhatsApp de atención humana (el 929 es la entrada del bot y no conoce el taller). */
+  /** WhatsApp de atención humana (el 929 es la entrada del bot y no conoce el evento). */
   whatsapp: '13474509281',
+  /** Redes de Impulsa Lab (las mismas del sitio, ver app/layout.tsx). */
+  redes: {
+    instagram: 'https://www.instagram.com/tuimpulsalabny/',
+    facebook: 'https://www.facebook.com/Tuimpulsalab',
+  },
 
   /** Video del héroe (30-60 s). null = no se muestra. Ruta pública, p. ej. '/videos/taller-heroe.mp4'. */
   videoHeroe: null as string | null,

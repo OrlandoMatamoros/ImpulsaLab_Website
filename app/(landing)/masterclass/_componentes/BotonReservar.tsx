@@ -65,7 +65,7 @@ export default function BotonReservar({ precio, tono = 'claro', lugar, id, class
         onClick={reservar}
         disabled={cargando}
         aria-busy={cargando}
-        className={`inline-flex w-full items-center justify-center gap-3 rounded-xl px-6 py-4 text-lg font-extrabold tracking-[-0.01em] shadow-[0_10px_30px_-12px_rgba(0,188,212,0.65)] transition-[background-color,transform] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-px disabled:cursor-wait disabled:opacity-80 ${estilos}`}
+        className={`inline-flex w-full items-center justify-center gap-3 rounded-xl px-6 py-3.5 text-lg sm:py-4 font-extrabold tracking-[-0.01em] shadow-[0_10px_30px_-12px_rgba(0,188,212,0.65)] transition-[background-color,transform] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:translate-y-px disabled:cursor-wait disabled:opacity-80 ${estilos}`}
       >
         {cargando ? (
           <>

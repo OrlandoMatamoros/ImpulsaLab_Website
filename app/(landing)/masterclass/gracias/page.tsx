@@ -54,7 +54,7 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
     `Hola, tengo una pregunta sobre el Taller de IA del ${fechaCorta(TALLER.inicio)}.`,
   )}`
   const invitar = `https://wa.me/?text=${encodeURIComponent(
-    `Me inscribí al ${TALLER.nombre} de Impulsa Lab: presencial y en español, el ${fechaLarga(TALLER.inicio)} en Brooklyn. ¿Vamos? https://goimpulsalab.com/taller`,
+    `Me inscribí ${TALLER.evento.ala} de IA de Impulsa Lab: presencial y en español, el ${fechaLarga(TALLER.inicio)} en Brooklyn. ¿Vamos? https://goimpulsalab.com/masterclass`,
   )}`
 
   return (
@@ -76,7 +76,7 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
               {nombre ? `¡Listo, ${nombre}!` : '¡Listo!'} Tu cupo está asegurado.
             </h1>
             <p className="mt-4 text-[18px] leading-relaxed text-white/85">
-              Te esperamos en el {TALLER.nombre}. Guarda esta fecha en tu calendario: es lo más importante ahora.
+              Te esperamos en {TALLER.evento.la} de IA. Guarda esta fecha en tu calendario: es lo más importante ahora.
             </p>
 
             <div className="mt-8 rounded-2xl bg-white p-6 text-[#002D62] shadow-[0_24px_60px_-24px_rgba(0,0,0,0.6)]">
@@ -100,7 +100,7 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
                   Agregar a Google Calendar
                 </a>
                 <a
-                  href="/taller/evento.ics"
+                  href="/masterclass/evento.ics"
                   className="rounded-xl px-5 py-3.5 text-center text-[16px] font-extrabold text-[#002D62] ring-2 ring-[#002D62] hover:bg-[#F4F7FB]"
                 >
                   Agregar a Apple u Outlook
@@ -111,8 +111,8 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
             <h2 className="mt-10 text-[22px] font-extrabold">Qué sigue</h2>
             <ul className="mt-4 space-y-3 text-[17px] leading-relaxed text-white/85">
               <li>Te llega el recibo de pago a tu correo.</li>
-              <li>Antes del taller te escribimos para que llegues con tu cuenta de IA creada.</li>
-              <li>El día del taller trae el celular cargado, tu computador si tienes y un problema real de tu negocio para la clínica.</li>
+              <li>Unos días antes te escribimos con lo que conviene tener listo.</li>
+              <li>Ese día trae el celular cargado y tus preguntas: cada caso deja su espacio para ellas y al final hay media hora solo de preguntas.</li>
             </ul>
 
             <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -152,7 +152,7 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
               reservado, puedes hacerlo desde la página del taller.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a href="/taller" className="rounded-xl bg-[#00BCD4] px-5 py-3.5 text-center text-[16px] font-extrabold text-[#002D62] hover:bg-[#33CADD]">
+              <a href="/masterclass" className="rounded-xl bg-[#00BCD4] px-5 py-3.5 text-center text-[16px] font-extrabold text-[#002D62] hover:bg-[#33CADD]">
                 Ir a la página del taller
               </a>
               <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="rounded-xl px-5 py-3.5 text-center text-[16px] font-extrabold text-white ring-2 ring-white/40 hover:ring-white">

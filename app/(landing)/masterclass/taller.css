@@ -1,0 +1,42 @@
+/* Movimiento de la landing del evento. Una sola entrada orquestada en el héroe; el resto aparece
+   al llegar con el scroll. Todo se apaga con «reducir movimiento» (además del catch-all de globals.css). */
+
+@keyframes t-sube {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes t-foto {
+  from { opacity: 0; transform: translateY(24px) scale(0.98); }
+  to { opacity: 1; transform: none; }
+}
+
+.t-entra { animation: t-sube 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both; }
+.t-entra-1 { animation-delay: 0.05s; }
+.t-entra-2 { animation-delay: 0.15s; }
+.t-entra-3 { animation-delay: 0.27s; }
+.t-entra-4 { animation-delay: 0.39s; }
+.t-entra-5 { animation-delay: 0.51s; }
+.t-entra-foto { animation: t-foto 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.3s both; }
+
+.t-revelar {
+  transition: opacity 0.7s cubic-bezier(0.2, 0.7, 0.2, 1), transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1);
+  transition-delay: var(--retraso, 0ms);
+}
+.t-revelar[data-oculto='true'] { opacity: 0; transform: translateY(22px); }
+
+/* La escalera de precios sube desde abajo: el precio literalmente crece. */
+.t-escalon {
+  transform-origin: bottom;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1), opacity 0.8s ease;
+  transition-delay: var(--retraso, 0ms);
+}
+.t-escalon[data-oculto='true'] { opacity: 0; transform: scaleY(0.55); }
+
+/* Línea de la agenda que se llena con el scroll (la variable la pone LineaAgenda). */
+.t-linea-llena { transform: scaleY(var(--avance, 0)); transform-origin: top; }
+
+@media (prefers-reduced-motion: reduce) {
+  .t-entra, .t-entra-foto { animation: none; }
+  .t-revelar, .t-escalon { transition: none !important; opacity: 1 !important; transform: none !important; }
+  .t-linea-llena { transform: none; }
+}

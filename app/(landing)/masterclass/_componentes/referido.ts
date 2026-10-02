@@ -3,7 +3,7 @@
 import { TALLER } from '@/lib/taller/config'
 
 /**
- * Código del vendedor que trajo al visitante (`/taller?ref=yorkis`).
+ * Código del vendedor que trajo al visitante (`/masterclass?ref=yorkis`).
  * Se guarda en el navegador 30 días: si la persona vuelve otro día sin el enlace,
  * la venta igual cuenta para quien la recomendó. El servidor lo vuelve a validar.
  * Si el navegador no deja guardar (modo privado), se usa solo el de la URL.

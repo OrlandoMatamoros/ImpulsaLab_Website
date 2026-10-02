@@ -25,6 +25,9 @@ const nextConfig = {
         destination: '/blog/respuestas-automaticas-whatsapp-business-gratis-paso-a-paso',
         permanent: true,
       },
+      // La landing del evento se llamó /taller las primeras horas (2-oct-2026); ahora es /masterclass.
+      { source: '/taller', destination: '/masterclass', permanent: true },
+      { source: '/taller/:path*', destination: '/masterclass/:path*', permanent: true },
       {
         source: '/services',
         destination: '/servicios',

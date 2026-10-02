@@ -3,6 +3,7 @@ import { TALLER } from '@/lib/taller/config'
 import { estadoVenta, vendedorPorRef } from '@/lib/taller/precio'
 import { fechaLarga, hora } from '@/lib/taller/fechas'
 import { crearSesion, ErrorStripe, llaveTaller } from '@/lib/taller/stripe'
+import { estadoCupo } from '@/lib/taller/cupos'
 import { rateLimit } from '@/lib/rate-limit'
 
 export const runtime = 'nodejs'
@@ -54,7 +55,11 @@ export async function POST(req: Request) {
 
   const venta = estadoVenta()
   if (!venta.abierta) {
-    return NextResponse.json({ error: 'Las inscripciones para este taller ya cerraron.' }, { status: 410 })
+    return NextResponse.json({ error: 'Las inscripciones ya cerraron.' }, { status: 410 })
+  }
+  // Cupo del salón: al venderse todos los puestos, no se abren más pagos.
+  if ((await estadoCupo()).agotado) {
+    return NextResponse.json({ error: 'Se agotaron los cupos. Escríbenos por WhatsApp para quedar en lista de espera.' }, { status: 410 })
   }
 
   let ref: unknown = null
@@ -107,7 +112,7 @@ export async function POST(req: Request) {
             currency: 'usd',
             unit_amount: venta.franja.precio * 100,
             product_data: {
-              name: `${TALLER.nombre} · ${venta.franja.nombre}`,
+              name: `${TALLER.evento.nombre} · ${venta.franja.nombre}`,
               description: `Presencial y en español · ${fechaLarga(TALLER.inicio, true)}, ${hora(TALLER.inicio)} a ${hora(TALLER.fin)} · ${lugar}`,
             },
           },
@@ -131,7 +136,7 @@ export async function POST(req: Request) {
         },
         {
           key: 'referido',
-          label: { type: 'custom', custom: '¿Quién te recomendó el taller?' },
+          label: { type: 'custom', custom: '¿Quién te la recomendó?' },
           type: 'dropdown',
           dropdown: { options: opcionesReferido, default_value: vendedor?.slug },
         },
@@ -147,18 +152,18 @@ export async function POST(req: Request) {
       custom_text: {
         submit: {
           message:
-            `Al reservar aceptas la política de devoluciones del taller (goimpulsalab.com/taller#devoluciones). ` +
-            `Si no llegamos a ${TALLER.minimoPersonas} personas, te devolvemos el 100 % sin que tengas que pedirlo.`,
+            `Al reservar aceptas la política de devoluciones ${TALLER.evento.dela} (goimpulsalab.com/masterclass#devoluciones). ` +
+            `Cupo limitado a ${TALLER.cupoMaximo} puestos.`,
         },
       },
       metadata: metadatos,
       payment_intent_data: {
-        description: `${TALLER.nombre} · ${fechaLarga(TALLER.inicio, true)} · ${venta.franja.nombre}`,
+        description: `${TALLER.evento.nombre} · ${fechaLarga(TALLER.inicio, true)} · ${venta.franja.nombre}`,
         metadata: metadatos,
       },
       expires_at: expira,
-      success_url: `${origen}/taller/gracias?sesion={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origen}/taller${vendedor ? `?ref=${vendedor.slug}` : ''}`,
+      success_url: `${origen}/masterclass/gracias?sesion={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origen}/masterclass${vendedor ? `?ref=${vendedor.slug}` : ''}`,
     })
 
     if (!sesion.url) throw new ErrorStripe('Stripe no devolvió la URL de pago', 502)

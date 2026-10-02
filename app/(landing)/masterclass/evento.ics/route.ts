@@ -1,6 +1,6 @@
 import { archivoIcs } from '@/lib/taller/calendario'
 
-// /taller/evento.ics — el taller para Apple Calendar, Outlook o cualquier calendario.
+// /masterclass/evento.ics — el taller para Apple Calendar, Outlook o cualquier calendario.
 export const dynamic = 'force-static'
 
 export function GET() {

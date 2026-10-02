@@ -1,6 +1,6 @@
 import { TALLER } from './config'
 
-const URL_LANDING = 'https://goimpulsalab.com/taller'
+const URL_LANDING = 'https://goimpulsalab.com/masterclass'
 
 /** 20261120T200000Z */
 function utcCompacta(iso: string): string {
@@ -12,15 +12,15 @@ function lugarCompleto(): string {
 }
 
 const DETALLE =
-  `${TALLER.nombreLargo}. Presencial y en español: 3 horas de mentoría con ejercicios en vivo ` +
-  `y 1 hora de clínica con tu negocio real. Trae tu celular cargado (y tu computador si tienes). ` +
+  `${TALLER.evento.nombreLargo}. Presencial y en español: casos reales de negocios resueltos en vivo, ` +
+  `con espacio para preguntas en cada uno y media hora final de preguntas. Trae tu celular cargado y tus preguntas. ` +
   `Más información: ${URL_LANDING}`
 
 /** Enlace «Agregar a Google Calendar». */
 export function enlaceGoogleCalendar(): string {
   const p = new URLSearchParams({
     action: 'TEMPLATE',
-    text: TALLER.nombre,
+    text: TALLER.evento.nombre,
     dates: `${utcCompacta(TALLER.inicio)}/${utcCompacta(TALLER.fin)}`,
     details: DETALLE,
     location: lugarCompleto(),
@@ -65,14 +65,14 @@ export function archivoIcs(ahora: Date = new Date()): string {
     `DTSTAMP:${utcCompacta(ahora.toISOString())}`,
     `DTSTART:${utcCompacta(TALLER.inicio)}`,
     `DTEND:${utcCompacta(TALLER.fin)}`,
-    `SUMMARY:${escaparIcs(TALLER.nombre)}`,
+    `SUMMARY:${escaparIcs(TALLER.evento.nombre)}`,
     `LOCATION:${escaparIcs(lugarCompleto())}`,
     `DESCRIPTION:${escaparIcs(DETALLE)}`,
     `URL:${URL_LANDING}`,
     'BEGIN:VALARM',
     'TRIGGER:-P1D',
     'ACTION:DISPLAY',
-    `DESCRIPTION:${escaparIcs('Mañana: ' + TALLER.nombre)}`,
+    `DESCRIPTION:${escaparIcs('Mañana: ' + TALLER.evento.nombre)}`,
     'END:VALARM',
     'END:VEVENT',
     'END:VCALENDAR',
