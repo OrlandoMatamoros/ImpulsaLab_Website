@@ -170,7 +170,7 @@ export default async function TallerPage() {
       : franja
         ? 'Es el último precio: la venta cierra cuando empieza el evento.'
         : null
-  const lineaCupo = cupo.avisar ? `Quedan ${cupo.quedan} de ${TALLER.cupoMaximo} puestos` : `Cupo limitado: ${TALLER.cupoMaximo} puestos`
+  const lineaCupo = cupo.avisar ? `Quedan ${cupo.quedan} puestos` : `Cupo limitado: ${TALLER.cupoMaximo} puestos`
   const cerrado = cupo.agotado ? 'Se agotaron los cupos.' : 'Las inscripciones ya cerraron.'
 
   const eventoJsonLd = {
