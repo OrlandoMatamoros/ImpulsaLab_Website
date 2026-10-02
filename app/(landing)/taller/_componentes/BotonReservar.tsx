@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { evento, refActual } from './referido'
 
 interface Props {
@@ -20,6 +20,16 @@ interface Props {
 export default function BotonReservar({ precio, tono = 'claro', lugar, id, className = '' }: Props) {
   const [cargando, setCargando] = useState(false)
   const [error, setError] = useState<string | null>(null)
+
+  // Si vuelve desde Stripe con «Atrás», el navegador restaura la página tal cual quedó
+  // (con el botón en «Abriendo el pago…»). Se destraba.
+  useEffect(() => {
+    const alVolver = (e: PageTransitionEvent) => {
+      if (e.persisted) setCargando(false)
+    }
+    window.addEventListener('pageshow', alVolver)
+    return () => window.removeEventListener('pageshow', alVolver)
+  }, [])
 
   async function reservar() {
     if (cargando) return

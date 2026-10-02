@@ -6,7 +6,7 @@
  * Para cambiar algo, se cambia SOLO este archivo:
  * - Las horas van con el desfase de Nueva York de ESA fecha: en 2026 el horario de verano
  *   (EDT, -04:00) termina el domingo 1-nov; desde ahí es EST (-05:00). Un desfase mal puesto
- *   corre el corte una hora — las pruebas de lib/taller/precio.test.ts lo atrapan.
+ *   corre el corte una hora — las pruebas de lib/taller/taller.test.ts lo atrapan.
  * - `corte` de una franja = el instante en que deja de valer. Se escribe como la medianoche
  *   del día siguiente: la página muestra «hasta el martes 20 de octubre a las 11:59 p. m.».
  * - Al lanzar de verdad: `lanzado: true` (deja indexar la página y la mete al sitemap) y

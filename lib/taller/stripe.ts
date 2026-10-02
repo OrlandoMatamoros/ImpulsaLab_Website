@@ -9,6 +9,9 @@
  */
 
 const API = 'https://api.stripe.com/v1'
+// Versión fija: sin ella Stripe usa la de la cuenta (hoy 2026-03-25.dahlia), que puede no
+// conocer parámetros nuevos como `name_collection`. Cambiarla solo después de probar un pago.
+const VERSION_API = '2026-09-30.endive'
 
 export interface LlaveTaller {
   clave: string
@@ -66,6 +69,7 @@ async function llamar<T>(llave: LlaveTaller, metodo: 'GET' | 'POST', ruta: strin
     method: metodo,
     headers: {
       Authorization: `Bearer ${llave.clave}`,
+      'Stripe-Version': VERSION_API,
       ...(cuerpo ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {}),
     },
     body: cuerpo,
@@ -87,7 +91,8 @@ export interface SesionCheckout {
   payment_status: 'paid' | 'unpaid' | 'no_payment_required'
   amount_total: number | null
   metadata: Record<string, string>
-  customer_details: { name: string | null; email: string | null } | null
+  /** Con `name_collection`, el nombre que escribe el comprador llega en `individual_name`. */
+  customer_details: { name: string | null; individual_name?: string | null; email: string | null } | null
 }
 
 export function crearSesion(llave: LlaveTaller, params: Record<string, Valor>): Promise<SesionCheckout> {

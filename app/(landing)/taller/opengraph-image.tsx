@@ -6,6 +6,9 @@ import { fechaLarga, hora } from '@/lib/taller/fechas'
 
 // Tarjeta que aparece al pegar el enlace en WhatsApp, Facebook o LinkedIn.
 // Sin precio a propósito: WhatsApp guarda la vista previa por días y el precio cambia.
+// PESO: WhatsApp suele omitir miniaturas de más de ~300 KB. Por eso fondo y disco planos (los
+// degradados la llevaban a 393 KB) y un retrato propio ya a 420 px y con el ruido suavizado
+// (orlando-taller-og.png). Hoy pesa ~287 KB: no agregar degradados ni fotos sin medir.
 export const runtime = 'nodejs'
 export const alt = `${TALLER.nombre} en Brooklyn, ${fechaLarga(TALLER.inicio)}`
 export const size = { width: 1200, height: 630 }
@@ -18,7 +21,7 @@ export default async function Image() {
   const [fuente, fuenteMedia, retrato, isotipo] = await Promise.all([
     readFile(path.join(publico, 'fonts/Manrope-ExtraBold.ttf')),
     readFile(path.join(publico, 'fonts/Manrope-Medium.ttf')),
-    readFile(path.join(publico, 'images/taller/orlando-taller.png')),
+    readFile(path.join(publico, 'images/taller/orlando-taller-og.png')), // copia liviana (ver nota arriba)
     readFile(path.join(publico, 'images/taller/isotipo-negativo.png')),
   ])
   const src = (b: Buffer) => `data:image/png;base64,${b.toString('base64')}`
@@ -30,7 +33,7 @@ export default async function Image() {
           width: '100%',
           height: '100%',
           display: 'flex',
-          background: 'linear-gradient(135deg, #002D62 0%, #002D62 55%, #001B3D 100%)',
+          background: '#002D62',
           fontFamily: 'Manrope',
           color: '#FFFFFF',
           position: 'relative',
@@ -44,7 +47,7 @@ export default async function Image() {
             width: 700,
             height: 700,
             borderRadius: 9999,
-            background: 'radial-gradient(circle, rgba(0,188,212,0.45) 0%, rgba(0,188,212,0) 65%)',
+            background: 'rgba(0,188,212,0.18)',
           }}
         />
         <div style={{ display: 'flex', flexDirection: 'column', padding: '56px 0 56px 64px', width: 760 }}>
@@ -72,7 +75,7 @@ export default async function Image() {
               fontWeight: 800,
             }}
           >
-            {`${cap(fechaLarga(TALLER.inicio))}, ${hora(TALLER.inicio)} · Brooklyn`}
+            {`${cap(fechaLarga(TALLER.inicio))}, ${hora(TALLER.inicio)}, en Brooklyn`}
           </div>
         </div>
         <img

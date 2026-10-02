@@ -8,9 +8,10 @@ import CuentaRegresiva from './_componentes/CuentaRegresiva'
 import BarraMovil from './_componentes/BarraMovil'
 import NotaReferido from './_componentes/NotaReferido'
 
-// El precio cambia por fecha: la página se regenera cada minuto. El que se COBRA lo
-// recalcula el servidor en cada intento de pago (app/api/taller/checkout).
-export const revalidate = 60
+// El precio cambia por fecha: la página se arma en cada visita (es liviana), así el precio
+// mostrado nunca queda viejo tras un corte. El que se COBRA lo recalcula el servidor en cada
+// intento de pago (app/api/taller/checkout).
+export const dynamic = 'force-dynamic'
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
@@ -35,6 +36,12 @@ export const metadata: Metadata = {
     url: 'https://goimpulsalab.com/taller',
     title: `Taller + mentoría de IA · ${cap(FECHA)} en Brooklyn`,
     description: 'Presencial, en español, con tu negocio real y con mentoría. 4 horas para poner la IA a trabajar en tu negocio.',
+  },
+  // Sin esto hereda la tarjeta genérica de la portada al compartir en X.
+  twitter: {
+    card: 'summary_large_image',
+    title: `Taller + mentoría de IA · ${cap(FECHA)} en Brooklyn`,
+    description: 'Presencial, en español, con tu negocio real y con mentoría.',
   },
 }
 
@@ -236,6 +243,7 @@ export default function TallerPage() {
         </p>
       )}
 
+      <main>
       {/* ───────────────── Héroe ───────────────── */}
       <header className="relative overflow-hidden bg-[#002D62] text-white">
         {/* Luz cian detrás del retrato: el único gesto decorativo de la página. */}
@@ -302,7 +310,7 @@ export default function TallerPage() {
                           ${franja.precio}
                         </span>
                         {franja.precio < PRECIO_COMPLETO && (
-                          <span className="text-[17px] font-bold text-[#6B7C90]">
+                          <span className="text-[17px] font-bold text-[#55657A]">
                             <span className="sr-only">Precio completo: </span>
                             <s>${PRECIO_COMPLETO}</s>
                           </span>
@@ -520,7 +528,7 @@ export default function TallerPage() {
                     estado === 'vigente'
                       ? 'bg-[#002D62] text-white shadow-[0_20px_50px_-24px_rgba(0,45,98,0.8)] ring-2 ring-[#00BCD4]'
                       : estado === 'pasada'
-                        ? 'bg-[#F4F7FB] text-[#8A99AB]'
+                        ? 'bg-[#F4F7FB] text-[#5A6B80]'
                         : 'bg-white ring-1 ring-[#D6E0EC]'
                   }`}
                 >
@@ -622,6 +630,8 @@ export default function TallerPage() {
           </p>
         </div>
       </section>
+
+      </main>
 
       <footer className="bg-[#001B3D] pb-28 text-white/70 md:pb-0">
         <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-8 text-[14px] sm:flex-row sm:items-center sm:justify-between sm:px-6">

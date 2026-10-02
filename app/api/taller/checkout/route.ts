@@ -136,7 +136,10 @@ export async function POST(req: Request) {
           dropdown: { options: opcionesReferido, default_value: vendedor?.slug },
         },
       ],
-      allow_promotion_codes: true,
+      // Solo tarjeta (incluye Apple Pay y Google Pay): los medios que confirman días después
+      // (débito bancario) dejarían al comprador viendo «pago no encontrado».
+      payment_method_types: ['card'],
+      // Sin cupones: la cuenta de Stripe es compartida y un cupón de otro producto valdría aquí.
       custom_text: {
         submit: {
           message:

@@ -1,9 +1,11 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
+import { headers } from 'next/headers'
 import { TALLER } from '@/lib/taller/config'
 import { fechaCorta, fechaLarga, hora } from '@/lib/taller/fechas'
 import { enlaceGoogleCalendar } from '@/lib/taller/calendario'
 import { leerSesion, llaveTaller, type SesionCheckout } from '@/lib/taller/stripe'
+import { rateLimit } from '@/lib/rate-limit'
 import RegistrarCompra from './RegistrarCompra'
 
 export const dynamic = 'force-dynamic'
@@ -16,25 +18,38 @@ export const metadata: Metadata = {
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 const ID_VALIDO = /^cs_(test|live)_[A-Za-z0-9]{10,250}$/
 
-async function buscarPago(id: string | undefined): Promise<SesionCheckout | null> {
-  if (!id || !ID_VALIDO.test(id)) return null
+type Resultado =
+  | { estado: 'pagado' | 'en-proceso'; sesion: SesionCheckout }
+  | { estado: 'no-encontrado' | 'limitado' }
+
+async function buscarPago(id: string | undefined): Promise<Resultado> {
+  if (!id || !ID_VALIDO.test(id)) return { estado: 'no-encontrado' }
+  // Cada consulta va a la API de Stripe (cuenta compartida): con tope por IP.
+  const h = await headers()
+  const ip = h.get('x-forwarded-for')?.split(',')[0].trim() || h.get('x-real-ip') || 'desconocida'
+  const rl = await rateLimit({ prefix: 'taller-gracias', identifier: ip, limit: 30, windowSec: 600 })
+  if (!rl.success) return { estado: 'limitado' }
   const llave = llaveTaller()
-  if (!llave) return null
+  if (!llave) return { estado: 'no-encontrado' }
   try {
     const s = await leerSesion(llave, id)
     // Solo cuenta si es un pago de ESTE taller (la cuenta de Stripe también cobra otras cosas).
-    if (s.metadata?.evento !== TALLER.id || s.payment_status !== 'paid') return null
-    return s
+    if (s.metadata?.evento !== TALLER.id) return { estado: 'no-encontrado' }
+    if (s.payment_status === 'paid' || s.payment_status === 'no_payment_required') return { estado: 'pagado', sesion: s }
+    if (s.status === 'complete') return { estado: 'en-proceso', sesion: s }
+    return { estado: 'no-encontrado' }
   } catch (err) {
     console.error('[taller] No se pudo leer la sesión de pago en la página de gracias:', String(err))
-    return null
+    return { estado: 'no-encontrado' }
   }
 }
 
 export default async function GraciasPage({ searchParams }: { searchParams: Promise<{ sesion?: string }> }) {
   const { sesion } = await searchParams
-  const pago = await buscarPago(sesion)
-  const nombre = pago?.customer_details?.name?.trim().split(/\s+/)[0] ?? null
+  const resultado = await buscarPago(sesion)
+  const pago = resultado.estado === 'pagado' ? resultado.sesion : null
+  const cliente = pago?.customer_details
+  const nombre = (cliente?.individual_name || cliente?.name)?.trim().split(/\s+/)[0] ?? null
   const whatsapp = `https://wa.me/${TALLER.whatsapp}?text=${encodeURIComponent(
     `Hola, tengo una pregunta sobre el Taller de IA del ${fechaCorta(TALLER.inicio)}.`,
   )}`
@@ -54,7 +69,9 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
 
         {pago ? (
           <>
-            <RegistrarCompra valor={(pago.amount_total ?? 0) / 100} franja={pago.metadata?.franja ?? ''} />
+            {pago.livemode && (
+              <RegistrarCompra id={pago.id} valor={(pago.amount_total ?? 0) / 100} franja={pago.metadata?.franja ?? ''} />
+            )}
             <h1 className="mt-8 text-[34px] font-extrabold leading-[1.08] tracking-[-0.025em] sm:text-5xl">
               {nombre ? `¡Listo, ${nombre}!` : '¡Listo!'} Tu cupo está asegurado.
             </h1>
@@ -106,6 +123,26 @@ export default async function GraciasPage({ searchParams }: { searchParams: Prom
                 Tengo una pregunta
               </a>
             </div>
+          </>
+        ) : resultado.estado === 'en-proceso' ? (
+          <>
+            <h1 className="mt-8 text-[30px] font-extrabold leading-tight tracking-[-0.02em] sm:text-4xl">Recibimos tu reserva: el pago está en proceso</h1>
+            <p className="mt-4 text-[18px] leading-relaxed text-white/85">
+              Tu banco todavía no confirma el pago. Apenas lo confirme, tu cupo queda asegurado y te llega el recibo al correo. Si en
+              dos días no lo recibes, escríbenos por WhatsApp.
+            </p>
+            <div className="mt-8">
+              <a href={whatsapp} target="_blank" rel="noopener noreferrer" className="inline-block rounded-xl px-5 py-3.5 text-center text-[16px] font-extrabold text-white ring-2 ring-white/40 hover:ring-white">
+                Escribir por WhatsApp
+              </a>
+            </div>
+          </>
+        ) : resultado.estado === 'limitado' ? (
+          <>
+            <h1 className="mt-8 text-[30px] font-extrabold leading-tight tracking-[-0.02em] sm:text-4xl">Espera unos minutos y vuelve a abrir esta página</h1>
+            <p className="mt-4 text-[18px] leading-relaxed text-white/85">
+              Hubo demasiadas consultas seguidas desde tu conexión. Tu pago no se ve afectado.
+            </p>
           </>
         ) : (
           <>
