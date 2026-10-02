@@ -150,6 +150,10 @@ const PREGUNTAS: { p: string; r: React.ReactNode }[] = [
     r: 'Con tarjeta de crédito o débito en la página de pago segura de Stripe. Si tu celular tiene Apple Pay o Google Pay, también puedes usarlos. El precio que ves es el total: no hay cargos extra.',
   },
   {
+    p: '¿Y después del taller?',
+    r: 'Si quieres seguir, puedes continuar con mentoría en español para tu negocio. Al final del taller te contamos las opciones; no es obligatorio y no tienes que decidir ese día.',
+  },
+  {
     p: '¿Qué recibo cuando pago?',
     r: 'Ves tu confirmación en pantalla, con botones para guardar el taller en tu calendario, y te llega el recibo al correo.',
   },
@@ -384,6 +388,22 @@ export default function TallerPage() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      {/* ───────────────── Contra el «hágalo usted mismo» ─────────────────
+          Mensaje pedido por Orlando (informe de competidores, 2-oct): sin nombrar a nadie y sin
+          «somos los únicos», que el informe no lo prueba. */}
+      <section className="bg-[#002D62] text-white">
+        <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 md:py-20">
+          <p className="text-[26px] font-extrabold leading-[1.2] tracking-[-0.02em] md:text-[36px]">
+            No te vendemos un programa para que lo configures solo. Lo configuramos contigo, con los datos de tu negocio, y te
+            acompañamos en español y en persona.
+          </p>
+          <p className="mt-5 max-w-[60ch] text-[17px] leading-relaxed text-white/80">
+            Por eso el taller es presencial, en español, con tu negocio real y con mentoría. Y si al terminar quieres seguir, puedes
+            continuar con mentoría en español para tu negocio.
+          </p>
         </div>
       </section>
 
