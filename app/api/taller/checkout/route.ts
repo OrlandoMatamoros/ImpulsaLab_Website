@@ -138,7 +138,8 @@ export async function POST(req: Request) {
       ],
       // Solo tarjeta (incluye Apple Pay y Google Pay): los medios que confirman días después
       // (débito bancario) dejarían al comprador viendo «pago no encontrado».
-      payment_method_types: ['card'],
+      // OJO: desde la versión 2026-09-30.endive `payment_method_types` ya no existe y da 400.
+      allowed_payment_method_types: ['card'],
       // Sin cupones: la cuenta de Stripe es compartida y un cupón de otro producto valdría aquí.
       custom_text: {
         submit: {

@@ -54,7 +54,7 @@ export function nombreVendedor(slug: string | null): string | null {
 }
 
 /** Evento de analítica (Google tag). No falla si el tag no cargó. */
-export function evento(nombre: string, datos: Record<string, string | number> = {}) {
+export function evento(nombre: string, datos: Record<string, unknown> = {}) {
   try {
     if (typeof window !== 'undefined' && typeof window.gtag === 'function') window.gtag('event', nombre, datos)
   } catch {
